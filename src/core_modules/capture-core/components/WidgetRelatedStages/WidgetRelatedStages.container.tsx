@@ -54,6 +54,15 @@ export const WidgetRelatedStagesPlain = ({
     const stageWriteAccess = Boolean(stageWriteAccessById[programStageId]);
     const linkedStageId = constraint?.programStage?.id;
     const linkedStageWriteAccess = linkedStageId ? Boolean(stageWriteAccessById[linkedStageId]) : false;
+    const currentEvent = enrollment?.events?.find((e: any) => e.event === eventId);
+    const { stage: originStage } = getProgramAndStageForProgram(programId, programStageId);
+    const { isEventReadOnly } = useEventEditPermissions({
+        programId,
+        stage: originStage,
+        eventStatus: currentEvent?.status,
+        occurredAtClient: convertServerToClient(currentEvent?.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: convertServerToClient(currentEvent?.completedAt, dataElementTypes.DATE) as string,
+    });
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,
@@ -111,7 +120,7 @@ export const WidgetRelatedStagesPlain = ({
         return null;
     }
 
-    if (!stageWriteAccess || !linkedStageWriteAccess) {
+    if (!stageWriteAccess || !linkedStageWriteAccess || isEventReadOnly) {
         return null;
     }
 

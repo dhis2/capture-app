@@ -13,5 +13,6 @@ export type PlainProps = {
     readOnly: boolean,
     canDeleteEvent: boolean,
     canToggleCompletion: boolean,
+    canEditProgramStage: boolean,
     readOnlyMessage: string,
 };

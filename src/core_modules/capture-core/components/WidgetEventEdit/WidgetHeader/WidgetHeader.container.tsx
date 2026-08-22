@@ -54,6 +54,7 @@ const WidgetHeaderPlain = ({
     readOnly,
     canDeleteEvent,
     canToggleCompletion,
+    canEditProgramStage,
     readOnlyMessage,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -156,9 +157,11 @@ const WidgetHeaderPlain = ({
                                     dataTest="tracker-program-event-overflow-menu"
                                     onOpenChangelog={() => setChangeLogIsOpen(true)}
                                     onClose={() => setActionsIsOpen(false)}
+                                    hideMutationActions={!canEditProgramStage}
                                     onSkipMutate={onSkipStatusMutate}
                                     onSkipSuccess={onSkipStatusSuccess}
                                     onSkipError={onSkipStatusError}
+                                    skipDisabledMessage={canEditProgramStage ? undefined : readOnlyMessage}
                                     showCompletion={!storedEvent?.pendingApiResponse}
                                     onCompletionMutate={onCompletionStatusMutate}
                                     onCompletionSuccess={onCompletionStatusSuccess}

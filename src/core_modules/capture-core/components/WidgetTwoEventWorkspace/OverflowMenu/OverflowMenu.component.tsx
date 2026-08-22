@@ -22,6 +22,7 @@ export const OverflowMenuComponent = ({
     orgUnitId,
     originEventId,
     stageWriteAccess,
+    isOriginEventReadOnly,
     relationshipType,
     onDeleteEvent,
     onDeleteEventRelationship,
@@ -31,6 +32,10 @@ export const OverflowMenuComponent = ({
     const [isUnlinkModalOpen, setIsUnlinkModalOpen] = useState(false);
     const [isUnlinkAndDeleteModalOpen, setIsUnlinkAndDeleteModalOpen] = useState(false);
     const { relationshipTypeWriteAccess } = useRelationshipTypeAccess(relationshipType);
+    const mutationDisabled = !stageWriteAccess || !relationshipTypeWriteAccess || isOriginEventReadOnly;
+    const mutationDisabledMessage = isOriginEventReadOnly
+        ? i18n.t('This event cannot be modified in its current state')
+        : i18n.t('You do not have access to remove the link between these events');
 
     const handleViewLinkedEvent = () => {
         navigate(`/enrollmentEventEdit?${buildUrlQueryString({ eventId: linkedEvent.event, orgUnitId })}`);
@@ -67,13 +72,13 @@ export const OverflowMenuComponent = ({
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link between these events')}
-                            enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
+                            content={mutationDisabledMessage}
+                            enabled={mutationDisabled}
                         >
                             <MenuItem
                                 label={i18n.t('Unlink event')}
                                 icon={<IconLink16 />}
-                                disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
+                                disabled={mutationDisabled}
                                 dense
                                 dataTest="event-overflow-unlink-event"
                                 onClick={handleUnlinkEvent}
@@ -81,13 +86,15 @@ export const OverflowMenuComponent = ({
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link and delete the linked event')}
-                            enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
+                            content={isOriginEventReadOnly
+                                ? mutationDisabledMessage
+                                : i18n.t('You do not have access to remove the link and delete the linked event')}
+                            enabled={mutationDisabled}
                         >
                             <MenuItem
                                 label={i18n.t('Unlink and delete linked event')}
                                 icon={<IconDelete16 />}
-                                disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
+                                disabled={mutationDisabled}
                                 dense
                                 destructive
                                 dataTest="event-overflow-unlink-and-delete-event"

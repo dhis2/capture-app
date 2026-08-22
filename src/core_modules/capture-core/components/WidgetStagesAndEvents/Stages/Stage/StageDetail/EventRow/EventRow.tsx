@@ -44,7 +44,6 @@ const EventRowPlain = ({
     pendingApiResponse,
     eventDetails,
     cells,
-    stageWriteAccess,
     programStage,
     onDeleteEvent,
     onRollbackDeleteEvent,
@@ -57,7 +56,7 @@ const EventRowPlain = ({
     const dispatch = useDispatch();
 
     const {
-        canDeleteEvent, canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion,
+        canDeleteEvent, canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion, canEditProgramStage,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -66,7 +65,7 @@ const EventRowPlain = ({
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
     });
     const readOnlyMessage = getReadOnlyMessage({
-        access: { program: true, trackedEntityType: true, programStage: stageWriteAccess },
+        access: { program: true, trackedEntityType: true, programStage: canEditProgramStage },
         trackedEntityName: undefined,
         multipleStages: false,
         isEventBlockedByExpiry,
@@ -124,11 +123,12 @@ const EventRowPlain = ({
                                     eventStatus={eventDetails.status}
                                     onOpenChangelog={() => setChangelogOpen(true)}
                                     onClose={() => setActionsOpen(false)}
-                                    hideMutationActions={!stageWriteAccess}
+                                    hideMutationActions={!canEditProgramStage}
                                     onSkipMutate={onSkipStatusMutate}
                                     onSkipSuccess={onSkipStatusSuccess}
                                     onSkipError={onSkipStatusError}
-                                    skipDisabledMessage={stageWriteAccess ? undefined : readOnlyMessage}
+                                    skipDisabledMessage={canEditProgramStage ? undefined : readOnlyMessage}
+                                    showCompletion={!pendingApiResponse}
                                     onCompletionMutate={onCompletionStatusMutate}
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}

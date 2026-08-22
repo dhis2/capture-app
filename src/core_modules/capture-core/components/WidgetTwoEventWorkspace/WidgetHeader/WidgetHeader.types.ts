@@ -11,6 +11,7 @@ export type PlainProps = {
     relationshipType: string;
     stage: ProgramStage;
     eventId: string;
+    isOriginEventReadOnly: boolean;
     onDeleteEvent?: (eventId: string) => void;
     onDeleteEventRelationship?: (relationshipId: string) => void;
 };
