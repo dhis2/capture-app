@@ -14,5 +14,9 @@ export type PlainProps = {
     canDeleteEvent: boolean,
     canToggleCompletion: boolean,
     canEditProgramStage: boolean,
+    isEventExpired: boolean,
+    isEventBlockedByExpiry: boolean,
+    isCompletedAndBlockingForm: boolean,
+    isEventBlockedByCompletion: boolean,
     readOnlyMessage: string,
 };

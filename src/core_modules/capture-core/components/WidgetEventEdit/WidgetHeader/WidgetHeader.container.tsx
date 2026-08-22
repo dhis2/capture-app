@@ -20,6 +20,7 @@ import {
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { EventOverflowMenu, DeleteMenuItemModal } from '../../EventOverflowMenu';
 import { getCompletionDisabledMessage, getDeleteDisabledMessage } from '../../ReadOnlyBadge';
+import { EventStatusNoticeBox } from '../EventStatusNoticeBox';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
@@ -55,6 +56,10 @@ const WidgetHeaderPlain = ({
     canDeleteEvent,
     canToggleCompletion,
     canEditProgramStage,
+    isEventExpired,
+    isEventBlockedByExpiry,
+    isCompletedAndBlockingForm,
+    isEventBlockedByCompletion,
     readOnlyMessage,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -127,6 +132,14 @@ const WidgetHeaderPlain = ({
                 </div>
             )}
             <span> {name} </span>
+            <EventStatusNoticeBox
+                eventStatus={eventStatus}
+                isEventExpired={isEventExpired}
+                isEventBlockedByExpiry={isEventBlockedByExpiry}
+                isCompletedAndBlockingForm={isCompletedAndBlockingForm}
+                isEventBlockedByCompletion={isEventBlockedByCompletion}
+                canEditProgramStage={canEditProgramStage}
+            />
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>

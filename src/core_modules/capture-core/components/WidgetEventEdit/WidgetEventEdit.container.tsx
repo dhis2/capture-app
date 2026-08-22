@@ -15,7 +15,6 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
-import { EventStatusNoticeBox } from './EventStatusNoticeBox';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
 import { getReadOnlyMessage } from '../ReadOnlyBadge';
 import {
@@ -141,19 +140,10 @@ const WidgetEventEditPlain = ({
                 orgUnitId={orgUnitId}
                 stageId={stageId}
                 stage={stage}
-                isOriginEventReadOnly={isEventReadOnly}
                 onDeleteEvent={onDeleteEvent}
                 onDeleteEventRelationship={onDeleteEventRelationship}
             />
             <div data-test="widget-enrollment-event">
-                <EventStatusNoticeBox
-                    eventStatus={eventStatus}
-                    isEventExpired={isEventExpired}
-                    isEventBlockedByExpiry={isEventBlockedByExpiry}
-                    isCompletedAndBlockingForm={isCompletedAndBlockingForm}
-                    isEventBlockedByCompletion={isEventBlockedByCompletion}
-                    canEditProgramStage={canEditProgramStage}
-                />
                 <Widget
                     header={
                         <WidgetHeader
@@ -169,6 +159,10 @@ const WidgetEventEditPlain = ({
                             canDeleteEvent={canDeleteEvent}
                             canToggleCompletion={canToggleCompletion}
                             canEditProgramStage={canEditProgramStage}
+                            isEventExpired={isEventExpired}
+                            isEventBlockedByExpiry={isEventBlockedByExpiry}
+                            isCompletedAndBlockingForm={isCompletedAndBlockingForm}
+                            isEventBlockedByCompletion={isEventBlockedByCompletion}
                             readOnlyMessage={readOnlyMessage}
                         />
                     }

@@ -30,7 +30,6 @@ const WidgetHeaderPlain = ({
     stage,
     eventId,
     classes,
-    isOriginEventReadOnly,
     onDeleteEvent,
     onDeleteEventRelationship,
 }: PlainProps & WithStyles<typeof styles>) => {
@@ -64,7 +63,6 @@ const WidgetHeaderPlain = ({
                         orgUnitId={orgUnitId}
                         originEventId={eventId}
                         stageWriteAccess={stage?.access?.data?.write}
-                        isOriginEventReadOnly={isOriginEventReadOnly}
                         onDeleteEvent={onDeleteEvent}
                         onDeleteEventRelationship={onDeleteEventRelationship}
                     />

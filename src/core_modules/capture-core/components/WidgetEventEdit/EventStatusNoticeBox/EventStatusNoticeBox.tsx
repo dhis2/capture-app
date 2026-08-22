@@ -1,18 +1,8 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { NoticeBox, spacers } from '@dhis2/ui';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { IconInfo16, Tag } from '@dhis2/ui';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
-
-const styles = {
-    wrapper: {
-        padding: spacers.dp8,
-        // Zero out NoticeBox's default bottom margin; wrapper padding is enough.
-        '& > *': {
-            marginBottom: 0,
-        },
-    },
-} as const;
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 
 type Props = {
     eventStatus?: string;
@@ -23,7 +13,7 @@ type Props = {
     canEditProgramStage: boolean;
 };
 
-type Notice = { title: string; message: string };
+type Notice = { label: string; tooltip: string };
 
 const getNotice = ({
     eventStatus,
@@ -35,34 +25,33 @@ const getNotice = ({
 }: Props): Notice | undefined => {
     if (eventStatus === eventStatuses.SKIPPED && canEditProgramStage) {
         return {
-            title: i18n.t('This event is skipped'),
-            message: i18n.t('You can unskip this event to edit it.'),
+            label: i18n.t('Skipped'),
+            tooltip: i18n.t('You can unskip this event to edit it.'),
         };
     }
     if (isCompletedAndBlockingForm && !isEventBlockedByCompletion) {
         return {
-            title: i18n.t('This event is completed'),
-            message: i18n.t('You can mark this event as incomplete to edit it.'),
+            label: i18n.t('Completed'),
+            tooltip: i18n.t('You can mark this event as incomplete to edit it.'),
         };
     }
     if (isEventExpired && !isEventBlockedByExpiry) {
         return {
-            title: i18n.t('This event is outside the editing period'),
-            message: i18n.t('You have permission to edit expired events.'),
+            label: i18n.t('Outside editing period'),
+            tooltip: i18n.t('You have permission to edit expired events.'),
         };
     }
     return undefined;
 };
 
-const EventStatusNoticeBoxPlain = ({
+export const EventStatusNoticeBox = ({
     eventStatus,
     isEventExpired,
     isEventBlockedByExpiry,
     isCompletedAndBlockingForm,
     isEventBlockedByCompletion,
     canEditProgramStage,
-    classes,
-}: Props & WithStyles<typeof styles>) => {
+}: Props) => {
     const notice = getNotice({
         eventStatus,
         isEventExpired,
@@ -73,12 +62,10 @@ const EventStatusNoticeBoxPlain = ({
     });
     if (!notice) return null;
     return (
-        <div className={classes.wrapper}>
-            <NoticeBox title={notice.title} dataTest="event-status-notice-box">
-                {notice.message}
-            </NoticeBox>
-        </div>
+        <ConditionalTooltip content={notice.tooltip} enabled>
+            <Tag neutral icon={<IconInfo16 />} dataTest="event-status-notice-box">
+                {notice.label}
+            </Tag>
+        </ConditionalTooltip>
     );
 };
-
-export const EventStatusNoticeBox = withStyles(styles)(EventStatusNoticeBoxPlain);

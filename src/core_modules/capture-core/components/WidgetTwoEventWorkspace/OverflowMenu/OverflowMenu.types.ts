@@ -4,7 +4,6 @@ export type Props = {
     orgUnitId: string;
     originEventId: string;
     stageWriteAccess: boolean;
-    isOriginEventReadOnly: boolean;
     relationshipType: string;
     onDeleteEvent?: (eventId: string) => void;
     onDeleteEventRelationship?: (relationshipId: string) => void;

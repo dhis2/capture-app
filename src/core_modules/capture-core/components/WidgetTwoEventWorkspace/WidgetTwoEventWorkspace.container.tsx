@@ -60,7 +60,6 @@ export const WidgetTwoEventWorkspace = ({
     stageId,
     stage,
     type,
-    isOriginEventReadOnly = false,
     onDeleteEvent,
     onDeleteEventRelationship,
 }: Props) => {
@@ -104,7 +103,6 @@ export const WidgetTwoEventWorkspace = ({
                             eventId={eventId}
                             relationship={relationship}
                             relationshipType={relationshipType}
-                            isOriginEventReadOnly={isOriginEventReadOnly}
                             onDeleteEvent={onDeleteEvent}
                             onDeleteEventRelationship={onDeleteEventRelationship}
                         />

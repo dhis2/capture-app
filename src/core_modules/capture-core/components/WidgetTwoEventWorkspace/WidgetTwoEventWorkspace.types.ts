@@ -12,7 +12,6 @@ export type Props = {
     currentPage: keyof typeof EnrollmentPageKeys | string;
     stage?: ProgramStage;
     type?: typeof WidgetTwoEventWorkspaceWrapperTypes[keyof typeof WidgetTwoEventWorkspaceWrapperTypes];
-    isOriginEventReadOnly?: boolean;
     onDeleteEvent?: (eventId: string) => void;
     onDeleteEventRelationship?: (relationshipId: string) => void;
 };
