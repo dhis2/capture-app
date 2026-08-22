@@ -5,17 +5,18 @@ import {
     CircularLoader,
     DataTableCell,
     DataTableRow,
-    FlyoutMenu,
     IconMore16,
 } from '@dhis2/ui';
 import { useEventEditPermissions } from 'capture-core/hooks';
-import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteMenuItem, DeleteEventModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
-import { SkipAction } from './SkipAction';
+import { EventOverflowMenu, DeleteMenuItemModal } from '../../../../../EventOverflowMenu';
+import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
+import {
+    getReadOnlyMessage, getCompletionDisabledMessage, getDeleteDisabledMessage,
+} from '../../../../../ReadOnlyBadge';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
@@ -35,9 +36,6 @@ const styles: Readonly<any> = {
     },
 };
 
-const isSkippableStatus = (status?: string) =>
-    status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
-
 const getRowClass = (classes: Record<string, string>, disabled: boolean) =>
     (disabled ? classes.rowDisabled : classes.row);
 
@@ -46,24 +44,33 @@ const EventRowPlain = ({
     pendingApiResponse,
     eventDetails,
     cells,
-    stageWriteAccess,
     programStage,
     onDeleteEvent,
     onRollbackDeleteEvent,
-    onUpdateEventStatus,
     programId,
     classes,
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [changelogOpen, setChangelogOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { isEventReadOnly, canUncompleteEvent } = useEventEditPermissions({
+    const {
+        canDeleteEvent, canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion, canEditProgramStage,
+    } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
         occurredAtClient: convertServerToClient(eventDetails.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
+    });
+    const readOnlyMessage = getReadOnlyMessage({
+        access: { program: true, trackedEntityType: true, programStage: canEditProgramStage },
+        trackedEntityName: undefined,
+        multipleStages: false,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
+        trackedEntityInactive: false,
     });
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
@@ -79,6 +86,18 @@ const EventRowPlain = ({
         dispatch(rollbackEnrollmentEvent(id));
     }, [dispatch, id]);
 
+    const onSkipStatusMutate = useCallback((newStatus: string) => {
+        dispatch(updateEnrollmentEvent(id, { ...eventDetails, status: newStatus }));
+    }, [dispatch, eventDetails, id]);
+
+    const onSkipStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentEvent(id));
+    }, [dispatch, id]);
+
+    const onSkipStatusError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(id));
+    }, [dispatch, id]);
+
     return (
         <DataTableRow
             className={getRowClass(classes, !!pendingApiResponse)}
@@ -87,65 +106,62 @@ const EventRowPlain = ({
             {cells}
 
             <DataTableCell>
-                {stageWriteAccess && (
-                    <>
-                        {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
+                <>
+                    {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
 
-                        {!pendingApiResponse && (!isEventReadOnly || canUncompleteEvent) && (
-                            <OverflowButton
-                                open={actionsOpen}
-                                onClick={() => setActionsOpen(prev => !prev)}
-                                dataTest={'overflow-button'}
-                                secondary
-                                small
-                                icon={<IconMore16 />}
-                                component={(
-                                    <FlyoutMenu
-                                        dense
-                                        dataTest={'overflow-menu'}
-                                    >
-                                        {isSkippableStatus(eventDetails.status) && (
-                                            <SkipAction
-                                                eventId={id}
-                                                eventDetails={eventDetails}
-                                                setActionsOpen={setActionsOpen}
-                                                pendingApiResponse={pendingApiResponse}
-                                                onUpdateEventStatus={onUpdateEventStatus}
-                                            />
-                                        )}
-
-                                        {canUncompleteEvent && (
-                                            <CompletionMenuItem
-                                                eventId={id}
-                                                eventStatus={eventDetails.status}
-                                                onMutate={onCompletionStatusMutate}
-                                                onSuccess={onCompletionStatusSuccess}
-                                                onError={onCompletionStatusError}
-                                                onClose={() => setActionsOpen(false)}
-                                            />
-                                        )}
-
-                                        <DeleteMenuItem
-                                            setActionsOpen={setActionsOpen}
-                                            setDeleteModalOpen={setDeleteModalOpen}
-                                        />
-                                    </FlyoutMenu>
-                                )}
-                            />
-                        )}
-
-                        {deleteModalOpen && (
-                            <DeleteEventModal
-                                eventId={id}
-                                pendingApiResponse={pendingApiResponse}
-                                eventDetails={eventDetails}
-                                onDeleteEvent={onDeleteEvent}
-                                onRollbackDeleteEvent={onRollbackDeleteEvent}
-                                setDeleteModalOpen={setDeleteModalOpen}
-                            />
-                        )}
-                    </>
-                )}
+                    {!pendingApiResponse && (
+                        <OverflowButton
+                            open={actionsOpen}
+                            onClick={() => setActionsOpen(prev => !prev)}
+                            dataTest={'overflow-button'}
+                            secondary
+                            small
+                            icon={<IconMore16 />}
+                            component={(
+                                <EventOverflowMenu
+                                    eventId={id}
+                                    eventStatus={eventDetails.status}
+                                    onOpenChangelog={() => setChangelogOpen(true)}
+                                    onClose={() => setActionsOpen(false)}
+                                    hideMutationActions={!canEditProgramStage}
+                                    onSkipMutate={onSkipStatusMutate}
+                                    onSkipSuccess={onSkipStatusSuccess}
+                                    onSkipError={onSkipStatusError}
+                                    skipDisabledMessage={canEditProgramStage ? undefined : readOnlyMessage}
+                                    showCompletion={!pendingApiResponse}
+                                    onCompletionMutate={onCompletionStatusMutate}
+                                    onCompletionSuccess={onCompletionStatusSuccess}
+                                    onCompletionError={onCompletionStatusError}
+                                    completionDisabledMessage={getCompletionDisabledMessage(
+                                        canToggleCompletion, readOnlyMessage,
+                                    )}
+                                    onDeleteRequest={() => setDeleteModalOpen(true)}
+                                    deleteDisabledMessage={getDeleteDisabledMessage(
+                                        canDeleteEvent, readOnlyMessage,
+                                    )}
+                                />
+                            )}
+                        />
+                    )}
+                    {deleteModalOpen && (
+                        <DeleteMenuItemModal
+                            eventId={id}
+                            pendingApiResponse={pendingApiResponse}
+                            eventDetails={eventDetails}
+                            onDeleteEvent={onDeleteEvent}
+                            onRollbackDeleteEvent={onRollbackDeleteEvent}
+                            setDeleteModalOpen={setDeleteModalOpen}
+                        />
+                    )}
+                    {changelogOpen && programStage?.stageForm && (
+                        <EventChangelogWrapper
+                            isOpen
+                            setIsOpen={setChangelogOpen}
+                            eventId={id}
+                            formFoundation={programStage.stageForm}
+                        />
+                    )}
+                </>
             </DataTableCell>
         </DataTableRow>
     );

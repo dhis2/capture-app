@@ -8,7 +8,6 @@ import {
     Button,
     IconMore16,
     FlyoutMenu,
-    MenuItem,
 } from '@dhis2/ui';
 import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
@@ -21,6 +20,7 @@ import { NoticeBox } from '../../../NoticeBox';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
 import { OverflowButton } from '../../../Buttons';
 import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
+import { ChangelogMenuItem } from '../../../EventOverflowMenu';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
@@ -82,14 +82,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { canUncompleteEvent } = useEventEditPermissions({
+    const { canToggleCompletion } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: loadedValues?.eventContainer?.event?.status,
         occurredAtClient: convertFormToClient(loadedValues?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
     });
-
     const onSaveExternal = useCallback(() => {
         removeEventChangelogQueries(queryClient, eventId);
         onBackToAllEvents();
@@ -109,7 +108,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
-                    canUncompleteEvent={canUncompleteEvent}
+                    canToggleCompletion={canToggleCompletion}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry
@@ -148,13 +147,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         maxWidth="250px"
                         dataTest="event-program-event-overflow-menu"
                     >
-                        <MenuItem
-                            label={i18n.t('View changelog')}
-                            suffix={null}
-                            onClick={() => {
-                                setChangeLogIsOpen(true);
-                                setActionsIsOpen(false);
-                            }}
+                        <ChangelogMenuItem
+                            onOpenChangelog={() => setChangeLogIsOpen(true)}
+                            onClose={() => setActionsIsOpen(false)}
                         />
                     </FlyoutMenu>
                 )}

@@ -16,6 +16,7 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
+import { getReadOnlyMessage } from '../ReadOnlyBadge';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
@@ -99,7 +100,7 @@ const WidgetEventEditPlain = ({
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
 
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
@@ -110,12 +111,23 @@ const WidgetEventEditPlain = ({
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isEventReadOnly, canUncompleteEvent } = useEventEditPermissions({
+    const {
+        isEventReadOnly, canDeleteEvent, canToggleCompletion, canEditProgramStage,
+        isEventExpired, isEventBlockedByExpiry, isCompletedAndBlockingForm, isEventBlockedByCompletion,
+    } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
+    });
+    const readOnlyMessage = getReadOnlyMessage({
+        access: { program: true, trackedEntityType: true, programStage: true },
+        trackedEntityName: undefined,
+        multipleStages: false,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
+        trackedEntityInactive: false,
     });
 
     return orgUnit && loadedValues ? (
@@ -140,9 +152,18 @@ const WidgetEventEditPlain = ({
                             stage={stage}
                             programId={programId}
                             orgUnit={orgUnit}
+                            teiId={teiId}
+                            enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
-                            canUncompleteEvent={canUncompleteEvent}
+                            canDeleteEvent={canDeleteEvent}
+                            canToggleCompletion={canToggleCompletion}
+                            canEditProgramStage={canEditProgramStage}
+                            isEventExpired={isEventExpired}
+                            isEventBlockedByExpiry={isEventBlockedByExpiry}
+                            isCompletedAndBlockingForm={isCompletedAndBlockingForm}
+                            isEventBlockedByCompletion={isEventBlockedByCompletion}
+                            readOnlyMessage={readOnlyMessage}
                         />
                     }
                     noncollapsible
@@ -177,9 +198,9 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    canUncompleteEvent={canUncompleteEvent}
+                                    canToggleCompletion={canToggleCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={!isEventReadOnly}
+                                    hasDeleteButton={canDeleteEvent}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}
@@ -189,7 +210,9 @@ const WidgetEventEditPlain = ({
                                     hideDueDate={stage.hideDueDate}
                                     assignee={assignee}
                                     onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
-                                    onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
+                                    onSaveAndCompleteEnrollmentErrorActionType={
+                                        onSaveAndCompleteEnrollmentErrorActionType
+                                    }
                                     onSaveAndCompleteEnrollmentSuccessActionType={
                                         onSaveAndCompleteEnrollmentSuccessActionType
                                     }

@@ -258,7 +258,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
-    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status, event?.event);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const userInteractionInProgress = useSelector(state => dataEntryHasChanges(state, dataEntryKey));
 
