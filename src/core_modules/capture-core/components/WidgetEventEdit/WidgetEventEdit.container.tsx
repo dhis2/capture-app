@@ -102,7 +102,7 @@ const WidgetEventEditPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
-    const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
+    const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
     const completedAt = loadedValues?.eventContainer?.event?.completedAt;
@@ -205,7 +205,6 @@ const WidgetEventEditPlain = ({
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
                     eventId={loadedValues.eventContainer.id}
-                    eventData={loadedValues.eventContainer.values}
                     formFoundation={formFoundation}
                 />
             )}
