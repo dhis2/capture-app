@@ -50,7 +50,7 @@ import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import type { UserFormField } from '../../FormFields/UserField';
-import type { ProgramStage } from '../../../metaData';
+import { getProgramEventAccess, type ProgramStage } from '../../../metaData';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
@@ -266,11 +266,10 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
+    const eventAccess = getProgramEventAccess(programId, stageId ?? null);
     const {
-        eventAccess,
-        isEventWithinValidPeriod,
-        isWithinCompleteExpiry,
-        canEditCompletedEvent,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -313,9 +312,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
             program={program}
             currentStageId={stageId}
             trackedEntityInactive={trackedEntityInactive}
-            isEventWithinValidPeriod={isEventWithinValidPeriod}
-            canEditCompletedEvent={canEditCompletedEvent}
-            isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
+            isEventBlockedByExpiry={isEventBlockedByExpiry}
+            isEventBlockedByCompletion={isEventBlockedByCompletion}
         >
             <EnrollmentEditEventPageComponent
                 pageLayout={pageLayout}

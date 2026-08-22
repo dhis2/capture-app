@@ -20,6 +20,7 @@ import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
     useEventEditPermissions,
+    useProgramExpiryForUser,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
@@ -108,7 +109,8 @@ const WidgetEventEditPlain = ({
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const { isEventReadOnly, canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
@@ -133,12 +135,14 @@ const WidgetEventEditPlain = ({
                 <Widget
                     header={
                         <WidgetHeader
+                            eventId={eventId}
                             eventStatus={eventStatus}
                             stage={stage}
                             programId={programId}
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            readOnly={readOnly}
+                            readOnly={isEventReadOnly}
+                            canUncompleteEvent={canUncompleteEvent}
                         />
                     }
                     noncollapsible
@@ -175,7 +179,7 @@ const WidgetEventEditPlain = ({
                                     eventStatus={eventStatus}
                                     canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={!readOnly}
+                                    hasDeleteButton={!isEventReadOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}
