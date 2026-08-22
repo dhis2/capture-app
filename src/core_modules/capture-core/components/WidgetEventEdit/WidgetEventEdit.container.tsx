@@ -110,14 +110,13 @@ const WidgetEventEditPlain = ({
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
+    const { isEventReadOnly, canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
     });
-    const canUncompleteEvent = !isEventBlockedByCompletion && !isEventBlockedByExpiry;
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>

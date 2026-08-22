@@ -20,9 +20,10 @@ type Output = {
     isEventBlockedByExpiry: boolean,
     isEventBlockedByCompletion: boolean,
     isEventReadOnly: boolean,
+    canUncompleteEvent: boolean,
 };
 
-const canUncompletEvent = (
+const computeCanUncompleteEvent = (
     hasWriteAccess: boolean,
     eventStatus: string | undefined,
     hasUncompleteAuthority: boolean,
@@ -55,14 +56,14 @@ export const useEventEditPermissions = ({
     const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
     const isEventBlockedByExpiry = isExpired && !hasEditExpiredAuthority;
 
-    const canUncompleteEvent = canUncompletEvent(
+    const canUncompleteEvent = computeCanUncompleteEvent(
         !!eventAccess?.write,
         eventStatus,
         hasUncompleteAuthority,
         isEventBlockedByExpiry,
     );
 
-    const isEventBlockedByCompletion = eventStatus === eventStatuses.COMPLETED && !canUncompleteEvent;
+    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !canUncompleteEvent;
 
     const isEventReadOnly = !eventAccess?.write
         || isEventBlockedByExpiry
@@ -72,5 +73,6 @@ export const useEventEditPermissions = ({
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
         isEventReadOnly,
+        canUncompleteEvent,
     };
 };
