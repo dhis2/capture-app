@@ -14,7 +14,10 @@ import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteMenuItem, DeleteMenuItemModal, CompletionMenuItem, SkipMenuItem } from '../../../../../EventOverflowMenu';
+import {
+    DeleteMenuItem, DeleteMenuItemModal, CompletionMenuItem, SkipMenuItem, ChangelogMenuItem,
+} from '../../../../../EventOverflowMenu';
+import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
@@ -40,14 +43,6 @@ const isSkippableStatus = (status?: string) =>
 const getRowClass = (classes: Record<string, string>, disabled: boolean) =>
     (disabled ? classes.rowDisabled : classes.row);
 
-const isCompletionToggleable = (status: string, blockedByCompletion: boolean, blockedByExpiry: boolean) =>
-    !blockedByCompletion
-    && !blockedByExpiry
-    && (status === eventStatuses.ACTIVE || status === eventStatuses.COMPLETED);
-
-const canShowOverflowMenu = (isEventReadOnly: boolean, canToggleCompletion: boolean, eventStatus?: string) =>
-    !isEventReadOnly || canToggleCompletion || isSkippableStatus(eventStatus);
-
 const EventRowPlain = ({
     id,
     pendingApiResponse,
@@ -62,10 +57,11 @@ const EventRowPlain = ({
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [changelogOpen, setChangelogOpen] = useState(false);
     const dispatch = useDispatch();
 
     const {
-        isEventReadOnly, isEventBlockedByCompletion, isEventBlockedByExpiry, isEventDeletable,
+        canDeleteEvent, canToggleCompletion,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -73,12 +69,6 @@ const EventRowPlain = ({
         occurredAtClient: convertServerToClient(eventDetails.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
     });
-    const canToggleCompletion = isCompletionToggleable(
-        eventDetails.status,
-        isEventBlockedByCompletion,
-        isEventBlockedByExpiry,
-    );
-    const showOverflowButton = canShowOverflowMenu(isEventReadOnly, canToggleCompletion, eventDetails.status);
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         const { completedAt, ...eventWithoutCompletion } = eventDetails;
@@ -117,7 +107,7 @@ const EventRowPlain = ({
                     <>
                         {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
 
-                        {!pendingApiResponse && showOverflowButton && (
+                        {!pendingApiResponse && (
                             <OverflowButton
                                 open={actionsOpen}
                                 onClick={() => setActionsOpen(prev => !prev)}
@@ -152,7 +142,12 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        {isEventDeletable && (
+                                        <ChangelogMenuItem
+                                            onOpenChangelog={() => setChangelogOpen(true)}
+                                            onClose={() => setActionsOpen(false)}
+                                        />
+
+                                        {canDeleteEvent && (
                                             <DeleteMenuItem
                                                 onDeleteRequest={() => setDeleteModalOpen(true)}
                                                 onClose={() => setActionsOpen(false)}
@@ -170,6 +165,14 @@ const EventRowPlain = ({
                                 onDeleteEvent={onDeleteEvent}
                                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                                 setDeleteModalOpen={setDeleteModalOpen}
+                            />
+                        )}
+                        {changelogOpen && programStage?.stageForm && (
+                            <EventChangelogWrapper
+                                isOpen
+                                setIsOpen={setChangelogOpen}
+                                eventId={id}
+                                formFoundation={programStage.stageForm}
                             />
                         )}
                     </>

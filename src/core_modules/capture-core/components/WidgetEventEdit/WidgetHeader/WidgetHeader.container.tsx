@@ -41,13 +41,6 @@ const styles: Readonly<any> = {
     },
 };
 
-const getCanChangeCompletionStatus = (
-    eventStatus: string | undefined,
-    readOnly: boolean,
-    isEventBlockedByCompletion: boolean,
-): boolean => (eventStatus === eventStatuses.ACTIVE && !readOnly)
-    || (eventStatus === eventStatuses.COMPLETED && !isEventBlockedByCompletion);
-
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const WidgetHeaderPlain = ({
@@ -61,8 +54,8 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
-    isEventDeletable,
-    isEventBlockedByCompletion,
+    canDeleteEvent,
+    canToggleCompletion,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -73,7 +66,6 @@ const WidgetHeaderPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     const showEditButton = !readOnly;
-    const canChangeCompletionStatus = getCanChangeCompletionStatus(eventStatus, readOnly, isEventBlockedByCompletion);
     const { programCategory } = useCategoryCombinations(programId);
 
     const storedEvent = useSelector((state: any) =>
@@ -124,6 +116,45 @@ const WidgetHeaderPlain = ({
     const isSkippableStatus = (status?: string) =>
         status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
 
+    const renderOverflowMenu = () => (
+        <FlyoutMenu
+            dense
+            maxWidth="250px"
+            dataTest={'tracker-program-event-overflow-menu'}
+        >
+            {isSkippableStatus(eventStatus) && (
+                <SkipMenuItem
+                    eventId={eventId}
+                    eventStatus={eventStatus}
+                    onMutate={onSkipStatusMutate}
+                    onSuccess={onSkipStatusSuccess}
+                    onError={onSkipStatusError}
+                    onClose={() => setActionsIsOpen(false)}
+                />
+            )}
+            {canToggleCompletion && !storedEvent?.pendingApiResponse && (
+                <CompletionMenuItem
+                    eventId={eventId}
+                    eventStatus={eventStatus}
+                    onMutate={onCompletionStatusMutate}
+                    onSuccess={onCompletionStatusSuccess}
+                    onError={onCompletionStatusError}
+                    onClose={() => setActionsIsOpen(false)}
+                />
+            )}
+            <ChangelogMenuItem
+                onOpenChangelog={() => setChangeLogIsOpen(true)}
+                onClose={() => setActionsIsOpen(false)}
+            />
+            {canDeleteEvent && (
+                <DeleteMenuItem
+                    onDeleteRequest={() => setDeleteModalOpen(true)}
+                    onClose={() => setActionsIsOpen(false)}
+                />
+            )}
+        </FlyoutMenu>
+    );
+
     return (
         <>
             {icon && (
@@ -141,7 +172,7 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        {showEditButton && (
+                        {showEditButton && !storedEvent?.pendingApiResponse && (
                             <Button
                                 small
                                 secondary
@@ -160,44 +191,7 @@ const WidgetHeaderPlain = ({
                             small
                             secondary
                             dataTest={'tracker-program-event-overflow-button'}
-                            component={
-                                <FlyoutMenu
-                                    dense
-                                    maxWidth="250px"
-                                    dataTest={'tracker-program-event-overflow-menu'}
-                                >
-                                    {isSkippableStatus(eventStatus) && (
-                                        <SkipMenuItem
-                                            eventId={eventId}
-                                            eventStatus={eventStatus}
-                                            onMutate={onSkipStatusMutate}
-                                            onSuccess={onSkipStatusSuccess}
-                                            onError={onSkipStatusError}
-                                            onClose={() => setActionsIsOpen(false)}
-                                        />
-                                    )}
-                                    {canChangeCompletionStatus && (
-                                        <CompletionMenuItem
-                                            eventId={eventId}
-                                            eventStatus={eventStatus}
-                                            onMutate={onCompletionStatusMutate}
-                                            onSuccess={onCompletionStatusSuccess}
-                                            onError={onCompletionStatusError}
-                                            onClose={() => setActionsIsOpen(false)}
-                                        />
-                                    )}
-                                    <ChangelogMenuItem
-                                        onOpenChangelog={() => setChangeLogIsOpen(true)}
-                                        onClose={() => setActionsIsOpen(false)}
-                                    />
-                                    {isEventDeletable && (
-                                        <DeleteMenuItem
-                                            onDeleteRequest={() => setDeleteModalOpen(true)}
-                                            onClose={() => setActionsIsOpen(false)}
-                                        />
-                                    )}
-                                </FlyoutMenu>
-                            }
+                            component={renderOverflowMenu()}
                         />
                     </div>
                 )}

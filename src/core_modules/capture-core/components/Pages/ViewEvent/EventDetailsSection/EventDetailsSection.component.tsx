@@ -82,14 +82,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isEventBlockedByCompletion, isEventBlockedByExpiry } = useEventEditPermissions({
+    const { canToggleCompletion } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: loadedValues?.eventContainer?.event?.status,
         occurredAtClient: convertFormToClient(loadedValues?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
     });
-    const isCompletionBlocked = isEventBlockedByCompletion || isEventBlockedByExpiry;
     const onSaveExternal = useCallback(() => {
         removeEventChangelogQueries(queryClient, eventId);
         onBackToAllEvents();
@@ -109,7 +108,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
-                    isEventBlockedByCompletion={isCompletionBlocked}
+                    canToggleCompletion={canToggleCompletion}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry

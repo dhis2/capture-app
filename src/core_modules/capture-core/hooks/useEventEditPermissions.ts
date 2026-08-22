@@ -20,7 +20,8 @@ type Output = {
     isEventBlockedByExpiry: boolean,
     isEventBlockedByCompletion: boolean,
     isEventReadOnly: boolean,
-    isEventDeletable: boolean,
+    canDeleteEvent: boolean,
+    canToggleCompletion: boolean,
 };
 
 const computeExpiryBlocked = (
@@ -39,22 +40,8 @@ const computeEditAccess = (
         || isEventBlockedByExpiry
         || isCompletedAndBlockingForm
         || eventStatus === eventStatuses.SKIPPED,
-    isEventDeletable: hasWriteAccess && !isEventBlockedByExpiry && !isCompletedAndBlockingForm,
+    canDeleteEvent: hasWriteAccess && !isEventBlockedByExpiry && !isCompletedAndBlockingForm,
 });
-
-const canUncompletEvent = (
-    hasWriteAccess: boolean,
-    eventStatus: string | undefined,
-    hasUncompleteAuthority: boolean,
-    isEventBlockedByExpiry: boolean,
-): boolean => {
-    if (!hasWriteAccess) return false;
-    if (eventStatus === eventStatuses.COMPLETED) {
-        if (isEventBlockedByExpiry) return false;
-        return hasUncompleteAuthority;
-    }
-    return eventStatus === eventStatuses.ACTIVE;
-};
 
 export const useEventEditPermissions = ({
     programId,
@@ -75,16 +62,16 @@ export const useEventEditPermissions = ({
         isWithinValidPeriod, isWithinCompleteExpiry, hasEditExpiredAuthority,
     );
 
-    const canUncompleteEvent = canUncompletEvent(
-        !!eventAccess?.write,
-        eventStatus,
-        hasUncompleteAuthority,
-        isEventBlockedByExpiry,
-    );
+    const canToggleCompletion = !!eventAccess?.write
+        && !isEventBlockedByExpiry
+        && (
+            eventStatus === eventStatuses.ACTIVE
+            || (eventStatus === eventStatuses.COMPLETED && hasUncompleteAuthority)
+        );
 
-    const isEventBlockedByCompletion = eventStatus === eventStatuses.COMPLETED && !canUncompleteEvent;
+    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !canToggleCompletion;
 
-    const { isEventReadOnly, isEventDeletable } = computeEditAccess(
+    const { isEventReadOnly, canDeleteEvent } = computeEditAccess(
         !!eventAccess?.write,
         isEventBlockedByExpiry,
         isCompletedAndBlockingForm,
@@ -95,6 +82,7 @@ export const useEventEditPermissions = ({
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
         isEventReadOnly,
-        isEventDeletable,
+        canDeleteEvent,
+        canToggleCompletion,
     };
 };

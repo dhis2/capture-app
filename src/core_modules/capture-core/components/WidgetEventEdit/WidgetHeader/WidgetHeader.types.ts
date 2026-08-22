@@ -11,6 +11,6 @@ export type PlainProps = {
     enrollmentId: string,
     setChangeLogIsOpen: (toggle: boolean) => void,
     readOnly: boolean,
-    isEventDeletable: boolean,
-    isEventBlockedByCompletion: boolean,
+    canDeleteEvent: boolean,
+    canToggleCompletion: boolean,
 };
