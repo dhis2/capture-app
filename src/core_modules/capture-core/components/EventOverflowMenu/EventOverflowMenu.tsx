@@ -25,7 +25,6 @@ type Props = {
     onSkipError: () => void;
     skipDisabledMessage?: string;
 
-    showCompletion?: boolean; // additional filter on top of the internal status check
     onCompletionMutate: (newStatus: string) => void;
     onCompletionSuccess: (newStatus: string) => void;
     onCompletionError: () => void;
@@ -47,7 +46,6 @@ export const EventOverflowMenu = ({
     onSkipSuccess,
     onSkipError,
     skipDisabledMessage,
-    showCompletion = true,
     onCompletionMutate,
     onCompletionSuccess,
     onCompletionError,
@@ -74,7 +72,7 @@ export const EventOverflowMenu = ({
                     />
                 )}
 
-                {showCompletion && isCompletableStatus(eventStatus) && (
+                {isCompletableStatus(eventStatus) && (
                     <CompletionMenuItem
                         eventId={eventId}
                         eventStatus={eventStatus}

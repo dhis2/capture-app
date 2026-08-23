@@ -128,7 +128,6 @@ const EventRowPlain = ({
                                     onSkipSuccess={onSkipStatusSuccess}
                                     onSkipError={onSkipStatusError}
                                     skipDisabledMessage={canEditProgramStage ? undefined : readOnlyMessage}
-                                    showCompletion={!pendingApiResponse}
                                     onCompletionMutate={onCompletionStatusMutate}
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}

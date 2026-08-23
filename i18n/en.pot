@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-23T05:37:31.357Z\n"
-"PO-Revision-Date: 2026-08-23T05:37:31.357Z\n"
+"POT-Creation-Date: 2026-08-23T06:02:05.475Z\n"
+"PO-Revision-Date: 2026-08-23T06:02:05.475Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1548,21 +1548,6 @@ msgstr "Geometry (Area)"
 msgid "Geometry (Coordinate)"
 msgstr "Geometry (Coordinate)"
 
-msgid "This event is skipped"
-msgstr "This event is skipped"
-
-msgid "You can unskip this event to edit it."
-msgstr "You can unskip this event to edit it."
-
-msgid "This event is completed"
-msgstr "This event is completed"
-
-msgid "You can mark this event as incomplete to edit it."
-msgstr "You can mark this event as incomplete to edit it."
-
-msgid "You have permission to edit expired events."
-msgstr "You have permission to edit expired events."
-
 msgid "Polygon captured"
 msgstr "Polygon captured"
 
@@ -1571,6 +1556,9 @@ msgstr "No polygon captured"
 
 msgid "Event completed"
 msgstr "Event completed"
+
+msgid "Please wait for the current save to complete"
+msgstr "Please wait for the current save to complete"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"

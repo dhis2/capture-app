@@ -20,7 +20,6 @@ import {
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { EventOverflowMenu, DeleteMenuItemModal } from '../../EventOverflowMenu';
 import { getCompletionDisabledMessage, getDeleteDisabledMessage } from '../../ReadOnlyBadge';
-import { EventStatusNoticeBox } from '../EventStatusNoticeBox';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
@@ -56,10 +55,6 @@ const WidgetHeaderPlain = ({
     canDeleteEvent,
     canUncompleteEvent,
     canEditProgramStage,
-    isEventExpired,
-    isEventBlockedByExpiry,
-    isCompletedAndBlockingForm,
-    isEventBlockedByCompletion,
     readOnlyMessage,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -147,15 +142,6 @@ const WidgetHeaderPlain = ({
                             </Button>
                         )}
 
-                        <EventStatusNoticeBox
-                            eventStatus={eventStatus}
-                            isEventExpired={isEventExpired}
-                            isEventBlockedByExpiry={isEventBlockedByExpiry}
-                            isCompletedAndBlockingForm={isCompletedAndBlockingForm}
-                            isEventBlockedByCompletion={isEventBlockedByCompletion}
-                            canEditProgramStage={canEditProgramStage}
-                        />
-
                         <OverflowButton
                             open={actionsIsOpen}
                             onClick={() => setActionsIsOpen(prev => !prev)}
@@ -176,13 +162,12 @@ const WidgetHeaderPlain = ({
                                     onSkipSuccess={onSkipStatusSuccess}
                                     onSkipError={onSkipStatusError}
                                     skipDisabledMessage={canEditProgramStage ? undefined : readOnlyMessage}
-                                    showCompletion={!storedEvent?.pendingApiResponse}
                                     onCompletionMutate={onCompletionStatusMutate}
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}
-                                    completionDisabledMessage={getCompletionDisabledMessage(
-                                        canUncompleteEvent, readOnlyMessage,
-                                    )}
+                                    completionDisabledMessage={storedEvent?.pendingApiResponse
+                                        ? i18n.t('Please wait for the current save to complete')
+                                        : getCompletionDisabledMessage(canUncompleteEvent, readOnlyMessage)}
                                     onDeleteRequest={() => setDeleteModalOpen(true)}
                                     deleteDisabledMessage={getDeleteDisabledMessage(
                                         canDeleteEvent, readOnlyMessage,
