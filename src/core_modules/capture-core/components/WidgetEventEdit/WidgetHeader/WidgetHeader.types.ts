@@ -12,7 +12,7 @@ export type PlainProps = {
     setChangeLogIsOpen: (toggle: boolean) => void,
     readOnly: boolean,
     canDeleteEvent: boolean,
-    canToggleCompletion: boolean,
+    canUncompleteEvent: boolean,
     canEditProgramStage: boolean,
     isEventExpired: boolean,
     isEventBlockedByExpiry: boolean,

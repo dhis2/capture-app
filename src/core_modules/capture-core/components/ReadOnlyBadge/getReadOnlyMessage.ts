@@ -40,8 +40,8 @@ export const getReadOnlyMessage = ({
     return '';
 };
 
-export const getCompletionDisabledMessage = (canToggleCompletion: boolean, readOnlyMessage: string) =>
-    (canToggleCompletion ? undefined : readOnlyMessage || i18n.t('You do not have access to uncomplete this event'));
+export const getCompletionDisabledMessage = (canUncompleteEvent: boolean, readOnlyMessage: string) =>
+    (canUncompleteEvent ? undefined : readOnlyMessage || i18n.t('You do not have access to uncomplete this event'));
 
 export const getDeleteDisabledMessage = (canDeleteEvent: boolean, readOnlyMessage: string) =>
     (canDeleteEvent ? undefined : readOnlyMessage || i18n.t('You do not have access to delete this event'));

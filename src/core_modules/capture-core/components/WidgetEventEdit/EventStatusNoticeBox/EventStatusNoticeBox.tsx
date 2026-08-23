@@ -25,19 +25,19 @@ const getNotice = ({
 }: Props): Notice | undefined => {
     if (eventStatus === eventStatuses.SKIPPED && canEditProgramStage) {
         return {
-            label: i18n.t('Skipped'),
+            label: i18n.t('This event is skipped'),
             tooltip: i18n.t('You can unskip this event to edit it.'),
         };
     }
     if (isCompletedAndBlockingForm && !isEventBlockedByCompletion) {
         return {
-            label: i18n.t('Completed'),
+            label: i18n.t('This event is completed'),
             tooltip: i18n.t('You can mark this event as incomplete to edit it.'),
         };
     }
     if (isEventExpired && !isEventBlockedByExpiry) {
         return {
-            label: i18n.t('Outside editing period'),
+            label: i18n.t('This event is outside the editing period'),
             tooltip: i18n.t('You have permission to edit expired events.'),
         };
     }

@@ -54,7 +54,7 @@ const WidgetHeaderPlain = ({
     classes,
     readOnly,
     canDeleteEvent,
-    canToggleCompletion,
+    canUncompleteEvent,
     canEditProgramStage,
     isEventExpired,
     isEventBlockedByExpiry,
@@ -132,14 +132,6 @@ const WidgetHeaderPlain = ({
                 </div>
             )}
             <span> {name} </span>
-            <EventStatusNoticeBox
-                eventStatus={eventStatus}
-                isEventExpired={isEventExpired}
-                isEventBlockedByExpiry={isEventBlockedByExpiry}
-                isCompletedAndBlockingForm={isCompletedAndBlockingForm}
-                isEventBlockedByCompletion={isEventBlockedByCompletion}
-                canEditProgramStage={canEditProgramStage}
-            />
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
@@ -154,6 +146,15 @@ const WidgetHeaderPlain = ({
                                 {i18n.t('Edit event')}
                             </Button>
                         )}
+
+                        <EventStatusNoticeBox
+                            eventStatus={eventStatus}
+                            isEventExpired={isEventExpired}
+                            isEventBlockedByExpiry={isEventBlockedByExpiry}
+                            isCompletedAndBlockingForm={isCompletedAndBlockingForm}
+                            isEventBlockedByCompletion={isEventBlockedByCompletion}
+                            canEditProgramStage={canEditProgramStage}
+                        />
 
                         <OverflowButton
                             open={actionsIsOpen}
@@ -180,7 +181,7 @@ const WidgetHeaderPlain = ({
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}
                                     completionDisabledMessage={getCompletionDisabledMessage(
-                                        canToggleCompletion, readOnlyMessage,
+                                        canUncompleteEvent, readOnlyMessage,
                                     )}
                                     onDeleteRequest={() => setDeleteModalOpen(true)}
                                     deleteDisabledMessage={getDeleteDisabledMessage(

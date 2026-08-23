@@ -82,7 +82,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { canToggleCompletion } = useEventEditPermissions({
+    const { canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: loadedValues?.eventContainer?.event?.status,
@@ -108,7 +108,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
-                    canToggleCompletion={canToggleCompletion}
+                    canUncompleteEvent={canUncompleteEvent}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry
