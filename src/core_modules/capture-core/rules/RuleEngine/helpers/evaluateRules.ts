@@ -35,7 +35,7 @@ export const evaluateRules = ({
             executionContext,
         );
     }
-    const duplicateActionIds = new Set<string>;
+    const duplicateActionIds = new Set<string>();
     return ruleEngine.evaluateAll(enrollment, [currentEvent], executionContext)
         .flatMap(entry => entry.ruleEffects)
         .filter((effect) => {
