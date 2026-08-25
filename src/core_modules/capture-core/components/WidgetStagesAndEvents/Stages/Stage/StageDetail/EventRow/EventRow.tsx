@@ -14,9 +14,7 @@ import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { EventOverflowMenu, DeleteMenuItemModal } from '../../../../../EventOverflowMenu';
 import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
-import {
-    getReadOnlyMessage, getCompletionDisabledMessage, getDeleteDisabledMessage,
-} from '../../../../../ReadOnlyBadge';
+import { getReadOnlyMessage } from '../../../../../ReadOnlyBadge';
 import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
@@ -56,7 +54,7 @@ const EventRowPlain = ({
     const dispatch = useDispatch();
 
     const {
-        canDeleteEvent, canUncompleteEvent, isEventBlockedByExpiry, isEventBlockedByCompletion, canEditProgramStage,
+        canUncompleteEvent, isEventBlockedByExpiry, isEventBlockedByCompletion, canEditProgramStage,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -72,6 +70,7 @@ const EventRowPlain = ({
         isEventBlockedByCompletion,
         trackedEntityInactive: false,
     });
+    const canMutateEvent = canEditProgramStage && !isEventBlockedByExpiry;
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         const { completedAt, ...eventWithoutCompletion } = eventDetails;
@@ -127,17 +126,13 @@ const EventRowPlain = ({
                                     onSkipMutate={onSkipStatusMutate}
                                     onSkipSuccess={onSkipStatusSuccess}
                                     onSkipError={onSkipStatusError}
-                                    skipDisabledMessage={canEditProgramStage ? undefined : readOnlyMessage}
                                     onCompletionMutate={onCompletionStatusMutate}
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}
-                                    completionDisabledMessage={getCompletionDisabledMessage(
-                                        canUncompleteEvent, readOnlyMessage,
-                                    )}
                                     onDeleteRequest={() => setDeleteModalOpen(true)}
-                                    deleteDisabledMessage={getDeleteDisabledMessage(
-                                        canDeleteEvent, readOnlyMessage,
-                                    )}
+                                    canMutateEvent={canMutateEvent}
+                                    canUncompleteEvent={canUncompleteEvent}
+                                    readOnlyMessage={readOnlyMessage}
                                 />
                             )}
                         />

@@ -19,19 +19,19 @@ type Props = {
     onClose: () => void;
 
     hideMutationActions?: boolean;
+    canMutateEvent: boolean;
+    canUncompleteEvent: boolean;
+    readOnlyMessage: string;
 
     onSkipMutate: (newStatus: string) => void;
     onSkipSuccess: (newStatus: string) => void;
     onSkipError: () => void;
-    skipDisabledMessage?: string;
 
     onCompletionMutate: (newStatus: string) => void;
     onCompletionSuccess: (newStatus: string) => void;
     onCompletionError: () => void;
-    completionDisabledMessage?: string;
 
     onDeleteRequest: () => void;
-    deleteDisabledMessage?: string;
 };
 
 export const EventOverflowMenu = ({
@@ -42,16 +42,16 @@ export const EventOverflowMenu = ({
     onOpenChangelog,
     onClose,
     hideMutationActions = false,
+    canMutateEvent,
+    canUncompleteEvent,
+    readOnlyMessage,
     onSkipMutate,
     onSkipSuccess,
     onSkipError,
-    skipDisabledMessage,
     onCompletionMutate,
     onCompletionSuccess,
     onCompletionError,
-    completionDisabledMessage,
     onDeleteRequest,
-    deleteDisabledMessage,
 }: Props) => (
     <FlyoutMenu dense maxWidth={maxWidth} dataTest={dataTest}>
         <ChangelogMenuItem onOpenChangelog={onOpenChangelog} onClose={onClose} />
@@ -68,7 +68,8 @@ export const EventOverflowMenu = ({
                         onSuccess={onSkipSuccess}
                         onError={onSkipError}
                         onClose={onClose}
-                        disabledMessage={skipDisabledMessage}
+                        canMutateEvent={canMutateEvent}
+                        readOnlyMessage={readOnlyMessage}
                     />
                 )}
 
@@ -80,14 +81,16 @@ export const EventOverflowMenu = ({
                         onSuccess={onCompletionSuccess}
                         onError={onCompletionError}
                         onClose={onClose}
-                        disabledMessage={completionDisabledMessage}
+                        canUncompleteEvent={canUncompleteEvent}
+                        readOnlyMessage={readOnlyMessage}
                     />
                 )}
 
                 <DeleteMenuItem
                     onDeleteRequest={onDeleteRequest}
                     onClose={onClose}
-                    disabledMessage={deleteDisabledMessage}
+                    canMutateEvent={canMutateEvent}
+                    readOnlyMessage={readOnlyMessage}
                 />
             </>
         )}

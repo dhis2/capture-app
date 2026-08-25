@@ -39,9 +39,3 @@ export const getReadOnlyMessage = ({
     if (isEventBlockedByCompletion) return getCompletedEventMessage();
     return '';
 };
-
-export const getCompletionDisabledMessage = (canUncompleteEvent: boolean, readOnlyMessage: string) =>
-    (canUncompleteEvent ? undefined : readOnlyMessage || i18n.t('You do not have access to uncomplete this event'));
-
-export const getDeleteDisabledMessage = (canDeleteEvent: boolean, readOnlyMessage: string) =>
-    (canDeleteEvent ? undefined : readOnlyMessage || i18n.t('You do not have access to delete this event'));

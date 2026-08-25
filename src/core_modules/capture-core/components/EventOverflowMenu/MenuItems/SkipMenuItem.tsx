@@ -17,7 +17,8 @@ type Props = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
-    disabledMessage?: string;
+    canMutateEvent: boolean;
+    readOnlyMessage: string;
 };
 
 export const SkipMenuItem = ({
@@ -27,8 +28,10 @@ export const SkipMenuItem = ({
     onSuccess,
     onError,
     onClose,
-    disabledMessage,
+    canMutateEvent,
+    readOnlyMessage,
 }: Props) => {
+    const disabled = !canMutateEvent;
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
     const { show: showError } = useAlert(
@@ -78,9 +81,8 @@ export const SkipMenuItem = ({
         },
     );
 
-    const disabled = !!disabledMessage;
     return (
-        <ConditionalTooltip content={disabledMessage ?? ''} enabled={disabled}>
+        <ConditionalTooltip content={readOnlyMessage} enabled={disabled}>
             <MenuItem
                 dense
                 disabled={disabled}

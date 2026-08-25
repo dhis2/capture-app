@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-23T06:02:05.475Z\n"
-"PO-Revision-Date: 2026-08-23T06:02:05.475Z\n"
+"POT-Creation-Date: 2026-08-25T20:44:45.324Z\n"
+"PO-Revision-Date: 2026-08-25T20:44:45.324Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -439,6 +439,9 @@ msgstr ""
 
 msgid "View changelog"
 msgstr "View changelog"
+
+msgid "You do not have access to uncomplete this event"
+msgstr "You do not have access to uncomplete this event"
 
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"
@@ -1140,12 +1143,6 @@ msgstr "This {{trackedEntityName}} is deactivated"
 msgid "This tracked entity is deactivated"
 msgstr "This tracked entity is deactivated"
 
-msgid "You do not have access to uncomplete this event"
-msgstr "You do not have access to uncomplete this event"
-
-msgid "You do not have access to delete this event"
-msgstr "You do not have access to delete this event"
-
 msgid "Add relationship"
 msgstr "Add relationship"
 
@@ -1556,9 +1553,6 @@ msgstr "No polygon captured"
 
 msgid "Event completed"
 msgstr "Event completed"
-
-msgid "Please wait for the current save to complete"
-msgstr "Please wait for the current save to complete"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"

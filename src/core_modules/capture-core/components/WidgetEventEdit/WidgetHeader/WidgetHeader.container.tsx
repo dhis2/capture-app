@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { spacersNum, Button, IconEdit24, IconMore16, spacers } from '@dhis2/ui';
+import { spacersNum, Button, CircularLoader, IconEdit24, IconMore16, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import i18n from '@dhis2/d2-i18n';
@@ -19,7 +19,6 @@ import {
     addPersistedEnrollmentEvents,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { EventOverflowMenu, DeleteMenuItemModal } from '../../EventOverflowMenu';
-import { getCompletionDisabledMessage, getDeleteDisabledMessage } from '../../ReadOnlyBadge';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
@@ -112,6 +111,7 @@ const WidgetHeaderPlain = ({
     }, [dispatch]);
 
     const { icon, name } = stage;
+    const pendingApiResponse = !!storedEvent?.pendingApiResponse;
 
     return (
         <>
@@ -130,7 +130,7 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        {showEditButton && !storedEvent?.pendingApiResponse && (
+                        {showEditButton && !pendingApiResponse && (
                             <Button
                                 small
                                 secondary
@@ -142,39 +142,39 @@ const WidgetHeaderPlain = ({
                             </Button>
                         )}
 
-                        <OverflowButton
-                            open={actionsIsOpen}
-                            onClick={() => setActionsIsOpen(prev => !prev)}
-                            icon={<IconMore16 />}
-                            small
-                            secondary
-                            dataTest={'tracker-program-event-overflow-button'}
-                            component={(
-                                <EventOverflowMenu
-                                    eventId={eventId}
-                                    eventStatus={eventStatus}
-                                    maxWidth="250px"
-                                    dataTest="tracker-program-event-overflow-menu"
-                                    onOpenChangelog={() => setChangeLogIsOpen(true)}
-                                    onClose={() => setActionsIsOpen(false)}
-                                    hideMutationActions={!canEditProgramStage}
-                                    onSkipMutate={onSkipStatusMutate}
-                                    onSkipSuccess={onSkipStatusSuccess}
-                                    onSkipError={onSkipStatusError}
-                                    skipDisabledMessage={canEditProgramStage ? undefined : readOnlyMessage}
-                                    onCompletionMutate={onCompletionStatusMutate}
-                                    onCompletionSuccess={onCompletionStatusSuccess}
-                                    onCompletionError={onCompletionStatusError}
-                                    completionDisabledMessage={storedEvent?.pendingApiResponse
-                                        ? i18n.t('Please wait for the current save to complete')
-                                        : getCompletionDisabledMessage(canUncompleteEvent, readOnlyMessage)}
-                                    onDeleteRequest={() => setDeleteModalOpen(true)}
-                                    deleteDisabledMessage={getDeleteDisabledMessage(
-                                        canDeleteEvent, readOnlyMessage,
-                                    )}
-                                />
-                            )}
-                        />
+                        {pendingApiResponse && <CircularLoader small dataTest="widget-header-saving-loader" />}
+
+                        {!pendingApiResponse && (
+                            <OverflowButton
+                                open={actionsIsOpen}
+                                onClick={() => setActionsIsOpen(prev => !prev)}
+                                icon={<IconMore16 />}
+                                small
+                                secondary
+                                dataTest={'tracker-program-event-overflow-button'}
+                                component={(
+                                    <EventOverflowMenu
+                                        eventId={eventId}
+                                        eventStatus={eventStatus}
+                                        maxWidth="250px"
+                                        dataTest="tracker-program-event-overflow-menu"
+                                        onOpenChangelog={() => setChangeLogIsOpen(true)}
+                                        onClose={() => setActionsIsOpen(false)}
+                                        hideMutationActions={!canEditProgramStage}
+                                        onSkipMutate={onSkipStatusMutate}
+                                        onSkipSuccess={onSkipStatusSuccess}
+                                        onSkipError={onSkipStatusError}
+                                        onCompletionMutate={onCompletionStatusMutate}
+                                        onCompletionSuccess={onCompletionStatusSuccess}
+                                        onCompletionError={onCompletionStatusError}
+                                        onDeleteRequest={() => setDeleteModalOpen(true)}
+                                        canMutateEvent={canDeleteEvent}
+                                        canUncompleteEvent={canUncompleteEvent}
+                                        readOnlyMessage={readOnlyMessage}
+                                    />
+                                )}
+                            />
+                        )}
                     </div>
                 )}
             </div>

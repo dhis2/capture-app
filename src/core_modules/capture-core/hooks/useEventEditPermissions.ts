@@ -43,7 +43,7 @@ const computeEditAccess = (
         || isEventBlockedByExpiry
         || isCompletedAndBlockingForm
         || eventStatus === eventStatuses.SKIPPED,
-    canDeleteEvent: canEditProgramStage && !isEventBlockedByExpiry && !isCompletedAndBlockingForm,
+    canDeleteEvent: canEditProgramStage && !isEventBlockedByExpiry,
 });
 
 const computeCanUncompleteEvent = (

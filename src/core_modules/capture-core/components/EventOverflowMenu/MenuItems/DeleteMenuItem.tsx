@@ -13,13 +13,16 @@ import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 type DeleteMenuItemProps = {
     onDeleteRequest: () => void;
     onClose: () => void;
-    disabledMessage?: string;
+    canMutateEvent: boolean;
+    readOnlyMessage: string;
 };
 
-export const DeleteMenuItem = ({ onDeleteRequest, onClose, disabledMessage }: DeleteMenuItemProps) => {
-    const disabled = !!disabledMessage;
+export const DeleteMenuItem = ({
+    onDeleteRequest, onClose, canMutateEvent, readOnlyMessage,
+}: DeleteMenuItemProps) => {
+    const disabled = !canMutateEvent;
     return (
-        <ConditionalTooltip content={disabledMessage ?? ''} enabled={disabled}>
+        <ConditionalTooltip content={readOnlyMessage} enabled={disabled}>
             <MenuItem
                 dense
                 disabled={disabled}

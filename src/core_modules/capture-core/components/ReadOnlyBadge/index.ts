@@ -1,4 +1,2 @@
 export { ReadOnlyBadge } from './ReadOnlyBadge';
-export {
-    getReadOnlyMessage, getCompletionDisabledMessage, getDeleteDisabledMessage,
-} from './getReadOnlyMessage';
+export { getReadOnlyMessage } from './getReadOnlyMessage';
