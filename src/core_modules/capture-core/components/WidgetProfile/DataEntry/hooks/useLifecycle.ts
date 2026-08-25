@@ -29,7 +29,7 @@ import type { QuerySingleResource } from '../../../../utils/api';
 
 type UseLifecycleParams = {
     programAPI: any;
-    orgUnitId: string;
+    programOwnerId: string;
     clientAttributesWithSubvalues: Array<any>;
     userRoles: Array<string>;
     dataEntryId: string;
@@ -42,7 +42,7 @@ type UseLifecycleParams = {
 
 export const useLifecycle = ({
     programAPI,
-    orgUnitId,
+    programOwnerId,
     clientAttributesWithSubvalues,
     userRoles,
     dataEntryId,
@@ -57,7 +57,7 @@ export const useLifecycle = ({
     const enrollment: EnrollmentData = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollment);
     const dataElements: DataElements = useDataElements(programAPI);
     const otherEvents = useEvents(enrollment, dataElements);
-    const orgUnit: any = useCoreOrgUnit(orgUnitId).orgUnit;
+    const orgUnit: any = useCoreOrgUnit(programOwnerId).orgUnit;
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI, dataEntryFormConfig);
     const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });

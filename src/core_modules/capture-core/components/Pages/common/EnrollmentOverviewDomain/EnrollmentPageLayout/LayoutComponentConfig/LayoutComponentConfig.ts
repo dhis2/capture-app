@@ -151,7 +151,7 @@ export const ProfileWidget: WidgetConfig = {
     }: any): WidgetProfileProps => ({
         teiId,
         programId: program.id,
-        orgUnitId: programOwnerId,
+        programOwnerId,
         onUpdateTeiAttributeValues,
         onDeleteSuccess: onDeleteTrackedEntitySuccess,
         onStatusToggleSuccess,

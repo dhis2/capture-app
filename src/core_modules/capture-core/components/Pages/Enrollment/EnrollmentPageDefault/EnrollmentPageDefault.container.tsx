@@ -68,9 +68,9 @@ export const EnrollmentPageDefault = () => {
         enrollment,
         attributeValues,
         readOnly: trackedEntityInactive,
+        programOwnerId,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const program = useTrackerProgram(programId);
-    const programOwnerId = useSelector(({ enrollmentPage }: any) => enrollmentPage.programOwners?.[programId]);
     const { orgUnit: programOwnerOrgUnit, error: programOwnerOrgUnitError } = useCoreOrgUnit(programOwnerId);
 
     const onStatusToggleSuccess = useCallback(() => {

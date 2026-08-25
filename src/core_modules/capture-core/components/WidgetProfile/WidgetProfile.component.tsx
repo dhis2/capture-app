@@ -72,7 +72,7 @@ const WidgetProfilePlain = ({
     teiId,
     programId,
     readOnlyMode = false,
-    orgUnitId = '',
+    programOwnerId = '',
     ruleEffects,
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
@@ -284,7 +284,7 @@ const WidgetProfilePlain = ({
                         onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
-                        orgUnitId={orgUnitId}
+                        programOwnerId={programOwnerId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}
