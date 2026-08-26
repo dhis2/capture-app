@@ -51,7 +51,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
-    canMutateEvent,
+    hasStageWriteAccess,
     canToggleCompletion,
     canEditProgramStage,
     readOnlyMessage,
@@ -168,7 +168,7 @@ const WidgetHeaderPlain = ({
                                         onCompletionSuccess={onCompletionStatusSuccess}
                                         onCompletionError={onCompletionStatusError}
                                         onDeleteRequest={() => setDeleteModalOpen(true)}
-                                        canMutateEvent={canMutateEvent}
+                                        hasStageWriteAccess={hasStageWriteAccess}
                                         canToggleCompletion={canToggleCompletion}
                                         readOnlyMessage={readOnlyMessage}
                                     />

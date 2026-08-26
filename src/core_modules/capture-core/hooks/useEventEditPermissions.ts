@@ -23,7 +23,7 @@ type Output = {
     isEventBlockedByCompletion: boolean,
     isEventBlockedByUncompleteAuthority: boolean,
     isEventReadOnly: boolean,
-    canMutateEvent: boolean,
+    hasStageWriteAccess: boolean,
     canToggleCompletion: boolean,
     canEditProgramStage: boolean,
 };
@@ -92,7 +92,7 @@ export const useEventEditPermissions = ({
     const isEventBlockedByUncompleteAuthority =
         eventStatus === eventStatuses.COMPLETED && !canToggleCompletion;
 
-    const canMutateEvent = canEditProgramStage && !isEventBlockedByExpiry;
+    const hasStageWriteAccess = canEditProgramStage && !isEventBlockedByExpiry;
     const isEventReadOnly = computeIsEventReadOnly(
         canEditProgramStage, isEventBlockedByExpiry, isCompletedAndBlockingForm, eventStatus,
     );
@@ -103,7 +103,7 @@ export const useEventEditPermissions = ({
         isEventBlockedByCompletion,
         isEventBlockedByUncompleteAuthority,
         isEventReadOnly,
-        canMutateEvent,
+        hasStageWriteAccess,
         canToggleCompletion,
         canEditProgramStage,
     };

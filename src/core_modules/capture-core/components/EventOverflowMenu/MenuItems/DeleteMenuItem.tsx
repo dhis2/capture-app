@@ -13,18 +13,18 @@ import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 type DeleteMenuItemProps = {
     onDeleteRequest: () => void;
     onClose: () => void;
-    canMutateEvent: boolean;
+    hasStageWriteAccess: boolean;
     readOnlyMessage: string;
 };
 
 export const DeleteMenuItem = ({
-    onDeleteRequest, onClose, canMutateEvent, readOnlyMessage,
+    onDeleteRequest, onClose, hasStageWriteAccess, readOnlyMessage,
 }: DeleteMenuItemProps) => (
-    <ConditionalTooltip content={readOnlyMessage} enabled={!canMutateEvent}>
+    <ConditionalTooltip content={readOnlyMessage} enabled={!hasStageWriteAccess}>
         <MenuItem
             dense
-            disabled={!canMutateEvent}
-            icon={<IconDelete16 color={!canMutateEvent ? undefined : colors.red600} />}
+            disabled={!hasStageWriteAccess}
+            icon={<IconDelete16 color={!hasStageWriteAccess ? undefined : colors.red600} />}
             label={i18n.t('Delete')}
             dataTest="stages-and-events-delete"
             onClick={() => {

@@ -11,7 +11,7 @@ export type PlainProps = {
     enrollmentId: string,
     setChangeLogIsOpen: (toggle: boolean) => void,
     readOnly: boolean,
-    canMutateEvent: boolean,
+    hasStageWriteAccess: boolean,
     canToggleCompletion: boolean,
     canEditProgramStage: boolean,
     readOnlyMessage: string,

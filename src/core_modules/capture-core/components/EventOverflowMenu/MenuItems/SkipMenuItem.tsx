@@ -17,7 +17,7 @@ type Props = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
-    canMutateEvent: boolean;
+    hasStageWriteAccess: boolean;
     readOnlyMessage: string;
 };
 
@@ -28,10 +28,10 @@ export const SkipMenuItem = ({
     onSuccess,
     onError,
     onClose,
-    canMutateEvent,
+    hasStageWriteAccess,
     readOnlyMessage,
 }: Props) => {
-    const disabled = !canMutateEvent;
+    const disabled = !hasStageWriteAccess;
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
     const { show: showError } = useAlert(

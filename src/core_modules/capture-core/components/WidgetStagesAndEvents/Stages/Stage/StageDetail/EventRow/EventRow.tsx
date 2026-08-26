@@ -54,7 +54,7 @@ const EventRowPlain = ({
     const dispatch = useDispatch();
 
     const {
-        canMutateEvent, canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion,
+        hasStageWriteAccess, canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion,
         isEventBlockedByUncompleteAuthority, canEditProgramStage,
     } = useEventEditPermissions({
         programId,
@@ -132,7 +132,7 @@ const EventRowPlain = ({
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}
                                     onDeleteRequest={() => setDeleteModalOpen(true)}
-                                    canMutateEvent={canMutateEvent}
+                                    hasStageWriteAccess={hasStageWriteAccess}
                                     canToggleCompletion={canToggleCompletion}
                                     readOnlyMessage={readOnlyMessage}
                                 />

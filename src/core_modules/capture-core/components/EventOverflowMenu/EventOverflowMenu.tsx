@@ -21,7 +21,7 @@ type Props = {
     onClose: () => void;
 
     hideMutationActions?: boolean;
-    canMutateEvent: boolean;
+    hasStageWriteAccess: boolean;
     canToggleCompletion: boolean;
     readOnlyMessage: string;
 
@@ -44,7 +44,7 @@ export const EventOverflowMenu = ({
     onOpenChangelog,
     onClose,
     hideMutationActions = false,
-    canMutateEvent,
+    hasStageWriteAccess,
     canToggleCompletion,
     readOnlyMessage,
     onSkipMutate,
@@ -70,7 +70,7 @@ export const EventOverflowMenu = ({
                         onSuccess={onSkipSuccess}
                         onError={onSkipError}
                         onClose={onClose}
-                        canMutateEvent={canMutateEvent}
+                        hasStageWriteAccess={hasStageWriteAccess}
                         readOnlyMessage={readOnlyMessage}
                     />
                 )}
@@ -91,7 +91,7 @@ export const EventOverflowMenu = ({
                 <DeleteMenuItem
                     onDeleteRequest={onDeleteRequest}
                     onClose={onClose}
-                    canMutateEvent={canMutateEvent}
+                    hasStageWriteAccess={hasStageWriteAccess}
                     readOnlyMessage={readOnlyMessage}
                 />
             </>
