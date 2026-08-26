@@ -23,7 +23,7 @@ type Output = {
     isEventBlockedByCompletion: boolean,
     isEventReadOnly: boolean,
     canDeleteEvent: boolean,
-    canUncompleteEvent: boolean,
+    canToggleCompletion: boolean,
     canEditProgramStage: boolean,
 };
 
@@ -46,7 +46,7 @@ const computeEditAccess = (
     canDeleteEvent: canEditProgramStage && !isEventBlockedByExpiry,
 });
 
-const computeCanUncompleteEvent = (
+const computeCanToggleCompletion = (
     canEditProgramStage: boolean,
     isEventBlockedByExpiry: boolean,
     hasUncompleteAuthority: boolean,
@@ -80,11 +80,11 @@ export const useEventEditPermissions = ({
         isWithinValidPeriod, isWithinCompleteExpiry, hasEditExpiredAuthority,
     );
 
-    const canUncompleteEvent = computeCanUncompleteEvent(
+    const canToggleCompletion = computeCanToggleCompletion(
         canEditProgramStage, isEventBlockedByExpiry, hasUncompleteAuthority, eventStatus,
     );
 
-    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !canUncompleteEvent;
+    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !canToggleCompletion;
 
     const { isEventReadOnly, canDeleteEvent } = computeEditAccess(
         canEditProgramStage,
@@ -100,7 +100,7 @@ export const useEventEditPermissions = ({
         isEventBlockedByCompletion,
         isEventReadOnly,
         canDeleteEvent,
-        canUncompleteEvent,
+        canToggleCompletion,
         canEditProgramStage,
     };
 };

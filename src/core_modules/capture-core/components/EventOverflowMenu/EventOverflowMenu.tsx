@@ -20,7 +20,7 @@ type Props = {
 
     hideMutationActions?: boolean;
     canMutateEvent: boolean;
-    canUncompleteEvent: boolean;
+    canToggleCompletion: boolean;
     readOnlyMessage: string;
 
     onSkipMutate: (newStatus: string) => void;
@@ -43,7 +43,7 @@ export const EventOverflowMenu = ({
     onClose,
     hideMutationActions = false,
     canMutateEvent,
-    canUncompleteEvent,
+    canToggleCompletion,
     readOnlyMessage,
     onSkipMutate,
     onSkipSuccess,
@@ -81,7 +81,7 @@ export const EventOverflowMenu = ({
                         onSuccess={onCompletionSuccess}
                         onError={onCompletionError}
                         onClose={onClose}
-                        canUncompleteEvent={canUncompleteEvent}
+                        canToggleCompletion={canToggleCompletion}
                         readOnlyMessage={readOnlyMessage}
                     />
                 )}

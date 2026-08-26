@@ -19,25 +19,22 @@ type DeleteMenuItemProps = {
 
 export const DeleteMenuItem = ({
     onDeleteRequest, onClose, canMutateEvent, readOnlyMessage,
-}: DeleteMenuItemProps) => {
-    const disabled = !canMutateEvent;
-    return (
-        <ConditionalTooltip content={readOnlyMessage} enabled={disabled}>
-            <MenuItem
-                dense
-                disabled={disabled}
-                icon={<IconDelete16 color={disabled ? undefined : colors.red600} />}
-                label={i18n.t('Delete')}
-                dataTest="stages-and-events-delete"
-                onClick={() => {
-                    onDeleteRequest();
-                    onClose();
-                }}
-                suffix={null}
-            />
-        </ConditionalTooltip>
-    );
-};
+}: DeleteMenuItemProps) => (
+    <ConditionalTooltip content={readOnlyMessage} enabled={!canMutateEvent}>
+        <MenuItem
+            dense
+            disabled={!canMutateEvent}
+            icon={<IconDelete16 color={!canMutateEvent ? undefined : colors.red600} />}
+            label={i18n.t('Delete')}
+            dataTest="stages-and-events-delete"
+            onClick={() => {
+                onDeleteRequest();
+                onClose();
+            }}
+            suffix={null}
+        />
+    </ConditionalTooltip>
+);
 
 type DeleteMenuItemModalProps = {
     eventId: string;

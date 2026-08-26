@@ -16,7 +16,7 @@ type Props = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
-    canUncompleteEvent: boolean;
+    canToggleCompletion: boolean;
     readOnlyMessage: string;
 };
 
@@ -27,10 +27,9 @@ export const CompletionMenuItem = ({
     onSuccess,
     onError,
     onClose,
-    canUncompleteEvent,
+    canToggleCompletion,
     readOnlyMessage,
 }: Props) => {
-    const disabled = !canUncompleteEvent;
     const disabledMessage = readOnlyMessage || i18n.t('You do not have access to uncomplete this event');
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
@@ -82,10 +81,10 @@ export const CompletionMenuItem = ({
     );
 
     return (
-        <ConditionalTooltip content={disabledMessage} enabled={disabled}>
+        <ConditionalTooltip content={disabledMessage} enabled={!canToggleCompletion}>
             <MenuItem
                 dense
-                disabled={disabled}
+                disabled={!canToggleCompletion}
                 dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
                 icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
                 label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}

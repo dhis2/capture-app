@@ -112,7 +112,7 @@ const WidgetEventEditPlain = ({
 
     const expiryPeriod = useProgramExpiryForUser(programId);
     const {
-        isEventReadOnly, canDeleteEvent, canUncompleteEvent, canEditProgramStage,
+        isEventReadOnly, canDeleteEvent, canToggleCompletion, canEditProgramStage,
         isEventBlockedByExpiry, isEventBlockedByCompletion,
     } = useEventEditPermissions({
         programId,
@@ -157,7 +157,7 @@ const WidgetEventEditPlain = ({
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
                             canDeleteEvent={canDeleteEvent}
-                            canUncompleteEvent={canUncompleteEvent}
+                            canToggleCompletion={canToggleCompletion}
                             canEditProgramStage={canEditProgramStage}
                             readOnlyMessage={readOnlyMessage}
                         />
@@ -194,7 +194,7 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    canUncompleteEvent={canUncompleteEvent}
+                                    canToggleCompletion={canToggleCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
                                     hasDeleteButton={canDeleteEvent}
                                     onHandleScheduleSave={onHandleScheduleSave}

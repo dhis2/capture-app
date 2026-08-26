@@ -52,7 +52,7 @@ const WidgetHeaderPlain = ({
     classes,
     readOnly,
     canDeleteEvent,
-    canUncompleteEvent,
+    canToggleCompletion,
     canEditProgramStage,
     readOnlyMessage,
 }: Props) => {
@@ -169,7 +169,7 @@ const WidgetHeaderPlain = ({
                                         onCompletionError={onCompletionStatusError}
                                         onDeleteRequest={() => setDeleteModalOpen(true)}
                                         canMutateEvent={canDeleteEvent}
-                                        canUncompleteEvent={canUncompleteEvent}
+                                        canToggleCompletion={canToggleCompletion}
                                         readOnlyMessage={readOnlyMessage}
                                     />
                                 )}
