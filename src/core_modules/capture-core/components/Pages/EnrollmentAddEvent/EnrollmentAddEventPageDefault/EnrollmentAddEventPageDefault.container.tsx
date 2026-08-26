@@ -20,7 +20,7 @@ import {
     showEnrollmentError,
     updateEnrollmentAndEvents,
     updateOrAddEnrollmentEvents,
-    useRuleEffects,
+    useEnrollmentScopeRuleEffects,
 } from '../../common/EnrollmentOverviewDomain';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
@@ -118,7 +118,8 @@ export const EnrollmentAddEventPageDefault = ({
     const trackerProgram = useTrackerProgram(programId);
     const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
 
-    const ruleEffects = useRuleEffects({
+    useEnrollmentScopeRuleEffects({
+        enrollmentId,
         orgUnit: programOwnerOrgUnit,
         program: trackerProgram,
         apiEnrollment: enrollment ?? undefined,
@@ -219,7 +220,6 @@ export const EnrollmentAddEventPageDefault = ({
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
                 trackedEntityInactive={trackedEntityInactive}
                 programOwnerId={programOwnerId}
-                ruleEffects={ruleEffects}
             />
         </>
     );

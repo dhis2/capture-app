@@ -16,7 +16,7 @@ import {
     updateEnrollmentDate,
     updateIncidentDate,
     useCommonEnrollmentDomainData,
-    useRuleEffects,
+    useEnrollmentScopeRuleEffects,
 } from '../../common/EnrollmentOverviewDomain';
 import {
     deleteEnrollment,
@@ -94,14 +94,16 @@ export const EnrollmentPageDefault = () => {
         ));
     }
 
-    const ruleEffects = useRuleEffects({
+    useEnrollmentScopeRuleEffects({
+        enrollmentId,
         orgUnit: programOwnerOrgUnit,
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
+        force: true,
     });
 
-    const outputEffects = useFilteredWidgetData(ruleEffects);
+    const outputEffects = useFilteredWidgetData(enrollmentId);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
@@ -228,7 +230,6 @@ export const EnrollmentPageDefault = () => {
                 onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
-                ruleEffects={ruleEffects}
                 widgetEnrollmentStatus={widgetEnrollmentStatus}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
                 feedbackEmptyText={i18n.t('No feedback for this enrollment yet')}

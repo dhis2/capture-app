@@ -1,4 +1,3 @@
-import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { AttributeValue } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
@@ -12,7 +11,6 @@ import { Program } from '../../../../metaData';
 export type Props = {
     program: Program | null | undefined;
     programOwnerId?: string;
-    ruleEffects?: Array<OutputEffect>;
     stageId: string;
     orgUnitId: string;
     teiId: string;

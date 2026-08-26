@@ -14,7 +14,7 @@ import {
     updateEnrollmentAndEvents,
     updateEnrollmentEvent,
     useCommonEnrollmentDomainData,
-    useRuleEffects,
+    useEnrollmentScopeRuleEffects,
     deleteEnrollmentEvent,
     deleteEnrollmentEventRelationship,
     updateOrAddEnrollmentEvents,
@@ -163,7 +163,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
     const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
-    const ruleEffects = useRuleEffects({
+    useEnrollmentScopeRuleEffects({
+        enrollmentId,
         orgUnit: programOwnerOrgUnit,
         program,
         apiEnrollment: enrollmentSite,
@@ -379,7 +380,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
                 onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
                 userInteractionInProgress={userInteractionInProgress}
-                ruleEffects={ruleEffects}
                 programOwnerId={programOwnerId}
             />
         </EnrollmentAccessProvider>

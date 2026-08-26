@@ -1,10 +1,15 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
-import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
+import {
+    useCommonEnrollmentDomainData,
+    useEnrollmentScopeRuleEffects,
+    getEnrollmentScopeFormId,
+} from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
@@ -29,12 +34,15 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     const { orgUnit } = useCoreOrgUnit(programOwnerId);
     const programRules = useTrackerProgram(programId);
 
-    const ruleEffects = useRuleEffects({
+    useEnrollmentScopeRuleEffects({
+        enrollmentId,
         orgUnit,
         program: programRules,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
     });
+    const hiddenProgramStageIds = useSelector(({ rulesEffectsHiddenProgramStage }: any) =>
+        (enrollmentId ? rulesEffectsHiddenProgramStage?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
 
     useEffect(() => {
         if (enrollmentsError || programError) {
@@ -57,12 +65,10 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                 displayName: currentStage.displayName,
                 style: currentStage.style,
                 repeatable: currentStage.repeatable,
-                hiddenProgramStage: ruleEffects?.find(
-                    (ruleEffect: any) => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === currentStage.id,
-                ),
+                hiddenProgramStage: Boolean(hiddenProgramStageIds?.[currentStage.id]),
             });
             return accStage;
-        }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
+        }, []), [enrollment?.events, program?.programStages, programLoading, hiddenProgramStageIds]);
 
     const onSelectProgramStage = useCallback((newStageId: string) =>
         navigate(`enrollmentEventNew?${buildUrlQueryString({

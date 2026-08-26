@@ -7,7 +7,6 @@ import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
-import { effectActions } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -27,6 +26,7 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { getEnrollmentScopeFormId } from '../Pages/common/EnrollmentOverviewDomain';
 
 const styles: Readonly<any> = {
     header: {
@@ -73,7 +73,6 @@ const WidgetProfilePlain = ({
     programId,
     readOnlyMode = false,
     programOwnerId = '',
-    ruleEffects,
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -88,6 +87,9 @@ const WidgetProfilePlain = ({
         storedGeometry: trackedEntityInstance?.geometry,
         hasError: trackedEntityInstance?.hasError,
     }));
+    const enrollmentId = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollmentId);
+    const hiddenAttributeIds = useSelector(({ rulesEffectsHiddenFields }: any) =>
+        (enrollmentId ? rulesEffectsHiddenFields?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
     const { configIsFetched, dataEntryFormConfig } = useDataEntryFormConfig({ selectedScopeId: programId });
     const {
         loading: trackedEntityInstancesLoading,
@@ -133,11 +135,10 @@ const WidgetProfilePlain = ({
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = program?.trackedEntityType?.changelogEnabled;
 
-    const hiddenFieldIds = useMemo(() => new Set(
-        (ruleEffects ?? [])
-            .filter(effect => effect.type === effectActions.HIDE_FIELD)
-            .map(effect => effect.id),
-    ), [ruleEffects]);
+    const hiddenFieldIds = useMemo(
+        () => new Set(hiddenAttributeIds ? Object.keys(hiddenAttributeIds) : []),
+        [hiddenAttributeIds],
+    );
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter((item: any) => item.displayInList && !hiddenFieldIds.has(item.attribute))
