@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { statusTypes } from '../events/statusTypes';
 import { useLocationQuery } from '../utils/routing';
@@ -7,17 +7,17 @@ import { useLocationQuery } from '../utils/routing';
 const isScheduledStatus = (status?: string) =>
     status === statusTypes.SCHEDULE || status === statusTypes.OVERDUE;
 
+const initialStatusPerEvent = new Map<string, string>();
+
 export const useEnrollmentEditEventPageMode = (eventStatus?: string, eventId?: string) => {
     const showEditEvent = useSelector(({ viewEventPage }: any) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const { initMode } = useLocationQuery();
 
-    const initialStatusRef = useRef<{ eventId?: string; status?: string }>({});
-    if (initialStatusRef.current.eventId !== eventId) {
-        initialStatusRef.current = { eventId, status: eventStatus };
-    } else if (initialStatusRef.current.status === undefined && eventStatus !== undefined) {
-        initialStatusRef.current.status = eventStatus;
+    if (eventId && eventStatus !== undefined && !initialStatusPerEvent.has(eventId)) {
+        initialStatusPerEvent.set(eventId, eventStatus);
     }
-    const landedAsSkipped = initialStatusRef.current.status === statusTypes.SKIPPED;
+    const initialStatus = eventId ? initialStatusPerEvent.get(eventId) : eventStatus;
+    const landedAsSkipped = initialStatus === statusTypes.SKIPPED;
 
     return useMemo(() => {
         if (initMode) return { currentPageMode: initMode };

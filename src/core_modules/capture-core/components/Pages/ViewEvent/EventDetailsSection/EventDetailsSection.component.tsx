@@ -88,6 +88,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         eventStatus: loadedValues?.eventContainer?.event?.status,
         occurredAtClient: convertFormToClient(loadedValues?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
+        scheduledAtClient: loadedValues?.eventContainer?.event?.scheduledAt,
     });
     const onSaveExternal = useCallback(() => {
         removeEventChangelogQueries(queryClient, eventId);

@@ -30,7 +30,6 @@ export const CompletionMenuItem = ({
     canToggleCompletion,
     readOnlyMessage,
 }: Props) => {
-    const disabledMessage = readOnlyMessage || i18n.t('You do not have access to uncomplete this event');
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
     const { show: showError } = useAlert(
@@ -81,7 +80,7 @@ export const CompletionMenuItem = ({
     );
 
     return (
-        <ConditionalTooltip content={disabledMessage} enabled={!canToggleCompletion}>
+        <ConditionalTooltip content={readOnlyMessage} enabled={!canToggleCompletion}>
             <MenuItem
                 dense
                 disabled={!canToggleCompletion}

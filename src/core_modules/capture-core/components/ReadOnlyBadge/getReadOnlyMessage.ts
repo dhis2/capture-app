@@ -17,6 +17,8 @@ const getExpiredMessage = (): string => i18n.t('This event is outside the editin
 
 const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
 
+const getUncompleteAuthorityMessage = (): string => i18n.t('You do not have access to uncomplete this event');
+
 const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
     ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
     : i18n.t('This tracked entity is deactivated'));
@@ -28,6 +30,7 @@ export const getReadOnlyMessage = ({
     multipleStages,
     isEventBlockedByExpiry,
     isEventBlockedByCompletion,
+    isEventBlockedByUncompleteAuthority,
     trackedEntityInactive,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
@@ -37,5 +40,6 @@ export const getReadOnlyMessage = ({
     if (!access.programStage) return getProgramStageMessage(multipleStages);
     if (isEventBlockedByExpiry) return getExpiredMessage();
     if (isEventBlockedByCompletion) return getCompletedEventMessage();
+    if (isEventBlockedByUncompleteAuthority) return getUncompleteAuthorityMessage();
     return '';
 };

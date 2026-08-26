@@ -4,7 +4,9 @@ import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { ChangelogMenuItem, SkipMenuItem, CompletionMenuItem, DeleteMenuItem } from './MenuItems';
 
 const isSkippableStatus = (status?: string) =>
-    status === eventStatuses.SCHEDULE || status === eventStatuses.SKIPPED;
+    status === eventStatuses.SCHEDULE
+    || status === eventStatuses.SKIPPED
+    || status === eventStatuses.OVERDUE;
 
 const isCompletableStatus = (status?: string) =>
     status === eventStatuses.ACTIVE || status === eventStatuses.COMPLETED;

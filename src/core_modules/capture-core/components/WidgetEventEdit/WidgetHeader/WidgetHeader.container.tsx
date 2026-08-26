@@ -51,7 +51,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
-    canDeleteEvent,
+    canMutateEvent,
     canToggleCompletion,
     canEditProgramStage,
     readOnlyMessage,
@@ -60,7 +60,7 @@ const WidgetHeaderPlain = ({
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
 
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
@@ -168,7 +168,7 @@ const WidgetHeaderPlain = ({
                                         onCompletionSuccess={onCompletionStatusSuccess}
                                         onCompletionError={onCompletionStatusError}
                                         onDeleteRequest={() => setDeleteModalOpen(true)}
-                                        canMutateEvent={canDeleteEvent}
+                                        canMutateEvent={canMutateEvent}
                                         canToggleCompletion={canToggleCompletion}
                                         readOnlyMessage={readOnlyMessage}
                                     />

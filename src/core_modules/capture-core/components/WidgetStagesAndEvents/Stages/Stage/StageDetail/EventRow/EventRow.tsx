@@ -54,13 +54,15 @@ const EventRowPlain = ({
     const dispatch = useDispatch();
 
     const {
-        canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion, canEditProgramStage,
+        canMutateEvent, canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion,
+        isEventBlockedByUncompleteAuthority, canEditProgramStage,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
         occurredAtClient: convertServerToClient(eventDetails.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
+        scheduledAtClient: convertServerToClient(eventDetails.scheduledAt, dataElementTypes.DATE) as string,
     });
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: canEditProgramStage },
@@ -68,9 +70,9 @@ const EventRowPlain = ({
         multipleStages: false,
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
+        isEventBlockedByUncompleteAuthority,
         trackedEntityInactive: false,
     });
-    const canMutateEvent = canEditProgramStage && !isEventBlockedByExpiry;
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         const { completedAt, ...eventWithoutCompletion } = eventDetails;

@@ -107,19 +107,21 @@ const WidgetEventEditPlain = ({
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
     const completedAt = loadedValues?.eventContainer?.event?.completedAt;
+    const scheduledAt = loadedValues?.eventContainer?.event?.scheduledAt;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
     const {
-        isEventReadOnly, canDeleteEvent, canToggleCompletion, canEditProgramStage,
-        isEventBlockedByExpiry, isEventBlockedByCompletion,
+        isEventReadOnly, canMutateEvent, canToggleCompletion, canEditProgramStage,
+        isEventBlockedByExpiry, isEventBlockedByCompletion, isEventBlockedByUncompleteAuthority,
     } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
+        scheduledAtClient: scheduledAt,
     });
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: true },
@@ -127,6 +129,7 @@ const WidgetEventEditPlain = ({
         multipleStages: false,
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
+        isEventBlockedByUncompleteAuthority,
         trackedEntityInactive: false,
     });
 
@@ -156,7 +159,7 @@ const WidgetEventEditPlain = ({
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
-                            canDeleteEvent={canDeleteEvent}
+                            canMutateEvent={canMutateEvent}
                             canToggleCompletion={canToggleCompletion}
                             canEditProgramStage={canEditProgramStage}
                             readOnlyMessage={readOnlyMessage}
@@ -196,7 +199,7 @@ const WidgetEventEditPlain = ({
                                     eventStatus={eventStatus}
                                     canToggleCompletion={canToggleCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={canDeleteEvent}
+                                    hasDeleteButton={canMutateEvent}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}
