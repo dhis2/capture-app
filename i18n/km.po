@@ -1,17 +1,17 @@
 # Translators:
 # channara rin, 2025
-# Kiry Heng, 2025
 # Em Le <em.hispvietnam@gmail.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Sokna, 2026
 # Philip Larsen Donnelly, 2026
+# Kiry Heng, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-07-08T07:19:14.135Z\n"
+"POT-Creation-Date: 2026-08-21T07:54:23.258Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Kiry Heng, 2026\n"
 "Language-Team: Khmer (https://app.transifex.com/hisp-uio/teams/100509/km/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -20,19 +20,19 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "The application could not be loaded."
-msgstr ""
+msgstr "កម្មវិធីមិនអាចបង្ហាញបាន"
 
 msgid "Please verify that the server is running."
-msgstr ""
+msgstr "សូមបញ្ជាក់ថាម៉ាស៊ីនមេកំពុងដំណើរការ"
 
 msgid "Please see log for details."
-msgstr ""
+msgstr "សូមពិនិត្យមើលសារសម្រាប់ព័ត៌មានលម្អិត"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "ជ្រើសរើសកាលបរិច្ឆេទមួយ ឬច្រើន"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "ជ្រើស​​រើសកាលបរិច្ចេទ"
 
 msgid "Today"
 msgstr "ថ្ងៃនេះ"
@@ -55,10 +55,10 @@ msgid "Active enrollments"
 msgstr ""
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "ការចុះឈ្មោះដែលបានបញ្ចប់"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "ការចុះឈ្មោះដែលបានលុប"
 
 msgid "Search"
 msgstr "ស្វែងរក"
@@ -67,10 +67,10 @@ msgid "Enrollment dashboard"
 msgstr ""
 
 msgid "View event"
-msgstr ""
+msgstr "មើលប្រព្រឹត្តិការណ៍"
 
 msgid "Edit event"
-msgstr ""
+msgstr "កែប្រែព្រឹត្តិការណ៍"
 
 msgid "New event"
 msgstr "ព្រឹត្តិការណ៏ថ្មី"
@@ -79,16 +79,16 @@ msgid "Loading..."
 msgstr "កំពុងទាញទិន្នន័យ"
 
 msgid "Event list"
-msgstr ""
+msgstr "តារាងបញ្ជី"
 
 msgid "More"
-msgstr ""
+msgstr "បន្ថែមទៀត"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
 
 msgid "View dashboard"
-msgstr ""
+msgstr "មើលផ្ទាំងប៉ាណ្ណូបរិធាន"
 
 msgid "View active enrollment"
 msgstr ""
@@ -97,19 +97,19 @@ msgid "Re-enroll in {{programName}}"
 msgstr ""
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "ចុះឈ្មោះសារជាថ្មី"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "ចុះឈ្មោះ"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "ចុះឈ្មោះកន្លងមក"
 
 msgid "Organisation unit"
 msgstr "ផ្នែក​នៃ​អង្គការ"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "កាលបរិច្ឆេទនៃការចុះឈ្មោះ"
 
 msgid "Last updated"
 msgstr "បាន​ធ្វើ​បច្ចុប្បន្នភាព​ចុងក្រោយ"
@@ -127,34 +127,34 @@ msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
-msgstr ""
+msgstr "បង្ហាញតិច"
 
 msgid "Show more"
 msgstr "បង្ហាញច្រើនទៀត"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "កំហុសកើតឡើងអំឡុងពេលផ្ទៀងផ្ទាត់វាល"
 
 msgid "error"
-msgstr ""
+msgstr "កំហុស"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "តម្លៃនេះកំពុងផ្ទៀងផ្ទាត់"
 
 msgid "Async field update failed"
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "តំបន់"
 
 msgid "Coordinate"
 msgstr ""
 
 msgid "Enrollment"
-msgstr ""
+msgstr "ការចុះឈ្មោះ"
 
 msgid "Complete event"
-msgstr ""
+msgstr "បញ្ចប់ព្រឹត្តិការណ៏"
 
 msgid ""
 "The date entered belongs to an expired period. Enter a date after "
@@ -162,10 +162,10 @@ msgid ""
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "ទាមទារមានតម្លៃ"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "សូមបញ្ចូលកាលបរិច្ឆេទដែលត្រូវត្រូវ"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -180,7 +180,7 @@ msgid "Please select {{categoryName}}"
 msgstr ""
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "មិនអាចបញ្ចូលកាលបរិច្ឆេទនាពេលអនាគត"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -192,7 +192,7 @@ msgid "Cancel"
 msgstr "បោះបង់"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "កំហុសទិន្នន័យមេតា។ សូមពិនិត្យមើលលម្អិត"
 
 msgid "{{ stageName }} - Details"
 msgstr ""
@@ -204,13 +204,13 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
-msgstr ""
+msgstr "ស្វែងរកអ្នកប្រើប្រាស់"
 
 msgid "Notes"
 msgstr "ចំណាំ"
 
 msgid "Basic info"
-msgstr ""
+msgstr "ព័ត៌មានទូទៅ"
 
 msgid "Status"
 msgstr "ស្ថានភាព"
@@ -233,7 +233,7 @@ msgid ""
 msgstr ""
 
 msgid "This event"
-msgstr ""
+msgstr "ព្រឹត្តិការណ៍នេះ"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -241,7 +241,7 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "កំពុងដំណើរការ"
 
 msgid "Completed"
 msgstr "បានបញ្ចប់"
@@ -250,50 +250,50 @@ msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
 msgid "Please provide an valid organisation unit"
-msgstr ""
+msgstr "សូមផ្ដល់អង្គភាពដែលត្រឹមត្រូវ"
 
 msgid "Save and add another"
 msgstr ""
 
 msgid "Save and exit"
-msgstr ""
+msgstr "រក្សាទុក រួចចាកចេញ"
 
 msgid "Finish"
-msgstr ""
+msgstr "បញ្ចប់"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "រក្សាទុក ដោយមិនទាន់បានបញ្ចប់"
 
 msgid "Complete"
 msgstr "បញ្ចប់"
 
 msgid "No write access"
-msgstr ""
+msgstr "មិនអនុញ្ញាតឱ្យសរសេរ"
 
 msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "ផ្លាស់ប្ដូរទៅមើលទម្រង់"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "ផ្លាស់ប្ដូរទៅមើលតាមជួរដេក"
 
 msgid "{{count}} event added"
 msgid_plural "{{count}} event added"
 msgstr[0] ""
 
 msgid "No events added"
-msgstr ""
+msgstr "មិនមានបន្ថែមព្រឹត្តិការណ៍"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "ព្រឹត្តិការណ៍ថ្មីដែលមានទំនាក់ទំនងគ្នា"
 
 msgid "Adding relationship to event."
 msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "ត្រឡប់ទៅព្រឹត្តិការណ៍ដោយមិនបានរក្សាទុកទំនាក់ទំនង"
 
 msgid "Discard unsaved changes?"
 msgstr "តើអ្នកចង់បោះបង់ការកែប្រែនេះឬ?"
@@ -316,16 +316,16 @@ msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
 msgid "without"
-msgstr ""
+msgstr "មិនមាន"
 
 msgid "enrollment"
-msgstr ""
+msgstr "ការចុះឈ្មោះ"
 
 msgid "in"
-msgstr ""
+msgstr "ក្នុង"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
+msgstr "ចុះឈ្មោះក្នុងកម្មវិធីដោយជ្រើសរើសផ្ទាំងកម្មវិធីនៅផ្នែកខាងលើ"
 
 msgid "An error has occurred. See log for details"
 msgstr ""
@@ -351,7 +351,7 @@ msgid "Would you like to complete the enrollment?"
 msgstr ""
 
 msgid "Complete enrollment"
-msgstr ""
+msgstr "ការចុះឈ្មោះដែលបានបញ្ចប់"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -373,10 +373,10 @@ msgid "Show registered {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Registered person"
-msgstr ""
+msgstr "អ្នកចូលរួមដែលបានចុះឈ្មោះ"
 
 msgid "No item selected"
-msgstr ""
+msgstr "មិនមានធាតុណាមួយបានជ្រើសរើស"
 
 msgid "Form foundation missing. See log for details"
 msgstr ""
@@ -397,28 +397,28 @@ msgid "Do you want to create another event?"
 msgstr "តើអ្នកចង់បង្កើតព្រឹត្តិការណ៏ថ្មីមួយទៀតទេ?"
 
 msgid "Yes, create new event"
-msgstr ""
+msgstr "បាទ/ចាស បង្កើតព្រឹត្តិការណ៍ថ្មី"
 
 msgid "Back to form"
-msgstr ""
+msgstr "ត្រឡប់ទៅទម្រង់"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "រក្សាទុក"
 
 msgid "Validation errors and warnings"
 msgstr ""
 
 msgid "Validation errors"
-msgstr ""
+msgstr "កំហុសការផ្ទៀងផ្ទាត់"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "សារព្រមានការផ្ទៀងផ្ទាត់"
 
 msgid "Some operations are still running. Please wait."
 msgstr ""
 
 msgid "Operations running"
-msgstr ""
+msgstr "កំពុងដំណើរការ"
 
 msgid "No feedback for this enrollment yet"
 msgstr ""
@@ -441,19 +441,19 @@ msgid "Close"
 msgstr "បិទ"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "សូមជ្រើសរើសអ្នកប្រើប្រាស់"
 
 msgid "Me"
-msgstr ""
+msgstr "ខ្ញុំ"
 
 msgid "Anyone"
-msgstr ""
+msgstr "នរណាម្នាក់"
 
 msgid "None"
 msgstr "គ្មាន"
 
 msgid "Select user"
-msgstr ""
+msgstr "ជ្រើសរើសអ្នកប្រើប្រាស់"
 
 msgid "Please specify a range"
 msgstr ""
@@ -462,13 +462,13 @@ msgid "Start date must be before the end date"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "ពី"
 
 msgid "to"
 msgstr "ដល់"
 
 msgid "To"
-msgstr ""
+msgstr "ដល់"
 
 msgid "Period"
 msgstr "កំឡុងពេល"
@@ -480,10 +480,10 @@ msgid "Please specify the number of days"
 msgstr ""
 
 msgid "Days in the past"
-msgstr ""
+msgstr "ថ្ងៃនាអតីតកាល"
 
 msgid "Days in the future"
-msgstr ""
+msgstr "ថ្ងៃ ពេលអនាគត"
 
 msgid "This week"
 msgstr "សប្តាហ៍នេះ"
@@ -510,7 +510,7 @@ msgid "Relative range"
 msgstr ""
 
 msgid "Please specify a date"
-msgstr ""
+msgstr "សូមបញ្ជាក់កាលបរិច្ឆេទ"
 
 msgid "The \"Before\" value must be after the \"After\" value"
 msgstr ""
@@ -585,6 +585,9 @@ msgid "Type to filter options"
 msgstr "វាយបញ្ចូលមុខងារដើម្បីច្រោះ"
 
 msgid "No match found"
+msgstr ""
+
+msgid "Search for an organisation unit"
 msgstr ""
 
 msgid "Clear"
@@ -1077,6 +1080,12 @@ msgid "This event is outside the editing period"
 msgstr ""
 
 msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
 msgstr ""
 
 msgid "View only - {{message}}"
