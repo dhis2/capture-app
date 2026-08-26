@@ -21,6 +21,64 @@ setFieldValue({
 });
 ```
 
+#### Expected value types
+
+The `setFieldValue` function expects different value types depending on the element type. Below is a reference table of the expected value formats:
+
+| Element Type | Value Type | Example |
+|-------------|------------|---------|
+| `TEXT`, `LONG_TEXT` | `string` | `"John Doe"` |
+| `MULTI_TEXT` | `string` (comma-separated option codes) | `"code1,code2"` |
+| `NUMBER`, `INTEGER`, `INTEGER_POSITIVE`, `INTEGER_NEGATIVE`, `INTEGER_ZERO_OR_POSITIVE`, `PERCENTAGE` | `string` | `"42"` |
+| `NUMBER_RANGE`, `INTEGER_RANGE`, `INTEGER_POSITIVE_RANGE`, `INTEGER_NEGATIVE_RANGE`, `INTEGER_ZERO_OR_POSITIVE_RANGE`, `PERCENTAGE_RANGE` | `{ from: string, to: string }` | `{ from: "10", to: "20" }` |
+| `DATE` | `string` (`YYYY-MM-DD`) | `"2024-01-15"` |
+| `DATE_RANGE` | `{ from: string, to: string }` | `{ from: "2024-01-01", to: "2024-12-31" }` |
+| `DATETIME` | `{ date: string, time: string }` | `{ date: "2024-01-15", time: "10:30" }` |
+| `DATETIME_RANGE` | `{ from: { date: string, time: string }, to: { date: string, time: string } }` | `{ from: { date: "2024-01-01", time: "08:00" }, to: { date: "2024-01-02", time: "14:30" } }` |
+| `TIME` | `string` (HH:mm) | `"14:30"` |
+| `TIME_RANGE` | `{ from: string, to: string }` | `{ from: "08:00", to: "14:30" }` |
+| `BOOLEAN` | `'true' \| 'false'` (string, not boolean) | `'true'` |
+| `TRUE_ONLY` | `'true'` (string, not boolean) | `'true'` |
+| `PHONE_NUMBER`, `EMAIL`, `URL`, `USERNAME` | `string` | `"user@example.com"` |
+| `AGE` | `{ date: string }` | `{ date: "1990-05-15" }` |
+| `COORDINATE` | `{ latitude: number, longitude: number }` | `{ latitude: 40.7128, longitude: -74.0060 }` |
+| `POLYGON` | `Array<Array<Array<number>>>` | `[[[30, 10], [40, 40], [20, 40], [30, 10]]]` |
+| `FILE_RESOURCE` | `{ value: string, name: string, url?: string }` | `{ value: "fileId123", name: "doc.pdf" }` |
+| `IMAGE` | `{ value: string, name: string, url?: string, previewUrl?: string }` | `{ value: "imgId456", name: "photo.jpg" }` |
+| `ORGANISATION_UNIT` | `{ id: string }` | `{ id: "orgUnitId" }` |
+
+**Common examples:**
+
+```ts
+// Text field
+setFieldValue({ fieldId: 'firstName', value: 'John' });
+
+// Number field
+setFieldValue({ fieldId: 'age', value: '25' });
+
+// Date field
+setFieldValue({ fieldId: 'birthDate', value: '1990-05-15' });
+
+// Image field
+setFieldValue({
+    fieldId: 'photo',
+    value: { value: 'fileResourceId', name: 'photo.jpg' }
+});
+
+// Coordinate field
+setFieldValue({
+    fieldId: 'location',
+    value: { latitude: 40.7128, longitude: -74.0060 }
+});
+
+// With validation options
+setFieldValue({
+    fieldId: 'email',
+    value: 'user@example.com',
+    options: { touched: true }
+});
+```
+
 ### Updating context values
 
 You can also update context values from the plugin using the `setContextFieldValue` function that is passed as a prop to the plugin.
@@ -39,21 +97,22 @@ The props that a form field plugin can expect are as follows:
 
 ```ts
 type fieldsMetadata = {
-    id: string;
     name: string;
     shortName: string;
+    code: string;
     formName: string;
     disabled: boolean;
     compulsory: boolean;
     description: string;
     type: string;
-    optionSet: any;
     displayInForms: boolean;
     displayInReports: boolean;
-    icon: any;
-    unique: any;
-    searchable: boolean | undefined;
-    url: string | undefined;
+    optionSet?: any;
+    icon?: any;
+    unique?: any;
+    searchable?: boolean;
+    url?: string;
+    attributes?: Record<string, any>;
 }
 
 type FieldValueOptions = {
@@ -71,17 +130,17 @@ export type SetFieldValueProps = {
 type SetContextFieldValueProps = {
     fieldId: 'geometry' | 'occurredAt' | 'enrolledAt'
     value: any,
-    options?: FieldValueOptions,
 }
 
 export type IFormFieldPluginProps = {
+    orgUnitId: string;
     values: Record<string, any>;
     errors: Record<string, string[]>;
     warnings: Record<string, string[]>;
     fieldsMetadata: Record<string, fieldsMetadata>;
-    setFieldValue: (values: SetFieldValueProps) => void;
-    setContextFieldValue: (values: SetContextFieldValueProps) => void;
     viewMode: boolean;
     formSubmitted: boolean;
+    setFieldValue: (values: SetFieldValueProps) => void;
+    setContextFieldValue: (values: SetContextFieldValueProps) => void;
 }
 ```

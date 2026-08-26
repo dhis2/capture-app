@@ -27,8 +27,8 @@ on:
 
 env:
     BASE_URL_INSTANCES: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}
-    NAME_PATTERN_LEGACY_INSTANCES: ca-test-{version}
-    NAME_PATTERN_DEV_INSTANCE: ca-test-dev
+    NAME_PATTERN_LEGACY_INSTANCES: tracker-{version}
+    NAME_PATTERN_DEV_INSTANCE: tracker-dev
     CYPRESS_CONTAINERS: 5
     TRIGGER_LABELS: e2e-tests, testing
 
@@ -42,7 +42,7 @@ jobs:
         outputs:
             matrix: ${{ steps.set-matrix.outputs.specs }}
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v6
             - name: Generate test matrix
               id: set-matrix
               run: |
@@ -64,7 +64,7 @@ jobs:
                   echo "::set-output name=labels::[ ${labels%,} ]"
 
             - if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              uses: actions/checkout@v2
+              uses: actions/checkout@v6
 
             - name: compute-instance-url
               id: instance-url
@@ -91,15 +91,15 @@ jobs:
         env:
             SHOULD_RECORD: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record') }}
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v6
 
-            - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v6
               with:
-                  node-version: 18.x
+                  cache: ''
 
             - name: compute-instance-url
               id: instance-url
-              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/$version}"
+              run: echo "::set-output name=url::${BASE_URL_INSTANCES%/}/${NAME_PATTERN_LEGACY_INSTANCES/"{version}"/${version#*.}}"
               env:
                   version: ${{ matrix.versions }}
 
@@ -118,9 +118,13 @@ jobs:
                 echo "Computed Tag=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}"
                 echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
                 echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
+
+            - uses: dhis2/action-safe-yarn-install-with-cache@v1
+            
             - name: Cypress run
-              uses: cypress-io/github-action@v6
+              uses: cypress-io/github-action@v7
               with:
+                  install: false
                   record: ${{ env.SHOULD_RECORD }}
                   parallel: ${{ env.SHOULD_RECORD }}
                   group: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}

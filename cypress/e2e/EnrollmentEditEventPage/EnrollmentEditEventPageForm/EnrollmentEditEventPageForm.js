@@ -103,26 +103,16 @@ When(/^the user set the apgar score to (.*)/, score =>
         .blur(),
 );
 
-When(/^the user changes the gender to (.*)/, gender =>
-    cy
-        .get('[data-test="widget-enrollment-event"]')
-        .get('[data-test="virtualized-select"]')
-        .eq(0)
-        .click()
-        .contains(gender)
-        .click(),
-);
-
-When(/^the user sets Plurality assessed to (.*)/, text =>
-    cy
-        .get('[data-test="widget-enrollment-event"]')
+When(/^the user sets Plurality assessed to (.*)/, (text) => {
+    cy.get('[data-test="widget-enrollment-event"]')
         .get('[data-test="scope-selector"]')
-        .get('[data-test="virtualized-select"]')
+        .get('[data-test="dhis2-simplesingleselect"]')
         .eq(4)
         .click()
+        .get('[role="option"]:visible')
         .contains(text)
-        .click({ force: true }),
-);
+        .click();
+});
 
 When('the user clicks switch tab to Schedule', () => {
     cy.get('[data-test="edit-event-tab-bar"]').get('button').contains('Schedule').click();
@@ -217,10 +207,10 @@ And('you open the Birth stage event', () => {
         });
 });
 
-Then('the edit button should be disabled', () => {
+Then('the edit button should not be visible', () => {
     cy.get('[data-test="widget-enrollment-event"]')
         .find('[data-test="widget-enrollment-event-edit-button"]')
-        .should('be.disabled');
+        .should('not.exist');
 });
 
 And('the add event form is displayed', () => {

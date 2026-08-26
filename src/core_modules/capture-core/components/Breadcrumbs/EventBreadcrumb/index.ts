@@ -1,0 +1,1 @@
+export { EventBreadcrumb } from './EventBreadcrumb';

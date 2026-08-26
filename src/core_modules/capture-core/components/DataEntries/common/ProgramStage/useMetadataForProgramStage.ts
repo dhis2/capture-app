@@ -1,0 +1,105 @@
+import { useMemo } from 'react';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { CurrentUser } from '../../../../utils/userInfo/CurrentUser';
+import { useDataEntryFormConfig, useOptionSetsForAttributes } from '../TEIAndEnrollment';
+import { useDataElementsForStage } from './useDataElementsForStage';
+import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
+import { buildProgramStageMetadata } from './buildProgramStageMetadata';
+import type { Props, ReturnType } from './useMetadataForProgramStage.types';
+
+function isProgramStageMetadataQueryEnabled({
+    program,
+    programId,
+    dataElements,
+    optionSets,
+    locale,
+    configIsFetched,
+}: {
+    program: unknown;
+    programId: string | undefined;
+    dataElements: unknown;
+    optionSets: unknown;
+    locale: unknown;
+    configIsFetched: boolean;
+}): boolean {
+    return [
+        program,
+        programId,
+        dataElements,
+        optionSets,
+        locale,
+        configIsFetched,
+    ].every(Boolean);
+}
+
+export const useMetadataForProgramStage = ({
+    programId,
+    stageId,
+}: Props): ReturnType => {
+    const scopeId = stageId || programId;
+    const { program } = useProgramFromIndexedDB(programId, { enabled: !!programId });
+    const locale = CurrentUser.get().uiLocale;
+    const {
+        dataEntryFormConfig,
+        configIsFetched,
+        isLoading: isDataEntryFormConfigLoading,
+    } = useDataEntryFormConfig({ selectedScopeId: scopeId });
+
+    const programStage = useMemo(() => {
+        if (!stageId) {
+            return program?.programStages[0];
+        }
+
+        return program?.programStages.find(ps => ps.id === stageId);
+    }, [program?.programStages, stageId]);
+
+    const dataElementIds = useMemo(() => {
+        if (!programStage) return [];
+
+        return programStage
+            .programStageDataElements
+            .map(dataElement => dataElement.dataElementId);
+    }, [programStage]);
+
+    const { dataElements } = useDataElementsForStage({
+        programId,
+        stageId,
+        dataElementIds,
+    });
+
+    const { optionSets } = useOptionSetsForAttributes({
+        attributes: dataElements,
+        selectedScopeId: scopeId,
+    });
+
+    const { data: programStageMetadata, isInitialLoading, isError } = useIndexedDBQuery(
+        ['programStageMetadata', programId, stageId],
+        () => buildProgramStageMetadata({
+            cachedProgramStage: programStage,
+            cachedDataElements: dataElements,
+            programId,
+            cachedOptionSets: optionSets,
+            locale,
+            dataEntryFormConfig,
+        }),
+        {
+            cacheTime: Infinity,
+            staleTime: Infinity,
+            enabled: isProgramStageMetadataQueryEnabled({
+                program,
+                programId,
+                dataElements,
+                optionSets,
+                locale,
+                configIsFetched,
+            }),
+        },
+    );
+
+    return {
+        formFoundation: programStageMetadata?.stageForm ?? null,
+        stage: programStageMetadata ?? null,
+        isLoading: isDataEntryFormConfigLoading || isInitialLoading,
+        isError,
+    };
+};

@@ -1,0 +1,8 @@
+import { actionCreator } from '../actions/actions.utils';
+
+export const rulesEffectsActionTypes = {
+    UPDATE_RULES_EFFECTS: 'UpdateRulesEffects',
+};
+
+export const updateRulesEffects = (rulesEffects: any = {}, formId: string) =>
+    actionCreator(rulesEffectsActionTypes.UPDATE_RULES_EFFECTS)({ rulesEffects, formId });

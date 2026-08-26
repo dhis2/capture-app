@@ -198,9 +198,10 @@ When('you change rows per page to 50', () => {
     cy.intercept('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('div[data-test="rows-per-page-selector"]')
-        .click()
-        .contains('50')
-        .click();
+    .click()
+    .get('[role="option"]:visible')
+    .contains('50')
+    .click();
 });
 
 Then('an event batch capped at 50 records should be retrieved from the api', () => {

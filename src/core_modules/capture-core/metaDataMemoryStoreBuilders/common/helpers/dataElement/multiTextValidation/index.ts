@@ -1,0 +1,1 @@
+export { isMultiTextWithoutOptionset } from './isMultiTextWithoutOptionset';

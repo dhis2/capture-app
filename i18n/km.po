@@ -1,30 +1,41 @@
-# 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2024
-# Philip Larsen Donnelly, 2024
 # channara rin, 2025
+# Em Le <em.hispvietnam@gmail.com>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Sokna, 2026
+# Philip Larsen Donnelly, 2026
+# Kiry Heng, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2026-08-21T07:54:23.258Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: channara rin, 2025\n"
+"Last-Translator: Kiry Heng, 2026\n"
 "Language-Team: Khmer (https://app.transifex.com/hisp-uio/teams/100509/km/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: km\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgid "The application could not be loaded."
+msgstr "កម្មវិធីមិនអាចបង្ហាញបាន"
+
+msgid "Please verify that the server is running."
+msgstr "សូមបញ្ជាក់ថាម៉ាស៊ីនមេកំពុងដំណើរការ"
+
+msgid "Please see log for details."
+msgstr "សូមពិនិត្យមើលសារសម្រាប់ព័ត៌មានលម្អិត"
+
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "ជ្រើសរើសកាលបរិច្ឆេទមួយ ឬច្រើន"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "ជ្រើស​​រើសកាលបរិច្ចេទ"
 
 msgid "Today"
-msgstr ""
+msgstr "ថ្ងៃនេះ"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -44,10 +55,10 @@ msgid "Active enrollments"
 msgstr ""
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "ការចុះឈ្មោះដែលបានបញ្ចប់"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "ការចុះឈ្មោះដែលបានលុប"
 
 msgid "Search"
 msgstr "ស្វែងរក"
@@ -56,46 +67,49 @@ msgid "Enrollment dashboard"
 msgstr ""
 
 msgid "View event"
-msgstr ""
+msgstr "មើលប្រព្រឹត្តិការណ៍"
 
 msgid "Edit event"
-msgstr ""
+msgstr "កែប្រែព្រឹត្តិការណ៍"
 
 msgid "New event"
 msgstr "ព្រឹត្តិការណ៏ថ្មី"
 
+msgid "Loading..."
+msgstr "កំពុងទាញទិន្នន័យ"
+
 msgid "Event list"
-msgstr ""
+msgstr "តារាងបញ្ជី"
 
 msgid "More"
-msgstr ""
+msgstr "បន្ថែមទៀត"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
 
 msgid "View dashboard"
-msgstr ""
+msgstr "មើលផ្ទាំងប៉ាណ្ណូបរិធាន"
 
 msgid "View active enrollment"
 msgstr ""
 
-msgid "Re-enroll"
+msgid "Re-enroll in {{programName}}"
 msgstr ""
 
-msgid "in"
-msgstr ""
+msgid "Re-enroll"
+msgstr "ចុះឈ្មោះសារជាថ្មី"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "ចុះឈ្មោះ"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "ចុះឈ្មោះកន្លងមក"
 
 msgid "Organisation unit"
 msgstr "ផ្នែក​នៃ​អង្គការ"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "កាលបរិច្ឆេទនៃការចុះឈ្មោះ"
 
 msgid "Last updated"
 msgstr "បាន​ធ្វើ​បច្ចុប្បន្នភាព​ចុងក្រោយ"
@@ -106,47 +120,52 @@ msgstr ""
 msgid "Long"
 msgstr ""
 
-msgid "lat"
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
-msgstr ""
+msgstr "បង្ហាញតិច"
 
 msgid "Show more"
-msgstr ""
+msgstr "បង្ហាញច្រើនទៀត"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "កំហុសកើតឡើងអំឡុងពេលផ្ទៀងផ្ទាត់វាល"
 
 msgid "error"
-msgstr ""
+msgstr "កំហុស"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "តម្លៃនេះកំពុងផ្ទៀងផ្ទាត់"
 
 msgid "Async field update failed"
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "តំបន់"
 
 msgid "Coordinate"
 msgstr ""
 
 msgid "Enrollment"
-msgstr ""
+msgstr "ការចុះឈ្មោះ"
 
 msgid "Complete event"
+msgstr "បញ្ចប់ព្រឹត្តិការណ៏"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "ទាមទារមានតម្លៃ"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "សូមបញ្ចូលកាលបរិច្ឆេទដែលត្រូវត្រូវ"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -161,7 +180,7 @@ msgid "Please select {{categoryName}}"
 msgstr ""
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "មិនអាចបញ្ចូលកាលបរិច្ឆេទនាពេលអនាគត"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -173,7 +192,7 @@ msgid "Cancel"
 msgstr "បោះបង់"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "កំហុសទិន្នន័យមេតា។ សូមពិនិត្យមើលលម្អិត"
 
 msgid "{{ stageName }} - Details"
 msgstr ""
@@ -185,13 +204,13 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
-msgstr ""
+msgstr "ស្វែងរកអ្នកប្រើប្រាស់"
 
 msgid "Notes"
 msgstr "ចំណាំ"
 
 msgid "Basic info"
-msgstr ""
+msgstr "ព័ត៌មានទូទៅ"
 
 msgid "Status"
 msgstr "ស្ថានភាព"
@@ -214,7 +233,7 @@ msgid ""
 msgstr ""
 
 msgid "This event"
-msgstr ""
+msgstr "ព្រឹត្តិការណ៍នេះ"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -222,7 +241,7 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "កំពុងដំណើរការ"
 
 msgid "Completed"
 msgstr "បានបញ្ចប់"
@@ -231,52 +250,53 @@ msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
 msgid "Please provide an valid organisation unit"
-msgstr ""
+msgstr "សូមផ្ដល់អង្គភាពដែលត្រឹមត្រូវ"
 
 msgid "Save and add another"
 msgstr ""
 
 msgid "Save and exit"
-msgstr ""
+msgstr "រក្សាទុក រួចចាកចេញ"
 
 msgid "Finish"
-msgstr ""
+msgstr "បញ្ចប់"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "រក្សាទុក ដោយមិនទាន់បានបញ្ចប់"
 
 msgid "Complete"
 msgstr "បញ្ចប់"
 
 msgid "No write access"
-msgstr ""
+msgstr "មិនអនុញ្ញាតឱ្យសរសេរ"
 
 msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "ផ្លាស់ប្ដូរទៅមើលទម្រង់"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "ផ្លាស់ប្ដូរទៅមើលតាមជួរដេក"
 
-msgid "events added"
-msgstr ""
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
 
 msgid "No events added"
-msgstr ""
+msgstr "មិនមានបន្ថែមព្រឹត្តិការណ៍"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "ព្រឹត្តិការណ៍ថ្មីដែលមានទំនាក់ទំនងគ្នា"
 
 msgid "Adding relationship to event."
 msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "ត្រឡប់ទៅព្រឹត្តិការណ៍ដោយមិនបានរក្សាទុកទំនាក់ទំនង"
 
 msgid "Discard unsaved changes?"
-msgstr ""
+msgstr "តើអ្នកចង់បោះបង់ការកែប្រែនេះឬ?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -284,28 +304,28 @@ msgid ""
 msgstr ""
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "បាទ/ចាស, បោះបង់ការផ្លាស់ប្តូរ"
 
 msgid "No, cancel"
-msgstr ""
+msgstr "ទេ, បោះបង់ចោល"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
-
-msgid "Save"
-msgstr "រក្សាទុក​"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
 msgid "without"
-msgstr ""
+msgstr "មិនមាន"
 
 msgid "enrollment"
-msgstr ""
+msgstr "ការចុះឈ្មោះ"
+
+msgid "in"
+msgstr "ក្នុង"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
+msgstr "ចុះឈ្មោះក្នុងកម្មវិធីដោយជ្រើសរើសផ្ទាំងកម្មវិធីនៅផ្នែកខាងលើ"
 
 msgid "An error has occurred. See log for details"
 msgstr ""
@@ -331,7 +351,7 @@ msgid "Would you like to complete the enrollment?"
 msgstr ""
 
 msgid "Complete enrollment"
-msgstr ""
+msgstr "ការចុះឈ្មោះដែលបានបញ្ចប់"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -353,6 +373,12 @@ msgid "Show registered {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Registered person"
+msgstr "អ្នកចូលរួមដែលបានចុះឈ្មោះ"
+
+msgid "No item selected"
+msgstr "មិនមានធាតុណាមួយបានជ្រើសរើស"
+
+msgid "Form foundation missing. See log for details"
 msgstr ""
 
 msgid "validation failed"
@@ -371,27 +397,33 @@ msgid "Do you want to create another event?"
 msgstr "តើអ្នកចង់បង្កើតព្រឹត្តិការណ៏ថ្មីមួយទៀតទេ?"
 
 msgid "Yes, create new event"
-msgstr ""
+msgstr "បាទ/ចាស បង្កើតព្រឹត្តិការណ៍ថ្មី"
 
 msgid "Back to form"
-msgstr ""
+msgstr "ត្រឡប់ទៅទម្រង់"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "រក្សាទុក"
 
 msgid "Validation errors and warnings"
 msgstr ""
 
 msgid "Validation errors"
-msgstr ""
+msgstr "កំហុសការផ្ទៀងផ្ទាត់"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "សារព្រមានការផ្ទៀងផ្ទាត់"
 
-msgid "Some operations are still runnning. Please wait.."
+msgid "Some operations are still running. Please wait."
 msgstr ""
 
 msgid "Operations running"
+msgstr "កំពុងដំណើរការ"
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid ""
@@ -409,52 +441,67 @@ msgid "Close"
 msgstr "បិទ"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "សូមជ្រើសរើសអ្នកប្រើប្រាស់"
 
 msgid "Me"
-msgstr ""
+msgstr "ខ្ញុំ"
 
 msgid "Anyone"
-msgstr ""
+msgstr "នរណាម្នាក់"
 
 msgid "None"
 msgstr "គ្មាន"
 
 msgid "Select user"
+msgstr "ជ្រើសរើសអ្នកប្រើប្រាស់"
+
+msgid "Please specify a range"
 msgstr ""
+
+msgid "Start date must be before the end date"
+msgstr ""
+
+msgid "From"
+msgstr "ពី"
 
 msgid "to"
 msgstr "ដល់"
 
-msgid "Days in the future"
+msgid "To"
+msgstr "ដល់"
+
+msgid "Period"
+msgstr "កំឡុងពេល"
+
+msgid "Please provide zero or a positive integer"
 msgstr ""
 
-msgid "From"
+msgid "Please specify the number of days"
 msgstr ""
 
 msgid "Days in the past"
-msgstr ""
+msgstr "ថ្ងៃនាអតីតកាល"
 
-msgid "To"
-msgstr ""
+msgid "Days in the future"
+msgstr "ថ្ងៃ ពេលអនាគត"
 
 msgid "This week"
-msgstr ""
+msgstr "សប្តាហ៍នេះ"
 
 msgid "This month"
-msgstr ""
+msgstr "ខែនេះ"
 
-msgid "This Year"
-msgstr ""
+msgid "This year"
+msgstr "ឆ្នាំនេះ"
 
 msgid "Last week"
-msgstr ""
+msgstr "សប្តាហ៍មុន"
 
 msgid "Last month"
-msgstr ""
+msgstr "ខែមុន"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "៣ខែចុងក្រោយ"
 
 msgid "Absolute range"
 msgstr ""
@@ -462,14 +509,53 @@ msgstr ""
 msgid "Relative range"
 msgstr ""
 
-msgid "Max"
-msgstr "អតិបរមា"
+msgid "Please specify a date"
+msgstr "សូមបញ្ជាក់កាលបរិច្ឆេទ"
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "កាលបរិច្ឆេទ"
+
+msgid "Time"
+msgstr ""
+
+msgid "Before"
+msgstr ""
+
+msgid "Is empty"
+msgstr ""
+
+msgid "Is not empty"
+msgstr ""
+
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
 
 msgid "Min"
 msgstr "អប្បបរមា"
 
-msgid "Contains text"
-msgstr ""
+msgid "Max"
+msgstr "អតិបរមា"
 
 msgid "Yes"
 msgstr "បាទ/ចាស"
@@ -501,11 +587,14 @@ msgstr "វាយបញ្ចូលមុខងារដើម្បីច្រ
 msgid "No match found"
 msgstr ""
 
+msgid "Search for an organisation unit"
+msgstr ""
+
 msgid "Clear"
 msgstr "លុបចោល"
 
-msgid "No results"
-msgstr ""
+msgid "No results found"
+msgstr "មិនមានលទ្ធផលបង្ហាញ"
 
 msgid "Description"
 msgstr "ការ​ពិពណ៌នា"
@@ -522,10 +611,10 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "No results found"
-msgstr "មិនមានលទ្ធផលបង្ហាញ"
-
 msgid "No items to display"
+msgstr ""
+
+msgid "Tracked entity is deactivated"
 msgstr ""
 
 msgid "Select columns"
@@ -533,6 +622,9 @@ msgstr ""
 
 msgid "Columns to show in table"
 msgstr ""
+
+msgid "Save"
+msgstr "រក្សាទុក​"
 
 msgid "Column"
 msgstr ""
@@ -549,6 +641,17 @@ msgstr ""
 msgid "Remove filter"
 msgstr ""
 
+msgid "Minimum characters to search is too high for this filter."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -558,10 +661,22 @@ msgstr ""
 msgid "before or equal to {{date}}"
 msgstr ""
 
-msgid "greater than or equal to"
+msgid "{{start}} days in the past to {{end}} days in the future"
 msgstr ""
 
-msgid "less than or equal to"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
 msgstr ""
 
 msgid "More filters"
@@ -585,13 +700,10 @@ msgstr ""
 msgid "Add note"
 msgstr "បន្ថែមការកត់ចំណាំ"
 
-msgid "You don't have access to write notes"
-msgstr ""
-
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -600,16 +712,7 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
-msgstr ""
-
 msgid "Quick actions"
-msgstr ""
-
-msgid "New Event"
 msgstr ""
 
 msgid "Schedule an event"
@@ -621,7 +724,10 @@ msgstr ""
 msgid "No available program stages"
 msgstr ""
 
-msgid "Program stage not found"
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid ""
@@ -631,12 +737,6 @@ msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
-msgstr ""
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
-
-msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "There are no active enrollments."
@@ -686,10 +786,10 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
-msgid "Page is missing required values from URL"
+msgid "An error has occurred"
 msgstr ""
 
-msgid "Org unit is not valid with current program"
+msgid "Page is missing required values from URL"
 msgstr ""
 
 msgid "There was an error opening the Page"
@@ -701,6 +801,9 @@ msgstr ""
 msgid "Program stage is invalid"
 msgstr ""
 
+msgid "Stage not found"
+msgstr ""
+
 msgid "Report"
 msgstr ""
 
@@ -708,6 +811,9 @@ msgid "Schedule"
 msgstr ""
 
 msgid "Refer"
+msgstr ""
+
+msgid "New Event"
 msgstr ""
 
 msgid "You can't add any more {{ programStageName }} events"
@@ -725,12 +831,10 @@ msgstr ""
 msgid "Stage"
 msgstr ""
 
-msgid "Registered events"
+msgid "The category option is not valid for the selected organisation unit."
 msgstr ""
 
-msgid ""
-"The category option is not valid for the selected organisation unit. Please "
-"select a valid combination."
+msgid "Please select a valid combination."
 msgstr ""
 
 msgid "Get started with Capture app"
@@ -753,13 +857,16 @@ msgstr ""
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Please select an organisation unit"
+msgstr "Please select an organisation unit"
+
+msgid "See working list without organisation unit"
 msgstr ""
 
-msgid "Or see all events accessible to you in {{program}}"
+msgid "Search for a {{trackedEntityName}}"
 msgstr ""
 
-msgid "Please select an organisation unit."
+msgid "Registered events"
 msgstr ""
 
 msgid ""
@@ -778,9 +885,6 @@ msgstr ""
 
 msgid "New"
 msgstr "ថ្មី"
-
-msgid "Create for"
-msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -852,9 +956,6 @@ msgstr "ព្រឹត្តិការណ៏"
 msgid "event"
 msgstr ""
 
-msgid "You don't have access to edit this event"
-msgstr ""
-
 msgid "View changelog"
 msgstr ""
 
@@ -869,11 +970,11 @@ msgstr ""
 msgid "Errors"
 msgstr ""
 
-msgid "Feedback"
-msgstr "មតិ​ឆ្លើយតប"
+msgid "This event doesn't have any notes"
+msgstr ""
 
-msgid "Indicators"
-msgstr "Indicators"
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
@@ -887,6 +988,21 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr "បាន​ជ្រើស"
+
+msgid "Please select an organisation unit."
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Selected program"
 msgstr ""
 
@@ -896,6 +1012,9 @@ msgstr ""
 msgid "Search by attributes"
 msgstr ""
 
+msgid "Search {{attributeName}}"
+msgstr ""
+
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
@@ -903,7 +1022,13 @@ msgstr[0] ""
 msgid "Missing search criteria"
 msgstr ""
 
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
+
 msgid "Back to search"
+msgstr ""
+
+msgid "Search form is missing. See log for details"
 msgstr ""
 
 msgid "Could not retrieve metadata. Please try again later."
@@ -918,16 +1043,55 @@ msgstr "Loading"
 msgid "An error occurred while loading the form"
 msgstr ""
 
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr ""
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You don't have access to delete this relationship"
+msgid "You only have view access to this enrollment"
 msgstr ""
 
-msgid "You don't have access to create any relationships"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
 msgstr ""
 
 msgid "Add relationship"
@@ -937,6 +1101,18 @@ msgid "No results found for "
 msgstr ""
 
 msgid "Choose an organisation unit in the form below"
+msgstr ""
+
+msgid "None selected"
+msgstr "មិនត្រូវបានជ្រើសរើស"
+
+msgid "Choose an organisation unit"
+msgstr ""
+
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
 msgstr ""
 
 msgid "Clear selection"
@@ -957,17 +1133,29 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
-msgid "Search for {{titleText}}"
+msgid "Choose a {{title}}"
 msgstr ""
 
-msgid "Search for"
+msgid "Search for a {{title}}"
 msgstr ""
 
 msgid ""
-"You can also choose a program from the top bar and search in that program"
+"You can also select a program from the top bar to search within that "
+"program."
 msgstr ""
 
 msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "{{trackedEntityName}} has no searchable attributes"
+msgstr ""
+
+msgid ""
+"Try selecting a different tracked entity type, or try searching in a program"
+" by choosing one from the top bar."
+msgstr ""
+
+msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search {{name}}"
@@ -980,8 +1168,7 @@ msgid "all programs"
 msgstr ""
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
 
 msgid "No searchable attributes for {{trackedEntityName}}"
@@ -990,7 +1177,8 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create a new "
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
 
 msgid "Create new"
@@ -1012,13 +1200,32 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "An error has occurred"
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later."
+msgstr ""
+
+msgid "For more details open the Console tab of the Developer tools"
 msgstr ""
 
 msgid "Too many results"
 msgstr ""
 
+msgid "This search returned too many results to show."
+msgstr ""
+
+msgid ""
+"Try changing search terms or searching by more attributes to narrow down the"
+" results."
+msgstr ""
+
 msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Results found in {{currentSearchScopeName}}"
 msgstr ""
 
 msgid "Results found"
@@ -1038,7 +1245,7 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
@@ -1047,22 +1254,25 @@ msgstr ""
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
+msgid "Search..."
+msgstr ""
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
+
 msgid "No tracked entity types available"
 msgstr ""
 
 msgid "Assigned to"
 msgstr ""
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr "កែសម្រួល​"
 
 msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1084,7 +1294,10 @@ msgstr ""
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
-"program. All activity will be logged."
+"program."
+msgstr ""
+
+msgid "All activity will be logged."
 msgstr ""
 
 msgid "Unsaved changes"
@@ -1120,9 +1333,10 @@ msgstr ""
 msgid "Delete enrollment"
 msgstr ""
 
-msgid ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
+msgid "Are you sure you want to delete this enrollment?"
+msgstr ""
+
+msgid "This will permanently remove the current enrollment."
 msgstr ""
 
 msgid "Yes, delete enrollment."
@@ -1215,6 +1429,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1240,13 +1457,19 @@ msgid "Error"
 msgstr "កំហុសបច្ចេកទេស"
 
 msgid "Warning"
-msgstr ""
+msgstr "ព្រមាន"
 
 msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Delete event"
 msgstr "លុបចោលព្រឹត្តិការណ៏"
+
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this event? "
+msgstr ""
 
 msgid "Yes, delete event"
 msgstr ""
@@ -1257,16 +1480,22 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
 
-msgid "Event completed"
+msgid "Polygon captured"
 msgstr ""
 
-msgid "The event cannot be edited after it has been completed"
+msgid "No polygon captured"
+msgstr ""
+
+msgid "Event completed"
 msgstr ""
 
 msgid "Notes about this event"
@@ -1275,16 +1504,10 @@ msgstr ""
 msgid "Write a note about this event"
 msgstr ""
 
-msgid "This event doesn't have any notes"
-msgstr ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
-msgstr ""
-
-msgid "Schedule date info"
 msgstr ""
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
@@ -1313,6 +1536,13 @@ msgstr ""
 msgid "Please provide a valid organisation unit"
 msgstr ""
 
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgstr ""
+
 msgid "Schedule info"
 msgstr ""
 
@@ -1325,21 +1555,29 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "មតិ​ឆ្លើយតប"
+
+msgid "Indicators"
+msgstr "Indicators"
+
 msgid "Save note"
 msgstr ""
 
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. Information about "
-"this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
-msgstr ""
-
 msgid "Save changes"
+msgstr "រក្សាទុកការផ្លាស់ប្តូរ"
+
+msgid "Change information about this {{trackedEntityName}} here."
+msgstr ""
+
+msgid ""
+"Information about this enrollment can be edited in the Enrollment widget."
+msgstr ""
+
+msgid "{{trackedEntityName}} profile"
 msgstr ""
 
 msgid "Profile"
@@ -1360,6 +1598,34 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr ""
 
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr ""
 
@@ -1378,19 +1644,25 @@ msgstr ""
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr ""
 
+msgid "View profile"
+msgstr "មើល​ជីវប្រវត្តិ"
+
 msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1435,21 +1707,22 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-
 msgid "This stage can only have one event"
 msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
-msgid ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event?"
+msgid "Are you sure you want to delete this event?"
 msgstr ""
 
 msgid "An error occurred when updating event status"
@@ -1483,6 +1756,9 @@ msgstr ""
 msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
+msgid "No stages found in this program"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
@@ -1492,9 +1768,12 @@ msgstr ""
 msgid "Unlink and delete linked event"
 msgstr ""
 
+msgid "Are you sure you want to remove the link and delete the linked event?"
+msgstr ""
+
 msgid ""
-"Are you sure you want to remove the link and delete the linked event? This "
-"action permanently removes the link, linked event, and all related data."
+"This action permanently removes the link, linked event, and all related "
+"data."
 msgstr ""
 
 msgid "Yes, unlink and delete linked event"
@@ -1503,9 +1782,10 @@ msgstr ""
 msgid "Unlink event"
 msgstr ""
 
-msgid ""
-"Are you sure you want to remove the link between these events? This action "
-"removes the link itself, but the linked event will remain."
+msgid "Are you sure you want to remove the link between these events?"
+msgstr ""
+
+msgid "This action removes the link itself, but the linked event will remain."
 msgstr ""
 
 msgid "Yes, unlink event"
@@ -1538,7 +1818,7 @@ msgid "No changes to display"
 msgstr ""
 
 msgid "Data item"
-msgstr ""
+msgstr "ទិន្នន័យ"
 
 msgid "Updated"
 msgstr ""
@@ -1548,9 +1828,6 @@ msgstr ""
 
 msgid "Deleted"
 msgstr ""
-
-msgid "Date"
-msgstr "កាលបរិច្ឆេទ"
 
 msgid "Sort by date"
 msgstr ""
@@ -1574,7 +1851,7 @@ msgid "File"
 msgstr ""
 
 msgid "Image"
-msgstr ""
+msgstr "រូបភាព"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
@@ -1604,9 +1881,10 @@ msgstr ""
 msgid "Delete relationship"
 msgstr ""
 
-msgid ""
-"Deleting the relationship is permanent and cannot be undone. Are you sure "
-"you want to delete this relationship?"
+msgid "Deleting the relationship is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this relationship?"
 msgstr ""
 
 msgid "Yes, delete relationship"
@@ -1616,6 +1894,9 @@ msgid "An error occurred while deleting the relationship."
 msgstr ""
 
 msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "This enrollment doesn't have any relationships"
 msgstr ""
 
 msgid "Type"
@@ -1637,6 +1918,9 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "There is a bulk data entry with unsaved changes"
 msgstr ""
 
 msgid "Complete events"
@@ -1663,26 +1947,25 @@ msgstr ""
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
 msgstr ""
 
-msgid ""
-"This cannot be undone. Are you sure you want to delete the selected events?"
+msgid "This cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete the selected events?"
 msgstr ""
 
 msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
 msgstr ""
 
 msgid "Enrollment status"
@@ -1692,6 +1975,9 @@ msgid "Follow up"
 msgstr "តាមដាន"
 
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid ""
@@ -1709,9 +1995,10 @@ msgid ""
 "again."
 msgstr ""
 
-msgid ""
-"There are currently no active enrollments in the selection. All enrollments "
-"are already completed or cancelled."
+msgid "There are currently no active enrollments in the selection."
+msgstr ""
+
+msgid "All enrollments are already completed or cancelled."
 msgstr ""
 
 msgid ""
@@ -1726,9 +2013,6 @@ msgid_plural ""
 msgstr[0] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1795,8 +2079,10 @@ msgid_plural "Delete {{count}} {{ trackedEntityName }}"
 msgstr[0] ""
 
 msgid ""
-"Deleting records will also delete any associated enrollments and events. "
-"This cannot be undone. Are you sure you want to delete?"
+"Deleting records will also delete any associated enrollments and events."
+msgstr ""
+
+msgid "Are you sure you want to delete?"
 msgstr ""
 
 msgid "An error occurred while deleting the records"
@@ -1806,16 +2092,6 @@ msgid "Working list could not be updated"
 msgstr ""
 
 msgid "an error occurred loading the working lists"
-msgstr ""
-
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] ""
-
-msgid "Deselect all"
 msgstr ""
 
 msgid "Update view"
@@ -1837,7 +2113,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "បញ្ជាក់"
 
 msgid "Save As view"
 msgstr ""
@@ -1851,6 +2127,28 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} បានជ្រើសរើស"
+
+msgid "Deselect all"
+msgstr ""
+
 msgid "Download as JSON"
 msgstr ""
 
@@ -1860,7 +2158,13 @@ msgstr ""
 msgid "Download with current filters"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
 msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
@@ -1885,9 +2189,6 @@ msgid "Program not found"
 msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr ""
-
-msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event"
@@ -1926,28 +2227,19 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
+msgid "Could not save enrollment note"
 msgstr ""
 
-msgid "Please provide a valid integer"
+msgid "Could not save event note"
 msgstr ""
 
-msgid "Please provide a positive integer"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "Please provide a negative integer"
+msgid "There was an error fetching metadata"
 msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr ""
 
 msgid "Please provide a valid time"
-msgstr ""
-
-msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
@@ -1968,6 +2260,11 @@ msgstr ""
 msgid "\"From\" cannot be greater than \"To\""
 msgstr ""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr ""
 
@@ -1980,10 +2277,18 @@ msgstr ""
 msgid "Please enter a time"
 msgstr ""
 
-msgid "Set coordinate"
+msgid ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgid_plural ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgstr[0] ""
+
+msgid "Some attributes are hidden"
 msgstr ""
 
-msgid "Time"
+msgid "Set coordinate"
 msgstr ""
 
 msgid "From date"
@@ -2005,4 +2310,18 @@ msgid "Area on map saved"
 msgstr ""
 
 msgid "Compatibility mode"
+msgstr ""
+
+msgid ""
+"This app is currently running in compatibility mode due to browser "
+"restrictions. For better performance, use another browser or exit private "
+"mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr ""
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""

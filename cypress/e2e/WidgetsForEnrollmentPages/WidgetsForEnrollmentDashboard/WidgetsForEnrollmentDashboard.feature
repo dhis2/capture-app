@@ -1,6 +1,6 @@
 Feature: The user interacts with the widgets on the enrollment dashboard
 
-  Scenario: User can open the transfer modal
+   Scenario: User can open the transfer modal
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the enrollment widget should be opened
     When the user opens the enrollment actions menu
@@ -53,7 +53,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     Then the profile details should be displayed
 
   Scenario: The TEI rules are triggered correctly in the profile edit modal widget
-    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=ek4WWAgXX5i
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=ek4WWAgXX5i&orgUnitId=DwpbWkiqjMy
     And you see the widget with data-test profile-widget
     When the user clicks the element containing the text: Edit
     Then the user sees the edit profile modal
@@ -83,6 +83,35 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     Then you see the delete tracked entity confirmation modal
     When you confirm by clicking the "Yes, delete Focus area" button
     Then you are redirected to the home page
+
+  @with-tracked-entity-status-cleanup
+  Scenario: User can deactivate and then reactivate a tracked entity
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=EaOyKGOIGRp
+    And you see the widget with data-test profile-widget
+    And the tracked entity profile is editable
+    When you open the tracked entity profile overflow menu
+    And you click the status toggle menu item
+    Then you see the deactivate confirmation modal for the Person
+    When you confirm the status toggle action
+    Then the tracked entity profile is read-only
+    When you open the tracked entity profile overflow menu
+    Then you see the "Activate Person" status toggle option
+    When you click the status toggle menu item
+    Then you see the activate confirmation modal for the Person
+    When you confirm the status toggle action
+    Then the tracked entity profile is editable
+
+  @with-tracked-entity-status-cleanup
+  Scenario: User can cancel the deactivate modal without changing the status
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=EaOyKGOIGRp
+    And you see the widget with data-test profile-widget
+    When you open the tracked entity profile overflow menu
+    Then you see the "Deactivate Person" status toggle option
+    When you click the status toggle menu item
+    Then you see the deactivate confirmation modal for the Person
+    When you cancel the status toggle modal
+    Then the status toggle modal is closed
+    And the tracked entity profile is editable
 
   Scenario: User can close the Enrollment Widget
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
@@ -123,7 +152,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     Then list should contain the new note: enrollment note
 
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
-    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE&orgUnitId=DiszpKrYNg8
     Then the user can see the program rules effect in the indicator widget
 
   Scenario: User can complete the enrollment and the active events

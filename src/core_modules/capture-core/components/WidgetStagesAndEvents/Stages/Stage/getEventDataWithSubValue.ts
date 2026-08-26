@@ -1,0 +1,88 @@
+import { dataElementTypes } from '../../../../metaData';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
+
+const getFileResourceSubvalue = async (
+    keys: any,
+    querySingleResource: QuerySingleResource,
+    eventId: string,
+    absoluteApiPath: string,
+) => {
+    const promises = Object.keys(keys)
+        .map(async (key) => {
+            const value = keys[key];
+            if (value) {
+                const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
+                return {
+                    id,
+                    name,
+                    url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/file`,
+                };
+            }
+            return {};
+        });
+
+    return (await Promise.all(promises))
+        .reduce((acc, { id, name, url }) => {
+            if (id) {
+                acc[id] = { value: id, name, url };
+            }
+            return acc;
+        }, {});
+};
+
+const getImageSubvalue = (keys: any, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => (
+    Object.keys(keys)
+        .map((key) => {
+            const value = keys[key];
+            if (value) {
+                return {
+                    value,
+                    url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image`,
+                    previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues` +
+                        `/${key}/image?dimension=small`,
+                };
+            }
+            return {};
+        }).reduce((acc, { value, url, previewUrl }: any) => {
+            if (value) {
+                acc[value] = { value, url, previewUrl };
+            }
+            return acc;
+        }, {})
+);
+
+const getOrganisationUnitSubvalue = async (keys: any, querySingleResource: QuerySingleResource) => {
+    const ids = Object.values(keys).map(value => String(value));
+    const orgUnitNames = await getOrgUnitNames(ids, querySingleResource);
+    return orgUnitNames;
+};
+
+const subValueGetterByElementType = {
+    [dataElementTypes.FILE_RESOURCE]: getFileResourceSubvalue,
+    [dataElementTypes.IMAGE]: getImageSubvalue,
+    [dataElementTypes.ORGANISATION_UNIT]: getOrganisationUnitSubvalue,
+};
+
+
+export async function getSubValues(item: any, querySingleResource: QuerySingleResource, absoluteApiPath: string) {
+    const { type, ids: values, eventId } = item;
+
+    if (!values) {
+        return null;
+    }
+    return Object.keys(values).reduce(async (accValuesPromise, metaElementId) => {
+        const accValues = await accValuesPromise;
+
+        if (type) {
+            const subValueGetter = subValueGetterByElementType[type];
+            if (subValueGetter) {
+                const subValue = await subValueGetter(values, querySingleResource, eventId, absoluteApiPath);
+                accValues[metaElementId] = subValue[values[metaElementId]];
+            } else {
+                accValues[metaElementId] = values[metaElementId];
+            }
+        }
+        return accValues;
+    }, Promise.resolve(values));
+}

@@ -24,7 +24,7 @@
 
 .textArea {
     margin: 0px;
-    padding-left: 12px;
+    padding-inline-start: 12px;
     padding-top: 10px;
     font-size: 14px;
     width: 100%;

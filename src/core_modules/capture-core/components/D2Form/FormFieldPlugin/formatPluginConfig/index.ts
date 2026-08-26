@@ -1,0 +1,1 @@
+export { formatPluginConfig } from './formatPluginConfig';

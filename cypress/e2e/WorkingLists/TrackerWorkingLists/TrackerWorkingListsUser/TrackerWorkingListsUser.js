@@ -1,30 +1,40 @@
 import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
-import { hasVersionSupport } from '../../../../support/tagUtils';
+import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
-const cleanUpIfApplicable = (programId) => {
-    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
+const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
+    cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const workingList = body.programStageWorkingLists && body.programStageWorkingLists.find(e => e.displayName === 'Custom Program stage list');
-            if (!workingList) {
-                return null;
-            }
-            return cy
-                .buildApiUrl('programStageWorkingLists', workingList.id)
-                .then(workingListUrl => cy.request('DELETE', workingListUrl));
+            const matches = body[resource]?.filter(e => e.displayName === displayName) ?? [];
+            matches.forEach((match) => {
+                cy.buildApiUrl(resource, match.id)
+                    .then(resourceUrl => cy.request('DELETE', resourceUrl));
+            });
         });
 };
 Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and child programme default template context', () => {
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'IpHINAT79UW', 'trackerStoredWorkingList');
+    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default');
+});
+
 Given('you open the main page with child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW');
 });
 
+Given('you open the main page with Ngelehun and TEI value types program context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'ur1Edk5Oe2n', 'trackerStoredWorkingList');
+    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&selectedTemplateId=ur1Edk5Oe2n-default');
+});
+
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 });
 
@@ -33,6 +43,7 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -52,12 +63,36 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
         .click();
 });
 
+Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context', () => {
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
+    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&selectedTemplateId=WSGAb5XwJ3Y-default');
+
+    cy.get('[data-test="tracker-working-lists"]')
+        .within(() => cy.contains('More filters').click());
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Care at birth')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
 Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'My custom list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and Malaria case diagnosis default template context', () => {
+    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'trackerStoredWorkingList');
+    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default');
+});
+
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
-    cleanUpIfApplicable('qDkgAbB5Jlk');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'qDkgAbB5Jlk', 'Custom Program stage list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -78,7 +113,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 });
 
 Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
-    cleanUpIfApplicable('M3xtLkYBlKI');
+    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'M3xtLkYBlKI', 'Custom Program stage list');
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
@@ -164,6 +199,8 @@ When('you set the enrollment date to a relative range', () => {
     cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment date')
         .click();
+    cy.contains('Relative range')
+        .click();
     cy.get('[data-test="date-range-filter-start"]')
         .type('1000');
     cy.get('[data-test="date-range-filter-end"]')
@@ -197,13 +234,14 @@ When('you set the WHOMCH Smoking filter to No', () => {
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
     const ids = [
+        'UGB082875',
         'ZDA984904',
         'FSL05494',
     ];
 
     cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
-        .should('have.length', 3)
+        .should('have.length', 4)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
@@ -228,7 +266,7 @@ Then('the list should display teis with John as the first name', () => {
 
 
 When('you open the column selector', () => {
-    cy.get('[data-test="select-columns-reference"]')
+    cy.get('[data-test="select-columns-reference"]').find('button')
         .click();
 });
 
@@ -408,8 +446,13 @@ When('you save the list with the name My custom list', () => {
         .click();
     cy.contains('Save current view')
         .click();
+
     cy.get('[data-test="view-name-content"]')
-        .type('My custom list');
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type('My custom list')
+                .blur();
+        });
 
     cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackedEntityInstanceFilters');
     cy.get('button')
@@ -423,8 +466,13 @@ When('you save the list with the name Custom Program stage list', () => {
         .click();
     cy.contains('Save current view')
         .click();
+
     cy.get('[data-test="view-name-content"]')
-        .type('Custom Program stage list');
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type('Custom Program stage list')
+                .blur();
+        });
 
     cy.intercept('POST', '**/programStageWorkingLists**').as('newProgramStageWorkingLists');
     cy.get('button')
@@ -443,6 +491,20 @@ When('you update the list with the name My custom list', () => {
     cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
 });
 
+When(/^you update the tracker tei view with the name (.+)$/, (_name) => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFiltersByName');
+    cy.contains('Update view').click();
+    cy.wait('@editTrackedEntityInstanceFiltersByName', { timeout: 30000 });
+});
+
+When(/^you update the tracker program stage view with the name (.+)$/, (_name) => {
+    cy.get('[data-test="list-view-menu-button"]').click();
+    cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingListsByName');
+    cy.contains('Update view').click();
+    cy.wait('@editProgramStageWorkingListsByName', { timeout: 30000 });
+});
+
 When('you update the list with the name Custom Program stage list', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -451,13 +513,6 @@ When('you update the list with the name Custom Program stage list', () => {
     cy.contains('Update view')
         .click();
     cy.wait('@editProgramStageWorkingLists', { timeout: 30000 });
-});
-
-Then(/^you can load the view with the name ?(.*)/, (name) => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .within(() => {
-            cy.contains(name).click();
-        });
 });
 
 When('you delete the name My custom list', () => {
@@ -486,6 +541,297 @@ When('you delete the name Custom Program stage list', () => {
     cy.wait('@deleteProgramStageWorkingLists', { timeout: 30000 });
 });
 
+When(/^you set the date filter "([^"]+)" to (.+) and (.+)$/, (filterName, startDate, endDate) => {
+    if (CARE_AT_BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    } else {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    }
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]')
+        .within(() => {
+            cy.contains('Absolute range')
+                .click();
+            cy.get('input[type="text"]')
+                .then(($elements) => {
+                    cy.wrap($elements[0])
+                        .type(startDate).blur();
+
+                    cy.wrap($elements[1])
+                        .type(endDate).blur();
+                });
+
+            cy.contains('Update')
+                .click();
+        });
+});
+
+When(/^you set the range filter "([^"]+)" to (-?\d+)-(-?\d+)$/, (filterName, min, max) => {
+    if (CARE_AT_BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    } else {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    }
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]').find('input[placeholder="Min"]').type(min).blur();
+    cy.get('[data-test="list-view-filter-contents"]').find('input[placeholder="Max"]').type(max).blur();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When(/^you set the text filter "([^"]+)" to (.*)$/, (filterName, value) => {
+    cy.get('[data-test="tracker-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const prefix = filterName.substring(0, 28);
+            const match = [...$anchors].find((node) => {
+                const text = node.innerText.replaceAll(/\s+/g, ' ').trim();
+                return text.includes(filterName) || text.startsWith(prefix);
+            });
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                openStageFilterMenu(filterName);
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
+    cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').clear().type(value);
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+const BIRTH_STAGE_FILTER_NAMES = new Set(['Birth certificate', 'BCG dose', 'Apgar comment']);
+
+const CARE_AT_BIRTH_STAGE_FILTER_NAMES = new Set([
+    'WHOMCH Fetal heart rate on admission',
+    'WHOMCH Estimated blood loss (ml)',
+    'WHOMCH Hospital / Birth clinic',
+    'WHOMCH Body temperature',
+    'WHOMCH Haematocrit value',
+    'WHOMCH Heart rate',
+    'WHOMCH Respiratory rate',
+    'WHOMCH Date of induction of labor',
+]);
+
+const PROGRAM_STAGE_FILTER_NAMES = new Set([
+    ...BIRTH_STAGE_FILTER_NAMES,
+    ...CARE_AT_BIRTH_STAGE_FILTER_NAMES,
+    'WHOMCH Smoking',
+]);
+
+function openStageFilterMenu(filterName) {
+    if (BIRTH_STAGE_FILTER_NAMES.has(filterName)) {
+        let needProgramStageFlow = false;
+        cy.get('[data-test="tracker-working-lists"]').within(() => {
+            cy.get('[data-test="more-filters"]').then(($buttons) => {
+                if ($buttons.length >= 2) {
+                    cy.wrap($buttons.eq(1)).click();
+                } else {
+                    needProgramStageFlow = true;
+                    cy.contains('More filters').click();
+                }
+            });
+        });
+        cy.then(() => {
+            if (needProgramStageFlow) {
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
+                cy.get('[data-test="list-view-filter-contents"]').contains('Birth').click();
+                cy.get('[data-test="list-view-filter-apply-button"]').click();
+                cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+            }
+        });
+    } else if (PROGRAM_STAGE_FILTER_NAMES.has(filterName)) {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    } else {
+        cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    }
+}
+
+When('you open the program stage More filters menu for Birth on the tracker working list', () => {
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.contains('More filters').click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Program stage').click());
+    cy.get('[data-test="list-view-filter-contents"]').contains('Birth').click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+});
+
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    cy.viewport(1440, 1080);
+    cy.get('[data-test="tracker-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const prefix = filterName.substring(0, 28);
+            const match = [...$anchors].find((node) => {
+                const text = node.innerText.replaceAll(/\s+/g, ' ').trim();
+                return text.includes(filterName) || text.startsWith(prefix);
+            });
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                openStageFilterMenu(filterName);
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
+    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
+});
+
+When('you set the boolean filter', () => {
+    openStageFilterMenu('BCG dose');
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('BCG dose').click());
+    cy.get('[data-test="list-view-filter-contents"]').contains('Yes').click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When(/^you set the option filter "([^"]+)" to (Yes|No)$/, (filterName, value) => {
+    openStageFilterMenu(filterName);
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When(/^you set the program stage organisation unit filter "([^"]+)" to "([^"]+)"$/, (filterName, searchTerm) => {
+    cy.get('[data-test="tracker-working-lists"]').within(() => cy.get('[data-test="more-filters"]').eq(1).click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    cy.get('[data-test="org-unit-selector-trigger"]').click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type(searchTerm, { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
+        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
+        cy.contains(searchTerm).click();
+    });
+});
+
+When(/^you save the view as (.*)$/, (name) => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.contains('Save current view')
+        .click();
+
+    cy.get('[data-test="view-name-content"]')
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type(name)
+                .blur();
+        });
+
+    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackerFilterResult');
+
+    cy.get('button')
+        .contains('Save')
+        .click();
+
+    cy.wait('@newTrackerFilterResult', { timeout: 30000 });
+});
+
+When(/^you save the program stage view as (.*)$/, (name) => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+
+    cy.contains('Save current view')
+        .click();
+
+    cy.get('[data-test="view-name-content"]')
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type(name)
+                .blur();
+        });
+
+    cy.intercept('POST', '**/programStageWorkingLists**').as('newTrackerFilterResult');
+
+    cy.get('button')
+        .contains('Save')
+        .click();
+
+    cy.wait('@newTrackerFilterResult', { timeout: 30000 });
+});
+
+Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').find('input[type="text"]').invoke('attr', 'value').should('equal', value);
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the date filter "([^"]+)" should be in effect and show (.+) to (.+) when opened$/, (filterName, startDate, endDate) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${startDate} to ${endDate}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains('Absolute range').click();
+        cy.get('[data-test="date-filter-from"]').find('input').should('have.attr', 'value', startDate);
+        cy.get('[data-test="date-filter-to"]').find('input').should('have.attr', 'value', endDate);
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the range filter "([^"]+)" should be in effect and show (-?\d+) to (-?\d+) when opened$/, (filterName, min, max) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
+        cy.get('input[placeholder="Max"]').should('have.attr', 'value', max);
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then('the boolean filter should be in effect and show the correct value when opened', () => {
+    const filterName = 'BCG dose';
+    const value = 'Yes';
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the option filter "([^"]+)" should be in effect and show (Yes|No) when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+// Chip label may truncate the full label; assert chip shows expected truncated text, then verify full value when opened
+Then(/^the program stage organisation unit filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, expectedOrgUnitName) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${expectedOrgUnitName}`);
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
+    cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').should('contain', expectedOrgUnitName);
+    cy.get('body').click(0, 0);
+});
+
+Then('the saved tracker working list view is cleaned up', () => {
+    cy.get('@newTrackerFilterResult').then((result) => {
+        expect(result.response.statusCode).to.equal(201);
+        const body = result.response?.body;
+        const id = body?.response?.uid ?? body?.uid;
+        const resource = result.request?.url?.includes('programStageWorkingLists')
+            ? 'programStageWorkingLists'
+            : 'trackedEntityInstanceFilters';
+        cy.buildApiUrl(resource, id).then((url) => {
+            cy.request('DELETE', url);
+        });
+    });
+});
+
 Then(/^the new ?(.*) is created/, (name) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
@@ -500,38 +846,6 @@ Then(/^the ?(.*) is deleted/, (name) => {
         });
 });
 
-When('you change the sharing settings', () => {
-    cy.get('[data-test="list-view-menu-button"]').click();
-    cy.contains('Share view').click();
-    cy.get('[placeholder="Search"]')
-        .type('Boateng');
-
-    cy.contains('Kevin Boateng').click();
-    cy.contains('Select a level').click();
-    cy.get('[data-test="dhis2-uicore-popper"]').contains('View and edit').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
-});
-
-Then('you see the new sharing settings', () => {
-    cy.get('[data-test="list-view-menu-button"]').click();
-    cy.contains('Share view').click();
-    cy.contains('Kevin Boateng')
-        .should('exist');
-
-    cy.contains('Close')
-        .click();
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Delete view')
-        .click();
-
-    cy.contains('Confirm')
-        .click();
-});
-
 When('you create a copy of the working list',
     () => {
         cy.get('[data-test="list-view-menu-button"]')
@@ -541,8 +855,13 @@ When('you create a copy of the working list',
             .click();
 
         const id = uuid();
+
         cy.get('[data-test="view-name-content"]')
-            .type(id);
+            .within(() => {
+                cy.get('input[type="text"]')
+                    .type(id)
+                    .blur();
+            });
 
         cy.intercept('POST', '**/trackedEntityInstanceFilters**')
             .as('newTrackerFilter');
@@ -568,19 +887,6 @@ When('you open the program stage filters from the more filters dropdown menu', (
         });
     cy.get('[data-test="more-filters-menu"]')
         .within(() => cy.contains('Program stage').click());
-});
-
-Then('you see the program stages and the default events filters', () => {
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Birth');
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Baby Postnatal');
-    cy.get('[data-test="filter-button-container-programStage"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-occurredAt"]')
-        .should('exist');
-    cy.get('[data-test="filter-button-container-status"]')
-        .should('exist');
 });
 
 When('you select the First antenatal care visit program stage', () => {
@@ -732,12 +1038,6 @@ Then('the working list configuration was kept', () => {
         .should('exist');
 });
 
-Then('the program stage custom working list filters are loaded', () => {
-    cy.get('[data-test="tracker-working-lists"]')
-        .find('[data-test="more-filters"]')
-        .should('have.length', 2);
-});
-
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
@@ -778,8 +1078,9 @@ Given('you open the main page with all accesible records in the WHO RMNCH Tracke
         .click();
 });
 
-Then('the tracker event URL contains the orgUnitId', () => {
-    cy.url().should('include', '/enrollmentEventEdit?eventId=cxQ44Gz8yEr&orgUnitId=yMCshbaVExv');
+Then('the tracker event URL does not contain the orgUnitId', () => {
+    cy.url().should('include', '/enrollmentEventEdit?eventId=cxQ44Gz8yEr');
+    cy.url().should('not.include', 'orgUnitId');
 });
 
 When('you open an enrollment event from the working list', () => {
@@ -826,10 +1127,7 @@ Then('the download dialog opens', () => {
 });
 
 Then('the CSV button exists', () => {
-    const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
-    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
-    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnit';
-    const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
+    const params = 'order=createdAt%3Adesc&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&paging=false';
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as CSV');
@@ -841,10 +1139,7 @@ Then('the CSV button exists', () => {
 });
 
 Then('the JSON button exists', () => {
-    const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
-    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
-    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnit';
-    const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
+    const params = 'order=createdAt%3Adesc&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&paging=false';
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as JSON');
@@ -872,7 +1167,7 @@ Then('the working list is empty', () => {
 });
 
 Then('the assignee column is displayed', () => {
-    cy.get('[data-test="dhis2-uicore-tablehead"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Assigned to')
         .should('exist');
 

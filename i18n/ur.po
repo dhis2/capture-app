@@ -1,26 +1,35 @@
-# 
 # Translators:
-# Philip Larsen Donnelly, 2024
-# Viktor Varland <viktor@dhis2.org>, 2025
+# Arslan Mughal, 2026
+# Philip Larsen Donnelly, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2026-07-08T07:19:14.135Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Urdu (https://app.transifex.com/hisp-uio/teams/100509/ur/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ur\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "The application could not be loaded."
+msgstr "ایپلیکیشن لوڈ نہیں ہو سکی۔"
+
+msgid "Please verify that the server is running."
+msgstr "براہِ کرم تصدیق کریں کہ سرور فعال ہے۔"
+
+msgid "Please see log for details."
+msgstr "مزید تفصیلات کے لیے لاگ فائل دیکھیں"
+
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "ایک یا زیادہ تاریخیں منتخب کریں"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "ایک تاریخ منتخب کریں"
 
 msgid "Today"
 msgstr "آج"
@@ -29,42 +38,47 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"ممکن ہے کہ آپ کا براؤزر یا اس کا موڈ (جیسے پرائیویسی موڈ) سپورٹڈ نہ ہو۔ مزید"
+" تفصیلات کے لیے لاگ دیکھیں۔"
 
 msgid "Please refresh the page (Either the server or the app version changed)"
-msgstr ""
+msgstr "راہِ کرم صفحہ ریفریش کریں (یا تو سرور یا ایپ کا ورژن تبدیل ہو گیا ہے)"
 
 msgid "Bulk data entry"
-msgstr ""
+msgstr "اجتماعی ڈیٹا اندراج"
 
 msgid "Program overview"
-msgstr ""
+msgstr "پروگرام کا جائزہ"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "فعال اندراجات"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "مکمل شدہ اندراجات"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "منسوخ شدہ اندراجات"
 
 msgid "Search"
 msgstr "تلاش کریں"
 
 msgid "Enrollment dashboard"
-msgstr ""
+msgstr "اندراج کا ڈیش بورڈ"
 
 msgid "View event"
-msgstr ""
+msgstr "ایونٹ ملاحظہ"
 
 msgid "Edit event"
-msgstr ""
+msgstr " ایونٹ کی ترمیم"
 
 msgid "New event"
 msgstr "نئی تقریب"
 
+msgid "Loading..."
+msgstr "لوڈ کر رہا ہے ..."
+
 msgid "Event list"
-msgstr ""
+msgstr "ایونٹ کی فہرست"
 
 msgid "More"
 msgstr "مزید"
@@ -73,25 +87,25 @@ msgid "View {{programName}} dashboard"
 msgstr ""
 
 msgid "View dashboard"
-msgstr ""
+msgstr "ڈیش بورڈ ملاحظہ"
 
 msgid "View active enrollment"
+msgstr "فعال اندراجات ملاحظہ"
+
+msgid "Re-enroll in {{programName}}"
 msgstr ""
 
 msgid "Re-enroll"
-msgstr ""
-
-msgid "in"
-msgstr "اندر"
+msgstr "دوبارہ اندراج"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "اندراج شدہ"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "پہلے سے اندراج شدہ"
 
 msgid "Organisation unit"
-msgstr "تنظیم یونٹ"
+msgstr "تنظیمی اکائی"
 
 msgid "Date of enrollment"
 msgstr "اندراج کی تاریخ"
@@ -100,15 +114,15 @@ msgid "Last updated"
 msgstr "آخری اپ ڈیٹ"
 
 msgid "Lat"
-msgstr ""
+msgstr "عرض البلد"
 
 msgid "Long"
+msgstr "طول البلد"
+
+msgid "lat{{escape}} {{latitudeValue}}"
 msgstr ""
 
-msgid "lat"
-msgstr ""
-
-msgid "long"
+msgid "long{{escape}} {{longitudeValue}}"
 msgstr ""
 
 msgid "Show less"
@@ -118,16 +132,16 @@ msgid "Show more"
 msgstr "اور دیکھاو"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "فیلڈ ویلیڈیشن کے دوران غلطی ہوئی"
 
 msgid "error"
-msgstr ""
+msgstr "خرابی"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "اس ویلیو کی تصدیق کی جا رہی ہے"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "اسنک فیلڈ اپڈیٹ ناکام ہو گئی"
 
 msgid "Area"
 msgstr "رقبہ"
@@ -147,10 +161,10 @@ msgid ""
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "ایک ویلیو درکار ہے"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "براہِ کرم درست تاریخ فراہم کریں"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -165,7 +179,7 @@ msgid "Please select {{categoryName}}"
 msgstr ""
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "مستقبل کی تاریخ درج کرنے کی اجازت نہیں ہے"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -264,8 +278,10 @@ msgstr ""
 msgid "Switch to row view"
 msgstr ""
 
-msgid "events added"
-msgstr ""
+msgid "{{count}} event added"
+msgid_plural "{{count}} event added"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "No events added"
 msgstr ""
@@ -296,9 +312,6 @@ msgstr ""
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
-msgid "Save"
-msgstr "محفوظ"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
@@ -307,6 +320,9 @@ msgstr ""
 
 msgid "enrollment"
 msgstr ""
+
+msgid "in"
+msgstr "اندر"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -360,6 +376,12 @@ msgstr ""
 msgid "Registered person"
 msgstr ""
 
+msgid "No item selected"
+msgstr ""
+
+msgid "Form foundation missing. See log for details"
+msgstr ""
+
 msgid "validation failed"
 msgstr ""
 
@@ -393,10 +415,16 @@ msgstr ""
 msgid "Validation warnings"
 msgstr "توثیق انتباہ"
 
-msgid "Some operations are still runnning. Please wait.."
+msgid "Some operations are still running. Please wait."
 msgstr ""
 
 msgid "Operations running"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid ""
@@ -428,20 +456,35 @@ msgstr "کوئی نہں"
 msgid "Select user"
 msgstr ""
 
-msgid "to"
+msgid "Please specify a range"
 msgstr ""
 
-msgid "Days in the future"
+msgid "Start date must be before the end date"
 msgstr ""
 
 msgid "From"
 msgstr "سے"
 
-msgid "Days in the past"
+msgid "to"
 msgstr ""
 
 msgid "To"
 msgstr "کرنے کے لئے"
+
+msgid "Period"
+msgstr "مدت"
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please specify the number of days"
+msgstr ""
+
+msgid "Days in the past"
+msgstr ""
+
+msgid "Days in the future"
+msgstr ""
 
 msgid "This week"
 msgstr "اس ہفتے"
@@ -449,8 +492,8 @@ msgstr "اس ہفتے"
 msgid "This month"
 msgstr "اس مہینے"
 
-msgid "This Year"
-msgstr ""
+msgid "This year"
+msgstr "اس سال"
 
 msgid "Last week"
 msgstr "آخری ہفتہ"
@@ -467,14 +510,53 @@ msgstr ""
 msgid "Relative range"
 msgstr ""
 
-msgid "Max"
-msgstr "زیادہ سے زیادہ"
+msgid "Please specify a date"
+msgstr ""
+
+msgid "The \"Before\" value must be after the \"After\" value"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Time"
+msgstr "وقت"
+
+msgid "Before"
+msgstr ""
+
+msgid "Is empty"
+msgstr ""
+
+msgid "Is not empty"
+msgstr ""
+
+msgid "Minimum value cannot be greater than maximum value"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
 
 msgid "Min"
 msgstr "کم سے کم"
 
-msgid "Contains text"
-msgstr ""
+msgid "Max"
+msgstr "زیادہ سے زیادہ"
 
 msgid "Yes"
 msgstr "ہاں"
@@ -509,8 +591,8 @@ msgstr ""
 msgid "Clear"
 msgstr "کلیئر"
 
-msgid "No results"
-msgstr ""
+msgid "No results found"
+msgstr "کوئی نتیجہ نہیں ملا"
 
 msgid "Description"
 msgstr "تفصیلات"
@@ -527,10 +609,10 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "No results found"
-msgstr "کوئی نتیجہ نہیں ملا"
-
 msgid "No items to display"
+msgstr ""
+
+msgid "Tracked entity is deactivated"
 msgstr ""
 
 msgid "Select columns"
@@ -538,6 +620,9 @@ msgstr ""
 
 msgid "Columns to show in table"
 msgstr ""
+
+msgid "Save"
+msgstr "محفوظ"
 
 msgid "Column"
 msgstr "کالم"
@@ -554,6 +639,18 @@ msgstr ""
 msgid "Remove filter"
 msgstr ""
 
+msgid "Minimum characters to search is too high for this filter."
+msgstr ""
+
+msgid "Please enter at least {{minCharactersToSearch}} character to filter"
+msgid_plural ""
+"Please enter at least {{minCharactersToSearch}} character to filter"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Locked to{{escape}} {{buttonText}}"
+msgstr ""
+
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
@@ -563,10 +660,22 @@ msgstr ""
 msgid "before or equal to {{date}}"
 msgstr ""
 
-msgid "greater than or equal to"
+msgid "{{start}} days in the past to {{end}} days in the future"
 msgstr ""
 
-msgid "less than or equal to"
+msgid "{{from}} to {{to}}"
+msgstr ""
+
+msgid "greater than or equal to {{value}}"
+msgstr ""
+
+msgid "less than or equal to {{value}}"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
 msgstr ""
 
 msgid "More filters"
@@ -590,13 +699,10 @@ msgstr ""
 msgid "Add note"
 msgstr "نوٹ شامل"
 
-msgid "You don't have access to write notes"
-msgstr ""
-
 msgid "Write note"
 msgstr ""
 
-msgid "was blanked out and hidden by your last action"
+msgid "{{fieldName}} was blanked out and hidden by your last action"
 msgstr ""
 
 msgid "Notice"
@@ -605,16 +711,7 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
-msgstr ""
-
 msgid "Quick actions"
-msgstr ""
-
-msgid "New Event"
 msgstr ""
 
 msgid "Schedule an event"
@@ -626,7 +723,10 @@ msgstr "حوالہ بنائیں"
 msgid "No available program stages"
 msgstr ""
 
-msgid "Program stage not found"
+msgid "Invalid enrollment id {{enrollmentId}}."
+msgstr ""
+
+msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid ""
@@ -636,12 +736,6 @@ msgstr ""
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
-msgstr ""
-
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
-
-msgid "Choose an enrollment to view the dashboard."
 msgstr ""
 
 msgid "There are no active enrollments."
@@ -691,10 +785,10 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
-msgid "Page is missing required values from URL"
+msgid "An error has occurred"
 msgstr ""
 
-msgid "Org unit is not valid with current program"
+msgid "Page is missing required values from URL"
 msgstr ""
 
 msgid "There was an error opening the Page"
@@ -706,6 +800,9 @@ msgstr ""
 msgid "Program stage is invalid"
 msgstr ""
 
+msgid "Stage not found"
+msgstr ""
+
 msgid "Report"
 msgstr "رپورٹ"
 
@@ -713,6 +810,9 @@ msgid "Schedule"
 msgstr "شیڈول"
 
 msgid "Refer"
+msgstr ""
+
+msgid "New Event"
 msgstr ""
 
 msgid "You can't add any more {{ programStageName }} events"
@@ -730,16 +830,14 @@ msgstr ""
 msgid "Stage"
 msgstr "اسٹیج"
 
-msgid "Registered events"
-msgstr "رجسٹرڈ واقعات"
+msgid "The category option is not valid for the selected organisation unit."
+msgstr ""
 
-msgid ""
-"The category option is not valid for the selected organisation unit. Please "
-"select a valid combination."
+msgid "Please select a valid combination."
 msgstr ""
 
 msgid "Get started with Capture app"
-msgstr ""
+msgstr "کیپچر ایپ کے ساتھ آغاز کریں"
 
 msgid "Report data"
 msgstr ""
@@ -753,19 +851,22 @@ msgid "Click 'Search'. For program-specific results, choose a program first."
 msgstr ""
 
 msgid "Learn more about Capture app"
-msgstr ""
+msgstr "کیپچر ایپ کے متعلق مزید جانیے"
 
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Or see all records accessible to you in {{program}} "
+msgid "Please select an organisation unit"
+msgstr "براہ کرم تنظیم یونٹ منتخب کریں"
+
+msgid "See working list without organisation unit"
 msgstr ""
 
-msgid "Or see all events accessible to you in {{program}}"
+msgid "Search for a {{trackedEntityName}}"
 msgstr ""
 
-msgid "Please select an organisation unit."
-msgstr ""
+msgid "Registered events"
+msgstr "رجسٹرڈ واقعات"
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
@@ -783,9 +884,6 @@ msgstr ""
 
 msgid "New"
 msgstr "نیا"
-
-msgid "Create for"
-msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
@@ -857,9 +955,6 @@ msgstr ""
 msgid "event"
 msgstr ""
 
-msgid "You don't have access to edit this event"
-msgstr ""
-
 msgid "View changelog"
 msgstr ""
 
@@ -874,11 +969,11 @@ msgstr ""
 msgid "Errors"
 msgstr "غلطیاں"
 
-msgid "Feedback"
-msgstr "رائے"
+msgid "This event doesn't have any notes"
+msgstr ""
 
-msgid "Indicators"
-msgstr "اشارے"
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
@@ -892,6 +987,21 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "All accessible"
+msgstr "تمام قابل رسائی"
+
+msgid "Selected"
+msgstr "منتخب"
+
+msgid "Please select an organisation unit."
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr "تنظیم یونٹ کی گنجائش"
+
 msgid "Selected program"
 msgstr "منتخب کردہ پروگرام"
 
@@ -899,6 +1009,9 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Search by attributes"
+msgstr ""
+
+msgid "Search {{attributeName}}"
 msgstr ""
 
 msgid "Fill in at least {{count}} attribute to search"
@@ -909,7 +1022,13 @@ msgstr[1] ""
 msgid "Missing search criteria"
 msgstr ""
 
+msgid "Please fill in {{uniqueTEAName}} to search"
+msgstr ""
+
 msgid "Back to search"
+msgstr ""
+
+msgid "Search form is missing. See log for details"
 msgstr ""
 
 msgid "Could not retrieve metadata. Please try again later."
@@ -924,16 +1043,49 @@ msgstr "لوڈ کر رہا ہے"
 msgid "An error occurred while loading the form"
 msgstr ""
 
+msgid "First Page"
+msgstr ""
+
+msgid "Previous Page"
+msgstr ""
+
+msgid "Next Page"
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr ""
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
-msgid "You don't have access to delete this relationship"
+msgid "You only have view access to this enrollment"
 msgstr ""
 
-msgid "You don't have access to create any relationships"
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
 msgstr ""
 
 msgid "Add relationship"
@@ -949,6 +1101,12 @@ msgid "None selected"
 msgstr "کوئی بھی منتخب نہیں"
 
 msgid "Choose an organisation unit"
+msgstr ""
+
+msgid "Choose a {{categoryName}}"
+msgstr ""
+
+msgid "Search for a {{categoryName}}"
 msgstr ""
 
 msgid "Clear selection"
@@ -969,17 +1127,29 @@ msgstr ""
 msgid "Choose a program"
 msgstr ""
 
-msgid "Search for {{titleText}}"
+msgid "Choose a {{title}}"
 msgstr ""
 
-msgid "Search for"
-msgstr "تلاش کریں"
+msgid "Search for a {{title}}"
+msgstr ""
 
 msgid ""
-"You can also choose a program from the top bar and search in that program"
+"You can also select a program from the top bar to search within that "
+"program."
 msgstr ""
 
 msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "{{trackedEntityName}} has no searchable attributes"
+msgstr ""
+
+msgid ""
+"Try selecting a different tracked entity type, or try searching in a program"
+" by choosing one from the top bar."
+msgstr ""
+
+msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search {{name}}"
@@ -992,8 +1162,7 @@ msgid "all programs"
 msgstr ""
 
 msgid ""
-"Not finding the results you were looking for? Try to search all programs "
-"that use type "
+"Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
 
 msgid "No searchable attributes for {{trackedEntityName}}"
@@ -1002,7 +1171,8 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
-msgid "If none of search results match, you can create a new "
+msgid ""
+"If none of search results match, you can create a new {{trackedEntityName}}."
 msgstr ""
 
 msgid "Create new"
@@ -1024,13 +1194,32 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "An error has occurred"
+msgid "Create new {{trackedEntityName}}"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later."
+msgstr ""
+
+msgid "For more details open the Console tab of the Developer tools"
 msgstr ""
 
 msgid "Too many results"
 msgstr ""
 
+msgid "This search returned too many results to show."
+msgstr ""
+
+msgid ""
+"Try changing search terms or searching by more attributes to narrow down the"
+" results."
+msgstr ""
+
 msgid "Cannot search in all programs"
+msgstr ""
+
+msgid "Results found in {{currentSearchScopeName}}"
 msgstr ""
 
 msgid "Results found"
@@ -1050,7 +1239,7 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "Create new in another program"
+msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new event"
@@ -1059,22 +1248,25 @@ msgstr "نئی ایونٹ بنائیں"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
+msgid "Search..."
+msgstr ""
+
+msgid "Select tracked entity type"
+msgstr ""
+
+msgid "Type to filter tracked entity types"
+msgstr ""
+
 msgid "No tracked entity types available"
 msgstr ""
 
 msgid "Assigned to"
 msgstr "مقرر کیا، مقرر کرنا"
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr "ترمیم"
 
 msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1096,7 +1288,10 @@ msgstr ""
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
-"program. All activity will be logged."
+"program."
+msgstr ""
+
+msgid "All activity will be logged."
 msgstr ""
 
 msgid "Unsaved changes"
@@ -1132,9 +1327,10 @@ msgstr ""
 msgid "Delete enrollment"
 msgstr "اندراج حذف کریں"
 
-msgid ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
+msgid "Are you sure you want to delete this enrollment?"
+msgstr ""
+
+msgid "This will permanently remove the current enrollment."
 msgstr ""
 
 msgid "Yes, delete enrollment."
@@ -1227,6 +1423,9 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1260,6 +1459,12 @@ msgstr ""
 msgid "Delete event"
 msgstr ""
 
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this event? "
+msgstr ""
+
 msgid "Yes, delete event"
 msgstr ""
 
@@ -1269,16 +1474,22 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "Geometry (Area)"
 msgstr ""
 
 msgid "Geometry (Coordinate)"
 msgstr ""
 
-msgid "Event completed"
-msgstr ""
+msgid "Polygon captured"
+msgstr "کثیر الاضلاع محفوظ کر لی گئیں"
 
-msgid "The event cannot be edited after it has been completed"
+msgid "No polygon captured"
+msgstr "کوئی کثیر الاضلاع محفوظ نہیں کی گئیں"
+
+msgid "Event completed"
 msgstr ""
 
 msgid "Notes about this event"
@@ -1287,17 +1498,11 @@ msgstr ""
 msgid "Write a note about this event"
 msgstr ""
 
-msgid "This event doesn't have any notes"
-msgstr ""
-
 msgid "after"
 msgstr "کے بعد"
 
 msgid "before"
 msgstr "پہلے"
-
-msgid "Schedule date info"
-msgstr ""
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
 msgstr ""
@@ -1327,6 +1532,13 @@ msgstr ""
 msgid "Please provide a valid organisation unit"
 msgstr ""
 
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgstr ""
+
 msgid "Schedule info"
 msgstr ""
 
@@ -1339,22 +1551,30 @@ msgstr ""
 msgid "Program or stage is invalid"
 msgstr ""
 
+msgid "Feedback"
+msgstr "رائے"
+
+msgid "Indicators"
+msgstr "اشارے"
+
 msgid "Save note"
 msgstr "نوٹ محفوظ کریں"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. Information about "
-"this enrollment can be edited in the Enrollment widget."
-msgstr ""
-
-msgid " Loading..."
-msgstr ""
-
 msgid "Save changes"
 msgstr "تبدیلیاں محفوظ کریں"
+
+msgid "Change information about this {{trackedEntityName}} here."
+msgstr ""
+
+msgid ""
+"Information about this enrollment can be edited in the Enrollment widget."
+msgstr ""
+
+msgid "{{trackedEntityName}} profile"
+msgstr ""
 
 msgid "Profile"
 msgstr "پرفائل"
@@ -1372,6 +1592,34 @@ msgid "Try again or contact your system administrator for support"
 msgstr ""
 
 msgid "Fix errors in the form to continue."
+msgstr ""
+
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
@@ -1392,19 +1640,25 @@ msgstr ""
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr ""
 
+msgid "View profile"
+msgstr "معلومات دیکھو"
+
 msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "No attributes configured"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
-msgid "tracked entity instance"
-msgstr ""
-
 msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}}"
+msgid "Select an event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} can only have one event"
@@ -1449,21 +1703,22 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-
 msgid "This stage can only have one event"
 msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
 
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
+msgstr ""
+
 msgid "An error occurred while deleting the event"
 msgstr ""
 
-msgid ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event?"
+msgid "Are you sure you want to delete this event?"
 msgstr ""
 
 msgid "An error occurred when updating event status"
@@ -1498,6 +1753,9 @@ msgstr ""
 msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
+msgid "No stages found in this program"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
@@ -1507,9 +1765,12 @@ msgstr ""
 msgid "Unlink and delete linked event"
 msgstr ""
 
+msgid "Are you sure you want to remove the link and delete the linked event?"
+msgstr ""
+
 msgid ""
-"Are you sure you want to remove the link and delete the linked event? This "
-"action permanently removes the link, linked event, and all related data."
+"This action permanently removes the link, linked event, and all related "
+"data."
 msgstr ""
 
 msgid "Yes, unlink and delete linked event"
@@ -1518,9 +1779,10 @@ msgstr ""
 msgid "Unlink event"
 msgstr ""
 
-msgid ""
-"Are you sure you want to remove the link between these events? This action "
-"removes the link itself, but the linked event will remain."
+msgid "Are you sure you want to remove the link between these events?"
+msgstr ""
+
+msgid "This action removes the link itself, but the linked event will remain."
 msgstr ""
 
 msgid "Yes, unlink event"
@@ -1563,9 +1825,6 @@ msgstr "تخلیق"
 
 msgid "Deleted"
 msgstr ""
-
-msgid "Date"
-msgstr "تاریخ"
 
 msgid "Sort by date"
 msgstr ""
@@ -1619,9 +1878,10 @@ msgstr ""
 msgid "Delete relationship"
 msgstr "رشتہ حذف کریں"
 
-msgid ""
-"Deleting the relationship is permanent and cannot be undone. Are you sure "
-"you want to delete this relationship?"
+msgid "Deleting the relationship is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this relationship?"
 msgstr ""
 
 msgid "Yes, delete relationship"
@@ -1631,6 +1891,9 @@ msgid "An error occurred while deleting the relationship."
 msgstr ""
 
 msgid "To open this relationship, please wait until saving is complete"
+msgstr ""
+
+msgid "This enrollment doesn't have any relationships"
 msgstr ""
 
 msgid "Type"
@@ -1652,6 +1915,9 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "There is a bulk data entry with unsaved changes"
 msgstr ""
 
 msgid "Complete events"
@@ -1678,17 +1944,19 @@ msgstr ""
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
 msgstr ""
 
-msgid ""
-"This cannot be undone. Are you sure you want to delete the selected events?"
+msgid "This cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete the selected events?"
 msgstr ""
 
 msgid "Owner organisation unit"
@@ -1697,9 +1965,6 @@ msgstr ""
 msgid "Registration Date"
 msgstr ""
 
-msgid "Inactive"
-msgstr "غیر فعال"
-
 msgid "Enrollment status"
 msgstr "اندراج کی حیثیت"
 
@@ -1707,6 +1972,9 @@ msgid "Follow up"
 msgstr ""
 
 msgid "Choose a program stage to filter by {{label}}"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid ""
@@ -1724,9 +1992,10 @@ msgid ""
 "again."
 msgstr ""
 
-msgid ""
-"There are currently no active enrollments in the selection. All enrollments "
-"are already completed or cancelled."
+msgid "There are currently no active enrollments in the selection."
+msgstr ""
+
+msgid "All enrollments are already completed or cancelled."
 msgstr ""
 
 msgid ""
@@ -1743,9 +2012,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1818,8 +2084,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid ""
-"Deleting records will also delete any associated enrollments and events. "
-"This cannot be undone. Are you sure you want to delete?"
+"Deleting records will also delete any associated enrollments and events."
+msgstr ""
+
+msgid "Are you sure you want to delete?"
 msgstr ""
 
 msgid "An error occurred while deleting the records"
@@ -1830,17 +2098,6 @@ msgstr ""
 
 msgid "an error occurred loading the working lists"
 msgstr ""
-
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Deselect all"
-msgstr "سب کو منتخب کریں"
 
 msgid "Update view"
 msgstr ""
@@ -1875,6 +2132,29 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Deselect all"
+msgstr "سب کو منتخب کریں"
+
 msgid "Download as JSON"
 msgstr "JSON کے طور پر ڈاؤن لوڈ کریں"
 
@@ -1884,7 +2164,13 @@ msgstr "CSV کے طور پر ڈاؤن لوڈ کریں"
 msgid "Download with current filters"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "Exact matches only"
+msgstr ""
+
+msgid "Must match the start of the value"
+msgstr ""
+
+msgid "Must match the end of the value"
 msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
@@ -1897,7 +2183,7 @@ msgid "Overdue"
 msgstr "زیادہ سے زیادہ"
 
 msgid "Skipped"
-msgstr "کھڑا"
+msgstr "نظر انداز کیا گیا"
 
 msgid "Visited"
 msgstr ""
@@ -1909,9 +2195,6 @@ msgid "Program not found"
 msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr ""
-
-msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event"
@@ -1950,28 +2233,19 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Please provide a valid number"
+msgid "Could not save enrollment note"
 msgstr ""
 
-msgid "Please provide a valid integer"
+msgid "Could not save event note"
 msgstr ""
 
-msgid "Please provide a positive integer"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "Please provide a negative integer"
+msgid "There was an error fetching metadata"
 msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr ""
 
 msgid "Please provide a valid time"
-msgstr ""
-
-msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
@@ -1992,6 +2266,11 @@ msgstr ""
 msgid "\"From\" cannot be greater than \"To\""
 msgstr ""
 
+msgid ""
+"Please enter at least {{minCharactersToSearch}} characters for {{formName}} "
+"to perform a search"
+msgstr ""
+
 msgid "Checking..."
 msgstr ""
 
@@ -2004,11 +2283,20 @@ msgstr ""
 msgid "Please enter a time"
 msgstr ""
 
+msgid ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgid_plural ""
+"The following attribute type is not supported for searching and has been "
+"hidden"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Some attributes are hidden"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr "ہم آہنگی مقرر کریں"
-
-msgid "Time"
-msgstr "وقت"
 
 msgid "From date"
 msgstr "اس تاریخ سے"
@@ -2029,4 +2317,18 @@ msgid "Area on map saved"
 msgstr ""
 
 msgid "Compatibility mode"
+msgstr ""
+
+msgid ""
+"This app is currently running in compatibility mode due to browser "
+"restrictions. For better performance, use another browser or exit private "
+"mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "قبضہ"
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""

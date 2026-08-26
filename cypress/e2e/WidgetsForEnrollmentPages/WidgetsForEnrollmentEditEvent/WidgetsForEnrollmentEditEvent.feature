@@ -38,12 +38,11 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user sees the owner organisation unit
     And the user sees the last update date
 
-  Scenario: User can open the delete modal
+  Scenario: The enrollment widget is in read-only mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be opened
-    When the user opens the enrollment actions menu
-    And the user clicks on the delete action
-    Then the user sees the delete enrollment modal
+    And the enrollment actions button is not visible
+    And the enrollment date edit buttons are not visible
 
   Scenario: User can add note on edit event page view mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
@@ -58,22 +57,25 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And you fill in the note: edit mode note
     Then list should contain the new note: edit mode note
 
-  Scenario: You can assign a user to a event
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=veuwiLC2x0e&orgUnitId=g8upMTyEZGZ
+  Scenario: You can assign a user to a event in the view mode
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=z4PCgdaBXFh&orgUnitId=g8upMTyEZGZ
     When you assign the user Geetha in the view mode
     Then the event has the user Geetha Alwan assigned
+    When you remove the assigned user
+    Then the event has no assignd user
+
+  Scenario: You can assign a user to a event in the edit mode
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=TMw2x87EZmo&orgUnitId=g8upMTyEZGZ
     When you assign the user Tracker demo User in the edit mode
     Then the event has the user Tracker demo User assigned
     When you remove the assigned user
     Then the event has no assignd user
 
-  Scenario: User can complete the enrollment and the active events
+  Scenario: The enrollment widget is in read-only mode on enrollment event page
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=PyXThVzWJzL&orgUnitId=RzgSFJ9E46G
     And the enrollment widget should be opened
-    And the user sees the enrollment status and the Baby Postnatal event status is active
-    And the user opens the enrollment actions menu
-    When the user completes the enrollment and the active events
-    Then the user sees the enrollment status and the Baby Postnatal event status is completed
+    Then the enrollment actions button is not visible
+    And the enrollment date edit buttons are not visible
 
   Scenario: User can see the enrollment minimap
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=W1uHdJEjZUI&orgUnitId=DiszpKrYNg8

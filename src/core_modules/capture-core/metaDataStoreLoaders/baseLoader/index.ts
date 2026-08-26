@@ -1,0 +1,1 @@
+export { loadMetaData } from './loadMetaData';

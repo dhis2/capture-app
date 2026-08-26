@@ -1,0 +1,37 @@
+---
+title: Developer Details (Bulk Data Entry Plugin)
+sidebar_label: Developer details
+id: developer-details
+---
+
+Here are some details for developers who want to develop a bulk data entry plugin for the DHIS2 Capture app.
+
+## Plugin Interface
+
+The plugin receives the following props:
+
+```ts
+type BulkDataEntryPluginProps = {|
+    pluginSource: string,    
+    configKey: string,  
+    dataKey?: string,        
+    onComplete: () => void,
+    onDefer: () => void,
+    trackedEntityIds?: Array<string>,
+|};
+```
+
+### Exiting the Plugin
+
+To exit the Plugin and return to the Program overview or Search pages, use the `onDefer` function provided as a prop. This will place the Plugin in an idle state until further action is taken.
+
+```ts
+onDefer();
+```
+
+### Closing the Plugin
+
+To ensure proper cleanup and resource management, use the `onComplete` function provided as a prop to close the plugin. This will clear the selected configuration from `IndexedDB`.
+```ts
+onComplete();
+```

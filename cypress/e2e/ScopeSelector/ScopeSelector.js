@@ -198,10 +198,6 @@ Then('you should be taken to the main page with only org unit selected', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 });
 
-Then('you should be taken to the main page with only program selected', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?programId=VBqh0ynB2wv`);
-});
-
 Given('you land on a view event page with an invalid id', () => {
     cy.visit('/#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=invalid');
 });
@@ -237,6 +233,7 @@ const selectedEnrollment = ['Enrollment', `${getCurrentYear() + 1}-07-01 12:05`]
 
 const scopeSelectorCases = {
     all: [...selectedChildProgram, ...selectedOrgUnit, ...selectedTei, ...selectedEnrollment],
+    allWithoutOrgUnit: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei, ...selectedEnrollment],
     teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei],
     teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei],
     teiAndMalariaProgram: [...selectedMalariaProgram, ...emptyOrgUnitSelection, ...selectedTei],
@@ -286,11 +283,16 @@ And('you see the enrollment event Edit page but there is no org unit id in the u
 });
 
 And('you see the enrollment event New page but there is no stage id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=Aemr3Q02aqV&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=eUTmQGull6H`);
     cy.contains('Choose a stage for a new event');
 });
 
-And('you see the enrollment page', () => {
+And('you see the enrollment page without org unit in the url', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
+    cy.get('[data-test="enrollment-overview-page"]');
+});
+
+And('you see the enrollment page with the org unit in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="enrollment-overview-page"]');
 });

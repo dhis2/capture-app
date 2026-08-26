@@ -2,9 +2,39 @@ import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
+import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
+
+const cleanUpEventFilterIfApplicable = (programId, displayName) => {
+    cy.buildApiUrl(`eventFilters?filter=program:eq:${programId}&fields=id,displayName`)
+        .then((url) => cy.request(url))
+        .then(({ body }) => {
+            const items = body.eventFilters ?? [];
+            const match = items.find((e) => e.displayName === displayName);
+            if (!match) {
+                return null;
+            }
+            return cy
+                .buildApiUrl('eventFilters', match.id)
+                .then((deleteUrl) => cy.request('DELETE', deleteUrl));
+        });
+};
 
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and event program text filter context', () => {
+    cleanUpEventFilterIfApplicable('MoUd5BTQ3lY', 'eventStoredWorkingList');
+    cy.visit('#/?programId=MoUd5BTQ3lY&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
+    cleanUpEventFilterIfApplicable('eBAyeGv0exc', 'eventStoredWorkingList');
+    cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with Ngelehun and Contraceptives Voucher Program', () => {
+    cy.visit('#/?programId=kla3mAPgvCH&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
@@ -141,6 +171,30 @@ Then('the list should display events where age is between 10 and 20', () => {
         });
 });
 
+When(/^you set the text filter "([^"]+)" to "([^"]+)"$/, (filterName, value) => {
+    cy.get('[data-test="event-working-lists"]')
+        .within(() => {
+            cy.contains('More filters').click();
+        });
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains(filterName).click());
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[type="text"]')
+        .clear()
+        .type(value)
+        .blur();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+Then(/^the text filter "([^"]+)" should be in effect and show "([^"]+)" when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.get('input[type="text"]').should('have.value', value);
+    });
+    cy.get('body').click(0, 0);
+});
+
 When('you open the column selector', () => {
     cy.get('[data-test="select-columns-reference"]')
         .click();
@@ -249,6 +303,9 @@ Then('the list should display data ordered descendingly by report date', () => {
     cy.contains('button', 'Report date')
         .click();
 
+    cy.contains('Absolute range')
+        .click();
+
     cy.get('input[placeholder="From"]')
         .type(`${lastYear}-01-01`).blur();
 
@@ -309,8 +366,13 @@ When('you create a copy of the working list', () => {
         .click();
 
     const id = uuid();
+
     cy.get('[data-test="view-name-content"]')
-        .type(id);
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type(id)
+                .blur();
+        });
 
     cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
 
@@ -325,25 +387,6 @@ When('you create a copy of the working list', () => {
     cy.contains(id.substring(0, 26))
         .click();
 });
-
-When('you change the sharing settings', () => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Share view')
-        .click();
-    cy.get('[placeholder="Search"]')
-        .type('Boateng');
-
-    cy.contains('Kevin Boateng').click();
-    cy.contains('Select a level').click();
-    cy.get('[data-test="dhis2-uicore-select-menu-menuwrapper"]')
-        .contains('View and edit').click({ force: true });
-
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Give access').click({ force: true });
-    cy.get('[data-test="dhis2-uicore-button"]').contains('Close').click({ force: true });
-});
-
 
 When('you update the working list', () => {
     cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
@@ -365,11 +408,13 @@ Then('your newly defined sharing settings should still be present', () => {
     cy.contains('Share view')
         .click();
 
-    cy.contains('Kevin Boateng')
-        .should('exist');
+    cy.get('[data-test="sharing-dialog"]').within(() => {
+        cy.contains('Kevin Boateng')
+            .should('exist');
 
-    cy.contains('Close')
-        .click();
+        cy.contains('Close')
+            .click();
+    });
 
     cy.get('[data-test="list-view-menu-button"]')
         .click();
@@ -380,10 +425,6 @@ Then('your newly defined sharing settings should still be present', () => {
     cy.contains('Confirm')
         .click();
 });
-Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
-    cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
-});
-
 When('you set the date of admission filter', () => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
@@ -396,6 +437,8 @@ When('you set the date of admission filter', () => {
 
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {
+            cy.contains('Absolute range')
+                .click();
             cy.get('input[type="text"]')
                 .then(($elements) => {
                     cy.wrap($elements[0])
@@ -418,7 +461,11 @@ When(/^you save the view as (.*)$/, (name) => {
         .click();
 
     cy.get('[data-test="view-name-content"]')
-        .type(name);
+        .within(() => {
+            cy.get('input[type="text"]')
+                .type(name)
+                .blur();
+        });
 
     cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
 
@@ -429,34 +476,131 @@ When(/^you save the view as (.*)$/, (name) => {
     cy.wait('@newEventFilter', { timeout: 30000 }).as('newEventResult');
 });
 
-When('you refresh the page', () => {
-    cy.reload();
-});
-
-When('you open the dateFilterWorkingList', () => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains('dateFilterWorkingList')
-        .click();
-});
-
-Then('the admission filter should be in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Date of admission: 2018-01...')
+When(/^you update the view with the name (.+)$/, (_name) => {
+    cy.get('[data-test="list-view-menu-button"]')
         .click();
 
-    cy.get('[data-test="list-view-filter-contents"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .then(($elements) => {
-                    cy.wrap($elements[0])
-                        .should('have.attr', 'value', '2018-01-01');
+    cy.intercept('PUT', '**/eventFilters/**').as('updateEventFilter');
+    cy.contains('Update view')
+        .click();
+    cy.wait('@updateEventFilter', { timeout: 30000 });
+});
 
-                    cy.wrap($elements[1])
-                        .should('have.attr', 'value', '2018-12-31');
-                });
+When(/^you set the range filter "([^"]+)" to (\d+)-(\d+)$/, (filterName, min, max) => {
+    if (filterName === 'Age (years)') {
+        cy.get('[data-test="event-working-lists"]').contains('Age (years)').click();
+    } else {
+        cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+        cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+    }
+    cy.get('[data-test="list-view-filter-contents"]').find('input[placeholder="Min"]').type(min).blur();
+    cy.get('[data-test="list-view-filter-contents"]').find('input[placeholder="Max"]').type(max).blur();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When('you set the boolean filter', () => {
+    cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Pregnant').click());
+    cy.get('[data-test="list-view-filter-contents"]').contains('Yes').click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+});
+
+When('you set the date filter', () => {
+    cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Date of admission').click());
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains('Absolute range').click();
+        cy.get('input[type="text"]').then(($inputs) => {
+            cy.wrap($inputs[0]).type('2018-01-01').blur();
+            cy.wrap($inputs[1]).type('2018-12-31').blur();
         });
+        cy.contains('Update').click();
+    });
+});
 
-    // clean up
+When('you set the organisation unit filter', () => {
+    cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+    cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Place of Infection').click());
+    cy.get('[data-test="org-unit-selector-trigger"]').click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type('Ngelehun', { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
+        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
+        cy.contains('Ngelehun').click();
+    });
+});
+
+When(/^you set the isEmpty filter "([^"]+)" to (Is empty|Is not empty)$/, (filterName, value) => {
+    cy.viewport(1440, 1080);
+    const labelPrefix = truncateFilterLabelForTest(filterName);
+    cy.get('[data-test="event-working-lists"]')
+        .find('[data-test="filter-button-popover-anchor"]')
+        .then(($anchors) => {
+            const match = [...$anchors].find((node) => node.innerText.includes(labelPrefix));
+            if (match) {
+                cy.wrap(match).click();
+            } else {
+                cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
+                cy.get('[data-test="more-filters-menu"]').within(() => cy.contains(filterName).click());
+            }
+        });
+    cy.get('[data-test="list-view-filter-contents"]').contains(value).click();
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.get('[data-test="list-view-filter-contents"]').should('not.exist');
+});
+
+Then('the boolean filter should be in effect and show the correct value when opened', () => {
+    cy.get('[data-test="event-working-lists"]').should('contain', 'Pregnant').and('contain', 'Yes');
+    cy.get('[data-test="event-working-lists"]').contains('Pregnant').click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains('Yes').closest('label').find('input').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the range filter "([^"]+)" should be in effect and show (\d+) to (\d+) when opened$/, (filterName, min, max) => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest(`${filterName}: ${min} to ${max}`))
+        .should('exist');
+    cy.get('[data-test="event-working-lists"]').contains(filterName).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.get('input[placeholder="Min"]').should('have.attr', 'value', min);
+        cy.get('input[placeholder="Max"]').should('have.attr', 'value', max);
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then('the date filter should be in effect and show the correct value when opened', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains(truncateFilterLabelForTest('Date of admission: 2018-01-01 to 2018-12-31'))
+        .click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains('Absolute range').click();
+        cy.get('input[type="text"]').then(($inputs) => {
+            cy.wrap($inputs[0]).should('have.attr', 'value', '2018-01-01');
+            cy.wrap($inputs[1]).should('have.attr', 'value', '2018-12-31');
+        });
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then('the organisation unit filter should be in effect and show the correct value when opened', () => {
+    cy.get('[data-test="event-working-lists"]').should('contain', 'Place of Infection').and('contain', 'Ngelehu');
+    cy.get('[data-test="event-working-lists"]').contains('Place of Infection').click();
+    cy.get('[data-test="list-view-filter-contents"]').should('contain', 'Ngelehun');
+    cy.get('body').click(0, 0);
+});
+
+Then(/^the isEmpty filter "([^"]+)" should be in effect and show (Is empty|Is not empty) when opened$/, (filterName, value) => {
+    const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).should('exist');
+    cy.get('[data-test="event-working-lists"]').contains(chipLabel).click();
+    cy.get('[data-test="list-view-filter-contents"]').within(() => {
+        cy.contains(value).closest('label').find('input[type="checkbox"]').should('be.checked');
+    });
+    cy.get('body').click(0, 0);
+});
+
+Then('the saved working list view is cleaned up', () => {
     cy.get('@newEventResult')
         .then((result) => {
             expect(result.response.statusCode).to.equal(201);
@@ -466,10 +610,6 @@ Then('the admission filter should be in effect', () => {
                     cy.request('DELETE', eventFiltersUrl);
                 });
         });
-});
-
-Given('you open the main page with Ngelehun and Contraceptives Voucher Program', () => {
-    cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=kla3mAPgvCH');
 });
 
 Then(/^you are told to select (.*)$/, (text) => {
@@ -490,7 +630,7 @@ Then('the working list should be displayed', () => {
         .find('tr');
 });
 
-When('you delete the name toDeleteWorkingList', () => {
+When('you delete the name eventStoredWorkingList', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
@@ -505,6 +645,6 @@ When('you delete the name toDeleteWorkingList', () => {
 Then('the custom events working list is deleted', () => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
-            cy.contains('toDeleteWorkingList').should('not.exist');
+            cy.contains('eventStoredWorkingList').should('not.exist');
         });
 });

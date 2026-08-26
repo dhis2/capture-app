@@ -6,6 +6,21 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
+Given(/^you make sure the event (.+) is unlinked$/, (eventId) => {
+    cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const relationships = body.relationships ?? [];
+            if (relationships.length) {
+                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((deleteUrl) => {
+                    cy.request('POST', deleteUrl, {
+                        relationships: relationships.map(({ relationship }) => ({ relationship })),
+                    });
+                });
+            }
+        });
+});
+
 And(/^the Related stages Actions is ?(.*) visible at the bottom of the page/, (not) => {
     cy.get('[data-test="related-stages-section"]')
         .should(not ? 'not.exist' : 'exist');
@@ -33,10 +48,10 @@ And('you select the Enter details now action', () => {
 });
 
 When('you select the first existing Baby Postnatal event in the list', () => {
-    cy.get('[data-test="related-stages-existing-response-list-content"]')
-        .click();
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
-        .eq(0)
+    cy.get('[data-test="related-stages-existing-response-list"]')
+        .click()
+        .get('[role="option"]:visible')
+        .first()
         .click();
 });
 
@@ -56,12 +71,14 @@ Then('you can see the Birth linked event', () => {
 });
 
 When('you unlink the Baby Postnatal linked event', () => {
+    cy.intercept('POST', '**/tracker*importStrategy=DELETE*').as('unlinkEvent');
     cy.get('[data-test="widget-linked-event-overflow-menu"]')
         .click();
     cy.get('[data-test="event-overflow-unlink-event"]')
         .click();
     cy.get('[data-test="event-overflow-unlink-event-confirm"]')
         .click();
+    cy.wait('@unlinkEvent');
 });
 
 And('you delete the Birth event', () => {
@@ -109,19 +126,19 @@ And('you open the Birth new event page and fill in the required data in the form
 
 When('you fill in the required values for the Baby postnatal event when scheduling', () => {
     cy.get('[data-test="related-stages-section"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .eq(0)
-                .type(`${getCurrentYear()}-08-01`)
-                .blur();
+        .find('input[type="text"]')
+        .eq(0)
+        .type(`${getCurrentYear()}-08-01`)
+        .blur();
 
-            cy.get('input[type="text"]')
-                .eq(1)
-                .type('Barmoi CH');
-
-            cy.contains('Barmoi CHP')
-                .click();
-        });
+    cy.get('[data-test="related-stages-section"]')
+        .find('[data-test="org-unit-selector-trigger"]')
+        .click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type('Barmoi CH', { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
+        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
+        cy.contains('Barmoi CHP').click();
+    });
 });
 
 And('you click the Schedule action button', () => {
@@ -131,14 +148,13 @@ And('you click the Schedule action button', () => {
 
 When('you fill in the required values for the Baby postnatal event when entering details', () => {
     cy.get('[data-test="related-stages-section"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .eq(0)
-                .type('Barmoi CH');
-
-            cy.contains('Barmoi CHP')
-                .click();
-        });
+        .find('[data-test="org-unit-selector-trigger"]')
+        .click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type('Barmoi CH', { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
+        cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
+        cy.contains('Barmoi CHP').click();
+    });
 });
 
 And('you click the Enter details action button', () => {
@@ -220,7 +236,7 @@ And('you delete the recently added tracked entity', () => {
     cy.get('[data-test="profile-widget"]')
         .contains('Person profile')
         .should('exist');
-    cy.get('[data-test="widget-profile-overflow-menu"]')
+    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
         .click();
     cy.contains('Delete Person')
         .click();

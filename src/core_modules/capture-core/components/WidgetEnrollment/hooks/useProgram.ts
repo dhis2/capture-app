@@ -1,0 +1,32 @@
+import { useMemo } from 'react';
+import { useDataQuery } from '@dhis2/app-runtime';
+
+type ProgramData = {
+    featureType: string;
+    [key: string]: any;
+};
+
+export const useProgram = (programId: string) => {
+    const { error, loading, data } = useDataQuery(
+        useMemo(
+            () => ({
+                program: {
+                    resource: `programs/${programId}`,
+                    params: {
+                        fields: [
+                            'displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,' +
+                            'displayEnrollmentLabel,displayEnrollmentsLabel,displayFollowUpLabel,displayOrgUnitLabel,' +
+                            'displayRelationshipLabel,displayNoteLabel,displayTrackedEntityAttributeLabel,' +
+                            'displayProgramStageLabel,displayProgramStagesLabel,displayEventLabel,displayEventsLabel,' +
+                            'trackedEntityType[displayName,access],' +
+                            'programStages[autoGenerateEvent,name,access,id],' +
+                            'access,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture',
+                        ],
+                    },
+                },
+            }),
+            [programId],
+        ),
+    );
+    return { error, loading, program: data?.program as ProgramData | undefined };
+};

@@ -1,0 +1,1 @@
+export { WidgetEventEditWrapper } from './WidgetEventEditWrapper';

@@ -1,0 +1,1 @@
+export { WidgetEventChangelog } from './WidgetEventChangelog';

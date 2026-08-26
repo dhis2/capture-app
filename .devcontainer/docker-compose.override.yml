@@ -1,0 +1,12 @@
+# You can use this file for local customizations.
+# Run git update-index --skip-worktree .devcontainer/docker-compose.override.yml
+# to exclude this file from source control, then modify it freely.
+
+services:
+  dev:
+    labels: []
+    # Add local overrides here, e.g.:
+    # deploy:
+    #   resources:
+    #       limits:
+    #           memory: 32g

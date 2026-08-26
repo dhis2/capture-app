@@ -4,7 +4,6 @@ Feature: User creates a new entries from the registration page
     Given you are on the default registration page
     Then there should be informative message explaining you need to select an organisation unit
 
-  @v>=41
   Scenario: New person in Tracker Program > Filling the Allergies with multiple options
     Given you are in the WHO RMNCH program registration page
     When you fill in multiple Allergies options
@@ -135,8 +134,6 @@ Feature: User creates a new entries from the registration page
 
 ### New person in Tracker Program
 
-  # DHIS2-14837
-  @skip
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error
     Given you are in the WHO RMNCH program registration page
     And you click the save person submit button
@@ -192,6 +189,16 @@ Feature: User creates a new entries from the registration page
     Then you see the enrollment event Edit page
     # Cleanup
     And you delete the recently added malaria entity
+
+  Scenario: New person in Tracker Program > Enter non-unique value in a unique data element shows validation error
+    Given you are on the TB program registration page
+    And you enter an existing value in the National identifier field
+    Then an error message should show up saying this national identifier is already registered
+
+  Scenario: New person in Tracker Program > Enter invalid date in age field shows validation error
+    Given you are on the TB program registration page
+    And you enter an invalid date in the Age field
+    Then an error message shows up asking the user to enter a valid date
 
 
 ## New enrollment of existing TEI

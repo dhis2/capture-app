@@ -1,0 +1,119 @@
+import * as React from 'react';
+import log from 'loglevel';
+import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
+import { DateFilter as DateFilterInput } from './DateFilter.component';
+import { mainOptionKeys } from './options';
+import { dateFilterTypes } from './date.const';
+import { getEmptyValueFilterValue, isEmptyFilterData } from '../EmptyValue';
+import type {
+    DateFilter,
+    DateFilterManagerProps,
+    RelativeDateFilterData,
+    AbsoluteDateFilterData,
+    Value,
+} from './date.types';
+import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
+
+type State = {
+    value?: Value;
+};
+
+export class DateFilterManager extends React.Component<DateFilterManagerProps, State> {
+    static convertDateForEdit(rawValue: string) {
+        const localDate = convertIsoToLocalCalendar(rawValue);
+        return localDate;
+    }
+    static calculateAbsoluteRangeValueState(filter: AbsoluteDateFilterData) {
+        const ge = filter.ge;
+        const le = filter.le;
+        const geDate = ge ? ge.split('T')[0] : undefined;
+        const leDate = le ? le.split('T')[0] : undefined;
+        const isSameDay = geDate && leDate && geDate === leDate;
+
+        if (isSameDay && ge) {
+            const converted = DateFilterManager.convertDateForEdit(ge);
+            return {
+                main: mainOptionKeys.ABSOLUTE_RANGE,
+                from: { value: converted, isValid: true },
+                to: { value: converted, isValid: true },
+            };
+        }
+
+        return {
+            main: mainOptionKeys.ABSOLUTE_RANGE,
+            from: ge ? {
+                value: DateFilterManager.convertDateForEdit(ge),
+                isValid: true,
+            } : undefined,
+            to: le ? {
+                value: DateFilterManager.convertDateForEdit(le),
+                isValid: true,
+            } : undefined,
+        };
+    }
+    static calculateRelativeRangeValueState(filter: RelativeDateFilterData) {
+        return {
+            main: mainOptionKeys.RELATIVE_RANGE,
+            start:
+                (filter.startBuffer || filter.startBuffer === 0)
+                    ? Math.abs(filter.startBuffer).toString()
+                    : undefined,
+            end: (filter.endBuffer || filter.endBuffer === 0) ? filter.endBuffer.toString() : undefined,
+        };
+    }
+
+    static calculateDefaultValueState(filter?: DateFilter | null) {
+        if (!filter) return undefined;
+        if (isEmptyFilterData(filter)) return getEmptyValueFilterValue(filter);
+
+        if (filter.type === dateFilterTypes.RELATIVE) {
+            if (filter.period) {
+                return {
+                    main: filter.period,
+                };
+            }
+            const startBuffer = filter.startBuffer ?? 0;
+            const endBuffer = filter.endBuffer ?? 0;
+            if (areRelativeRangeValuesSupported(startBuffer, endBuffer)) {
+                return DateFilterManager.calculateRelativeRangeValueState({
+                    ...filter,
+                    startBuffer,
+                    endBuffer,
+                });
+            }
+            log.warn(
+                'The startBuffer and endBuffer values are not supported by the UI',
+                filter.startBuffer,
+                filter.endBuffer,
+            );
+            return undefined;
+        }
+
+        return DateFilterManager.calculateAbsoluteRangeValueState(filter);
+    }
+
+    constructor(props: DateFilterManagerProps) {
+        super(props);
+        this.state = {
+            value: DateFilterManager.calculateDefaultValueState(this.props.filter),
+        };
+    }
+
+    handleCommitValue = (value?: Value, isBlur?: boolean) => {
+        this.setState({ value });
+        this.props.handleCommitValue?.(value, isBlur);
+    };
+
+    render() {
+        const { filter, filterTypeRef, ...passOnProps } = this.props;
+
+        return (
+            <DateFilterInput
+                value={this.state.value}
+                ref={filterTypeRef}
+                onCommitValue={this.handleCommitValue}
+                {...passOnProps}
+            />
+        );
+    }
+}

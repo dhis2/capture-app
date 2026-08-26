@@ -1,0 +1,1 @@
+export { storeDataElements } from './storeDataElements';

@@ -1,0 +1,1 @@
+export { InfoIconText } from './InfoIconText';

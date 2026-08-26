@@ -1,0 +1,69 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCommonEnrollmentSiteData } from '../enrollment.actions';
+import type { Output } from './useCommonEnrollmentDomainData.types';
+import { useApiDataQuery } from '../../../../../utils/reactQueryHelpers';
+
+export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: string, programId: string): Output => {
+    const dispatch = useDispatch();
+
+    const {
+        enrollmentId: storedEnrollmentId,
+        enrollment: storedEnrollment,
+        attributeValues: storedAttributeValues,
+        inactive: storedInactive,
+    } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain);
+
+    const { data, error } = useApiDataQuery(
+        ['stages&event', 'enrollmentData', teiId, programId, enrollmentId],
+        {
+            resource: 'tracker/trackedEntities',
+            id: teiId,
+            params: {
+                program: programId,
+                fields: ['enrollments[*,!attributes],attributes,inactive'],
+            },
+        },
+        {
+            enabled: !!teiId && !!programId && !!enrollmentId && storedEnrollmentId !== enrollmentId,
+            staleTime: 0,
+            cacheTime: 0,
+        },
+    ) as any;
+
+    const fetchedEnrollmentData = {
+        reference: data,
+        enrollment: data?.enrollments
+            ?.find((enrollment: any) => enrollment.enrollment === enrollmentId),
+        attributeValues: data?.attributes,
+        inactive: Boolean(data?.inactive),
+    };
+
+    useEffect(() => {
+        if (fetchedEnrollmentData.reference) {
+            dispatch(setCommonEnrollmentSiteData(
+                fetchedEnrollmentData.enrollment,
+                fetchedEnrollmentData.attributeValues
+                    .map(({ attribute, value }: any) => ({ id: attribute, value })),
+                fetchedEnrollmentData.inactive,
+            ));
+        }
+    }, [
+        dispatch,
+        fetchedEnrollmentData.reference,
+        fetchedEnrollmentData.enrollment,
+        fetchedEnrollmentData.attributeValues,
+        fetchedEnrollmentData.inactive,
+    ]);
+
+    const inEffectData = enrollmentId === storedEnrollmentId ? {
+        enrollment: storedEnrollment,
+        attributeValues: storedAttributeValues,
+        readOnly: Boolean(storedInactive),
+    } : { enrollment: undefined, attributeValues: undefined, readOnly: false };
+
+    return {
+        error,
+        ...inEffectData,
+    };
+};

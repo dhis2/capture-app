@@ -1,0 +1,1 @@
+export { getInjectionValue } from './getInjectionValue';

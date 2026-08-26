@@ -1,0 +1,37 @@
+type Location = {
+    longitude: number,
+    latitude: number,
+};
+
+function isNumValid(num: any) {
+    if (typeof num === 'number') {
+        return true;
+    } else if (typeof num === 'string') {
+        return num.match(/[^0-9.,-]+/) === null;
+    }
+
+    return false;
+}
+
+/**
+ *
+ * @export
+ * @param { Object } value
+ * @returns { boolean }
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const isValidCoordinate = (value: Location, _internalComponentError?: {error?: string, errorCode?: string}) => {
+    if (!value) {
+        return false;
+    }
+
+    const { longitude, latitude } = value;
+    if (!isNumValid(latitude) || !isNumValid(longitude)) {
+        return false;
+    }
+
+    const ld = parseInt(longitude.toString(), 10);
+    const lt = parseInt(latitude.toString(), 10);
+
+    return ld >= -180 && ld <= 180 && lt >= -90 && lt <= 90;
+};

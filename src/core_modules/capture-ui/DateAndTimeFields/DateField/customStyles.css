@@ -5,8 +5,8 @@
 .Cal__Today__root .Cal__Today__chevron {
     position: unset;
     top: unset;
-    margin-left: 5px;
+    margin-inline-start: 5px;
     margin-top: 0;
     margin-bottom: 0;
-    margin-right: 0;
+    margin-inline-end: 0;
 }

@@ -1,7 +1,7 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { initRulesEngine, ruleEngine } from '../rulesEngine';
 
-initRulesEngine('', []);
+initRulesEngine('', [], []);
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },

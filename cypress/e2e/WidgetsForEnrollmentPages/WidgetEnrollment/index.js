@@ -3,11 +3,10 @@ import { getCurrentYear } from '../../../support/date';
 import { hasVersionSupport } from '../../../support/tagUtils';
 
 After({ tags: '@with-transfer-ownership-data-cleanup' }, () => {
-    const teiQueryKey = hasVersionSupport('@v>=41') ? 'trackedEntity' : 'trackedEntityInstance';
     const orgUnitKey = hasVersionSupport('@v>=42') ? 'orgUnit' : 'ou';
     cy.buildApiUrl(
         'tracker',
-        `ownership/transfer?program=IpHINAT79UW&${orgUnitKey}=DiszpKrYNg8&${teiQueryKey}=EaOyKGOIGRp`,
+        `ownership/transfer?program=IpHINAT79UW&${orgUnitKey}=DiszpKrYNg8&trackedEntity=EaOyKGOIGRp`,
     ).then(url => cy.request('PUT', url));
 });
 
@@ -57,6 +56,18 @@ Then('the enrollment widget should be closed', () => {
 Then('the enrollment widget should be opened', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-contents"]').children().should('exist');
+    });
+});
+
+Then('the enrollment actions button is not visible', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-actions-button"]').should('not.exist');
+    });
+});
+
+Then('the enrollment date edit buttons are not visible', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-icon-edit-date"]').should('not.exist');
     });
 });
 
@@ -115,31 +126,11 @@ When('the user opens the enrollment actions menu', () => {
     }).as('putEnrollment');
 });
 
-When(/^the user changes the enrollment status to (.*)$/, (status) => {
-    cy.get(`[data-test="widget-enrollment-actions-${status}"]`).click();
-    cy.wait('@putEnrollment');
-});
-
 Then(/^the user sees the enrollment status is (.*)$/, status =>
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-status"]')
             .contains(status)
             .should('exist');
-    }),
-);
-
-When(/^the user (.*) the enrollment for followup/, (action) => {
-    cy.get(
-        `[data-test="widget-enrollment-actions-followup-${action}"]`,
-    ).click();
-    cy.wait('@putEnrollment');
-});
-
-Then(/^the user can see the enrollment is ?(.*) marked for follow up/, not =>
-    cy.get('[data-test="widget-enrollment"]').within(() => {
-        cy.get('[data-test="widget-enrollment-status"]')
-            .contains('Follow-up')
-            .should(not ? 'not.exist' : 'exist');
     }),
 );
 

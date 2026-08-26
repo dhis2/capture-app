@@ -19,10 +19,3 @@ When(/^the user clicks the "Enrollment dashboard" breadcrumb item/, () =>
     cy.get('[data-test="enrollment-breadcrumb-overview-item"]')
         .click(),
 );
-
-When(/^the user clicks the "New Event" button/, () =>
-    cy
-        .get('[data-test="quick-action-button-report"]')
-        .contains('New Event')
-        .click(),
-);

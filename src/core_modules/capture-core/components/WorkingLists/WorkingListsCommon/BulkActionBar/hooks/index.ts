@@ -1,0 +1,1 @@
+export { useSelectedRowsController } from './useSelectedRowsController';

@@ -6,7 +6,8 @@ Feature: Smoke tests
         Then you should see the login prompt
 
     # login form is not working for v42 currently
-    @skip-login @v<42
+    # https://dhis2.atlassian.net/browse/DHIS2-20638
+    @skip-login @v<40
     Scenario: Show app main selections and header bar: without auth cookie
         Given you open the App without auth cookie
         When you fill in credentials

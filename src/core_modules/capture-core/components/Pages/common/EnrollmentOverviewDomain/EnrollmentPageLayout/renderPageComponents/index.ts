@@ -1,0 +1,1 @@
+export { renderWidgets } from './renderPageComponents';

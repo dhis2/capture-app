@@ -7,3 +7,5 @@ updates:
   open-pull-requests-limit: 5
   target-branch: master
   versioning-strategy: increase
+  cooldown:
+    default-days: 7

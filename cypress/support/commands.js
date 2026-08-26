@@ -38,7 +38,8 @@ Cypress.Commands.add('cleanIndexBD', () => {
 // overrides loginByApi from @dhis2/cypress-commands
 // temporary solution: should use solution from @dhis2/cypres-commands when available
 Cypress.Commands.add('loginByApi', ({ username, password, baseUrl }) => {
-    const currentInstanceVersion = Number(/[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion'))[1]);
+    const versionMatch = /[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion') || '2.42');
+    const currentInstanceVersion = Number(versionMatch ? versionMatch[1] : '42');
 
     if (currentInstanceVersion >= 42) {
         cy.request({

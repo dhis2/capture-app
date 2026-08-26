@@ -2,7 +2,7 @@
 
 ## About the Capture app { #about_capture_app } 
 
-In the Capture app you register events that occurred at a particular time and place. An event can happen at any given point in time. This stands in contrast to routine data, which is captured for predefined, regular intervals. Events are sometimes called cases or records. In DHIS2, events are linked to a program. The Capture app lets you select the organisation unit and program and specify a date when an event happened, before entering information for the event. Some events are linked to a tracked entity instance, for example a person, allowing longitudinal follow-up.
+In the Capture app you register events that occurred at a particular time and place. An event can happen at any given point in time. This stands in contrast to routine data, which is captured for predefined, regular intervals. Events are sometimes called cases or records. In DHIS2, events are linked to a program. The Capture app lets you select the organisation unit and program and specify a date when an event happened, before entering information for the event. Some events are linked to a tracked entity, for example a person, allowing longitudinal follow-up.
 
 ## Register an event { #capture_register_event } 
 
@@ -59,11 +59,11 @@ In the Capture app you register events that occurred at a particular time and pl
 > achieved by clicking the **Switch to row view** button on the top right of the data entry form. If you are currently in **row view** you
 > can switch to the default form view by clicking the **Switch to form view** button on the top right of the data entry form.
 
-## Register a tracked entity instance
+## Register a tracked entity
 
-There are two different ways one can register a tracked entity instance under an organisation unit.
-The first way, is to register a tracked entity instance without enrolling it to a tracker program.
-The second option, is to register a tracked entity instance with program and enroll it. 
+There are two different ways one can register a tracked entity under an organisation unit.
+The first way, is to register a tracked entity without enrolling it to a tracker program.
+The second option, is to register a tracked entity with program and enroll it. 
 
 ### Without a program enrollment 
 
@@ -76,7 +76,7 @@ The second option, is to register a tracked entity instance with program and enr
     ![image](resources/images/register-without-enrollment-new-button.png)
 
     You'll now be navigated to the registration page. In that page you will see a drop down 
-    menu similar to the one in the image below. From the dropdown menu you can select a tracked entity 
+    menu similar to the one in the image below. You can type to filter and select a tracked entity 
     type, eg. Building, Person etc.
     
     ![image](resources/images/register-without-enrollment-dropdown-menu.png)
@@ -88,7 +88,7 @@ The second option, is to register a tracked entity instance with program and enr
 5. The moment you select a tracked entity type, a form will be shown on the screen. 
     
     The "Profile" section will be shown. In this section you can add data relevant to the 
-    tracked entity instance. The profile section mainly contains all the tracked entity attributes
+    tracked entity. The profile section mainly contains all the tracked entity attributes
     linked to the tracked entity type. 
 
     ![image](resources/images/register-without-enrollment-form.png)
@@ -106,11 +106,11 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click the **Save person** button to register the tracked entity instance. 
+7. Click the **Save person** button to register the tracked entity. 
     
-8. You will now be prompted to the tracked entity instance dashboard. 
+8. You will now be prompted to the tracked entity dashboard. 
 
-    The dashboard will show relevant information about the newly created tracked entity instance.
+    The dashboard will show relevant information about the newly created tracked entity.
 
 ### With a program enrollment
 
@@ -128,7 +128,7 @@ The second option, is to register a tracked entity instance with program and enr
 
     The enrollment form has different layouts depending on how the program is customized. The top section has the title "Enrollment",
     and it holds all the relevant information about the enrollment details. This section will always be present, regardless of layout.
-    Underneath, the different data input fields relevant to the tracked entity instance will be displayed. 
+    Underneath, the different data input fields relevant to the tracked entity will be displayed. 
     These fields will either be displayed within sections or as a completely custom form. 
     The sections, or custom form, mainly contains all the tracked entity attributes linked to the program or tracked entity type.
 
@@ -146,12 +146,12 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click **Save person** to register the tracked entity instance. 
+7. Click **Save person** to register the tracked entity. 
     The **Save** button shows a loading spinner and the **Cancel** button is disabled while the request is processing.
     
-8. You will now be prompted to the tracked entity instance dashboard. 
+8. You will now be prompted to the tracked entity dashboard. 
 
-    The dashboard will show relevant information about the newly created tracked entity instance.
+    The dashboard will show relevant information about the newly created tracked entity.
 
 > **Note**
 >
@@ -194,7 +194,7 @@ You can set multiple program stages within a program to be auto-generating (this
 
 ### Enrollment with open data entry form
 
-A program can be configured to automatically take the user to register a new event immediately after enrolling a tracked entity instance. To enable this behavior, the program must have at least one program stage with the "Open data entry form after registration" option checked. If more than one program stage has this option enabled, the first stage will be used.
+A program can be configured to automatically take the user to register a new event immediately after enrolling a tracked entity. To enable this behavior, the program must have at least one program stage with the "Open data entry form after registration" option checked. If more than one program stage has this option enabled, the first stage will be used.
 
 To configure it, you must follow the steps described in the [Enrollment with auto generated events](#enrollment-with-auto-generated-events) section and then check the option "Open data entry form after enrollment".
 
@@ -232,7 +232,7 @@ When the "Scheduled days from start" does not contain a number or contains 0 the
 
 ### Possible duplicates detection
 
-In both cases of registering a tracked entity instance, (with enrollment or without enrollment) the system will start looking for possible duplicates.
+In both cases of registering a tracked entity, (with enrollment or without enrollment) the system will start looking for possible duplicates.
 Note that programs need to be correctly configured through the maintenance app for the system to start detecting duplicates when enrolling a new person in a program. 
 
 To configure a program through the maintenance app you will have to: 
@@ -270,7 +270,7 @@ Click **Save person**. The system will start looking for possible duplicates tha
 5. The system will automatically show a list of possible duplicates if there are any. 
 ![](resources/images/duplicates-on-creation-04.png)
 
-6. You can choose to make a new enrollement by clicking **Save as new** or if you see the right person in the list - you can view the dashboard.
+6. You can choose to make a new enrollment by clicking **Save as new** or if you see the right person in the list - you can view the dashboard.
 ![](resources/images/duplicates-on-creation-05.png)
 
 > **Tip**
@@ -280,12 +280,12 @@ Click **Save person**. The system will start looking for possible duplicates tha
 
 ### Program rules execution
 
-In both cases of registering a tracked entity instance (with enrollment or without enrollment), the system will run program rules you have configured.
+In both cases of registering a tracked entity (with enrollment or without enrollment), the system will run program rules you have configured.
 Note that rules can be configured in the maintenance app.
 
-To see a rule being executed while enrolling a tracked entity instance you will have to take the following steps. 
+To see a rule being executed while enrolling a tracked entity you will have to take the following steps. 
 
-1. Configure a rule in the maintenance app. For the example below we configured a rule that throws a warning when the date of birth is less than a year.
+1. Configure a rule in the maintenance app. For the example below we configured a rule that throws a warning when a tracked entity's age is outside the expected range for the program.
 
 2. Open the **Capture** app.
 ![](resources/images/duplicates-on-creation-00.png)
@@ -293,22 +293,22 @@ To see a rule being executed while enrolling a tracked entity instance you will 
 3. Select your organisation unit and program from the menu on the top.
 ![](resources/images/program-rules-on-creation-00.png)
 
-4. Fill in the date of birth with a value which is less than a year. In our case this is 27th of January 2021. 
+4. Fill in the birth date with a value that falls outside the expected age range. In our case this is 18th of August 2026.
 ![](resources/images/program-rules-on-creation-01.png)
 
 5. You will now be able to see the warning produced by the program rule underneath the birth date field. 
 ![](resources/images/program-rules-on-creation-02.png)
 
-## Re-enroll an existing tracked entity instance
+## Re-enroll an existing tracked entity
 
-When you are on the re-enroll page, the teId will be visible in the URL parameters. The attributes of the tracked entity instance will be pre-fielded with the current values. 
+When you are on the re-enroll page, the teID will be visible in the URL parameters. The attributes of the tracked entity will be pre-filled with the current values. 
 ![](resources/images/enroll-existing-tei.png)
 
 
 ## Adding a relationship { #capture_add_relationship } 
 
 Relationships can be added either during registration, editing or viewing of an event.
-Currently the **Capture App** only supports *Event to Tracked Entity Instance* relationships.
+The **Capture App** supports several relationship types, including *Event to tracked entity* and *tracked entity to tracked entity* (e.g. Sibling, Mother-Child). The relationship types available depend on your program configuration.
 
 1. While in an event, click **Add relationship**.
 
@@ -316,57 +316,58 @@ Currently the **Capture App** only supports *Event to Tracked Entity Instance* r
 
 You now have two options: 
 
-- **Link to an existing Tracked Entity Instance** or 
+- **Link to an existing _[tracked entity type]_** or 
 
-- **Create new Tracked Entity Instance**.
+- **Create new**.
+
+> The **Link to an existing** button label reflects your program's tracked entity type, for example **Link to an existing Person**. The **Create new** button does not.
 
 ![relationship options](resources/images/relationship_options.png)
 
-### Link to an existing Tracked Entity Instance
+### Link to an existing tracked entity
 
-1. Click **Link to an existing Tracked Entity Instance**.
+1. Click **Link to an existing _[tracked entity type]_**.
 
-- You will be presented with some options for searching for a **Tracked Entity Instance**.
+- You will be presented with some options for searching for a **tracked entity**.
   You have the option to select a **program**. If a **program** is selected the attributes are derived from the selected **program**.
-  If no **program** is selected, only the attributes that belong to the **Tracked Entity Instance** will be visible.
+  If no **program** is selected, only the attributes that belong to the **tracked entity** will be visible.
 
-    ![search for Tracked Entity Instance](resources/images/search_tei.png)
+    ![search for tracked entity](resources/images/search_tei.png)
 
-    - If the **Tracked Entity Instance** or **program** is configured with a unique attribute, this attribute can be
-      used for finding a specific **Tracked Entity Instance** or **program**. This attribute should be presented alone.
+    - If the **tracked entity** or **program** is configured with a unique attribute, this attribute can be
+      used for finding a specific **tracked entity** or **program**. This attribute should be presented alone.
       When the unique attribute field has been filled out, click the **Search** button located right below
       the unique attribute field.
 
-    - If the **Tracked Entity Instance** or **program** has attibutes these can be used for searching by expanding the **Search by attributes** box.
-      When all desired attribute fields have been filled out, click the **Search by attributes** button located at the bottom. You can also limit the search by setting the **Organisation unit scope**. If set to *All accessible* you will search for the **Tracked Entity Instance** in all organisation units you have access to. If you select *Selected*, you will be asked to select which organisation units to search within.
+    - If the **tracked entity** or **program** has attributes these can be used for searching by expanding the **Search by attributes** box.
+      When all desired attribute fields have been filled out, click the **Search by attributes** button located at the bottom. You can also limit the search by setting the **Organisation unit scope**. If set to *All accessible* you will search for the **tracked entity** in all organisation units you have access to. If you select *Selected*, you will be asked to select which organisation units to search within.
 
-2. After a successful search you will be presented with a list of **Tracked Entity Instances** matching the search criteria.
-   To create a relationship click the **Link** button on the **Tracked Entity Instance** you would like to create a relationship to.
+2. After a successful search you will be presented with a list of **tracked entities** matching the search criteria.
+   To create a relationship click the **Link** button on the **tracked entity** you would like to create a relationship to.
 
-- If you did not find the **Tracked Entity Instance** you were looking for, you can either click the **New search** or **Edit search** buttons.
+- If you did not find the **tracked entity** you were looking for, you can either click the **New search** or **Edit search** buttons.
   **New search** will take you to new blank search while **Edit search** will take you back to the search you just performed keeping the search criteria.
 
-### Create new Tracked Entity Instance
+### Create new tracked entity
 
-1. Click **Create new Tracked Entity Instance**.
+1. Click **Create new _[tracked entity type]_**.
 
-- You are now presented with a form for registering a new **Tracked Entity Instance**. You can choose to either register with or without a program.
-  If a program is selected, the new **Tracked Entity Instance** will be enrolled in said program. You can also change the **Organisation unit** by removing the one that is automatically set and selecting a new one.
+- You are now presented with a form for registering a new **tracked entity**. You can choose to either register with or without a program.
+  If a program is selected, the new **tracked entity** will be enrolled in said program. You can also change the **Organisation unit** by removing the one that is automatically set and selecting a new one.
 
-  ![register new Tracked Entity Instance](resources/images/register_tei.png)
+  ![register new tracked entity](resources/images/register_tei.png)
 
 2. Fill in the desired (and possibly mandatory) attributes and enrollment details.
 
-3. Click **Create Tracked Entity Instance and Link**.
+3. Click **Save new _[tracked entity type]_ and link**.
 
 > **Note**
 >
 > When filling in data you might face a warning telling you that a possible duplicate has been found. You can click the warning to see these
-> duplicates and if the duplicate is a match you can choose to link that **Tracked Entity Instance** by clicking the **Link** button.
-> If the warning is still present when you are done filling in data, you will not see the **Create Tracked Entity Instance and Link** button.
-> Instead you will be presented with a button called **Review duplicates**. When you click this button a list of possible duplicates will be displayed.
-> If any of these duplicates matches the **Tracked Entity Instance** you are trying to create you can click the **Link** button, if not you can click
-> the **Save as new person** button to register a new **Tracked Entity Instance**.
+> duplicates and if the duplicate is a match you can choose to link that **tracked entity** by clicking the **Link** button.
+> If the warning is still present when you click **Save new _[tracked entity type]_ and link**, a dialog listing the possible duplicates opens
+> automatically instead of saving. If any of these duplicates matches the **tracked entity** you are trying to create you can click the **Link**
+> button, if not you can click **Save as new _[tracked entity type]_** to register a new **tracked entity**, or **Cancel** to go back.
 
 
 ## Edit an event { #capture_edit_event } 
@@ -375,7 +376,7 @@ You now have two options:
 
 2. Select a program.
 
-3. Select an organisation unit or click the _all events_-link to view all events accessible to you.
+3. Select an organisation unit, or if none is selected, click the **See working list without organisation unit** link to view events across all accessible organisation units.
 
     ![](resources/images/main-page-all-accessible-records.png)
     All events registered to the selected program show up in a list.
@@ -387,7 +388,13 @@ You now have two options:
 6. Modify the event details and click **Save**.
 
 > **Note**  
-> The **Edit event** button is disabled if the program stage has **Block entry form after completed** enabled and your user role does not include the **Uncomplete events** authority.
+> If you cannot edit the event, the **Edit event** button is replaced by a **View only** badge explaining why. This happens when:
+>
+> - You only have view access to the program, program stage(s), or tracked entity type.
+> - The event's date is outside the program's editing period (expiry days), or the event is completed and outside the program's **complete events expiry days** window.
+> - The event is completed and the program stage has **Block entry form after completed** enabled.
+>
+> Users with the **Edit expired data** authority can still edit events affected by the last two cases.
 
 
 ## Delete an event { #capture_delete_event } 
@@ -405,6 +412,10 @@ You now have two options:
 5. In the menu that is displayed click **Delete event**.
 
     ![delete event](resources/images/delete_event.png)
+
+6. A confirmation dialog opens warning that deleting an event is permanent and cannot be undone. Click **Yes, delete event** to confirm, or **No, cancel** to back out.
+
+    ![delete event confirmation](resources/images/delete_event_confirm.png)
 
 ## Modify an event list layout { #capture_modify_event_list_layout } 
 
@@ -428,7 +439,7 @@ assigned to a program stage.
 
 > **Tip**
 >
-> You can reorganize the order of the data elements by draging and dropping them in the list.
+> You can reorganize the order of the data elements by dragging and dropping them in the list.
 
 ## Filter an event list { #capture_filter_event_list } 
 
@@ -442,13 +453,28 @@ assigned to a program stage.
 
     Along the top of the event list are buttons with the same names as the column headers in the list.
 
-4. Use the buttons on the top of the list to filter based on a report date or a specific data element.
+4. Use the buttons on the top of the list to filter.
 
     ![filter event](resources/images/filter_event.png)
 
+Each filter adapts to the data element's value type, for example, **numeric** data elements provide a range selector, **text** data elements a search input, and **date** data elements a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+
+#### Filter on empty or non-empty values
+
+Data element filters show two checkboxes at the top:
+
+- **Is empty** – matches events that have no value for the selected data element.
+- **Is not empty** – matches events that have any value for the selected data element.
+
+Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for the filter.
+
+For image, file and coordinate data elements, **Is empty** and **Is not empty** are the only available filter options.
+
 > **Note**
 >
-> Different data element types are fitered in different ways. A **Number** data element will for instance show a rang to filter on while a **Text** data element will ask you to enter a search query to filter on.
+> The empty / non-empty checkboxes are not shown on the main filters (report date, status, assignee, etc.).
+>
+> Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
 
 ## Sort an event list { #capture_sort_event_list } 
 
@@ -461,11 +487,11 @@ assigned to a program stage.
 
 4. Click one of the column headers to sort the list on that data element in ascending order.
 
-    A small upward arrow is displayed next to the column to show that the list is sorted in ascending order.
+    Two arrows (up and down) are displayed next to each sortable column. When sorted ascending, the upward arrow is highlighted. Unsorted columns show both arrows greyed out.
 
 5. Click the column header again to sort the list on that data element in descending order.
 
-    A small downward arrow is displayed next to the column to show that the list is sorted in descending order.
+    When sorted descending, the downward arrow is highlighted.
 
     ![sort event](resources/images/sort_event.png)
 
@@ -577,7 +603,7 @@ You can perform bulk actions on events in the event list.
 
 ## User assignment in events programs { #capture_user_assignment } 
 
-Events can be assigned to users. This feature must be enabled per program.
+Events can be assigned to users. This feature must be enabled per program by checking **Enable user assignment of events** in the program settings in the Maintenance app.
 
 ### Assigning user to new events { #capture_user_assignment_new } 
 
@@ -625,12 +651,12 @@ In the event list you will be able to view the assignee per event. Moreover, you
 
 ## Tracker programs { #capture_tracker_programs } 
 
-The Capture app supports the workinglists in tracker programs, but when you open a tracked entity instance, you will be redirected to the enrollment dashboard in the Tracker Capture app.
+The Capture app supports the working lists in tracker programs, and opening a tracked entity takes you to its enrollment dashboard within the Capture app.
 
 ![](resources/images/tracker_program.png)
 
 
-## Search for tracked entity instances
+## Search for tracked entities
 
 ### In Program scope
 
@@ -650,6 +676,10 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-0.png)
 
+    To enhance search performance, you can configure the **preferredSearchOperator** or **blockedSearchOperators** metadata in Maintenance. Tracked entity attributes with the following value types apply these settings: TEXT, LONG_TEXT, EMAIL, PHONE_NUMBER and PERCENTAGE. If preferredSearchOperator is not defined, the search falls back to the first available operator in [LIKE, SW, EQ] that is not listed in blockedSearchOperators. Attributes with other value types ignore the preferredSearchOperator. Helper text messages are displayed below the attribute search fields to guide the user.
+
+    ![](resources/images/search-by-attributes-on-scope-program-preferredSearchOperator.png)
+
     To execute a search now:
 
 1. Fill in the attributes you want to search with.
@@ -662,24 +692,24 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-2.png)
 
-    In this list you can see the entries that match your search. For each entry you can have a total of three options.
+    In this list you can see the entries that match your search. The actions available for each entry depend on the **tracked entity**'s enrollment status in the program you are searching within. Whether an entry's enrollment actually opens once you click into it depends on who owns it and your access to that organisation unit; see [Tracked entity ownership](#capture_tei_ownership) below.
 
-    a. You can choose to view the dashboard for the **Tracked Entity Instance** by clicking the "View dashboard" button
+    a. **View dashboard** is always shown as an option. It opens the enrollment dashboard for the **tracked entity** in the program you are searching within. The enrollment shown is selected automatically: if there is a single enrollment in the program that one is opened, and if there are several, the active enrollment is opened.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-5.png)
 
-    b. You can view the the active enrollment of a **Tracked Entity Instance** by clicking the "View active enrollment" button
+    b. **View active enrollment** is only shown when the **tracked entity** has an active enrollment in the program you are searching within. It opens the enrollment dashboard for that active enrollment.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-3.png)
 
-    c. You can re-enroll a **Tracked Entity Instance** to the current program you are searching within.
+    c. **Re-enroll** is shown when the **tracked entity**'s enrollment in the program you are searching within is completed or cancelled. It takes you to the program's enrollment page so you can enroll the **tracked entity** again. If there is an active enrollment, this option is not shown.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-4.png)
 
 
 #### Fallback search
 
-Execute a full search as described above. If the search you have made has results they will be displayed. However, the actual **Tracked Entity Instance** you are searching for may be within a different program. In that case, you may want to extend the search to other programs. This is known as a fallback search.
+Execute a full search as described above. If the search you have made has results they will be displayed. However, the actual **tracked entity** you are searching for may be within a different program. In that case, you may want to extend the search to other programs. This is known as a fallback search.
 
 To execute a fallback search, simply press the button on the bottom saying "Search in all programs".
 You will see the **Results in all programs** be appended below the search in the current program. These two modules are collapsible to save space. 
@@ -692,7 +722,7 @@ If the fallback can not be done, you will be presented with a modal to go **Back
 
 ![](resources/images/search-by-attributes-fallback-overview-0.png)
 
-#### Create new **Tracked entity instance**
+#### Create new **tracked entity**
 
 When none of the results match, you can create a new user by clicking **Create new** button on the bottom of the search page. 
 
@@ -708,7 +738,7 @@ The search terms that you typed in before will be prefilled in the registration 
 
 2. Click the **Search** button to open the search page.
 
-3. Click on the drop down menu and select the type of entity you want to search for.
+3. Click the **Search for** field. You can type to filter the list of tracked entity types.
 
     ![](resources/images/search-by-attributes-domain-selector-overview-0.png)
 
@@ -732,12 +762,12 @@ The search terms that you typed in before will be prefilled in the registration 
 
     ![](resources/images/search-by-attributes-on-scope-tetype-overview-2.png)
 
-    In this list you can see the entries that match your search. For each entry you have the option to click the "View Dashboard" button to view the dashboard for the **Tracked Entity Instance**.
+    In this list you can see the entries that match your search. For each entry you have the option to click the "View Dashboard" button to view the dashboard for the **tracked entity**.
 
 
 ### Too many results functionality
 
-The program or tracked entitiy type you are searching within may be configured with a limit on the number of results that are retrurned from a search. If your search results exceed this limit you will be shown a warning message like the one below.
+The program or tracked entity type you are searching within may be configured with a limit on the number of results that are returned from a search. If your search results exceed this limit you will be shown a warning message like the one below.
 
 ![](resources/images/search-by-attributes-on-scope-program-overview-too-many-results-message.png)
 
@@ -747,7 +777,36 @@ The results page shows up to five results at a time. You should try to use speci
 
 ![](resources/images/search-by-attributes-on-scope-program-overview-pagination.png)
 
-## List tracked entity instances enrolled in program
+### Tracked entity ownership { #capture_tei_ownership }
+
+Every enrollment of a tracked entity in a program has an **owning organisation unit**. Ownership starts out as the organisation unit that first enrolled the tracked entity into that program, and changes if the enrollment is later [transferred to another organisation unit](#transfer-the-enrollment-to-another-organisation-unit). Ownership is tracked per tracked entity/program combination: the same tracked entity can be owned by different organisation units for different programs (for example, one facility could own a person's HIV program enrollment, while a different facility owns the same person's MCH program enrollment).
+
+Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Maintenance app, together with which organisation units you have been assigned data capture or search access to:
+
+- **Open** or **Audited**: you can open the enrollment as long as you have at least search access to the owning organisation unit. (Audited additionally logs the access.)
+- **Protected**: you can open the enrollment if you have data capture access to the owning organisation unit. If you only have search access to it, you'll first have to provide a reason (see [Breaking the glass](#capture_break_glass) below).
+- **Closed**: you can open the enrollment only if you have data capture access to the owning organisation unit. If you only have search access to it, you cannot open it at all, and there is no option to request access.
+
+In practice, clicking **View dashboard** or **View active enrollment** from a search result doesn't always show the enrollment's content. For a Closed program you'll see an access-denied message if you don't have data capture access to the owning organisation unit. For a Protected program you'll see the breaking the glass prompt if you only have search access, or the same access-denied message if you have neither.
+
+Being able to open an enrollment doesn't necessarily mean you can edit it: edit access depends separately on the program's sharing settings, and you may still see a **View only** label if you don't have write access.
+
+### Breaking the glass { #capture_break_glass }
+
+If a program is configured with the **Protected** access level and you open a tracked entity whose enrollment is owned by an organisation unit you only have search access to (not data capture access), you'll be prompted to provide a reason before you can view the enrollment. This is informally known as "breaking the glass."
+
+1. Search for and open the tracked entity as normal.
+2. A **Check for enrollments** panel appears, explaining that the program is protected and that you must provide a reason to check for enrollments. All activity is logged.
+3. Enter a reason in the **Reason to check for enrollments** field. This is required; you cannot submit without one.
+4. Click **Check for enrollments** to proceed, or **Cancel** to go back to search.
+
+![](resources/images/break-the-glass.png)
+
+Once submitted, you get access to the enrollment for about 3 hours. This is tied to your user account rather than the organisation unit. So only the user gains access for 3 hours. Once the 3 hours pass, you'll need to provide a reason again. Every request is logged for audit purposes.
+
+Whether you can edit the enrollment once you have access still depends on the program's sharing settings, the same as for any enrollment you own. Breaking the glass only grants visibility, not special edit rights.
+
+## List tracked entities enrolled in program
 
 1. Open the **Capture** app.
 
@@ -757,7 +816,7 @@ The results page shows up to five results at a time. You should try to use speci
 
 4. The program can have categories associated with it (implementing partner would be an example of such a category). If this is the case, fill them in.
 
-### Custom TEI working list for programs with "Display front page list" set to false.
+### Custom tracked entity working list for programs with "Display front page list" set to false.
 
 1. Open the **Capture** app.
 
@@ -771,17 +830,39 @@ The results page shows up to five results at a time. You should try to use speci
 
 ### Filter the list
 
-Use the buttons above the list itself to filter it.
+Use the buttons above the list to filter it.
 
 ![](resources/images/tei_list_filters.png)
 
-As an example, you could filter the list to show only tracked entity instances where you have been assigned an event: Click the "Assigned to" filter (1), select "Me" (2) and then "Apply" the changes (3).
+As an example, you could filter the list to show only tracked entities where the enrollment status is "Completed": Click the "Enrollment status" filter (1), select "Completed" (2) and then "Update" the changes (3).
 
 ![](resources/images/tei_list_filter_example.png)
 
+Each filter adapts to the attribute's value type, for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
+
+
+#### Filter on empty or non-empty values
+
+Data element filters show two checkboxes at the top:
+
+- **Is empty** – matches events that have no value for the selected data element.
+- **Is not empty** – matches events that have any value for the selected data element.
+
+![](resources/images/tei_list_filter_isempty.png)
+
+Only one option can be active at a time per filter. Selecting **Is empty** or **Is not empty** clears any value-based criteria for the filter.
+
+For image, file and coordinate data elements, **Is empty** and **Is not empty** are the only available filter options.
+
+> **Note**
+>
+> The empty / non-empty checkboxes are not shown on the main filters (report date, status, assignee, etc.).
+>
+> Filtering on empty / non-empty values requires DHIS2 server version 2.42 or higher. On older servers the checkboxes are not shown.
+
 ### Sort the list
 
-Click one of the column headers to sort the list by that column. A small arrow is displayed next to the column header to indicate the current sort order. Click again to change between ascending and descending order.
+Click one of the column headers to sort the list by that column. Two arrows (up and down) are displayed next to each sortable column header. The active sort direction is highlighted, and unsorted columns show both arrows greyed out. Click again to toggle between ascending and descending order.
 
 ![](resources/images/tei_list_sort_order.png)
 
@@ -789,7 +870,7 @@ Click one of the column headers to sort the list by that column. A small arrow i
 
 You can select which columns to show in the list and also reorganize the order of the columns.
 
-Click the **gear** icon in the top right corner of the list. Tick the checkboxes for the the columns you would like to display (1) and reorgainze the columns by dragging and dropping (2).
+Click the **gear** icon in the top right corner of the list. Tick the checkboxes for the columns you would like to display (1) and reorganize the columns by dragging and dropping using the six-dot handle on the left side of each column name (2).
 
 ![](resources/images/tei_list_column_layout.png)
 
@@ -874,8 +955,7 @@ In this section we are focusing on the first use-case, where you type or paste t
 
 ![](resources/images/enrollment-dash-01.png)
 
-One way to reach the enrollment dashboard and view a specific tracked entity instance's enrollment is by using _only_ the enrollment id. For example the link .../dhis-web-capture/#/enrollment?enrollmentId=wBU0RAsYjKE will 
-take you the dashboard for the enrollment with id `wBU0RAsYjKE`. 
+One way to reach the enrollment dashboard and view a specific tracked entity's enrollment is by using _only_ the enrollment id. For example the link `.../capture#/enrollment?enrollmentId=wBU0RAsYjKE` will take you to the dashboard for the enrollment with id `wBU0RAsYjKE`. 
 
 The top of the dashboard defines your context. For example in the image below the context is as follows, the selected program is "Child Programme", the organisation unit is "Ngelehun CHC", the selected person is "Anna Jones" and the selected enrollment is "2017-11-16 11:38".
 
@@ -885,6 +965,30 @@ You can change your context by clicking the "x" button.
 
 ![](resources/images/enrollment-dash-03.png)
 
+#### What each context box shows
+
+The context selector shows one box for each level of your context, from left to right:
+
+- **Program** - the selected program. You only see programs that are shared with you and your user group, and if you have selected an organisation unit, that are assigned to that organisation unit.
+- **Organisation unit** - the organisation unit you are working in.
+- **Tracked entity** - this box is titled with the *tracked entity type* (for example "Person" or "Building"), and its value shows the display name of the specific tracked entity instance (see [How the tracked entity display name is built](#capture_tei_display_name) below).
+- **Enrollment** - the selected enrollment, labelled with its enrollment date.
+
+When you open an event from the program stage list, two more boxes are added to the right:
+
+- **Stage** - the program stage the event belongs to.
+- **Report date** - the event's date, labelled with the stage's date label (for example "Date of discharge").
+
+##### How the tracked entity display name is built { #capture_tei_display_name }
+
+The name shown for the tracked entity in the top bar is derived from the tracked entity's attribute values, in the following order:
+
+1. The values of the first two tracked entity type attributes that are set to **Display in list**, shown together (for example the "First name" and "Last name" attributes, giving "Anna Jones").
+2. If that produces no value - either because no attributes are set to *Display in list*, or because the tracked entity has no value for them - the values of the first two attributes configured on the tracked entity type (in their configured order) are used instead.
+3. If no attribute value can be shown at all, the tracked entity's **unique identifier (UID)** is shown as a fallback.
+
+> **Note for implementers/administrators:** If the top bar shows a UID instead of a readable name, it means no suitable attribute value could be shown for the tracked entity. To control which attributes are used for the name, set the relevant tracked entity type attributes to **Display in list** in the Metadata Management app, and make sure the tracked entity has values for them.
+
 #### Deselecting the program
 
 When you deselect the program you see the following
@@ -893,15 +997,15 @@ When you deselect the program you see the following
 
 ##### Selecting a program with enrollments
 
-When program _and_ enrollment selections are empty, you first have to select a program. 
-If the tracked entity instance (in this case "Anna Jones") has enrollments under the program you select you will see the following message.
-
-![](resources/images/enrollment-dash-09.png)
+When program _and_ enrollment selections are empty, you first have to select a program.
+Since only one enrollment can be active per program at a time, if the tracked entity (in
+this case "Anna Jones") already has an active enrollment under the program you select,
+you will be taken directly to that enrollment's dashboard.
 
 ##### Selecting a program with zero enrollments
 
-If the tracked entity instance (in this case "Anna Jenkins") does not have enrollments under the program you select you will see a message explaining that there are no enrollments for that program.
-You will also be given the option to enroll "Anna Jenkins" in that program.
+If the tracked entity (in this case "Anna Jones") does not have enrollments under the program you select you will see a message explaining that there are no enrollments for that program.
+You will also be given the option to enroll "Anna Jones" in that program.
 
 ![](resources/images/enrollment-dash-10.png)
 
@@ -915,11 +1019,11 @@ You will also be given the option to either create a new event for the selected 
 
 ##### Selecting a program with a different tracked entity type 
 
-When your selected tracked entity type is a person, as in our example with Anna Jenkins, and you select a program that is not of type person but for example of a type Malaria case you will see the following.
+When your selected tracked entity type is a person, as in our example with Anna Jones, and you select a program that is not of type person but for example of a type Malaria case you will see the following.
 
 ![](resources/images/enrollment-dash-12.png)
 
-You are also given the option to enroll a tracked entity instance in the program you selected.
+You are also given the option to enroll a tracked entity in the program you selected.
 
 #### Deselecting the organisation unit
 
@@ -927,9 +1031,9 @@ When you deselect the organisation unit you see the following
 
 ![](resources/images/enrollment-dash-06.png)
 
-#### Deselecting the tracked entity instance
+#### Deselecting the tracked entity
 
-When you deselect the tracked entity instance, in this case "Anna Jones" you are taken to the working lists in that Tracker program.
+When you deselect the tracked entity, in this case "Anna Jones" you are taken to the working lists in that Tracker program.
 
 ![](resources/images/enrollment-dash-07.png)
 
@@ -939,8 +1043,12 @@ When you deselect the enrollment you see the following
 
 ![](resources/images/enrollment-dash-08.png)
 
+#### Clearing all selections
 
-###Quick actions
+In addition to deselecting individual boxes, the top bar provides an action to clear all current selections at once. This resets the organisation unit, program, tracked entity and enrollment and returns you to an empty scope. If you have unsaved changes in an open form, you are first asked to confirm before the selections are discarded.
+
+
+### Quick actions
 
 The quick actions widget offers shortcuts for frequently used actions for the current enrollment.
 
@@ -968,7 +1076,7 @@ Depending on the status of events, there can be additional information regarding
 
 ![](resources/images/enrollment-dash-stages-events-03.png)
 
-When you expand the list, you will see the table contains the data of events in the stage. This includes mandatory columns: `Status`, `Report date` and `Organization unit`, the following columns depend on the data elements that have been selected as `Display in list`  of event.
+When you expand the list, you will see the table contains the data of events in the stage. This includes mandatory columns: `Status`, `Report date` and `Organisation unit`, the following columns depend on the data elements that have been selected as `Display in list`  of event.
 
 Events are sorted with most recent on top and other columns are also sortable.
 
@@ -978,20 +1086,11 @@ When clicking  **New {stage event name}** button, you will be redirected to the 
 
 ![](resources/images/enrollment-dash-stages-events-06.png)
 
-
-When clicking  **Go to full {stage event name}** button, you will be redirected to the  **Program stage list page** for this selected stage.
-
-![](resources/images/enrollment-dash-stages-events-08.png)
-
 #### Expanded stages with more than 5 events 
 
 In case there are more than 5 events in the list, only the first 5 are shown. You will be able to view the rest by clicking  **Show more**.
 
 ![](resources/images/enrollment-dash-stages-events-05.png)
-
-If you want to collapse events, you can use  **Reset list** button which will return the table back to the default sorting and initial 5 events.
-
-![](resources/images/enrollment-dash-stages-events-07.png)
 
 ### Enrollment widget
 
@@ -1003,7 +1102,7 @@ On the enrollment page you can see the enrollment widget
 
 When you click on the enrollment actions button, a menu with all the available actions will open. You can:
 
-- Change the enrollment status to Active, Canceled or Completed using the buttons in the menu.
+- Change the enrollment status to Active, Cancelled or Completed using the buttons in the menu.
 - Mark or remove the enrollment for a follow-up.
 - Transfer the enrollment to another organisation unit
 - Delete the enrollment
@@ -1011,14 +1110,16 @@ When you click on the enrollment actions button, a menu with all the available a
 
 ![](resources/images/enrollment-dash-enrollment-widget-2.png)
 
-There can only be one active enrollment at a time. If there are no active enrollments, there will be a button **Add new** to enroll the tracked entity instance in the program again.
-If the program only allows one enrollment per tracked entity instance, the **Add new** button will be disabled with a tooltip saying `Only one enrollment per {TET} is allowed in this program`.
+There can only be one active enrollment at a time. If there are no active enrollments, there will be a button **Add new** to enroll the tracked entity in the program again.
+If the program only allows one enrollment per tracked entity, the **Add new** button will be disabled with a tooltip saying `Only one enrollment per {TET} is allowed in this program`.
 
 ![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
 
 #### Transfer the enrollment to another organisation unit
 
 In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
+
+Transferring changes the **owning organisation unit** of the enrollment, which affects data visibility and access. After the transfer, the tracked entity will be owned by the new organisation unit, meaning users without access to that organisation unit may no longer be able to view or edit the enrollment. The transfer does not move historical event data; it only changes the ownership going forward. See [Tracked entity ownership](#capture_tei_ownership) for how ownership determines who can view and edit an enrollment.
 
 ![](resources/images/enrollment-dash-enrollment-widget-transfer.png)
 
@@ -1050,52 +1151,56 @@ The number next to the title signifies the total number of relationships
 
 ![](resources/images/enrollment-dash-relationship-widget.png)
 
-For tracked entity instance relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed on the relationship type page in Maintenance.
+For tracked entity relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed on the relationship type page in Maintenance.
 
 If no attributes are selected, it will just show a row per record with tracked entity type name and relationship creation date.
 
-When clicking a tracked entity instance you should be taken to the Enrollment Dashboard. If the relationship type includes a program, you should be taken to the latest enrollment for that program. If no program is specified, you should still be sent to the enrollment dashboard, but without a program.
+When clicking a tracked entity you should be taken to the Enrollment Dashboard. If the relationship type includes a program, you should be taken to the latest enrollment for that program. If no program is specified, you should still be sent to the enrollment dashboard, but without a program.
 
 Click the **Add new** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
 
 ![](resources/images/enrollment-dash-relationship-widget-add.png)
 
-Choose between linking to an existing tracked entity instance or creating a new one.
+Choose between linking to an existing tracked entity or creating a new one.
 
 ![](resources/images/enrollment-dash-relationship-widget-add-choose.png)
 
-#### Existing tracked entity instance
+#### Existing tracked entity
 
 Use the search form to find any existing record to link to.
 
 ![](resources/images/enrollment-dash-relationship-widget-add-existing.png)
 
-#### New tracked entity instance
+#### New tracked entity
 
 Use the form to create a new record and link.
 
 ![](resources/images/enrollment-dash-relationship-widget-add-new.png)
 
-### Tracked entity instance profile widget
+### tracked entity profile widget
 
-On the enrollment dashboard, you can view the tracked entity instance profile widget. Inside the profile widget you can view the key attributes values. 
+On the enrollment dashboard, you can view the tracked entity profile widget. Inside the profile widget you can view the key attributes values. 
 
 ![](resources/images/enrollment-dash-tei-profile-widget.png)
 
-Click the **Edit** button to make changes to the tracked entity instance profile. Editing the profile opens a dialog where the profile attributes can be changed.
+Click the **Edit** button to make changes to the tracked entity profile. Editing the profile opens a dialog where the profile attributes can be changed.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
 
-Click the **Delete ${tracked entity type}** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
+Click the **Delete _[tracked entity type]_** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-delete.png)
 
 ### Feedback widget
 
-![](resources/images/enrollment-dash-feedback-widget-1.png)
+![Feedback widget on the enrollment dashboard showing program rule-triggered text](resources/images/enrollment-dash-feedback-widget-1.png)
 
 On the enrollment dashboard, the feedback widget displays text and values that are triggered by certain conditions. 
 If the current dashboard triggers some rules set up in the program, the text or values will be automatically displayed.
+
+The displayed text and values support Markdown formatting, including headings, bold/italic text, lists, tables, and legend-colored key/value pairs.
+
+![Feedback widget rendering Markdown-formatted text and values](resources/images/enrollment-edit-event-feedback-widget.png)
 
 #### Empty state
 
@@ -1144,12 +1249,12 @@ You can reach the enrollment event edit page is by clicking any event in the Pro
 
 ### Top bar context 
 
-At the top of the page you can see various information related to the current context. You can see the program, the organization unit, the tracked entity, the enrollment date, the stage and the enrollment event date.
+At the top of the page you can see various information related to the current context. You can see the program, the organisation unit, the tracked entity, the enrollment date, the stage and the report date.
 
-To go to Enrollment Overview page you can:
-- click the "Back to all stages and events" button.
+To go to the Enrollment Overview page you can:
+- click **Enrollment dashboard** in the breadcrumb.
 - deselect the stage from the top bar.
-- deselect the event from the top bar.
+- deselect the event (report date) from the top bar.
 
 ![](resources/images/enrollment-event-view-edit-navigation.png)
 
@@ -1162,17 +1267,6 @@ This is the form where you can see and edit the enrollment event details.
 In the view/edit event form you can see the stage name and icon.
 
 ![](resources/images/enrollment-event-view-edit-header.png)
-
-### Top bar context  
-
-At the top of the page you can see different informations related with the current context. You can see the program, the organization unit, the tracked entity, the enrollment date, the stage. 
-
-To go to Enrollment Overview page you can: 
-- deselect the stage from the top bar. 
-- deselect the event from the top bar. 
-
-![](resources/images/enrollment-event-new-navigation.png) 
-
 
 ### Scheduled date in edit event form
 If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
@@ -1242,7 +1336,7 @@ The widgets seen in the right-hand column will display and function the same way
 ## Enrollment event new page
 
 You can reach this page add event page by clicking in the **New {stage event name}** button in the overview page. 
-In this page you can switch between different tabs: **Report** to add new event, **Schedule** to schedule an event and **Refer** to refer event.
+In this page you can switch between different tabs: **Report** to add new event and **Schedule** to schedule an event.
 If you have unsaved changes in one tab and switch to another tab, there will be a warning displayed.
 
 ### New event widget form
@@ -1280,7 +1374,7 @@ You will find the assignee section near the bottom of the data entry page. Searc
 ### Schedule event widget form
 Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
-The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
+The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to compute the suggested date.
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
@@ -1289,9 +1383,9 @@ If a program stage has a default next scheduled date configured, the suggested d
 
 ![](resources/images/schedule_event_01.png)
 
-2. A program rule based on the data entered in the program stage, will determine how many days until the next suggested follow up will be. For example: A program rule with the following condition: #{penta_dose} == '1' (The program rule will trigger when the TEI has received Penta Dose 1), Assign value to the data element: next suggested follow up date with expression: d2:addDays(V{event_date}, '30') **The number suggest how many days from event date the next scheduled event should be.** 
+2. A program rule based on the data entered in the program stage, will determine how many days until the next suggested follow up will be. For example: A program rule with the following condition: #{penta_dose} == '1' (The program rule will trigger when the tracked entity has received Penta Dose 1), Assign value to the data element: next suggested follow up date with expression: d2:addDays(V{event_date}, '30') **The number suggest how many days from event date the next scheduled event should be.** 
 
-3. Open the Capture app and create a TEI. As long as Penta Dose has value Dose 1, the suggested next scheduled event is 30 days forward from event date. When scheduling a new event, the system will pick up from the data element as long it has value.
+3. Open the Capture app and create a tracked entity. As long as Penta Dose has value Dose 1, the suggested next scheduled event is 30 days forward from event date. When scheduling a new event, the system will pick up from the data element as long it has value.
 
 ![](resources/images/schedule_event_02.png)
 
@@ -1385,7 +1479,7 @@ The **Event Changelog** tracks changes to data items within an event. These data
 The **tracked entity changelog** tracks changes to attributes of a tracked entity within an enrollment.
 
 #### How to open the tracked entity changelog
-1. **Go to the Maintenance app** and **enable** the **Tracked Entity Instance Audit Log**.
+1. **Go to the Maintenance app** and **enable** the **Tracked entity instance audit log**.
    ![](resources/images/enable-tracked-entity-instance-audit-log.png)
 
 2. **Open** the enrollment dashboard in the Capture app.  
@@ -1393,11 +1487,11 @@ The **tracked entity changelog** tracks changes to attributes of a tracked entit
 3. Click **View Changelog** in the **Tracked Entity Profile** widget to open the changelog.
    ![](resources/images/open-tracked-entity-changelog.png)
 
-# Related stages and linked events for Tracker programs
-You can connect any two program stages via a relationship. To enable this feature, you can set up two program stages in the same program and link them with an event-event relationship.
+# Related stages and linked events for Tracker programs { #related-stages-and-linked-events }
+You can connect any two program stages via a relationship. This is useful for workflows where completing one stage should trigger or be linked to another, for example linking a lab request stage to a lab result stage, or linking a referral stage to a follow-up consultation stage. To enable this feature, you can set up two program stages in the same program and link them with an event-event relationship in the Maintenance app.
 ![](resources/images/related-stages-maintenance.png)
 
-## Adding a new tracker event
+## Adding a new tracker event { #related-stages-adding-new-event }
 When opening the new event form, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
@@ -1406,7 +1500,7 @@ When opening the new event form, a widget called *Actions - ${Relationship type 
 When clicking Complete or Save without completing, the Capture app will create the current event, schedule the linked event and make sure that there is a relationship between them in the correct context.
 ![](resources/images/related-stages-new-event.png)
 
-## Editing a tracker event
+## Editing a tracker event { #related-stages-editing-event }
 ### When there isn't a linked event 
 If the event is eligible for related stages but isn’t linked yet, a widget called *Linked event* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
@@ -1425,7 +1519,7 @@ Additionally, by clicking the Menu in the top-right corner, users can:
 2. Unlink and delete the linked event.
 ![](resources/images/related-stages-linked-event-actions-menu.png)
 
-## Enrolling a tracked entity
+## Enrolling a tracked entity { #related-stages-enrolling }
 Enable the "First stage appears on registration page" flag in the Maintenance for the Tracker program. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly

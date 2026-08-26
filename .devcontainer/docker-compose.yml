@@ -1,0 +1,16 @@
+services:
+    dev:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ..:/workspaces/capture-app:cached
+            - node_modules:/workspaces/capture-app/node_modules
+            - yarn_cache:/home/vscode/.cache/yarn
+            - cypress_cache:/home/vscode/.cache/Cypress
+        command: sleep infinity
+
+volumes:
+    node_modules:
+    yarn_cache:
+    cypress_cache:

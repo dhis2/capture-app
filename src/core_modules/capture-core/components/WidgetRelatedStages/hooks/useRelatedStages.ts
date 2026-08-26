@@ -1,0 +1,86 @@
+import { useMemo } from 'react';
+import { relatedStageStatus } from '../constants';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
+import { RELATIONSHIP_ENTITIES } from '../WidgetRelatedStages.constants';
+import type { RelationshipType } from '../WidgetRelatedStages.types';
+
+const getRelationshipTypeFromIndexedDB = () => {
+    const storageController = getUserMetadataStorageController();
+    return storageController.getAll(USER_METADATA_STORES.RELATIONSHIP_TYPES);
+};
+
+type Props = {
+    programStageId: string;
+    programId: string;
+};
+
+const filterBidirectionalRelationship = (): boolean => true;
+
+const filterUnidirectionalRelationship = (relationshipType: RelationshipType, programStageId: string): boolean => {
+    const { fromConstraint, toConstraint } = relationshipType;
+
+    const isSelfReferencing = fromConstraint.programStage.id === programStageId
+        && toConstraint.programStage.id === programStageId;
+
+    if (fromConstraint.programStage.id !== programStageId && !isSelfReferencing) {
+        return false;
+    }
+
+    return true;
+};
+
+export const useRelatedStages = ({ programStageId, programId }: Props) => {
+    const { data: relationshipTypes } = useIndexedDBQuery(
+        ['RelatedStages', 'relationshipTypes', programId, programStageId],
+        () => getRelationshipTypeFromIndexedDB(), {
+            select: (allRelationshipTypes: Array<RelationshipType>) => allRelationshipTypes
+                ?.filter((relationshipType) => {
+                    if (!relationshipType.access.data.write) {
+                        return false;
+                    }
+                    const { fromConstraint, toConstraint, bidirectional } = relationshipType;
+
+                    if (fromConstraint.relationshipEntity !== RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE
+                        || toConstraint.relationshipEntity !== RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE) {
+                        return false;
+                    }
+
+                    if (fromConstraint.programStage.id !== programStageId
+                        && toConstraint.programStage.id !== programStageId) {
+                        return false;
+                    }
+
+                    if (fromConstraint.programStage.program.id !== programId
+                        || toConstraint.programStage.program.id !== programId) {
+                        return false;
+                    }
+
+                    return bidirectional ?
+                        filterBidirectionalRelationship() :
+                        filterUnidirectionalRelationship(relationshipType, programStageId);
+                }) ?? [],
+        });
+
+    const currentRelatedStagesStatus = useMemo(() => {
+        if (relationshipTypes) {
+            if (relationshipTypes.length === 1) {
+                return relatedStageStatus.LINKABLE;
+            } else if (relationshipTypes.length > 1) {
+                return relatedStageStatus.AMBIGUOUS_RELATIONSHIPS;
+            }
+        }
+        return null;
+    }, [relationshipTypes]);
+
+    const selectedRelationshipType = currentRelatedStagesStatus === relatedStageStatus.LINKABLE ?
+        relationshipTypes?.[0] : undefined;
+    const constraint = selectedRelationshipType?.toConstraint?.programStage?.id === programStageId ?
+        selectedRelationshipType?.fromConstraint : selectedRelationshipType?.toConstraint;
+
+    return {
+        currentRelatedStagesStatus,
+        selectedRelationshipType,
+        constraint,
+    };
+};

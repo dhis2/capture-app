@@ -21,7 +21,8 @@ export const filterInstanceVersion = (skip) => {
         return;
     }
 
-    const currentInstanceVersion = Number(/[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion'))[1]);
+    const versionMatch = /[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion') || '2.42');
+    const currentInstanceVersion = Number(versionMatch ? versionMatch[1] : '42');
 
     const shouldRun = versionTags
         .some((versionTag) => {
@@ -42,7 +43,8 @@ export const filterInstanceVersion = (skip) => {
 
 export const hasVersionSupport = (inputVersion) => {
     const supportedVersion = /^@v([><=]*)(\d+)$/.exec(inputVersion);
-    const currentInstanceVersion = Number(/[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion'))[1]);
+    const versionMatch = /[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion') || '2.42');
+    const currentInstanceVersion = Number(versionMatch ? versionMatch[1] : '42');
 
     const version = Number(supportedVersion[2]);
     const operator = supportedVersion[1] || '=';

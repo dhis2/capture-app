@@ -1,0 +1,1 @@
+export { MetadataAutoSelectInitializer } from './MetadataAutoSelectInitializer';
