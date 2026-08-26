@@ -1,4 +1,4 @@
-@working-list-sharing
+@with-working-list-sharing-cleanup
 Feature: Sharing of working list views survives an update
 
 Scenario: The sharing settings on an event working list view survive an update
