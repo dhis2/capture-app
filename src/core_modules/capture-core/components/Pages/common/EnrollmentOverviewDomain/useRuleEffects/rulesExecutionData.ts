@@ -65,10 +65,9 @@ export const useAttributeValuesForRules = (
             return acc;
         }, {}), [program.attributes]);
 
-    return useMemo(() => apiAttributeValues &&
-        apiAttributeValues
-            .reduce((acc: any, { id, value }) => {
-                acc[id] = convertValue(value, attributesObject[id]?.type);
-                return acc;
-            }, {}), [apiAttributeValues, attributesObject]);
+    return useMemo(() => apiAttributeValues
+        ?.reduce((acc: any, { id, value }) => {
+            acc[id] = convertValue(value, attributesObject[id]?.type);
+            return acc;
+        }, {}), [apiAttributeValues, attributesObject]);
 };
