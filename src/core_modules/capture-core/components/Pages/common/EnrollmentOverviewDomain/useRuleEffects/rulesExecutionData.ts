@@ -24,7 +24,7 @@ const getClientFormattedDataValuesAsObject = (dataValues: any, elementsById: any
 export const useEventsData = (enrollment: EnrollmentData | undefined, program: TrackerProgram) => {
     const elementsById = useMemo(() => getDataElementsInProgram(program), [program]);
 
-    return useMemo(() => enrollment && enrollment.events.map((event: any) => ({
+    return useMemo(() => enrollment?.events.map((event: any) => ({
         eventId: event.event,
         programId: event.program,
         programStageId: event.programStage,

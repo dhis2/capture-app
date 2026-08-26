@@ -1,4 +1,5 @@
 import { actionCreator } from '../../../../actions/actions.utils';
+import type { AttributeValue, EnrollmentData } from './useCommonEnrollmentDomainData';
 
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
@@ -26,8 +27,8 @@ export const enrollmentSiteActionTypes = {
 };
 
 export const setCommonEnrollmentSiteData = (
-    enrollment: Record<string, unknown>,
-    attributeValues: Array<Record<string, unknown>>,
+    enrollment: EnrollmentData,
+    attributeValues: Array<AttributeValue>,
     inactive?: boolean,
     programOwnerId?: string,
 ) => actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({
