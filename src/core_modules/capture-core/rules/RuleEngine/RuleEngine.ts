@@ -2,6 +2,7 @@ import { RuleEngineJs } from '@dhis2/rule-engine';
 import {
     InputBuilder,
     ValueProcessor,
+    evaluateRules,
     getRulesEffectsProcessor,
 } from './helpers';
 import type {
@@ -43,6 +44,7 @@ export class RuleEngine {
         selectedOrgUnit,
         selectedUserRoles,
         optionSets,
+        isEnrollmentFormWithEvent,
     }: RulesEngineInput): OutputEffects {
         if (!programRulesContainer.programRules ||
             !selectedOrgUnit ||
@@ -71,23 +73,19 @@ export class RuleEngine {
             [];
 
         const ruleEngine = new RuleEngineJs(this.flags.verbose || false);
-        const effects = (currentEvent ?
-            ruleEngine.evaluateEvent(
-                inputBuilder.convertEvent(currentEvent),
-                enrollment,
-                events,
-                executionContext,
-            ) :
-            ruleEngine.evaluateEnrollment(
-                enrollment!,
-                events,
-                executionContext,
-            ))
-            .map(effect => ({
-                ...Object.fromEntries(effect.ruleAction.values),
-                action: effect.ruleAction.type,
-                data: effect.data,
-            })) as Array<ProgramRuleEffect>;
+
+        const effects = evaluateRules({
+            ruleEngine,
+            enrollment,
+            currentEvent: currentEvent && inputBuilder.convertEvent(currentEvent),
+            events,
+            executionContext,
+            isEnrollmentFormWithEvent,
+        }).map(effect => ({
+            ...Object.fromEntries(effect.ruleAction.values),
+            action: effect.ruleAction.type,
+            data: effect.data,
+        })) as Array<ProgramRuleEffect>;
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
         return processRulesEffects({

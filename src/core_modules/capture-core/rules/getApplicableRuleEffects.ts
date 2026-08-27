@@ -52,6 +52,7 @@ export const getApplicableRuleEffectsForTrackerProgram = ({
     attributeValues,
     enrollmentData,
     formFoundation,
+    isEnrollmentFormWithEvent,
 }: GetApplicableRuleEffectsForTrackerProgramInput,
 flattenedResult = false,
 ) => {
@@ -83,6 +84,7 @@ flattenedResult = false,
         programRuleVariables,
         trackedEntityAttributes: getTrackedEntityAttributesForRulesExecution(program.attributes),
         foundationForPostProcessing,
+        isEnrollmentFormWithEvent,
     });
 
     return flattenedResult ? effects : buildEffectsHierarchy(effects);
@@ -99,6 +101,7 @@ const getApplicableRuleEffects = ({
     programRuleVariables,
     trackedEntityAttributes,
     foundationForPostProcessing,
+    isEnrollmentFormWithEvent,
 }: GetApplicableRuleEffectsInput) => {
     const dataElements = getDataElementsForRulesExecution(stages);
 
@@ -115,6 +118,7 @@ const getApplicableRuleEffects = ({
         selectedEntity: attributeValues,
         selectedOrgUnit: orgUnit,
         optionSets,
+        isEnrollmentFormWithEvent,
     });
 
     return postProcessRulesEffects(
