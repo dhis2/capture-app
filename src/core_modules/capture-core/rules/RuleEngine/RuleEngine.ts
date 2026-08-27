@@ -44,7 +44,7 @@ export class RuleEngine {
         selectedOrgUnit,
         selectedUserRoles,
         optionSets,
-        isFirstStageEventForm,
+        isEnrollmentFormWithEvent,
     }: RulesEngineInput): OutputEffects {
         if (!programRulesContainer.programRules ||
             !selectedOrgUnit ||
@@ -80,7 +80,7 @@ export class RuleEngine {
             currentEvent: currentEvent && inputBuilder.convertEvent(currentEvent),
             events,
             executionContext,
-            isFirstStageEventForm,
+            isEnrollmentFormWithEvent,
         }).map(effect => ({
             ...Object.fromEntries(effect.ruleAction.values),
             action: effect.ruleAction.type,

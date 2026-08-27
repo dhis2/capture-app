@@ -25,7 +25,7 @@ Object {
       "valueType": "TEXT",
     },
   },
-  "isFirstStageEventForm": undefined,
+  "isEnrollmentFormWithEvent": undefined,
   "optionSets": Object {
     "0": Object {
       "displayName": undefined,

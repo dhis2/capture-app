@@ -11,14 +11,14 @@ export const evaluateRules = ({
     currentEvent,
     events,
     executionContext,
-    isFirstStageEventForm,
+    isEnrollmentFormWithEvent,
 }: {
     ruleEngine: RuleEngineJs
     enrollment: RuleEnrollmentJs | null,
     currentEvent: RuleEventJs | null | undefined,
     events: Array<RuleEventJs>,
     executionContext: RuleEngineContextJs,
-    isFirstStageEventForm: boolean | undefined,
+    isEnrollmentFormWithEvent: boolean | undefined,
 }) => {
     if (!currentEvent) {
         return ruleEngine.evaluateEnrollment(
@@ -27,7 +27,7 @@ export const evaluateRules = ({
             executionContext,
         );
     }
-    if (!isFirstStageEventForm) {
+    if (!isEnrollmentFormWithEvent) {
         return ruleEngine.evaluateEvent(
             currentEvent,
             enrollment,

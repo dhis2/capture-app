@@ -62,7 +62,7 @@ export const runRulesOnUpdateFieldBatch = async ({
         enrollmentData,
         attributeValues,
         formFoundation,
-        isFirstStageEventForm: Boolean(currentEvent),
+        isEnrollmentFormWithEvent: Boolean(currentEvent),
     });
 
     const effectsWithValidations = await validateAssignEffects({

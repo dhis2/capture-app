@@ -106,7 +106,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         attributeValues: clientValues,
         enrollmentData: { enrolledAt: new Date().toISOString() },
         formFoundation,
-        isFirstStageEventForm: true,
+        isEnrollmentFormWithEvent: true,
     });
 
     return batchActions([
