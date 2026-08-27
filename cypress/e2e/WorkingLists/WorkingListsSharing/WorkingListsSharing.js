@@ -51,11 +51,7 @@ const OWNER_LIST_TYPES = {
     'program stage': 'programStage',
 };
 
-const NON_OWNER_LIST_TYPES = {
-    event: 'eventShared',
-    tracker: 'tracker',
-    'program stage': 'programStage',
-};
+const nonOwnerListType = listName => (listName === 'event' ? 'eventShared' : OWNER_LIST_TYPES[listName]);
 
 const resourceFor = listName => LIST_TYPES[OWNER_LIST_TYPES[listName]].resource;
 
@@ -171,6 +167,9 @@ When(/^you save the current (event|tracker|program stage) view$/, (listName) => 
     cy.get('button').contains('Save').click();
 
     cy.wait('@createView');
+
+    cy.get('[data-test="workinglists-template-selector-chips-container"]')
+        .should('contain', VIEW_NAME);
 });
 
 When('you share the view with the other user', () => {
@@ -239,17 +238,14 @@ const seedSharedView = (listType) => {
         });
 };
 
-Given('an event working list view owned by another user is shared with you with view and edit access', () =>
-    seedSharedView('eventShared'));
-
-Given('a tracker working list view owned by another user is shared with you with view and edit access', () =>
-    seedSharedView('tracker'));
-
-Given('a program stage working list view owned by another user is shared with you with view and edit access', () =>
-    seedSharedView('programStage'));
+Given(
+    // eslint-disable-next-line max-len
+    /^an? (event|tracker|program stage) working list view owned by another user is shared with you with view and edit access$/,
+    listName => seedSharedView(nonOwnerListType(listName)),
+);
 
 When(/^you open the shared (event|tracker|program stage) view$/, (listName) => {
-    visitWorkingList(NON_OWNER_LIST_TYPES[listName]);
+    visitWorkingList(nonOwnerListType(listName));
 
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .contains(VIEW_NAME)
