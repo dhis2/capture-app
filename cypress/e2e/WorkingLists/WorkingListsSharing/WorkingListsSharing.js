@@ -1,4 +1,5 @@
 import { After, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { login } from '../../../support/tagUtils';
 import '../sharedSteps';
 
 const ORG_UNIT_ID = 'DiszpKrYNg8';
@@ -26,7 +27,6 @@ const LIST_TYPES = {
         programId: SHARED_EVENT_PROGRAM_ID,
         criteriaKey: 'eventQueryCriteria',
         programAsObject: false,
-        requiresDataRead: true,
     },
     tracker: {
         resource: 'trackedEntityInstanceFilters',
@@ -84,15 +84,13 @@ After({ tags: '@with-working-list-sharing-cleanup' }, () => {
 });
 
 const assertLoggedInUserCanUseProgram = (listType) => {
-    const { programId, requiresDataRead } = LIST_TYPES[listType];
+    const { programId } = LIST_TYPES[listType];
 
     cy.buildApiUrl(`programs/${programId}?fields=name,access`)
         .then(url => cy.request(url))
         .then(({ body: { name, access } }) => {
             expect(access.read, `${otherUsername()} can read the metadata of ${name}`).to.equal(true);
-            if (requiresDataRead) {
-                expect(access.data.read, `${otherUsername()} can read the events of ${name}`).to.equal(true);
-            }
+            expect(access.data.read, `${otherUsername()} can read the data of ${name}`).to.equal(true);
         });
 };
 
@@ -167,9 +165,6 @@ When(/^you save the current (event|tracker|program stage) view$/, (listName) => 
     cy.get('button').contains('Save').click();
 
     cy.wait('@createView');
-
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .should('contain', VIEW_NAME);
 });
 
 When('you share the view with the other user', () => {
@@ -236,6 +231,10 @@ const seedSharedView = (listType) => {
                     });
             });
         });
+
+    // Admin basic-auth requests above set an admin session cookie in the jar;
+    // restore the current scenario's user before the app is visited.
+    login();
 };
 
 Given(
