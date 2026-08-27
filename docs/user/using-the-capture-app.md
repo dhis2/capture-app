@@ -722,7 +722,7 @@ If the fallback can not be done, you will be presented with a modal to go **Back
 
 ![](resources/images/search-by-attributes-fallback-overview-0.png)
 
-#### Create new **tracked entity**
+#### Create new **tracked entity** { #capture_search_create_new_tracked_entity }
 
 When none of the results match, you can create a new user by clicking **Create new** button on the bottom of the search page. 
 
@@ -841,7 +841,7 @@ As an example, you could filter the list to show only tracked entities where the
 Each filter adapts to the attribute's value type, for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
 
 
-#### Filter on empty or non-empty values
+#### Filter on empty or non-empty values { #capture_filter_tracked_entity_list_empty_values }
 
 Data element filters show two checkboxes at the top:
 
@@ -1215,7 +1215,7 @@ If there aren't any program rules that could show feedback for the current dashb
 On the enrollment dashboard, the indicator widget displays indicator text and values output related to the current dashboard.
 The indicators will be sorted alphabetically.
 
-#### Empty state
+#### Empty state { #capture_indicator_widget_empty_state }
 
 If there aren't any related indicators or indicator output for the current dashboard, the widget shows a short _empty_ message.
 If the current dashboard can't show any indicator output (because it has no related indicators) then the widget is hidden.
@@ -1353,7 +1353,7 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
-### Ask user to complete program when stage is complete
+### Ask user to complete program when stage is complete { #capture_ask_complete_enrollment_new_event }
 If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button.
 
 ![](resources/images/ask-user-to-complete-enrollment-new-event.png)
