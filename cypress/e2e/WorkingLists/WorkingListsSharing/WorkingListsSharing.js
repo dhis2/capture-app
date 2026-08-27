@@ -69,14 +69,14 @@ const asAdmin = () => ({
 const findViewByName = resource =>
     cy.buildApiUrl(`${resource}?filter=name:eq:${VIEW_NAME}&fields=id`)
         .then(url => cy.request({ url, auth: asAdmin() }))
-        .then(({ body }) => body[resource][0]);
+        .then(({ body }) => body[resource]?.[0]);
 
 const deleteSharedViews = () => {
     Object.values(OWNER_LIST_TYPES).forEach((listType) => {
         const { resource } = LIST_TYPES[listType];
 
         findViewByName(resource).then((view) => {
-            if (!view) return;
+            if (!view?.id) return;
             cy.buildApiUrl(resource, view.id)
                 .then(url => cy.request({ url, method: 'DELETE', auth: asAdmin() }));
         });
