@@ -1,5 +1,4 @@
 import { After, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
-import { loginUser } from '../../../support/tagUtils';
 import '../sharedSteps';
 
 const ORG_UNIT_ID = 'DiszpKrYNg8';
@@ -62,13 +61,14 @@ const resourceFor = listName => LIST_TYPES[OWNER_LIST_TYPES[listName]].resource;
 
 const otherUsername = () => Cypress.env(`dhis2Username_${RESTRICTED_USER}`);
 
-const switchToOwner = () => loginUser();
-
-const switchToRestrictedUser = () => loginUser(RESTRICTED_USER);
+const asAdmin = () => ({
+    username: Cypress.env('dhis2Username'),
+    password: Cypress.env('dhis2Password'),
+});
 
 const findViewByName = resource =>
     cy.buildApiUrl(`${resource}?filter=name:eq:${VIEW_NAME}&fields=id`)
-        .then(url => cy.request(url))
+        .then(url => cy.request({ url, auth: asAdmin() }))
         .then(({ body }) => body[resource][0]);
 
 const deleteSharedViews = () => {
@@ -78,13 +78,12 @@ const deleteSharedViews = () => {
         findViewByName(resource).then((view) => {
             if (!view) return;
             cy.buildApiUrl(resource, view.id)
-                .then(url => cy.request('DELETE', url));
+                .then(url => cy.request({ url, method: 'DELETE', auth: asAdmin() }));
         });
     });
 };
 
 After({ tags: '@with-working-list-sharing-cleanup' }, () => {
-    switchToOwner();
     deleteSharedViews();
 });
 
@@ -103,7 +102,7 @@ const assertLoggedInUserCanUseProgram = (listType) => {
 
 const lookUpOtherUser = () =>
     cy.buildApiUrl(`users?query=${otherUsername()}&fields=id,displayName,username`)
-        .then(url => cy.request(url))
+        .then(url => cy.request({ url, auth: asAdmin() }))
         .then(({ body }) => {
             const usernames = body.users.map(user => user.username);
             expect(usernames, 'usernames returned by the lookup').to.include(otherUsername());
@@ -205,13 +204,13 @@ const seedSharedView = (listType) => {
         .then(({ body: { id: myId } }) => {
             assertLoggedInUserCanUseProgram(listType);
 
-            switchToOwner();
             deleteSharedViews();
 
             cy.buildApiUrl(resource)
                 .then(url => cy.request({
                     method: 'POST',
                     url,
+                    auth: asAdmin(),
                     body: {
                         name: VIEW_NAME,
                         program: programAsObject ? { id: programId } : programId,
@@ -225,19 +224,18 @@ const seedSharedView = (listType) => {
                     .then(url => cy.request({
                         method: 'POST',
                         url,
+                        auth: asAdmin(),
                         body: { object: { publicAccess: NO_ACCESS, userAccesses: [{ id: myId, access: VIEW_AND_EDIT }] } },
                     }));
 
                 cy.buildApiUrl(`${resource}/${viewId}?fields=sharing`)
-                    .then(url => cy.request(url))
+                    .then(url => cy.request({ url, auth: asAdmin() }))
                     .its('body.sharing.owner')
                     .should((owner) => {
                         expect(owner, 'owner of the seeded view, which must not be the logged-in user')
                             .to.not.equal(myId);
                     });
             });
-
-            switchToRestrictedUser();
         });
 };
 
@@ -282,12 +280,10 @@ When(/^you update the (event|tracker|program stage) view$/, (listName) => {
 Then(/^the (event|tracker|program stage) view is still shared with (?:the other user|you)$/, (listName) => {
     const resource = resourceFor(listName);
 
-    switchToOwner();
-
     lookUpOtherUser().then(({ id: userId }) => {
         findViewByName(resource).then(({ id: viewId }) => {
             cy.buildApiUrl(`${resource}/${viewId}?fields=sharing`)
-                .then(url => cy.request(url))
+                .then(url => cy.request({ url, auth: asAdmin() }))
                 .its('body.sharing')
                 .should((sharing) => {
                     expect(Object.keys(sharing.users), 'users the view is shared with').to.include(userId);
