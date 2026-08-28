@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-17T07:58:18.382Z\n"
-"PO-Revision-Date: 2026-08-17T07:58:18.383Z\n"
+"POT-Creation-Date: 2026-08-28T14:48:19.309Z\n"
+"PO-Revision-Date: 2026-08-28T14:48:19.309Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2242,8 +2242,14 @@ msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgid "enrollment"
 msgstr "enrollment"
 
+msgid "enrollments"
+msgstr "enrollments"
+
 msgid "program stage"
 msgstr "program stage"
+
+msgid "program stages"
+msgstr "program stages"
 
 msgid "note"
 msgstr "note"

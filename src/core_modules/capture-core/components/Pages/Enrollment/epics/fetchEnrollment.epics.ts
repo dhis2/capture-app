@@ -3,7 +3,8 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
-import { getTermLabel, tLabel } from '../../../../metaData';
+import { getTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
@@ -120,8 +121,10 @@ const handleErrorsFromNewerBackends = ({
         }));
     }
     const enrollmentsLabel = getTermLabel(programId, 'enrollment', { plural: true });
-    const errorMessage =
-        tLabel('An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.', { enrollmentsLabel });
+    const errorMessage = tCustomTerm(
+        'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
+        { enrollmentsLabel },
+    );
     return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
 };
 
@@ -139,8 +142,10 @@ const handleErrorsFromOlderBackends = (error: any, programId?: string) => {
         }
     }
     const enrollmentsLabel = getTermLabel(programId, 'enrollment', { plural: true });
-    const errorMessage =
-        tLabel('An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.', { enrollmentsLabel });
+    const errorMessage = tCustomTerm(
+        'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
+        { enrollmentsLabel },
+    );
     return showErrorViewOnEnrollmentPage({ error: errorMessage });
 };
 

@@ -4,7 +4,8 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 import type { PlainProps } from './DeleteTeiAction.types';
-import { useTermLabel, tLabel } from '../../../../../../metaData';
+import { useTermLabel } from '../../../../../../metaData';
+import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
 
@@ -35,7 +36,7 @@ export const DeleteTeiAction = ({
                 small
                 onClick={() => setIsDeleteDialogOpen(true)}
             >
-                {tLabel('Delete {{ trackedEntityName }} with all {{enrollmentsLabel}}', {
+                {tCustomTerm('Delete {{ trackedEntityName }} with all {{enrollmentsLabel}}', {
                     trackedEntityName: trackedEntityName.toLowerCase(),
                     enrollmentsLabel,
                 })}

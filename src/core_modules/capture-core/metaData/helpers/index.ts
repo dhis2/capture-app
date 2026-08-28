@@ -18,12 +18,9 @@ export { getProgramEventAccess } from './getProgramEventAccess';
 export { getProgramAndStageForProgram } from './getProgramAndStageForProgram';
 export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';
 export {
-    CUSTOM_LABEL_FIELDS,
     extractCustomLabels,
     resolveLabel,
     getTermLabel,
     useTermLabel,
-    tLabel,
-    capitalizeFirstLetter,
 } from './customLabels';
 export type { CustomLabelKey, CustomLabels, LabelOptions } from './customLabels';

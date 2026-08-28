@@ -1,12 +1,7 @@
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-const trackedEntityTypeFields =
-    'id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,' +
-    'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
-    'translations[property,locale,value]';
-
-const buildFields = (): string =>
+const fields =
     'id,version,displayName,displayShortName,description,programType,style,minAttributesRequiredToSearch,' +
     'enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,' +
     'displayIncidentDate,access[*],' +
@@ -28,7 +23,9 @@ const buildFields = (): string =>
         'displayDescription,valueType,optionSetValue,unique,orgunitScope,pattern,translations[property,locale,value],' +
         'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]]],' +
         'displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
-    `trackedEntityType[${trackedEntityTypeFields}],` +
+    'trackedEntityType[id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,' +
+        'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
+        'translations[property,locale,value]],' +
     'userRoles[id,displayName]';
 
 export const useApiProgram = (programId: string) => {
@@ -39,7 +36,7 @@ export const useApiProgram = (programId: string) => {
                     resource: 'programs',
                     id: programId,
                     params: {
-                        fields: buildFields(),
+                        fields,
                     },
                 },
             }),

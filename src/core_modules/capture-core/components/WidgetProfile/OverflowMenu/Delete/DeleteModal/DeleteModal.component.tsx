@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
-import { useTermLabel, tLabel } from '../../../../../metaData';
+import { useTermLabel } from '../../../../../metaData';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './hooks';
 import type { ErrorReport } from '../../processErrorReports';
@@ -25,11 +26,10 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
             <ModalContent>
                 <p>
                     {/* eslint-disable-next-line max-len */}
-                    {tLabel('Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated {{enrollmentsLabel}} and events in all programs.',
+                    {tCustomTerm('Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated {{enrollmentsLabel}} and events in all programs.',
                         {
                             trackedEntityTypeName,
                             enrollmentsLabel,
-                            interpolation: { escapeValue: false },
                         },
                     )}
                 </p>
