@@ -23,7 +23,5 @@ export {
     resolveLabel,
     getTermLabel,
     useTermLabel,
-    tLabel,
-    capitalizeFirstLetter,
 } from './customLabels';
 export type { CustomLabelKey, CustomLabels, LabelOptions } from './customLabels';

@@ -45,7 +45,5 @@ export {
     resolveLabel,
     getTermLabel,
     useTermLabel,
-    tLabel,
-    capitalizeFirstLetter,
 } from './helpers';
 export type { CustomLabelKey, CustomLabels, LabelOptions } from './helpers';

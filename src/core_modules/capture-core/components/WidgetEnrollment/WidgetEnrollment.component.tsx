@@ -17,12 +17,9 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import {
-    dataElementTypes,
-    useTermLabel,
-    tLabel,
-    capitalizeFirstLetter,
-} from '../../metaData';
+import { dataElementTypes, useTermLabel } from '../../metaData';
+import { tLabel } from '../../utils/tLabel';
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -121,7 +118,7 @@ const WidgetEnrollmentPlain = ({
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                {true && (
+                {initError && (
                     <div className={classes.enrollment}>
                         {tLabel('{{enrollmentLabel}} widget could not be loaded. Please try again later',
                             { enrollmentLabel })}
