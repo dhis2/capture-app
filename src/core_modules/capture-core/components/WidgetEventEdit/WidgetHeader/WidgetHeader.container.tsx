@@ -181,7 +181,6 @@ const WidgetHeaderPlain = ({
             {deleteModalOpen && storedEvent && (
                 <DeleteMenuItemModal
                     eventId={eventId}
-                    pendingApiResponse={false}
                     eventDetails={storedEvent}
                     onDeleteEvent={onDeleteEvent}
                     onRollbackDeleteEvent={onRollbackDeleteEvent}

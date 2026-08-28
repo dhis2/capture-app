@@ -48,7 +48,6 @@ export const DeleteMenuItem = ({
 
 type DeleteMenuItemModalProps = {
     eventId: string;
-    pendingApiResponse: boolean;
     eventDetails: ApiEnrollmentEvent;
     onDeleteEvent: (eventId: string) => void;
     onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void;
@@ -57,7 +56,6 @@ type DeleteMenuItemModalProps = {
 
 export const DeleteMenuItemModal = ({
     setDeleteModalOpen,
-    pendingApiResponse,
     eventId,
     eventDetails,
     onDeleteEvent,
@@ -69,7 +67,7 @@ export const DeleteMenuItemModal = ({
     );
     const dataEngine = useDataEngine();
 
-    const { mutate } = useMutation(
+    const { mutate, isLoading } = useMutation(
         () => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
@@ -106,7 +104,7 @@ export const DeleteMenuItemModal = ({
                     <Button onClick={() => setDeleteModalOpen(false)}>
                         {i18n.t('No, cancel')}
                     </Button>
-                    <Button destructive onClick={() => !pendingApiResponse && mutate(undefined)}>
+                    <Button destructive disabled={isLoading} onClick={() => mutate(undefined)}>
                         {i18n.t('Yes, delete event')}
                     </Button>
                 </ButtonStrip>

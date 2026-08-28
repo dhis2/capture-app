@@ -146,7 +146,6 @@ const EventRowPlain = ({
                     {deleteModalOpen && (
                         <DeleteMenuItemModal
                             eventId={id}
-                            pendingApiResponse={pendingApiResponse}
                             eventDetails={eventDetails}
                             onDeleteEvent={onDeleteEvent}
                             onRollbackDeleteEvent={onRollbackDeleteEvent}
