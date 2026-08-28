@@ -5,7 +5,8 @@ import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
 import uuid from 'd2-utilizr/lib/uuid';
 import { errorCreator } from 'capture-core-utils';
-import { getTermLabel, tLabel } from '../../metaData';
+import { getTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
@@ -112,15 +113,17 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Error saving tracked entity instance') }),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: () => {
         const enrollmentLabel = getTermLabel(undefined, 'enrollment');
-        return addErrorFeedback({ message: tLabel('Error saving {{enrollmentLabel}}', { enrollmentLabel }) });
+        return addErrorFeedback({ message: tCustomTerm('Error saving {{enrollmentLabel}}', { enrollmentLabel }) });
     },
     [enrollmentSiteActionTypes.SAVE_FAILED]: () => {
         const enrollmentLabel = getTermLabel(undefined, 'enrollment');
-        return addErrorFeedback({ message: tLabel('Error saving the {{enrollmentLabel}} event', { enrollmentLabel }) });
+        return addErrorFeedback({ message: tCustomTerm('Error saving the {{enrollmentLabel}} event', { enrollmentLabel }) });
     },
     [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: () => {
         const enrollmentLabel = getTermLabel(undefined, 'enrollment');
-        return addErrorFeedback({ message: tLabel('Error deleting the {{enrollmentLabel}} event', { enrollmentLabel }) });
+        return addErrorFeedback({
+            message: tCustomTerm('Error deleting the {{enrollmentLabel}} event', { enrollmentLabel }),
+        });
     },
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error editing the event, the changes made were not saved') }),
@@ -132,7 +135,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
     [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: () => {
         const enrollmentLabel = getTermLabel(undefined, 'enrollment');
-        return addErrorFeedback({ message: tLabel('Could not save {{enrollmentLabel}} note', { enrollmentLabel }) });
+        return addErrorFeedback({ message: tCustomTerm('Could not save {{enrollmentLabel}} note', { enrollmentLabel }) });
     },
     [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: () =>
         addErrorFeedback({ message: i18n.t('Could not save event note') }),
