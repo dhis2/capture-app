@@ -20,22 +20,36 @@ type Output = {
     isEventBlockedByExpiry: boolean,
     isEventBlockedByCompletion: boolean,
     isEventReadOnly: boolean,
-    canUncompleteEvent: boolean,
+    canToggleCompletion: boolean,
 };
 
-const computeCanUncompleteEvent = (
-    hasWriteAccess: boolean,
-    eventStatus: string | undefined,
-    hasUncompleteAuthority: boolean,
+const computeExpiryBlocked = (
+    isWithinValidPeriod: boolean,
+    isWithinCompleteExpiry: boolean,
+    hasEditExpiredAuthority: boolean,
+): boolean => (!isWithinValidPeriod || !isWithinCompleteExpiry) && !hasEditExpiredAuthority;
+
+const computeCanToggleCompletion = (
+    canEditProgramStage: boolean,
     isEventBlockedByExpiry: boolean,
-): boolean => {
-    if (!hasWriteAccess) return false;
-    if (eventStatus === eventStatuses.COMPLETED) {
-        if (isEventBlockedByExpiry) return false;
-        return hasUncompleteAuthority;
-    }
-    return eventStatus === eventStatuses.ACTIVE;
-};
+    hasUncompleteAuthority: boolean,
+    eventStatus?: string,
+): boolean =>
+    canEditProgramStage
+    && !isEventBlockedByExpiry
+    && (
+        eventStatus === eventStatuses.ACTIVE
+        || (eventStatus === eventStatuses.COMPLETED && hasUncompleteAuthority)
+    );
+
+const computeIsEventReadOnly = (
+    canEditProgramStage: boolean,
+    isEventBlockedByExpiry: boolean,
+    isCompletedAndBlockingForm: boolean,
+): boolean =>
+    !canEditProgramStage
+    || isEventBlockedByExpiry
+    || isCompletedAndBlockingForm;
 
 export const useEventEditPermissions = ({
     programId,
@@ -49,30 +63,28 @@ export const useEventEditPermissions = ({
     const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
     const { hasAuthority: hasUncompleteAuthority } = useAuthority(Authorities.UNCOMPLETE_EVENT);
     const { hasAuthority: hasEditExpiredAuthority } = useAuthority(Authorities.EDIT_EXPIRED);
+
     const { isWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
-    const isExpired = !isWithinValidPeriod || !isWithinCompleteExpiry;
-
-    const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
-    const isEventBlockedByExpiry = isExpired && !hasEditExpiredAuthority;
-
-    const canUncompleteEvent = computeCanUncompleteEvent(
-        !!eventAccess?.write,
-        eventStatus,
-        hasUncompleteAuthority,
-        isEventBlockedByExpiry,
+    const isEventBlockedByExpiry = computeExpiryBlocked(
+        isWithinValidPeriod, isWithinCompleteExpiry, hasEditExpiredAuthority,
     );
 
-    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !canUncompleteEvent;
+    const canEditProgramStage = !!eventAccess?.write;
+    const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && eventStatus === eventStatuses.COMPLETED);
 
-    const isEventReadOnly = !eventAccess?.write
-        || isEventBlockedByExpiry
-        || isCompletedAndBlockingForm;
+    const canToggleCompletion = computeCanToggleCompletion(
+        canEditProgramStage, isEventBlockedByExpiry, hasUncompleteAuthority, eventStatus,
+    );
+    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !hasUncompleteAuthority;
+    const isEventReadOnly = computeIsEventReadOnly(
+        canEditProgramStage, isEventBlockedByExpiry, isCompletedAndBlockingForm,
+    );
 
     return {
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
         isEventReadOnly,
-        canUncompleteEvent,
+        canToggleCompletion,
     };
 };

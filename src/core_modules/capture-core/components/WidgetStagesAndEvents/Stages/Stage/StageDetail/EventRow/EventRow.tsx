@@ -58,7 +58,7 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const { isEventReadOnly, canUncompleteEvent } = useEventEditPermissions({
+    const { isEventReadOnly, canToggleCompletion } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: eventDetails.status,
@@ -91,7 +91,7 @@ const EventRowPlain = ({
                     <>
                         {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
 
-                        {!pendingApiResponse && (!isEventReadOnly || canUncompleteEvent) && (
+                        {!pendingApiResponse && (!isEventReadOnly || canToggleCompletion) && (
                             <OverflowButton
                                 open={actionsOpen}
                                 onClick={() => setActionsOpen(prev => !prev)}
@@ -114,7 +114,7 @@ const EventRowPlain = ({
                                             />
                                         )}
 
-                                        {canUncompleteEvent && (
+                                        {canToggleCompletion && (
                                             <CompletionMenuItem
                                                 eventId={id}
                                                 eventStatus={eventDetails.status}
