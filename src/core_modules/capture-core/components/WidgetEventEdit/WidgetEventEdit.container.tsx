@@ -110,7 +110,7 @@ const WidgetEventEditPlain = ({
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isEventReadOnly, canUncompleteEvent } = useEventEditPermissions({
+    const { isEventReadOnly, canToggleCompletion } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
@@ -142,7 +142,7 @@ const WidgetEventEditPlain = ({
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
-                            canUncompleteEvent={canUncompleteEvent}
+                            canToggleCompletion={canToggleCompletion}
                         />
                     }
                     noncollapsible
@@ -177,7 +177,7 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    canUncompleteEvent={canUncompleteEvent}
+                                    canToggleCompletion={canToggleCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
                                     hasDeleteButton={!isEventReadOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}
