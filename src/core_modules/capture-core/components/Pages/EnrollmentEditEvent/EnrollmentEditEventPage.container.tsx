@@ -268,6 +268,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const {
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
+        isEventOverdueOrScheduled,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -311,7 +312,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             program={program}
             currentStageId={stageId}
             trackedEntityInactive={trackedEntityInactive}
-            isEventBlockedByExpiry={isEventBlockedByExpiry}
+            isEventBlockedByExpiry={!isEventOverdueOrScheduled && isEventBlockedByExpiry}
             isEventBlockedByCompletion={isEventBlockedByCompletion}
         >
             <EnrollmentEditEventPageComponent

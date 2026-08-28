@@ -54,8 +54,11 @@ const EventRowPlain = ({
     const dispatch = useDispatch();
 
     const {
-        hasStageWriteAccess, canToggleCompletion, isEventBlockedByExpiry, isEventBlockedByCompletion,
-        isEventBlockedByUncompleteAuthority, canEditProgramStage,
+        canToggleCompletion,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
+        isEventCompleted,
+        canEditProgramStage,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -70,7 +73,8 @@ const EventRowPlain = ({
         multipleStages: false,
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
-        isEventBlockedByUncompleteAuthority,
+        isEventCompleted,
+        canToggleCompletion,
         trackedEntityInactive: false,
     });
 
@@ -132,7 +136,7 @@ const EventRowPlain = ({
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}
                                     onDeleteRequest={() => setDeleteModalOpen(true)}
-                                    hasStageWriteAccess={hasStageWriteAccess}
+                                    isEventBlockedByExpiry={isEventBlockedByExpiry}
                                     canToggleCompletion={canToggleCompletion}
                                     readOnlyMessage={readOnlyMessage}
                                 />

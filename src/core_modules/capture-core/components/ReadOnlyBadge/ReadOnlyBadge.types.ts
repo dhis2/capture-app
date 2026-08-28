@@ -22,6 +22,7 @@ export type ReadOnlyMessageInput = {
     multipleStages: boolean;
     isEventBlockedByExpiry: boolean;
     isEventBlockedByCompletion: boolean;
-    isEventBlockedByUncompleteAuthority?: boolean;
+    isEventCompleted?: boolean;
+    canToggleCompletion?: boolean;
     trackedEntityInactive: boolean;
 };

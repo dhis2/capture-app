@@ -113,8 +113,8 @@ const WidgetEventEditPlain = ({
 
     const expiryPeriod = useProgramExpiryForUser(programId);
     const {
-        isEventReadOnly, hasStageWriteAccess, canToggleCompletion, canEditProgramStage,
-        isEventBlockedByExpiry, isEventBlockedByCompletion, isEventBlockedByUncompleteAuthority,
+        isEventReadOnly, canToggleCompletion, canEditProgramStage,
+        isEventBlockedByExpiry, isEventBlockedByCompletion, isEventCompleted,
     } = useEventEditPermissions({
         programId,
         stage,
@@ -129,7 +129,8 @@ const WidgetEventEditPlain = ({
         multipleStages: false,
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
-        isEventBlockedByUncompleteAuthority,
+        isEventCompleted,
+        canToggleCompletion,
         trackedEntityInactive: false,
     });
 
@@ -159,7 +160,7 @@ const WidgetEventEditPlain = ({
                             enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
-                            hasStageWriteAccess={hasStageWriteAccess}
+                            isEventBlockedByExpiry={isEventBlockedByExpiry}
                             canToggleCompletion={canToggleCompletion}
                             canEditProgramStage={canEditProgramStage}
                             readOnlyMessage={readOnlyMessage}
@@ -199,7 +200,7 @@ const WidgetEventEditPlain = ({
                                     eventStatus={eventStatus}
                                     canToggleCompletion={canToggleCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={hasStageWriteAccess}
+                                    hasDeleteButton={!isEventBlockedByExpiry}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}

@@ -30,7 +30,8 @@ export const getReadOnlyMessage = ({
     multipleStages,
     isEventBlockedByExpiry,
     isEventBlockedByCompletion,
-    isEventBlockedByUncompleteAuthority,
+    isEventCompleted,
+    canToggleCompletion,
     trackedEntityInactive,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
@@ -40,6 +41,6 @@ export const getReadOnlyMessage = ({
     if (!access.programStage) return getProgramStageMessage(multipleStages);
     if (isEventBlockedByExpiry) return getExpiredMessage();
     if (isEventBlockedByCompletion) return getCompletedEventMessage();
-    if (isEventBlockedByUncompleteAuthority) return getUncompleteAuthorityMessage();
+    if (isEventCompleted && !canToggleCompletion) return getUncompleteAuthorityMessage();
     return '';
 };

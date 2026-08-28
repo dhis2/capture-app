@@ -51,7 +51,7 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
-    hasStageWriteAccess,
+    isEventBlockedByExpiry,
     canToggleCompletion,
     canEditProgramStage,
     readOnlyMessage,
@@ -168,7 +168,7 @@ const WidgetHeaderPlain = ({
                                         onCompletionSuccess={onCompletionStatusSuccess}
                                         onCompletionError={onCompletionStatusError}
                                         onDeleteRequest={() => setDeleteModalOpen(true)}
-                                        hasStageWriteAccess={hasStageWriteAccess}
+                                        isEventBlockedByExpiry={isEventBlockedByExpiry}
                                         canToggleCompletion={canToggleCompletion}
                                         readOnlyMessage={readOnlyMessage}
                                     />

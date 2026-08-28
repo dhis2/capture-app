@@ -2,7 +2,14 @@ import React from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import {
-    Button, ButtonStrip, colors, IconDelete16, MenuItem, Modal, ModalActions, ModalContent, ModalTitle,
+    Button,
+    ButtonStrip,
+    colors,
+    IconDelete16,
+    MenuItem,
+    Modal,
+    ModalActions, ModalContent,
+    ModalTitle,
 } from '@dhis2/ui';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from '@tanstack/react-query';
@@ -13,18 +20,21 @@ import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 type DeleteMenuItemProps = {
     onDeleteRequest: () => void;
     onClose: () => void;
-    hasStageWriteAccess: boolean;
+    isEventBlockedByExpiry: boolean;
     readOnlyMessage: string;
 };
 
 export const DeleteMenuItem = ({
-    onDeleteRequest, onClose, hasStageWriteAccess, readOnlyMessage,
+    onDeleteRequest,
+    onClose,
+    isEventBlockedByExpiry,
+    readOnlyMessage,
 }: DeleteMenuItemProps) => (
-    <ConditionalTooltip content={readOnlyMessage} enabled={!hasStageWriteAccess}>
+    <ConditionalTooltip content={readOnlyMessage} enabled={isEventBlockedByExpiry}>
         <MenuItem
             dense
-            disabled={!hasStageWriteAccess}
-            icon={<IconDelete16 color={!hasStageWriteAccess ? undefined : colors.red600} />}
+            disabled={isEventBlockedByExpiry}
+            icon={<IconDelete16 color={isEventBlockedByExpiry ? undefined : colors.red600} />}
             label={i18n.t('Delete')}
             dataTest="stages-and-events-delete"
             onClick={() => {

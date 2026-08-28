@@ -17,7 +17,7 @@ type Props = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
-    hasStageWriteAccess: boolean;
+    isEventBlockedByExpiry: boolean;
     readOnlyMessage: string;
 };
 
@@ -28,10 +28,9 @@ export const SkipMenuItem = ({
     onSuccess,
     onError,
     onClose,
-    hasStageWriteAccess,
+    isEventBlockedByExpiry,
     readOnlyMessage,
 }: Props) => {
-    const disabled = !hasStageWriteAccess;
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
     const { show: showError } = useAlert(
@@ -82,10 +81,10 @@ export const SkipMenuItem = ({
     );
 
     return (
-        <ConditionalTooltip content={readOnlyMessage} enabled={disabled}>
+        <ConditionalTooltip content={readOnlyMessage} enabled={isEventBlockedByExpiry}>
             <MenuItem
                 dense
-                disabled={disabled}
+                disabled={isEventBlockedByExpiry}
                 dataTest={isSkipped ? 'unskip-event-menu-item' : 'skip-event-menu-item'}
                 icon={isSkipped ? <DirectionalArrow reverse /> : <DirectionalArrow />}
                 label={isSkipped ? i18n.t('Unskip') : i18n.t('Skip')}
