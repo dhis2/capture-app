@@ -18,7 +18,7 @@ import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDo
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes, useTermLabel } from '../../metaData';
-import { tLabel } from '../../utils/tLabel';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
@@ -120,8 +120,10 @@ const WidgetEnrollmentPlain = ({
             >
                 {initError && (
                     <div className={classes.enrollment}>
-                        {tLabel('{{enrollmentLabel}} widget could not be loaded. Please try again later',
-                            { enrollmentLabel })}
+                        {tCustomTerm(
+                            '{{enrollmentLabel}} widget could not be loaded. Please try again later',
+                            { enrollmentLabel },
+                        )}
                     </div>
                 )}
                 {loading && <LoadingMaskElementCenter />}

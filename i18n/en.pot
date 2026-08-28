@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-28T13:42:27.818Z\n"
-"PO-Revision-Date: 2026-08-28T13:42:27.818Z\n"
+"POT-Creation-Date: 2026-08-28T14:37:10.874Z\n"
+"PO-Revision-Date: 2026-08-28T14:37:10.874Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2251,32 +2251,17 @@ msgstr "program stages"
 msgid "note"
 msgstr "note"
 
-msgid "notes"
-msgstr "notes"
-
 msgid "relationship"
 msgstr "relationship"
-
-msgid "relationships"
-msgstr "relationships"
 
 msgid "attribute"
 msgstr "attribute"
 
-msgid "attributes"
-msgstr "attributes"
-
 msgid "organisation unit"
 msgstr "organisation unit"
 
-msgid "organisation units"
-msgstr "organisation units"
-
 msgid "follow-up"
 msgstr "follow-up"
-
-msgid "follow-ups"
-msgstr "follow-ups"
 
 msgid "Program not found"
 msgstr "Program not found"
