@@ -542,13 +542,14 @@ type Props = {
     recentlyAddedRelationshipId?: string | null,
     onScrollToRelationships: () => void;
     notesLabel: string,
+    relationshipsLabel: string,
 };
 type DataEntrySection = {
     placement: typeof placements[keyof typeof placements],
     name?: string,
 };
 
-const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
+const buildDataEntrySectionDefinitions = (notesLabel: string, relationshipsLabel: string) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -566,7 +567,7 @@ const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Relationships'),
+        name: relationshipsLabel,
     },
     [dataEntrySectionNames.ASSIGNEE]: {
         placement: placements.BOTTOM,
@@ -582,7 +583,7 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
         this.fieldOptions = {
             theme: props.theme,
         };
-        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel);
+        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel, props.relationshipsLabel);
     }
 
     componentDidMount() {

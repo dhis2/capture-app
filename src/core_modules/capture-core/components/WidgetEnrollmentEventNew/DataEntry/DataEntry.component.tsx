@@ -442,6 +442,7 @@ type Props = {
     programName: string;
     orgUnitFieldValue?: OrgUnit | null;
     notesLabel: string;
+    relationshipsLabel: string;
 };
 
 type DataEntrySection = {
@@ -449,7 +450,7 @@ type DataEntrySection = {
     name: string,
 };
 
-const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
+const buildDataEntrySectionDefinitions = (notesLabel: string, relationshipsLabel: string) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -464,7 +465,7 @@ const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Relationships'),
+        name: relationshipsLabel,
     },
     [dataEntrySectionNames.ASSIGNEE]: {
         placement: placements.BOTTOM,
@@ -485,7 +486,7 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel);
+        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel, props.relationshipsLabel);
     }
 
     componentDidMount() {

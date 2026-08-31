@@ -29,6 +29,7 @@ import { newEventSaveTypes } from './newEventSaveTypes';
 
 const customLabels = {
     notesLabel: { key: 'note', plural: true },
+    relationshipsLabel: { key: 'relationship', plural: true },
 } as const;
 
 const makeMapStateToProps = () => {

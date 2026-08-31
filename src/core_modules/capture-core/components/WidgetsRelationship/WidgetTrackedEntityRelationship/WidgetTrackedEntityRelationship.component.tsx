@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
 import { RelationshipSearchEntities, useRelationships } from '../common/useRelationships';
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
+import { useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -25,6 +26,7 @@ export const WidgetTrackedEntityRelationship = ({
     accessReadOnly,
     hideReadOnlyBadge,
 }: WidgetTrackedEntityRelationshipProps) => {
+    const relationshipsLabel = useTermLabel('relationship', { plural: true });
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
     const {
@@ -44,7 +46,10 @@ export const WidgetTrackedEntityRelationship = ({
     if (isError) {
         return (
             <div>
-                {i18n.t('Something went wrong while loading relationships. Please try again later.')}
+                {tCustomTerm(
+                    'Something went wrong while loading {{relationshipsLabel}}. Please try again later.',
+                    { relationshipsLabel },
+                )}
             </div>
         );
     }
@@ -55,9 +60,9 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={i18n.t('{{trackedEntityTypeName}} relationships', {
+            title={tCustomTerm('{{trackedEntityTypeName}} {{relationshipsLabel}}', {
                 trackedEntityTypeName,
-                interpolation: { escapeValue: false },
+                relationshipsLabel,
             })}
             isLoading={isLoading}
             relationships={relationships}

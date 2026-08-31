@@ -19,6 +19,7 @@ import { withCustomLabels } from '../../../HOC/withCustomLabels';
 
 const customLabels = {
     notesLabel: { key: 'note', plural: true },
+    relationshipsLabel: { key: 'relationship', plural: true },
 } as const;
 
 const WrappedDataEntryComponent = withCustomLabels(customLabels)(DataEntryComponent);

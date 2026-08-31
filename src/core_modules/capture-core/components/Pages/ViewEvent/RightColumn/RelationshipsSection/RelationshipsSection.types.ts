@@ -9,4 +9,5 @@ export type PlainProps = {
     ready: boolean;
     readOnly: boolean;
     orgUnitId: string;
+    relationshipsLabel: string;
 };

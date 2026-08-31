@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-31T09:24:37.476Z\n"
-"PO-Revision-Date: 2026-08-31T09:24:37.476Z\n"
+"POT-Creation-Date: 2026-08-31T09:36:32.334Z\n"
+"PO-Revision-Date: 2026-08-31T09:36:32.335Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -201,9 +201,6 @@ msgstr "Basic info"
 
 msgid "Status"
 msgstr "Status"
-
-msgid "Relationships"
-msgstr "Relationships"
 
 msgid "Assignee"
 msgstr "Assignee"
@@ -976,9 +973,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Errors"
 
-msgid "This event doesn't have any relationships"
-msgstr "This event doesn't have any relationships"
-
 msgid "Warnings"
 msgstr "Warnings"
 
@@ -1680,9 +1674,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 msgid "Actions - {{relationshipName}}"
 msgstr "Actions - {{relationshipName}}"
 
-msgid "Ambiguous relationships, contact system administrator"
-msgstr "Ambiguous relationships, contact system administrator"
-
 msgid "Enter details"
 msgstr "Enter details"
 
@@ -1882,12 +1873,6 @@ msgstr "Link to an existing {{tetName}}"
 msgid "An error occurred while adding the relationship"
 msgstr "An error occurred while adding the relationship"
 
-msgid "Something went wrong while loading relationships. Please try again later."
-msgstr "Something went wrong while loading relationships. Please try again later."
-
-msgid "{{trackedEntityTypeName}} relationships"
-msgstr "{{trackedEntityTypeName}} relationships"
-
 msgid "Delete relationship"
 msgstr "Delete relationship"
 
@@ -1905,9 +1890,6 @@ msgstr "An error occurred while deleting the relationship."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"
-
-msgid "This {{enrollmentLabel}} doesn't have any relationships"
-msgstr "This {{enrollmentLabel}} doesn't have any relationships"
 
 msgid "Type"
 msgstr "Type"

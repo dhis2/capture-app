@@ -1,5 +1,4 @@
 import * as React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
@@ -8,6 +7,7 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
@@ -45,13 +45,13 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     renderHeader = () => {
-        const { classes, relationships, ready } = this.props;
+        const { classes, relationships, ready, relationshipsLabel } = this.props;
         const count = relationships ? relationships.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={i18n.t('Relationships')}
+                text={relationshipsLabel}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -76,7 +76,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, programStage, eventId, relationships, ready, readOnly } = this.props;
+        const { classes, programStage, eventId, relationships, ready, readOnly, relationshipsLabel } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
@@ -92,7 +92,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This event doesn't have any relationships")}
+                        {tCustomTerm("This event doesn't have any {{relationshipsLabel}}", { relationshipsLabel })}
                     </div>
                 )}
                 {React.createElement(LoadingRelationships as any, {
