@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
-import { capitalizeFirstLetter } from './capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 type I18nInternal = {
     getResource: (lang: string, ns: string, key: string) => string | undefined;
@@ -7,31 +7,31 @@ type I18nInternal = {
 };
 const internal = i18n as unknown as I18nInternal;
 
-const getRawTranslation = (key: string): string =>
+const getTranslatedTemplate = (key: string): string =>
     internal.getResource(internal.language, 'default', key)
     ?? internal.getResource('en', 'default', key)
     ?? key;
 
-const startsWithVar = (raw: string, varName: string): boolean => {
-    const trimmed = raw.trimStart();
-    return trimmed.startsWith(`{{${varName}}}`) || trimmed.startsWith(`{{${varName},`);
+type Options = {
+    interpolation?: Record<string, unknown>;
+    [key: string]: unknown;
 };
 
-export const tCustomTerm = (key: string, options: Record<string, unknown> = {}): string => {
-    const raw = getRawTranslation(key);
+export const tCustomTerm = (key: string, options: Options = {}): string => {
     const { interpolation, ...values } = options;
+    const template = getTranslatedTemplate(key).trimStart();
 
-    const cased = Object.fromEntries(
-        Object.entries(values).map(([name, value]) => [
-            name,
-            typeof value === 'string' && startsWithVar(raw, name)
-                ? capitalizeFirstLetter(value)
-                : value,
-        ]),
+    const casedValues = Object.fromEntries(
+        Object.entries(values).map(([name, value]) => {
+            const variableIsAtSentenceStart = template.startsWith(`{{${name}}}`)
+                || template.startsWith(`{{${name},`);
+            const shouldCapitalize = typeof value === 'string' && variableIsAtSentenceStart;
+            return [name, shouldCapitalize ? capitalizeFirstLetter(value) : value];
+        }),
     );
 
     return i18n.t(key, {
-        ...cased,
-        interpolation: { escapeValue: false, ...(interpolation as Record<string, unknown> ?? {}) },
+        ...casedValues,
+        interpolation: { escapeValue: false, ...(interpolation ?? {}) },
     });
 };
