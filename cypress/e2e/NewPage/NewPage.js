@@ -572,7 +572,7 @@ Given('you are in the Malaria case diagnosis, treatment and investigation progra
 });
 
 And('you fill the Malaria case diagnosis registration form with values', () => {
-    malariaEntityFirstName = `Ana-${Math.round((new Date()).getTime() / 1000)}`;
+    malariaEntityFirstName = `Ana-${Math.round(Date.now() / 1000)}`;
 
     cy.get('input[type="text"]')
         .eq(3)
@@ -580,7 +580,7 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
         .blur();
     cy.get('input[type="text"]')
         .eq(4)
-        .type(`Maria-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(`Maria-${Math.round(Date.now() / 1000)}`)
         .blur();
     cy.get('input[type="text"]')
         .eq(5)
