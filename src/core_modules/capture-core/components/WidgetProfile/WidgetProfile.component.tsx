@@ -26,6 +26,8 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles: Readonly<any> = {
     header: {
@@ -80,6 +82,7 @@ const WidgetProfilePlain = ({
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
+    const attributesLabel = useTermLabel('attribute', { plural: true });
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
@@ -176,11 +179,11 @@ const WidgetProfilePlain = ({
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
                         {trackedEntityTypeName
-                            ? i18n.t('No attributes configured for {{trackedEntityTypeName}}', {
+                            ? tCustomTerm('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
+                                attributesLabel,
                                 trackedEntityTypeName,
-                                interpolation: { escapeValue: false },
                             })
-                            : i18n.t('No attributes configured')}
+                            : tCustomTerm('No {{attributesLabel}} configured', { attributesLabel })}
                     </p>
                 </div>
             );

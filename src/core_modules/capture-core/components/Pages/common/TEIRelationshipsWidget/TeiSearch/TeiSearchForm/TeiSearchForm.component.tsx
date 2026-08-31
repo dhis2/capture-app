@@ -16,6 +16,7 @@ import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { withGotoInterface } from '../../../../../FormFields/New';
 import type { SearchGroup } from '../../../../../../metaData';
+import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
@@ -55,6 +56,7 @@ type OwnProps = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
+    attributesLabel: string;
 };
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
@@ -217,7 +219,7 @@ class SearchFormPlain extends React.Component<Props, State> {
         }
         const searchButtonText = searchGroup.unique ?
             this.getUniqueSearchButtonText(searchForm) :
-            i18n.t('Search by attributes');
+            tCustomTerm('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
         return (
             <div
                 data-test="d2-form-area"

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-31T09:36:32.334Z\n"
-"PO-Revision-Date: 2026-08-31T09:36:32.335Z\n"
+"POT-Creation-Date: 2026-08-31T11:01:18.198Z\n"
+"PO-Revision-Date: 2026-08-31T11:01:18.198Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1006,9 +1006,6 @@ msgstr "Selected program"
 msgid "Search {{uniqueAttrName}}"
 msgstr "Search {{uniqueAttrName}}"
 
-msgid "Search by attributes"
-msgstr "Search by attributes"
-
 msgid "Search {{attributeName}}"
 msgstr "Search {{attributeName}}"
 
@@ -1147,9 +1144,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Choose a type to start searching"
 
-msgid "{{trackedEntityName}} has no searchable attributes"
-msgstr "{{trackedEntityName}} has no searchable attributes"
-
 msgid ""
 "Try selecting a different tracked entity type, or try searching in a "
 "program by choosing one from the top bar."
@@ -1171,9 +1165,6 @@ msgstr "all programs"
 
 msgid "Not finding the results you were looking for? Try searching in all programs."
 msgstr "Not finding the results you were looking for? Try searching in all programs."
-
-msgid "No searchable attributes for {{trackedEntityName}}"
-msgstr "No searchable attributes for {{trackedEntityName}}"
 
 msgid "Search in all programs"
 msgstr "Search in all programs"
@@ -1222,13 +1213,6 @@ msgstr "Too many results"
 
 msgid "This search returned too many results to show."
 msgstr "This search returned too many results to show."
-
-msgid ""
-"Try changing search terms or searching by more attributes to narrow down "
-"the results."
-msgstr ""
-"Try changing search terms or searching by more attributes to narrow down "
-"the results."
 
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
@@ -1649,12 +1633,6 @@ msgstr "View profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
-
-msgid "No attributes configured for {{trackedEntityTypeName}}"
-msgstr "No attributes configured for {{trackedEntityTypeName}}"
-
-msgid "No attributes configured"
-msgstr "No attributes configured"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
@@ -2333,9 +2311,6 @@ msgstr[0] ""
 msgstr[1] ""
 "The following attribute types are not supported for searching and have been "
 "hidden"
-
-msgid "Some attributes are hidden"
-msgstr "Some attributes are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

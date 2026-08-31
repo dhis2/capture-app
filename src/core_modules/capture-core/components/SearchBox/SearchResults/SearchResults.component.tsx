@@ -18,7 +18,8 @@ import { SearchResultsHeader } from '../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Widget } from '../../Widget';
-import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
+import { getTrackerProgramThrowIfNotFound, useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -64,6 +65,7 @@ const SearchResultsIndex = ({
     orgUnitId,
 }: Props & WithStyles<typeof getStyles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
+    const attributesLabel = useTermLabel('attribute', { plural: true });
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
     const [isFallbackLoading, setIsFallbackLoading] = useState(false);
@@ -210,8 +212,9 @@ const SearchResultsIndex = ({
                 </div>
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
-                    content={i18n.t('No searchable attributes for {{trackedEntityName}}', {
-                        trackedEntityName, interpolation: { escapeValue: false },
+                    content={tCustomTerm('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
+                        attributesLabel,
+                        trackedEntityName,
                     })}
                 >
                     <Button

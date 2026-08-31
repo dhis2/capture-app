@@ -12,6 +12,11 @@ import {
 import type { OwnProps } from './TeiSearch.types';
 import { getSearchGroups } from './getSearchGroups';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../metaData';
+import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
+
+const customLabels = {
+    attributesLabel: { key: 'attribute', plural: true },
+} as const;
 
 const mapStateToProps = (state: any, props: OwnProps) => {
     const currentTeiSearch = state.teiSearch[props.id] ?? {};
@@ -49,4 +54,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: OwnProps) => ({
 });
 
 export const TeiSearch: ComponentType<OwnProps> =
-  connect(mapStateToProps, mapDispatchToProps)(TeiSearchComponent);
+  connect(mapStateToProps, mapDispatchToProps)(withCustomLabels(customLabels)(TeiSearchComponent));

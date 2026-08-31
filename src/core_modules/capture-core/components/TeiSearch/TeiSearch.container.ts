@@ -10,6 +10,11 @@ import {
 } from './actions/teiSearch.actions';
 import { makeSearchGroupsSelector } from './teiSearch.selectors';
 import type { OwnProps } from './TeiSearch.types';
+import { withCustomLabels } from '../../HOC/withCustomLabels';
+
+const customLabels = {
+    attributesLabel: { key: 'attribute', plural: true },
+} as const;
 
 const makeMapStateToProps = () => {
     const searchGroupsSelector = makeSearchGroupsSelector();
@@ -50,4 +55,6 @@ const mapDispatchToProps = (dispatch: any, ownProps: OwnProps) => ({
     },
 });
 
-export const TeiSearch = connect(makeMapStateToProps, mapDispatchToProps)(TeiSearchComponent);
+export const TeiSearch = connect(makeMapStateToProps, mapDispatchToProps)(
+    withCustomLabels(customLabels)(TeiSearchComponent),
+);

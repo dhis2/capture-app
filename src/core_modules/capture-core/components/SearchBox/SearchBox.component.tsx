@@ -14,7 +14,8 @@ import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
-import { scopeTypes } from '../../metaData';
+import { scopeTypes, useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const getStyles: Readonly<any> = {
     half: {
@@ -91,6 +92,7 @@ function renderFooterContent(args: {
     searchGroupsForSelectedScope: SearchGroups;
     availableSearchOption?: AvailableSearchOption;
     trackedEntityName: string;
+    attributesLabel: string;
 }) {
     if (args.isLoading) {
         return <LoadingMaskElementCenter containerStyle={{ height: '100px' }} />;
@@ -114,9 +116,9 @@ function renderFooterContent(args: {
         footerNodes.push(
             <NoticeBox
                 warning
-                title={i18n.t('{{trackedEntityName}} has no searchable attributes', {
+                title={tCustomTerm('{{trackedEntityName}} has no searchable {{attributesLabel}}', {
                     trackedEntityName: capitalizeFirstLetter(args.trackedEntityName),
-                    interpolation: { escapeValue: false },
+                    attributesLabel: args.attributesLabel,
                 })}
             >
                 {/* eslint-disable-next-line max-len */}
@@ -145,6 +147,7 @@ const Index = ({
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
+    const attributesLabel = useTermLabel('attribute', { plural: true });
     const {
         searchOption: availableSearchOption,
         isLoading,
@@ -212,6 +215,7 @@ const Index = ({
                 searchGroupsForSelectedScope,
                 availableSearchOption,
                 trackedEntityName,
+                attributesLabel,
             })}
         </>
     );

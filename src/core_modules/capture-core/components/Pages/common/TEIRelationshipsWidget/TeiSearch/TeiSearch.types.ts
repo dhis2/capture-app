@@ -24,4 +24,8 @@ export type OwnProps = {
     selectedTrackedEntityTypeId: string;
 }
 
-export type Props = OwnProps & DispatchersFromRedux & PropsFromRedux;
+type InjectedLabels = {
+    attributesLabel: string;
+}
+
+export type Props = OwnProps & DispatchersFromRedux & PropsFromRedux & InjectedLabels;

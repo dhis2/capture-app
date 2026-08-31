@@ -14,13 +14,15 @@ type InjectedLabels<S extends LabelSpecs> = { [K in keyof S]: string };
 
 export const withCustomLabels =
     <S extends LabelSpecs>(specs: S) =>
-        <P extends Record<string, unknown>>(WrappedComponent: React.ComponentType<P & InjectedLabels<S>>) =>
-            (props: P) => {
+        <P extends Record<string, unknown>>(
+            WrappedComponent: React.ComponentType<P & InjectedLabels<S>>,
+        ): React.ComponentType<Omit<P, keyof InjectedLabels<S>>> =>
+            (props: Omit<P, keyof InjectedLabels<S>>) => {
                 const labels = Object.fromEntries(
                     Object.entries(specs).map(([propName, { key, plural }]) => [
                         propName,
                         capitalizeFirstLetter(useTermLabel(key, { plural })),
                     ]),
                 ) as InjectedLabels<S>;
-                return React.createElement(WrappedComponent, { ...props, ...labels });
+                return React.createElement(WrappedComponent, { ...props, ...labels } as unknown as P & InjectedLabels<S>);
             };
