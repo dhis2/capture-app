@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-31T11:01:18.198Z\n"
-"PO-Revision-Date: 2026-08-31T11:01:18.198Z\n"
+"POT-Creation-Date: 2026-08-31T11:10:35.292Z\n"
+"PO-Revision-Date: 2026-08-31T11:10:35.292Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1174,19 +1174,6 @@ msgstr "If none of search results match, you can create a new {{trackedEntityNam
 
 msgid "Create new"
 msgstr "Create new"
-
-msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-msgstr ""
-"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
-"search{{escape}} {{searchableAttributes}}"
-
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
-msgstr "Fill in this field to search{{escape}} {{searchableAttributes}}"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
