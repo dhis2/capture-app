@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-31T09:42:07.115Z\n"
-"PO-Revision-Date: 2026-08-31T09:42:07.116Z\n"
+"POT-Creation-Date: 2026-08-31T10:56:29.976Z\n"
+"PO-Revision-Date: 2026-08-31T10:56:29.976Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -640,9 +640,6 @@ msgstr "before or equal to"
 msgid "More filters"
 msgstr "More filters"
 
-msgid "Program stage filters"
-msgstr "Program stage filters"
-
 msgid "Rows per page"
 msgstr "Rows per page"
 
@@ -678,9 +675,6 @@ msgstr "Schedule an event"
 
 msgid "Make referral"
 msgstr "Make referral"
-
-msgid "No available program stages"
-msgstr "No available program stages"
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
@@ -725,12 +719,6 @@ msgstr "There was an error opening the Page"
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
-msgid "Program stage is invalid"
-msgstr "Program stage is invalid"
-
-msgid "Program stage not found"
-msgstr "Program stage not found"
-
 msgid "Report"
 msgstr "Report"
 
@@ -748,15 +736,6 @@ msgstr "You can't add any more {{ programStageName }} events"
 
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
-
-msgid "Choose a program stage for a new event"
-msgstr "Choose a program stage for a new event"
-
-msgid "Program Stages could not be loaded"
-msgstr "Program Stages could not be loaded"
-
-msgid "Program stage"
-msgstr "Program stage"
 
 msgid "The category option is not valid for the selected organisation unit."
 msgstr "The category option is not valid for the selected organisation unit."
@@ -993,12 +972,6 @@ msgstr "You only have view access to this {{trackedEntityName}}"
 
 msgid "You only have view access to this tracked entity type"
 msgstr "You only have view access to this tracked entity type"
-
-msgid "You only have view access to these program stages"
-msgstr "You only have view access to these program stages"
-
-msgid "You only have view access to this program stage"
-msgstr "You only have view access to this program stage"
 
 msgid "This event is outside the editing period"
 msgstr "This event is outside the editing period"
@@ -1323,17 +1296,11 @@ msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgid "Saving to {{stageName}} for {{programName}}"
 msgstr "Saving to {{stageName}} for {{programName}}"
 
-msgid "Program or program stage is invalid"
-msgstr "Program or program stage is invalid"
-
 msgid "Error"
 msgstr "Error"
 
 msgid "Warning"
 msgstr "Warning"
-
-msgid "Program stage not found in rules execution"
-msgstr "Program stage not found in rules execution"
 
 msgid "Delete event"
 msgstr "Delete event"
@@ -1581,9 +1548,6 @@ msgstr "Please enter a date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
-msgid "This program stage can only have one event"
-msgstr "This program stage can only have one event"
-
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 
@@ -1630,12 +1594,6 @@ msgstr "{{ overdueEvents }} overdue"
 
 msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} scheduled"
-
-msgid "No program stages found in this program"
-msgstr "No program stages found in this program"
-
-msgid "Program stages and events"
-msgstr "Program stages and events"
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr "An error occurred while unlinking and deleting the event."
@@ -1780,9 +1738,6 @@ msgstr "Type"
 msgid "Created date"
 msgstr "Created date"
 
-msgid "Program stage name"
-msgstr "Program stage name"
-
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
@@ -1845,9 +1800,6 @@ msgstr "Registration Date"
 
 msgid "Follow up"
 msgstr "Follow up"
-
-msgid "Choose a program stage to filter by {{label}}"
-msgstr "Choose a program stage to filter by {{label}}"
 
 msgid "Delete {{count}} {{ trackedEntityName }}"
 msgid_plural "Delete {{count}} {{ trackedEntityName }}"

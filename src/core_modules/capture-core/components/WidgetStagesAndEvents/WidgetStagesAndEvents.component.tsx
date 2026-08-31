@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -29,6 +30,7 @@ const WidgetStagesAndEventsPlain = ({
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
+    const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
     const {
         anyStageWriteAccess,
         anyStageReadAccess,
@@ -44,7 +46,7 @@ const WidgetStagesAndEventsPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{i18n.t('Program stages and events')}</span>
+                        <span>{tCustomTerm('{{programStagesLabel}} and events', { programStagesLabel })}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge

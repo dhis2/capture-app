@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram, useTermLabel } from '../../metaData';
 import { OrgUnitFetcher } from './OrgUnitFetcher/OrgUnitFetcher.container';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 export const WidgetEnrollmentEventNew = ({
     programId,
@@ -12,6 +13,7 @@ export const WidgetEnrollmentEventNew = ({
     ...passOnProps
 }: WidgetProps) => {
     const { program } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const programStageLabel = useTermLabel('programStage', { programId });
     const {
         stage,
         formFoundation,
@@ -30,7 +32,7 @@ export const WidgetEnrollmentEventNew = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || isError || !formFoundation) {
         return (
             <div>
-                {i18n.t('Program or program stage is invalid')}
+                {tCustomTerm('Program or {{programStageLabel}} is invalid', { programStageLabel })}
             </div>
         );
     }

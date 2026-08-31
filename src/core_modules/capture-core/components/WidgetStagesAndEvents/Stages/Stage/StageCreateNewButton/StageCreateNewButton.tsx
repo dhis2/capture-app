@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import { Button, IconAdd16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
+import { useTermLabel } from '../../../../../metaData';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 
 type Props = {
     onCreateNew: () => void;
@@ -18,6 +20,7 @@ export const StageCreateNewButton = ({
     preventAddingEventActionInEffect,
     eventName,
 }: Props) => {
+    const programStageLabel = useTermLabel('programStage');
     const { isDisabled, tooltipContent } = useMemo(() => {
         if (preventAddingEventActionInEffect) {
             return {
@@ -31,14 +34,14 @@ export const StageCreateNewButton = ({
         if (!repeatable && eventCount > 0) {
             return {
                 isDisabled: true,
-                tooltipContent: i18n.t('This program stage can only have one event'),
+                tooltipContent: tCustomTerm('This {{programStageLabel}} can only have one event', { programStageLabel }),
             };
         }
         return {
             isDisabled: false,
             tooltipContent: '',
         };
-    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable]);
+    }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable, programStageLabel]);
 
     return (
         <ConditionalTooltip
