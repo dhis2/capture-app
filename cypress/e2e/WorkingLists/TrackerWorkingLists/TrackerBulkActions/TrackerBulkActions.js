@@ -127,20 +127,23 @@ Then('the bulk complete enrollments modal should close', () => {
         .should('not.exist');
 });
 
-When(/^you select row number (.*)$/, (rowNumber) => {
-    cy.get('[data-test="dhis2-uicore-tablebody"]')
-        .find('tr')
-        .eq(rowNumber)
-        .find('[data-test="select-row-checkbox"]')
-        .click();
+// The rows carry their tracked entity id as data-test, so the scenarios can target the records
+// they assert on instead of whichever records happen to sort to the top of the list.
+When(/^you select the rows for tracked entities (.*)$/, (trackedEntityIds) => {
+    trackedEntityIds.split(', ').forEach(trackedEntityId =>
+        cy.get('[data-test="online-list-table"]')
+            .find(`[data-test="dhis2-uicore-tablebody"] tr[data-test="${trackedEntityId}"]`)
+            .find('[data-test="select-row-checkbox"]')
+            .click(),
+    );
 });
 
-Then('the working list is displayed with 25 rows per page', () => {
+Then(/^the working list is displayed with (\d+) rows per page$/, (rowsPerPage) => {
     cy.get('[data-test="working-list-table-loading"]').should('not.exist');
     cy.get('div[data-test="rows-per-page-selector"]')
         .click()
         .get('[role="option"]:visible')
-        .contains('25')
+        .contains(new RegExp(`^${rowsPerPage}$`))
         .click();
     cy.get('[data-test="working-list-table-loading"]').should('not.exist');
 });

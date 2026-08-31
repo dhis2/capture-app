@@ -1,6 +1,41 @@
-import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { After, defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import moment from 'moment';
 import { getCurrentYear } from '../../support/date';
+
+const MALARIA_FIRST_NAME_ATTRIBUTE = 'TfdH5KvFmMy';
+const MALARIA_PROGRAM = 'qDkgAbB5Jlk';
+
+// Set when the registration form is filled in, so the cleanup hook can find the entity again.
+let malariaEntityFirstName;
+
+const clearMalariaEntity = () => {
+    if (!malariaEntityFirstName) {
+        return undefined;
+    }
+
+    return cy
+        .buildApiUrl(
+            'tracker',
+            `trackedEntities?program=${MALARIA_PROGRAM}&orgUnitMode=ACCESSIBLE` +
+                `&filter=${MALARIA_FIRST_NAME_ATTRIBUTE}:like:${malariaEntityFirstName}` +
+                '&fields=trackedEntity&page=1&pageSize=5',
+        )
+        .then(url => cy.request(url))
+        .then(({ body }) =>
+            (body.trackedEntities || []).forEach(({ trackedEntity }) =>
+                cy
+                    .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                    .then(deleteUrl => cy.request('POST', deleteUrl, { trackedEntities: [{ trackedEntity }] })),
+            ),
+        );
+};
+
+// The entity is created for real, so it has to be removed even when the scenario fails halfway
+// through. Deleting it from within the scenario leaks a record on every failed attempt.
+After({ tags: '@with-malaria-entity-cleanup' }, () => {
+    clearMalariaEntity();
+    malariaEntityFirstName = undefined;
+});
 
 And('you are on the default registration page', () => {
     cy.visit('/#/new');
@@ -537,9 +572,11 @@ Given('you are in the Malaria case diagnosis, treatment and investigation progra
 });
 
 And('you fill the Malaria case diagnosis registration form with values', () => {
+    malariaEntityFirstName = `Ana-${Math.round((new Date()).getTime() / 1000)}`;
+
     cy.get('input[type="text"]')
         .eq(3)
-        .type(`Ana-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(malariaEntityFirstName)
         .blur();
     cy.get('input[type="text"]')
         .eq(4)
@@ -655,24 +692,6 @@ And('you delete the recently added tracked entity', () => {
             .click();
     });
     cy.url().should('include', 'selectedTemplateId=IpHINAT79UW');
-});
-
-And('you delete the recently added malaria entity', () => {
-    // deselect the program stage from the context selector
-    cy.get('[data-test="stage-selector-container-clear-icon"]')
-        .click();
-
-    cy.get('[data-test="profile-widget"]')
-        .contains('Malaria Entity profile')
-        .should('exist');
-    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
-        .click();
-    cy.contains('Delete Malaria Entity')
-        .click();
-    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
-        cy.contains('Yes, delete Malaria Entity')
-            .click();
-    });
 });
 
 And(/^you select (.*) from the available tracked entity types/, (selection) => {
