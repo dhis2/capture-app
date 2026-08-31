@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-28T14:51:05.211Z\n"
-"PO-Revision-Date: 2026-08-28T14:51:05.211Z\n"
+"POT-Creation-Date: 2026-08-31T09:02:36.773Z\n"
+"PO-Revision-Date: 2026-08-31T09:02:36.773Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -195,9 +195,6 @@ msgstr "Assigned user"
 
 msgid "Search for user"
 msgstr "Search for user"
-
-msgid "Notes"
-msgstr "Notes"
 
 msgid "Basic info"
 msgstr "Basic info"
@@ -979,9 +976,6 @@ msgstr ""
 msgid "Errors"
 msgstr "Errors"
 
-msgid "This event doesn't have any notes"
-msgstr "This event doesn't have any notes"
-
 msgid "This event doesn't have any relationships"
 msgstr "This event doesn't have any relationships"
 
@@ -1467,14 +1461,8 @@ msgstr "Saving to {{stageName}} for {{programName}}"
 msgid "Program or program stage is invalid"
 msgstr "Program or program stage is invalid"
 
-msgid "Notes about this {{enrollmentLabel}}"
-msgstr "Notes about this {{enrollmentLabel}}"
-
 msgid "Write a note about this {{enrollmentLabel}}"
 msgstr "Write a note about this {{enrollmentLabel}}"
-
-msgid "This {{enrollmentLabel}} doesn't have any notes"
-msgstr "This {{enrollmentLabel}} doesn't have any notes"
 
 msgid "Error"
 msgstr "Error"
@@ -1520,9 +1508,6 @@ msgstr "No polygon captured"
 
 msgid "Event completed"
 msgstr "Event completed"
-
-msgid "Notes about this event"
-msgstr "Notes about this event"
 
 msgid "Write a note about this event"
 msgstr "Write a note about this event"
@@ -1571,9 +1556,6 @@ msgstr "Scheduling an event in {{stageName}} for {{programName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"
-
-msgid "Event notes"
-msgstr "Event notes"
 
 msgid "Write a note about this scheduled event"
 msgstr "Write a note about this scheduled event"
@@ -2254,11 +2236,20 @@ msgstr "program stages"
 msgid "note"
 msgstr "note"
 
+msgid "notes"
+msgstr "notes"
+
 msgid "relationship"
 msgstr "relationship"
 
+msgid "relationships"
+msgstr "relationships"
+
 msgid "attribute"
 msgstr "attribute"
+
+msgid "attributes"
+msgstr "attributes"
 
 msgid "organisation unit"
 msgstr "organisation unit"

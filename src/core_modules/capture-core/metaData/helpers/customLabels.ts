@@ -33,15 +33,21 @@ const LABELS = asLabels({
     },
     note: {
         field: 'displayNoteLabel',
+        pluralField: 'displayNotesLabel',
         singular: () => i18n.t('note'),
+        plural: () => i18n.t('notes'),
     },
     relationship: {
         field: 'displayRelationshipLabel',
+        pluralField: 'displayRelationshipsLabel',
         singular: () => i18n.t('relationship'),
+        plural: () => i18n.t('relationships'),
     },
     attribute: {
         field: 'displayTrackedEntityAttributeLabel',
+        pluralField: 'displayTrackedEntityAttributesLabel',
         singular: () => i18n.t('attribute'),
+        plural: () => i18n.t('attributes'),
     },
     orgUnit: {
         field: 'displayOrgUnitLabel',
