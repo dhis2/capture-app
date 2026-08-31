@@ -11,6 +11,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
@@ -19,7 +20,6 @@ import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes, useTermLabel } from '../../metaData';
 import { tCustomTerm } from '../../utils/tCustomTerm';
-import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
