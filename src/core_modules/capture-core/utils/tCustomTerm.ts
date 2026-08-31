@@ -32,6 +32,6 @@ export const tCustomTerm = (key: string, options: Options = {}): string => {
 
     return i18n.t(key, {
         ...casedValues,
-        interpolation: { escapeValue: false, ...(interpolation ?? {}) },
+        interpolation: { escapeValue: false, ...interpolation },
     });
 };
