@@ -127,8 +127,6 @@ Then('the bulk complete enrollments modal should close', () => {
         .should('not.exist');
 });
 
-// The rows carry their tracked entity id as data-test, so the scenarios can target the records
-// they assert on instead of whichever records happen to sort to the top of the list.
 When(/^you select the rows for tracked entities (.*)$/, (trackedEntityIds) => {
     trackedEntityIds.split(', ').forEach(trackedEntityId =>
         cy.get('[data-test="online-list-table"]')

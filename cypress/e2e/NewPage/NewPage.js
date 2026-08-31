@@ -5,7 +5,6 @@ import { getCurrentYear } from '../../support/date';
 const MALARIA_FIRST_NAME_ATTRIBUTE = 'TfdH5KvFmMy';
 const MALARIA_PROGRAM = 'qDkgAbB5Jlk';
 
-// Set when the registration form is filled in, so the cleanup hook can find the entity again.
 let malariaEntityFirstName;
 
 const clearMalariaEntity = () => {
@@ -30,8 +29,6 @@ const clearMalariaEntity = () => {
         );
 };
 
-// The entity is created for real, so it has to be removed even when the scenario fails halfway
-// through. Deleting it from within the scenario leaks a record on every failed attempt.
 After({ tags: '@with-malaria-entity-cleanup' }, () => {
     clearMalariaEntity();
     malariaEntityFirstName = undefined;
