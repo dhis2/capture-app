@@ -1,5 +1,4 @@
 import React, { type ComponentType, useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from 'capture-core-utils/styles';
 import type { WithStyles } from 'capture-core-utils/styles';
@@ -11,6 +10,7 @@ import type { Props } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
 import { useTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 const styles = {
     header: {},
@@ -94,7 +94,7 @@ const RelationshipsWidgetPlain = ({
                 }
                 {(relationships?.length ?? 0) === 0 && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This {{enrollmentLabel}} doesn't have any relationships", { enrollmentLabel })}
+                        {tCustomTerm("This {{enrollmentLabel}} doesn't have any relationships", { enrollmentLabel })}
                     </div>
                 )}
                 {children}

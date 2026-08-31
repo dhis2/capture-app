@@ -5,6 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 import type { Props, Access, ReadOnlyMessageInput } from './ReadOnlyBadge.types';
 import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles = {
     label: {
@@ -13,7 +14,7 @@ const styles = {
 } as const;
 
 const getEnrollmentMessage = (enrollmentLabel: string): string =>
-    i18n.t('You only have view access to this {{enrollmentLabel}}', { enrollmentLabel });
+    tCustomTerm('You only have view access to this {{enrollmentLabel}}', { enrollmentLabel });
 
 const getProgramMessage = (): string => i18n.t('You only have view access to this program');
 

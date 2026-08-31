@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 import { DirectionalChevron } from '../../../utils/rtl';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -103,7 +104,7 @@ const BreadcrumbsPlain = ({
         {
             key: pageKeys.OVERVIEW,
             onClick: () => handleNavigation(onBackToDashboard, pageKeys.OVERVIEW),
-            label: i18n.t('{{enrollmentLabel}} dashboard', { enrollmentLabel }),
+            label: tCustomTerm('{{enrollmentLabel}} dashboard', { enrollmentLabel }),
             selected: page === pageKeys.OVERVIEW,
             condition: true,
         },

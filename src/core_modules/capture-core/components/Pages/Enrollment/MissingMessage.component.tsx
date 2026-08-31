@@ -158,12 +158,11 @@ const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string })
     return (
         <IncompleteSelectionsMessage>
             {enrollmentId ?
-                i18n.t('Invalid {{enrollmentLabel}} id {{enrollmentId}}.', {
+                tCustomTerm('Invalid {{enrollmentLabel}} id {{enrollmentId}}.', {
                     enrollmentLabel,
                     enrollmentId,
-                    interpolation: { escapeValue: false },
                 }) :
-                i18n.t('Choose an {{enrollmentLabel}} to view the dashboard.', { enrollmentLabel })
+                tCustomTerm('Choose an {{enrollmentLabel}} to view the dashboard.', { enrollmentLabel })
             }
         </IncompleteSelectionsMessage>
     );
@@ -196,8 +195,8 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose a program to add new or see existing {{enrollmentsLabel}} for {{teiDisplayName}}', {
-                    enrollmentsLabel, teiDisplayName, interpolation: { escapeValue: false },
+                {tCustomTerm('Choose a program to add new or see existing {{enrollmentsLabel}} for {{teiDisplayName}}', {
+                    enrollmentsLabel, teiDisplayName,
                 })}
             </IncompleteSelectionsMessage>
         }
@@ -221,13 +220,13 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('There are no active {{enrollmentsLabel}}.', { enrollmentsLabel })}
+                    {tCustomTerm('There are no active {{enrollmentsLabel}}.', { enrollmentsLabel })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToTrackerProgramRegistrationPage}
                         >
-                            {i18n.t(
+                            {tCustomTerm(
                                 'Add new {{enrollmentLabel}} for {{teiDisplayName}} in this program.',
                                 { enrollmentLabel, teiDisplayName },
                             )}
@@ -282,8 +281,8 @@ const MissingMessagePlain = ({
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
                     {/* eslint-disable-next-line max-len */}
-                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollmentLabel}}. ', {
-                        teiDisplayName, programName, tetName, enrollmentLabel, interpolation: { escapeValue: false },
+                    {tCustomTerm('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollmentLabel}}. ', {
+                        teiDisplayName, programName, tetName, enrollmentLabel,
                     })}
                     <div>
                         <LinkButton

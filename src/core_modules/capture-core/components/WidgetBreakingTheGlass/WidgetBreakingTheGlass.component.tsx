@@ -11,6 +11,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
 import { Widget } from '../Widget';
 import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     title: {
@@ -47,11 +48,11 @@ const WidgetBreakingTheGlassPlain = ({
             >
                 <div className={classes.wrapper}>
                     <div className={classes.title}>
-                        {i18n.t('Check for {{enrollmentsLabel}}', { enrollmentsLabel })}
+                        {tCustomTerm('Check for {{enrollmentsLabel}}', { enrollmentsLabel })}
                     </div>
                     <br />
                     <NoticeBox title={i18n.t('This program is protected')} warning>
-                        {i18n.t(
+                        {tCustomTerm(
                             'You must provide a reason to check for {{enrollmentsLabel}} in this protected program.',
                             { enrollmentsLabel },
                         )}
@@ -60,9 +61,9 @@ const WidgetBreakingTheGlassPlain = ({
                     </NoticeBox>
                     <br />
                     <TextAreaField
-                        label={i18n.t('Reason to check for {{enrollmentsLabel}}', { enrollmentsLabel })}
+                        label={tCustomTerm('Reason to check for {{enrollmentsLabel}}', { enrollmentsLabel })}
                         placeholder={
-                            i18n.t(
+                            tCustomTerm(
                                 'Describe the reason you are checking for {{enrollmentsLabel}} in this protected program',
                                 { enrollmentsLabel },
                             )
@@ -76,7 +77,7 @@ const WidgetBreakingTheGlassPlain = ({
                     <br />
                     <ButtonStrip>
                         <Button onClick={() => onBreakingTheGlass(reason)} disabled={disabled} primary>
-                            {i18n.t('Check for {{enrollmentsLabel}}', { enrollmentsLabel })}
+                            {tCustomTerm('Check for {{enrollmentsLabel}}', { enrollmentsLabel })}
                         </Button>
                         <Button secondary onClick={onCancel}>
                             {i18n.t('Cancel')}

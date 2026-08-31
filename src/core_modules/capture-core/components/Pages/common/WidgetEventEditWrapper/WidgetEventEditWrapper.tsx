@@ -6,6 +6,7 @@ import { WidgetEventEdit } from '../../../WidgetEventEdit';
 import type { Props } from '../../../WidgetEventEdit/widgetEventEdit.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 type WidgetProps = {
     pageStatus: string;
@@ -35,7 +36,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
 
     if (pageStatus === pageStatuses.MISSING_DATA) {
         return (
-            <span>{i18n.t('The {{enrollmentLabel}} event data could not be found', { enrollmentLabel })}</span>
+            <span>{tCustomTerm('The {{enrollmentLabel}} event data could not be found', { enrollmentLabel })}</span>
         );
     }
 

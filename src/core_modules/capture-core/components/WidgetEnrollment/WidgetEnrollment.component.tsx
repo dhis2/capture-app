@@ -56,7 +56,7 @@ const styles = {
 const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = (program, enrollmentLabel: string) =>
-    program.displayEnrollmentDateLabel ?? i18n.t('{{enrollmentLabel}} date', { enrollmentLabel });
+    program.displayEnrollmentDateLabel ?? tCustomTerm('{{enrollmentLabel}} date', { enrollmentLabel });
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
 const WidgetEnrollmentPlain = ({

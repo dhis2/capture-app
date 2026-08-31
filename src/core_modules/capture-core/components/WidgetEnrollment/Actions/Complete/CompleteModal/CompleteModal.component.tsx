@@ -3,6 +3,7 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './completeModal.types';
 import { useTermLabel } from '../../../../../metaData';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 
 export const CompleteModalComponent = ({
     programStagesWithActiveEvents,
@@ -14,9 +15,9 @@ export const CompleteModalComponent = ({
     const enrollmentLabel = useTermLabel('enrollment');
     return (
         <Modal position="middle" large dataTest="widget-enrollment-complete-modal">
-            <ModalTitle>{i18n.t('Complete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>
+            <ModalTitle>{tCustomTerm('Complete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>
             <ModalContent>
-                <p>{i18n.t(
+                <p>{tCustomTerm(
                     'Would you like to complete the {{enrollmentLabel}} and all active events as well?',
                     { enrollmentLabel },
                 )}</p>
@@ -76,7 +77,7 @@ export const CompleteModalComponent = ({
                             primary
                             dataTest="widget-enrollment-actions-complete-button"
                         >
-                            {i18n.t('Yes, complete {{enrollmentLabel}} and events', { enrollmentLabel })}
+                            {tCustomTerm('Yes, complete {{enrollmentLabel}} and events', { enrollmentLabel })}
                         </Button>
                         <Button
                             onClick={() => {
@@ -85,7 +86,7 @@ export const CompleteModalComponent = ({
                             }}
                             secondary
                         >
-                            {i18n.t('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
+                            {tCustomTerm('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
                         </Button>
                         <Button onClick={() => setOpenCompleteModal(false)} secondary>
                             {i18n.t('No, cancel')}

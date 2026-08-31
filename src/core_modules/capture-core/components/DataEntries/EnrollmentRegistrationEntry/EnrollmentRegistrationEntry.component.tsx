@@ -5,6 +5,7 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes, useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
@@ -30,11 +31,10 @@ const translatedTextWithStylesForProgram = (
     teiId?: string,
 ) => (
     teiId ? <span>
-        {i18n.t('Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}.', {
+        {tCustomTerm('Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}.', {
             enrollmentLabel,
             programName,
             orgUnitName,
-            interpolation: { escapeValue: false },
         })}
     </span> : <span>
         {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', {

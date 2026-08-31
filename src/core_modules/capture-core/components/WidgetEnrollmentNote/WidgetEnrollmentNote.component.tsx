@@ -1,5 +1,4 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
@@ -7,6 +6,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
 import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
@@ -27,9 +27,9 @@ export const WidgetEnrollmentNote = () => {
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
-                title={i18n.t('Notes about this {{enrollmentLabel}}', { enrollmentLabel })}
-                placeholder={i18n.t('Write a note about this {{enrollmentLabel}}', { enrollmentLabel })}
-                emptyNoteMessage={i18n.t("This {{enrollmentLabel}} doesn't have any notes", { enrollmentLabel })}
+                title={tCustomTerm('Notes about this {{enrollmentLabel}}', { enrollmentLabel })}
+                placeholder={tCustomTerm('Write a note about this {{enrollmentLabel}}', { enrollmentLabel })}
+                emptyNoteMessage={tCustomTerm("This {{enrollmentLabel}} doesn't have any notes", { enrollmentLabel })}
                 notes={notes}
                 readOnly={!programWriteAccess}
                 badge={showWidgetBadge ? (

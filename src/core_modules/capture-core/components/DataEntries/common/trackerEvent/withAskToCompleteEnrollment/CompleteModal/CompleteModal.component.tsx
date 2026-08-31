@@ -3,6 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps, PlainPropsWithEvents } from './completeModal.types';
 import { useTermLabel } from '../../../../../../metaData';
+import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
 
 export const CompleteEnrollmentAndEventsModalComponent = ({
     programStageName,
@@ -22,7 +23,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                 })}
             </ModalTitle>
             <ModalContent>
-                <p>{i18n.t(
+                <p>{tCustomTerm(
                     'Would you like to complete the {{enrollmentLabel}} and all active events as well?',
                     { enrollmentLabel },
                 )}</p>
@@ -71,10 +72,10 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={onCompleteEnrollmentAndEvents} primary>
-                            {i18n.t('Yes, complete {{enrollmentLabel}} and events', { enrollmentLabel })}
+                            {tCustomTerm('Yes, complete {{enrollmentLabel}} and events', { enrollmentLabel })}
                         </Button>
                         <Button onClick={onCompleteEnrollment} secondary dataTest="enrollment-actions-complete-button">
-                            {i18n.t('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
+                            {tCustomTerm('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
                         </Button>
                         <Button onClick={onCancel} secondary>
                             {i18n.t('No, cancel')}
@@ -97,11 +98,11 @@ export const CompleteEnrollmentModalComponent = ({ programStageName, onCancel, o
                 })}
             </ModalTitle>
             <ModalContent>
-                <p>{i18n.t('Would you like to complete the {{enrollmentLabel}}?', { enrollmentLabel })}</p>
+                <p>{tCustomTerm('Would you like to complete the {{enrollmentLabel}}?', { enrollmentLabel })}</p>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={onCompleteEnrollment} primary>
-                            {i18n.t('Complete {{enrollmentLabel}}', { enrollmentLabel })}
+                            {tCustomTerm('Complete {{enrollmentLabel}}', { enrollmentLabel })}
                         </Button>
                         <Button onClick={onCancel} secondary>
                             {i18n.t('No, cancel')}

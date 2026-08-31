@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = (
@@ -16,7 +17,7 @@ export const useFiltersOnly = (
             {
                 id: MAIN_FILTERS.PROGRAM_STATUS,
                 type: dataElementTypes.TEXT,
-                header: i18n.t('{{enrollmentLabel}} status', { enrollmentLabel }),
+                header: tCustomTerm('{{enrollmentLabel}} status', { enrollmentLabel }),
                 options: [
                     { text: i18n.t('Active'), value: 'ACTIVE' },
                     { text: i18n.t('Completed'), value: 'COMPLETED' },

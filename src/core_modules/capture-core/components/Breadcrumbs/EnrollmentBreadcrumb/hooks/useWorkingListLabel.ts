@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 type Template = {
     id: string;
@@ -38,9 +39,9 @@ export const useWorkingListLabel = ({
 
     const defaultFilterLabels: { [key in DefaultFilterKey]: string } = useMemo(() => ({
         [DefaultFilterKeys.DEFAULT]: i18n.t('Program overview'),
-        [DefaultFilterKeys.ACTIVE]: i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
-        [DefaultFilterKeys.COMPLETE]: i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
-        [DefaultFilterKeys.CANCELLED]: i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
+        [DefaultFilterKeys.ACTIVE]: tCustomTerm('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
+        [DefaultFilterKeys.COMPLETE]: tCustomTerm('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
+        [DefaultFilterKeys.CANCELLED]: tCustomTerm('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
     }), [enrollmentsLabel]);
 
     const label: string = useMemo(() => {
