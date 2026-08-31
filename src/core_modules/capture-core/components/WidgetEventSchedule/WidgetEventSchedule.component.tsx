@@ -14,6 +14,8 @@ import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
+import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -57,6 +59,7 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
+    const notesLabel = useTermLabel('note', { plural: true, programId });
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
@@ -121,12 +124,12 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={i18n.t('Event notes')}
+                    sectionName={tCustomTerm('Event {{notesLabel}}', { notesLabel })}
                 >
                     <NoteSection
                         notes={notes}
                         placeholder={i18n.t('Write a note about this scheduled event')}
-                        emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
+                        emptyNoteMessage={tCustomTerm("This event doesn't have any {{notesLabel}}", { notesLabel })}
                         handleAddNote={onAddNote}
                     />
                 </DataSection>

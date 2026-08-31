@@ -283,6 +283,7 @@ type Props = {
     dataEntryId: string;
     programId: string;
     itemId: string;
+    notesLabel: string;
 };
 
 type DataEntrySection = {
@@ -290,7 +291,7 @@ type DataEntrySection = {
     name?: string;
 };
 
-const dataEntrySectionDefinitions = {
+const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -301,13 +302,13 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
+        name: notesLabel,
     },
     [AOCsectionKey]: {
         placement: placements.TOP,
         name: '',
     },
-};
+});
 
 class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
@@ -319,7 +320,7 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel);
     }
 
     render() {

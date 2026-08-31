@@ -1,5 +1,4 @@
 import * as React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
@@ -8,6 +7,7 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import type { PlainProps } from './NotesSection.types';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
@@ -34,13 +34,13 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes, ready } = this.props;
+        const { classes, notes, ready, notesLabel } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={i18n.t('Notes')}
+                text={notesLabel}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -48,7 +48,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly, notesLabel } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -57,7 +57,7 @@ class NotesSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
-                        {i18n.t("This event doesn't have any notes")}
+                        {tCustomTerm("This event doesn't have any {{notesLabel}}", { notesLabel })}
                     </div>
                 )}
                 {React.createElement(LoadingNotes as any, {

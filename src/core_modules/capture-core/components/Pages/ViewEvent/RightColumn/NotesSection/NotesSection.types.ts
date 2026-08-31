@@ -5,4 +5,5 @@ export type PlainProps = {
     fieldValue?: string;
     ready: boolean;
     readOnly: boolean;
+    notesLabel: string;
 };

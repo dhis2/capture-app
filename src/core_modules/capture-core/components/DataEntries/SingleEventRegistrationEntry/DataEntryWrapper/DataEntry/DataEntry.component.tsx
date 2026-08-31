@@ -402,7 +402,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Notes'),
+            label: props.notesLabel,
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
@@ -541,13 +541,14 @@ type Props = {
     formHorizontal: boolean | null,
     recentlyAddedRelationshipId?: string | null,
     onScrollToRelationships: () => void;
+    notesLabel: string,
 };
 type DataEntrySection = {
     placement: typeof placements[keyof typeof placements],
     name?: string,
 };
 
-const dataEntrySectionDefinitions = {
+const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -561,7 +562,7 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
+        name: notesLabel,
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
@@ -571,7 +572,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
     },
-};
+});
 
 class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any };
@@ -581,7 +582,7 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
         this.fieldOptions = {
             theme: props.theme,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel);
     }
 
     componentDidMount() {

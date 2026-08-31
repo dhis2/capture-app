@@ -308,7 +308,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Notes'),
+            label: props.notesLabel,
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
@@ -441,6 +441,7 @@ type Props = {
     placementDomNodeForSavingText?: HTMLElement;
     programName: string;
     orgUnitFieldValue?: OrgUnit | null;
+    notesLabel: string;
 };
 
 type DataEntrySection = {
@@ -448,7 +449,7 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
+const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -459,7 +460,7 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
+        name: notesLabel,
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
@@ -473,7 +474,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.TOP,
         name: '',
     },
-};
+});
 class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     relationshipsInstance?: HTMLDivElement | null;
     dataEntrySections: { [key: string]: DataEntrySection };
@@ -484,7 +485,7 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel);
     }
 
     componentDidMount() {

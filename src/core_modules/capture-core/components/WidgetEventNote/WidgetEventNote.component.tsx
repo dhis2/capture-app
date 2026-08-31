@@ -1,11 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import { useDispatch, useSelector } from 'react-redux';
 import type { Props } from './WidgetEventNote.types';
 import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
@@ -16,6 +18,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
+    const notesLabel = useTermLabel('note', { plural: true });
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue));
@@ -24,9 +27,9 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={i18n.t('Notes about this event')}
+                title={tCustomTerm('{{notesLabel}} about this event', { notesLabel })}
                 placeholder={i18n.t('Write a note about this event')}
-                emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
+                emptyNoteMessage={tCustomTerm("This event doesn't have any {{notesLabel}}", { notesLabel })}
                 notes={notes}
                 readOnly={!currentStageWriteAccess}
                 badge={showWidgetBadge ? (

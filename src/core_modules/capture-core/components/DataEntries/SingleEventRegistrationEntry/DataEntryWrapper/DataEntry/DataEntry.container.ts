@@ -5,6 +5,7 @@ import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { DataEntryComponent } from './DataEntry.component';
+import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
@@ -25,6 +26,10 @@ import {
 import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { newEventSaveTypes } from './newEventSaveTypes';
+
+const customLabels = {
+    notesLabel: { key: 'note', plural: true },
+} as const;
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -111,5 +116,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withErrorMessageHandler()(DataEntryComponent)),
+    withLoadingIndicator()(withErrorMessageHandler()(
+        withCustomLabels(customLabels)(DataEntryComponent),
+    )),
 );
