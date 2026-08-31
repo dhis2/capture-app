@@ -10,15 +10,15 @@
 # Bram Piot <bram.piot@gmail.com>, 2026
 # Philip Larsen Donnelly, 2026
 # Esther Tokouli, 2026
-# Cyrille Kabrane, 2026
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
+# Cyrille Kabrane, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
+"POT-Creation-Date: 2026-08-24T07:37:43.159Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026\n"
+"Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -656,7 +656,7 @@ msgid "No items to display"
 msgstr "Aucun élément à afficher"
 
 msgid "Tracked entity is deactivated"
-msgstr ""
+msgstr "L'entité suivie est désactivée"
 
 msgid "Select columns"
 msgstr "Sélectionner des colonnes"
@@ -866,7 +866,7 @@ msgid "Program stage is invalid"
 msgstr "Le stade de programme n'est pas valide"
 
 msgid "Stage not found"
-msgstr ""
+msgstr "Stade non trouvé"
 
 msgid "Report"
 msgstr "Rapport"
@@ -931,7 +931,7 @@ msgid "Please select an organisation unit"
 msgstr "Veuillez choisir une unité d'organisation"
 
 msgid "See working list without organisation unit"
-msgstr ""
+msgstr "Afficher la liste des tâches sans unité d'organisation"
 
 msgid "Search for a {{trackedEntityName}}"
 msgstr "Rechercher pour un {{trackedEntityName}}"
@@ -1054,7 +1054,7 @@ msgid "This event doesn't have any notes"
 msgstr "Cet événement n'a pas de notes"
 
 msgid "This event doesn't have any relationships"
-msgstr ""
+msgstr "Cet événement n'a aucune relation"
 
 msgid "Warnings"
 msgstr "Avertissements"
@@ -1144,37 +1144,41 @@ msgid "An error occurred loading possible duplicates"
 msgstr "Une erreur s'est produite lors du chargement des doublons potentiels"
 
 msgid "You only have view access to this enrollment"
-msgstr ""
+msgstr "Vous disposez uniquement d'un accès en lecture à cette inscription."
 
 msgid "You only have view access to this program"
-msgstr ""
+msgstr "Vous disposez uniquement d'un accès en lecture à ce programme."
 
 msgid "You only have view access to this {{trackedEntityName}}"
 msgstr ""
+"Vous disposez uniquement d'un accès en lecture à {{trackedEntityName}}"
 
 msgid "You only have view access to this tracked entity type"
 msgstr ""
+"Vous disposez uniquement d'un accès en lecture à ce type d'entité suivie"
 
 msgid "You only have view access to these program stages"
 msgstr ""
+"Vous disposez uniquement d'un accès en lecture à ces stades de programme."
 
 msgid "You only have view access to this program stage"
 msgstr ""
+"Vous disposez uniquement d'un accès en lecture à ce stade de programme."
 
 msgid "This event is outside the editing period"
-msgstr ""
+msgstr "Cet événement se situe hors de la fenêtre de modification"
 
 msgid "This event has been completed"
-msgstr ""
+msgstr "Cet événement est terminé"
 
 msgid "This {{trackedEntityName}} is deactivated"
-msgstr ""
+msgstr "Cette {{trackedEntityName}} est désactivée"
 
 msgid "This tracked entity is deactivated"
-msgstr ""
+msgstr "Cette entité suivie est désactivée"
 
 msgid "View only - {{message}}"
-msgstr ""
+msgstr "Lecture seule - {{message}}"
 
 msgid "View only"
 msgstr "Visualiser uniquement"
@@ -1745,32 +1749,40 @@ msgid "Fix errors in the form to continue."
 msgstr "Corrigez les erreurs dans le formulaire pour continuer."
 
 msgid "Activate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Activer {{trackedEntityTypeName}}"
 
 msgid "Deactivate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Désactiver {{trackedEntityTypeName}}"
 
 msgid ""
 "Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
 "change its status to active and write operations will be allowed."
 msgstr ""
+"Êtes-vous sûr de vouloir activer cette {{trackedEntityTypeName}}? Son statut"
+" passera alors à \"actif\" et les opérations d'écriture seront autorisées."
 
 msgid ""
 "Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
 "will change its status to inactive and only read operations will be allowed."
 msgstr ""
+"Êtes-vous sûr de vouloir désactiver cette {{trackedEntityTypeName}}? Son "
+"statut passera alors à \"inactif\" et seules les opérations de lecture "
+"seront autorisées."
 
 msgid "Yes, activate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Oui, activer {{trackedEntityTypeName}}"
 
 msgid "Yes, deactivate {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Oui, désactiver {{trackedEntityTypeName}}"
 
 msgid "There was a problem activating the {{trackedEntityTypeName}}"
 msgstr ""
+"Un problème est survenu lors de l'activation du {{trackedEntityTypeName}}"
 
 msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
 msgstr ""
+"Un problème est survenu lors de la désactivation de "
+"{{trackedEntityTypeName}}"
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "Vous n'êtes pas autorisé à supprimer {{trackedEntityTypeName}}"
@@ -1871,7 +1883,7 @@ msgstr ""
 "supprimé."
 
 msgid "This event is outside the edit period"
-msgstr ""
+msgstr "Cet événement se situe hors de la fenêtre de modification"
 
 msgid "An error occurred while deleting the event"
 msgstr "Une erreur s'est produite lors de la suppression de l'événement"
@@ -1917,7 +1929,7 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr "{{ scheduledEvents }} planifiés"
 
 msgid "No stages found in this program"
-msgstr ""
+msgstr "Aucun stade trouvé dans ce programme"
 
 msgid "Stages and Events"
 msgstr "Stades et événements"
@@ -2071,7 +2083,7 @@ msgstr ""
 "l'enregistrement soit terminé."
 
 msgid "This enrollment doesn't have any relationships"
-msgstr ""
+msgstr "Cette inscription n'a aucune relation"
 
 msgid "Type"
 msgstr "Type"
@@ -2449,10 +2461,10 @@ msgid "Error updating the Assignee"
 msgstr "Erreur lors de la de mise à jour de l'attributaire"
 
 msgid "Could not save enrollment note"
-msgstr ""
+msgstr "Impossible d'enregistrer la note d'inscription"
 
 msgid "Could not save event note"
-msgstr ""
+msgstr "Impossible d'enregistrer la note d'événement"
 
 msgid "There was an error fetching metadata"
 msgstr "Une erreur s'est produite lors de l'extraction des métadonnées."
@@ -2559,4 +2571,4 @@ msgstr "Saisie"
 
 msgctxt "Title for shortcut used by command palette"
 msgid "__MANIFEST_SHORTCUT_Search TEI"
-msgstr ""
+msgstr "Rechercher la TEI"
