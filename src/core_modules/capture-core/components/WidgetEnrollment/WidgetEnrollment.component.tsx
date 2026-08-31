@@ -86,6 +86,7 @@ const WidgetEnrollmentPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
     const enrollmentLabel = useTermLabel('enrollment');
+    const followUpLabel = useTermLabel('followUp');
     const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -133,7 +134,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {i18n.t('Follow-up')}
+                                    {capitalizeFirstLetter(followUpLabel)}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-31T11:23:59.337Z\n"
-"PO-Revision-Date: 2026-08-31T11:23:59.337Z\n"
+"POT-Creation-Date: 2026-08-31T11:34:13.748Z\n"
+"PO-Revision-Date: 2026-08-31T11:34:13.748Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1214,12 +1214,6 @@ msgstr "Mark as cancelled"
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
 
-msgid "Remove mark for follow-up"
-msgstr "Remove mark for follow-up"
-
-msgid "Mark for follow-up"
-msgstr "Mark for follow-up"
-
 msgid "Transfer"
 msgstr "Transfer"
 
@@ -1268,9 +1262,6 @@ msgstr ""
 
 msgid "Incident date"
 msgstr "Incident date"
-
-msgid "Follow-up"
-msgstr "Follow-up"
 
 msgid "Started at{{escape}}"
 msgstr "Started at{{escape}}"
@@ -1797,9 +1788,6 @@ msgstr "Owner organisation unit"
 
 msgid "Registration Date"
 msgstr "Registration Date"
-
-msgid "Follow up"
-msgstr "Follow up"
 
 msgid "Delete {{count}} {{ trackedEntityName }}"
 msgid_plural "Delete {{count}} {{ trackedEntityName }}"

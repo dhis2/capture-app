@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
 import { tCustomTerm } from '../../../../../utils/tCustomTerm';
@@ -10,6 +11,7 @@ export const useFiltersOnly = (
     programStageId?: string,
 ) => {
     const enrollmentLabel = useTermLabel('enrollment');
+    const followUpLabel = useTermLabel('followUp');
     return useMemo(() => {
         const enableUserAssignment =
             !programStageId && Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);
@@ -73,7 +75,7 @@ export const useFiltersOnly = (
             {
                 id: MAIN_FILTERS.FOLLOW_UP,
                 type: dataElementTypes.BOOLEAN,
-                header: i18n.t('Follow up'),
+                header: capitalizeFirstLetter(followUpLabel),
                 showInMoreFilters: true,
                 multiValueFilter: false,
                 transformRecordsFilter: (rawFilter: string) => ({
@@ -98,5 +100,5 @@ export const useFiltersOnly = (
                 ]
                 : []),
         ];
-    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages, programStageId, enrollmentLabel]);
+    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages, programStageId, enrollmentLabel, followUpLabel]);
 };
