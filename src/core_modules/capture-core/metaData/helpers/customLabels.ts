@@ -93,7 +93,7 @@ const resolveTerm = (
     const stage = program && stageId ? program.getStage(stageId) : undefined;
     const custom = resolveLabel([stage?.customLabels, program?.customLabels], key, { plural });
     if (custom) return custom;
-    if (plural) return LABELS[key].plural?.() ?? `${key}s`;
+    if (plural) return LABELS[key].plural?.() ?? LABELS[key].singular();
     return LABELS[key].singular();
 };
 
