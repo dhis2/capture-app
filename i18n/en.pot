@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-31T11:34:13.748Z\n"
-"PO-Revision-Date: 2026-08-31T11:34:13.748Z\n"
+"POT-Creation-Date: 2026-09-01T07:23:02.415Z\n"
+"PO-Revision-Date: 2026-09-01T07:23:02.415Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -80,9 +80,6 @@ msgstr "Enrolled"
 
 msgid "Previously enrolled"
 msgstr "Previously enrolled"
-
-msgid "Organisation unit"
-msgstr "Organisation unit"
 
 msgid "Last updated"
 msgstr "Last updated"
@@ -221,9 +218,6 @@ msgstr "Completed"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Please add or cancel the note before saving the event"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -545,9 +539,6 @@ msgstr "Type to filter options"
 msgid "No match found"
 msgstr "No match found"
 
-msgid "Search for an organisation unit"
-msgstr "Search for an organisation unit"
-
 msgid "Clear"
 msgstr "Clear"
 
@@ -643,14 +634,8 @@ msgstr "More filters"
 msgid "Rows per page"
 msgstr "Rows per page"
 
-msgid "Could not get organisation unit"
-msgstr "Could not get organisation unit"
-
 msgid "Program doesn't exist"
 msgstr "Program doesn't exist"
-
-msgid "Selected program is invalid for selected organisation unit"
-msgstr "Selected program is invalid for selected organisation unit"
 
 msgid "Add note"
 msgstr "Add note"
@@ -678,13 +663,6 @@ msgstr "Make referral"
 
 msgid "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} has categories. Choose all categories to view dashboard."
-
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
-msgstr ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -737,9 +715,6 @@ msgstr "You can't add any more {{ programStageName }} events"
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
 
-msgid "The category option is not valid for the selected organisation unit."
-msgstr "The category option is not valid for the selected organisation unit."
-
 msgid "Please select a valid combination."
 msgstr "Please select a valid combination."
 
@@ -749,13 +724,6 @@ msgstr "Get started with Capture app"
 msgid "Report data"
 msgstr "Report data"
 
-msgid ""
-"Choose a program and organisation unit to see existing data and create new "
-"records."
-msgstr ""
-"Choose a program and organisation unit to see existing data and create new "
-"records."
-
 msgid "Click 'Search'. For program-specific results, choose a program first."
 msgstr "Click 'Search'. For program-specific results, choose a program first."
 
@@ -764,12 +732,6 @@ msgstr "Learn more about Capture app"
 
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
-
-msgid "Please select an organisation unit"
-msgstr "Please select an organisation unit"
-
-msgid "See working list without organisation unit"
-msgstr "See working list without organisation unit"
 
 msgid "Search for a {{trackedEntityName}}"
 msgstr "Search for a {{trackedEntityName}}"
@@ -783,9 +745,6 @@ msgid ""
 msgstr ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
-
-msgid "Choose an organisation unit to start reporting"
-msgstr "Choose an organisation unit to start reporting"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
@@ -825,9 +784,6 @@ msgstr "Show all"
 
 msgid "Program"
 msgstr "Program"
-
-msgid "Organisation Unit"
-msgstr "Organisation Unit"
 
 msgid "Registration"
 msgstr "Registration"
@@ -893,9 +849,6 @@ msgstr "Event could not be loaded. Are you sure it exists?"
 msgid "Event could not be loaded"
 msgstr "Event could not be loaded"
 
-msgid "Organisation unit could not be loaded"
-msgstr "Organisation unit could not be loaded"
-
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
@@ -904,12 +857,6 @@ msgstr "All accessible"
 
 msgid "Selected"
 msgstr "Selected"
-
-msgid "Please select an organisation unit."
-msgstr "Please select an organisation unit."
-
-msgid "Organisation unit scope"
-msgstr "Organisation unit scope"
 
 msgid "Selected program"
 msgstr "Selected program"
@@ -997,14 +944,8 @@ msgstr "Add relationship"
 msgid "No results found for "
 msgstr "No results found for "
 
-msgid "Choose an organisation unit in the form below"
-msgstr "Choose an organisation unit in the form below"
-
 msgid "None selected"
 msgstr "None selected"
-
-msgid "Choose an organisation unit"
-msgstr "Choose an organisation unit"
 
 msgid "Choose a {{categoryName}}"
 msgstr "Choose a {{categoryName}}"
@@ -1020,9 +961,6 @@ msgstr "No programs available."
 
 msgid "Search for a program"
 msgstr "Search for a program"
-
-msgid "Some programs are being filtered by the chosen organisation unit"
-msgstr "Some programs are being filtered by the chosen organisation unit"
 
 msgid "Show all programs"
 msgstr "Show all programs"
@@ -1253,13 +1191,6 @@ msgstr "Set area"
 msgid "Transfer Ownership"
 msgstr "Transfer Ownership"
 
-msgid ""
-"Choose the organisation unit to which {{enrollmentLabel}} ownership should "
-"be transferred."
-msgstr ""
-"Choose the organisation unit to which {{enrollmentLabel}} ownership should "
-"be transferred."
-
 msgid "Incident date"
 msgstr "Incident date"
 
@@ -1277,9 +1208,6 @@ msgstr "Add coordinates"
 
 msgid "Add area"
 msgstr "Add area"
-
-msgid "organisation unit could not be retrieved. Please try again later."
-msgstr "organisation unit could not be retrieved. Please try again later."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1367,9 +1295,6 @@ msgstr[1] ""
 
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Please provide a valid organisation unit"
 
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1783,9 +1708,6 @@ msgstr "This cannot be undone."
 msgid "Are you sure you want to delete the selected events?"
 msgstr "Are you sure you want to delete the selected events?"
 
-msgid "Owner organisation unit"
-msgstr "Owner organisation unit"
-
 msgid "Registration Date"
 msgstr "Registration Date"
 
@@ -1965,6 +1887,9 @@ msgstr "Error editing the event, the changes made were not saved"
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
 
+msgid "Could not save enrollment note"
+msgstr "Could not save enrollment note"
+
 msgid "Could not save event note"
 msgstr "Could not save event note"
 
@@ -1988,6 +1913,9 @@ msgstr "Please provide a valid age"
 
 msgid "Please provide a valid phone number"
 msgstr "Please provide a valid phone number"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Please provide a valid organisation unit"
 
 msgid "This value already exists"
 msgstr "This value already exists"

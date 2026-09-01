@@ -187,6 +187,7 @@ const MissingMessagePlain = ({
     const { programId, teiId, enrollmentId } = useLocationQuery();
     const enrollmentLabel = useTermLabel('enrollment');
     const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
+    const orgUnitLabel = useTermLabel('orgUnit');
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
@@ -253,7 +254,11 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
             <IncompleteSelectionsMessage>
                 {/* eslint-disable-next-line max-len */}
-                {i18n.t('You do not have permissions to access to this program, registering unit or record, contact your administrator for more information.')}
+                {tCustomTerm(
+                    // eslint-disable-next-line max-len
+                    'You do not have permissions to access to this program, {{orgUnitLabel}} or record, contact your administrator for more information.',
+                    { orgUnitLabel },
+                )}
             </IncompleteSelectionsMessage>
         }
 

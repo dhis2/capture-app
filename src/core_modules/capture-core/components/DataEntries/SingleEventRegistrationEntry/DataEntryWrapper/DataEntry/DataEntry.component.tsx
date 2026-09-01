@@ -213,11 +213,11 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: i18n.t('Organisation unit'),
+            label: props.orgUnitLabel,
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,

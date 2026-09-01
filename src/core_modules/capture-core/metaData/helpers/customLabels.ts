@@ -98,7 +98,7 @@ const resolveTerm = (
 };
 
 export const getTermLabel = (
-    programId: string | undefined,
+    programId: string,
     key: CustomLabelKey,
     options: TermLabelOptions = {},
 ): string => resolveTerm(programId, key, options);

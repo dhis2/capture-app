@@ -99,7 +99,7 @@ export const openEventForEditInDataEntry = ({
     },
     orgUnit: OrgUnit,
     foundation?: RenderFoundation,
-    program: Program | EventProgram | TrackerProgram | null,
+    program: Program | EventProgram | TrackerProgram,
     dataEntryId: string,
     dataEntryKey: string,
     enrollment?: EnrollmentData,
@@ -119,7 +119,7 @@ export const openEventForEditInDataEntry = ({
         {
             id: 'orgUnit',
             type: 'ORGANISATION_UNIT',
-            validatorContainers: getOrgUnitValidatorContainers(),
+            validatorContainers: getOrgUnitValidatorContainers(getTermLabel(program.id, 'orgUnit')),
         },
         {
             clientId: 'geometry',

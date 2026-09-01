@@ -13,7 +13,7 @@ export const Placements = {
     BOTTOM: 'BOTTOM',
 };
 
-export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: RenderFoundation) => {
+export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: RenderFoundation, orgUnitLabel: string) => {
     const statusLabels: Record<string, string> = {
         ACTIVE: i18n.t('Active'),
         COMPLETED: i18n.t('Completed'),
@@ -36,7 +36,7 @@ export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: Re
             apiKey: 'orgUnit',
             type: dataElementTypes.ORGANISATION_UNIT,
             placement: Placements.TOP,
-            label: i18n.t('Organisation unit'),
+            label: orgUnitLabel,
             convertFn: (orgUnitId: string) => React.createElement(TooltipOrgUnit, { orgUnitId }),
         },
         status: {

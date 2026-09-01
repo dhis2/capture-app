@@ -73,7 +73,7 @@ export const loadViewEventDataEntry =
             {
                 id: 'orgUnit',
                 type: 'ORGANISATION_UNIT',
-                validatorContainers: getOrgUnitValidatorContainers(),
+                validatorContainers: getOrgUnitValidatorContainers(getTermLabel(program.id, 'orgUnit')),
             },
             {
                 clientId: 'geometry',

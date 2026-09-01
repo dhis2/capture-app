@@ -25,11 +25,12 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
         isError,
     } = useMetadataForProgramStage({ programId, stageId });
     const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const orgUnitLabel = useTermLabel('orgUnit', { programId });
 
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {
         return (
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose an organisation unit to start reporting')}
+                {tCustomTerm('Choose an {{orgUnitLabel}} to start reporting', { orgUnitLabel })}
             </IncompleteSelectionsMessage>
         );
     }

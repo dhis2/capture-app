@@ -1,14 +1,11 @@
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
-import i18n from '@dhis2/d2-i18n';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 const validateOrgUnit = (value?: Record<string, unknown>) => isValidOrgUnit(value);
 
-export const getOrgUnitValidatorContainers = () => {
-    const validatorContainers = [
-        {
-            validator: validateOrgUnit,
-            errorMessage: i18n.t('Please provide an valid organisation unit'),
-        },
-    ];
-    return validatorContainers;
-};
+export const getOrgUnitValidatorContainers = (orgUnitLabel: string) => [
+    {
+        validator: validateOrgUnit,
+        errorMessage: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
+    },
+];

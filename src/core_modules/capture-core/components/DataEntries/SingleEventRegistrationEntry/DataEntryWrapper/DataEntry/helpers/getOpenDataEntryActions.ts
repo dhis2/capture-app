@@ -8,8 +8,9 @@ import { addFormData } from '../../../../../D2Form/actions/form.actions';
 import { getCategoryOptionsValidatorContainers } from '../../../../Enrollment/fieldValidators';
 import type { ProgramCategory } from '../../../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import type { DataEntryPropToInclude } from '../../../../../DataEntry/actions/dataEntryLoad.utils';
+import { getTermLabel } from '../../../../../../metaData/helpers/customLabels';
 
-const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
+const buildDataEntryPropsToInclude = (orgUnitLabel: string): Array<DataEntryPropToInclude> => [
     {
         id: 'occurredAt',
         type: 'DATE',
@@ -18,7 +19,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         id: 'orgUnit',
         type: 'ORGANISATION_UNIT',
-        validatorContainers: getOrgUnitValidatorContainers(),
+        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
     },
     {
         clientId: 'geometry',
@@ -49,6 +50,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 ];
 
 export const getOpenDataEntryActions = (
+    programId: string,
     programCategory?: ProgramCategory | null,
     selectedCategories?: { [key: string]: string } | null,
     orgUnit?: CoreOrgUnit | null,
@@ -59,6 +61,7 @@ export const getOpenDataEntryActions = (
             : undefined,
     };
 
+    const dataEntryPropsToInclude = buildDataEntryPropsToInclude(getTermLabel(programId, 'orgUnit'));
     if (programCategory && programCategory.categories) {
         dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,

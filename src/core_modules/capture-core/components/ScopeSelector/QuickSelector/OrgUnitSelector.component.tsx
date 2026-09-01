@@ -3,8 +3,15 @@ import i18n from '@dhis2/d2-i18n';
 // @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { OrgUnitField } from '../../FormFields/New';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
+import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
+
+const customLabels = {
+    orgUnitLabel: { key: 'orgUnit' },
+} as const;
 
 const styles = () => ({
     selectBarMenu: {
@@ -28,6 +35,7 @@ type OwnProps = {
     previousOrgUnitId?: string;
     isReadOnly?: boolean;
     tooltip?: boolean;
+    orgUnitLabel: string;
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -54,16 +62,20 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
     }
 
     render() {
-        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, tooltip, classes } = this.props;
+        const {
+            selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, tooltip, classes, orgUnitLabel,
+        } = this.props;
 
         return (
             <ConditionalTooltip
                 enabled={Boolean(tooltip)}
-                content={i18n.t('Choose an organisation unit in the form below')}
+                content={tCustomTerm('Choose an {{orgUnitLabel}} in the form below', { orgUnitLabel })}
             >
                 <SelectorBarItem
-                    label={i18n.t('Organisation unit')}
-                    noValueMessage={isReadOnly ? i18n.t('None selected') : i18n.t('Choose an organisation unit')}
+                    label={capitalizeFirstLetter(orgUnitLabel)}
+                    noValueMessage={isReadOnly
+                        ? i18n.t('None selected')
+                        : tCustomTerm('Choose an {{orgUnitLabel}}', { orgUnitLabel })}
                     value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                     open={!isReadOnly && this.state.open}
                     setOpen={open => this.setState({ open })}
@@ -89,4 +101,4 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
     }
 }
 
-export const OrgUnitSelector = withStyles(styles)(OrgUnitSelectorPlain);
+export const OrgUnitSelector = withCustomLabels(customLabels)(withStyles(styles)(OrgUnitSelectorPlain));

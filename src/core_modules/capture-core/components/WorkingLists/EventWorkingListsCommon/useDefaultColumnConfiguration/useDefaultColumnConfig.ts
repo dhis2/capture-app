@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ProgramStage } from '../../../../metaData';
-import { dataElementTypes as elementTypeKeys } from '../../../../metaData';
+import { dataElementTypes as elementTypeKeys, useTermLabel } from '../../../../metaData';
 import { mainPropertyNames } from '../../../../events/mainPropertyNames.const';
 import type {
     MainColumnConfig,
@@ -11,7 +12,7 @@ import type {
 } from '..';
 
 
-const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
+const getDefaultMainConfig = (stage: ProgramStage, orgUnitLabel: string): Array<MainColumnConfig> => {
     const baseFields = [{
         id: mainPropertyNames.OCCURRED_AT,
         visible: true,
@@ -21,7 +22,7 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         id: mainPropertyNames.ORGANISATION_UNIT,
         visible: true,
         type: elementTypeKeys.ORGANISATION_UNIT,
-        header: i18n.t('Organisation unit'),
+        header: capitalizeFirstLetter(orgUnitLabel),
         apiName: 'orgUnit',
         filterHidden: true,
     }, {
@@ -66,8 +67,10 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
             multiValueFilter: !!optionSet || type === elementTypeKeys.BOOLEAN,
         })) as Array<MetadataColumnConfig>;
 
-export const useDefaultColumnConfig = (stage: ProgramStage): EventWorkingListsColumnConfigs =>
-    useMemo(() => [
-        ...getDefaultMainConfig(stage),
+export const useDefaultColumnConfig = (stage: ProgramStage): EventWorkingListsColumnConfigs => {
+    const orgUnitLabel = useTermLabel('orgUnit');
+    return useMemo(() => [
+        ...getDefaultMainConfig(stage, orgUnitLabel),
         ...getMetaDataConfig(stage),
-    ], [stage]);
+    ], [stage, orgUnitLabel]);
+};

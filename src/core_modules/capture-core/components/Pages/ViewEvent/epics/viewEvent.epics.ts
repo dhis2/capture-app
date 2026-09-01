@@ -28,6 +28,8 @@ import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
 import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
+import { getTermLabel } from '../../../../metaData/helpers/customLabels';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 export const getEventOpeningFromEventListEpic = (
     action$: any,
@@ -42,6 +44,7 @@ export const getEventOpeningFromEventListEpic = (
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
                 }
+                const orgUnitLabel = getTermLabel(eventContainer.event.programId, 'orgUnit');
                 return getCoreOrgUnit({
                     orgUnitId: eventContainer.event.orgUnitId,
                     onSuccess: (orgUnit: CoreOrgUnit) => startOpenEventForView(eventContainer, orgUnit),
@@ -50,9 +53,10 @@ export const getEventOpeningFromEventListEpic = (
                         log.error(
                             errorCreator(
                                 message ||
-                                i18n.t('Organisation unit could not be loaded'))(details));
+                                tCustomTerm('{{orgUnitLabel}} could not be loaded', { orgUnitLabel }))(details));
                         return openViewEventPageFailed(
-                            i18n.t('Could not get organisation unit'));
+                            tCustomTerm('Could not get {{orgUnitLabel}}', { orgUnitLabel }),
+                        );
                     },
                 });
             })
@@ -103,6 +107,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: any) =>
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         map((action: any) => {
             const eventContainer = action.payload.eventContainer;
+            const orgUnitLabel = getTermLabel(eventContainer.event.programId, 'orgUnit');
             return getCoreOrgUnit({
                 orgUnitId: eventContainer.event.orgUnitId,
                 onSuccess: (orgUnit: CoreOrgUnit) => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer),
@@ -110,7 +115,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: any) =>
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(
                         message ||
-                        i18n.t('Organisation unit could not be loaded'))(details));
+                        tCustomTerm('{{orgUnitLabel}} could not be loaded', { orgUnitLabel }))(details));
                     return orgUnitCouldNotBeRetrievedOnUrlUpdate(eventContainer);
                 },
             });

@@ -3,6 +3,7 @@ import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
 import { convertFormToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
+import { tCustomTerm } from 'capture-core/utils/tCustomTerm';
 import { relatedStageActions } from '../constants';
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
         expiryPeriodType?: string;
         expiryDays?: number;
     };
+    orgUnitLabel: string;
 };
 
 export const isScheduledDateValid = (
@@ -62,6 +64,7 @@ const scheduleInOrgUnit = (props) => {
         orgUnit,
         setErrorMessages,
         expiryPeriod,
+        orgUnitLabel,
     } = props ?? {};
     const { valid: scheduledAtIsValid, validationText } = isScheduledDateValid(
         scheduledAt,
@@ -82,7 +85,7 @@ const scheduleInOrgUnit = (props) => {
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: i18n.t('Please provide a valid organisation unit'),
+            orgUnit: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
         });
     } else {
         setErrorMessages({
@@ -94,12 +97,12 @@ const scheduleInOrgUnit = (props) => {
 };
 
 const enterData = (props) => {
-    const { orgUnit, setErrorMessages } = props ?? {};
+    const { orgUnit, setErrorMessages, orgUnitLabel } = props ?? {};
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: i18n.t('Please provide a valid organisation unit'),
+            orgUnit: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
         });
     } else {
         setErrorMessages({
