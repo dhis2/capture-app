@@ -3,7 +3,7 @@ import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 const timeStamp = Math.round((new Date()).getTime() / 1000);
 
 Then('the stages and events should be loaded', () => {
-    cy.contains('Stages and Events').should('exist');
+    cy.contains('Program stages and events').should('exist');
 });
 
 When(/^you fill in the note: (.*)$/, (note) => {
