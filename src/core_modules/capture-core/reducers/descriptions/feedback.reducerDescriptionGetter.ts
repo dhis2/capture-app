@@ -137,10 +137,28 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
     [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
-    [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: () =>
-        addErrorFeedback({ message: i18n.t('Could not save enrollment note') }),
-    [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: () =>
-        addErrorFeedback({ message: i18n.t('Could not save event note') }),
-    [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: () =>
-        addErrorFeedback({ message: i18n.t('Could not save event note') }),
+    [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: (_state, action) => {
+        const programId = action.meta.selections.programId;
+        const enrollmentLabel = getTermLabel(programId, 'enrollment');
+        const noteLabel = getTermLabel(programId, 'note');
+        return addErrorFeedback({
+            message: tCustomTerm('Could not save {{enrollmentLabel}} {{noteLabel}}', { enrollmentLabel, noteLabel }),
+        });
+    },
+    [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: (_state, action) => {
+        const programId = action.meta.programId;
+        const eventLabel = getTermLabel(programId, 'event');
+        const noteLabel = getTermLabel(programId, 'note');
+        return addErrorFeedback({
+            message: tCustomTerm('Could not save {{eventLabel}} {{noteLabel}}', { eventLabel, noteLabel }),
+        });
+    },
+    [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: (_state, action) => {
+        const programId = action.meta.programId;
+        const eventLabel = getTermLabel(programId, 'event');
+        const noteLabel = getTermLabel(programId, 'note');
+        return addErrorFeedback({
+            message: tCustomTerm('Could not save {{eventLabel}} {{noteLabel}}', { eventLabel, noteLabel }),
+        });
+    },
 }, 'feedbacks', []);

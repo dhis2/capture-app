@@ -73,6 +73,7 @@ class NotesSectionPlain extends React.Component<Props> {
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,
                     smallMainButton: true,
+                    noteLabel: getTermLabel(programId, 'note'),
                 })}
             </ViewEventSection>
         );

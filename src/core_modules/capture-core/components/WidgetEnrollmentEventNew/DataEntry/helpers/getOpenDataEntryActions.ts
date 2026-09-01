@@ -7,7 +7,11 @@ import { getCategoryOptionsValidatorContainers } from '../fieldValidators/catego
 import type { DataEntryPropToInclude } from '../../../DataEntry/actions/dataEntryLoad.utils';
 import { getTermLabel } from '../../../../metaData/helpers/customLabels';
 
-const buildDataEntryPropsToInclude = (orgUnitLabel: string, eventLabel: string): Array<DataEntryPropToInclude> => [
+const buildDataEntryPropsToInclude = (
+    orgUnitLabel: string,
+    eventLabel: string,
+    noteLabel: string,
+): Array<DataEntryPropToInclude> => [
     {
         id: 'occurredAt',
         type: 'DATE',
@@ -31,7 +35,7 @@ const buildDataEntryPropsToInclude = (orgUnitLabel: string, eventLabel: string):
     {
         id: 'note',
         type: 'TEXT',
-        validatorContainers: getNoteValidatorContainers(eventLabel),
+        validatorContainers: getNoteValidatorContainers(eventLabel, noteLabel),
         clientIgnore: true,
     },
     {
@@ -56,6 +60,7 @@ export const getOpenDataEntryActions =
         const dataEntryPropsToInclude = buildDataEntryPropsToInclude(
             getTermLabel(programId, 'orgUnit'),
             getTermLabel(programId, 'event'),
+            getTermLabel(programId, 'note'),
         );
         if (programCategory && programCategory.categories) {
             dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({

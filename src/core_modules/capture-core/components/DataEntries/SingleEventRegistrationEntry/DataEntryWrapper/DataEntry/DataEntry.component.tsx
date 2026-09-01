@@ -406,9 +406,10 @@ const buildNotesSettingsFn = () => {
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
+            noteLabel: props.noteLabel,
         }),
         getPropName: () => 'note',
-        getValidatorContainers: (props: any) => getNoteValidatorContainers(props.eventLabel),
+        getValidatorContainers: (props: any) => getNoteValidatorContainers(props.eventLabel, props.noteLabel),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.NOTES,

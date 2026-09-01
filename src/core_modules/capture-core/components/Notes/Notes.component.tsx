@@ -10,6 +10,7 @@ import { withFocusSaver } from 'capture-ui';
 import { TextField } from '../FormFields/New';
 import { convertClientToList } from '../../converters';
 import { dataElementTypes } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 import type { Note } from './notes.types';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -69,6 +70,7 @@ type Props = {
     value: string | null;
     readOnly?: boolean;
     smallMainButton?: boolean;
+    noteLabel: string;
 };
 
 type NotesProps = Props & WithStyles<typeof styles>;
@@ -80,6 +82,7 @@ const NotesPlain = ({
     value: propValue,
     readOnly = false,
     smallMainButton,
+    noteLabel,
     classes,
 }: NotesProps) => {
     const [addIsOpen, setAddIsOpen] = useState(false);
@@ -134,7 +137,7 @@ const NotesPlain = ({
                     className={classes.addNoteContainer}
                     small
                 >
-                    {i18n.t('Add note')}
+                    {tCustomTerm('Add {{noteLabel}}', { noteLabel })}
                 </Button>
                 <Button
                     onClick={onCancel}
@@ -156,7 +159,7 @@ const NotesPlain = ({
                 small={smallMainButton}
                 dataTest="write-note-btn"
             >
-                {i18n.t('Write note')}
+                {tCustomTerm('Write {{noteLabel}}', { noteLabel })}
             </Button>
         </div>
     );

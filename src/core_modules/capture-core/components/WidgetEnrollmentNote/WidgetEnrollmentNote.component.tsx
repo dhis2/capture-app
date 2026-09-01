@@ -19,6 +19,7 @@ export const WidgetEnrollmentNote = () => {
         showWidgetBadge,
     } = useEnrollmentAccessContext();
     const enrollmentLabel = useTermLabel('enrollment');
+    const noteLabel = useTermLabel('note');
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
@@ -28,8 +29,12 @@ export const WidgetEnrollmentNote = () => {
         <div data-test="enrollment-note-widget">
             <WidgetNote
                 title={tCustomTerm('Notes about this {{enrollmentLabel}}', { enrollmentLabel })}
-                placeholder={tCustomTerm('Write a note about this {{enrollmentLabel}}', { enrollmentLabel })}
+                placeholder={tCustomTerm(
+                    'Write a {{noteLabel}} about this {{enrollmentLabel}}',
+                    { enrollmentLabel, noteLabel },
+                )}
                 emptyNoteMessage={tCustomTerm("This {{enrollmentLabel}} doesn't have any notes", { enrollmentLabel })}
+                noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!programWriteAccess}
                 badge={showWidgetBadge ? (

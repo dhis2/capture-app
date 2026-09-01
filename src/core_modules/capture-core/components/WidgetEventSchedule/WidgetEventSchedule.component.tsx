@@ -76,6 +76,7 @@ const WidgetEventSchedulePlain = ({
         setIsFormValid(formIsValid());
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
     const eventLabel = useTermLabel('event', { programId });
+    const noteLabel = useTermLabel('note', { programId });
 
     return (
         <Widget
@@ -128,9 +129,13 @@ const WidgetEventSchedulePlain = ({
                 >
                     <NoteSection
                         notes={notes}
-                        placeholder={tCustomTerm('Write a note about this scheduled {{eventLabel}}', { eventLabel })}
+                        placeholder={tCustomTerm(
+                            'Write a {{noteLabel}} about this scheduled {{eventLabel}}',
+                            { eventLabel, noteLabel },
+                        )}
                         emptyNoteMessage={tCustomTerm("This {{eventLabel}} doesn't have any notes", { eventLabel })}
                         handleAddNote={onAddNote}
+                        noteLabel={noteLabel}
                     />
                 </DataSection>
                 {enableUserAssignment && (

@@ -18,6 +18,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
         showWidgetBadge,
     } = useEnrollmentAccessContext();
     const eventLabel = useTermLabel('event');
+    const noteLabel = useTermLabel('note');
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId));
@@ -27,8 +28,9 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
         <div data-test="event-note-widget">
             <WidgetNote
                 title={tCustomTerm('Notes about this {{eventLabel}}', { eventLabel })}
-                placeholder={tCustomTerm('Write a note about this {{eventLabel}}', { eventLabel })}
+                placeholder={tCustomTerm('Write a {{noteLabel}} about this {{eventLabel}}', { eventLabel, noteLabel })}
                 emptyNoteMessage={tCustomTerm("This {{eventLabel}} doesn't have any notes", { eventLabel })}
+                noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!currentStageWriteAccess}
                 badge={showWidgetBadge ? (
