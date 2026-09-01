@@ -111,16 +111,20 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Organisation unit search failed.') }),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error saving tracked entity instance') }),
-    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: () => {
-        const enrollmentLabel = getTermLabel(undefined, 'enrollment');
-        return addErrorFeedback({ message: tCustomTerm('Error saving {{enrollmentLabel}}', { enrollmentLabel }) });
+    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: (_state, action) => {
+        const enrollmentLabel = getTermLabel(action.meta.programId, 'enrollment');
+        return addErrorFeedback({
+            message: tCustomTerm('Error saving {{enrollmentLabel}}', { enrollmentLabel }),
+        });
     },
-    [enrollmentSiteActionTypes.SAVE_FAILED]: () => {
-        const enrollmentLabel = getTermLabel(undefined, 'enrollment');
-        return addErrorFeedback({ message: tCustomTerm('Error saving the {{enrollmentLabel}} event', { enrollmentLabel }) });
+    [enrollmentSiteActionTypes.SAVE_FAILED]: (_state, action) => {
+        const enrollmentLabel = getTermLabel(action.payload.programId, 'enrollment');
+        return addErrorFeedback({
+            message: tCustomTerm('Error saving the {{enrollmentLabel}} event', { enrollmentLabel }),
+        });
     },
-    [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: () => {
-        const enrollmentLabel = getTermLabel(undefined, 'enrollment');
+    [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
+        const enrollmentLabel = getTermLabel(action.meta.programId, 'enrollment');
         return addErrorFeedback({
             message: tCustomTerm('Error deleting the {{enrollmentLabel}} event', { enrollmentLabel }),
         });
@@ -133,10 +137,8 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
     [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
-    [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: () => {
-        const enrollmentLabel = getTermLabel(undefined, 'enrollment');
-        return addErrorFeedback({ message: tCustomTerm('Could not save {{enrollmentLabel}} note', { enrollmentLabel }) });
-    },
+    [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: () =>
+        addErrorFeedback({ message: i18n.t('Could not save enrollment note') }),
     [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: () =>
         addErrorFeedback({ message: i18n.t('Could not save event note') }),
     [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: () =>

@@ -166,7 +166,7 @@ export const openEventForEditInDataEntry = ({
         const stage = getStageFromEvent(eventContainer.event)?.stage;
         if (!stage) {
             throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
-                programStageLabel: getTermLabel(program?.id, 'programStage'),
+                programStageLabel: getTermLabel(program.id, 'programStage'),
             }));
         }
         // TODO: Add attributeValues & enrollmentData

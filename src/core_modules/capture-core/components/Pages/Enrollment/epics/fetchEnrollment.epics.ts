@@ -128,7 +128,7 @@ const handleErrorsFromNewerBackends = ({
     return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
 };
 
-const handleErrorsFromOlderBackends = (error: any, programId?: string) => {
+const handleErrorsFromOlderBackends = (error: any, programId: string) => {
     const { message } = error || {};
     if (message) {
         if (message.includes(serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED)) {

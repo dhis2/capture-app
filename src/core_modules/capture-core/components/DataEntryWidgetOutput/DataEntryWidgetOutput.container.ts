@@ -18,8 +18,7 @@ const makeMapStateToProps = () => {
         const { dataEntries } = state;
         const ready = !!dataEntries[dataEntryId];
         const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
-        const programId = state.currentSelections?.programId;
-        const enrollmentLabel = getTermLabel(programId, 'enrollment');
+        const enrollmentLabel = getTermLabel(selectedScopeId, 'enrollment');
 
         return {
             ready,
