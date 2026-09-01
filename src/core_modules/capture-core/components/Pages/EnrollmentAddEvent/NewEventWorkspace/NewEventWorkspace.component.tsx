@@ -69,7 +69,7 @@ const NewEventWorkspacePlain = ({
 
     if (!stage) {
         return renderWidget(
-            <div className={classes.errorWrapper}>{i18n.t('Program stage not found')}</div>,
+            <div className={classes.errorWrapper}>{i18n.t('Stage not found')}</div>,
         );
     }
 

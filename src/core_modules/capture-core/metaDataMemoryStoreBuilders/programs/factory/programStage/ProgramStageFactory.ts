@@ -239,16 +239,8 @@ export class ProgramStageFactory {
                 _form.description = cachedProgramStage.description;
                 _form.featureType = ProgramStageFactory._getFeatureType(cachedProgramStage);
                 _form.access = cachedProgramStage.access;
-                const executionLabel = cachedProgramStage.displayExecutionDateLabel;
-                const dueDateLabel = cachedProgramStage.displayDueDateLabel;
-                _form.addLabel({
-                    id: 'occurredAt',
-                    label: executionLabel ? capitalizeFirstLetter(executionLabel) : 'Report date',
-                });
-                _form.addLabel({
-                    id: 'scheduledAt',
-                    label: dueDateLabel ? capitalizeFirstLetter(dueDateLabel) : 'Scheduled date',
-                });
+                _form.addLabel({ id: 'occurredAt', label: cachedProgramStage.displayExecutionDateLabel || 'Report date' });
+                _form.addLabel({ id: 'scheduledAt', label: cachedProgramStage.displayDueDateLabel || 'Scheduled date' });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&
                     camelCaseUppercaseString(cachedProgramStage.validationStrategy);

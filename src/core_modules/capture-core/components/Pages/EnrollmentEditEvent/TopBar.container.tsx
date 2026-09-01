@@ -102,7 +102,7 @@ export const TopBar = ({
                     },
                 ]}
                 selectedValue="alwaysPreselected"
-                title={i18n.t('Program stage')}
+                title={i18n.t('Stage')}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             />
             {programStage && (

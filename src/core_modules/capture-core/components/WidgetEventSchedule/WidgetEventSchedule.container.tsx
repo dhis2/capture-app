@@ -181,7 +181,7 @@ export const WidgetEventSchedule = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || !programStageScheduleConfig) {
         return (
             <div>
-                {i18n.t('Program or program stage is invalid')}
+                {i18n.t('Program or stage is invalid')}
             </div>
         );
     }

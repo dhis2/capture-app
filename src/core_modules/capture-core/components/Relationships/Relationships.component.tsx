@@ -63,9 +63,9 @@ const styles: Readonly<any> = (theme: any) => ({
     },
 });
 
-const getFromNames = () => ({
+const fromNames = {
     PROGRAM_STAGE_INSTANCE: i18n.t('This event'),
-});
+};
 
 type PlainProps = {
     relationships: Array<Relationship>;
@@ -105,7 +105,7 @@ class RelationshipsPlain extends React.Component<Props> {
         const { onRenderConnectedEntity } = this.props;
 
         if (entity.id === this.props.currentEntityId) {
-            return getFromNames()[entity.type];
+            return fromNames[entity.type];
         }
 
         return onRenderConnectedEntity ? onRenderConnectedEntity(entity) : entity.name;

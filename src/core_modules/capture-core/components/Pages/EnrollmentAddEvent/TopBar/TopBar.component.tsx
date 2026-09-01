@@ -72,7 +72,7 @@ export const EnrollmentAddEventTopBar = ({
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={i18n.t('Program stage')}
+                        title={i18n.t('Stage')}
                         isUserInteractionInProgress={userInteractionInProgress}
                     />
 

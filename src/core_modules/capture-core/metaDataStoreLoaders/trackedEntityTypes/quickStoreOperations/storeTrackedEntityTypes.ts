@@ -26,8 +26,7 @@ const convert = (() => {
             }));
 })();
 
-const FIELDS =
-    'id,access,displayName,minAttributesRequiredToSearch,featureType,' +
+const fieldsParam = 'id,access,displayName,displayTrackedEntityTypesLabel,minAttributesRequiredToSearch,featureType,' +
     'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
     'translations[property,locale,value]';
 
@@ -35,7 +34,7 @@ export const storeTrackedEntityTypes = (ids: Array<string>) => {
     const query = {
         resource: 'trackedEntityTypes',
         params: {
-            fields: FIELDS,
+            fields: fieldsParam,
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,
         },

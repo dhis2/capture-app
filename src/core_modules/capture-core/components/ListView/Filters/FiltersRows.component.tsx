@@ -84,7 +84,7 @@ export const FiltersRowsPlain = ({
             <>
                 <div className={classes.break} />
                 <div className={classes.additionalFiltersContainer}>
-                    <div className={classes.additionalFiltersTitle}>{i18n.t('Program stage filters').toUpperCase()}</div>
+                    <div className={classes.additionalFiltersTitle}>{i18n.t('Stage filters').toUpperCase()}</div>
                     <div className={classes.break} />
                     <Filters
                         columns={columns.filter(item => item.additionalColumn)}
