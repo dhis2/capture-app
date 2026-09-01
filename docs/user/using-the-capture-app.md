@@ -722,7 +722,7 @@ If the fallback can not be done, you will be presented with a modal to go **Back
 
 ![](resources/images/search-by-attributes-fallback-overview-0.png)
 
-#### Create new **tracked entity**
+#### Create new **tracked entity** { #capture_search_create_new_tracked_entity }
 
 When none of the results match, you can create a new user by clicking **Create new** button on the bottom of the search page. 
 
@@ -841,7 +841,7 @@ As an example, you could filter the list to show only tracked entities where the
 Each filter adapts to the attribute's value type, for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
 
 
-#### Filter on empty or non-empty values
+#### Filter on empty or non-empty values { #capture_filter_tracked_entity_list_empty_values }
 
 Data element filters show two checkboxes at the top:
 
@@ -945,7 +945,6 @@ For performance reasons the Capture app caches metadata in the client browser. W
 
 3. The exception to the two rules above is option sets. Option sets have their own version property, i.e. increasing the option set version should ensure the option set metadata are propagated to the clients.
 
-
 ## Enrollment dashboard
 
 ### Reaching the enrollment dashboard via url
@@ -1047,6 +1046,19 @@ When you deselect the enrollment you see the following
 
 In addition to deselecting individual boxes, the top bar provides an action to clear all current selections at once. This resets the organisation unit, program, tracked entity and enrollment and returns you to an empty scope. If you have unsaved changes in an open form, you are first asked to confirm before the selections are discarded.
 
+### Read-only mode { #capture_enrollment_dashboard_read_only }
+
+The enrollment dashboard becomes read-only when you don't have full write access, or when the tracked entity is [deactivated](#capture_deactivate_activate_tei). In read-only mode you can still view all data, but actions that would create, edit, delete, or complete data are hidden rather than just disabled.
+
+- If you have no write access at all (to the program, the tracked entity type, and every program stage), a single **View only** badge is shown next to the context bar at the top of the dashboard, explaining why.
+
+  ![](resources/images/enrollment-dash-read-only-full.png)
+
+- If you have write access to some parts but not others (for example, write access to some program stages but not others, or to the program but not the tracked entity type), the page-level badge is not shown. Instead, each affected widget shows its own **View only** badge and hides only the actions it doesn't allow.
+
+  ![](resources/images/enrollment-dash-read-only-partial.png)
+
+In both cases the action buttons in the affected widgets are hidden, while all existing data stays visible.
 
 ### Quick actions
 
@@ -1157,7 +1169,7 @@ If no attributes are selected, it will just show a row per record with tracked e
 
 When clicking a tracked entity you should be taken to the Enrollment Dashboard. If the relationship type includes a program, you should be taken to the latest enrollment for that program. If no program is specified, you should still be sent to the enrollment dashboard, but without a program.
 
-Click the **Add new** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
+Click the **New Relationship** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
 
 ![](resources/images/enrollment-dash-relationship-widget-add.png)
 
@@ -1187,9 +1199,36 @@ Click the **Edit** button to make changes to the tracked entity profile. Editing
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
 
-Click the **Delete _[tracked entity type]_** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
+The **⋯** (more) icon next to the **Edit** button opens an overflow menu with further actions on the tracked entity: **View changelog** (if enabled for the tracked entity type), **Deactivate**/**Activate**, and **Delete**.
+
+![](resources/images/enrollment-dash-tei-profile-widget-overflow-menu.png)
+
+Select **Delete _[tracked entity type]_** from the overflow menu to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, the tracked entity and all its associated enrollments and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-delete.png)
+
+#### Deactivate or activate a tracked entity { #capture_deactivate_activate_tei }
+
+Deactivating a tracked entity marks it read-only: its profile can no longer be edited, and no new enrollments or events can be created for it in any program. This is useful for records that should be preserved for historical or reporting purposes but should no longer receive new data, for example a person who is deceased or has permanently left the catchment area.
+
+To deactivate a tracked entity:
+
+1. Open the enrollment dashboard for the tracked entity.
+2. In the tracked entity profile widget, click the **⋯** (more) icon and select **Deactivate _[tracked entity type]_**.
+
+   ![](resources/images/enrollment-dash-tei-profile-widget-deactivate-menu-item.png)
+
+3. Confirm by clicking **Yes, deactivate _[tracked entity type]_** in the dialog.
+
+   ![](resources/images/enrollment-dash-tei-profile-widget-deactivate-modal.png)
+
+This option is only shown to users with write access to the tracked entity type.
+
+Once deactivated, the tracked entity shows a **View only** badge wherever it's opened, and appears dimmed with its checkbox disabled in tracked entity working lists, so it can't be picked up for bulk actions.
+
+![](resources/images/enrollment-dash-tei-profile-widget-deactivated-badge.png)
+
+To reverse this, open the overflow menu again and select **Activate _[tracked entity type]_**, then confirm. This restores normal write access according to the user's existing data access permissions.
 
 ### Feedback widget
 
@@ -1215,7 +1254,7 @@ If there aren't any program rules that could show feedback for the current dashb
 On the enrollment dashboard, the indicator widget displays indicator text and values output related to the current dashboard.
 The indicators will be sorted alphabetically.
 
-#### Empty state
+#### Empty state { #capture_indicator_widget_empty_state }
 
 If there aren't any related indicators or indicator output for the current dashboard, the widget shows a short _empty_ message.
 If the current dashboard can't show any indicator output (because it has no related indicators) then the widget is hidden.
@@ -1240,6 +1279,14 @@ If there aren't any warnings to show for the current dashboard then the widget i
 
 On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
 If there aren't any errors to show for the current dashboard then the widget is hidden.
+
+### Customize the dashboard layout { #capture_dashboard_layout }
+
+The widgets described above, and their left/right column order, form the *default* dashboard layout. Individual users cannot rearrange these widgets from within the Capture app itself.
+
+A user with access to the Datastore Management app or the Tracker Configurator App can instead define a custom layout per tracker program, by adding a configuration entry to the `capture` datastore namespace. This lets you choose which widgets appear, in which column, and in what order, and even embed custom plugins alongside the built-in widgets. The same mechanism also applies to the **Add event** and **Edit event** pages.
+
+See [Manual setup (Advanced)](https://developers.dhis2.org/docs/capture-plugins/developer/enrollment-plugins/manual-setup) for the full configuration reference, including the list of supported widgets and how to embed plugins.
 
 ## Enrollment event view and edit page
 
@@ -1353,7 +1400,7 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
-### Ask user to complete program when stage is complete
+### Ask user to complete program when stage is complete { #capture_ask_complete_enrollment_new_event }
 If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button.
 
 ![](resources/images/ask-user-to-complete-enrollment-new-event.png)
