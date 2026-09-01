@@ -42,7 +42,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
     };
 
     useEffect(() => {
-        if (fetchedEnrollmentData.reference) {
+        if (fetchedEnrollmentData.reference && storedEnrollmentId !== enrollmentId) {
             dispatch(setCommonEnrollmentSiteData(
                 fetchedEnrollmentData.enrollment,
                 fetchedEnrollmentData.attributeValues
@@ -53,6 +53,8 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         }
     }, [
         dispatch,
+        enrollmentId,
+        storedEnrollmentId,
         fetchedEnrollmentData.reference,
         fetchedEnrollmentData.enrollment,
         fetchedEnrollmentData.attributeValues,
