@@ -13,7 +13,7 @@ import { getTermLabel } from '../../../../../../metaData/helpers/customLabels';
 const mapStateToProps = (state: ReduxState, props: { searchId: string }) => {
     const searchId = props.searchId;
     const teiSearch = (state as any).teiSearch[searchId];
-    const programId = teiSearch.selectedProgramId;
+    const programId: string | undefined = teiSearch.selectedProgramId;
 
     const filteredRoots = getOrgUnitRoots(searchId);
     const roots = filteredRoots || getOrgUnitRoots('searchRoots');

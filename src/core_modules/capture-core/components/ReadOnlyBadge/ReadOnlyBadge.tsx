@@ -30,9 +30,11 @@ const getProgramStageMessage = (
     ? tCustomTerm('You only have view access to these {{programStagesLabel}}', { programStagesLabel })
     : tCustomTerm('You only have view access to this {{programStageLabel}}', { programStageLabel }));
 
-const getExpiredMessage = (): string => i18n.t('This event is outside the editing period');
+const getExpiredMessage = (eventLabel: string): string =>
+    tCustomTerm('This {{eventLabel}} is outside the editing period', { eventLabel });
 
-const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
+const getCompletedEventMessage = (eventLabel: string): string =>
+    tCustomTerm('This {{eventLabel}} has been completed', { eventLabel });
 
 const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
     ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
@@ -50,15 +52,16 @@ const getReadOnlyMessage = ({
     enrollmentLabel,
     programStageLabel,
     programStagesLabel,
+    eventLabel,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
     if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage(enrollmentLabel);
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages, programStageLabel, programStagesLabel);
-    if (!eventWithinValidPeriod) return getExpiredMessage();
-    if (!canEditCompletedEvent) return getCompletedEventMessage();
-    if (!withinCompleteEventsExpiry) return getExpiredMessage();
+    if (!eventWithinValidPeriod) return getExpiredMessage(eventLabel);
+    if (!canEditCompletedEvent) return getCompletedEventMessage(eventLabel);
+    if (!withinCompleteEventsExpiry) return getExpiredMessage(eventLabel);
     return '';
 };
 
@@ -78,6 +81,7 @@ const ReadOnlyBadgePlain = ({
     const enrollmentLabel = useTermLabel('enrollment');
     const programStageLabel = useTermLabel('programStage');
     const programStagesLabel = useTermLabel('programStage', { plural: true });
+    const eventLabel = useTermLabel('event');
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,
@@ -94,6 +98,7 @@ const ReadOnlyBadgePlain = ({
         enrollmentLabel,
         programStageLabel,
         programStagesLabel,
+        eventLabel,
     });
     if (!message) return null;
 

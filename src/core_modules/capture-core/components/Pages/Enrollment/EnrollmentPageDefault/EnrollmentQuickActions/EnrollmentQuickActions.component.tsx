@@ -9,6 +9,8 @@ import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventW
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
+import { useTermLabel } from '../../../../../metaData';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 
 const styles = {
     contentContainer: {
@@ -30,6 +32,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
+    const eventLabel = useTermLabel('event', { programId: programId as string | undefined });
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };
@@ -79,7 +82,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                 >
                     <QuickActionButton
                         icon={<IconAdd16 color={colors.grey700} />}
-                        label={i18n.t('New event')}
+                        label={tCustomTerm('New {{eventLabel}}', { eventLabel })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
                         disabled={noStageAvailable}
@@ -87,7 +90,7 @@ const EnrollmentQuickActionsComponentPlain = ({
 
                     <QuickActionButton
                         icon={<IconCalendar16 color={colors.grey700} />}
-                        label={i18n.t('Schedule an event')}
+                        label={tCustomTerm('Schedule an {{eventLabel}}', { eventLabel })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
                         disabled={noStageAvailable}

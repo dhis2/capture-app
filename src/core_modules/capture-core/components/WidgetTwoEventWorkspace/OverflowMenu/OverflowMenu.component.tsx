@@ -8,13 +8,14 @@ import {
     IconView16,
     MenuItem,
 } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { OverflowButton } from '../../Buttons';
 import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Props } from './OverflowMenu.types';
 import { useRelationshipTypeAccess } from '../hooks';
+import { useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 export const OverflowMenuComponent = ({
     linkedEvent,
@@ -31,6 +32,8 @@ export const OverflowMenuComponent = ({
     const [isUnlinkModalOpen, setIsUnlinkModalOpen] = useState(false);
     const [isUnlinkAndDeleteModalOpen, setIsUnlinkAndDeleteModalOpen] = useState(false);
     const { relationshipTypeWriteAccess } = useRelationshipTypeAccess(relationshipType);
+    const eventLabel = useTermLabel('event');
+    const eventsLabel = useTermLabel('event', { plural: true });
 
     const handleViewLinkedEvent = () => {
         navigate(`/enrollmentEventEdit?${buildUrlQueryString({ eventId: linkedEvent.event, orgUnitId })}`);
@@ -59,7 +62,7 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense maxWidth="250px">
                         <MenuItem
-                            label={i18n.t('View linked event')}
+                            label={tCustomTerm('View linked {{eventLabel}}', { eventLabel })}
                             icon={<IconView16 />}
                             dataTest="event-overflow-view-linked-event"
                             onClick={handleViewLinkedEvent}
@@ -67,11 +70,14 @@ export const OverflowMenuComponent = ({
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link between these events')}
+                            content={tCustomTerm(
+                                'You do not have access to remove the link between these {{eventsLabel}}',
+                                { eventsLabel },
+                            )}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink event')}
+                                label={tCustomTerm('Unlink {{eventLabel}}', { eventLabel })}
                                 icon={<IconLink16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense
@@ -81,11 +87,14 @@ export const OverflowMenuComponent = ({
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link and delete the linked event')}
+                            content={tCustomTerm(
+                                'You do not have access to remove the link and delete the linked {{eventLabel}}',
+                                { eventLabel },
+                            )}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink and delete linked event')}
+                                label={tCustomTerm('Unlink and delete linked {{eventLabel}}', { eventLabel })}
                                 icon={<IconDelete16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense

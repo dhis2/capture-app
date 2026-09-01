@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
+import { getTermLabel } from '../../../../../../metaData';
+import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
 
 import {
     initializeNewRelationship,
@@ -76,11 +78,12 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
             const toEntity = payload.entity;
 
 
+            const programId = state.currentSelections.programId;
             const newRelationship = {
                 clientId: uuid(),
                 from: {
                     id: 'newEvent',
-                    name: i18n.t('This event'),
+                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel(programId, 'event') }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {

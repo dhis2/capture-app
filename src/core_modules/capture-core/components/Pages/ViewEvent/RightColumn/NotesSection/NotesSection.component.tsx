@@ -9,6 +9,8 @@ import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.com
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import type { PlainProps } from './NotesSection.types';
+import { getTermLabel } from '../../../../../metaData';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
@@ -48,7 +50,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly, programId } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -57,14 +59,17 @@ class NotesSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
-                        {i18n.t("This event doesn't have any notes")}
+                        {tCustomTerm(
+                            "This {{eventLabel}} doesn't have any notes",
+                            { eventLabel: getTermLabel(programId, 'event') },
+                        )}
                     </div>
                 )}
                 {React.createElement(LoadingNotes as any, {
                     ready,
                     notes,
                     readOnly,
-                    onAddNote,
+                    onAddNote: (note: string) => onAddNote(note, programId),
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,
                     smallMainButton: true,

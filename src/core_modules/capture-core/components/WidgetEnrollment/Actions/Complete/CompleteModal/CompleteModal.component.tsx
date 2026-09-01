@@ -13,29 +13,32 @@ export const CompleteModalComponent = ({
     onCompleteEnrollmentAndEvents,
 }: PlainProps) => {
     const enrollmentLabel = useTermLabel('enrollment');
+    const eventLabel = useTermLabel('event');
+    const eventsLabel = useTermLabel('event', { plural: true });
     return (
         <Modal position="middle" large dataTest="widget-enrollment-complete-modal">
             <ModalTitle>{tCustomTerm('Complete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>
             <ModalContent>
                 <p>{tCustomTerm(
-                    'Would you like to complete the {{enrollmentLabel}} and all active events as well?',
-                    { enrollmentLabel },
+                    'Would you like to complete the {{enrollmentLabel}} and all active {{eventsLabel}} as well?',
+                    { enrollmentLabel, eventsLabel },
                 )}</p>
 
                 {Object.keys(programStagesWithActiveEvents).length !== 0 && (
                     <>
-                        {i18n.t('The following events will be completed:')}
+                        {tCustomTerm('The following {{eventsLabel}} will be completed:', { eventsLabel })}
                         {Object.keys(programStagesWithActiveEvents).map((key) => {
                             const { count, name } = programStagesWithActiveEvents[key];
                             return (
                                 <ul key={key}>
                                     <li>
-                                        {i18n.t('{{count}} event in {{programStageName}}', {
+                                        {tCustomTerm('{{count}} {{eventLabel}} in {{programStageName}}', {
                                             count,
-                                            defaultValue: '{{count}} event in {{programStageName}}',
-                                            defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                            eventLabel,
+                                            eventsLabel,
                                             programStageName: name,
-                                            interpolation: { escapeValue: false },
+                                            defaultValue: '{{count}} {{eventLabel}} in {{programStageName}}',
+                                            defaultValue_plural: '{{count}} {{eventsLabel}} in {{programStageName}}',
                                         })}
                                     </li>
                                 </ul>
@@ -46,19 +49,23 @@ export const CompleteModalComponent = ({
 
                 {Object.keys(programStagesWithoutAccess).length !== 0 && (
                     <>
-                        {i18n.t('The following events will not be completed due to lack of access:')}
+                        {tCustomTerm(
+                            'The following {{eventsLabel}} will not be completed due to lack of access:',
+                            { eventsLabel },
+                        )}
                         {Object.keys(programStagesWithoutAccess).map((key) => {
                             const { count, name } = programStagesWithoutAccess[key];
 
                             return (
                                 <ul key={key}>
                                     <li>
-                                        {i18n.t('{{count}} event in {{programStageName}}', {
+                                        {tCustomTerm('{{count}} {{eventLabel}} in {{programStageName}}', {
                                             count,
-                                            defaultValue: '{{count}} event in {{programStageName}}',
-                                            defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                            eventLabel,
+                                            eventsLabel,
                                             programStageName: name,
-                                            interpolation: { escapeValue: false },
+                                            defaultValue: '{{count}} {{eventLabel}} in {{programStageName}}',
+                                            defaultValue_plural: '{{count}} {{eventsLabel}} in {{programStageName}}',
                                         })}
                                     </li>
                                 </ul>
@@ -77,7 +84,10 @@ export const CompleteModalComponent = ({
                             primary
                             dataTest="widget-enrollment-actions-complete-button"
                         >
-                            {tCustomTerm('Yes, complete {{enrollmentLabel}} and events', { enrollmentLabel })}
+                            {tCustomTerm(
+                                'Yes, complete {{enrollmentLabel}} and {{eventsLabel}}',
+                                { enrollmentLabel, eventsLabel },
+                            )}
                         </Button>
                         <Button
                             onClick={() => {

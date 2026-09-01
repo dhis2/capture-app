@@ -29,6 +29,7 @@ import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 
 const customLabels = {
     orgUnitLabel: { key: 'orgUnit' },
+    eventLabel: { key: 'event' },
 } as const;
 
 const makeMapStateToProps = () => {

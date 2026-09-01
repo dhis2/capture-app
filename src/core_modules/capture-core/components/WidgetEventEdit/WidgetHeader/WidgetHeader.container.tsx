@@ -11,6 +11,8 @@ import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCate
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import type { PlainProps } from './WidgetHeader.types';
+import { useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 const styles: Readonly<any> = {
     icon: {
@@ -47,6 +49,7 @@ const WidgetHeaderPlain = ({
     const { programCategory } = useCategoryCombinations(programId);
 
     const { icon, name } = stage;
+    const eventLabel = useTermLabel('event', { programId });
 
     return (
         <>
@@ -73,7 +76,7 @@ const WidgetHeaderPlain = ({
                                 onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                                 data-test="widget-enrollment-event-edit-button"
                             >
-                                {i18n.t('Edit event')}
+                                {tCustomTerm('Edit {{eventLabel}}', { eventLabel })}
                             </Button>
                         )}
 

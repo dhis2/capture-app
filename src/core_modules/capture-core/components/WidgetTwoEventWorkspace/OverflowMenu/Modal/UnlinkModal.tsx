@@ -13,6 +13,8 @@ import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkModal.types';
+import { useTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 export const UnlinkModal = ({
     setOpenModal,
@@ -22,8 +24,10 @@ export const UnlinkModal = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const eventLabel = useTermLabel('event');
+    const eventsLabel = useTermLabel('event', { plural: true });
     const { show: showErrorAlert } = useAlert(
-        i18n.t('An error occurred while unlinking and deleting the event.'),
+        tCustomTerm('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
         { critical: true },
     );
 
@@ -59,13 +63,16 @@ export const UnlinkModal = ({
     return (
         <Modal dataTest="event-unlink-modal">
             <ModalTitle>
-                {i18n.t('Unlink event')}
+                {tCustomTerm('Unlink {{eventLabel}}', { eventLabel })}
             </ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t('Are you sure you want to remove the link between these events?')}
+                    {tCustomTerm('Are you sure you want to remove the link between these {{eventsLabel}}?', { eventsLabel })}
                     {' '}
-                    {i18n.t('This action removes the link itself, but the linked event will remain.')}
+                    {tCustomTerm(
+                        'This action removes the link itself, but the linked {{eventLabel}} will remain.',
+                        { eventLabel },
+                    )}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -79,7 +86,7 @@ export const UnlinkModal = ({
                         disabled={mutation.isLoading}
                         dataTest="event-overflow-unlink-event-confirm"
                     >
-                        {i18n.t('Yes, unlink event')}
+                        {tCustomTerm('Yes, unlink {{eventLabel}}', { eventLabel })}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

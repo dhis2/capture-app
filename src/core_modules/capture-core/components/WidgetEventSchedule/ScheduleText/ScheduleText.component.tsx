@@ -1,16 +1,20 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { InfoIconText } from '../../InfoIconText';
 import type { Props } from './scheduleText.types';
+import { useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 
-export const ScheduleText = ({ orgUnitName, stageName, programName }: Props) => (
-    <InfoIconText>
-        <span>
-            {orgUnitName
-                ? i18n.t('Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}',
-                    { orgUnitName, stageName, programName, interpolation: { escapeValue: false } })
-                : i18n.t('Scheduling an event in {{stageName}} for {{programName}}',
-                    { stageName, programName, interpolation: { escapeValue: false } })}
-        </span>
-    </InfoIconText>
-);
+export const ScheduleText = ({ orgUnitName, stageName, programName }: Props) => {
+    const eventLabel = useTermLabel('event');
+    return (
+        <InfoIconText>
+            <span>
+                {orgUnitName
+                    ? tCustomTerm('Scheduling an {{eventLabel}} in {{stageName}} for {{programName}} in {{orgUnitName}}',
+                        { orgUnitName, stageName, programName, eventLabel })
+                    : tCustomTerm('Scheduling an {{eventLabel}} in {{stageName}} for {{programName}}',
+                        { stageName, programName, eventLabel })}
+            </span>
+        </InfoIconText>
+    );
+};

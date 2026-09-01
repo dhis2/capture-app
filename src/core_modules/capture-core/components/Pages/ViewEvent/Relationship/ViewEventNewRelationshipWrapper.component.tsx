@@ -7,6 +7,8 @@ import { NewRelationship } from '../../NewRelationship/NewRelationship.container
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { PlainProps } from './ViewEventNewRelationshipWrapper.types';
+import { getTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -70,27 +72,28 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
             className={this.props.classes.headerContainer}
         >
             <div className={this.props.classes.header} >
-                {i18n.t('New event relationship')}
+                {tCustomTerm('New {{eventLabel}} relationship', { eventLabel: getTermLabel(this.props.programId, 'event') })}
             </div>
         </div>
     );
 
     render() {
-        const { classes, onCancel, ...passOnProps } = this.props;
+        const { classes, onCancel, programId, ...passOnProps } = this.props;
+        const eventLabel = getTermLabel(programId, 'event');
         return (
             <div className={classes.container}>
                 <div className={classes.backToEventContainer}>
-                    <span>{i18n.t('Adding relationship to event.')}</span>
+                    <span>{tCustomTerm('Adding relationship to {{eventLabel}}.', { eventLabel })}</span>
                     <LinkButton
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {i18n.t('Go back to event without saving relationship')}
+                        {tCustomTerm('Go back to {{eventLabel}} without saving relationship', { eventLabel })}
                     </LinkButton>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={i18n.t('New event relationship')}
+                        header={tCustomTerm('New {{eventLabel}} relationship', { eventLabel })}
                         onCancel={onCancel}
                         {...passOnProps}
                     />

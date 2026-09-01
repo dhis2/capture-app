@@ -28,4 +28,5 @@ export type ReadOnlyMessageInput = {
     enrollmentLabel: string;
     programStageLabel: string;
     programStagesLabel: string;
+    eventLabel: string;
 };

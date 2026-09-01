@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { IconDelete24, colors } from '@dhis2/ui';
 import { EventWorkingListsUpdateTrigger } from '../UpdateTrigger';
 import type { CustomRowMenuContents } from '../../WorkingListsBase';
@@ -7,10 +6,13 @@ import type { Props } from './eventWorkingListsRowMenuSetup.types';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { isValidPeriod } from '../../../../utils/validation/validators/form';
 import { DeleteEventModal } from './DeleteEventModal';
+import { useTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 
 export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...passOnProps }: Props) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
+    const eventLabel = useTermLabel('event', { programId });
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [eventIdToDelete, setEventIdToDelete] = useState<string | null>(null);
 
@@ -32,15 +34,15 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
         key: 'deleteEventItem',
         clickHandler: ({ id }) => handleOpenDeleteModal(id),
         icon: <IconDelete24 color={colors.red400} />,
-        label: i18n.t('Delete event'),
+        label: tCustomTerm('Delete {{eventLabel}}', { eventLabel }),
         tooltipContent: (row) => {
             const { occurredAt } = row ?? {};
             const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
-            return isWithinValidPeriod ? null : i18n.t(
-                '{{occurredAt}} belongs to an expired period. Event cannot be deleted',
+            return isWithinValidPeriod ? null : tCustomTerm(
+                '{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be deleted',
                 {
                     occurredAt,
-                    interpolation: { escapeValue: false },
+                    eventLabel,
                 },
             );
         },
@@ -54,7 +56,7 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
             const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
             return !isWithinValidPeriod;
         },
-    }], [expiryPeriod]);
+    }], [expiryPeriod, eventLabel]);
 
 
     return (

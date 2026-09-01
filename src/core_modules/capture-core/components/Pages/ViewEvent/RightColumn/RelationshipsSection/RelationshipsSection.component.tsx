@@ -11,6 +11,8 @@ import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
+import { getTermLabel } from '../../../../../metaData';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
@@ -76,7 +78,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, programStage, eventId, relationships, ready, readOnly } = this.props;
+        const { classes, programStage, programId, eventId, relationships, ready, readOnly } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
@@ -92,7 +94,10 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This event doesn't have any relationships")}
+                        {tCustomTerm(
+                            "This {{eventLabel}} doesn't have any relationships",
+                            { eventLabel: getTermLabel(programId, 'event') },
+                        )}
                     </div>
                 )}
                 {React.createElement(LoadingRelationships as any, {
@@ -105,6 +110,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     readOnly,
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
+                    programId,
                 })}
             </ViewEventSection>
         );

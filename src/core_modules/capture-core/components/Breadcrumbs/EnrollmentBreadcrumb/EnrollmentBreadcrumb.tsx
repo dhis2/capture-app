@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState, ComponentType } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { useTermLabel } from '../../../metaData';
@@ -71,6 +70,7 @@ const BreadcrumbsPlain = ({
 }: Props) => {
     const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
     const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const eventLabel = useTermLabel('event', { programId });
 
     const { label } = useWorkingListLabel({
         programId,
@@ -111,7 +111,7 @@ const BreadcrumbsPlain = ({
         {
             key: pageKeys.VIEW_EVENT,
             onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
-            label: i18n.t('View event'),
+            label: tCustomTerm('View {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT ||
                 (page === pageKeys.EDIT_EVENT && !eventIsScheduled(eventStatus)),
@@ -119,14 +119,14 @@ const BreadcrumbsPlain = ({
         {
             key: pageKeys.EDIT_EVENT,
             onClick: () => undefined,
-            label: i18n.t('Edit event'),
+            label: tCustomTerm('Edit {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
         {
             key: pageKeys.NEW_EVENT,
             onClick: () => undefined,
-            label: i18n.t('New event'),
+            label: tCustomTerm('New {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.NEW_EVENT,
             condition: page === pageKeys.NEW_EVENT,
         },
@@ -139,6 +139,7 @@ const BreadcrumbsPlain = ({
         onBackToDashboard,
         onBackToViewEvent,
         enrollmentLabel,
+        eventLabel,
     ]);
 
     return (

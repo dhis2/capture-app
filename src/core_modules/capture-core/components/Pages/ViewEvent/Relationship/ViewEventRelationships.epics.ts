@@ -3,6 +3,8 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
+import { getTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 import {
     addRelationship,
     removeRelationship,
@@ -79,11 +81,12 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
             const toEntity = payload.entity;
 
             const relationshipClientId = uuid();
+            const programId = state.currentSelections.programId;
             const clientRelationship = {
                 clientId: relationshipClientId,
                 from: {
                     id: eventId,
-                    name: i18n.t('This event'),
+                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel(programId, 'event') }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
