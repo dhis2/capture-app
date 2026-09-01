@@ -15,7 +15,9 @@ import {
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { withGotoInterface } from '../../../../../FormFields/New';
+import { useTermLabel } from '../../../../../../metaData';
 import type { SearchGroup } from '../../../../../../metaData';
+import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
@@ -43,6 +45,20 @@ const getStyles = (theme: any) => ({
 
 type State = {
     showMissingSearchCriteriaModal: boolean;
+};
+
+const MinAttributesRequiredMessage = ({ count }: { count: number }) => {
+    const attributeLabel = useTermLabel('attribute');
+    return (
+        <>
+            {tCustomTerm('Fill in at least {{count}} {{attributeLabel}} to search', {
+                count,
+                attributeLabel,
+                defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
+                defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+            })}
+        </>
+    );
 };
 
 type OwnProps = {
@@ -163,13 +179,7 @@ class SearchFormPlain extends React.Component<Props, State> {
 
         return (
             <div className={minAttributesRequiredClass}>
-                {
-                    i18n.t('Fill in at least {{count}} attribute to search', {
-                        count: searchGroup.minAttributesRequiredToSearch,
-                        defaultValue: 'Fill in at least {{count}} attribute to search',
-                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    })
-                }
+                <MinAttributesRequiredMessage count={searchGroup.minAttributesRequiredToSearch} />
             </div>
         );
     }
