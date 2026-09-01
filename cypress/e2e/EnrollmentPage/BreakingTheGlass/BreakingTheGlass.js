@@ -1,10 +1,8 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, After, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
-import { hasVersionSupport } from '../../../support/tagUtils';
 
-Given('the tei created by this test is cleared from the database', () => {
-    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
-    cy.buildApiUrl('tracker', `trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&${orgUnitModeParam}=ACCESSIBLE`)
+const clearTestTei = () =>
+    cy.buildApiUrl('tracker', 'trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&orgUnitMode=ACCESSIBLE')
         .then(url => cy.request(url))
         .then(({ body }) => {
             const apiTrackedEntities = body.trackedEntities || body.instances || [];
@@ -14,6 +12,19 @@ Given('the tei created by this test is cleared from the database', () => {
                     .then(trackedEntityUrl => cy.request('POST', trackedEntityUrl, { trackedEntities: [{ trackedEntity }] })),
             );
         });
+
+After({ tags: '@with-breaking-the-glass-tei-cleanup' }, () => {
+    // The scenario ends logged in as the search-scope-only user, which cannot delete the tei.
+    cy.loginByApi({
+        username: Cypress.env('dhis2Username'),
+        password: Cypress.env('dhis2Password'),
+        baseUrl: Cypress.env('dhis2BaseUrl'),
+    });
+    clearTestTei();
+});
+
+Given('the tei created by this test is cleared from the database', () => {
+    clearTestTei();
 });
 
 And('you create a new tei in Child programme from Ngelehun CHC', () => {
@@ -79,24 +90,23 @@ And('you enroll the tei from Njandama MCHP', () => {
 });
 
 And('you log out', () => {
-    cy.get('[data-test="headerbar-profile"')
-        .click();
-    cy.get('[data-test="headerbar-profile-menu"')
-        .contains('Logout')
-        .click();
-    // Wait for login screen
-    cy.get('#j_username')
-        .should('exist');
+    cy.clearCookies();
 });
 
 And('you log in as tracker2 user', () => {
-    cy.clearCookies();
-    cy.visit('/').then(() => {
-        cy.get('#j_username').type('tracker2');
-        cy.get('#j_password').type('Tracker@123');
-        cy.get('form').submit();
+    const baseUrl = Cypress.env('dhis2BaseUrl');
+    const username = 'tracker2';
+
+    cy.session(`user${username}`, () => {
+        cy.loginByApi({ username, password: 'Tracker@123', baseUrl });
+    }, {
+        cacheAcrossSpecs: true,
+        validate: () => {
+            cy.validateUserIsLoggedIn({ baseUrl, username });
+        },
     });
 
+    cy.visit('/');
     cy.get('[data-test="scope-selector"]', { timeout: 60000 })
         .should('exist');
 });

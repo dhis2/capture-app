@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDataEngine, useConfig } from '@dhis2/app-runtime';
+import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { buildFormFoundation } from '../FormFoundation';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
@@ -7,8 +7,6 @@ import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnro
 export const useFormFoundation = (programAPI: any, dataEntryFormConfig: DataEntryFormConfig | null) => {
     const [formFoundation, setFormFoundation] = useState<any>({});
     const dataEngine = useDataEngine();
-    const { serverVersion } = useConfig();
-    const minorServerVersion = (serverVersion as any)?.minor;
 
     useEffect(() => {
         const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
@@ -16,10 +14,9 @@ export const useFormFoundation = (programAPI: any, dataEntryFormConfig: DataEntr
             programAPI,
             setFormFoundation,
             querySingleResource,
-            minorServerVersion,
             dataEntryFormConfig,
         );
-    }, [programAPI, dataEngine, minorServerVersion, dataEntryFormConfig]);
+    }, [programAPI, dataEngine, dataEntryFormConfig]);
 
     return formFoundation;
 };

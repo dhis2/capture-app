@@ -7,13 +7,11 @@ export async function buildTrackedEntityTypes({
     cachedTrackedEntityAttributes,
     cachedOptionSets,
     locale,
-    minorServerVersion,
 }: BuildTrackedEntityTypesInput) {
     const trackedEntityTypeFactory = new TrackedEntityTypeFactory({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
-        minorServerVersion,
     });
 
     // @ts-expect-error - keeping original functionality as before ts rewrite
