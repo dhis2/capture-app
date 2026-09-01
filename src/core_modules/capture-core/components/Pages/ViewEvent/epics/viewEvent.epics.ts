@@ -42,7 +42,7 @@ export const getEventOpeningFromEventListEpic = (
             .then((eventContainer: any) => {
                 if (!eventContainer) {
                     return openViewEventPageFailed(
-                        i18n.t('Event could not be loaded. Are you sure it exists?'));
+                        i18n.t('Could not load the requested data. It may not exist or you may not have access.'));
                 }
                 const orgUnitLabel = getTermLabel(eventContainer.event.programId, 'orgUnit');
                 return getCoreOrgUnit({
@@ -67,7 +67,7 @@ export const getEventOpeningFromEventListEpic = (
                         message ||
                         i18n.t('Event could not be loaded'))(details));
                 return openViewEventPageFailed(
-                    i18n.t('Event could not be loaded. Are you sure it exists?'));
+                    i18n.t('Could not load the requested data. It may not exist or you may not have access.'));
             }),
         ),
     );
@@ -86,7 +86,7 @@ export const getEventFromUrlEpic = (
                 .then((eventContainer: any) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(
-                            i18n.t('Event could not be loaded. Are you sure it exists?'));
+                            i18n.t('Could not load the requested data. It may not exist or you may not have access.'));
                     }
                     return getCategoriesDataFromEventAsync(eventContainer.event, querySingleResource)
                         .then((categoriesData: any) => eventFromUrlRetrieved(eventContainer, prevProgramId, categoriesData));
@@ -98,7 +98,7 @@ export const getEventFromUrlEpic = (
                             message ||
                             i18n.t('Event could not be loaded'))(details));
                     return eventFromUrlCouldNotBeRetrieved(
-                        i18n.t('Event could not be loaded. Are you sure it exists?'));
+                        i18n.t('Could not load the requested data. It may not exist or you may not have access.'));
                 });
         }));
 

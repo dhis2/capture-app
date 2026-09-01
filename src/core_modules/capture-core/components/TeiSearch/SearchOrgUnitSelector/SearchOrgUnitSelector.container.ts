@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import {
     setOrgUnitScope,
     setOrgUnit,
@@ -24,7 +25,7 @@ const mapStateToProps = (state: any, props: any) => {
         treeSearchText: teiSearch.orgUnitsSearchText,
         treeReady: !teiSearch.orgUnitsLoading,
         treeKey: teiSearch.orgUnitsSearchText || 'initial',
-        orgUnitLabel: getTermLabel(programId, 'orgUnit'),
+        orgUnitLabel: programId ? getTermLabel(programId, 'orgUnit') : i18n.t('organisation unit'),
     };
 };
 
