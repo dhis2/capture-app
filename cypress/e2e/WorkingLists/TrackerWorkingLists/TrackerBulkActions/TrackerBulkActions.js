@@ -1,6 +1,10 @@
 import { Given, Then, When, After } from '@badeball/cypress-cucumber-preprocessor';
 import '../../sharedSteps';
 
+const getTrackedEntityRow = trackedEntityId =>
+    cy.get('[data-test="online-list-table"]')
+        .find(`[data-test="dhis2-uicore-tablebody"] tr[data-test="${trackedEntityId}"]`);
+
 const setTrackedEntityInactive = (teiId, inactive) =>
     cy.buildApiUrl('tracker', `trackedEntities/${teiId}?fields=trackedEntity,trackedEntityType,orgUnit,inactive`)
         .then(url => cy.request(url))
@@ -129,8 +133,7 @@ Then('the bulk complete enrollments modal should close', () => {
 
 When(/^you select the rows for tracked entities (.*)$/, (trackedEntityIds) => {
     trackedEntityIds.split(', ').forEach(trackedEntityId =>
-        cy.get('[data-test="online-list-table"]')
-            .find(`[data-test="dhis2-uicore-tablebody"] tr[data-test="${trackedEntityId}"]`)
+        getTrackedEntityRow(trackedEntityId)
             .find('[data-test="select-row-checkbox"]')
             .click(),
     );
@@ -280,16 +283,10 @@ When('you close the error dialog', () => {
         .contains('Cancel');
 });
 
-Then('the unsuccessful enrollments should still be selected', () => {
-    cy.get('[data-test="dhis2-uicore-tablebody"]')
-        .find('tr')
-        .eq(0)
-        .should('have.class', 'selected');
-
-    cy.get('[data-test="dhis2-uicore-tablebody"]')
-        .find('tr')
-        .eq(2)
-        .should('have.class', 'selected');
+Then(/^the rows for tracked entities (.*) should still be selected$/, (trackedEntityIds) => {
+    trackedEntityIds.split(', ').forEach(trackedEntityId =>
+        getTrackedEntityRow(trackedEntityId).should('have.class', 'selected'),
+    );
 });
 
 Then('the bulk delete enrollments modal should open', () => {

@@ -52,7 +52,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
     When you confirm 2 active enrollments with errors
     Then an error dialog will be displayed to the user
     And you close the error dialog
-    And the unsuccessful enrollments should still be selected
+    And the rows for tracked entities s4NfKOuayqG, dNpxRu1mWG5 should still be selected
 
   Scenario: the user should be able to bulk complete enrollments and events
     Given you open the main page with Ngelehun and Malaria focus investigation context
