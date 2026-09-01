@@ -136,7 +136,7 @@ When(/^you select the rows for tracked entities (.*)$/, (trackedEntityIds) => {
     );
 });
 
-Then(/^the working list is displayed with (\d+) rows per page$/, (rowsPerPage) => {
+When(/^you set the working list to display (\d+) rows per page$/, (rowsPerPage) => {
     cy.get('[data-test="working-list-table-loading"]').should('not.exist');
     cy.get('div[data-test="rows-per-page-selector"]')
         .click()

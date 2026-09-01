@@ -16,17 +16,21 @@ const clearMalariaEntity = () => {
         .buildApiUrl(
             'tracker',
             `trackedEntities?program=${MALARIA_PROGRAM}&orgUnitMode=ACCESSIBLE` +
-                `&filter=${MALARIA_FIRST_NAME_ATTRIBUTE}:like:${malariaEntityFirstName}` +
+                `&filter=${MALARIA_FIRST_NAME_ATTRIBUTE}:eq:${malariaEntityFirstName}` +
                 '&fields=trackedEntity&page=1&pageSize=5',
         )
         .then(url => cy.request(url))
-        .then(({ body }) =>
-            (body.trackedEntities || []).forEach(({ trackedEntity }) =>
-                cy
-                    .buildApiUrl('tracker?async=false&importStrategy=DELETE')
-                    .then(deleteUrl => cy.request('POST', deleteUrl, { trackedEntities: [{ trackedEntity }] })),
-            ),
-        );
+        .then(({ body }) => {
+            const trackedEntities = (body.trackedEntities || []).map(({ trackedEntity }) => ({ trackedEntity }));
+
+            if (!trackedEntities.length) {
+                return undefined;
+            }
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(deleteUrl => cy.request('POST', deleteUrl, { trackedEntities }));
+        });
 };
 
 After({ tags: '@with-malaria-entity-cleanup' }, () => {
@@ -569,7 +573,7 @@ Given('you are in the Malaria case diagnosis, treatment and investigation progra
 });
 
 And('you fill the Malaria case diagnosis registration form with values', () => {
-    malariaEntityFirstName = `Ana-${Math.round(Date.now() / 1000)}`;
+    malariaEntityFirstName = `Ana-${Date.now()}`;
 
     cy.get('input[type="text"]')
         .eq(3)
@@ -577,7 +581,7 @@ And('you fill the Malaria case diagnosis registration form with values', () => {
         .blur();
     cy.get('input[type="text"]')
         .eq(4)
-        .type(`Maria-${Math.round(Date.now() / 1000)}`)
+        .type(`Maria-${Date.now()}`)
         .blur();
     cy.get('input[type="text"]')
         .eq(5)
