@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { cx } from '@emotion/css';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
@@ -172,8 +171,10 @@ class RelationshipsPlain extends React.Component<Props> {
             writableRelationshipTypes,
             relationshipsRef,
             smallMainButton,
+            programId,
         } = this.props;
         const canCreate = !readOnly && writableRelationshipTypes.length > 0;
+        const relationshipLabel = getTermLabel(programId, 'relationship');
         return (
             <div className={classes.container} ref={relationshipsRef}>
                 <div className={classes.relationshipsContainer}>
@@ -188,7 +189,7 @@ class RelationshipsPlain extends React.Component<Props> {
                                 dataTest="add-relationship-button"
                                 secondary
                             >
-                                {i18n.t('Add relationship')}
+                                {tCustomTerm('Add {{relationshipLabel}}', { relationshipLabel })}
                             </Button>
                         </div>
                     </div>

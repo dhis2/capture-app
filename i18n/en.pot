@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-01T13:34:18.036Z\n"
-"PO-Revision-Date: 2026-09-01T13:34:18.036Z\n"
+"POT-Creation-Date: 2026-09-01T14:58:08.714Z\n"
+"PO-Revision-Date: 2026-09-01T14:58:08.714Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -188,13 +188,6 @@ msgstr ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-
 msgid "Active"
 msgstr "Active"
 
@@ -230,13 +223,6 @@ msgstr "Switch to row view"
 
 msgid "Discard unsaved changes?"
 msgstr "Discard unsaved changes?"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
 
 msgid "Yes, discard changes"
 msgstr "Yes, discard changes"
@@ -693,9 +679,6 @@ msgstr "Save {{trackedEntityTypeName}}"
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
 
-msgid "Enter details now is not available when creating a relationship"
-msgstr "Enter details now is not available when creating a relationship"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
 
@@ -743,13 +726,6 @@ msgstr "Back"
 
 msgid "View changelog"
 msgstr "View changelog"
-
-msgid ""
-"Leaving this page will discard any selections you made for a new "
-"relationship"
-msgstr ""
-"Leaving this page will discard any selections you made for a new "
-"relationship"
 
 msgid "Errors"
 msgstr "Errors"
@@ -858,9 +834,6 @@ msgstr "View only - {{message}}"
 
 msgid "View only"
 msgstr "View only"
-
-msgid "Add relationship"
-msgstr "Add relationship"
 
 msgid "No results found for "
 msgstr "No results found for "

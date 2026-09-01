@@ -1,7 +1,6 @@
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 import { getTermLabel } from '../../../../../../metaData';
@@ -99,9 +98,10 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 r.to.id &&
                 r.to.id === newRelationship.to.id)
             ) {
-                const message = i18n.t(
-                    'Relationship of type {{relationshipTypeName}} to {{entityName}} already exists',
+                const message = tCustomTerm(
+                    '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
+                        relationshipLabel: getTermLabel(programId, 'relationship'),
                         entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
                         interpolation: { escapeValue: false },

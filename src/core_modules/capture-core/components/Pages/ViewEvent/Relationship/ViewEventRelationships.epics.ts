@@ -1,7 +1,6 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
-import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
 import { getTermLabel } from '../../../../metaData';
 import { tCustomTerm } from '../../../../utils/tCustomTerm';
@@ -102,9 +101,10 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                     r.to.id &&
                     r.to.id === clientRelationship.to.id)
             ) {
-                const message = i18n.t(
-                    'Relationship of type {{relationshipTypeName}} to {{entityName}} already exists',
+                const message = tCustomTerm(
+                    '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
+                        relationshipLabel: getTermLabel(programId, 'relationship'),
                         entityName: clientRelationship.from.name,
                         relationshipTypeName: clientRelationship.relationshipType.name,
                     },
