@@ -1,12 +1,13 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { MenuItem, IconCheckmark16, IconUndo16 } from '@dhis2/ui';
+import { MenuItem } from '@dhis2/ui';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { removeEventChangelogQueries } from '../../WidgetsChangelog';
+import { DirectionalArrow } from '../../../utils/rtl';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 
 type Props = {
@@ -16,18 +17,18 @@ type Props = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
-    canToggleCompletion: boolean;
+    isEventBlockedByExpiry: boolean;
     readOnlyMessage: string;
 };
 
-export const CompletionMenuItem = ({
+export const SkipMenuItem = ({
     eventId,
     eventStatus,
     onMutate,
     onSuccess,
     onError,
     onClose,
-    canToggleCompletion,
+    isEventBlockedByExpiry,
     readOnlyMessage,
 }: Props) => {
     const dataEngine = useDataEngine();
@@ -37,10 +38,10 @@ export const CompletionMenuItem = ({
         { critical: true },
     );
 
-    const isCompleted = eventStatus === eventStatuses.COMPLETED;
-    const newStatus = isCompleted ? eventStatuses.ACTIVE : eventStatuses.COMPLETED;
+    const isSkipped = eventStatus === eventStatuses.SKIPPED;
+    const newStatus = isSkipped ? eventStatuses.SCHEDULE : eventStatuses.SKIPPED;
 
-    const { mutate: updateCompletionStatus } = useMutation(
+    const { mutate: updateEventStatus } = useMutation(
         async () => {
             const { event: apiEvent } = await dataEngine.query({
                 event: {
@@ -52,6 +53,7 @@ export const CompletionMenuItem = ({
                     },
                 },
             }) as any;
+
             return dataEngine.mutate({
                 resource: 'tracker?async=false&importStrategy=UPDATE',
                 type: 'create',
@@ -80,17 +82,17 @@ export const CompletionMenuItem = ({
     );
 
     return (
-        <ConditionalTooltip content={readOnlyMessage} enabled={!canToggleCompletion}>
+        <ConditionalTooltip content={readOnlyMessage} enabled={isEventBlockedByExpiry}>
             <MenuItem
                 dense
-                disabled={!canToggleCompletion}
-                dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
-                icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
-                label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
+                disabled={isEventBlockedByExpiry}
+                dataTest={isSkipped ? 'unskip-event-menu-item' : 'skip-event-menu-item'}
+                icon={isSkipped ? <DirectionalArrow reverse /> : <DirectionalArrow />}
+                label={isSkipped ? i18n.t('Unskip') : i18n.t('Skip')}
                 suffix={null}
                 onClick={() => {
                     onClose();
-                    updateCompletionStatus();
+                    updateEventStatus();
                 }}
             />
         </ConditionalTooltip>

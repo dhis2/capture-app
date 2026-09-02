@@ -258,7 +258,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
-    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status, event?.event);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const userInteractionInProgress = useSelector(state => dataEntryHasChanges(state, dataEntryKey));
 
@@ -268,12 +268,14 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const {
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
+        isEventOverdueOrScheduled,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: event?.status,
         occurredAtClient: convertServerToClient(event?.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: convertServerToClient(event?.completedAt, dataElementTypes.DATE) as string,
+        scheduledAtClient: convertServerToClient(event?.scheduledAt, dataElementTypes.DATE) as string,
     });
 
     const pageStatus = getPageStatus({
@@ -310,7 +312,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             program={program}
             currentStageId={stageId}
             trackedEntityInactive={trackedEntityInactive}
-            isEventBlockedByExpiry={isEventBlockedByExpiry}
+            isEventBlockedByExpiry={!isEventOverdueOrScheduled && isEventBlockedByExpiry}
             isEventBlockedByCompletion={isEventBlockedByCompletion}
         >
             <EnrollmentEditEventPageComponent

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-28T11:16:56.550Z\n"
-"PO-Revision-Date: 2026-08-28T11:16:56.550Z\n"
+"POT-Creation-Date: 2026-09-02T08:23:23.426Z\n"
+"PO-Revision-Date: 2026-09-02T08:23:23.426Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -437,6 +437,9 @@ msgstr ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 
+msgid "View changelog"
+msgstr "View changelog"
+
 msgid "An error occurred when updating event status"
 msgstr "An error occurred when updating event status"
 
@@ -445,6 +448,9 @@ msgstr "Mark incomplete"
 
 msgid "Mark complete"
 msgstr "Mark complete"
+
+msgid "Delete"
+msgstr "Delete"
 
 msgid "An error occurred while deleting the event"
 msgstr "An error occurred while deleting the event"
@@ -461,8 +467,11 @@ msgstr "Are you sure you want to delete this event?"
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
 
-msgid "Delete"
-msgstr "Delete"
+msgid "Unskip"
+msgstr "Unskip"
+
+msgid "Skip"
+msgstr "Skip"
 
 msgid "No events to display"
 msgstr "No events to display"
@@ -993,9 +1002,6 @@ msgstr "events"
 msgid "event"
 msgstr "event"
 
-msgid "View changelog"
-msgstr "View changelog"
-
 msgid "Event details"
 msgstr "Event details"
 
@@ -1098,6 +1104,12 @@ msgstr "Possible duplicates found"
 msgid "An error occurred loading possible duplicates"
 msgstr "An error occurred loading possible duplicates"
 
+msgid "View only - {{message}}"
+msgstr "View only - {{message}}"
+
+msgid "View only"
+msgstr "View only"
+
 msgid "You only have view access to this enrollment"
 msgstr "You only have view access to this enrollment"
 
@@ -1122,17 +1134,14 @@ msgstr "This event is outside the editing period"
 msgid "This event has been completed"
 msgstr "This event has been completed"
 
+msgid "You do not have access to uncomplete this event"
+msgstr "You do not have access to uncomplete this event"
+
 msgid "This {{trackedEntityName}} is deactivated"
 msgstr "This {{trackedEntityName}} is deactivated"
 
 msgid "This tracked entity is deactivated"
 msgstr "This tracked entity is deactivated"
-
-msgid "View only - {{message}}"
-msgstr "View only - {{message}}"
-
-msgid "View only"
-msgstr "View only"
 
 msgid "Add relationship"
 msgstr "Add relationship"
@@ -1530,9 +1539,6 @@ msgstr "Go to “Schedule” tab to reschedule this event"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
 
-msgid "You do not have access to uncomplete this event"
-msgstr "You do not have access to uncomplete this event"
-
 msgid "Geometry (Area)"
 msgstr "Geometry (Area)"
 
@@ -1771,12 +1777,6 @@ msgstr "This stage can only have one event"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
-
-msgid "Unskip"
-msgstr "Unskip"
-
-msgid "Skip"
-msgstr "Skip"
 
 msgid "Show {{ rest }} more"
 msgstr "Show {{ rest }} more"

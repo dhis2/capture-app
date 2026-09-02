@@ -96,6 +96,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const occurredAt = useSelector((state: any) => state.viewEventPage.loadedValues?.dataEntryValues?.occurredAt);
     const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
     const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
+    const scheduledAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.scheduledAt);
 
     const {
         isEventBlockedByExpiry,
@@ -107,6 +108,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
+        scheduledAtClient: scheduledAt,
     });
     const showEditButton = !isEditEventPage && !isEventReadOnly;
 
