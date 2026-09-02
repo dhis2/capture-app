@@ -51,7 +51,7 @@ const Schedule = ({
     programStage,
     canAddNewEventToStage,
 }) => {
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
     if (hidden) {
@@ -96,7 +96,7 @@ const EnterData = ({
     programStage,
     canAddNewEventToStage,
 }) => {
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
     if (hidden) {
@@ -141,8 +141,8 @@ const LinkExistingResponse = ({
     updateSelectedAction,
     programStage,
 }) => {
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
+    const eventsLabel = useTermLabel('event', { stageId: programStage?.id, plural: true });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
     if (hidden) {

@@ -153,6 +153,8 @@ const WidgetEventSchedulePlain = ({
                     programName={programName}
                     stageName={stageName}
                     orgUnitName={orgUnit?.name || ''}
+                    programId={programId}
+                    stageId={stageId}
                 />
             </div>
         </Widget>

@@ -30,7 +30,10 @@ export const SkipAction = ({
     onUpdateEventStatus,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', {
+        programId: eventDetails.program,
+        stageId: eventDetails.programStage,
+    });
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },

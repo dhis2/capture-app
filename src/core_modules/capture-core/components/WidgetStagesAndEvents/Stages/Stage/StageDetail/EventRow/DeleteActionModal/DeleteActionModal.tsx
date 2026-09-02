@@ -26,7 +26,10 @@ export const DeleteActionModal = ({
     onDeleteEvent,
     onRollbackDeleteEvent,
 }: Props) => {
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', {
+        programId: eventDetails.program,
+        stageId: eventDetails.programStage,
+    });
     const { show: showError } = useAlert(
         ({ message }) => message,
         {

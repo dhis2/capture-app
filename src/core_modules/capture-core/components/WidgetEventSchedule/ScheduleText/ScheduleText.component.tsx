@@ -4,8 +4,8 @@ import type { Props } from './scheduleText.types';
 import { useTermLabel } from '../../../metaData';
 import { tCustomTerm } from '../../../utils/tCustomTerm';
 
-export const ScheduleText = ({ orgUnitName, stageName, programName }: Props) => {
-    const eventLabel = useTermLabel('event');
+export const ScheduleText = ({ orgUnitName, stageName, programName, programId, stageId }: Props) => {
+    const eventLabel = useTermLabel('event', { programId, stageId });
     return (
         <InfoIconText>
             <span>

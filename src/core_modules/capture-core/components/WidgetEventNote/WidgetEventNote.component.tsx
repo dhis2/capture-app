@@ -17,8 +17,8 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
-    const eventLabel = useTermLabel('event');
-    const noteLabel = useTermLabel('note');
+    const eventLabel = useTermLabel('event', { programId });
+    const noteLabel = useTermLabel('note', { programId });
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId));

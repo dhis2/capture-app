@@ -23,10 +23,11 @@ export const UnlinkAndDeleteModal = ({
     relationshipId,
     onDeleteEvent,
     onDeleteEventRelationship,
+    stageId,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', { stageId });
     const { show: showErrorAlert } = useAlert(
         tCustomTerm('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
         { critical: true },

@@ -113,6 +113,7 @@ export const OverflowMenuComponent = ({
                     relationshipId={relationshipId}
                     originEventId={originEventId}
                     onDeleteEventRelationship={onDeleteEventRelationship}
+                    stageId={linkedEvent?.programStage}
                 />
             )}
             {isUnlinkAndDeleteModalOpen && (
@@ -123,6 +124,7 @@ export const OverflowMenuComponent = ({
                     relationshipId={relationshipId}
                     onDeleteEvent={onDeleteEvent}
                     onDeleteEventRelationship={onDeleteEventRelationship}
+                    stageId={linkedEvent?.programStage}
                 />
             )}
         </>
