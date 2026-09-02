@@ -82,10 +82,10 @@ export const resolveLabel = (
     return list.find(source => source?.[target])?.[target];
 };
 
-type TermLabelOptions = LabelOptions & { stageId?: string; programId?: string };
+type TermLabelOptions = LabelOptions & { stageId?: string | null; programId?: string | null };
 
 const resolveTerm = (
-    programId: string | undefined,
+    programId: string | null | undefined,
     key: CustomLabelKey,
     { stageId, plural = false }: TermLabelOptions,
 ): string => {
