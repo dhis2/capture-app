@@ -13,7 +13,7 @@ export const WidgetEnrollmentEventNew = ({
     ...passOnProps
 }: WidgetProps) => {
     const { program } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const programStageLabel = useTermLabel('programStage', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
     const {
         stage,
         formFoundation,

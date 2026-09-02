@@ -94,7 +94,7 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
 };
 
 export const StageOverviewPlain = ({
-    title, icon, description, events, stageWriteAccess = true, classes,
+    title, icon, description, events, stageWriteAccess = true, stageId, classes,
 }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const { anyStageWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
@@ -168,6 +168,7 @@ export const StageOverviewPlain = ({
                 {showStageBadge && (
                     <ReadOnlyBadge
                         programStageWriteAccess={stageWriteAccess}
+                        stageId={stageId}
                     />
                 )}
             </div>

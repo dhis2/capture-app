@@ -271,6 +271,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                     preventAddingEventActionInEffect={hiddenProgramStage}
                     repeatable={repeatable}
                     eventName={eventName}
+                    stageId={stageId}
                 />
             </div>
         ) : null);

@@ -10,6 +10,7 @@ type Props = {
     repeatable?: boolean;
     preventAddingEventActionInEffect?: boolean;
     eventName: string;
+    stageId: string;
 };
 
 export const StageCreateNewButton = ({
@@ -18,8 +19,9 @@ export const StageCreateNewButton = ({
     repeatable,
     preventAddingEventActionInEffect,
     eventName,
+    stageId,
 }: Props) => {
-    const programStageLabel = useTermLabel('programStage');
+    const programStageLabel = useTermLabel('programStage', { stageId });
     const eventLabel = useTermLabel('event');
     const eventsLabel = useTermLabel('event', { plural: true });
     const { isDisabled, tooltipContent } = useMemo(() => {

@@ -9,6 +9,7 @@ export type Props = {
     trackedEntityName?: string;
     trackedEntityInactive?: boolean;
     inlineLabel?: boolean;
+    stageId?: string;
 };
 
 export type Access = {

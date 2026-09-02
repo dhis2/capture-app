@@ -49,7 +49,7 @@ const NewEventWorkspacePlain = ({
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef<string | undefined>(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const programStageLabel = useTermLabel('programStage', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
 
     const onHandleSwitchTab = (newMode: string) => {
         if (dataEntryHasChanges) {

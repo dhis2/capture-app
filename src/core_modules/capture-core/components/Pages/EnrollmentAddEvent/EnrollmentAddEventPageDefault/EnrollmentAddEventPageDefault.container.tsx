@@ -37,7 +37,7 @@ export const EnrollmentAddEventPageDefault = ({
     trackedEntityInactive,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
-    const programStageLabel = useTermLabel('programStage', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
 
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
@@ -161,6 +161,7 @@ export const EnrollmentAddEventPageDefault = ({
                 enrollmentId={enrollmentId}
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
+                stageId={stageId}
                 stageName={selectedProgramStage?.stageForm.name}
                 stageIcon={selectedProgramStage?.icon}
                 eventDateLabel={selectedProgramStage?.stageForm.getLabel('occurredAt')}
