@@ -4,7 +4,7 @@ import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import { ReduxStore, ApiUtils } from 'capture-core-utils/types/global';
 import { getTrackerProgramThrowIfNotFound, getTermLabel } from '../../../../metaData/helpers';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     newEventWidgetDataEntryActionTypes,
@@ -49,7 +49,7 @@ const runRulesForNewEvent = async ({
     const program = getTrackerProgramThrowIfNotFound(programId);
     const stage = program.getStage(stageId);
     if (!stage) {
-        throw Error(tCustomTerm('{{programStageLabel}} not found', {
+        throw Error(customTerms.i18n.t('{{programStageLabel}} not found', {
             programStageLabel: getTermLabel('programStage', { programId, stageId }),
         }));
     }

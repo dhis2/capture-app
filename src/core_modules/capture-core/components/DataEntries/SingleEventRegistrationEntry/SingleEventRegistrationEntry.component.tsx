@@ -6,7 +6,7 @@ import { NewRelationshipWrapper } from './NewRelationshipWrapper/NewEventNewRela
 import { cancelNewEventAndReturnToMainPage } from './DataEntryWrapper/DataEntry/actions/dataEntry.actions';
 import type { Props } from './SingleEventRegistrationEntry.types';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eventAccess }: Props) => {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eve
     if (!eventAccess.write) {
         return (
             <NoWriteAccessMessage
-                message={tCustomTerm(
+                message={customTerms.i18n.t(
                     "You don't have access to create an {{eventLabel}} in the current selections",
                     { eventLabel },
                 )}

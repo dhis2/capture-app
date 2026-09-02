@@ -16,7 +16,7 @@ import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOvervie
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { RequestEvent } from '../DataEntries';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 const styles = {
     header: {
@@ -125,7 +125,7 @@ export const WidgetRelatedStagesPlain = ({
                     <span className={classes.icon}>
                         <IconLink24 />
                     </span>
-                    {tCustomTerm('Linked {{eventLabel}}', { eventLabel })}
+                    {customTerms.i18n.t('Linked {{eventLabel}}', { eventLabel })}
                 </div>
             }
         >

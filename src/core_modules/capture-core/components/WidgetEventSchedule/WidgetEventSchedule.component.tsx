@@ -15,7 +15,7 @@ import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -125,15 +125,15 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={tCustomTerm('{{eventLabel}} notes', { eventLabel })}
+                    sectionName={customTerms.i18n.t('{{eventLabel}} notes', { eventLabel })}
                 >
                     <NoteSection
                         notes={notes}
-                        placeholder={tCustomTerm(
+                        placeholder={customTerms.i18n.t(
                             'Write a {{noteLabel}} about this scheduled {{eventLabel}}',
                             { eventLabel, noteLabel },
                         )}
-                        emptyNoteMessage={tCustomTerm("This {{eventLabel}} doesn't have any notes", { eventLabel })}
+                        emptyNoteMessage={customTerms.i18n.t("This {{eventLabel}} doesn't have any notes", { eventLabel })}
                         handleAddNote={onAddNote}
                         noteLabel={noteLabel}
                     />

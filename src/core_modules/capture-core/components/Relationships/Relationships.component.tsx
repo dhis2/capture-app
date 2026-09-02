@@ -6,7 +6,7 @@ import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
 import { getTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import type { Relationship, Entity } from './relationships.types';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -65,7 +65,7 @@ const styles: Readonly<any> = (theme: any) => ({
 });
 
 const getFromNames = (programId: string) => ({
-    PROGRAM_STAGE_INSTANCE: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
+    PROGRAM_STAGE_INSTANCE: customTerms.i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
 });
 
 type PlainProps = {
@@ -189,7 +189,7 @@ class RelationshipsPlain extends React.Component<Props> {
                                 dataTest="add-relationship-button"
                                 secondary
                             >
-                                {tCustomTerm('Add {{relationshipLabel}}', { relationshipLabel })}
+                                {customTerms.i18n.t('Add {{relationshipLabel}}', { relationshipLabel })}
                             </Button>
                         </div>
                     </div>

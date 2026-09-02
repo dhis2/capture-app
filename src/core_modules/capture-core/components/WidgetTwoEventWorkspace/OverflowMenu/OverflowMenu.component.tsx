@@ -15,7 +15,7 @@ import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Props } from './OverflowMenu.types';
 import { useRelationshipTypeAccess } from '../hooks';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 export const OverflowMenuComponent = ({
     linkedEvent,
@@ -62,7 +62,7 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense maxWidth="250px">
                         <MenuItem
-                            label={tCustomTerm('View linked {{eventLabel}}', { eventLabel })}
+                            label={customTerms.i18n.t('View linked {{eventLabel}}', { eventLabel })}
                             icon={<IconView16 />}
                             dataTest="event-overflow-view-linked-event"
                             onClick={handleViewLinkedEvent}
@@ -70,14 +70,14 @@ export const OverflowMenuComponent = ({
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={tCustomTerm(
+                            content={customTerms.i18n.t(
                                 'You do not have access to remove the link between these {{eventsLabel}}',
                                 { eventsLabel },
                             )}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={tCustomTerm('Unlink {{eventLabel}}', { eventLabel })}
+                                label={customTerms.i18n.t('Unlink {{eventLabel}}', { eventLabel })}
                                 icon={<IconLink16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense
@@ -87,14 +87,14 @@ export const OverflowMenuComponent = ({
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={tCustomTerm(
+                            content={customTerms.i18n.t(
                                 'You do not have access to remove the link and delete the linked {{eventLabel}}',
                                 { eventLabel },
                             )}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={tCustomTerm('Unlink and delete linked {{eventLabel}}', { eventLabel })}
+                                label={customTerms.i18n.t('Unlink and delete linked {{eventLabel}}', { eventLabel })}
                                 icon={<IconDelete16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense

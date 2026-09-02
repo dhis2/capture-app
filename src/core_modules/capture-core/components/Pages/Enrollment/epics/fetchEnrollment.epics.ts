@@ -4,7 +4,7 @@ import { from, of } from 'rxjs';
 import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
@@ -121,7 +121,7 @@ const handleErrorsFromNewerBackends = ({
         }));
     }
     const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
-    const errorMessage = tCustomTerm(
+    const errorMessage = customTerms.i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
     );
@@ -142,7 +142,7 @@ const handleErrorsFromOlderBackends = (error: any, programId: string) => {
         }
     }
     const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
-    const errorMessage = tCustomTerm(
+    const errorMessage = customTerms.i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
     );

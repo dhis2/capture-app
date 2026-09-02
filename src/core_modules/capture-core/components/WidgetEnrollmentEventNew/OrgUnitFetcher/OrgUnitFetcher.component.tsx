@@ -3,7 +3,7 @@ import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { Validated } from '../Validated/Validated.container';
 import type { OrgUnitFetcherProps } from './orgUnitFetcher.types';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 export const OrgUnitFetcher = ({
     orgUnitId,
@@ -15,7 +15,7 @@ export const OrgUnitFetcher = ({
     if (error) {
         return (
             <div>
-                {tCustomTerm('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
+                {customTerms.i18n.t('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
             </div>
         );
     }

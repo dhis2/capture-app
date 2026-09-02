@@ -15,7 +15,7 @@ import { IconButton } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './DeleteRelationship.types';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     tableCell: {
@@ -52,15 +52,15 @@ export const DeleteRelationshipPlain = ({
                     dataTest={'delete-relationship-modal'}
                 >
                     <ModalTitle>
-                        {tCustomTerm('Delete {{relationshipLabel}}', { relationshipLabel })}
+                        {customTerms.i18n.t('Delete {{relationshipLabel}}', { relationshipLabel })}
                     </ModalTitle>
                     <ModalContent>
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             'Deleting the {{relationshipLabel}} is permanent and cannot be undone.',
                             { relationshipLabel },
                         )}
                         {' '}
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             'Are you sure you want to delete this {{relationshipLabel}}?',
                             { relationshipLabel },
                         )}
@@ -80,7 +80,7 @@ export const DeleteRelationshipPlain = ({
                                     setIsModalOpen(false);
                                 }}
                             >
-                                {tCustomTerm('Yes, delete {{relationshipLabel}}', { relationshipLabel })}
+                                {customTerms.i18n.t('Yes, delete {{relationshipLabel}}', { relationshipLabel })}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

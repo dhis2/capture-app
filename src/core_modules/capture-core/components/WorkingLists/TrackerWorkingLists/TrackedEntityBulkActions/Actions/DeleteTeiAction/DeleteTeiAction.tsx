@@ -5,7 +5,7 @@ import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 import type { PlainProps } from './DeleteTeiAction.types';
 import { useTermLabel } from '../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../utils/customTerms';
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
 
@@ -37,7 +37,7 @@ export const DeleteTeiAction = ({
                 small
                 onClick={() => setIsDeleteDialogOpen(true)}
             >
-                {tCustomTerm('Delete {{ trackedEntityName }} with all {{enrollmentsLabel}}', {
+                {customTerms.i18n.t('Delete {{ trackedEntityName }} with all {{enrollmentsLabel}}', {
                     trackedEntityName: trackedEntityName.toLowerCase(),
                     enrollmentsLabel,
                 })}
@@ -58,7 +58,7 @@ export const DeleteTeiAction = ({
                     </ModalTitle>
                     <ModalContent>
                         <span>
-                            {tCustomTerm(
+                            {customTerms.i18n.t(
                                 'Deleting records will also delete any associated {{enrollmentsLabel}} and {{eventsLabel}}.',
                                 { enrollmentsLabel, eventsLabel },
                             )}

@@ -2,7 +2,7 @@ import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 import { getTermLabel, RenderFoundation, Program } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     getApplicableRuleEffectsForEventProgram,
@@ -165,7 +165,7 @@ export const openEventForEditInDataEntry = ({
     if (program instanceof TrackerProgram) {
         const stage = getStageFromEvent(eventContainer.event)?.stage;
         if (!stage) {
-            throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
+            throw Error(customTerms.i18n.t('{{programStageLabel}} not found in rules execution', {
                 programStageLabel: getTermLabel('programStage', { programId: program.id }),
             }));
         }

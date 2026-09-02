@@ -6,7 +6,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -48,7 +48,7 @@ const WidgetStagesAndEventsPlain = ({
                 header={
                     <div className={classes.header}>
                         <span>
-                            {tCustomTerm(
+                            {customTerms.i18n.t(
                                 '{{programStagesLabel}} and {{eventsLabel}}',
                                 { programStagesLabel, eventsLabel },
                             )}

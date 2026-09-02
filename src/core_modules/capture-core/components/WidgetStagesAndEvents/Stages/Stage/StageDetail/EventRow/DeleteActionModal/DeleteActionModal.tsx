@@ -7,7 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { useTermLabel } from '../../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../../utils/customTerms';
 
 type Props = {
     eventId: string;
@@ -60,7 +60,12 @@ export const DeleteActionModal = ({
                 return eventToRollbackOnFail;
             },
             onError: (apiError: unknown, payload: unknown, eventToRollbackOnFail?: ApiEnrollmentEvent) => {
-                showError({ message: tCustomTerm('An error occurred while deleting the {{eventLabel}}', { eventLabel }) });
+                showError({
+                    message: customTerms.i18n.t(
+                        'An error occurred while deleting the {{eventLabel}}',
+                        { eventLabel },
+                    ),
+                });
                 log.error(errorCreator('An error occurred while deleting the event')({ apiError, payload }));
 
                 if (eventToRollbackOnFail) {
@@ -76,13 +81,13 @@ export const DeleteActionModal = ({
             small
         >
             <ModalTitle>
-                {tCustomTerm('Delete {{eventLabel}}', { eventLabel })}
+                {customTerms.i18n.t('Delete {{eventLabel}}', { eventLabel })}
             </ModalTitle>
             <ModalContent>
                 <p>
-                    {tCustomTerm('Deleting an {{eventLabel}} is permanent and cannot be undone.', { eventLabel })}
+                    {customTerms.i18n.t('Deleting an {{eventLabel}} is permanent and cannot be undone.', { eventLabel })}
                     {' '}
-                    {tCustomTerm('Are you sure you want to delete this {{eventLabel}}?', { eventLabel })}
+                    {customTerms.i18n.t('Are you sure you want to delete this {{eventLabel}}?', { eventLabel })}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -96,7 +101,7 @@ export const DeleteActionModal = ({
                         destructive
                         onClick={() => !pendingApiResponse && mutate({ eventId })}
                     >
-                        {tCustomTerm('Yes, delete {{eventLabel}}', { eventLabel })}
+                        {customTerms.i18n.t('Yes, delete {{eventLabel}}', { eventLabel })}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

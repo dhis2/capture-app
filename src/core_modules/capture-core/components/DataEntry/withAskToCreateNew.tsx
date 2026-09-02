@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { RenderFoundation } from '../../metaData';
 import { getTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
@@ -61,10 +61,10 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
                     dataTest="modal-ask-to-create-new"
                 >
                     <ModalTitle>
-                        {tCustomTerm('Generate new {{eventLabel}}', { eventLabel })}
+                        {customTerms.i18n.t('Generate new {{eventLabel}}', { eventLabel })}
                     </ModalTitle>
                     <ModalContent>
-                        {tCustomTerm('Do you want to create another {{eventLabel}}?', { eventLabel })}
+                        {customTerms.i18n.t('Do you want to create another {{eventLabel}}?', { eventLabel })}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>
@@ -84,7 +84,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
                                 }}
                                 primary
                             >
-                                {tCustomTerm('Yes, create new {{eventLabel}}', { eventLabel })}
+                                {customTerms.i18n.t('Yes, create new {{eventLabel}}', { eventLabel })}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

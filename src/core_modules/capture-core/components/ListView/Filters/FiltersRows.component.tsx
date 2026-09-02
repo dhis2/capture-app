@@ -3,7 +3,7 @@ import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Filters } from './Filters.component';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 import type {
     Column,
     FiltersOnly,
@@ -88,7 +88,7 @@ export const FiltersRowsPlain = ({
                     <div className={classes.break} />
                     <div className={classes.additionalFiltersContainer}>
                         <div className={classes.additionalFiltersTitle}>
-                            {tCustomTerm('{{programStageLabel}} filters', { programStageLabel }).toUpperCase()}
+                            {customTerms.i18n.t('{{programStageLabel}} filters', { programStageLabel }).toUpperCase()}
                         </div>
                         <div className={classes.break} />
                         <Filters

@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps, PlainPropsWithEvents } from './completeModal.types';
 import { useTermLabel } from '../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../utils/customTerms';
 
 export const CompleteEnrollmentAndEventsModalComponent = ({
     programStageName,
@@ -25,19 +25,19 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                 })}
             </ModalTitle>
             <ModalContent>
-                <p>{tCustomTerm(
+                <p>{customTerms.i18n.t(
                     'Would you like to complete the {{enrollmentLabel}} and all active {{eventsLabel}} as well?',
                     { enrollmentLabel, eventsLabel },
                 )}</p>
 
                 {Object.keys(programStagesWithActiveEvents).length !== 0 && (
                     <>
-                        {tCustomTerm('The following {{eventsLabel}} will be completed:', { eventsLabel })}
+                        {customTerms.i18n.t('The following {{eventsLabel}} will be completed:', { eventsLabel })}
                         {Object.keys(programStagesWithActiveEvents).map((key) => {
                             const { count, name } = programStagesWithActiveEvents[key];
                             return (
                                 <ul key={key}>
-                                    {tCustomTerm('{{count}} {{eventLabel}} in {{programStageName}}', {
+                                    {customTerms.i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                         count,
                                         eventLabel,
                                         eventsLabel,
@@ -53,7 +53,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
 
                 {Object.keys(programStagesWithoutAccess).length !== 0 && (
                     <>
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             'The following {{eventsLabel}} will not be completed due to lack of access:',
                             { eventsLabel },
                         )}
@@ -62,7 +62,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
 
                             return (
                                 <ul key={key}>
-                                    {tCustomTerm('{{count}} {{eventLabel}} in {{programStageName}}', {
+                                    {customTerms.i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                         count,
                                         eventLabel,
                                         eventsLabel,
@@ -79,13 +79,13 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={onCompleteEnrollmentAndEvents} primary>
-                            {tCustomTerm(
+                            {customTerms.i18n.t(
                                 'Yes, complete {{enrollmentLabel}} and {{eventsLabel}}',
                                 { enrollmentLabel, eventsLabel },
                             )}
                         </Button>
                         <Button onClick={onCompleteEnrollment} secondary dataTest="enrollment-actions-complete-button">
-                            {tCustomTerm('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
+                            {customTerms.i18n.t('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
                         </Button>
                         <Button onClick={onCancel} secondary>
                             {i18n.t('No, cancel')}
@@ -108,11 +108,11 @@ export const CompleteEnrollmentModalComponent = ({ programStageName, onCancel, o
                 })}
             </ModalTitle>
             <ModalContent>
-                <p>{tCustomTerm('Would you like to complete the {{enrollmentLabel}}?', { enrollmentLabel })}</p>
+                <p>{customTerms.i18n.t('Would you like to complete the {{enrollmentLabel}}?', { enrollmentLabel })}</p>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={onCompleteEnrollment} primary>
-                            {tCustomTerm('Complete {{enrollmentLabel}}', { enrollmentLabel })}
+                            {customTerms.i18n.t('Complete {{enrollmentLabel}}', { enrollmentLabel })}
                         </Button>
                         <Button onClick={onCancel} secondary>
                             {i18n.t('No, cancel')}

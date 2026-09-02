@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../../../Widget';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import { Breadcrumbs } from './Breadcrumbs';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS, type WizardStep } from './wizardSteps.const';
 import {
@@ -278,7 +278,7 @@ const NewTrackedEntityRelationshipPlain = ({
         <div className={classes.container}>
             <div className={classes.bar}>
                 <LinkButton onClick={onCancel} className={classes.linkText}>
-                    {tCustomTerm('Go back without saving {{relationshipLabel}}', { relationshipLabel })}
+                    {customTerms.i18n.t('Go back without saving {{relationshipLabel}}', { relationshipLabel })}
                 </LinkButton>
             </div>
             <Widget

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -235,8 +235,14 @@ export const EnrollmentPageDefault = () => {
                 ruleEffects={ruleEffects}
                 widgetEnrollmentStatus={widgetEnrollmentStatus}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
-                feedbackEmptyText={tCustomTerm('No feedback for this {{enrollmentLabel}} yet', { enrollmentLabel })}
-                indicatorEmptyText={tCustomTerm('No indicator output for this {{enrollmentLabel}} yet', { enrollmentLabel })}
+                feedbackEmptyText={customTerms.i18n.t(
+                    'No feedback for this {{enrollmentLabel}} yet',
+                    { enrollmentLabel },
+                )}
+                indicatorEmptyText={customTerms.i18n.t(
+                    'No indicator output for this {{enrollmentLabel}} yet',
+                    { enrollmentLabel },
+                )}
             />
         </EnrollmentAccessProvider>
     );

@@ -4,7 +4,7 @@ import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.componen
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { makeProgramRulesSelector } from './DataEntryWidgetOutput.selectors';
 import { getTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 type OwnProps = {
     dataEntryId: string;
@@ -24,8 +24,14 @@ const makeMapStateToProps = () => {
             ready,
             dataEntryKey,
             programRules: programRulesSelector(state, { dataEntryId, selectedScopeId }),
-            feedbackEmptyText: tCustomTerm('No feedback for this {{enrollmentLabel}} yet', { enrollmentLabel }),
-            indicatorEmptyText: tCustomTerm('No indicator output for this {{enrollmentLabel}} yet', { enrollmentLabel }),
+            feedbackEmptyText: customTerms.i18n.t(
+                'No feedback for this {{enrollmentLabel}} yet',
+                { enrollmentLabel },
+            ),
+            indicatorEmptyText: customTerms.i18n.t(
+                'No indicator output for this {{enrollmentLabel}} yet',
+                { enrollmentLabel },
+            ),
         };
     };
 };

@@ -14,7 +14,7 @@ import {
 } from '../../../components/DataEntry';
 
 import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 import { convertFormToClient, convertClientToView } from '../../../converters';
 
 import {
@@ -224,7 +224,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: tCustomTerm('{{eventLabel}} completed', { eventLabel: props.eventLabel }),
+            label: customTerms.i18n.t('{{eventLabel}} completed', { eventLabel: props.eventLabel }),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),

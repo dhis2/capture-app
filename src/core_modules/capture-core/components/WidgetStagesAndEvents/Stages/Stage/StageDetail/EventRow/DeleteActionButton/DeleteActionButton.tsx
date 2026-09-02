@@ -9,7 +9,7 @@ import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalToolti
 import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
 import { dataElementTypes, type ProgramStage, useTermLabel } from '../../../../../../../metaData';
 import { useEventEditPermissions } from '../../../../../../../hooks';
-import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../../utils/customTerms';
 
 type Props = {
     setActionsOpen: (open: boolean) => void;
@@ -48,15 +48,15 @@ export const DeleteActionButton = ({
 
     const getDisabledMessage = (): string => {
         if (!isEventWithinValidPeriod) {
-            return tCustomTerm('{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be deleted', {
+            return customTerms.i18n.t('{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be deleted', {
                 occurredAt: occurredAtClientView,
                 eventLabel,
             });
         }
         if (!canEditCompletedEvent) {
-            return tCustomTerm('This {{eventLabel}} has been completed', { eventLabel });
+            return customTerms.i18n.t('This {{eventLabel}} has been completed', { eventLabel });
         }
-        return tCustomTerm('This {{eventLabel}} is outside the edit period', { eventLabel });
+        return customTerms.i18n.t('This {{eventLabel}} is outside the edit period', { eventLabel });
     };
 
     return (

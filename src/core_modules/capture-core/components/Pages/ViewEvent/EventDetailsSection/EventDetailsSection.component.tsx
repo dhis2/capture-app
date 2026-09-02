@@ -28,7 +28,7 @@ import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import type { PlainProps } from './EventDetailsSection.types';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 const getStyles: any = () => ({
     container: {
@@ -129,7 +129,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         secondary
                         small
                     >
-                        {tCustomTerm('Edit {{eventLabel}}', { eventLabel })}
+                        {customTerms.i18n.t('Edit {{eventLabel}}', { eventLabel })}
                     </Button>
                 </div>}
             <OverflowButton
@@ -169,7 +169,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 header={(
                     <div className={classes.headerContainer}>
                         <ViewEventSectionHeader
-                            text={tCustomTerm('{{eventLabel}} details', { eventLabel })}
+                            text={customTerms.i18n.t('{{eventLabel}} details', { eventLabel })}
                             icon={IconFileDocument24}
                         />
                         {renderActionsContainer()}

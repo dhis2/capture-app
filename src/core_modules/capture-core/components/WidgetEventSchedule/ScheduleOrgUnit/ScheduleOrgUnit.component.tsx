@@ -11,7 +11,7 @@ import {
     withLabel,
 } from '../../FormFields/New';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 type OrgUnitValue = {
     checked: boolean;
@@ -60,7 +60,7 @@ export const ScheduleOrgUnit = ({
     };
 
     const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
-    const errorMessages = tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel });
+    const errorMessages = customTerms.i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel });
 
     return (
         <OrgUnitFieldForForm

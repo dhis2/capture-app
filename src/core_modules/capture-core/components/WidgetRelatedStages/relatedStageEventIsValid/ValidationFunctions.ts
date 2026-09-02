@@ -3,7 +3,7 @@ import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
 import { convertFormToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
-import { tCustomTerm } from 'capture-core/utils/tCustomTerm';
+import { customTerms } from 'capture-core/utils/customTerms';
 import { relatedStageActions } from '../constants';
 
 type Props = {
@@ -86,7 +86,7 @@ const scheduleInOrgUnit = (props) => {
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
+            orgUnit: customTerms.i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
         });
     } else {
         setErrorMessages({
@@ -103,7 +103,7 @@ const enterData = (props) => {
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
+            orgUnit: customTerms.i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
         });
     } else {
         setErrorMessages({
@@ -120,7 +120,7 @@ const linkToExistingResponse = (props) => {
 
     if (!linkedEventIdIsValid) {
         setErrorMessages({
-            linkedEventId: tCustomTerm('Please select a valid {{eventLabel}}', { eventLabel }),
+            linkedEventId: customTerms.i18n.t('Please select a valid {{eventLabel}}', { eventLabel }),
         });
     } else {
         setErrorMessages({

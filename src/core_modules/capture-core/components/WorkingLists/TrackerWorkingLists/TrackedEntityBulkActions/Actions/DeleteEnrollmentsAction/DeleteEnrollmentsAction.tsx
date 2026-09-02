@@ -6,7 +6,7 @@ import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { PlainProps } from './DeleteEnrollmentsAction.types';
 import { useTermLabel } from '../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../utils/customTerms';
 
 const getTooltipContent = (
     programDataWriteAccess: boolean,
@@ -14,7 +14,7 @@ const getTooltipContent = (
     enrollmentsLabel: string,
 ) => {
     if (!programDataWriteAccess) {
-        return tCustomTerm('You do not have access to delete {{enrollmentsLabel}}', { enrollmentsLabel });
+        return customTerms.i18n.t('You do not have access to delete {{enrollmentsLabel}}', { enrollmentsLabel });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -52,7 +52,7 @@ export const DeleteEnrollmentsAction = ({
                     disabled={disabled}
                     onClick={() => setIsDeleteDialogOpen(true)}
                 >
-                    {tCustomTerm('Delete {{enrollmentsLabel}}', { enrollmentsLabel })}
+                    {customTerms.i18n.t('Delete {{enrollmentsLabel}}', { enrollmentsLabel })}
                 </Button>
             </ConditionalTooltip>
 

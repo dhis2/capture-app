@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
 import type { ContainerProps } from './NewTrackedEntityRelationship.types';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 const styles = {
     container: {
@@ -50,7 +50,7 @@ const NewTrackedEntityRelationshipPlain = ({
                     small
                     secondary
                 >
-                    {tCustomTerm('New {{relationshipLabel}}', { relationshipLabel })}
+                    {customTerms.i18n.t('New {{relationshipLabel}}', { relationshipLabel })}
                 </Button>
             )}
 

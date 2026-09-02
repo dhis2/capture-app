@@ -6,7 +6,7 @@ import { NewRelationship } from '../../../Pages/NewRelationship/NewRelationship.
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { getTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 const getStyles = (theme: any) => ({
     headerContainer: {
@@ -90,13 +90,16 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
             <div>
                 <div className={classes.backToEventContainer}>
                     <span>
-                        {tCustomTerm('Adding {{relationshipLabel}} to {{eventLabel}}.', { eventLabel, relationshipLabel })}
+                        {customTerms.i18n.t(
+                            'Adding {{relationshipLabel}} to {{eventLabel}}.',
+                            { eventLabel, relationshipLabel },
+                        )}
                     </span>
                     <LinkButton
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             'Go back to {{eventLabel}} without saving {{relationshipLabel}}',
                             { eventLabel, relationshipLabel },
                         )}
@@ -104,7 +107,10 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={tCustomTerm('New {{eventLabel}} {{relationshipLabel}}', { eventLabel, relationshipLabel })}
+                        header={customTerms.i18n.t(
+                            'New {{eventLabel}} {{relationshipLabel}}',
+                            { eventLabel, relationshipLabel },
+                        )}
                         onGetUnsavedAttributeValues={this.onGetUnsavedAttributeValues}
                         onCancel={onCancel}
                         {...passOnProps}
@@ -112,7 +118,7 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
                 </Card>
                 <DiscardDialog
                     header={i18n.t('Discard unsaved changes?')}
-                    text={tCustomTerm(
+                    text={customTerms.i18n.t(
                         'Leaving this page will discard the selections you made for a new {{relationshipLabel}}',
                         { relationshipLabel },
                     )}

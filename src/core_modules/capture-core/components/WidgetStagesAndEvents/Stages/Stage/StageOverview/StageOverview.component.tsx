@@ -16,7 +16,7 @@ import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
 import { dataElementTypes, useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     container: {
@@ -139,7 +139,7 @@ export const StageOverviewPlain = ({
             </div>
             <div className={classes.infoItems}>
                 <div className={classes.indicator}>
-                    {tCustomTerm('{{count}} {{eventLabel}}', {
+                    {customTerms.i18n.t('{{count}} {{eventLabel}}', {
                         count: totalEvents,
                         eventLabel,
                         eventsLabel,

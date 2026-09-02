@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import type { Mutation } from 'capture-core-utils/types/app-runtime';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 type Props = {
     teiId: string;
@@ -24,7 +24,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const dataEngine = useDataEngine();
     const relationshipLabel = useTermLabel('relationship');
     const { show: showAlert } = useAlert(
-        tCustomTerm('An error occurred while adding the {{relationshipLabel}}', { relationshipLabel }),
+        customTerms.i18n.t('An error occurred while adding the {{relationshipLabel}}', { relationshipLabel }),
         { critical: true },
     );
 

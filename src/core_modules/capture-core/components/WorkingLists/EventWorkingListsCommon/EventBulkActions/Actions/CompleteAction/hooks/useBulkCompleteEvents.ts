@@ -4,7 +4,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { useTermLabel } from '../../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../../utils/customTerms';
 
 type Props = {
     selectedRows: { [key: string]: boolean };
@@ -77,7 +77,12 @@ export const useBulkCompleteEvents = ({
         }),
         {
             onError: () => {
-                showAlert({ message: tCustomTerm('An error occurred while completing {{eventsLabel}}', { eventsLabel }) });
+                showAlert({
+                    message: customTerms.i18n.t(
+                        'An error occurred while completing {{eventsLabel}}',
+                        { eventsLabel },
+                    ),
+                });
             },
             onSuccess: (response, { payload }: any) => {
                 const errorReports = response?.validationReport?.errorReports;

@@ -2,7 +2,7 @@ import React from 'react';
 import { dataEntryIds } from 'capture-core/constants';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
 import { NoticeBox } from '../../NoticeBox';
@@ -130,8 +130,8 @@ export const EnrollmentEditEventPageComponent = ({
                 onSaveAssigneeError={onSaveAssigneeError}
                 onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
-                feedbackEmptyText={tCustomTerm('No feedback for this {{eventLabel}} yet', { eventLabel })}
-                indicatorEmptyText={tCustomTerm('No indicator output for this {{eventLabel}} yet', { eventLabel })}
+                feedbackEmptyText={customTerms.i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })}
+                indicatorEmptyText={customTerms.i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })}
                 onNavigateToEvent={onNavigateToEvent}
                 onDeleteEvent={onDeleteEvent}
                 onDeleteEventRelationship={onDeleteEventRelationship}

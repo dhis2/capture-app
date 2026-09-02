@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
 const getMainConfig = (hasDisplayInReportsAttributes: boolean, orgUnitLabel: string): Array<MainColumnConfig> =>
@@ -11,7 +11,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean, orgUnitLabel: str
             id: 'programOwnerId',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: tCustomTerm('Owner {{orgUnitLabel}}', { orgUnitLabel }),
+            header: customTerms.i18n.t('Owner {{orgUnitLabel}}', { orgUnitLabel }),
             sortDisabled: true,
             filterHidden: true,
             apiViewName: 'programOwner',
@@ -58,7 +58,7 @@ const getProgramStageMainConfig = (programStage, orgUnitLabel: string, eventLabe
             id: ADDITIONAL_FILTERS.orgUnit,
             visible: true,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: tCustomTerm('{{eventLabel}} {{orgUnitLabel}}', { eventLabel, orgUnitLabel }),
+            header: customTerms.i18n.t('{{eventLabel}} {{orgUnitLabel}}', { eventLabel, orgUnitLabel }),
             apiViewName: 'eventOrgUnit',
         },
         ...(programStage.enableUserAssignment

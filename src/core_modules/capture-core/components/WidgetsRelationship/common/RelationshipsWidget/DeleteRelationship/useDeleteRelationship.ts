@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from '../../../../../utils/reactQueryHelpers';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 type Props = {
     sourceId: string;
@@ -30,7 +30,7 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
     const queryClient = useQueryClient();
     const relationshipLabel = useTermLabel('relationship');
     const { show: showError } = useAlert(
-        tCustomTerm('An error occurred while deleting the {{relationshipLabel}}.', { relationshipLabel }),
+        customTerms.i18n.t('An error occurred while deleting the {{relationshipLabel}}.', { relationshipLabel }),
         {
             critical: true,
         },

@@ -10,7 +10,7 @@ import type { Props } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 const styles = {
     header: {},
@@ -94,7 +94,7 @@ const RelationshipsWidgetPlain = ({
                 }
                 {(relationships?.length ?? 0) === 0 && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {tCustomTerm("This {{enrollmentLabel}} doesn't have any relationships", { enrollmentLabel })}
+                        {customTerms.i18n.t("This {{enrollmentLabel}} doesn't have any relationships", { enrollmentLabel })}
                     </div>
                 )}
                 {children}

@@ -12,7 +12,7 @@ import { convert as convertClientToList } from '../../../../converters/clientToL
 import type { Props } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     row: {
@@ -54,7 +54,7 @@ const LinkedEntityTableBodyPlain = ({
                                         return (
                                             <Tooltip
                                                 key={`${entityId}-${id}`}
-                                                content={tCustomTerm(
+                                                content={customTerms.i18n.t(
                                                     'To open this {{relationshipLabel}}, please wait until saving ' +
                                                     'is complete',
                                                     { relationshipLabel },

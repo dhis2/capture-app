@@ -27,7 +27,7 @@ import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.co
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 import { TrackerProgram, useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
@@ -148,7 +148,7 @@ export const EnrollmentAddEventPageDefault = ({
                 error
                 title={i18n.t('An error has occurred')}
             >
-                {tCustomTerm('{{programStageLabel}} is invalid', { programStageLabel })}
+                {customTerms.i18n.t('{{programStageLabel}} is invalid', { programStageLabel })}
             </NoticeBox>
         );
     }

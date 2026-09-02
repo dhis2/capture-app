@@ -3,7 +3,7 @@ import { IconAdd16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import type { Props } from './addNew.types';
 
 export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, onAddNew }: Props) => {
@@ -15,7 +15,7 @@ export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, onAddNew }: Props) 
 
     return (
         <ConditionalTooltip
-            content={tCustomTerm(
+            content={customTerms.i18n.t(
                 'Only one {{enrollmentLabel}} per {{tetName}} is allowed in this program',
                 { enrollmentLabel, tetName },
             )}

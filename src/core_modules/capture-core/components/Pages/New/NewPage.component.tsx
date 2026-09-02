@@ -15,7 +15,7 @@ import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     container: {
@@ -104,7 +104,7 @@ const NewPagePlain = ({
                             newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                             <>
                                 <IncompleteSelectionsMessage>
-                                    {tCustomTerm('Choose an {{orgUnitLabel}} to start reporting', { orgUnitLabel })}
+                                    {customTerms.i18n.t('Choose an {{orgUnitLabel}} to start reporting', { orgUnitLabel })}
                                 </IncompleteSelectionsMessage>
                                 <Button
                                     dataTest="new-page-cancel-button"
@@ -141,7 +141,7 @@ const NewPagePlain = ({
                         {
                             newPageStatus === newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
                                 <IncompleteSelectionsMessage>
-                                    {tCustomTerm(
+                                    {customTerms.i18n.t(
                                         'The category option is not valid for the selected {{orgUnitLabel}}.',
                                         { orgUnitLabel },
                                     )}

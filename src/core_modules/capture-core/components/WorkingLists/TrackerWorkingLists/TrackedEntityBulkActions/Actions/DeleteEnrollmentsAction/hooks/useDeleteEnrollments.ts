@@ -6,7 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { useTermLabel } from '../../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../../utils/customTerms';
 
 type Props = {
     selectedRows: Record<string, boolean>;
@@ -84,7 +84,10 @@ export const useDeleteEnrollments = ({
             onError: (error) => {
                 log.error(errorCreator('An error occurred when deleting enrollments')({ error }));
                 showAlert({
-                    message: tCustomTerm('An error occurred when deleting {{enrollmentsLabel}}', { enrollmentsLabel }),
+                    message: customTerms.i18n.t(
+                        'An error occurred when deleting {{enrollmentsLabel}}',
+                        { enrollmentsLabel },
+                    ),
                 });
             },
             onSuccess: () => {

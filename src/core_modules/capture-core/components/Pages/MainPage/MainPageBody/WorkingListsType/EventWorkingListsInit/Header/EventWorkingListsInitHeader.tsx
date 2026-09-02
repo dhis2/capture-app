@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { type Props } from './eventWorkingListsInitHeader.types';
 import { useTermLabel } from '../../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../../utils/customTerms';
 
 export const styles = () => ({
     container: {
@@ -36,7 +36,7 @@ const EventWorkingListsInitHeaderPlain =
                     <span
                         className={title}
                     >
-                        {tCustomTerm('Registered {{eventsLabel}}', { eventsLabel })}
+                        {customTerms.i18n.t('Registered {{eventsLabel}}', { eventsLabel })}
                     </span>
                 </div>
                 <div

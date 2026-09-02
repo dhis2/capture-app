@@ -4,7 +4,7 @@ import { Button, colors, spacers, spacersNum, UserAvatar } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Assignee } from './WidgetAssignee.types';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 const styles = () => ({
     wrapper: {
@@ -65,7 +65,7 @@ const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, progra
     return (
         <div>
             <div className={classes.emptyMessage} data-test="widget-assignee-empty-message">
-                {tCustomTerm('No one is assigned to this {{eventLabel}}', { eventLabel })}
+                {customTerms.i18n.t('No one is assigned to this {{eventLabel}}', { eventLabel })}
             </div>
             {!readOnly && (
                 <Button

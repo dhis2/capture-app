@@ -19,7 +19,7 @@ import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDo
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes, useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -56,7 +56,7 @@ const styles = {
 const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = (program, enrollmentLabel: string) =>
-    program.displayEnrollmentDateLabel ?? tCustomTerm('{{enrollmentLabel}} date', { enrollmentLabel });
+    program.displayEnrollmentDateLabel ?? customTerms.i18n.t('{{enrollmentLabel}} date', { enrollmentLabel });
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
 const WidgetEnrollmentPlain = ({
@@ -122,7 +122,7 @@ const WidgetEnrollmentPlain = ({
             >
                 {initError && (
                     <div className={classes.enrollment}>
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             '{{enrollmentLabel}} widget could not be loaded. Please try again later',
                             { enrollmentLabel },
                         )}

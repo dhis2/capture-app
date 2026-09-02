@@ -7,7 +7,7 @@ import { EnrollmentRegistrationEntry } from '../../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
 import { relatedStageActions } from '../../../../../../WidgetRelatedStages';
 import { getTermLabel } from '../../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../../utils/customTerms';
 
 const NewEnrollmentRelationshipPlain =
     ({
@@ -27,7 +27,7 @@ const NewEnrollmentRelationshipPlain =
         const relatedStageActionsOptions = {
             [relatedStageActions.ENTER_DATA]: {
                 disabled: true,
-                disabledMessage: tCustomTerm(
+                disabledMessage: customTerms.i18n.t(
                     'Enter details now is not available when creating a {{relationshipLabel}}',
                     { relationshipLabel },
                 ),

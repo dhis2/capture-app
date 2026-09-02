@@ -6,7 +6,7 @@ import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -46,7 +46,7 @@ export const WidgetTrackedEntityRelationship = ({
     if (isError) {
         return (
             <div>
-                {tCustomTerm(
+                {customTerms.i18n.t(
                     'Something went wrong while loading {{relationshipLabel}}. Please try again later.',
                     { relationshipLabel },
                 )}
@@ -60,7 +60,7 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={tCustomTerm('{{trackedEntityTypeName}} {{relationshipLabel}}', {
+            title={customTerms.i18n.t('{{trackedEntityTypeName}} {{relationshipLabel}}', {
                 trackedEntityTypeName,
                 relationshipLabel,
                 interpolation: { escapeValue: false },

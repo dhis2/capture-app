@@ -10,7 +10,7 @@ import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import type { PlainProps } from './NotesSection.types';
 import { getTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
@@ -59,7 +59,7 @@ class NotesSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             "This {{eventLabel}} doesn't have any notes",
                             { eventLabel: getTermLabel('event', { programId }) },
                         )}

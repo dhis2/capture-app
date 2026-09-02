@@ -5,7 +5,7 @@ import { ProgramStageSelectorComponent } from './ProgramStageSelector.component'
 import { Widget } from '../../../Widget';
 import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
@@ -106,7 +106,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         <>
             {program ?
                 <Widget
-                    header={tCustomTerm('Choose a {{programStageLabel}} for a new event', { programStageLabel })}
+                    header={customTerms.i18n.t('Choose a {{programStageLabel}} for a new event', { programStageLabel })}
                     noncollapsible
                 >
                     <ProgramStageSelectorComponent
@@ -116,7 +116,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                         onCancel={onCancel}
                     />
                 </Widget>
-                : tCustomTerm('{{programStagesLabel}} could not be loaded', { programStagesLabel })}
+                : customTerms.i18n.t('{{programStagesLabel}} could not be loaded', { programStagesLabel })}
         </>
     );
 };

@@ -6,7 +6,7 @@ import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props) => {
     const dispatch = useDispatch();
@@ -27,9 +27,12 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={tCustomTerm('Notes about this {{eventLabel}}', { eventLabel })}
-                placeholder={tCustomTerm('Write a {{noteLabel}} about this {{eventLabel}}', { eventLabel, noteLabel })}
-                emptyNoteMessage={tCustomTerm("This {{eventLabel}} doesn't have any notes", { eventLabel })}
+                title={customTerms.i18n.t('Notes about this {{eventLabel}}', { eventLabel })}
+                placeholder={customTerms.i18n.t(
+                    'Write a {{noteLabel}} about this {{eventLabel}}',
+                    { eventLabel, noteLabel },
+                )}
+                emptyNoteMessage={customTerms.i18n.t("This {{eventLabel}} doesn't have any notes", { eventLabel })}
                 noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!currentStageWriteAccess}

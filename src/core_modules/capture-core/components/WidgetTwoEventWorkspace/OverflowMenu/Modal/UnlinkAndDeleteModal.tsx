@@ -14,7 +14,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkAndDeleteModal.types';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 export const UnlinkAndDeleteModal = ({
     setOpenModal,
@@ -29,7 +29,7 @@ export const UnlinkAndDeleteModal = ({
     const queryClient = useQueryClient();
     const eventLabel = useTermLabel('event', { stageId });
     const { show: showErrorAlert } = useAlert(
-        tCustomTerm('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
+        customTerms.i18n.t('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
         { critical: true },
     );
 
@@ -65,15 +65,15 @@ export const UnlinkAndDeleteModal = ({
 
     return (
         <Modal dataTest="event-unlink-and-delete-modal">
-            <ModalTitle>{tCustomTerm('Unlink and delete linked {{eventLabel}}', { eventLabel })}</ModalTitle>
+            <ModalTitle>{customTerms.i18n.t('Unlink and delete linked {{eventLabel}}', { eventLabel })}</ModalTitle>
             <ModalContent>
                 <p>
-                    {tCustomTerm(
+                    {customTerms.i18n.t(
                         'Are you sure you want to remove the link and delete the linked {{eventLabel}}?',
                         { eventLabel },
                     )}
                     {' '}
-                    {tCustomTerm(
+                    {customTerms.i18n.t(
                         'This action permanently removes the link, linked {{eventLabel}}, and all related data.',
                         { eventLabel },
                     )}
@@ -92,7 +92,7 @@ export const UnlinkAndDeleteModal = ({
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
                     >
-                        {tCustomTerm('Yes, unlink and delete linked {{eventLabel}}', { eventLabel })}
+                        {customTerms.i18n.t('Yes, unlink and delete linked {{eventLabel}}', { eventLabel })}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

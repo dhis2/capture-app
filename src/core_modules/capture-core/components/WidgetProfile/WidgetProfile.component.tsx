@@ -12,7 +12,7 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
 import type { Props } from './widgetProfile.types';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -179,12 +179,12 @@ const WidgetProfilePlain = ({
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
                         {trackedEntityTypeName
-                            ? tCustomTerm('No {{attributeLabel}} configured for {{trackedEntityTypeName}}', {
+                            ? customTerms.i18n.t('No {{attributeLabel}} configured for {{trackedEntityTypeName}}', {
                                 attributeLabel,
                                 trackedEntityTypeName,
                                 interpolation: { escapeValue: false },
                             })
-                            : tCustomTerm('No {{attributeLabel}} configured', { attributeLabel })}
+                            : customTerms.i18n.t('No {{attributeLabel}} configured', { attributeLabel })}
                     </p>
                 </div>
             );

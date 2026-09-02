@@ -6,7 +6,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -158,11 +158,11 @@ const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string })
     return (
         <IncompleteSelectionsMessage>
             {enrollmentId ?
-                tCustomTerm('Invalid {{enrollmentLabel}} id {{enrollmentId}}.', {
+                customTerms.i18n.t('Invalid {{enrollmentLabel}} id {{enrollmentId}}.', {
                     enrollmentLabel,
                     enrollmentId,
                 }) :
-                tCustomTerm('Choose an {{enrollmentLabel}} to view the dashboard.', { enrollmentLabel })
+                customTerms.i18n.t('Choose an {{enrollmentLabel}} to view the dashboard.', { enrollmentLabel })
             }
         </IncompleteSelectionsMessage>
     );
@@ -197,9 +197,10 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {tCustomTerm('Choose a program to add new or see existing {{enrollmentsLabel}} for {{teiDisplayName}}', {
-                    enrollmentsLabel, teiDisplayName,
-                })}
+                {customTerms.i18n.t(
+                    'Choose a program to add new or see existing {{enrollmentsLabel}} for {{teiDisplayName}}',
+                    { enrollmentsLabel, teiDisplayName },
+                )}
             </IncompleteSelectionsMessage>
         }
 
@@ -222,13 +223,13 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {tCustomTerm('There are no active {{enrollmentsLabel}}.', { enrollmentsLabel })}
+                    {customTerms.i18n.t('There are no active {{enrollmentsLabel}}.', { enrollmentsLabel })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToTrackerProgramRegistrationPage}
                         >
-                            {tCustomTerm(
+                            {customTerms.i18n.t(
                                 'Add new {{enrollmentLabel}} for {{teiDisplayName}} in this program.',
                                 { enrollmentLabel, teiDisplayName },
                             )}
@@ -255,7 +256,7 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
             <IncompleteSelectionsMessage>
                 {/* eslint-disable-next-line max-len */}
-                {tCustomTerm(
+                {customTerms.i18n.t(
                     // eslint-disable-next-line max-len
                     'You do not have permissions to access to this program, {{orgUnitLabel}} or record, contact your administrator for more information.',
                     { orgUnitLabel },
@@ -287,7 +288,7 @@ const MissingMessagePlain = ({
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
                     {/* eslint-disable-next-line max-len */}
-                    {tCustomTerm('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollmentLabel}}. ', {
+                    {customTerms.i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollmentLabel}}. ', {
                         teiDisplayName, programName, tetName, enrollmentLabel,
                     })}
                     <div>
@@ -308,7 +309,7 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.EVENT_PROGRAM_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {tCustomTerm('{{programName}} is an event program and does not have {{enrollmentsLabel}}.', {
+                    {customTerms.i18n.t('{{programName}} is an event program and does not have {{enrollmentsLabel}}.', {
                         programName, enrollmentsLabel,
                     })}
                     <div>
@@ -316,7 +317,7 @@ const MissingMessagePlain = ({
                             className={classes.link}
                             onClick={navigateToEventProgramRegistrationPage}
                         >
-                            {tCustomTerm('Create a new {{eventLabel}} in this program.', { eventLabel })}
+                            {customTerms.i18n.t('Create a new {{eventLabel}} in this program.', { eventLabel })}
                         </LinkButton>
                     </div>
                     <div>

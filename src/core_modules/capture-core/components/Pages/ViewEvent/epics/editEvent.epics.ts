@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
 import { getTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -28,7 +28,11 @@ export const getEventFromUrlEpic = (
                 .then((eventContainer: any) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(
-                            tCustomTerm('{{eventLabel}} could not be loaded. Are you sure it exists?', { eventLabel }));
+                            customTerms.i18n.t(
+                                '{{eventLabel}} could not be loaded. Are you sure it exists?',
+                                { eventLabel },
+                            ),
+                        );
                     }
                     return eventFromUrlRetrieved(eventContainer, orgUnit, prevProgramId);
                 })
@@ -37,8 +41,8 @@ export const getEventFromUrlEpic = (
                     log.error(
                         errorCreator(
                             message ||
-                            tCustomTerm('{{eventLabel}} could not be loaded', { eventLabel }))(details));
+                            customTerms.i18n.t('{{eventLabel}} could not be loaded', { eventLabel }))(details));
                     return eventFromUrlCouldNotBeRetrieved(
-                        tCustomTerm('{{eventLabel}} could not be loaded. Are you sure it exists?', { eventLabel }));
+                        customTerms.i18n.t('{{eventLabel}} could not be loaded. Are you sure it exists?', { eventLabel }));
                 });
         }));
