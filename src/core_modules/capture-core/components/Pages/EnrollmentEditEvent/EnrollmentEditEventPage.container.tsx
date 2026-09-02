@@ -42,8 +42,7 @@ import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/Enrollmen
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer, convertServerToClient } from '../../../converters';
-import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
-import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
+import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { statusTypes } from '../../../enrollment';
 import { cancelEditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
@@ -245,8 +244,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch, navigate, orgUnitId, enrollmentId, eventId]);
 
     const onSaveExternal = useCallback(() => {
-        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
-        queryClient.removeQueries(queryKey);
+        removeEventChangelogQueries(queryClient, eventId);
         navigate(`enrollment?${buildUrlQueryString({ orgUnitId, enrollmentId })}`);
     }, [navigate, orgUnitId, enrollmentId, eventId, queryClient]);
 

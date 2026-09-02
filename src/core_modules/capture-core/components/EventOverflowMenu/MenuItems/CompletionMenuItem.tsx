@@ -2,10 +2,11 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { MenuItem, IconCheckmark16, IconUndo16 } from '@dhis2/ui';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
+import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 
 type Props = {
     eventId: string;
@@ -25,6 +26,7 @@ export const CompletionMenuItem = ({
     onClose,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -66,6 +68,7 @@ export const CompletionMenuItem = ({
                 onError?.();
             },
             onSuccess: () => {
+                removeEventChangelogQueries(queryClient, eventId);
                 onSuccess?.(newStatus);
             },
         },
