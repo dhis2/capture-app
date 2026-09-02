@@ -98,10 +98,9 @@ const resolveTerm = (
 };
 
 export const getTermLabel = (
-    programId: string | undefined,
     key: CustomLabelKey,
-    options: TermLabelOptions = {},
-): string => resolveTerm(programId, key, options);
+    options: TermLabelOptions & { programId: string },
+): string => resolveTerm(options.programId, key, options);
 
 export const useTermLabel = (
     key: CustomLabelKey,
