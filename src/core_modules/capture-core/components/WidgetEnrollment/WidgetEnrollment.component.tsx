@@ -19,12 +19,12 @@ import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDo
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes, useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
+import { customTerms } from '../../utils/customTerms';
 
 const styles = {
     enrollment: {
@@ -120,7 +120,7 @@ const WidgetEnrollmentPlain = ({
             >
                 {initError && (
                     <div className={classes.enrollment}>
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             '{{enrollmentLabel}} widget could not be loaded. Please try again later',
                             { enrollmentLabel },
                         )}
