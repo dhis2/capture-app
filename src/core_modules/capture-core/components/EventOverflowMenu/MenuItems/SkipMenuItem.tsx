@@ -48,7 +48,8 @@ export const SkipMenuItem = ({
                     resource: 'tracker/events',
                     id: eventId,
                     params: {
-                        fields: '*,!dataValues,!relationships',
+                        fields: 'event,status,program,programStage,orgUnit,occurredAt,scheduledAt,' +
+                            'enrollment,trackedEntity,attributeOptionCombo,notes,assignedUser,geometry,followUp',
                     },
                 },
             }) as any;

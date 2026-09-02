@@ -7,7 +7,7 @@ import {
     DataTableRow,
     IconMore16,
 } from '@dhis2/ui';
-import { useEventEditPermissions } from 'capture-core/hooks';
+import { useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
 import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
@@ -52,6 +52,7 @@ const EventRowPlain = ({
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [changelogOpen, setChangelogOpen] = useState(false);
     const dispatch = useDispatch();
+    const getUpdatedAt = useServerFormattedNow();
 
     const {
         canToggleCompletion,
@@ -80,8 +81,12 @@ const EventRowPlain = ({
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         const { completedAt, ...eventWithoutCompletion } = eventDetails;
-        dispatch(updateEnrollmentEvent(id, { ...eventWithoutCompletion, status: newStatus }));
-    }, [dispatch, eventDetails, id]);
+        dispatch(updateEnrollmentEvent(id, {
+            ...eventWithoutCompletion,
+            status: newStatus,
+            updatedAt: getUpdatedAt(),
+        }));
+    }, [dispatch, eventDetails, id, getUpdatedAt]);
 
     const onCompletionStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(id));
@@ -92,8 +97,12 @@ const EventRowPlain = ({
     }, [dispatch, id]);
 
     const onSkipStatusMutate = useCallback((newStatus: string) => {
-        dispatch(updateEnrollmentEvent(id, { ...eventDetails, status: newStatus }));
-    }, [dispatch, eventDetails, id]);
+        dispatch(updateEnrollmentEvent(id, {
+            ...eventDetails,
+            status: newStatus,
+            updatedAt: getUpdatedAt(),
+        }));
+    }, [dispatch, eventDetails, id, getUpdatedAt]);
 
     const onSkipStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(id));

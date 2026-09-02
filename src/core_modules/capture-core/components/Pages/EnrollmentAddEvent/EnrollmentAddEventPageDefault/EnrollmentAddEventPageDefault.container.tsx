@@ -1,7 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { formatMomentEn } from 'capture-core-utils/date';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox } from '@dhis2/ui';
 import type { ReduxState } from '../../../App/withAppUrlSync.types';
@@ -12,7 +10,7 @@ import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentP
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 import { useWidgetDataFromStore } from '../hooks';
-import { useHideWidgetByRuleLocations } from '../../../../hooks';
+import { useHideWidgetByRuleLocations, useServerFormattedNow } from '../../../../hooks';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -39,7 +37,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
-    const { fromClientDate } = useTimeZoneConversion();
+    const getUpdatedAt = useServerFormattedNow();
 
     const handleCancel = useCallback(() => {
         navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -71,9 +69,7 @@ export const EnrollmentAddEventPageDefault = ({
         ({ enrollments, events, linkMode }: any) => {
             if (linkMode && linkMode === relatedStageActions.ENTER_DATA) return;
 
-            const nowClient = fromClientDate(new Date());
-            const nowServer = new Date(nowClient.getServerZonedISOString());
-            const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
+            const updatedAt = getUpdatedAt();
 
             const eventsWithUpdatedDate = events.map((event: any) => ({
                 ...convertEventAttributeOptions(event),
@@ -89,7 +85,7 @@ export const EnrollmentAddEventPageDefault = ({
 
             navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [fromClientDate, navigate, programId, orgUnitId, teiId, enrollmentId, dispatch],
+        [getUpdatedAt, navigate, programId, orgUnitId, teiId, enrollmentId, dispatch],
     );
 
     const handleAddNew = useCallback(() => {

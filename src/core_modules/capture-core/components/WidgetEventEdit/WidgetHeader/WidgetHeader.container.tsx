@@ -5,7 +5,7 @@ import { spacersNum, Button, CircularLoader, IconEdit24, IconMore16, spacers } f
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useServerFormattedNow } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -59,6 +59,7 @@ const WidgetHeaderPlain = ({
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
+    const getUpdatedAt = useServerFormattedNow();
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
@@ -73,9 +74,13 @@ const WidgetHeaderPlain = ({
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
             const { completedAt, ...eventWithoutCompletion } = storedEvent;
-            dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
+            dispatch(updateEnrollmentEvent(eventId, {
+                ...eventWithoutCompletion,
+                status: newStatus,
+                updatedAt: getUpdatedAt(),
+            }));
         }
-    }, [dispatch, storedEvent, eventId]);
+    }, [dispatch, storedEvent, eventId, getUpdatedAt]);
 
     const onCompletionStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(eventId));
@@ -88,9 +93,13 @@ const WidgetHeaderPlain = ({
 
     const onSkipStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
-            dispatch(updateEnrollmentEvent(eventId, { ...storedEvent, status: newStatus }));
+            dispatch(updateEnrollmentEvent(eventId, {
+                ...storedEvent,
+                status: newStatus,
+                updatedAt: getUpdatedAt(),
+            }));
         }
-    }, [dispatch, storedEvent, eventId]);
+    }, [dispatch, storedEvent, eventId, getUpdatedAt]);
 
     const onSkipStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(eventId));
