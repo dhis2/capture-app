@@ -30,6 +30,7 @@ const EnrollmentDeleteModalPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const enrollmentLabel = useTermLabel('enrollment', { programId });
     const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
+    const eventsLabel = useTermLabel('event', { programId, plural: true });
     const {
         deleteEnrollments,
         isDeletingEnrollments,
@@ -121,7 +122,7 @@ const EnrollmentDeleteModalPlain = ({
                 <div className={classes.modalContent}>
                     <div>
                         {/* eslint-disable-next-line max-len */}
-                        {tCustomTerm('This action will permanently delete the selected {{enrollmentsLabel}}, including all associated data and events.', { enrollmentsLabel })}
+                        {tCustomTerm('This action will permanently delete the selected {{enrollmentsLabel}}, including all associated data and {{eventsLabel}}.', { enrollmentsLabel, eventsLabel })}
                     </div>
 
                     <div>

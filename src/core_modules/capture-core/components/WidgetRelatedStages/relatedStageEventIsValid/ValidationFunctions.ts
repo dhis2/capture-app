@@ -17,6 +17,7 @@ type Props = {
         expiryDays?: number;
     };
     orgUnitLabel: string;
+    eventLabel: string;
 };
 
 export const isScheduledDateValid = (
@@ -114,12 +115,12 @@ const enterData = (props) => {
 };
 
 const linkToExistingResponse = (props) => {
-    const { linkedEventId, setErrorMessages } = props ?? {};
+    const { linkedEventId, setErrorMessages, eventLabel } = props ?? {};
     const linkedEventIdIsValid = !!linkedEventId;
 
     if (!linkedEventIdIsValid) {
         setErrorMessages({
-            linkedEventId: i18n.t('Please select a valid event'),
+            linkedEventId: tCustomTerm('Please select a valid {{eventLabel}}', { eventLabel }),
         });
     } else {
         setErrorMessages({

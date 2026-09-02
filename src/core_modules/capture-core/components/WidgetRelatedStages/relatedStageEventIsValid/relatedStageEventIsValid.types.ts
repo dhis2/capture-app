@@ -17,4 +17,5 @@ export type RelatedStageIsValidProps = {
         expiryDays?: number;
     };
     orgUnitLabel: string;
+    eventLabel: string;
 };

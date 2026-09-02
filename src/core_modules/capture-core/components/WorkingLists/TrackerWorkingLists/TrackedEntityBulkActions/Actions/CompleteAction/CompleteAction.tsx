@@ -67,6 +67,7 @@ const CompleteActionPlain = ({
     const [openAccordion, setOpenAccordion] = useState(false);
     const enrollmentLabel = useTermLabel('enrollment', { programId });
     const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
+    const eventsLabel = useTermLabel('event', { programId, plural: true });
     const {
         completeEnrollments,
         enrollmentCounts,
@@ -190,7 +191,10 @@ const CompleteActionPlain = ({
                 }
 
                 <Checkbox
-                    label={tCustomTerm('Mark all events within {{enrollmentsLabel}} as complete', { enrollmentsLabel })}
+                    label={tCustomTerm(
+                        'Mark all {{eventsLabel}} within {{enrollmentsLabel}} as complete',
+                        { enrollmentsLabel, eventsLabel },
+                    )}
                     checked={completeEvents}
                     onChange={() => setCompleteEvents(prevState => !prevState)}
                 />

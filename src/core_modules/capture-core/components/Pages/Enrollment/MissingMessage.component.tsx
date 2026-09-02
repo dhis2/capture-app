@@ -185,10 +185,10 @@ const MissingMessagePlain = ({
     const { resetTeiId } = useResetTeiId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const { programId, teiId, enrollmentId } = useLocationQuery();
-    const enrollmentLabel = useTermLabel('enrollment');
-    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
-    const orgUnitLabel = useTermLabel('orgUnit');
-    const eventLabel = useTermLabel('event');
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
+    const orgUnitLabel = useTermLabel('orgUnit', { programId });
+    const eventLabel = useTermLabel('event', { programId });
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);

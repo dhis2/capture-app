@@ -82,12 +82,15 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
         log.error(errorCreator(errorMessage || 'Error saving event')(errorObject));
-        return addErrorFeedback({ message: i18n.t('Could not save event') });
+        const eventLabel = getTermLabel('event', { programId: action.meta.programId });
+        return addErrorFeedback({ message: tCustomTerm('Could not save {{eventLabel}}', { eventLabel }) });
     },
     [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (_state, action) =>
         addErrorFeedback({ message: action.payload.errorMessage }),
-    [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: () =>
-        addErrorFeedback({ message: i18n.t('Could not delete event') }),
+    [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: (_state, action) => {
+        const eventLabel = getTermLabel('event', { programId: action.meta.programId });
+        return addErrorFeedback({ message: tCustomTerm('Could not delete {{eventLabel}}', { eventLabel }) });
+    },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: () =>
         addErrorFeedback({ message: i18n.t('Could not save working list') }),
     [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: () =>
@@ -101,7 +104,8 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
         log.error(errorCreator(errorMessage || 'Error saving event')(errorObject));
-        return addErrorFeedback({ message: i18n.t('Could not save event') });
+        const eventLabel = getTermLabel('event', { programId: action.meta.programId });
+        return addErrorFeedback({ message: tCustomTerm('Could not save {{eventLabel}}', { eventLabel }) });
     },
     [dataEntryActionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS]: (_state, action) =>
         addErrorFeedback({ message: action.payload.message }),
@@ -118,19 +122,27 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         });
     },
     [enrollmentSiteActionTypes.SAVE_FAILED]: (_state, action) => {
-        const enrollmentLabel = getTermLabel('enrollment', { programId: action.payload.programId });
+        const programId = action.payload.programId;
+        const enrollmentLabel = getTermLabel('enrollment', { programId });
+        const eventLabel = getTermLabel('event', { programId });
         return addErrorFeedback({
-            message: tCustomTerm('Error saving the {{enrollmentLabel}} event', { enrollmentLabel }),
+            message: tCustomTerm('Error saving the {{enrollmentLabel}} {{eventLabel}}', { enrollmentLabel, eventLabel }),
         });
     },
     [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
-        const enrollmentLabel = getTermLabel('enrollment', { programId: action.meta.programId });
+        const programId = action.meta.programId;
+        const enrollmentLabel = getTermLabel('enrollment', { programId });
+        const eventLabel = getTermLabel('event', { programId });
         return addErrorFeedback({
-            message: tCustomTerm('Error deleting the {{enrollmentLabel}} event', { enrollmentLabel }),
+            message: tCustomTerm('Error deleting the {{enrollmentLabel}} {{eventLabel}}', { enrollmentLabel, eventLabel }),
         });
     },
-    [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: () =>
-        addErrorFeedback({ message: i18n.t('Error editing the event, the changes made were not saved') }),
+    [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
+        const eventLabel = getTermLabel('event', { programId: action.meta.programId });
+        return addErrorFeedback({
+            message: tCustomTerm('Error editing the {{eventLabel}}, the changes made were not saved', { eventLabel }),
+        });
+    },
     [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (_state, action) =>
         addErrorFeedback({ message: i18n.t(action.payload.message) }),
     [viewEventActionTypes.ASSIGNEE_SAVE_FAILED]: () =>

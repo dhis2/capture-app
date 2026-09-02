@@ -111,6 +111,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                 >
                     <ProgramStageSelectorComponent
                         programStages={availableStages}
+                        programId={programId}
                         onSelectProgramStage={onSelectProgramStage}
                         onCancel={onCancel}
                     />
