@@ -11,7 +11,7 @@ import {
     SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import type { SearchOrgUnitSelectorProps } from './SearchOrgUnitSelector.types';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const TeiSearchOrgUnitField = withFocusSaver()(
     withCalculateMessages()(
@@ -71,7 +71,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
         return (
             <TeiSearchSelectionBoxes
                 options={options}
-                label={tCustomTerm('{{orgUnitLabel}} scope', { orgUnitLabel })}
+                label={customTerms.i18n.t('{{orgUnitLabel}} scope', { orgUnitLabel })}
                 styles={selectionBoxesStyles}
                 onSelect={this.onSelectOrgUnitScope}
                 value={selectedOrgUnitScope}
@@ -103,7 +103,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
 
     getErrorMessage = () => {
         if (!this.isValid() && this.props.searchAttempted) {
-            return tCustomTerm('Please select an {{orgUnitLabel}}.', { orgUnitLabel: this.props.orgUnitLabel });
+            return customTerms.i18n.t('Please select an {{orgUnitLabel}}.', { orgUnitLabel: this.props.orgUnitLabel });
         }
         return null;
     }

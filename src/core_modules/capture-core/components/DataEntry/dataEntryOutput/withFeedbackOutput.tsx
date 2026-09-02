@@ -6,7 +6,7 @@ import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetFeedback } from '../../WidgetFeedback';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 type Props = {
     dataEntryKey?: string;
@@ -26,7 +26,7 @@ const FeedbackOutputWrapper = (props: Props) => {
     return (
         <WidgetFeedback
             dataEntryKey={dataEntryKey}
-            feedbackEmptyText={tCustomTerm('No feedback for this {{eventLabel}} yet', { eventLabel })}
+            feedbackEmptyText={customTerms.i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })}
         />
     );
 };

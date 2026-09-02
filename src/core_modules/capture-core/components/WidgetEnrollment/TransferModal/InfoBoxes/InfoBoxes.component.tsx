@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 
@@ -59,7 +59,7 @@ const InfoBoxesPlain = ({
             {newOrgUnitName && (
                 <div className={cx(classes.alert, { info: true })}>
                     <IconInfo16 color={colors.grey600} />
-                    {tCustomTerm(
+                    {customTerms.i18n.t(
                         'Transferring {{enrollmentLabel}} ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}',
                         {
                             enrollmentLabel,
@@ -74,7 +74,7 @@ const InfoBoxesPlain = ({
             {showWarning && (
                 <div className={cx(classes.alert, { warning: true })}>
                     <IconWarning16 />
-                    {tCustomTerm(
+                    {customTerms.i18n.t(
                         'You will lose access to the {{enrollmentLabel}} '
                             + 'when transferring ownership to {{organisationUnit}}.',
                         { enrollmentLabel, organisationUnit: newOrgUnitName },

@@ -6,7 +6,7 @@ import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 type Props = {
     dataEntryKey?: string;
@@ -26,7 +26,7 @@ const IndicatorOutputWrapper = (props: Props) => {
     return (
         <WidgetIndicator
             dataEntryKey={dataEntryKey}
-            indicatorEmptyText={tCustomTerm('No indicator output for this {{eventLabel}} yet', { eventLabel })}
+            indicatorEmptyText={customTerms.i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })}
         />
     );
 };

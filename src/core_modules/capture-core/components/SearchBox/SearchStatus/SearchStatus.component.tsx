@@ -18,7 +18,7 @@ import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.red
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {
@@ -104,7 +104,7 @@ export const SearchStatusPlain = ({
                 <NoticeBox title={i18n.t('Too many results')} warning>
                     {i18n.t('This search returned too many results to show.')}
                     {' '}
-                    {tCustomTerm(
+                    {customTerms.i18n.t(
                         'Try changing search terms or searching by more {{attributesLabel}} to narrow down the results.',
                         { attributesLabel },
                     )}

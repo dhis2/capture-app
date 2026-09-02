@@ -10,7 +10,7 @@ import { withFocusSaver } from 'capture-ui';
 import { TextField } from '../FormFields/New';
 import { convertClientToList } from '../../converters';
 import { dataElementTypes } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import type { Note } from './notes.types';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -137,7 +137,7 @@ const NotesPlain = ({
                     className={classes.addNoteContainer}
                     small
                 >
-                    {tCustomTerm('Add {{noteLabel}}', { noteLabel })}
+                    {customTerms.i18n.t('Add {{noteLabel}}', { noteLabel })}
                 </Button>
                 <Button
                     onClick={onCancel}
@@ -159,7 +159,7 @@ const NotesPlain = ({
                 small={smallMainButton}
                 dataTest="write-note-btn"
             >
-                {tCustomTerm('Write {{noteLabel}}', { noteLabel })}
+                {customTerms.i18n.t('Write {{noteLabel}}', { noteLabel })}
             </Button>
         </div>
     );

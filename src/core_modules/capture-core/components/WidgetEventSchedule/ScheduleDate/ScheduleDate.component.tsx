@@ -71,6 +71,8 @@ const ScheduleDatePlain = ({
     classes,
     hideDueDate,
     expiryPeriod,
+    programId,
+    stageId,
 }: Props) => {
     const validateDate = (dateString: string, internalComponentError: any) => {
         if (!hasValue(dateString)) {
@@ -147,6 +149,8 @@ const ScheduleDatePlain = ({
                     eventCountInOrgUnit={eventCountInOrgUnit}
                     orgUnitName={orgUnit?.name}
                     hideDueDate={hideDueDate}
+                    programId={programId}
+                    stageId={stageId}
                 />
             </div>
         </div>

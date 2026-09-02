@@ -1,11 +1,11 @@
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../utils/customTerms';
 
 const validateOrgUnit = (value?: any) => isValidOrgUnit(value);
 
 export const getOrgUnitValidatorContainers = (orgUnitLabel: string) => [
     {
         validator: validateOrgUnit,
-        errorMessage: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
+        errorMessage: customTerms.i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
     },
 ];

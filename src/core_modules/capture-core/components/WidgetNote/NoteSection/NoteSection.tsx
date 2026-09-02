@@ -9,7 +9,7 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 import type { OwnProps, NoteType } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -160,7 +160,7 @@ const NoteSectionPlain = ({
                         primary
                         small
                     >
-                        {tCustomTerm('Save {{noteLabel}}', { noteLabel })}
+                        {customTerms.i18n.t('Save {{noteLabel}}', { noteLabel })}
                     </Button>
                     <Button
                         dataTest="cancel-note-btn"

@@ -5,7 +5,7 @@ import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     wrapper: {
@@ -95,7 +95,7 @@ export const EnterDataInOrgUnitPlain = ({
             </div>
             <div className={classes.infoBox}>
                 <IconInfo16 />
-                {tCustomTerm(
+                {customTerms.i18n.t(
                     relatedStagesDataValues?.orgUnit?.name
                         ? 'Enter {{linkableStageLabel}} details for {{orgUnitName}} in the next step'
                         : 'Select {{orgUnitLabel}} and enter {{linkableStageLabel}} details in the next step',

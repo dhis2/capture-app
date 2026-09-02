@@ -3,15 +3,15 @@ import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = (
-    { enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
+    { id: programId, enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
     programStageId?: string,
 ) => {
-    const enrollmentLabel = useTermLabel('enrollment');
-    const followUpLabel = useTermLabel('followUp');
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const followUpLabel = useTermLabel('followUp', { programId });
     return useMemo(() => {
         const enableUserAssignment =
             !programStageId && Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);
@@ -19,7 +19,7 @@ export const useFiltersOnly = (
             {
                 id: MAIN_FILTERS.PROGRAM_STATUS,
                 type: dataElementTypes.TEXT,
-                header: tCustomTerm('{{enrollmentLabel}} status', { enrollmentLabel }),
+                header: customTerms.i18n.t('{{enrollmentLabel}} status', { enrollmentLabel }),
                 options: [
                     { text: i18n.t('Active'), value: 'ACTIVE' },
                     { text: i18n.t('Completed'), value: 'COMPLETED' },

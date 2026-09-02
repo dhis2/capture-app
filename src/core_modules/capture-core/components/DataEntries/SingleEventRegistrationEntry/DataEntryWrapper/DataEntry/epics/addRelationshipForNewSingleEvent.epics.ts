@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 import { getTermLabel } from '../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../utils/customTerms';
 
 import {
     initializeNewRelationship,
@@ -82,7 +82,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 clientId: uuid(),
                 from: {
                     id: 'newEvent',
-                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel(programId, 'event') }),
+                    name: customTerms.i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -98,10 +98,10 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 r.to.id &&
                 r.to.id === newRelationship.to.id)
             ) {
-                const message = tCustomTerm(
+                const message = customTerms.i18n.t(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        relationshipLabel: getTermLabel(programId, 'relationship'),
+                        relationshipLabel: getTermLabel('relationship', { programId }),
                         entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
                         interpolation: { escapeValue: false },

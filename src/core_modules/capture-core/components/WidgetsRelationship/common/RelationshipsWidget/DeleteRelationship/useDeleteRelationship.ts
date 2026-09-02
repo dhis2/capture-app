@@ -1,10 +1,11 @@
-import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from '../../../../../utils/reactQueryHelpers';
+import { useTermLabel } from '../../../../../metaData';
+import { customTerms } from '../../../../../utils/customTerms';
 
 type Props = {
     sourceId: string;
@@ -27,8 +28,9 @@ const deleteRelationshipMutation = {
 export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationship: OnDeleteRelationship } => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const relationshipLabel = useTermLabel('relationship');
     const { show: showError } = useAlert(
-        i18n.t('An error occurred while deleting the relationship.'),
+        customTerms.i18n.t('An error occurred while deleting the {{relationshipLabel}}.', { relationshipLabel }),
         {
             critical: true,
         },

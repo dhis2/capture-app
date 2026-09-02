@@ -47,8 +47,11 @@ export const TopBar = ({
     isUserInteractionInProgress,
 }: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
-    const enrollmentLabel = useTermLabel('enrollment', { programId: programId ?? undefined });
-    const programStageLabel = useTermLabel('programStage', { programId: programId ?? undefined });
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const programStageLabel = useTermLabel('programStage', {
+        programId,
+        stageId: programStage?.id,
+    });
 
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();

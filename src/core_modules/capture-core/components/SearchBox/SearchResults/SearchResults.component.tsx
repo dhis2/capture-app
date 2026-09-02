@@ -19,7 +19,7 @@ import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Widget } from '../../Widget';
 import { getTrackerProgramThrowIfNotFound, useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -212,7 +212,7 @@ const SearchResultsIndex = ({
                 </div>
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
-                    content={tCustomTerm('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
+                    content={customTerms.i18n.t('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
                         attributesLabel,
                         trackedEntityName,
                     })}

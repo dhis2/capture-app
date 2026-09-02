@@ -3,7 +3,7 @@ import { concatMap, map, filter } from 'rxjs/operators';
 import { from } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
 import { getTermLabel, getScopeInfo } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 import {
     enrollmentPageActionTypes,
@@ -124,9 +124,9 @@ export const enrollmentIdErrorEpic = (action$: any, store: any) =>
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) => {
             const { programId } = store.value.enrollmentPage;
-            const enrollmentLabel = getTermLabel(programId, 'enrollment');
+            const enrollmentLabel = getTermLabel('enrollment', { programId });
             return showErrorViewOnEnrollmentPage({
-                error: tCustomTerm('{{enrollmentLabel}} with id "{{enrollmentId}}" does not exist',
+                error: customTerms.i18n.t('{{enrollmentLabel}} with id "{{enrollmentId}}" does not exist',
                     { enrollmentLabel, enrollmentId }),
             });
         }),

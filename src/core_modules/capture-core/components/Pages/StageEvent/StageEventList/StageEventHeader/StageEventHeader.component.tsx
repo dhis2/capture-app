@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { PlainProps } from './StageEventHeader.types';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 const getStyles = () => ({
     wrapper: {
@@ -22,9 +22,9 @@ const getStyles = () => ({
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
 
-const StageEventHeaderPlain = ({ icon, title, events, classes }: Props) => {
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+const StageEventHeaderPlain = ({ icon, title, events, programId, stageId, classes }: Props) => {
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
     return (
         <div data-test="stage-event-header" className={classes.wrapper}>
             <div className={classes.icon}>{
@@ -42,7 +42,7 @@ const StageEventHeaderPlain = ({ icon, title, events, classes }: Props) => {
             }</div>
             <div className={classes.title}>{title}
                 {events.length > 0 && <span> :
-                    {tCustomTerm('{{count}} {{eventLabel}}', {
+                    {customTerms.i18n.t('{{count}} {{eventLabel}}', {
                         count: events.length,
                         eventLabel,
                         eventsLabel,

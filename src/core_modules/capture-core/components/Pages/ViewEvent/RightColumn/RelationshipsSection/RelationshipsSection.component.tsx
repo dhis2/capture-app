@@ -7,8 +7,8 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import { getTermLabel } from '../../../../../metaData';
+import { customTerms } from '../../../../../utils/customTerms';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
@@ -93,9 +93,9 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {tCustomTerm(
+                        {customTerms.i18n.t(
                             "This {{eventLabel}} doesn't have any {{relationshipsLabel}}",
-                            { eventLabel: getTermLabel(programId, 'event'), relationshipsLabel },
+                            { eventLabel: getTermLabel('event', { programId }), relationshipsLabel },
                         )}
                     </div>
                 )}

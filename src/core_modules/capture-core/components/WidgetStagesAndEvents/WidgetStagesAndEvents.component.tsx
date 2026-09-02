@@ -6,7 +6,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -31,6 +31,7 @@ const WidgetStagesAndEventsPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
+    const eventsLabel = useTermLabel('event', { programId, plural: true });
     const {
         anyStageWriteAccess,
         anyStageReadAccess,
@@ -46,12 +47,18 @@ const WidgetStagesAndEventsPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{tCustomTerm('{{programStagesLabel}} and events', { programStagesLabel })}</span>
+                        <span>
+                            {customTerms.i18n.t(
+                                '{{programStagesLabel}} and {{eventsLabel}}',
+                                { programStagesLabel, eventsLabel },
+                            )}
+                        </span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programStageWriteAccess={!anyStageReadAccess || anyStageWriteAccess}
                                     multipleStages={multipleStages}
+                                    programId={programId}
                                 />
                             </div>
                         )}

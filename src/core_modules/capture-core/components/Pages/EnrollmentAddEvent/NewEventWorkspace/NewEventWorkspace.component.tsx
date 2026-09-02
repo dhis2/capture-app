@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram, getProgramEventAccess, useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
@@ -49,7 +49,8 @@ const NewEventWorkspacePlain = ({
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef<string | undefined>(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const programStageLabel = useTermLabel('programStage', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
+    const eventLabel = useTermLabel('event', { programId, stageId });
 
     const onHandleSwitchTab = (newMode: string) => {
         if (dataEntryHasChanges) {
@@ -72,7 +73,7 @@ const NewEventWorkspacePlain = ({
     if (!stage) {
         return renderWidget(
             <div className={classes.errorWrapper}>
-                {tCustomTerm('{{programStageLabel}} not found', { programStageLabel })}
+                {customTerms.i18n.t('{{programStageLabel}} not found', { programStageLabel })}
             </div>,
         );
     }
@@ -82,7 +83,10 @@ const NewEventWorkspacePlain = ({
         return renderWidget(
             <div className={classes.errorWrapper}>
                 <NoWriteAccessMessage
-                    message={i18n.t("You don't have access to create an event in the current selections")}
+                    message={customTerms.i18n.t(
+                        "You don't have access to create an {{eventLabel}} in the current selections",
+                        { eventLabel },
+                    )}
                 />
             </div>,
         );

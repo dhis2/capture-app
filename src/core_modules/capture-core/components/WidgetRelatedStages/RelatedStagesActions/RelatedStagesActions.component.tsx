@@ -12,7 +12,7 @@ import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     wrapper: {
@@ -51,7 +51,7 @@ const Schedule = ({
     programStage,
     canAddNewEventToStage,
 }) => {
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
     if (hidden) {
@@ -63,7 +63,7 @@ const Schedule = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = tCustomTerm('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
+        tooltipContent = customTerms.i18n.t('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
             eventLabel,
         });
@@ -96,7 +96,7 @@ const EnterData = ({
     programStage,
     canAddNewEventToStage,
 }) => {
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
     if (hidden) {
@@ -108,7 +108,7 @@ const EnterData = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = tCustomTerm('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
+        tooltipContent = customTerms.i18n.t('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
             eventLabel,
         });
@@ -141,8 +141,8 @@ const LinkExistingResponse = ({
     updateSelectedAction,
     programStage,
 }) => {
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
+    const eventsLabel = useTermLabel('event', { stageId: programStage?.id, plural: true });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
     if (hidden) {
@@ -154,7 +154,7 @@ const LinkExistingResponse = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else if (!linkableEvents.length) {
-        tooltipContent = tCustomTerm('{{ linkableStageLabel }} has no linkable {{eventsLabel}}', {
+        tooltipContent = customTerms.i18n.t('{{ linkableStageLabel }} has no linkable {{eventsLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
             eventsLabel,
         });
@@ -171,7 +171,7 @@ const LinkExistingResponse = ({
                 name={`related-stage-action-${relatedStageActions.LINK_EXISTING_RESPONSE}`}
                 checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
                 disabled={tooltipEnabled}
-                label={tCustomTerm('Link to an existing {{eventLabel}}', { eventLabel })}
+                label={customTerms.i18n.t('Link to an existing {{eventLabel}}', { eventLabel })}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
                 dataTest="related-stages-actions-link-existing-response"
@@ -262,7 +262,7 @@ const RelatedStagesActionsPlain = ({
                 )}
 
                 {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
-                    <div>{tCustomTerm(
+                    <div>{customTerms.i18n.t(
                         'Ambiguous {{relationshipsLabel}}, contact system administrator',
                         { relationshipsLabel },
                     )}</div>

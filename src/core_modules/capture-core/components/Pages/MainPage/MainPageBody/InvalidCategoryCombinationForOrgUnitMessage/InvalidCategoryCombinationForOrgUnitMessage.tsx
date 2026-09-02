@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     incompleteMessageContainer: {
@@ -18,7 +18,7 @@ export const InvalidCategoryCombinationForOrgUnitMessagePlain = ({ classes }: Pr
     return (
         <div className={classes.incompleteMessageContainer}>
             <IncompleteSelectionsMessage>
-                {tCustomTerm(
+                {customTerms.i18n.t(
                     'The category option is not valid for the selected {{orgUnitLabel}}.',
                     { orgUnitLabel },
                 )}

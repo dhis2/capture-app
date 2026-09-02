@@ -7,7 +7,7 @@ import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 export const pageKeys = {
     MAIN_PAGE: 'mainPage',
@@ -73,14 +73,14 @@ const EventBreadcrumbPlain = ({
         {
             key: pageKeys.VIEW_EVENT,
             onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
-            label: tCustomTerm('View {{eventLabel}}', { eventLabel }),
+            label: customTerms.i18n.t('View {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT || page === pageKeys.EDIT_EVENT,
         },
         {
             key: pageKeys.EDIT_EVENT,
             onClick: () => undefined,
-            label: tCustomTerm('Edit {{eventLabel}}', { eventLabel }),
+            label: customTerms.i18n.t('Edit {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },

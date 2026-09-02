@@ -17,7 +17,7 @@ import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSel
 import type { Props } from './TeiSearchForm.types';
 import { withGotoInterface } from '../../FormFields/New';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
@@ -51,7 +51,7 @@ const MinAttributesRequiredMessage = ({ count }: { count: number }) => {
     const attributeLabel = useTermLabel('attribute');
     return (
         <>
-            {tCustomTerm('Fill in at least {{count}} {{attributeLabel}} to search', {
+            {customTerms.i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
                 count,
                 attributeLabel,
                 defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
@@ -207,7 +207,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         }
         const searchButtonText = searchGroup.unique
             ? this.getUniqueSearchButtonText(searchForm)
-            : tCustomTerm('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
+            : customTerms.i18n.t('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
         return (
             <div
                 data-test="d2-form-area"

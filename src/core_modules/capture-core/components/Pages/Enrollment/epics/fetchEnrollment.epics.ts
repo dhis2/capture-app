@@ -4,7 +4,7 @@ import { from, of } from 'rxjs';
 import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
@@ -120,8 +120,8 @@ const handleErrorsFromNewerBackends = ({
             querySingleResource,
         }));
     }
-    const enrollmentsLabel = getTermLabel(programId, 'enrollment', { plural: true });
-    const errorMessage = tCustomTerm(
+    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
+    const errorMessage = customTerms.i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
     );
@@ -141,8 +141,8 @@ const handleErrorsFromOlderBackends = (error: any, programId: string) => {
             return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
         }
     }
-    const enrollmentsLabel = getTermLabel(programId, 'enrollment', { plural: true });
-    const errorMessage = tCustomTerm(
+    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
+    const errorMessage = customTerms.i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
     );

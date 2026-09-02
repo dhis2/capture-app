@@ -7,7 +7,7 @@ import { useProgramExpiryForUser } from '../../../../hooks';
 import { isValidPeriod } from '../../../../utils/validation/validators/form';
 import { DeleteEventModal } from './DeleteEventModal';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 
 
 export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...passOnProps }: Props) => {
@@ -34,11 +34,11 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
         key: 'deleteEventItem',
         clickHandler: ({ id }) => handleOpenDeleteModal(id),
         icon: <IconDelete24 color={colors.red400} />,
-        label: tCustomTerm('Delete {{eventLabel}}', { eventLabel }),
+        label: customTerms.i18n.t('Delete {{eventLabel}}', { eventLabel }),
         tooltipContent: (row) => {
             const { occurredAt } = row ?? {};
             const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
-            return isWithinValidPeriod ? null : tCustomTerm(
+            return isWithinValidPeriod ? null : customTerms.i18n.t(
                 '{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be deleted',
                 {
                     occurredAt,
@@ -69,6 +69,7 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
             {deleteModalOpen && eventIdToDelete && (
                 <DeleteEventModal
                     eventId={eventIdToDelete}
+                    programId={programId}
                     onClose={handleCloseDeleteModal}
                     onConfirmDelete={handleConfirmDelete}
                 />

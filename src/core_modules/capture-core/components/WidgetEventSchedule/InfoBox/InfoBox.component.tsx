@@ -5,7 +5,7 @@ import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
 import type { PlainProps } from './InfoBox.types';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const styles = {
     infoBox: {
@@ -26,10 +26,12 @@ const InfoBoxPlain = ({
     hideDueDate,
     eventCountInOrgUnit,
     orgUnitName,
+    programId,
+    stageId,
     classes,
 }: Props) => {
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
     if (!scheduleDate || !suggestedScheduleDate) {
         return null;
     }
@@ -62,7 +64,7 @@ const InfoBoxPlain = ({
                     {!!orgUnitName && (
                         <>
                             {' '}
-                            {tCustomTerm(
+                            {customTerms.i18n.t(
                                 'There are {{count}} scheduled {{eventLabel}} in this program '
                                     + 'in {{orgUnitName}} on this day.',
                                 {

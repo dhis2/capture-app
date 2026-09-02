@@ -6,7 +6,7 @@ import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { OwnProps, ContainerProps } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes, useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
@@ -200,7 +200,7 @@ const RegistrationDataEntryPlain = ({
                 <div className={classes.container}>
                     <div className={classes.title} >
                         {
-                            teiId ? tCustomTerm('New {{enrollmentLabel}} in program{{escape}} {{programName}}', {
+                            teiId ? customTerms.i18n.t('New {{enrollmentLabel}} in program{{escape}} {{programName}}', {
                                 enrollmentLabel,
                                 escape: ':',
                                 programName,

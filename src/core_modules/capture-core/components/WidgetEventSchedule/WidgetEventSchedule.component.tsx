@@ -15,7 +15,7 @@ import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -59,7 +59,7 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const notesLabel = useTermLabel('note', { plural: true, programId });
+    const notesLabel = useTermLabel('note', { plural: true, programId, stageId });
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
@@ -76,8 +76,8 @@ const WidgetEventSchedulePlain = ({
         const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate && !validation?.error);
         setIsFormValid(formIsValid());
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
-    const eventLabel = useTermLabel('event', { programId });
-    const noteLabel = useTermLabel('note', { programId });
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const noteLabel = useTermLabel('note', { programId, stageId });
 
     return (
         <Widget
@@ -126,15 +126,15 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={tCustomTerm('{{eventLabel}} {{notesLabel}}', { eventLabel, notesLabel })}
+                    sectionName={customTerms.i18n.t('{{eventLabel}} {{notesLabel}}', { eventLabel, notesLabel })}
                 >
                     <NoteSection
                         notes={notes}
-                        placeholder={tCustomTerm(
+                        placeholder={customTerms.i18n.t(
                             'Write a {{noteLabel}} about this scheduled {{eventLabel}}',
                             { eventLabel, noteLabel },
                         )}
-                        emptyNoteMessage={tCustomTerm(
+                        emptyNoteMessage={customTerms.i18n.t(
                             "This {{eventLabel}} doesn't have any {{notesLabel}}",
                             { eventLabel, notesLabel },
                         )}
@@ -157,6 +157,8 @@ const WidgetEventSchedulePlain = ({
                     programName={programName}
                     stageName={stageName}
                     orgUnitName={orgUnit?.name || ''}
+                    programId={programId}
+                    stageId={stageId}
                 />
             </div>
         </Widget>

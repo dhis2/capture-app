@@ -4,7 +4,7 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import moment from 'moment';
 import { pipe } from 'capture-core-utils';
 import { getProgramAndStageForProgram, TrackerProgram, dataElementTypes, useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
@@ -38,7 +38,7 @@ export const WidgetEventSchedule = ({
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const programStageLabel = useTermLabel('programStage', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
     const dispatch = useDispatch();
     const { programStageScheduleConfig }: {programStageScheduleConfig?: any} = useScheduleConfigFromProgramStage(stageId);
     const { programConfig }: {programConfig?: any} = useScheduleConfigFromProgram(programId);
@@ -182,7 +182,7 @@ export const WidgetEventSchedule = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || !programStageScheduleConfig) {
         return (
             <div>
-                {tCustomTerm('Program or {{programStageLabel}} is invalid', { programStageLabel })}
+                {customTerms.i18n.t('Program or {{programStageLabel}} is invalid', { programStageLabel })}
             </div>
         );
     }

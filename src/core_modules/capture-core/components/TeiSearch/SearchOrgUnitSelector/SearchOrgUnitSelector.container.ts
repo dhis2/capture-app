@@ -25,7 +25,7 @@ const mapStateToProps = (state: any, props: any) => {
         treeSearchText: teiSearch.orgUnitsSearchText,
         treeReady: !teiSearch.orgUnitsLoading,
         treeKey: teiSearch.orgUnitsSearchText || 'initial',
-        orgUnitLabel: programId ? getTermLabel(programId, 'orgUnit') : i18n.t('organisation unit'),
+        orgUnitLabel: programId ? getTermLabel('orgUnit', { programId }) : i18n.t('organisation unit'),
     };
 };
 

@@ -24,7 +24,7 @@ import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } fro
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
@@ -109,11 +109,13 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const eventLabel = useTermLabel('event', { programId });
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
     const { stageWriteAccessById } = useEnrollmentAccessContext();
     const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;
-    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
+    const headerColumns = useComputeHeaderColumn(
+        dataElements, hideDueDate, enableUserAssignment, stage?.stageForm, programId, stageId,
+    );
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);
 
@@ -184,7 +186,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
                         key={`${id}-${row.id}`}
-                        content={tCustomTerm(
+                        content={customTerms.i18n.t(
                             'To open this {{eventLabel}}, please wait until saving is complete',
                             { eventLabel },
                         )}
@@ -271,6 +273,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                     preventAddingEventActionInEffect={hiddenProgramStage}
                     repeatable={repeatable}
                     eventName={eventName}
+                    stageId={stageId}
                 />
             </div>
         ) : null);
@@ -288,7 +291,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
     if (error) {
         return (
             <div>
-                {tCustomTerm('{{eventsLabel}} could not be retrieved. Please try again later.', { eventsLabel })}
+                {customTerms.i18n.t('{{eventsLabel}} could not be retrieved. Please try again later.', { eventsLabel })}
             </div>
         );
     }

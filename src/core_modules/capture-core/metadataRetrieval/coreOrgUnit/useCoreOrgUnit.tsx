@@ -5,7 +5,7 @@ import { useOrganisationUnit } from '../../dataQueries';
 import { orgUnitFetched } from './coreOrgUnit.actions';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 export function useCoreOrgUnit(orgUnitId: string): {
     orgUnit?: CoreOrgUnit,
@@ -21,7 +21,7 @@ export function useCoreOrgUnit(orgUnitId: string): {
 
     const errorComponent = (
         <div>
-            {tCustomTerm('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
+            {customTerms.i18n.t('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
         </div>
     );
 

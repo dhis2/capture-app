@@ -88,10 +88,10 @@ export const resolveLabel = (
     return list.find(source => source?.[target])?.[target];
 };
 
-type TermLabelOptions = LabelOptions & { stageId?: string; programId?: string };
+type TermLabelOptions = LabelOptions & { stageId?: string | null; programId?: string | null };
 
 const resolveTerm = (
-    programId: string | undefined,
+    programId: string | null | undefined,
     key: CustomLabelKey,
     { stageId, plural = false }: TermLabelOptions,
 ): string => {
@@ -104,10 +104,9 @@ const resolveTerm = (
 };
 
 export const getTermLabel = (
-    programId: string,
     key: CustomLabelKey,
-    options: TermLabelOptions = {},
-): string => resolveTerm(programId, key, options);
+    options: TermLabelOptions & { programId: string },
+): string => resolveTerm(options.programId, key, options);
 
 export const useTermLabel = (
     key: CustomLabelKey,

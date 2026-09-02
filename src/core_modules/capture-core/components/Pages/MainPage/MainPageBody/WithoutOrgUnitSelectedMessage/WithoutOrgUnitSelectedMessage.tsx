@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
 import { programTypes, TrackerProgram, useTermLabel } from '../../../../../metaData';
 import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     incompleteMessageContainer: {
@@ -53,7 +53,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
 }: Props) => {
     const { program, programType } = useProgramInfo(programId);
     const isTracker = programType === programTypes.TRACKER_PROGRAM;
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const orgUnitLabel = useTermLabel('orgUnit', { programId });
 
     const trackedEntityName = program instanceof TrackerProgram
         ? program.trackedEntityType?.name
@@ -68,7 +68,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
         >
             <IncompleteSelectionsMessage>
                 <div className={classes.incompleteMessageContent}>
-                    <span>{tCustomTerm('Please select an {{orgUnitLabel}}', { orgUnitLabel })}</span>
+                    <span>{customTerms.i18n.t('Please select an {{orgUnitLabel}}', { orgUnitLabel })}</span>
                     <div className={classes.actions}>
                         {showWorkingListLink && (
                             <button
@@ -76,7 +76,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
                                 onClick={onNavigateToWorkingList}
                                 data-test={'go-to-working-list-button'}
                             >
-                                {tCustomTerm('See working list without {{orgUnitLabel}}', { orgUnitLabel })}
+                                {customTerms.i18n.t('See working list without {{orgUnitLabel}}', { orgUnitLabel })}
                             </button>
                         )}
                         {showSearchLink && (

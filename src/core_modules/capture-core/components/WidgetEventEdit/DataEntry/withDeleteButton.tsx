@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { Props, State } from './withDeleteButton.types';
 import { getTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
     class DeleteButtonHOC extends React.Component<Props, State> {
@@ -20,7 +20,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderDeleteButton = (hasDeleteButton?: boolean) => {
-            const eventLabel = getTermLabel(this.props.programId, 'event');
+            const eventLabel = getTermLabel('event', { programId: this.props.programId });
             return (
                 hasDeleteButton ? (<div>
                     <Button
@@ -35,15 +35,15 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                             hide={!this.state.isOpen}
                         >
                             <ModalTitle>
-                                {tCustomTerm('Delete {{eventLabel}}', { eventLabel })}
+                                {customTerms.i18n.t('Delete {{eventLabel}}', { eventLabel })}
                             </ModalTitle>
                             <ModalContent>
-                                {tCustomTerm(
+                                {customTerms.i18n.t(
                                     'Deleting an {{eventLabel}} is permanent and cannot be undone.',
                                     { eventLabel },
                                 )}
                                 {' '}
-                                {tCustomTerm('Are you sure you want to delete this {{eventLabel}}? ', { eventLabel })}
+                                {customTerms.i18n.t('Are you sure you want to delete this {{eventLabel}}? ', { eventLabel })}
                             </ModalContent>
                             <ModalActions>
                                 <ButtonStrip end>
@@ -62,7 +62,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                                         }}
                                         destructive
                                     >
-                                        {tCustomTerm('Yes, delete {{eventLabel}}', { eventLabel })}
+                                        {customTerms.i18n.t('Yes, delete {{eventLabel}}', { eventLabel })}
                                     </Button>
                                 </ButtonStrip>
                             </ModalActions>

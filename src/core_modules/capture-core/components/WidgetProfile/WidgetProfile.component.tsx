@@ -11,6 +11,8 @@ import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
 import type { Props } from './widgetProfile.types';
+import { useTermLabel } from '../../metaData';
+import { customTerms } from '../../utils/customTerms';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -26,8 +28,6 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles: Readonly<any> = {
     header: {
@@ -82,7 +82,7 @@ const WidgetProfilePlain = ({
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
-    const attributesLabel = useTermLabel('attribute', { plural: true });
+    const attributesLabel = useTermLabel('attribute', { programId, plural: true });
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
@@ -179,11 +179,11 @@ const WidgetProfilePlain = ({
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
                         {trackedEntityTypeName
-                            ? tCustomTerm('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
+                            ? customTerms.i18n.t('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
                                 attributesLabel,
                                 trackedEntityTypeName,
                             })
-                            : tCustomTerm('No {{attributesLabel}} configured', { attributesLabel })}
+                            : customTerms.i18n.t('No {{attributesLabel}} configured', { attributesLabel })}
                     </p>
                 </div>
             );

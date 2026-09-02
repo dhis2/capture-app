@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
 const getMainConfig = (hasDisplayInReportsAttributes: boolean, orgUnitLabel: string): Array<MainColumnConfig> =>
@@ -11,7 +11,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean, orgUnitLabel: str
             id: 'programOwnerId',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: tCustomTerm('Owner {{orgUnitLabel}}', { orgUnitLabel }),
+            header: customTerms.i18n.t('Owner {{orgUnitLabel}}', { orgUnitLabel }),
             sortDisabled: true,
             filterHidden: true,
             apiViewName: 'programOwner',
@@ -28,7 +28,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean, orgUnitLabel: str
         isMainProperty: true,
     }));
 
-const getProgramStageMainConfig = (programStage, orgUnitLabel: string): Array<MetadataColumnConfig> =>
+const getProgramStageMainConfig = (programStage, orgUnitLabel: string, eventLabel: string): Array<MetadataColumnConfig> =>
     [
         {
             id: ADDITIONAL_FILTERS.status,
@@ -58,7 +58,7 @@ const getProgramStageMainConfig = (programStage, orgUnitLabel: string): Array<Me
             id: ADDITIONAL_FILTERS.orgUnit,
             visible: true,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: tCustomTerm('Event {{orgUnitLabel}}', { orgUnitLabel }),
+            header: customTerms.i18n.t('{{eventLabel}} {{orgUnitLabel}}', { eventLabel, orgUnitLabel }),
             apiViewName: 'eventOrgUnit',
         },
         ...(programStage.enableUserAssignment
@@ -143,7 +143,8 @@ export const useDefaultColumnConfig = (
     orgUnitId: string | null | undefined,
     programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs => {
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const orgUnitLabel = useTermLabel('orgUnit', { programId: program.id });
+    const eventLabel = useTermLabel('event', { programId: program.id, stageId: programStageId });
     return useMemo(() => {
         const { attributes, stages } = program;
         const searchFilterMetaById = buildSearchFilterMetaById(program);
@@ -157,10 +158,10 @@ export const useDefaultColumnConfig = (
 
         if (programStageId && programStage) {
             return defaultColumns.concat([
-                ...getProgramStageMainConfig(programStage, orgUnitLabel),
+                ...getProgramStageMainConfig(programStage, orgUnitLabel, eventLabel),
                 ...getEventsMetaDataConfig(programStage),
             ]);
         }
         return defaultColumns;
-    }, [orgUnitId, program, programStageId, orgUnitLabel]);
+    }, [orgUnitId, program, programStageId, orgUnitLabel, eventLabel]);
 };

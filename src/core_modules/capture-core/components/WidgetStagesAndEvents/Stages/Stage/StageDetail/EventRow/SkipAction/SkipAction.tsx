@@ -12,7 +12,7 @@ import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
 import { EventStatuses } from '../EventRow';
 import { useTermLabel } from '../../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../../utils/customTerms';
 
 type Props = {
     eventId: string;
@@ -30,7 +30,10 @@ export const SkipAction = ({
     onUpdateEventStatus,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', {
+        programId: eventDetails.program,
+        stageId: eventDetails.programStage,
+    });
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -59,7 +62,12 @@ export const SkipAction = ({
                 return { previousStatus };
             },
             onError: (error: unknown, payload: { status: string }, context?: { previousStatus: string }) => {
-                showError({ message: tCustomTerm('An error occurred when updating {{eventLabel}} status', { eventLabel }) });
+                showError({
+                    message: customTerms.i18n.t(
+                        'An error occurred when updating {{eventLabel}} status',
+                        { eventLabel },
+                    ),
+                });
                 log.error(errorCreator('An error occurred when updating event status')({ error, payload, context }));
                 context && onUpdateEventStatus(eventId, context.previousStatus);
             },

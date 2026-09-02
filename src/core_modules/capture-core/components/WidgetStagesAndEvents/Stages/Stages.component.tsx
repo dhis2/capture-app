@@ -6,7 +6,7 @@ import type { PlainProps, InputProps } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 import { useEnrollmentAccessContext } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const emptyStateStyle = {
     padding: `0 ${spacersNum.dp12}px`,
@@ -54,7 +54,7 @@ export const StagesPlain = ({
     if (!readableStages.length) {
         return (
             <p style={emptyStateStyle}>
-                {tCustomTerm('No {{programStagesLabel}} found in this program', { programStagesLabel })}
+                {customTerms.i18n.t('No {{programStagesLabel}} found in this program', { programStagesLabel })}
             </p>
         );
     }

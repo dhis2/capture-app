@@ -2,7 +2,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { relatedStageActions } from '../constants';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const ReactQueryAppNamespace = 'capture';
 
@@ -57,12 +57,22 @@ export const useAddEventWithRelationship = ({
                 if (payload.linkMode === relatedStageActions.ENTER_DATA && payload.eventIdToRedirectTo) {
                     onNavigateToEvent(payload.eventIdToRedirectTo);
                 } else {
-                    showSuccess({ message: tCustomTerm('The {{eventLabel}} was successfully linked', { eventLabel }) });
+                    showSuccess({
+                        message: customTerms.i18n.t(
+                            'The {{eventLabel}} was successfully linked',
+                            { eventLabel },
+                        ),
+                    });
                 }
             },
             onError: (_, payload: { serverData: Record<string, unknown> }) => {
                 setIsLinking(false);
-                showAlert({ message: tCustomTerm('An error occurred while linking the {{eventLabel}}', { eventLabel }) });
+                showAlert({
+                    message: customTerms.i18n.t(
+                        'An error occurred while linking the {{eventLabel}}',
+                        { eventLabel },
+                    ),
+                });
                 onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError((payload.serverData as any).events);
             },
         },

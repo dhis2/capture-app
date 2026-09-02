@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import type { WorkingListTemplate } from '../../../WorkingListsBase';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate | undefined, defaultTemplateId: string) => {
     const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
@@ -20,7 +20,7 @@ export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate |
             },
             {
                 id: 'active',
-                name: tCustomTerm('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
+                name: customTerms.i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
                 order: 1,
                 access: {
                     update: false,
@@ -34,7 +34,7 @@ export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate |
             },
             {
                 id: 'complete',
-                name: tCustomTerm('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
+                name: customTerms.i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
                 order: 2,
                 access: {
                     update: false,
@@ -48,7 +48,7 @@ export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate |
             },
             {
                 id: 'cancelled',
-                name: tCustomTerm('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
+                name: customTerms.i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
                 order: 3,
                 access: {
                     update: false,

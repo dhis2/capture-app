@@ -6,7 +6,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
+import { customTerms } from '../../utils/customTerms';
 
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
@@ -29,12 +29,15 @@ export const WidgetEnrollmentNote = () => {
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
-                title={tCustomTerm('{{notesLabel}} about this {{enrollmentLabel}}', { notesLabel, enrollmentLabel })}
-                placeholder={tCustomTerm(
+                title={customTerms.i18n.t(
+                    '{{notesLabel}} about this {{enrollmentLabel}}',
+                    { notesLabel, enrollmentLabel },
+                )}
+                placeholder={customTerms.i18n.t(
                     'Write a {{noteLabel}} about this {{enrollmentLabel}}',
                     { enrollmentLabel, noteLabel },
                 )}
-                emptyNoteMessage={tCustomTerm(
+                emptyNoteMessage={customTerms.i18n.t(
                     "This {{enrollmentLabel}} doesn't have any {{notesLabel}}",
                     { enrollmentLabel, notesLabel },
                 )}

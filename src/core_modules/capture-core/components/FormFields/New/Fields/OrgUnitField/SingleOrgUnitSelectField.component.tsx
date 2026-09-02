@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 import { Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 import { useOrgUnitAutoSelect, type AutoSelectOrgUnit } from '../../../../../dataQueries';
@@ -291,7 +291,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                         readOnly={!open}
                         disabled={disabled}
                         placeholder={open
-                            ? tCustomTerm('Search for an {{orgUnitLabel}}', { orgUnitLabel: this.props.orgUnitLabel })
+                            ? customTerms.i18n.t('Search for an {{orgUnitLabel}}', { orgUnitLabel: this.props.orgUnitLabel })
                             : undefined}
                         aria-haspopup="tree"
                         aria-controls={open ? this.popoverId : undefined}

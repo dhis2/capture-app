@@ -12,7 +12,7 @@ import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import type { PlainProps } from './WidgetHeader.types';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
+import { customTerms } from '../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     icon: {
@@ -49,7 +49,7 @@ const WidgetHeaderPlain = ({
     const { programCategory } = useCategoryCombinations(programId);
 
     const { icon, name } = stage;
-    const eventLabel = useTermLabel('event', { programId });
+    const eventLabel = useTermLabel('event', { programId, stageId: stage.id });
 
     return (
         <>
@@ -76,7 +76,7 @@ const WidgetHeaderPlain = ({
                                 onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                                 data-test="widget-enrollment-event-edit-button"
                             >
-                                {tCustomTerm('Edit {{eventLabel}}', { eventLabel })}
+                                {customTerms.i18n.t('Edit {{eventLabel}}', { eventLabel })}
                             </Button>
                         )}
 

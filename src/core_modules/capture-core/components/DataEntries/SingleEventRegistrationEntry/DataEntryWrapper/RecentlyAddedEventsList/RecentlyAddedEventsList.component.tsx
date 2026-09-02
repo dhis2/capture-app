@@ -6,7 +6,7 @@ import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/Offl
 import { listId } from './RecentlyAddedEventsList.const';
 import type { Props } from './RecentlyAddedEventsList.types';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../utils/customTerms';
 
 const styles = (theme: any) => ({
     container: {
@@ -30,7 +30,7 @@ const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
             <div
                 className={classes.header}
             >
-                {tCustomTerm('{{count}} {{eventLabel}} added', {
+                {customTerms.i18n.t('{{count}} {{eventLabel}} added', {
                     count: eventsAdded,
                     eventLabel,
                     eventsLabel,
@@ -40,8 +40,8 @@ const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
             </div>
             <OfflineEventsList
                 listId={listId}
-                noItemsText={tCustomTerm('No {{eventsLabel}} added', { eventsLabel })}
-                emptyListText={tCustomTerm('No {{eventsLabel}} added', { eventsLabel })}
+                noItemsText={customTerms.i18n.t('No {{eventsLabel}} added', { eventsLabel })}
+                emptyListText={customTerms.i18n.t('No {{eventsLabel}} added', { eventsLabel })}
                 {...passOnProps}
             />
         </Card>

@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import { getTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../utils/customTerms';
 import {
     addRelationship,
     removeRelationship,
@@ -85,7 +85,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                 clientId: relationshipClientId,
                 from: {
                     id: eventId,
-                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel(programId, 'event') }),
+                    name: customTerms.i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -101,10 +101,10 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                     r.to.id &&
                     r.to.id === clientRelationship.to.id)
             ) {
-                const message = tCustomTerm(
+                const message = customTerms.i18n.t(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        relationshipLabel: getTermLabel(programId, 'relationship'),
+                        relationshipLabel: getTermLabel('relationship', { programId }),
                         entityName: clientRelationship.from.name,
                         relationshipTypeName: clientRelationship.relationshipType.name,
                     },

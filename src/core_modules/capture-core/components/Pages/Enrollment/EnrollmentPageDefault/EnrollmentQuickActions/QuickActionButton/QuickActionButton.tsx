@@ -3,7 +3,7 @@ import { Button, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useTermLabel } from '../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../utils/customTerms';
 import { QuickActionButtonTypes } from './QuickActionButton.types';
 
 const styles = {
@@ -20,7 +20,7 @@ const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disabled
     const programStagesLabel = useTermLabel('programStage', { plural: true });
     return (
         <ConditionalTooltip
-            content={tCustomTerm('No available {{programStagesLabel}}', { programStagesLabel })}
+            content={customTerms.i18n.t('No available {{programStagesLabel}}', { programStagesLabel })}
             enabled={disabled}
         >
             <Button

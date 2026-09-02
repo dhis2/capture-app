@@ -7,7 +7,7 @@ import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
 import type { Props } from './CompleteAction.types';
 import { getTermLabel, useTermLabel } from '../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
+import { customTerms } from '../../../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     container: {
@@ -29,8 +29,8 @@ const getTooltipContent = (
     programId: string,
 ) => {
     if (!stageDataWriteAccess) {
-        return tCustomTerm('You do not have access to complete {{eventsLabel}}', {
-            eventsLabel: getTermLabel(programId, 'event', { plural: true }),
+        return customTerms.i18n.t('You do not have access to complete {{eventsLabel}}', {
+            eventsLabel: getTermLabel('event', { programId, plural: true }),
         });
     }
     if (bulkDataEntryIsActive) {
@@ -90,18 +90,18 @@ const CompleteActionPlain = ({
                     dataTest={'bulk-complete-events-dialog'}
                 >
                     <ModalTitle>
-                        {tCustomTerm('Complete {{eventsLabel}}', { eventsLabel })}
+                        {customTerms.i18n.t('Complete {{eventsLabel}}', { eventsLabel })}
                     </ModalTitle>
 
                     <ModalContent>
                         <span className={classes.container}>
                             {eventCounts.active > 0 ?
-                                tCustomTerm(
+                                customTerms.i18n.t(
                                     'Are you sure you want to complete all active {{eventsLabel}} in selection?',
                                     { eventsLabel },
                                 )
                                 :
-                                tCustomTerm(
+                                customTerms.i18n.t(
                                     'There are no active {{eventsLabel}} to complete in the current selection.',
                                     { eventsLabel },
                                 )
@@ -139,12 +139,12 @@ const CompleteActionPlain = ({
                     dataTest={'bulk-complete-events-dialog'}
                 >
                     <ModalTitle>
-                        {tCustomTerm('Error completing {{eventsLabel}}', { eventsLabel })}
+                        {customTerms.i18n.t('Error completing {{eventsLabel}}', { eventsLabel })}
                     </ModalTitle>
 
                     <ModalContent>
                         <span className={classes.container}>
-                            {tCustomTerm('There was an error completing the {{eventsLabel}}.', { eventsLabel })}
+                            {customTerms.i18n.t('There was an error completing the {{eventsLabel}}.', { eventsLabel })}
 
                             <Widget
                                 open={openAccordion}
