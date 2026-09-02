@@ -67,20 +67,6 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
         this.setState({ discardDialogOpen: false });
     }
 
-    renderHeader = () => {
-        const eventLabel = getTermLabel('event', { programId: this.props.programId });
-        const relationshipLabel = getTermLabel('relationship', { programId: this.props.programId });
-        return (
-            <div
-                className={this.props.classes.headerContainer}
-            >
-                <div className={this.props.classes.header} >
-                    {tCustomTerm('New {{eventLabel}} {{relationshipLabel}}', { eventLabel, relationshipLabel })}
-                </div>
-            </div>
-        );
-    };
-
     render() {
         const { classes, onCancel, programId, ...passOnProps } = this.props;
         const eventLabel = getTermLabel('event', { programId });
