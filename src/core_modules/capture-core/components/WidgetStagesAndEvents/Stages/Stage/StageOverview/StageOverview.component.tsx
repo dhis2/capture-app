@@ -94,7 +94,7 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
 };
 
 export const StageOverviewPlain = ({
-    title, icon, description, events, stageWriteAccess = true, stageId, classes,
+    title, icon, description, events, stageWriteAccess = true, programId, stageId, classes,
 }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const { anyStageWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
@@ -102,8 +102,8 @@ export const StageOverviewPlain = ({
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
-    const eventLabel = useTermLabel('event', { stageId });
-    const eventsLabel = useTermLabel('event', { stageId, plural: true });
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
 
     return (
         <div className={classes.container}>
@@ -168,6 +168,7 @@ export const StageOverviewPlain = ({
                 {showStageBadge && (
                     <ReadOnlyBadge
                         programStageWriteAccess={stageWriteAccess}
+                        programId={programId}
                         stageId={stageId}
                     />
                 )}

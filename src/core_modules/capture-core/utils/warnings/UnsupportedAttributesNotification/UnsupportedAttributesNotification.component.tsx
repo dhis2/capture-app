@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacers } from '@dhis2/ui';
 import { useTermLabel } from '../../../metaData';
 import { tCustomTerm } from '../../tCustomTerm';
@@ -37,7 +36,7 @@ const UnsupportedAttributesNotificationPlain = ({
 
     return (
         <div className={classes.container}>
-            <NoticeBox title={i18n.t('Some attributes are hidden')} warning>
+            <NoticeBox title={tCustomTerm('Some {{attributeLabel}} are hidden', { attributeLabel })} warning>
                 {message}{': '}
                 {unsupportedAttributes.map((attr, index) => (
                     <span key={attr.trackedEntityAttribute.id} className={classes.attributeName}>

@@ -50,6 +50,7 @@ const NewEventWorkspacePlain = ({
     const tempMode = useRef<string | undefined>(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const programStageLabel = useTermLabel('programStage', { programId, stageId });
+    const eventLabel = useTermLabel('event', { programId, stageId });
 
     const onHandleSwitchTab = (newMode: string) => {
         if (dataEntryHasChanges) {
@@ -82,7 +83,10 @@ const NewEventWorkspacePlain = ({
         return renderWidget(
             <div className={classes.errorWrapper}>
                 <NoWriteAccessMessage
-                    message={i18n.t("You don't have access to create an event in the current selections")}
+                    message={tCustomTerm(
+                        "You don't have access to create an {{eventLabel}} in the current selections",
+                        { eventLabel },
+                    )}
                 />
             </div>,
         );

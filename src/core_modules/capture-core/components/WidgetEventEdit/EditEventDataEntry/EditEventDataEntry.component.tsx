@@ -37,6 +37,7 @@ import {
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import { eventStatuses } from '../constants/status.const';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
@@ -166,10 +167,17 @@ const buildScheduleDateSettingsFn = () => {
                             const isScheduleableStatus =
                             [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
 
+                            const eventLabel = innerProps.eventLabel;
+                            const eventsLabel = innerProps.eventsLabel;
                             return isScheduleableStatus ?
-                                i18n.t('Go to “Schedule” tab to reschedule this event') :
-                                i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
-                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
+                                tCustomTerm(
+                                    'Go to “Schedule” tab to reschedule this {{eventLabel}}',
+                                    { eventLabel },
+                                ) :
+                                tCustomTerm(
+                                    'Scheduled date cannot be changed for {{ eventStatus }} {{eventsLabel}}',
+                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus], eventsLabel },
+                                );
                         },
                     })(
                         withDisplayMessages()(
@@ -328,7 +336,10 @@ const buildCompleteFieldSettingsFn = () => {
                                     const canUncompleteEvent = props.canUncompleteEvent;
                                     const shouldDisable = isEventCompleted && !canUncompleteEvent;
                                     return shouldDisable
-                                        ? i18n.t('You do not have access to uncomplete this event')
+                                        ? tCustomTerm(
+                                            'You do not have access to uncomplete this {{eventLabel}}',
+                                            { eventLabel: props.eventLabel },
+                                        )
                                         : undefined;
                                 })(TrueOnlyField),
                             ),
@@ -346,7 +357,7 @@ const buildCompleteFieldSettingsFn = () => {
             const shouldDisable = isEventCompleted && !canUncompleteEvent;
 
             return createComponentProps(props, {
-                label: i18n.t('Complete event'),
+                label: tCustomTerm('Complete {{eventLabel}}', { eventLabel: props.eventLabel }),
                 id: 'complete',
                 disabled: shouldDisable,
                 eventStatus: props.eventStatus,

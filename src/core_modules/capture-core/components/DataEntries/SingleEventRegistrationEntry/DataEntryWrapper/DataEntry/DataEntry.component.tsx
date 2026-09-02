@@ -16,6 +16,7 @@ import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '
 import { type RenderFoundation } from '../../../../../metaData';
 import { withMainButton } from './withMainButton';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
+import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import {
     withSaveHandler,
     placements,
@@ -328,7 +329,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
+            label: tCustomTerm('Complete {{eventLabel}}', { eventLabel: props.eventLabel }),
             id: 'complete',
         }),
         getPropName: () => 'complete',

@@ -188,6 +188,7 @@ const MissingMessagePlain = ({
     const enrollmentLabel = useTermLabel('enrollment');
     const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
     const orgUnitLabel = useTermLabel('orgUnit');
+    const eventLabel = useTermLabel('event');
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
@@ -315,7 +316,7 @@ const MissingMessagePlain = ({
                             className={classes.link}
                             onClick={navigateToEventProgramRegistrationPage}
                         >
-                            {i18n.t('Create a new event in this program.')}
+                            {tCustomTerm('Create a new {{eventLabel}} in this program.', { eventLabel })}
                         </LinkButton>
                     </div>
                     <div>

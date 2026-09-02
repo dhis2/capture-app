@@ -10,7 +10,7 @@ export const OrgUnitFetcher = ({
     ...passOnProps
 }: OrgUnitFetcherProps) => {
     const { error, orgUnit } = useCoreOrgUnit(orgUnitId);
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const orgUnitLabel = useTermLabel('orgUnit', { programId: passOnProps.program?.id });
 
     if (error) {
         return (
