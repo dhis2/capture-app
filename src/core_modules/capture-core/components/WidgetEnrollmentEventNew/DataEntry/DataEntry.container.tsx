@@ -18,6 +18,9 @@ import { useProgramExpiryForUser } from '../../../hooks';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
 
 const customLabels = {
+    orgUnitLabel: { key: 'orgUnit' },
+    eventLabel: { key: 'event' },
+    noteLabel: { key: 'note' },
     notesLabel: { key: 'note', plural: true },
     relationshipsLabel: { key: 'relationship', plural: true },
 } as const;

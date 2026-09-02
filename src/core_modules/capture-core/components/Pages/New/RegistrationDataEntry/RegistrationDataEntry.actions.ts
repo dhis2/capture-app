@@ -60,6 +60,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
     candidateForRegistration,
     uid,
     redirect,
+    programId,
 }: {
     candidateForRegistration: any;
     uid: string;
@@ -67,6 +68,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
         programStageId?: string;
         eventId?: string;
     };
+    programId: string;
 }) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)(
         { ...candidateForRegistration },
@@ -83,6 +85,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
                 },
                 rollback: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,
+                    meta: { programId },
                 },
             },
         },

@@ -1,6 +1,6 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { dataEntryKeys } from 'capture-core/constants';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { useTermLabel, type ProgramStage } from '../../../metaData';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import {
@@ -48,6 +48,7 @@ export const TopBar = ({
 }: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
     const enrollmentLabel = useTermLabel('enrollment', { programId: programId ?? undefined });
+    const programStageLabel = useTermLabel('programStage', { programId: programId ?? undefined });
 
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
@@ -103,7 +104,7 @@ export const TopBar = ({
                     },
                 ]}
                 selectedValue="alwaysPreselected"
-                title={i18n.t('Program stage')}
+                title={capitalizeFirstLetter(programStageLabel)}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             />
             {programStage && (

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import React, { type ComponentType } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { makeProgramRulesSelector } from './DataEntryWidgetOutput.selectors';
 import { getTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 type OwnProps = {
     dataEntryId: string;
@@ -18,15 +18,14 @@ const makeMapStateToProps = () => {
         const { dataEntries } = state;
         const ready = !!dataEntries[dataEntryId];
         const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
-        const programId = state.currentSelections?.programId;
-        const enrollmentLabel = getTermLabel(programId, 'enrollment');
+        const enrollmentLabel = getTermLabel(selectedScopeId, 'enrollment');
 
         return {
             ready,
             dataEntryKey,
             programRules: programRulesSelector(state, { dataEntryId, selectedScopeId }),
-            feedbackEmptyText: i18n.t('No feedback for this {{enrollmentLabel}} yet', { enrollmentLabel }),
-            indicatorEmptyText: i18n.t('No indicator output for this {{enrollmentLabel}} yet', { enrollmentLabel }),
+            feedbackEmptyText: tCustomTerm('No feedback for this {{enrollmentLabel}} yet', { enrollmentLabel }),
+            indicatorEmptyText: tCustomTerm('No indicator output for this {{enrollmentLabel}} yet', { enrollmentLabel }),
         };
     };
 };

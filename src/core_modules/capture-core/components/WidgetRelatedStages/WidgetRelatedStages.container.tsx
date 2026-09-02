@@ -1,7 +1,6 @@
 import React, { useRef, useCallback, useState } from 'react';
 import { IconLink24, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
 import { RelatedStagesActions } from './RelatedStagesActions';
 import { useLinkedEventByOriginId } from '../WidgetTwoEventWorkspace/hooks';
@@ -16,6 +15,8 @@ import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { RequestEvent } from '../DataEntries';
+import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles = {
     header: {
@@ -48,6 +49,7 @@ export const WidgetRelatedStagesPlain = ({
     classes,
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
+    const eventLabel = useTermLabel('event', { programId });
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus, constraint } = useRelatedStages({ programStageId, programId });
     const { stageWriteAccessById } = useEnrollmentAccessContext();
@@ -123,7 +125,7 @@ export const WidgetRelatedStagesPlain = ({
                     <span className={classes.icon}>
                         <IconLink24 />
                     </span>
-                    {i18n.t('Linked event')}
+                    {tCustomTerm('Linked {{eventLabel}}', { eventLabel })}
                 </div>
             }
         >

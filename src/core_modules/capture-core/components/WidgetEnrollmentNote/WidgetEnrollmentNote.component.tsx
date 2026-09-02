@@ -1,5 +1,4 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
@@ -20,6 +19,7 @@ export const WidgetEnrollmentNote = () => {
         showWidgetBadge,
     } = useEnrollmentAccessContext();
     const enrollmentLabel = useTermLabel('enrollment');
+    const noteLabel = useTermLabel('note');
     const notesLabel = useTermLabel('note', { plural: true });
 
     const onAddNote = (newNoteValue: string) => {
@@ -30,11 +30,15 @@ export const WidgetEnrollmentNote = () => {
         <div data-test="enrollment-note-widget">
             <WidgetNote
                 title={tCustomTerm('{{notesLabel}} about this {{enrollmentLabel}}', { notesLabel, enrollmentLabel })}
-                placeholder={i18n.t('Write a note about this {{enrollmentLabel}}', { enrollmentLabel })}
+                placeholder={tCustomTerm(
+                    'Write a {{noteLabel}} about this {{enrollmentLabel}}',
+                    { enrollmentLabel, noteLabel },
+                )}
                 emptyNoteMessage={tCustomTerm(
                     "This {{enrollmentLabel}} doesn't have any {{notesLabel}}",
                     { enrollmentLabel, notesLabel },
                 )}
+                noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!programWriteAccess}
                 badge={showWidgetBadge ? (

@@ -185,16 +185,19 @@ const SearchFormIndex = ({
             }
         };
 
-        const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
-            (<div className={error ? classes.textError : classes.textInfo}>
-                {
-                    i18n.t('Fill in at least {{count}} attribute to search', {
+        const FormInformativeMessage = ({ minAttributesRequiredToSearch }) => {
+            const attributeLabel = useTermLabel('attribute');
+            return (
+                <div className={error ? classes.textError : classes.textInfo}>
+                    {tCustomTerm('Fill in at least {{count}} {{attributeLabel}} to search', {
                         count: minAttributesRequiredToSearch,
-                        defaultValue: 'Fill in at least {{count}} attribute to search',
+                        attributeLabel,
+                        defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
                         defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    })
-                }
-            </div>);
+                    })}
+                </div>
+            );
+        };
 
         const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {

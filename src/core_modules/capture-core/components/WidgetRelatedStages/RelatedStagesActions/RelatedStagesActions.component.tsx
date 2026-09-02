@@ -51,6 +51,7 @@ const Schedule = ({
     programStage,
     canAddNewEventToStage,
 }) => {
+    const eventLabel = useTermLabel('event');
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
     if (hidden) {
@@ -62,9 +63,9 @@ const Schedule = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
+        tooltipContent = tCustomTerm('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
-            interpolation: { escapeValue: false },
+            eventLabel,
         });
     }
 
@@ -95,6 +96,7 @@ const EnterData = ({
     programStage,
     canAddNewEventToStage,
 }) => {
+    const eventLabel = useTermLabel('event');
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
     if (hidden) {
@@ -106,9 +108,9 @@ const EnterData = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
+        tooltipContent = tCustomTerm('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
-            interpolation: { escapeValue: false },
+            eventLabel,
         });
     }
 
@@ -139,6 +141,8 @@ const LinkExistingResponse = ({
     updateSelectedAction,
     programStage,
 }) => {
+    const eventLabel = useTermLabel('event');
+    const eventsLabel = useTermLabel('event', { plural: true });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
     if (hidden) {
@@ -150,9 +154,9 @@ const LinkExistingResponse = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else if (!linkableEvents.length) {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} has no linkable events', {
+        tooltipContent = tCustomTerm('{{ linkableStageLabel }} has no linkable {{eventsLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
-            interpolation: { escapeValue: false },
+            eventsLabel,
         });
     }
 
@@ -167,7 +171,7 @@ const LinkExistingResponse = ({
                 name={`related-stage-action-${relatedStageActions.LINK_EXISTING_RESPONSE}`}
                 checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
+                label={tCustomTerm('Link to an existing {{eventLabel}}', { eventLabel })}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
                 dataTest="related-stages-actions-link-existing-response"

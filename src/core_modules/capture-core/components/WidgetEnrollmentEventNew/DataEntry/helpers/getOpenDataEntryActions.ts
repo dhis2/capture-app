@@ -5,8 +5,13 @@ import { getNoteValidatorContainers } from '../fieldValidators/note.validatorCon
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
 import type { DataEntryPropToInclude } from '../../../DataEntry/actions/dataEntryLoad.utils';
+import { getTermLabel } from '../../../../metaData/helpers/customLabels';
 
-const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
+const buildDataEntryPropsToInclude = (
+    orgUnitLabel: string,
+    eventLabel: string,
+    noteLabel: string,
+): Array<DataEntryPropToInclude> => [
     {
         id: 'occurredAt',
         type: 'DATE',
@@ -15,7 +20,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         id: 'orgUnit',
         type: 'ORGANISATION_UNIT',
-        validatorContainers: getOrgUnitValidatorContainers(),
+        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
     },
     {
         id: 'scheduledAt',
@@ -30,7 +35,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         id: 'note',
         type: 'TEXT',
-        validatorContainers: getNoteValidatorContainers(),
+        validatorContainers: getNoteValidatorContainers(eventLabel, noteLabel),
         clientIgnore: true,
     },
     {
@@ -40,12 +45,23 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 ];
 
 export const getOpenDataEntryActions =
-    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit?: Record<string, unknown>) => {
+    (
+        dataEntryId: string,
+        itemId: string,
+        programId: string,
+        programCategory?: ProgramCategory,
+        orgUnit?: Record<string, unknown>,
+    ) => {
         const defaultDataEntryValues = {
             orgUnit: orgUnit
                 ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
                 : undefined,
         };
+        const dataEntryPropsToInclude = buildDataEntryPropsToInclude(
+            getTermLabel(programId, 'orgUnit'),
+            getTermLabel(programId, 'event'),
+            getTermLabel(programId, 'note'),
+        );
         if (programCategory && programCategory.categories) {
             dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
                 id: `attributeCategoryOptions-${category.id}`,

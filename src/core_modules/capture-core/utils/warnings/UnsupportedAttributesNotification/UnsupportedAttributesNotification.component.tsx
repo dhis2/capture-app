@@ -1,10 +1,9 @@
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacers } from '@dhis2/ui';
-import type { SearchAttribute } from '../../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 import { useTermLabel } from '../../../metaData';
 import { tCustomTerm } from '../../tCustomTerm';
+import type { SearchAttribute } from '../../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 
 const styles: Readonly<any> = (theme: any) => ({
     container: {
@@ -24,14 +23,16 @@ const UnsupportedAttributesNotificationPlain = ({
     unsupportedAttributes,
     classes,
 }: Props) => {
+    const attributeLabel = useTermLabel('attribute');
     const attributesLabel = useTermLabel('attribute', { plural: true });
     const message =
-        i18n.t('The following attribute type is not supported for searching and has been hidden', {
+        tCustomTerm('The following {{attributeLabel}} type is not supported for searching and has been hidden', {
             count: unsupportedAttributes.length,
+            attributeLabel,
             defaultValue:
-                'The following attribute type is not supported for searching and has been hidden',
+                'The following {{attributeLabel}} type is not supported for searching and has been hidden',
             defaultValue_plural:
-                'The following attribute types are not supported for searching and have been hidden',
+                'The following {{attributeLabel}} types are not supported for searching and have been hidden',
         });
 
     return (

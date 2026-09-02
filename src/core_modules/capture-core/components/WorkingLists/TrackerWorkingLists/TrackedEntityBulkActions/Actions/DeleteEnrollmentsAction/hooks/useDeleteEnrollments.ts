@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
-import i18n from '@dhis2/d2-i18n';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { useTermLabel } from '../../../../../../../metaData';
+import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
 
 type Props = {
     selectedRows: Record<string, boolean>;
@@ -83,7 +83,9 @@ export const useDeleteEnrollments = ({
         {
             onError: (error) => {
                 log.error(errorCreator('An error occurred when deleting enrollments')({ error }));
-                showAlert({ message: i18n.t('An error occurred when deleting {{enrollmentsLabel}}', { enrollmentsLabel }) });
+                showAlert({
+                    message: tCustomTerm('An error occurred when deleting {{enrollmentsLabel}}', { enrollmentsLabel }),
+                });
             },
             onSuccess: () => {
                 queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);

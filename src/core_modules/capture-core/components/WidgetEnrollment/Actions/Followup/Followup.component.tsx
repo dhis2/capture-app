@@ -1,10 +1,12 @@
 import React from 'react';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
+import { useTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
-export const Followup = ({ enrollment, onUpdate }: Props) =>
-    (enrollment.followUp ? (
+export const Followup = ({ enrollment, onUpdate }: Props) => {
+    const followUpLabel = useTermLabel('followUp');
+    return enrollment.followUp ? (
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-followup-remove"
@@ -15,7 +17,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) =>
                 })
             }
             icon={<IconFlag16 />}
-            label={i18n.t('Remove mark for follow-up')}
+            label={tCustomTerm('Remove mark for {{followUpLabel}}', { followUpLabel })}
             suffix=""
         />
     ) : (
@@ -29,7 +31,8 @@ export const Followup = ({ enrollment, onUpdate }: Props) =>
                 })
             }
             icon={<IconFlag16 />}
-            label={i18n.t('Mark for follow-up')}
+            label={tCustomTerm('Mark for {{followUpLabel}}', { followUpLabel })}
             suffix=""
         />
-    ));
+    );
+};

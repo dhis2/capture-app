@@ -9,6 +9,7 @@ import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useTermLabel } from '../../metaData';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 type Props = {
     currentSearchScopeId?: string,
@@ -117,7 +118,7 @@ const CardListButtons: FC<Props> = ({
     {
         dataTest: 'view-active-enrollment-button',
         onClick: onHandleClick,
-        label: i18n.t('View active {{enrollmentLabel}}', { enrollmentLabel }),
+        label: tCustomTerm('View active {{enrollmentLabel}}', { enrollmentLabel }),
         hide: navigationButtonsState !== availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON,
     },
     {

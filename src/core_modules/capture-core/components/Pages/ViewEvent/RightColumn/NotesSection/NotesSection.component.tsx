@@ -8,6 +8,7 @@ import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.com
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { getTermLabel } from '../../../../../metaData';
 import type { PlainProps } from './NotesSection.types';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
@@ -48,7 +49,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly, notesLabel } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly, notesLabel, programId } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -57,17 +58,21 @@ class NotesSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
-                        {tCustomTerm("This event doesn't have any {{notesLabel}}", { notesLabel })}
+                        {tCustomTerm(
+                            "This {{eventLabel}} doesn't have any {{notesLabel}}",
+                            { eventLabel: getTermLabel(programId, 'event'), notesLabel },
+                        )}
                     </div>
                 )}
                 {React.createElement(LoadingNotes as any, {
                     ready,
                     notes,
                     readOnly,
-                    onAddNote,
+                    onAddNote: (note: string) => onAddNote(note, programId),
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,
                     smallMainButton: true,
+                    noteLabel: getTermLabel(programId, 'note'),
                 })}
             </ViewEventSection>
         );

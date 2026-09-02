@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from 'react';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import type { ProgramStage } from '../../../../../../../metaData';
 import { useTermLabel } from '../../../../../../../metaData';
+import { tCustomTerm } from '../../../../../../../utils/tCustomTerm';
 
 type Props = {
     selectedRows: Record<string, any>;
@@ -162,7 +162,7 @@ export const useCompleteBulkEnrollments = ({
             },
             onError: (serverResponse, variables) => {
                 removeQueries();
-                showAlert({ message: i18n.t('An error occurred when completing the {{enrollmentsLabel}}', { enrollmentsLabel }) }); // eslint-disable-line max-len
+                showAlert({ message: tCustomTerm('An error occurred when completing the {{enrollmentsLabel}}', { enrollmentsLabel }) }); // eslint-disable-line max-len
                 log.error(
                     errorCreator('An error occurred when completing enrollments')({
                         serverResponse,
@@ -187,7 +187,7 @@ export const useCompleteBulkEnrollments = ({
                 onUpdateList(true);
             },
             onError: (serverResponse, variables) => {
-                showAlert({ message: i18n.t('An error occurred when completing the {{enrollmentsLabel}}', { enrollmentsLabel }) }); // eslint-disable-line max-len
+                showAlert({ message: tCustomTerm('An error occurred when completing the {{enrollmentsLabel}}', { enrollmentsLabel }) }); // eslint-disable-line max-len
                 log.error(
                     errorCreator('An error occurred when completing enrollments')({
                         serverResponse,
@@ -222,7 +222,7 @@ export const useCompleteBulkEnrollments = ({
                             enrollments,
                         }));
                     // eslint-disable-next-line max-len
-                    showAlert({ message: i18n.t('An unknown error occurred when completing {{enrollmentsLabel}}', { enrollmentsLabel }) });
+                    showAlert({ message: tCustomTerm('An unknown error occurred when completing {{enrollmentsLabel}}', { enrollmentsLabel }) });
                     return;
                 }
                 const validEnrollments = filterValidEnrollments(enrollments, errors);

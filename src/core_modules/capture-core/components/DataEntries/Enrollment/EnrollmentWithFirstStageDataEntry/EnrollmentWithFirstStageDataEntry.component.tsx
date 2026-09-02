@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { isLangRtl } from '../../../../utils/rtl';
+import { getTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 import { DataEntry } from '../../../DataEntry';
 import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
 import {
@@ -177,7 +179,9 @@ const getCompleteFieldSettingsFn = () => {
         isApplicable: (props: any) => props.firstStageMetaData && props.firstStageMetaData.stage?.stageForm,
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
+            label: tCustomTerm('Complete {{eventLabel}}', {
+                eventLabel: getTermLabel(props.programId, 'event'),
+            }),
             id: 'complete',
         }),
         getPropName: () => stageMainDataIds.COMPLETE,

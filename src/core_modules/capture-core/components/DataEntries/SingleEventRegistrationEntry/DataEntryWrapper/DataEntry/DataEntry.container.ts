@@ -26,6 +26,13 @@ import {
 import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { newEventSaveTypes } from './newEventSaveTypes';
+import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
+
+const customLabels = {
+    orgUnitLabel: { key: 'orgUnit' },
+    eventLabel: { key: 'event' },
+    noteLabel: { key: 'note' },
+} as const;
 
 const customLabels = {
     notesLabel: { key: 'note', plural: true },

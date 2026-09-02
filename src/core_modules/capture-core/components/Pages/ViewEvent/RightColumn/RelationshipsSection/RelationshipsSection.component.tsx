@@ -8,6 +8,7 @@ import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.com
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { tCustomTerm } from '../../../../../utils/tCustomTerm';
+import { getTermLabel } from '../../../../../metaData';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
@@ -76,7 +77,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, programStage, eventId, relationships, ready, readOnly, relationshipsLabel } = this.props;
+        const { classes, programStage, programId, eventId, relationships, ready, readOnly, relationshipsLabel } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
@@ -92,7 +93,10 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {tCustomTerm("This event doesn't have any {{relationshipsLabel}}", { relationshipsLabel })}
+                        {tCustomTerm(
+                            "This {{eventLabel}} doesn't have any {{relationshipsLabel}}",
+                            { eventLabel: getTermLabel(programId, 'event'), relationshipsLabel },
+                        )}
                     </div>
                 )}
                 {React.createElement(LoadingRelationships as any, {
@@ -105,6 +109,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     readOnly,
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
+                    programId,
                 })}
             </ViewEventSection>
         );

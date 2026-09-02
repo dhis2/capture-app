@@ -17,6 +17,8 @@ import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
+import { getTermLabel } from '../../metaData/helpers/customLabels';
+import { tCustomTerm } from '../../utils/tCustomTerm';
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
@@ -24,14 +26,17 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, sto
         filter(action => action.payload.nextProps.orgUnitId),
         concatMap((action) => {
             const { organisationUnits } = store.value as any;
-            const { orgUnitId } = action.payload.nextProps;
+            const { orgUnitId, programId } = action.payload.nextProps;
             if (organisationUnits[orgUnitId]) {
                 return of(completeUrlUpdate());
             }
+            const orgUnitLabel = getTermLabel(programId, 'orgUnit');
             return of(startLoading(), getCoreOrgUnit({
                 orgUnitId,
                 onSuccess: setCurrentOrgUnitBasedOnUrl,
-                onError: () => errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
+                onError: () => errorRetrievingOrgUnitBasedOnUrl(
+                    tCustomTerm('Could not get {{orgUnitLabel}}', { orgUnitLabel }),
+                ),
             }));
         }),
     );
@@ -63,7 +68,10 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>)
                 }
 
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
-                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for selected organisation unit'));
+                    const orgUnitLabel = getTermLabel(programId, 'orgUnit');
+                    return invalidSelectionsFromUrl(
+                        tCustomTerm('Selected program is invalid for selected {{orgUnitLabel}}', { orgUnitLabel }),
+                    );
                 }
             }
 

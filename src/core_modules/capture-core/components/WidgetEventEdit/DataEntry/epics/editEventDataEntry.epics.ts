@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n';
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, concatMap } from 'rxjs/operators';
@@ -9,7 +8,8 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
+import { getProgramThrowIfNotFound, dataElementTypes, getTermLabel } from '../../../../metaData';
+import { tCustomTerm } from '../../../../utils/tCustomTerm';
 import { convertValue } from '../../../../converters/serverToClient';
 import {
     getCurrentClientValues,
@@ -56,7 +56,9 @@ const runRulesForEditSingleEvent = async ({
         : getStageFromEvent(event)?.stage;
 
     if (!stage) {
-        throw Error(i18n.t('Program stage not found in rules execution'));
+        throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
+            programStageLabel: getTermLabel(programId, 'programStage'),
+        }));
     }
 
     const foundation = stage.stageForm;

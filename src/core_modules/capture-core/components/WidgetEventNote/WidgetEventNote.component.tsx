@@ -1,5 +1,4 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import type { Props } from './WidgetEventNote.types';
 import { requestAddNoteForEvent } from './WidgetEventNote.actions';
@@ -9,7 +8,7 @@ import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDo
 import { useTermLabel } from '../../metaData';
 import { tCustomTerm } from '../../utils/tCustomTerm';
 
-export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
+export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props) => {
     const dispatch = useDispatch();
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
@@ -18,18 +17,24 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
+    const eventLabel = useTermLabel('event');
+    const noteLabel = useTermLabel('note');
     const notesLabel = useTermLabel('note', { plural: true });
 
     const onAddNote = (newNoteValue: string) => {
-        dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue));
+        dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId));
     };
 
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={tCustomTerm('{{notesLabel}} about this event', { notesLabel })}
-                placeholder={i18n.t('Write a note about this event')}
-                emptyNoteMessage={tCustomTerm("This event doesn't have any {{notesLabel}}", { notesLabel })}
+                title={tCustomTerm('{{notesLabel}} about this {{eventLabel}}', { notesLabel, eventLabel })}
+                placeholder={tCustomTerm('Write a {{noteLabel}} about this {{eventLabel}}', { eventLabel, noteLabel })}
+                emptyNoteMessage={tCustomTerm(
+                    "This {{eventLabel}} doesn't have any {{notesLabel}}",
+                    { eventLabel, notesLabel },
+                )}
+                noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!currentStageWriteAccess}
                 badge={showWidgetBadge ? (

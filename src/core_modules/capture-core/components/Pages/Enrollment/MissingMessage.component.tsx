@@ -158,12 +158,11 @@ const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string })
     return (
         <IncompleteSelectionsMessage>
             {enrollmentId ?
-                i18n.t('Invalid {{enrollmentLabel}} id {{enrollmentId}}.', {
+                tCustomTerm('Invalid {{enrollmentLabel}} id {{enrollmentId}}.', {
                     enrollmentLabel,
                     enrollmentId,
-                    interpolation: { escapeValue: false },
                 }) :
-                i18n.t('Choose an {{enrollmentLabel}} to view the dashboard.', { enrollmentLabel })
+                tCustomTerm('Choose an {{enrollmentLabel}} to view the dashboard.', { enrollmentLabel })
             }
         </IncompleteSelectionsMessage>
     );
@@ -188,6 +187,7 @@ const MissingMessagePlain = ({
     const { programId, teiId, enrollmentId } = useLocationQuery();
     const enrollmentLabel = useTermLabel('enrollment');
     const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
+    const orgUnitLabel = useTermLabel('orgUnit');
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
@@ -196,8 +196,8 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose a program to add new or see existing {{enrollmentsLabel}} for {{teiDisplayName}}', {
-                    enrollmentsLabel, teiDisplayName, interpolation: { escapeValue: false },
+                {tCustomTerm('Choose a program to add new or see existing {{enrollmentsLabel}} for {{teiDisplayName}}', {
+                    enrollmentsLabel, teiDisplayName,
                 })}
             </IncompleteSelectionsMessage>
         }
@@ -221,13 +221,13 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('There are no active {{enrollmentsLabel}}.', { enrollmentsLabel })}
+                    {tCustomTerm('There are no active {{enrollmentsLabel}}.', { enrollmentsLabel })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToTrackerProgramRegistrationPage}
                         >
-                            {i18n.t(
+                            {tCustomTerm(
                                 'Add new {{enrollmentLabel}} for {{teiDisplayName}} in this program.',
                                 { enrollmentLabel, teiDisplayName },
                             )}
@@ -254,7 +254,11 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
             <IncompleteSelectionsMessage>
                 {/* eslint-disable-next-line max-len */}
-                {i18n.t('You do not have permissions to access to this program, registering unit or record, contact your administrator for more information.')}
+                {tCustomTerm(
+                    // eslint-disable-next-line max-len
+                    'You do not have permissions to access to this program, {{orgUnitLabel}} or record, contact your administrator for more information.',
+                    { orgUnitLabel },
+                )}
             </IncompleteSelectionsMessage>
         }
 
@@ -282,8 +286,8 @@ const MissingMessagePlain = ({
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
                     {/* eslint-disable-next-line max-len */}
-                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollmentLabel}}. ', {
-                        teiDisplayName, programName, tetName, enrollmentLabel, interpolation: { escapeValue: false },
+                    {tCustomTerm('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollmentLabel}}. ', {
+                        teiDisplayName, programName, tetName, enrollmentLabel,
                     })}
                     <div>
                         <LinkButton

@@ -4,6 +4,7 @@ import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
 
 const customLabels = {
+    orgUnitLabel: { key: 'orgUnit' },
     notesLabel: { key: 'note', plural: true },
 } as const;
 
@@ -24,7 +25,5 @@ const mapStateToProps = (state: any, props: any) => {
 const mapDispatchToProps = (): any => ({});
 
 export const ViewEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(
-        withCustomLabels(customLabels)(ViewEventDataEntryComponent),
-    ),
+    withLoadingIndicator()(withCustomLabels(customLabels)(ViewEventDataEntryComponent)),
 );

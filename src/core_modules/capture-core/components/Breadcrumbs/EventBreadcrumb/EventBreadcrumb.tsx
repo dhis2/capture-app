@@ -1,5 +1,4 @@
 import React, { ComponentType, useCallback, useMemo, useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { DirectionalChevron } from '../../../utils/rtl';
@@ -7,6 +6,8 @@ import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
+import { useTermLabel } from '../../../metaData';
+import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 export const pageKeys = {
     MAIN_PAGE: 'mainPage',
@@ -43,6 +44,7 @@ const EventBreadcrumbPlain = ({
 }: Props) => {
     const [openWarning, setOpenWarning] = useState<PageKeys | null>(null);
     const { label } = useWorkingListLabel({ programId });
+    const eventLabel = useTermLabel('event', { programId });
 
     const handleNavigation = useCallback((callback?: () => void, warningType?: PageKeys) => {
         if (userInteractionInProgress && warningType) {
@@ -71,14 +73,14 @@ const EventBreadcrumbPlain = ({
         {
             key: pageKeys.VIEW_EVENT,
             onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
-            label: i18n.t('View event'),
+            label: tCustomTerm('View {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT || page === pageKeys.EDIT_EVENT,
         },
         {
             key: pageKeys.EDIT_EVENT,
             onClick: () => undefined,
-            label: i18n.t('Edit event'),
+            label: tCustomTerm('Edit {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
@@ -88,6 +90,7 @@ const EventBreadcrumbPlain = ({
         onBackToViewEvent,
         onBackToMainPage,
         page,
+        eventLabel,
     ]);
 
     return (

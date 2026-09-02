@@ -56,7 +56,7 @@ const styles = {
 const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
 const getEnrollmentDateLabel = (program, enrollmentLabel: string) =>
-    program.displayEnrollmentDateLabel ?? i18n.t('{{enrollmentLabel}} date', { enrollmentLabel });
+    program.displayEnrollmentDateLabel ?? tCustomTerm('{{enrollmentLabel}} date', { enrollmentLabel });
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
 const WidgetEnrollmentPlain = ({
@@ -86,6 +86,7 @@ const WidgetEnrollmentPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
     const enrollmentLabel = useTermLabel('enrollment');
+    const followUpLabel = useTermLabel('followUp');
     const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -133,7 +134,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {i18n.t('Follow-up')}
+                                    {capitalizeFirstLetter(followUpLabel)}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />
