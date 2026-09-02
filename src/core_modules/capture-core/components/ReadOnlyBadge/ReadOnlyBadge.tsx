@@ -82,7 +82,7 @@ const ReadOnlyBadgePlain = ({
     const enrollmentLabel = useTermLabel('enrollment');
     const programStageLabel = useTermLabel('programStage', { stageId });
     const programStagesLabel = useTermLabel('programStage', { plural: true });
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', { stageId });
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,

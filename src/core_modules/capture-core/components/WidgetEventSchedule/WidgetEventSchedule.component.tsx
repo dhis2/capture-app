@@ -75,8 +75,8 @@ const WidgetEventSchedulePlain = ({
         const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate && !validation?.error);
         setIsFormValid(formIsValid());
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
-    const eventLabel = useTermLabel('event', { programId });
-    const noteLabel = useTermLabel('note', { programId });
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const noteLabel = useTermLabel('note', { programId, stageId });
 
     return (
         <Widget

@@ -102,8 +102,8 @@ export const StageOverviewPlain = ({
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const eventLabel = useTermLabel('event', { stageId });
+    const eventsLabel = useTermLabel('event', { stageId, plural: true });
 
     return (
         <div className={classes.container}>

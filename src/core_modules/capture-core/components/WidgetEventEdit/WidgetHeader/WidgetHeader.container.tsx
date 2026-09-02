@@ -49,7 +49,7 @@ const WidgetHeaderPlain = ({
     const { programCategory } = useCategoryCombinations(programId);
 
     const { icon, name } = stage;
-    const eventLabel = useTermLabel('event', { programId });
+    const eventLabel = useTermLabel('event', { programId, stageId: stage.id });
 
     return (
         <>

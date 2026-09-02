@@ -22,8 +22,8 @@ export const StageCreateNewButton = ({
     stageId,
 }: Props) => {
     const programStageLabel = useTermLabel('programStage', { stageId });
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const eventLabel = useTermLabel('event', { stageId });
+    const eventsLabel = useTermLabel('event', { stageId, plural: true });
     const { isDisabled, tooltipContent } = useMemo(() => {
         if (preventAddingEventActionInEffect) {
             return {

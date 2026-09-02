@@ -109,8 +109,8 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const eventLabel = useTermLabel('event', { programId });
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
     const { stageWriteAccessById } = useEnrollmentAccessContext();
     const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);

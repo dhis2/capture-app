@@ -32,7 +32,7 @@ export const DeleteActionButton = ({
 }: Props) => {
     const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
     const occurredAtClientView = convertClientToView(occurredAtClient, dataElementTypes.DATE);
-    const eventLabel = useTermLabel('event', { programId });
+    const eventLabel = useTermLabel('event', { programId, stageId: programStage?.id });
 
     const {
         isEventWithinValidPeriod,
