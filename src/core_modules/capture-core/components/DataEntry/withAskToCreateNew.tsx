@@ -54,7 +54,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             if (!this.state.isOpen) {
                 return null;
             }
-            const eventLabel = getTermLabel(this.props.programId, 'event');
+            const eventLabel = getTermLabel('event', { programId: this.props.programId });
             return (
                 <Modal
                     hide={!this.state.isOpen}

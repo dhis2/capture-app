@@ -23,7 +23,7 @@ const NewEnrollmentRelationshipPlain =
         ExistingUniqueValueDialogActions,
     }: Props) => {
         const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
-        const relationshipLabel = getTermLabel(programId, 'relationship');
+        const relationshipLabel = getTermLabel('relationship', { programId });
         const relatedStageActionsOptions = {
             [relatedStageActions.ENTER_DATA]: {
                 disabled: true,

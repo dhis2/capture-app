@@ -20,7 +20,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderDeleteButton = (hasDeleteButton?: boolean) => {
-            const eventLabel = getTermLabel(this.props.programId, 'event');
+            const eventLabel = getTermLabel('event', { programId: this.props.programId });
             return (
                 hasDeleteButton ? (<div>
                     <Button

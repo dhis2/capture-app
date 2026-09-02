@@ -112,19 +112,19 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error saving tracked entity instance') }),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: (_state, action) => {
-        const enrollmentLabel = getTermLabel(action.meta.programId, 'enrollment');
+        const enrollmentLabel = getTermLabel('enrollment', { programId: action.meta.programId });
         return addErrorFeedback({
             message: tCustomTerm('Error saving {{enrollmentLabel}}', { enrollmentLabel }),
         });
     },
     [enrollmentSiteActionTypes.SAVE_FAILED]: (_state, action) => {
-        const enrollmentLabel = getTermLabel(action.payload.programId, 'enrollment');
+        const enrollmentLabel = getTermLabel('enrollment', { programId: action.payload.programId });
         return addErrorFeedback({
             message: tCustomTerm('Error saving the {{enrollmentLabel}} event', { enrollmentLabel }),
         });
     },
     [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
-        const enrollmentLabel = getTermLabel(action.meta.programId, 'enrollment');
+        const enrollmentLabel = getTermLabel('enrollment', { programId: action.meta.programId });
         return addErrorFeedback({
             message: tCustomTerm('Error deleting the {{enrollmentLabel}} event', { enrollmentLabel }),
         });
@@ -139,24 +139,24 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
     [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: (_state, action) => {
         const programId = action.meta.selections.programId;
-        const enrollmentLabel = getTermLabel(programId, 'enrollment');
-        const noteLabel = getTermLabel(programId, 'note');
+        const enrollmentLabel = getTermLabel('enrollment', { programId });
+        const noteLabel = getTermLabel('note', { programId });
         return addErrorFeedback({
             message: tCustomTerm('Could not save {{enrollmentLabel}} {{noteLabel}}', { enrollmentLabel, noteLabel }),
         });
     },
     [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: (_state, action) => {
         const programId = action.meta.programId;
-        const eventLabel = getTermLabel(programId, 'event');
-        const noteLabel = getTermLabel(programId, 'note');
+        const eventLabel = getTermLabel('event', { programId });
+        const noteLabel = getTermLabel('note', { programId });
         return addErrorFeedback({
             message: tCustomTerm('Could not save {{eventLabel}} {{noteLabel}}', { eventLabel, noteLabel }),
         });
     },
     [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: (_state, action) => {
         const programId = action.meta.programId;
-        const eventLabel = getTermLabel(programId, 'event');
-        const noteLabel = getTermLabel(programId, 'note');
+        const eventLabel = getTermLabel('event', { programId });
+        const noteLabel = getTermLabel('note', { programId });
         return addErrorFeedback({
             message: tCustomTerm('Could not save {{eventLabel}} {{noteLabel}}', { eventLabel, noteLabel }),
         });

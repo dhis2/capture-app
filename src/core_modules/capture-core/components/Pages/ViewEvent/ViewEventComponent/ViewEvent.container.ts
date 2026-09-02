@@ -32,7 +32,7 @@ const makeMapStateToProps = () => {
             : getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW);
         const isUserInteractionInProgress = dataEntryHasChanges(state, currentDataEntryKey);
         const programId = state.currentSelections.programId;
-        const eventLabel = programId ? getTermLabel(programId, 'event') : undefined;
+        const eventLabel = programId ? getTermLabel('event', { programId }) : undefined;
         return {
             programStage: programStageSelector(state),
             eventAccess: eventAccessSelector(state),

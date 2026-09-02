@@ -57,7 +57,7 @@ const runRulesForEditSingleEvent = async ({
 
     if (!stage) {
         throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
-            programStageLabel: getTermLabel(programId, 'programStage'),
+            programStageLabel: getTermLabel('programStage', { programId }),
         }));
     }
 

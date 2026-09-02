@@ -23,7 +23,7 @@ export const getEventFromUrlEpic = (
             const eventId = action.payload.eventId;
             const orgUnit = action.payload.orgUnit;
             const prevProgramId = store.value.currentSelections.programId;
-            const eventLabel = getTermLabel(prevProgramId, 'event');
+            const eventLabel = getTermLabel('event', { programId: prevProgramId });
             return getEvent(eventId, absoluteApiPath, querySingleResource)
                 .then((eventContainer: any) => {
                     if (!eventContainer) {

@@ -124,7 +124,7 @@ export const enrollmentIdErrorEpic = (action$: any, store: any) =>
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) => {
             const { programId } = store.value.enrollmentPage;
-            const enrollmentLabel = getTermLabel(programId, 'enrollment');
+            const enrollmentLabel = getTermLabel('enrollment', { programId });
             return showErrorViewOnEnrollmentPage({
                 error: tCustomTerm('{{enrollmentLabel}} with id "{{enrollmentId}}" does not exist',
                     { enrollmentLabel, enrollmentId }),

@@ -85,7 +85,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                 clientId: relationshipClientId,
                 from: {
                     id: eventId,
-                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel(programId, 'event') }),
+                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -104,7 +104,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                 const message = tCustomTerm(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        relationshipLabel: getTermLabel(programId, 'relationship'),
+                        relationshipLabel: getTermLabel('relationship', { programId }),
                         entityName: clientRelationship.from.name,
                         relationshipTypeName: clientRelationship.relationshipType.name,
                     },

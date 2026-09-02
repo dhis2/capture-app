@@ -50,7 +50,7 @@ const runRulesForNewEvent = async ({
     const stage = program.getStage(stageId);
     if (!stage) {
         throw Error(tCustomTerm('{{programStageLabel}} not found', {
-            programStageLabel: getTermLabel(programId, 'programStage', { stageId }),
+            programStageLabel: getTermLabel('programStage', { programId, stageId }),
         }));
     }
 

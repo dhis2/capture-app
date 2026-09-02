@@ -82,7 +82,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 clientId: uuid(),
                 from: {
                     id: 'newEvent',
-                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel(programId, 'event') }),
+                    name: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -101,7 +101,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 const message = tCustomTerm(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        relationshipLabel: getTermLabel(programId, 'relationship'),
+                        relationshipLabel: getTermLabel('relationship', { programId }),
                         entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
                         interpolation: { escapeValue: false },

@@ -65,7 +65,7 @@ const styles: Readonly<any> = (theme: any) => ({
 });
 
 const getFromNames = (programId: string) => ({
-    PROGRAM_STAGE_INSTANCE: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel(programId, 'event') }),
+    PROGRAM_STAGE_INSTANCE: tCustomTerm('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
 });
 
 type PlainProps = {
@@ -174,7 +174,7 @@ class RelationshipsPlain extends React.Component<Props> {
             programId,
         } = this.props;
         const canCreate = !readOnly && writableRelationshipTypes.length > 0;
-        const relationshipLabel = getTermLabel(programId, 'relationship');
+        const relationshipLabel = getTermLabel('relationship', { programId });
         return (
             <div className={classes.container} ref={relationshipsRef}>
                 <div className={classes.relationshipsContainer}>

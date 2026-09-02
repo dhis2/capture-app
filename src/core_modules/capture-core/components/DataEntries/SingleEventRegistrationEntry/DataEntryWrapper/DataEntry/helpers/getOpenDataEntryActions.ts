@@ -66,9 +66,9 @@ export const getOpenDataEntryActions = (
     };
 
     const dataEntryPropsToInclude = buildDataEntryPropsToInclude(
-        getTermLabel(programId, 'orgUnit'),
-        getTermLabel(programId, 'event'),
-        getTermLabel(programId, 'note'),
+        getTermLabel('orgUnit', { programId }),
+        getTermLabel('event', { programId }),
+        getTermLabel('note', { programId }),
     );
     if (programCategory && programCategory.categories) {
         dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({

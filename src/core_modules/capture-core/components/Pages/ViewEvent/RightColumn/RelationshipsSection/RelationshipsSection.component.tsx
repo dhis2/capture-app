@@ -96,7 +96,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
                         {tCustomTerm(
                             "This {{eventLabel}} doesn't have any relationships",
-                            { eventLabel: getTermLabel(programId, 'event') },
+                            { eventLabel: getTermLabel('event', { programId }) },
                         )}
                     </div>
                 )}

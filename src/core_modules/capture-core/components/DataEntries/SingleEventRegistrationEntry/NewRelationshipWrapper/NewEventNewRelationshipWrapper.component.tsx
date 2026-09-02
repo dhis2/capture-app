@@ -83,8 +83,8 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
     }
 
     renderHeader = () => {
-        const eventLabel = getTermLabel(this.props.programId, 'event');
-        const relationshipLabel = getTermLabel(this.props.programId, 'relationship');
+        const eventLabel = getTermLabel('event', { programId: this.props.programId });
+        const relationshipLabel = getTermLabel('relationship', { programId: this.props.programId });
         return (
             <div
                 className={this.props.classes.headerContainer}
@@ -98,8 +98,8 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
 
     render() {
         const { classes, onCancel, programId, ...passOnProps } = this.props;
-        const eventLabel = getTermLabel(programId, 'event');
-        const relationshipLabel = getTermLabel(programId, 'relationship');
+        const eventLabel = getTermLabel('event', { programId });
+        const relationshipLabel = getTermLabel('relationship', { programId });
         return (
             <div>
                 <div className={classes.backToEventContainer}>

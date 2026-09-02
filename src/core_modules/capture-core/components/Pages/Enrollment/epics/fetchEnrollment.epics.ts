@@ -120,7 +120,7 @@ const handleErrorsFromNewerBackends = ({
             querySingleResource,
         }));
     }
-    const enrollmentsLabel = getTermLabel(programId, 'enrollment', { plural: true });
+    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
     const errorMessage = tCustomTerm(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
@@ -141,7 +141,7 @@ const handleErrorsFromOlderBackends = (error: any, programId: string) => {
             return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
         }
     }
-    const enrollmentsLabel = getTermLabel(programId, 'enrollment', { plural: true });
+    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
     const errorMessage = tCustomTerm(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },

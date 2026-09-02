@@ -30,7 +30,7 @@ const getTooltipContent = (
 ) => {
     if (!stageDataWriteAccess) {
         return tCustomTerm('You do not have access to complete {{eventsLabel}}', {
-            eventsLabel: getTermLabel(programId, 'event', { plural: true }),
+            eventsLabel: getTermLabel('event', { programId, plural: true }),
         });
     }
     if (bulkDataEntryIsActive) {

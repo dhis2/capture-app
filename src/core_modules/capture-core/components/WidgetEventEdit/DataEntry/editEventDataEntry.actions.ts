@@ -119,7 +119,7 @@ export const openEventForEditInDataEntry = ({
         {
             id: 'orgUnit',
             type: 'ORGANISATION_UNIT',
-            validatorContainers: getOrgUnitValidatorContainers(getTermLabel(program.id, 'orgUnit')),
+            validatorContainers: getOrgUnitValidatorContainers(getTermLabel('orgUnit', { programId: program.id })),
         },
         {
             clientId: 'geometry',
@@ -166,7 +166,7 @@ export const openEventForEditInDataEntry = ({
         const stage = getStageFromEvent(eventContainer.event)?.stage;
         if (!stage) {
             throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
-                programStageLabel: getTermLabel(program.id, 'programStage'),
+                programStageLabel: getTermLabel('programStage', { programId: program.id }),
             }));
         }
         // TODO: Add attributeValues & enrollmentData

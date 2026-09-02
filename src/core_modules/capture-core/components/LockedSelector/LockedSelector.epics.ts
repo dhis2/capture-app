@@ -30,7 +30,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, sto
             if (organisationUnits[orgUnitId]) {
                 return of(completeUrlUpdate());
             }
-            const orgUnitLabel = getTermLabel(programId, 'orgUnit');
+            const orgUnitLabel = getTermLabel('orgUnit', { programId });
             return of(startLoading(), getCoreOrgUnit({
                 orgUnitId,
                 onSuccess: setCurrentOrgUnitBasedOnUrl,
@@ -68,7 +68,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>)
                 }
 
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
-                    const orgUnitLabel = getTermLabel(programId, 'orgUnit');
+                    const orgUnitLabel = getTermLabel('orgUnit', { programId });
                     return invalidSelectionsFromUrl(
                         tCustomTerm('Selected program is invalid for selected {{orgUnitLabel}}', { orgUnitLabel }),
                     );

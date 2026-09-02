@@ -180,7 +180,7 @@ const getCompleteFieldSettingsFn = () => {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             label: tCustomTerm('Complete {{eventLabel}}', {
-                eventLabel: getTermLabel(props.programId, 'event'),
+                eventLabel: getTermLabel('event', { programId: props.programId }),
             }),
             id: 'complete',
         }),

@@ -73,7 +73,7 @@ export const loadViewEventDataEntry =
             {
                 id: 'orgUnit',
                 type: 'ORGANISATION_UNIT',
-                validatorContainers: getOrgUnitValidatorContainers(getTermLabel(program.id, 'orgUnit')),
+                validatorContainers: getOrgUnitValidatorContainers(getTermLabel('orgUnit', { programId: program.id })),
             },
             {
                 clientId: 'geometry',
@@ -146,7 +146,7 @@ export const loadViewEventDataEntry =
             const stage = getStageFromEvent(eventContainer.event)?.stage;
             if (!stage) {
                 throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
-                    programStageLabel: getTermLabel(program?.id, 'programStage'),
+                    programStageLabel: getTermLabel('programStage', { programId: program?.id }),
                 }));
             }
 

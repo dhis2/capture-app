@@ -61,7 +61,7 @@ class NotesSectionPlain extends React.Component<Props> {
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
                         {tCustomTerm(
                             "This {{eventLabel}} doesn't have any notes",
-                            { eventLabel: getTermLabel(programId, 'event') },
+                            { eventLabel: getTermLabel('event', { programId }) },
                         )}
                     </div>
                 )}
@@ -73,7 +73,7 @@ class NotesSectionPlain extends React.Component<Props> {
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,
                     smallMainButton: true,
-                    noteLabel: getTermLabel(programId, 'note'),
+                    noteLabel: getTermLabel('note', { programId }),
                 })}
             </ViewEventSection>
         );
