@@ -65,7 +65,7 @@ const errorMessages = {
     EMAIL: i18n.t('Please provide a valid email address'),
     AGE: i18n.t('Please provide a valid age'),
     PHONE_NUMBER: i18n.t('Please provide a valid phone number'),
-    ORGANISATION_UNIT: i18n.t('Please provide a valid organisation unit'),
+    ORGANISATION_UNIT: i18n.t('Please provide a valid selection.'),
     COORDINATE: i18n.t('Please provide valid coordinates'),
     UNIQUENESS: i18n.t('This value already exists'),
     RANGE: i18n.t('"From" cannot be greater than "To"'),
