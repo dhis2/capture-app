@@ -69,6 +69,7 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
             {deleteModalOpen && eventIdToDelete && (
                 <DeleteEventModal
                     eventId={eventIdToDelete}
+                    programId={programId}
                     onClose={handleCloseDeleteModal}
                     onConfirmDelete={handleConfirmDelete}
                 />

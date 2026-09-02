@@ -6,12 +6,13 @@ import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 type Props = {
     eventId: string;
+    programId: string;
     onClose: () => void;
     onConfirmDelete: (eventId: string) => void;
 };
 
-export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) => {
-    const eventLabel = useTermLabel('event');
+export const DeleteEventModal = ({ eventId, programId, onClose, onConfirmDelete }: Props) => {
+    const eventLabel = useTermLabel('event', { programId });
     const handleConfirm = () => {
         onConfirmDelete(eventId);
         onClose();

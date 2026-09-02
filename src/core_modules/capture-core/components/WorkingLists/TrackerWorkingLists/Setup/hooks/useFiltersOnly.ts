@@ -7,11 +7,11 @@ import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = (
-    { enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
+    { id: programId, enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
     programStageId?: string,
 ) => {
-    const enrollmentLabel = useTermLabel('enrollment');
-    const followUpLabel = useTermLabel('followUp');
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const followUpLabel = useTermLabel('followUp', { programId });
     return useMemo(() => {
         const enableUserAssignment =
             !programStageId && Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);

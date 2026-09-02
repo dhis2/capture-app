@@ -22,9 +22,9 @@ const getStyles = () => ({
 
 type Props = PlainProps & WithStyles<typeof getStyles>;
 
-const StageEventHeaderPlain = ({ icon, title, events, classes }: Props) => {
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+const StageEventHeaderPlain = ({ icon, title, events, programId, stageId, classes }: Props) => {
+    const eventLabel = useTermLabel('event', { programId, stageId });
+    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
     return (
         <div data-test="stage-event-header" className={classes.wrapper}>
             <div className={classes.icon}>{
