@@ -12,6 +12,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { customTerms } from '../../utils/customTerms';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
@@ -24,7 +25,6 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
-import { customTerms } from '../../utils/customTerms';
 
 const styles = {
     enrollment: {
