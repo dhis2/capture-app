@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../Widget';
@@ -6,7 +7,6 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -30,14 +30,14 @@ const WidgetStagesAndEventsPlain = ({
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
-    const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
     const {
         anyStageWriteAccess,
         anyStageReadAccess,
         multipleStages,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
+    const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
+    const eventsLabel = useTermLabel('event', { programId, plural: true });
 
     return (
         <div
@@ -48,10 +48,10 @@ const WidgetStagesAndEventsPlain = ({
                 header={
                     <div className={classes.header}>
                         <span>
-                            {customTerms.i18n.t(
-                                '{{programStagesLabel}} and {{eventsLabel}}',
-                                { programStagesLabel, eventsLabel },
-                            )}
+                            {i18n.t('{{programStagesLabel}} and {{eventsLabel}}', {
+                                programStagesLabel,
+                                eventsLabel,
+                            })}
                         </span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
