@@ -13,9 +13,9 @@
  */
 /* eslint-disable no-console */
 
-import { readFileSync } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const POT = fileURLToPath(new URL('../i18n/en.pot', import.meta.url));
 
@@ -85,12 +85,12 @@ function extractMsgids(potContents) {
 
 function findViolations(msgid) {
     // Strip placeholders first so `\bevent\b` doesn't match inside `{{eventLabel}}`.
-    const stripped = msgid.replace(/\{\{\s*[^}]*\}\}/g, '');
+    const stripped = msgid.replace(/\{\{[^}]*\}\}/g, '');
     const hits = [];
     for (const { words, suggestion } of CUSTOM_TERMS) {
         for (const word of words) {
             // Word-boundary + case-insensitive so `event` doesn't match `eventName`.
-            const re = new RegExp(`\\b${word}\\b`, 'i');
+            const re = new RegExp(String.raw`\b${word}\b`, 'i');
             if (re.test(stripped)) {
                 hits.push({ word, suggestion });
                 break;
