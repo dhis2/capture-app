@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-03T13:47:50.727Z\n"
-"PO-Revision-Date: 2026-09-03T13:47:50.727Z\n"
+"POT-Creation-Date: 2026-09-03T14:03:04.207Z\n"
+"PO-Revision-Date: 2026-09-03T14:03:04.207Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -807,8 +807,8 @@ msgstr "You can't add any more {{ programStageName }} {{eventsLabel}}"
 msgid "Cancel without saving"
 msgstr "Cancel without saving"
 
-msgid "Choose a {{programStageLabel}} for a new event"
-msgstr "Choose a {{programStageLabel}} for a new event"
+msgid "Choose a {{programStageLabel}} for a new {{eventLabel}}"
+msgstr "Choose a {{programStageLabel}} for a new {{eventLabel}}"
 
 msgid "{{programStagesLabel}} could not be loaded"
 msgstr "{{programStagesLabel}} could not be loaded"
@@ -984,9 +984,6 @@ msgstr ""
 msgid "{{orgUnitLabel}} could not be loaded"
 msgstr "{{orgUnitLabel}} could not be loaded"
 
-msgid "Event could not be loaded"
-msgstr "Event could not be loaded"
-
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
@@ -1037,8 +1034,8 @@ msgstr "Search form is missing. See log for details"
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
-msgid "The {{enrollmentLabel}} event data could not be found"
-msgstr "The {{enrollmentLabel}} event data could not be found"
+msgid "The {{enrollmentLabel}} {{eventLabel}} data could not be found"
+msgstr "The {{enrollmentLabel}} {{eventLabel}} data could not be found"
 
 msgid "Loading"
 msgstr "Loading"
@@ -1869,8 +1866,8 @@ msgstr "File"
 msgid "Image"
 msgstr "Image"
 
-msgid "New {{trackedEntityTypeName}} relationship"
-msgstr "New {{trackedEntityTypeName}} relationship"
+msgid "New {{trackedEntityTypeName}} {{relationshipLabel}}"
+msgstr "New {{trackedEntityTypeName}} {{relationshipLabel}}"
 
 msgid "Missing implementation step"
 msgstr "Missing implementation step"

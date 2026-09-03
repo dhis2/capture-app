@@ -25,6 +25,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     } = useMetadataForProgramStage({ programId, stageId });
     const enrollmentLabel = useTermLabel('enrollment', { programId });
     const orgUnitLabel = useTermLabel('orgUnit', { programId });
+    const eventLabel = useTermLabel('event', { programId });
 
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {
         return (
@@ -36,7 +37,12 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
 
     if (pageStatus === pageStatuses.MISSING_DATA) {
         return (
-            <span>{i18n.t('The {{enrollmentLabel}} event data could not be found', { enrollmentLabel })}</span>
+            <span>
+                {i18n.t('The {{enrollmentLabel}} {{eventLabel}} data could not be found', {
+                    enrollmentLabel,
+                    eventLabel,
+                })}
+            </span>
         );
     }
 

@@ -47,7 +47,10 @@ const FALLBACKS = new Set([
 ]);
 
 const ALLOWLIST = new Set([
-    // Nothing added yet.
+    // "event program" = DHIS2 programType, not user's event terminology
+    'This is not an event program or the metadata is corrupt. See log for details.',
+    // "event program" = DHIS2 programType, not user's event terminology
+    '{{programName}} is an event program and does not have {{enrollmentsLabel}}.',
 ]);
 
 // POT may split long msgids across multiple lines; concatenate them.
@@ -88,9 +91,11 @@ function findViolations(msgid) {
     return hits;
 }
 
+const DIVIDER = '━'.repeat(72);
+
 function reportViolations(violations) {
     const relPot = path.relative(process.cwd(), POT);
-    console.error('i18n:verify — custom-terminology violations found in en.pot:\n');
+    console.error(`\n${DIVIDER}\n`);
     for (const v of violations) {
         console.error(`  ${relPot}:${v.line}`);
         console.error(`    msgid: "${v.msgid}"`);
@@ -99,12 +104,15 @@ function reportViolations(violations) {
         }
         console.error('');
     }
-    console.error(`Total: ${violations.length} msgid(s) with untemplated custom terms.\n`);
+    console.error(`\x1b[1;31m${violations.length} custom-terminology violation(s) in en.pot.\x1b[0m\n`);
     console.error('Fix by wrapping the offending word in a custom-terminology template. Example:');
     console.error("  BEFORE:  i18n.t('Delete event')");
-    console.error("  AFTER:   customTerms.i18n.t('Delete {{eventLabel}}', { eventLabel })\n");
+    console.error("  AFTER:   i18n.t('Delete {{eventLabel}}', { eventLabel })");
+    console.error("  Where `eventLabel = useTermLabel('event', { programId })`");
+    console.error('  (or getTermLabel outside React).\n');
     console.error('If a hit is a genuine exception, add the exact msgid to the ALLOWLIST');
     console.error('in scripts/verifyCustomTerminology.mjs.');
+    console.error(`\n${DIVIDER}\n`);
 }
 
 function main() {
@@ -115,7 +123,9 @@ function main() {
         .filter(({ hits }) => hits.length > 0);
 
     if (violations.length === 0) {
-        console.log('i18n:verify — no custom-terminology violations in en.pot ✓');
+        console.log(`\n${DIVIDER}`);
+        console.log(' i18n:verify — no custom-terminology violations in en.pot ✓');
+        console.log(`${DIVIDER}\n`);
         return;
     }
 
