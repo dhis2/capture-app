@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useMemo } from 'react';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
@@ -6,7 +7,6 @@ import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -46,7 +46,7 @@ export const WidgetTrackedEntityRelationship = ({
     if (isError) {
         return (
             <div>
-                {customTerms.i18n.t(
+                {i18n.t(
                     'Something went wrong while loading {{relationshipsLabel}}. Please try again later.',
                     { relationshipsLabel },
                 )}
@@ -60,7 +60,7 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={customTerms.i18n.t('{{trackedEntityTypeName}} {{relationshipsLabel}}', {
+            title={i18n.t('{{trackedEntityTypeName}} {{relationshipsLabel}}', {
                 trackedEntityTypeName,
                 relationshipsLabel,
                 interpolation: { escapeValue: false },

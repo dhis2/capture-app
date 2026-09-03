@@ -1,9 +1,9 @@
+import i18n from '@dhis2/d2-i18n';
 import { colors, spacers } from '@dhis2/ui';
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { type Props } from './eventWorkingListsInitHeader.types';
 import { useTermLabel } from '../../../../../../../metaData';
-import { customTerms } from '../../../../../../../utils/customTerms';
 
 export const styles = () => ({
     container: {
@@ -36,7 +36,7 @@ const EventWorkingListsInitHeaderPlain =
                     <span
                         className={title}
                     >
-                        {customTerms.i18n.t('Registered {{eventsLabel}}', { eventsLabel })}
+                        {i18n.t('Registered {{eventsLabel}}', { eventsLabel })}
                     </span>
                 </div>
                 <div

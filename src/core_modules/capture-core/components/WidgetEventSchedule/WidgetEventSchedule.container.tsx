@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import moment from 'moment';
 import { pipe } from 'capture-core-utils';
 import { getProgramAndStageForProgram, TrackerProgram, dataElementTypes, useTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
@@ -182,7 +182,7 @@ export const WidgetEventSchedule = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || !programStageScheduleConfig) {
         return (
             <div>
-                {customTerms.i18n.t('Program or {{programStageLabel}} is invalid', { programStageLabel })}
+                {i18n.t('Program or {{programStageLabel}} is invalid', { programStageLabel })}
             </div>
         );
     }

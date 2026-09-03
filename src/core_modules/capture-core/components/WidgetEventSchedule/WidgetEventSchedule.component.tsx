@@ -15,7 +15,6 @@ import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 import { useTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -126,15 +125,15 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={customTerms.i18n.t('{{eventLabel}} {{notesLabel}}', { eventLabel, notesLabel })}
+                    sectionName={i18n.t('{{eventLabel}} {{notesLabel}}', { eventLabel, notesLabel })}
                 >
                     <NoteSection
                         notes={notes}
-                        placeholder={customTerms.i18n.t(
+                        placeholder={i18n.t(
                             'Write a {{noteLabel}} about this scheduled {{eventLabel}}',
                             { eventLabel, noteLabel },
                         )}
-                        emptyNoteMessage={customTerms.i18n.t(
+                        emptyNoteMessage={i18n.t(
                             "This {{eventLabel}} doesn't have any {{notesLabel}}",
                             { eventLabel, notesLabel },
                         )}

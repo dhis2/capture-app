@@ -1,6 +1,5 @@
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-
 import i18n from '@dhis2/d2-i18n';
 import {
     CircularLoader,
@@ -12,13 +11,11 @@ import {
     Button,
     NoticeBox,
 } from '@dhis2/ui';
-
 import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {
@@ -104,7 +101,7 @@ export const SearchStatusPlain = ({
                 <NoticeBox title={i18n.t('Too many results')} warning>
                     {i18n.t('This search returned too many results to show.')}
                     {' '}
-                    {customTerms.i18n.t(
+                    {i18n.t(
                         'Try changing search terms or searching by more {{attributesLabel}} to narrow down the results.',
                         { attributesLabel },
                     )}

@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { useHideWidgetByRuleLocations } from 'capture-core/hooks';
@@ -6,7 +7,6 @@ import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetFeedback } from '../../WidgetFeedback';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 type Props = {
     dataEntryKey?: string;
@@ -26,7 +26,7 @@ const FeedbackOutputWrapper = (props: Props) => {
     return (
         <WidgetFeedback
             dataEntryKey={dataEntryKey}
-            feedbackEmptyText={customTerms.i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })}
+            feedbackEmptyText={i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })}
         />
     );
 };

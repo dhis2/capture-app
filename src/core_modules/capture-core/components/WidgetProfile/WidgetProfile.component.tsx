@@ -12,7 +12,6 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
 import type { Props } from './widgetProfile.types';
 import { useTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -179,11 +178,11 @@ const WidgetProfilePlain = ({
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
                         {trackedEntityTypeName
-                            ? customTerms.i18n.t('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
+                            ? i18n.t('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
                                 attributesLabel,
                                 trackedEntityTypeName,
                             })
-                            : customTerms.i18n.t('No {{attributesLabel}} configured', { attributesLabel })}
+                            : i18n.t('No {{attributesLabel}} configured', { attributesLabel })}
                     </p>
                 </div>
             );

@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     container: {
@@ -79,7 +78,7 @@ const NoSelectionsInfoBoxPlain = ({ classes }: Props) => {
                 <div className={classes.content}>
                     <span>
                         <strong>{i18n.t('Report data')}</strong>:{' '}
-                        {customTerms.i18n.t(
+                        {i18n.t(
                             'Choose a program and {{orgUnitLabel}} to see existing data and create new records.',
                             { orgUnitLabel },
                         )}

@@ -1,8 +1,8 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useMemo } from 'react';
 import { Button, IconAdd16 } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
 import { useTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 
 type Props = {
     onCreateNew: () => void;
@@ -28,7 +28,7 @@ export const StageCreateNewButton = ({
         if (preventAddingEventActionInEffect) {
             return {
                 isDisabled: true,
-                tooltipContent: customTerms.i18n.t("You can't add any more {{ programStageName }} {{eventsLabel}}", {
+                tooltipContent: i18n.t("You can't add any more {{ programStageName }} {{eventsLabel}}", {
                     programStageName: eventName,
                     eventsLabel,
                 }),
@@ -37,7 +37,7 @@ export const StageCreateNewButton = ({
         if (!repeatable && eventCount > 0) {
             return {
                 isDisabled: true,
-                tooltipContent: customTerms.i18n.t(
+                tooltipContent: i18n.t(
                     'This {{programStageLabel}} can only have one {{eventLabel}}',
                     { programStageLabel, eventLabel },
                 ),
@@ -63,7 +63,7 @@ export const StageCreateNewButton = ({
                 dataTest={'create-new-button'}
                 disabled={isDisabled}
             >
-                {customTerms.i18n.t('New {{ eventName }} {{eventLabel}}', {
+                {i18n.t('New {{ eventName }} {{eventLabel}}', {
                     eventName, eventLabel,
                 })}
             </Button>

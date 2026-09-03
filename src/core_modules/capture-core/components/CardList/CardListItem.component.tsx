@@ -21,7 +21,6 @@ import {
     useTermLabel,
 } from '../../metaData';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
-import { customTerms } from '../../utils/customTerms';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 type OwnProps = {
@@ -228,7 +227,7 @@ const CardListItemIndex = ({
             <ListEntry
                 name={
                     program?.enrollment?.enrollmentDateLabel
-                    ?? customTerms.i18n.t('Date of {{enrollmentLabel}}', { enrollmentLabel })
+                    ?? i18n.t('Date of {{enrollmentLabel}}', { enrollmentLabel })
                 }
                 value={enrolledAt}
                 type={dataElementTypes.DATE}

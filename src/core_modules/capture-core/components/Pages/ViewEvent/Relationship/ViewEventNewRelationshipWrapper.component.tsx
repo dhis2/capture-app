@@ -8,7 +8,6 @@ import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { PlainProps } from './ViewEventNewRelationshipWrapper.types';
 import { getTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -75,7 +74,7 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
             <div className={classes.container}>
                 <div className={classes.backToEventContainer}>
                     <span>
-                        {customTerms.i18n.t(
+                        {i18n.t(
                             'Adding {{relationshipLabel}} to {{eventLabel}}.',
                             { eventLabel, relationshipLabel },
                         )}
@@ -84,7 +83,7 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {customTerms.i18n.t('Go back to {{eventLabel}} without saving {{relationshipLabel}}', {
+                        {i18n.t('Go back to {{eventLabel}} without saving {{relationshipLabel}}', {
                             eventLabel,
                             relationshipLabel,
                         })}
@@ -92,7 +91,7 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={customTerms.i18n.t(
+                        header={i18n.t(
                             'New {{eventLabel}} {{relationshipLabel}}',
                             { eventLabel, relationshipLabel },
                         )}
@@ -102,7 +101,7 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                 </Card>
                 <DiscardDialog
                     header={i18n.t('Discard unsaved changes?')}
-                    text={customTerms.i18n.t(
+                    text={i18n.t(
                         'Leaving this page will discard any selections you made for a new {{relationshipLabel}}',
                         { relationshipLabel },
                     )}

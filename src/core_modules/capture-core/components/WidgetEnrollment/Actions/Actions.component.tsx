@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import React, { type ComponentType, useState } from 'react';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 import { Cancel } from './Cancel';
 import { Complete, CompleteModal } from './Complete';
 import { Delete } from './Delete';
@@ -124,7 +123,7 @@ const ActionsPlain = ({
                     </FlyoutMenu>
                 }
             >
-                {customTerms.i18n.t('{{enrollmentLabel}} actions', { enrollmentLabel })}
+                {i18n.t('{{enrollmentLabel}} actions', { enrollmentLabel })}
             </DropdownButton>
             {loading && (
                 <div className={classes.loading}>

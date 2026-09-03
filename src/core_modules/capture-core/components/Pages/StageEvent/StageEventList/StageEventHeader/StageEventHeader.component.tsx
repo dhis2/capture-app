@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { PlainProps } from './StageEventHeader.types';
 import { useTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 
 const getStyles = () => ({
     wrapper: {
@@ -42,7 +42,7 @@ const StageEventHeaderPlain = ({ icon, title, events, programId, stageId, classe
             }</div>
             <div className={classes.title}>{title}
                 {events.length > 0 && <span> :
-                    {customTerms.i18n.t('{{count}} {{eventLabel}}', {
+                    {i18n.t('{{count}} {{eventLabel}}', {
                         count: events.length,
                         eventLabel,
                         eventsLabel,

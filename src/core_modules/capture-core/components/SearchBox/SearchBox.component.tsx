@@ -15,7 +15,6 @@ import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
 import { scopeTypes, useTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 
 const getStyles: Readonly<any> = {
     half: {
@@ -116,7 +115,7 @@ function renderFooterContent(args: {
         footerNodes.push(
             <NoticeBox
                 warning
-                title={customTerms.i18n.t('{{trackedEntityName}} has no searchable {{attributesLabel}}', {
+                title={i18n.t('{{trackedEntityName}} has no searchable {{attributesLabel}}', {
                     trackedEntityName: capitalizeFirstLetter(args.trackedEntityName),
                     attributesLabel: args.attributesLabel,
                 })}

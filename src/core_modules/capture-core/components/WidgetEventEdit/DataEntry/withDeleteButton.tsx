@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { Props, State } from './withDeleteButton.types';
 import { getTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
     class DeleteButtonHOC extends React.Component<Props, State> {
@@ -35,15 +34,15 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                             hide={!this.state.isOpen}
                         >
                             <ModalTitle>
-                                {customTerms.i18n.t('Delete {{eventLabel}}', { eventLabel })}
+                                {i18n.t('Delete {{eventLabel}}', { eventLabel })}
                             </ModalTitle>
                             <ModalContent>
-                                {customTerms.i18n.t(
+                                {i18n.t(
                                     'Deleting an {{eventLabel}} is permanent and cannot be undone.',
                                     { eventLabel },
                                 )}
                                 {' '}
-                                {customTerms.i18n.t('Are you sure you want to delete this {{eventLabel}}? ', { eventLabel })}
+                                {i18n.t('Are you sure you want to delete this {{eventLabel}}? ', { eventLabel })}
                             </ModalContent>
                             <ModalActions>
                                 <ButtonStrip end>
@@ -62,7 +61,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                                         }}
                                         destructive
                                     >
-                                        {customTerms.i18n.t('Yes, delete {{eventLabel}}', { eventLabel })}
+                                        {i18n.t('Yes, delete {{eventLabel}}', { eventLabel })}
                                     </Button>
                                 </ButtonStrip>
                             </ModalActions>

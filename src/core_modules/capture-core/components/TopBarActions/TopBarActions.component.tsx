@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
 import { scopeTypes, useTermLabel } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
-import { customTerms } from '../../utils/customTerms';
 import type { PlainProps } from './TopBarActions.types';
 
 const styles: Readonly<any> = {
@@ -67,7 +66,7 @@ const ActionButtonsPlain = ({
                             trackedEntityType: trackedEntityName,
                             interpolation: { escapeValue: false },
                         })
-                        : customTerms.i18n.t('Create new {{eventLabel}}', { eventLabel })
+                        : i18n.t('Create new {{eventLabel}}', { eventLabel })
                     }
                 </SplitButton>
             )}

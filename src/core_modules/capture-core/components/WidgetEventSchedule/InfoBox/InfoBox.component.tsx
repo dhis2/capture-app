@@ -5,7 +5,6 @@ import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
 import type { PlainProps } from './InfoBox.types';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 const styles = {
     infoBox: {
@@ -64,7 +63,7 @@ const InfoBoxPlain = ({
                     {!!orgUnitName && (
                         <>
                             {' '}
-                            {customTerms.i18n.t(
+                            {i18n.t(
                                 'There are {{count}} scheduled {{eventLabel}} in this program '
                                     + 'in {{orgUnitName}} on this day.',
                                 {

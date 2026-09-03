@@ -5,7 +5,6 @@ import React, {
     useEffect,
 } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, CircularLoader, colors } from '@dhis2/ui';
@@ -19,7 +18,6 @@ import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Widget } from '../../Widget';
 import { getTrackerProgramThrowIfNotFound, useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -212,7 +210,7 @@ const SearchResultsIndex = ({
                 </div>
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
-                    content={customTerms.i18n.t('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
+                    content={i18n.t('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
                         attributesLabel,
                         trackedEntityName,
                     })}

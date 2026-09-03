@@ -9,7 +9,6 @@ import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalToolti
 import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
 import { dataElementTypes, type ProgramStage, useTermLabel } from '../../../../../../../metaData';
 import { useEventEditPermissions } from '../../../../../../../hooks';
-import { customTerms } from '../../../../../../../utils/customTerms';
 
 type Props = {
     setActionsOpen: (open: boolean) => void;
@@ -48,15 +47,15 @@ export const DeleteActionButton = ({
 
     const getDisabledMessage = (): string => {
         if (!isEventWithinValidPeriod) {
-            return customTerms.i18n.t('{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be deleted', {
+            return i18n.t('{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be deleted', {
                 occurredAt: occurredAtClientView,
                 eventLabel,
             });
         }
         if (!canEditCompletedEvent) {
-            return customTerms.i18n.t('This {{eventLabel}} has been completed', { eventLabel });
+            return i18n.t('This {{eventLabel}} has been completed', { eventLabel });
         }
-        return customTerms.i18n.t('This {{eventLabel}} is outside the edit period', { eventLabel });
+        return i18n.t('This {{eventLabel}} is outside the edit period', { eventLabel });
     };
 
     return (

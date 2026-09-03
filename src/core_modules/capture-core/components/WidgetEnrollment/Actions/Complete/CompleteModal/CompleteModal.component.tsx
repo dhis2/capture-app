@@ -3,7 +3,6 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './completeModal.types';
 import { useTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 
 export const CompleteModalComponent = ({
     programStagesWithActiveEvents,
@@ -17,22 +16,22 @@ export const CompleteModalComponent = ({
     const eventsLabel = useTermLabel('event', { plural: true });
     return (
         <Modal position="middle" large dataTest="widget-enrollment-complete-modal">
-            <ModalTitle>{customTerms.i18n.t('Complete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>
+            <ModalTitle>{i18n.t('Complete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>
             <ModalContent>
-                <p>{customTerms.i18n.t(
+                <p>{i18n.t(
                     'Would you like to complete the {{enrollmentLabel}} and all active {{eventsLabel}} as well?',
                     { enrollmentLabel, eventsLabel },
                 )}</p>
 
                 {Object.keys(programStagesWithActiveEvents).length !== 0 && (
                     <>
-                        {customTerms.i18n.t('The following {{eventsLabel}} will be completed:', { eventsLabel })}
+                        {i18n.t('The following {{eventsLabel}} will be completed:', { eventsLabel })}
                         {Object.keys(programStagesWithActiveEvents).map((key) => {
                             const { count, name } = programStagesWithActiveEvents[key];
                             return (
                                 <ul key={key}>
                                     <li>
-                                        {customTerms.i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
+                                        {i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                             count,
                                             eventLabel,
                                             eventsLabel,
@@ -49,7 +48,7 @@ export const CompleteModalComponent = ({
 
                 {Object.keys(programStagesWithoutAccess).length !== 0 && (
                     <>
-                        {customTerms.i18n.t(
+                        {i18n.t(
                             'The following {{eventsLabel}} will not be completed due to lack of access:',
                             { eventsLabel },
                         )}
@@ -59,7 +58,7 @@ export const CompleteModalComponent = ({
                             return (
                                 <ul key={key}>
                                     <li>
-                                        {customTerms.i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
+                                        {i18n.t('{{count}} {{eventLabel}} in {{programStageName}}', {
                                             count,
                                             eventLabel,
                                             eventsLabel,
@@ -84,7 +83,7 @@ export const CompleteModalComponent = ({
                             primary
                             dataTest="widget-enrollment-actions-complete-button"
                         >
-                            {customTerms.i18n.t(
+                            {i18n.t(
                                 'Yes, complete {{enrollmentLabel}} and {{eventsLabel}}',
                                 { enrollmentLabel, eventsLabel },
                             )}
@@ -96,7 +95,7 @@ export const CompleteModalComponent = ({
                             }}
                             secondary
                         >
-                            {customTerms.i18n.t('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
+                            {i18n.t('Complete {{enrollmentLabel}} only', { enrollmentLabel })}
                         </Button>
                         <Button onClick={() => setOpenCompleteModal(false)} secondary>
                             {i18n.t('No, cancel')}

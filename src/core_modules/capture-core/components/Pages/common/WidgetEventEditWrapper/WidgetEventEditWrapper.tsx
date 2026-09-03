@@ -6,7 +6,6 @@ import { WidgetEventEdit } from '../../../WidgetEventEdit';
 import type { Props } from '../../../WidgetEventEdit/widgetEventEdit.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 
 type WidgetProps = {
     pageStatus: string;
@@ -30,14 +29,14 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {
         return (
             <IncompleteSelectionsMessage>
-                {customTerms.i18n.t('Choose an {{orgUnitLabel}} to start reporting', { orgUnitLabel })}
+                {i18n.t('Choose an {{orgUnitLabel}} to start reporting', { orgUnitLabel })}
             </IncompleteSelectionsMessage>
         );
     }
 
     if (pageStatus === pageStatuses.MISSING_DATA) {
         return (
-            <span>{customTerms.i18n.t('The {{enrollmentLabel}} event data could not be found', { enrollmentLabel })}</span>
+            <span>{i18n.t('The {{enrollmentLabel}} event data could not be found', { enrollmentLabel })}</span>
         );
     }
 

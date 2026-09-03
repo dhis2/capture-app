@@ -1,11 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
-
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
     enrollmentPageActionTypes,
@@ -121,7 +120,7 @@ const handleErrorsFromNewerBackends = ({
         }));
     }
     const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
-    const errorMessage = customTerms.i18n.t(
+    const errorMessage = i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
     );
@@ -142,7 +141,7 @@ const handleErrorsFromOlderBackends = (error: any, programId: string) => {
         }
     }
     const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
-    const errorMessage = customTerms.i18n.t(
+    const errorMessage = i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
     );

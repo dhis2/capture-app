@@ -1,4 +1,5 @@
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
@@ -8,7 +9,6 @@ import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.com
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { getTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
@@ -93,7 +93,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {customTerms.i18n.t(
+                        {i18n.t(
                             "This {{eventLabel}} doesn't have any {{relationshipsLabel}}",
                             { eventLabel: getTermLabel('event', { programId }), relationshipsLabel },
                         )}

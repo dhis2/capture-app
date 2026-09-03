@@ -1,11 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 import { getTermLabel } from '../../../../../../metaData';
-import { customTerms } from '../../../../../../utils/customTerms';
-
 import {
     initializeNewRelationship,
 } from '../../../../../Pages/NewRelationship/newRelationship.actions';
@@ -82,7 +81,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 clientId: uuid(),
                 from: {
                     id: 'newEvent',
-                    name: customTerms.i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
+                    name: i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -98,7 +97,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 r.to.id &&
                 r.to.id === newRelationship.to.id)
             ) {
-                const message = customTerms.i18n.t(
+                const message = i18n.t(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
                         relationshipLabel: getTermLabel('relationship', { programId }),

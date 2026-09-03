@@ -6,7 +6,6 @@ import { FiltrableMenuItems } from '../FiltrableMenuItems';
 import type { Program, Icon } from '../../../../metaData';
 import { useTermLabel } from '../../../../metaData';
 import { OptionLabel } from '../../OptionLabel';
-import { customTerms } from '../../../../utils/customTerms';
 
 const styles = () => ({
     filterWarning: {
@@ -62,7 +61,7 @@ const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgU
                 <>
                     <MenuDivider />
                     <div className={classes.filterWarning}>
-                        <span>{customTerms.i18n.t(
+                        <span>{i18n.t(
                             'Some programs are being filtered by the chosen {{orgUnitLabel}}',
                             { orgUnitLabel },
                         )}</span>

@@ -9,7 +9,6 @@ import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { TrackerProgram, useTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     container: {
@@ -95,11 +94,11 @@ const EnrollmentAddEventPagePain = ({
                     onEnrollmentError={onEnrollmentError}
                     onEnrollmentSuccess={onEnrollmentSuccess}
                     onAccessLostFromTransfer={onAccessLostFromTransfer}
-                    feedbackEmptyText={customTerms.i18n.t(
+                    feedbackEmptyText={i18n.t(
                         'No feedback for this {{eventLabel}} yet',
                         { eventLabel },
                     )}
-                    indicatorEmptyText={customTerms.i18n.t(
+                    indicatorEmptyText={i18n.t(
                         'No indicator output for this {{eventLabel}} yet',
                         { eventLabel },
                     )}

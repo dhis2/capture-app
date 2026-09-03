@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
@@ -6,7 +7,6 @@ import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/Offl
 import { listId } from './RecentlyAddedEventsList.const';
 import type { Props } from './RecentlyAddedEventsList.types';
 import { useTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 
 const styles = (theme: any) => ({
     container: {
@@ -30,7 +30,7 @@ const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
             <div
                 className={classes.header}
             >
-                {customTerms.i18n.t('{{count}} {{eventLabel}} added', {
+                {i18n.t('{{count}} {{eventLabel}} added', {
                     count: eventsAdded,
                     eventLabel,
                     eventsLabel,
@@ -40,8 +40,8 @@ const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
             </div>
             <OfflineEventsList
                 listId={listId}
-                noItemsText={customTerms.i18n.t('No {{eventsLabel}} added', { eventsLabel })}
-                emptyListText={customTerms.i18n.t('No {{eventsLabel}} added', { eventsLabel })}
+                noItemsText={i18n.t('No {{eventsLabel}} added', { eventsLabel })}
+                emptyListText={i18n.t('No {{eventsLabel}} added', { eventsLabel })}
                 {...passOnProps}
             />
         </Card>

@@ -1,8 +1,8 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBox, spacers } from '@dhis2/ui';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../customTerms';
 import type { SearchAttribute } from '../../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -26,7 +26,7 @@ const UnsupportedAttributesNotificationPlain = ({
     const attributeLabel = useTermLabel('attribute');
     const attributesLabel = useTermLabel('attribute', { plural: true });
     const message =
-        customTerms.i18n.t('The following {{attributeLabel}} type is not supported for searching and has been hidden', {
+        i18n.t('The following {{attributeLabel}} type is not supported for searching and has been hidden', {
             count: unsupportedAttributes.length,
             attributeLabel,
             defaultValue:
@@ -37,7 +37,7 @@ const UnsupportedAttributesNotificationPlain = ({
 
     return (
         <div className={classes.container}>
-            <NoticeBox title={customTerms.i18n.t('Some {{attributesLabel}} are hidden', { attributesLabel })} warning>
+            <NoticeBox title={i18n.t('Some {{attributesLabel}} are hidden', { attributesLabel })} warning>
                 {message}{': '}
                 {unsupportedAttributes.map((attr, index) => (
                     <span key={attr.trackedEntityAttribute.id} className={classes.attributeName}>
