@@ -7,6 +7,7 @@ export {
     getOptionId,
     getProgramId,
     getProgramRuleActions,
+    getUseNameForOptionSet,
     getOptionSetId,
     getTrackedEntityTypeId,
     getProgramTrackedEntityAttributes,
