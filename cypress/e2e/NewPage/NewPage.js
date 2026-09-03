@@ -21,7 +21,8 @@ const clearMalariaEntity = () => {
         )
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const trackedEntities = (body.trackedEntities || []).map(({ trackedEntity }) => ({ trackedEntity }));
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
+            const trackedEntities = apiTrackedEntities.map(({ trackedEntity }) => ({ trackedEntity }));
 
             if (!trackedEntities.length) {
                 return undefined;
