@@ -1,9 +1,40 @@
 import { Given, Then, When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../support/date';
 
+const BABY_POSTNATAL_STAGE = 'ZzYYXq4fJie';
+const BIRTH_STAGE = 'A03MvHHogjR';
+
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="person-selector-container"]').contains('Person');
+});
+
+Given(/^you make sure the enrollment (.+) has a Baby Postnatal event$/, (enrollmentId) => {
+    cy.buildApiUrl('tracker', `enrollments/${enrollmentId}?fields=orgUnit,program,events[event,programStage]`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const events = body.events ?? [];
+
+            if (events.some(({ programStage }) => programStage === BABY_POSTNATAL_STAGE)) {
+                return undefined;
+            }
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=CREATE_AND_UPDATE')
+                .then(createUrl => cy.request('POST', createUrl, {
+                    events: [{
+                        program: body.program,
+                        programStage: BABY_POSTNATAL_STAGE,
+                        enrollment: enrollmentId,
+                        orgUnit: body.orgUnit,
+                        occurredAt: `${getCurrentYear()}-07-01`,
+                        status: 'ACTIVE',
+                    }],
+                }))
+                .then(({ body: importSummary }) => {
+                    expect(importSummary.status).to.eq('OK');
+                });
+        });
 });
 
 Given(/^you make sure the event (.+) is unlinked$/, (eventId) => {
@@ -85,18 +116,20 @@ And('you delete the Birth event', () => {
     cy.buildApiUrl('tracker', 'enrollments/EOxeNf2MdBf?fields=events[event,programStage]')
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const { events } = body;
+            const eventToDelete = (body.events ?? []).find(event => event.programStage === BIRTH_STAGE);
 
-            if (events) {
-                const eventToDelete = events.find(event => event.programStage === 'A03MvHHogjR');
-                if (eventToDelete) {
-                    cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
-                        cy.request('POST', eventUrl, { events: [eventToDelete] });
-                        cy.reload();
-                    });
-                }
+            if (!eventToDelete) {
+                return undefined;
             }
-        });
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(eventUrl => cy.request('POST', eventUrl, { events: [eventToDelete] }))
+                .then(({ body: importSummary }) => {
+                    expect(importSummary.status).to.eq('OK');
+                });
+        })
+        .then(() => cy.reload());
 });
 
 And('you open the Birth event edit page', () => {
@@ -265,14 +298,19 @@ And(/^you delete the events of the enrollmentId (.*)$/, (enrollmentId) => {
     cy.buildApiUrl('tracker', `enrollments/${enrollmentId}?fields=events[event]`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const { events } = body;
+            const events = body.events ?? [];
 
-            if (events) {
-                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
-                    cy.request('POST', eventUrl, { events });
-                    cy.reload();
-                });
+            if (!events.length) {
+                return undefined;
             }
-        });
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(eventUrl => cy.request('POST', eventUrl, { events }))
+                .then(({ body: importSummary }) => {
+                    expect(importSummary.status).to.eq('OK');
+                });
+        })
+        .then(() => cy.reload());
 });
 
