@@ -77,7 +77,7 @@ function extractMsgids(potContents) {
 }
 
 function findViolations(msgid) {
-    const stripped = msgid.replace(/\{\{[^}]*\}\}/g, '');
+    const stripped = msgid.replace(/\{\{[^{}]*\}\}/g, '');
     const hits = [];
     for (const { words, suggestion } of CUSTOM_TERMS) {
         for (const word of words) {
