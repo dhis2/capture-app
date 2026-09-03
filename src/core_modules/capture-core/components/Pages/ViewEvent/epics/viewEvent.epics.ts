@@ -64,7 +64,7 @@ export const getEventOpeningFromEventListEpic = (
                 log.error(
                     errorCreator(
                         message ||
-                        i18n.t('Event could not be loaded'))(details));
+                        'Event could not be loaded')(details));
                 return openViewEventPageFailed(
                     i18n.t('Could not load the requested data. It may not exist or you may not have access.'));
             }),
@@ -95,7 +95,7 @@ export const getEventFromUrlEpic = (
                     log.error(
                         errorCreator(
                             message ||
-                            i18n.t('Event could not be loaded'))(details));
+                            'Event could not be loaded')(details));
                     return eventFromUrlCouldNotBeRetrieved(
                         i18n.t('Could not load the requested data. It may not exist or you may not have access.'));
                 });
