@@ -4,7 +4,6 @@ import { getProgramAndStageForProgram, TrackerProgram, useTermLabel } from '../.
 import { OrgUnitFetcher } from './OrgUnitFetcher/OrgUnitFetcher.container';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { customTerms } from '../../utils/customTerms';
 
 export const WidgetEnrollmentEventNew = ({
     programId,
@@ -32,7 +31,7 @@ export const WidgetEnrollmentEventNew = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || isError || !formFoundation) {
         return (
             <div>
-                {customTerms.i18n.t('Program or {{programStageLabel}} is invalid', { programStageLabel })}
+                {i18n.t('Program or {{programStageLabel}} is invalid', { programStageLabel })}
             </div>
         );
     }

@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { getTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 import { rollbackAssignee, setAssignee } from './viewEvent.actions';
 import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { ViewEventComponent } from './ViewEvent.component';
@@ -44,10 +43,10 @@ const makeMapStateToProps = () => {
             eventId: state.viewEventPage.eventId,
             isEditEventPage: eventDetailsSection.showEditEvent,
             feedbackEmptyText: eventLabel
-                ? customTerms.i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })
+                ? i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })
                 : i18n.t('No feedback yet'),
             indicatorEmptyText: eventLabel
-                ? customTerms.i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })
+                ? i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })
                 : i18n.t('No indicator output yet'),
             programRules: programRulesSelector(state),
         };

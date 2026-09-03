@@ -13,13 +13,12 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
 import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip/';
 import { useTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 
 export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
     const disabled = !canCascadeDeleteEnrollment;
     const enrollmentLabel = useTermLabel('enrollment');
-    const tooltipContent = customTerms.i18n.t(
+    const tooltipContent = i18n.t(
         'You do not have access to delete this {{enrollmentLabel}}',
         { enrollmentLabel },
     );
@@ -43,14 +42,14 @@ export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Pro
                     onClose={() => setToggle(false)}
                     dataTest="widget-enrollment-actions-modal"
                 >
-                    <ModalTitle>{customTerms.i18n.t('Delete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>
+                    <ModalTitle>{i18n.t('Delete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>
                     <ModalContent>
-                        {customTerms.i18n.t(
+                        {i18n.t(
                             'Are you sure you want to delete this {{enrollmentLabel}}?',
                             { enrollmentLabel },
                         )}
                         {' '}
-                        {customTerms.i18n.t(
+                        {i18n.t(
                             'This will permanently remove the current {{enrollmentLabel}}.',
                             { enrollmentLabel },
                         )}
@@ -64,7 +63,7 @@ export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Pro
                                 destructive
                                 onClick={() => onDelete(enrollment)}
                             >
-                                {customTerms.i18n.t('Yes, delete {{enrollmentLabel}}.', { enrollmentLabel })}
+                                {i18n.t('Yes, delete {{enrollmentLabel}}.', { enrollmentLabel })}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

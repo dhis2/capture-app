@@ -29,7 +29,6 @@ import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorking
 import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { getTermLabel } from '../../../../metaData/helpers/customLabels';
-import { customTerms } from '../../../../utils/customTerms';
 
 export const getEventOpeningFromEventListEpic = (
     action$: any,
@@ -53,9 +52,9 @@ export const getEventOpeningFromEventListEpic = (
                         log.error(
                             errorCreator(
                                 message ||
-                                customTerms.i18n.t('{{orgUnitLabel}} could not be loaded', { orgUnitLabel }))(details));
+                                i18n.t('{{orgUnitLabel}} could not be loaded', { orgUnitLabel }))(details));
                         return openViewEventPageFailed(
-                            customTerms.i18n.t('Could not get {{orgUnitLabel}}', { orgUnitLabel }),
+                            i18n.t('Could not get {{orgUnitLabel}}', { orgUnitLabel }),
                         );
                     },
                 });
@@ -115,7 +114,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: any) =>
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(
                         message ||
-                        customTerms.i18n.t('{{orgUnitLabel}} could not be loaded', { orgUnitLabel }))(details));
+                        i18n.t('{{orgUnitLabel}} could not be loaded', { orgUnitLabel }))(details));
                     return orgUnitCouldNotBeRetrievedOnUrlUpdate(eventContainer);
                 },
             });

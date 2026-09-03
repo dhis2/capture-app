@@ -18,7 +18,6 @@ import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../uti
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
 import { getTermLabel } from '../../metaData/helpers/customLabels';
-import { customTerms } from '../../utils/customTerms';
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
@@ -35,7 +34,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, sto
                 orgUnitId,
                 onSuccess: setCurrentOrgUnitBasedOnUrl,
                 onError: () => errorRetrievingOrgUnitBasedOnUrl(
-                    customTerms.i18n.t('Could not get {{orgUnitLabel}}', { orgUnitLabel }),
+                    i18n.t('Could not get {{orgUnitLabel}}', { orgUnitLabel }),
                 ),
             }));
         }),
@@ -70,7 +69,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>)
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
                     const orgUnitLabel = getTermLabel('orgUnit', { programId });
                     return invalidSelectionsFromUrl(
-                        customTerms.i18n.t('Selected program is invalid for selected {{orgUnitLabel}}', { orgUnitLabel }),
+                        i18n.t('Selected program is invalid for selected {{orgUnitLabel}}', { orgUnitLabel }),
                     );
                 }
             }

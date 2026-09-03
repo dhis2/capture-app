@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
 import { withStyles } from 'capture-core-utils/styles';
 import type { WithStyles } from 'capture-core-utils/styles';
@@ -12,7 +13,6 @@ import { convert as convertClientToList } from '../../../../converters/clientToL
 import type { Props } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
 import { useTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     row: {
@@ -54,7 +54,7 @@ const LinkedEntityTableBodyPlain = ({
                                         return (
                                             <Tooltip
                                                 key={`${entityId}-${id}`}
-                                                content={customTerms.i18n.t(
+                                                content={i18n.t(
                                                     'To open this {{relationshipLabel}}, please wait until saving ' +
                                                     'is complete',
                                                     { relationshipLabel },

@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
 import React, { type ComponentType } from 'react';
 import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { makeProgramRulesSelector } from './DataEntryWidgetOutput.selectors';
 import { getTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 
 type OwnProps = {
     dataEntryId: string;
@@ -24,11 +24,11 @@ const makeMapStateToProps = () => {
             ready,
             dataEntryKey,
             programRules: programRulesSelector(state, { dataEntryId, selectedScopeId }),
-            feedbackEmptyText: customTerms.i18n.t(
+            feedbackEmptyText: i18n.t(
                 'No feedback for this {{enrollmentLabel}} yet',
                 { enrollmentLabel },
             ),
-            indicatorEmptyText: customTerms.i18n.t(
+            indicatorEmptyText: i18n.t(
                 'No indicator output for this {{enrollmentLabel}} yet',
                 { enrollmentLabel },
             ),

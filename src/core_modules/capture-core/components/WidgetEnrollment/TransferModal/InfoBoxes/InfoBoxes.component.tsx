@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
 import { useTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 
@@ -59,7 +59,7 @@ const InfoBoxesPlain = ({
             {newOrgUnitName && (
                 <div className={cx(classes.alert, { info: true })}>
                     <IconInfo16 color={colors.grey600} />
-                    {customTerms.i18n.t(
+                    {i18n.t(
                         'Transferring {{enrollmentLabel}} ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}',
                         {
                             enrollmentLabel,
@@ -74,7 +74,7 @@ const InfoBoxesPlain = ({
             {showWarning && (
                 <div className={cx(classes.alert, { warning: true })}>
                     <IconWarning16 />
-                    {customTerms.i18n.t(
+                    {i18n.t(
                         'You will lose access to the {{enrollmentLabel}} '
                             + 'when transferring ownership to {{organisationUnit}}.',
                         { enrollmentLabel, organisationUnit: newOrgUnitName },

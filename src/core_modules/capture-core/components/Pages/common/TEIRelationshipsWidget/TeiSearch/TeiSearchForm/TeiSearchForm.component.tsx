@@ -17,7 +17,6 @@ import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSel
 import { withGotoInterface } from '../../../../../FormFields/New';
 import { useTermLabel } from '../../../../../../metaData';
 import type { SearchGroup } from '../../../../../../metaData';
-import { customTerms } from '../../../../../../utils/customTerms';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
@@ -51,7 +50,7 @@ const MinAttributesRequiredMessage = ({ count }: { count: number }) => {
     const attributeLabel = useTermLabel('attribute');
     return (
         <>
-            {customTerms.i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
+            {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
                 count,
                 attributeLabel,
                 defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',

@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import {
     SingleSelectField,
@@ -9,7 +10,6 @@ import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css'
 import { baseInputStyles } from '../FormComponents/commonProps';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 const SingleSelectForForm = withDefaultFieldContainer()(
     withLabel({
@@ -49,7 +49,7 @@ export const LinkToExisting = ({
         label: event.label,
     }));
 
-    const label = customTerms.i18n.t('Choose a {{linkableStageLabel}} {{eventLabel}}', {
+    const label = i18n.t('Choose a {{linkableStageLabel}} {{eventLabel}}', {
         linkableStageLabel,
         eventLabel,
     });
@@ -64,7 +64,7 @@ export const LinkToExisting = ({
             onChange={handleChange}
             onBlur={handleBlur}
             options={options}
-            placeholder={customTerms.i18n.t('Select an {{eventLabel}}', { eventLabel })}
+            placeholder={i18n.t('Select an {{eventLabel}}', { eventLabel })}
             clearable
             styles={baseInputStyles}
             errorMessage={shouldShowError ? errorMessages.linkedEventId : undefined}

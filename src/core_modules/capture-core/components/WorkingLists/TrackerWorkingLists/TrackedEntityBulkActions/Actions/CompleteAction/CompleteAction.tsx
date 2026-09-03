@@ -17,7 +17,6 @@ import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
 import type { PlainProps } from './CompleteAction.types';
 import { useTermLabel } from '../../../../../../metaData';
-import { customTerms } from '../../../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     container: {
@@ -44,7 +43,7 @@ const getTooltipContent = (
     enrollmentsLabel: string,
 ) => {
     if (!programDataWriteAccess) {
-        return customTerms.i18n.t('You do not have access to bulk complete {{enrollmentsLabel}}', { enrollmentsLabel });
+        return i18n.t('You do not have access to bulk complete {{enrollmentsLabel}}', { enrollmentsLabel });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -105,8 +104,8 @@ const CompleteActionPlain = ({
                     <span>
                         {hasPartiallyUploadedEnrollments ?
                             // eslint-disable-next-line max-len
-                            customTerms.i18n.t('Some {{enrollmentsLabel}} were completed successfully, but there was an error while completing the rest. Please see the details below.', { enrollmentsLabel }) :
-                            customTerms.i18n.t(
+                            i18n.t('Some {{enrollmentsLabel}} were completed successfully, but there was an error while completing the rest. Please see the details below.', { enrollmentsLabel }) :
+                            i18n.t(
                                 // eslint-disable-next-line max-len
                                 'There was an error while completing the {{enrollmentsLabel}}. Please see the details below.',
                                 { enrollmentsLabel },
@@ -142,7 +141,7 @@ const CompleteActionPlain = ({
         if (errorFetchingTrackedEntities) {
             return (
                 <div className={classes.container}>
-                    {customTerms.i18n.t(
+                    {i18n.t(
                         'An unexpected error occurred while fetching the {{enrollmentsLabel}}. Please try again.',
                         { enrollmentsLabel },
                     )}
@@ -154,12 +153,12 @@ const CompleteActionPlain = ({
         if (enrollmentCounts.active === 0) {
             return (
                 <div className={classes.container}>
-                    {customTerms.i18n.t(
+                    {i18n.t(
                         'There are currently no active {{enrollmentsLabel}} in the selection.',
                         { enrollmentsLabel },
                     )}
                     {' '}
-                    {customTerms.i18n.t(
+                    {i18n.t(
                         'All {{enrollmentsLabel}} are already completed or cancelled.',
                         { enrollmentsLabel },
                     )}
@@ -169,7 +168,7 @@ const CompleteActionPlain = ({
 
         return (
             <div className={classes.container}>
-                {customTerms.i18n.t('This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
+                {i18n.t('This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
                     {
                         count: enrollmentCounts.active,
                         enrollmentLabel,
@@ -183,7 +182,7 @@ const CompleteActionPlain = ({
                 {' '}
 
                 {enrollmentCounts.completed > 0 &&
-                    customTerms.i18n.t('{{count}} {{enrollmentLabel}} already marked as completed will not be changed.', {
+                    i18n.t('{{count}} {{enrollmentLabel}} already marked as completed will not be changed.', {
                         count: enrollmentCounts.completed,
                         enrollmentLabel,
                         defaultValue: '{{count}} {{enrollmentLabel}} already marked as completed will not be changed.',
@@ -194,7 +193,7 @@ const CompleteActionPlain = ({
                 }
 
                 <Checkbox
-                    label={customTerms.i18n.t(
+                    label={i18n.t(
                         'Mark all {{eventsLabel}} within {{enrollmentsLabel}} as complete',
                         { enrollmentsLabel, eventsLabel },
                     )}
@@ -217,7 +216,7 @@ const CompleteActionPlain = ({
                     disabled={disabled}
                     onClick={() => setModalIsOpen(true)}
                 >
-                    {customTerms.i18n.t('Complete {{enrollmentsLabel}}', { enrollmentsLabel })}
+                    {i18n.t('Complete {{enrollmentsLabel}}', { enrollmentsLabel })}
                 </Button>
             </ConditionalTooltip>
 
@@ -227,8 +226,8 @@ const CompleteActionPlain = ({
                     dataTest={'bulk-complete-enrollments-dialog'}
                 >
                     <ModalTitle>
-                        {validationError ? customTerms.i18n.t('Error completing {{enrollmentsLabel}}', { enrollmentsLabel })
-                            : customTerms.i18n.t('Complete {{enrollmentsLabel}}', { enrollmentsLabel })}
+                        {validationError ? i18n.t('Error completing {{enrollmentsLabel}}', { enrollmentsLabel })
+                            : i18n.t('Complete {{enrollmentsLabel}}', { enrollmentsLabel })}
                     </ModalTitle>
                     <ModalContent>
                         <ModalTextContent />
@@ -246,7 +245,7 @@ const CompleteActionPlain = ({
                             {!validationError && (
                                 <ConditionalTooltip
                                     enabled={enrollmentCounts?.active === 0}
-                                    content={customTerms.i18n.t(
+                                    content={i18n.t(
                                         'No active {{enrollmentsLabel}} to complete',
                                         { enrollmentsLabel },
                                     )}
@@ -258,7 +257,7 @@ const CompleteActionPlain = ({
                                         loading={isCompleting}
                                         dataTest={'bulk-complete-enrollments-confirm-button'}
                                     >
-                                        {customTerms.i18n.t('Complete {{count}} {{enrollmentLabel}}', {
+                                        {i18n.t('Complete {{count}} {{enrollmentLabel}}', {
                                             count: enrollmentCounts.active,
                                             enrollmentLabel,
                                             defaultValue: 'Complete {{count}} {{enrollmentLabel}}',

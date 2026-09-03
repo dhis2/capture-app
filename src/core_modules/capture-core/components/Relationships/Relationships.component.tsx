@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
@@ -6,7 +7,6 @@ import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
 import { getTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 import type { Relationship, Entity } from './relationships.types';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -65,7 +65,7 @@ const styles: Readonly<any> = (theme: any) => ({
 });
 
 const getFromNames = (programId: string) => ({
-    PROGRAM_STAGE_INSTANCE: customTerms.i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
+    PROGRAM_STAGE_INSTANCE: i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
 });
 
 type PlainProps = {
@@ -189,7 +189,7 @@ class RelationshipsPlain extends React.Component<Props> {
                                 dataTest="add-relationship-button"
                                 secondary
                             >
-                                {customTerms.i18n.t('Add {{relationshipLabel}}', { relationshipLabel })}
+                                {i18n.t('Add {{relationshipLabel}}', { relationshipLabel })}
                             </Button>
                         </div>
                     </div>

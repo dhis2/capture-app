@@ -5,7 +5,6 @@ import { ConditionalTooltip } from 'capture-core/components/Tooltips/Conditional
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 import { getTermLabel } from '../../../../metaData';
-import { customTerms } from '../../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     container: {
@@ -67,7 +66,7 @@ const ProgramStageSelectorComponentPlain = ({
                     key={programStage.id}
                 >
                     <ConditionalTooltip
-                        content={customTerms.i18n.t("You can't add any more {{ programStageName }} {{eventsLabel}}", {
+                        content={i18n.t("You can't add any more {{ programStageName }} {{eventsLabel}}", {
                             programStageName: programStage.displayName,
                             eventsLabel,
                             interpolation: { escapeValue: false },

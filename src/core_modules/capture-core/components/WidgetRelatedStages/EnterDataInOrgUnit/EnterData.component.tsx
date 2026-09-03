@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
@@ -5,7 +6,6 @@ import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 const styles: Readonly<any> = {
     wrapper: {
@@ -95,7 +95,7 @@ export const EnterDataInOrgUnitPlain = ({
             </div>
             <div className={classes.infoBox}>
                 <IconInfo16 />
-                {customTerms.i18n.t(
+                {i18n.t(
                     relatedStagesDataValues?.orgUnit?.name
                         ? 'Enter {{linkableStageLabel}} details for {{orgUnitName}} in the next step'
                         : 'Select {{orgUnitLabel}} and enter {{linkableStageLabel}} details in the next step',

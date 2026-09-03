@@ -24,7 +24,6 @@ import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } fro
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import { useTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
@@ -186,7 +185,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
                         key={`${id}-${row.id}`}
-                        content={customTerms.i18n.t(
+                        content={i18n.t(
                             'To open this {{eventLabel}}, please wait until saving is complete',
                             { eventLabel },
                         )}
@@ -291,7 +290,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
     if (error) {
         return (
             <div>
-                {customTerms.i18n.t('{{eventsLabel}} could not be retrieved. Please try again later.', { eventsLabel })}
+                {i18n.t('{{eventsLabel}} could not be retrieved. Please try again later.', { eventsLabel })}
             </div>
         );
     }

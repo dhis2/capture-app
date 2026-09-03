@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { colors, spacersNum, IconLink16 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 export const styles: Readonly<any> = {
     container: {
@@ -51,11 +51,11 @@ const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Plain
                         <span className={classes.icon}>
                             <IconLink16 color={colors.blue800} />
                         </span>
-                        <div>{customTerms.i18n.t('Linked {{eventLabel}}', { eventLabel })}</div>
+                        <div>{i18n.t('Linked {{eventLabel}}', { eventLabel })}</div>
                     </div>
                     <div className={classes.decription}>
                         {linkedStage?.name && stage?.name ?
-                            customTerms.i18n.t(
+                            i18n.t(
                                 'This {{stageName}} {{eventLabel}} is linked to a {{linkedStageName}} {{eventLabel}}. '
                                 + 'Review the linked {{eventLabel}} details before entering data below',
                                 {

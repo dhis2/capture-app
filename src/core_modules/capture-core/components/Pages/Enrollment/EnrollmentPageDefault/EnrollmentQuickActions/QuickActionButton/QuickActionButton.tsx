@@ -1,9 +1,9 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useTermLabel } from '../../../../../../metaData';
-import { customTerms } from '../../../../../../utils/customTerms';
 import { QuickActionButtonTypes } from './QuickActionButton.types';
 
 const styles = {
@@ -20,7 +20,7 @@ const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disabled
     const programStagesLabel = useTermLabel('programStage', { plural: true });
     return (
         <ConditionalTooltip
-            content={customTerms.i18n.t('No available {{programStagesLabel}}', { programStagesLabel })}
+            content={i18n.t('No available {{programStagesLabel}}', { programStagesLabel })}
             enabled={disabled}
         >
             <Button

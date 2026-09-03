@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
@@ -5,7 +6,6 @@ import { useOrganisationUnit } from '../../dataQueries';
 import { orgUnitFetched } from './coreOrgUnit.actions';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
 import { useTermLabel } from '../../metaData';
-import { customTerms } from '../../utils/customTerms';
 
 export function useCoreOrgUnit(orgUnitId: string): {
     orgUnit?: CoreOrgUnit,
@@ -21,7 +21,7 @@ export function useCoreOrgUnit(orgUnitId: string): {
 
     const errorComponent = (
         <div>
-            {customTerms.i18n.t('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
+            {i18n.t('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
         </div>
     );
 

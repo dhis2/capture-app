@@ -12,7 +12,6 @@ import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
 import { EventStatuses } from '../EventRow';
 import { useTermLabel } from '../../../../../../../metaData';
-import { customTerms } from '../../../../../../../utils/customTerms';
 
 type Props = {
     eventId: string;
@@ -63,7 +62,7 @@ export const SkipAction = ({
             },
             onError: (error: unknown, payload: { status: string }, context?: { previousStatus: string }) => {
                 showError({
-                    message: customTerms.i18n.t(
+                    message: i18n.t(
                         'An error occurred when updating {{eventLabel}} status',
                         { eventLabel },
                     ),

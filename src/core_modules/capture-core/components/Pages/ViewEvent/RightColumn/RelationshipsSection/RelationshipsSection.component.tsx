@@ -12,7 +12,6 @@ import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
 import { getTermLabel } from '../../../../../metaData';
-import { customTerms } from '../../../../../utils/customTerms';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
@@ -94,7 +93,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {customTerms.i18n.t(
+                        {i18n.t(
                             "This {{eventLabel}} doesn't have any relationships",
                             { eventLabel: getTermLabel('event', { programId }) },
                         )}

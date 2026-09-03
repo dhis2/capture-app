@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
@@ -6,7 +7,6 @@ import { NewRelationshipWrapper } from './NewRelationshipWrapper/NewEventNewRela
 import { cancelNewEventAndReturnToMainPage } from './DataEntryWrapper/DataEntry/actions/dataEntry.actions';
 import type { Props } from './SingleEventRegistrationEntry.types';
 import { useTermLabel } from '../../../metaData';
-import { customTerms } from '../../../utils/customTerms';
 
 export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eventAccess }: Props) => {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eve
     if (!eventAccess.write) {
         return (
             <NoWriteAccessMessage
-                message={customTerms.i18n.t(
+                message={i18n.t(
                     "You don't have access to create an {{eventLabel}} in the current selections",
                     { eventLabel },
                 )}
