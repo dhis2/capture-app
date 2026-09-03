@@ -17,6 +17,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     const { navigate } = useNavigate();
     const programStageLabel = useTermLabel('programStage', { programId });
     const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
+    const eventLabel = useTermLabel('event', { programId });
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
         teiId,
@@ -106,7 +107,10 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         <>
             {program ?
                 <Widget
-                    header={i18n.t('Choose a {{programStageLabel}} for a new event', { programStageLabel })}
+                    header={i18n.t('Choose a {{programStageLabel}} for a new {{eventLabel}}', {
+                        programStageLabel,
+                        eventLabel,
+                    })}
                     noncollapsible
                 >
                     <ProgramStageSelectorComponent

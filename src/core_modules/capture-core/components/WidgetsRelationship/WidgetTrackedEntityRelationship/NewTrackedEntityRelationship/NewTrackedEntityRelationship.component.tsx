@@ -288,6 +288,7 @@ const NewTrackedEntityRelationshipPlain = ({
                         onNavigate={handleNavigation}
                         linkedEntityMetadataName={selectedLinkedEntityMetadata?.name}
                         trackedEntityTypeName={trackedEntityTypeName}
+                        relationshipLabel={relationshipLabel}
                     />
                 )}
             >
