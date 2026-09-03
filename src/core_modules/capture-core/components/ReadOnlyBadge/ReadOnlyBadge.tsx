@@ -5,7 +5,6 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 import type { Props, Access, ReadOnlyMessageInput } from './ReadOnlyBadge.types';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles = {
     label: {
@@ -14,7 +13,7 @@ const styles = {
 } as const;
 
 const getEnrollmentMessage = (enrollmentLabel: string): string =>
-    tCustomTerm('You only have view access to this {{enrollmentLabel}}', { enrollmentLabel });
+    i18n.t('You only have view access to this {{enrollmentLabel}}', { enrollmentLabel });
 
 const getProgramMessage = (): string => i18n.t('You only have view access to this program');
 
@@ -27,14 +26,14 @@ const getProgramStageMessage = (
     programStageLabel: string,
     programStagesLabel: string,
 ): string => (multipleStages
-    ? tCustomTerm('You only have view access to these {{programStagesLabel}}', { programStagesLabel })
-    : tCustomTerm('You only have view access to this {{programStageLabel}}', { programStageLabel }));
+    ? i18n.t('You only have view access to these {{programStagesLabel}}', { programStagesLabel })
+    : i18n.t('You only have view access to this {{programStageLabel}}', { programStageLabel }));
 
 const getExpiredMessage = (eventLabel: string): string =>
-    tCustomTerm('This {{eventLabel}} is outside the editing period', { eventLabel });
+    i18n.t('This {{eventLabel}} is outside the editing period', { eventLabel });
 
 const getCompletedEventMessage = (eventLabel: string): string =>
-    tCustomTerm('This {{eventLabel}} has been completed', { eventLabel });
+    i18n.t('This {{eventLabel}} has been completed', { eventLabel });
 
 const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
     ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
@@ -76,12 +75,14 @@ const ReadOnlyBadgePlain = ({
     trackedEntityName,
     trackedEntityInactive = false,
     inlineLabel = false,
+    programId,
+    stageId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const enrollmentLabel = useTermLabel('enrollment');
-    const programStageLabel = useTermLabel('programStage');
-    const programStagesLabel = useTermLabel('programStage', { plural: true });
-    const eventLabel = useTermLabel('event');
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
+    const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
+    const eventLabel = useTermLabel('event', { programId, stageId });
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,

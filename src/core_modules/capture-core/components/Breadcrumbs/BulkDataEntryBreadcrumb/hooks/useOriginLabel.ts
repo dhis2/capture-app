@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 type Props = {
     programId: string;
@@ -36,9 +35,9 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
 
     const defaultFilterLabels = useMemo(() => ({
         default: i18n.t('Program overview'),
-        active: tCustomTerm('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
-        complete: tCustomTerm('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
-        cancelled: tCustomTerm('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
+        active: i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
+        complete: i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
+        cancelled: i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
     }), [enrollmentsLabel]);
 
     const label = useMemo(() => {

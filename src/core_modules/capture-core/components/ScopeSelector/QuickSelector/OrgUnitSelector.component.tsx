@@ -7,7 +7,6 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirst
 import { OrgUnitField } from '../../FormFields/New';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 const customLabels = {
     orgUnitLabel: { key: 'orgUnit' },
@@ -69,13 +68,13 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
         return (
             <ConditionalTooltip
                 enabled={Boolean(tooltip)}
-                content={tCustomTerm('Choose an {{orgUnitLabel}} in the form below', { orgUnitLabel })}
+                content={i18n.t('Choose an {{orgUnitLabel}} in the form below', { orgUnitLabel })}
             >
                 <SelectorBarItem
                     label={capitalizeFirstLetter(orgUnitLabel)}
                     noValueMessage={isReadOnly
                         ? i18n.t('None selected')
-                        : tCustomTerm('Choose an {{orgUnitLabel}}', { orgUnitLabel })}
+                        : i18n.t('Choose an {{orgUnitLabel}}', { orgUnitLabel })}
                     value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                     open={!isReadOnly && this.state.open}
                     setOpen={open => this.setState({ open })}

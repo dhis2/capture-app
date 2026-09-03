@@ -1,8 +1,8 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
 import type { Props } from './followup.types';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 export const Followup = ({ enrollment, onUpdate }: Props) => {
     const followUpLabel = useTermLabel('followUp');
@@ -17,7 +17,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) => {
                 })
             }
             icon={<IconFlag16 />}
-            label={tCustomTerm('Remove mark for {{followUpLabel}}', { followUpLabel })}
+            label={i18n.t('Remove mark for {{followUpLabel}}', { followUpLabel })}
             suffix=""
         />
     ) : (
@@ -31,7 +31,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) => {
                 })
             }
             icon={<IconFlag16 />}
-            label={tCustomTerm('Mark for {{followUpLabel}}', { followUpLabel })}
+            label={i18n.t('Mark for {{followUpLabel}}', { followUpLabel })}
             suffix=""
         />
     );

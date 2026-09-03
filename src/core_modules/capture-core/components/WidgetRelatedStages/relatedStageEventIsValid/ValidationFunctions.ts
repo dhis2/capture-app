@@ -3,7 +3,6 @@ import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
 import { convertFormToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
-import { tCustomTerm } from 'capture-core/utils/tCustomTerm';
 import { relatedStageActions } from '../constants';
 
 type Props = {
@@ -17,6 +16,7 @@ type Props = {
         expiryDays?: number;
     };
     orgUnitLabel: string;
+    eventLabel: string;
 };
 
 export const isScheduledDateValid = (
@@ -85,7 +85,7 @@ const scheduleInOrgUnit = (props) => {
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
+            orgUnit: i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
         });
     } else {
         setErrorMessages({
@@ -102,7 +102,7 @@ const enterData = (props) => {
 
     if (!orgUnitIsValid) {
         setErrorMessages({
-            orgUnit: tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
+            orgUnit: i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }),
         });
     } else {
         setErrorMessages({
@@ -114,12 +114,12 @@ const enterData = (props) => {
 };
 
 const linkToExistingResponse = (props) => {
-    const { linkedEventId, setErrorMessages } = props ?? {};
+    const { linkedEventId, setErrorMessages, eventLabel } = props ?? {};
     const linkedEventIdIsValid = !!linkedEventId;
 
     if (!linkedEventIdIsValid) {
         setErrorMessages({
-            linkedEventId: i18n.t('Please select a valid event'),
+            linkedEventId: i18n.t('Please select a valid {{eventLabel}}', { eventLabel }),
         });
     } else {
         setErrorMessages({

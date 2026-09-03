@@ -25,7 +25,10 @@ const styles: Readonly<any> = {
 };
 
 const WidgetTwoEventWorkspacePlain = ({ linkedEvent, dataValues, formFoundation, classes }: Props) => {
-    const orgUnitLabel = capitalizeFirstLetter(useTermLabel('orgUnit'));
+    const orgUnitLabel = capitalizeFirstLetter(useTermLabel('orgUnit', {
+        programId: linkedEvent?.program,
+        stageId: linkedEvent?.programStage,
+    }));
     const dataEntryValues = useMemo(() => getDataEntryDetails(
         linkedEvent,
         formFoundation,

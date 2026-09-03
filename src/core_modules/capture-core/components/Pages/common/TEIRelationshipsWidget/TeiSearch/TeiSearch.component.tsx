@@ -7,7 +7,6 @@ import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container'
 import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import type { Props } from './TeiSearch.types';
 
 const getStyles = (theme: any) => ({
@@ -100,7 +99,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
         const isUnique = sg.unique;
         const header = isUnique ?
             i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
-            tCustomTerm('Search by {{attributesLabel}}', { attributesLabel: props.attributesLabel });
+            i18n.t('Search by {{attributesLabel}}', { attributesLabel: props.attributesLabel });
         const collapsed = props.openSearchGroupSection !== searchGroupId;
         const unsupportedAttributes = sg.unsupportedAttributes;
         return (

@@ -13,7 +13,6 @@ import { OrgUnitField } from './OrgUnitField';
 import { useTransferValidation } from './hooks/useTransferValidation';
 import { InfoBoxes } from './InfoBoxes';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 export const TransferModal = ({
     enrollment,
@@ -55,7 +54,7 @@ export const TransferModal = ({
 
             <ModalContent>
                 <div>
-                    {tCustomTerm(
+                    {i18n.t(
                         'Choose the {{orgUnitLabel}} to which {{enrollmentLabel}} ownership should be transferred.',
                         { orgUnitLabel, enrollmentLabel },
                     )}

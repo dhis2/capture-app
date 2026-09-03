@@ -8,7 +8,6 @@ import { errorCreator } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { Props } from './DeleteAction.types';
 import { useTermLabel } from '../../../../../../metaData';
-import { tCustomTerm } from '../../../../../../utils/tCustomTerm';
 
 const getTooltipContent = (
     stageDataWriteAccess: boolean | undefined,
@@ -16,7 +15,7 @@ const getTooltipContent = (
     eventsLabel: string,
 ) => {
     if (!stageDataWriteAccess) {
-        return tCustomTerm(
+        return i18n.t(
             'You do not have access to delete {{eventsLabel}}',
             { eventsLabel },
         );
@@ -57,7 +56,12 @@ export const DeleteAction = ({
         {
             onError: (error) => {
                 log.error(errorCreator('An error occurred while deleting the events')({ error }));
-                showAlert({ message: tCustomTerm('An error occurred while deleting the {{eventsLabel}}', { eventsLabel }) });
+                showAlert({
+                    message: i18n.t(
+                        'An error occurred while deleting the {{eventsLabel}}',
+                        { eventsLabel },
+                    ),
+                });
             },
             onSuccess: () => {
                 onUpdateList();
@@ -88,13 +92,16 @@ export const DeleteAction = ({
                     dataTest={'bulk-delete-events-dialog'}
                 >
                     <ModalTitle>
-                        {tCustomTerm('Delete {{eventsLabel}}', { eventsLabel })}
+                        {i18n.t('Delete {{eventsLabel}}', { eventsLabel })}
                     </ModalTitle>
 
                     <ModalContent>
                         {i18n.t('This cannot be undone.')}
                         {' '}
-                        {tCustomTerm('Are you sure you want to delete the selected {{eventsLabel}}?', { eventsLabel })}
+                        {i18n.t(
+                            'Are you sure you want to delete the selected {{eventsLabel}}?',
+                            { eventsLabel },
+                        )}
                     </ModalContent>
 
                     <ModalActions>

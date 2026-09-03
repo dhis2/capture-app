@@ -1,8 +1,8 @@
+import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 import { getTermLabel, RenderFoundation, Program } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     getApplicableRuleEffectsForEventProgram,
@@ -119,7 +119,7 @@ export const openEventForEditInDataEntry = ({
         {
             id: 'orgUnit',
             type: 'ORGANISATION_UNIT',
-            validatorContainers: getOrgUnitValidatorContainers(getTermLabel(program.id, 'orgUnit')),
+            validatorContainers: getOrgUnitValidatorContainers(getTermLabel('orgUnit', { programId: program.id })),
         },
         {
             clientId: 'geometry',
@@ -165,8 +165,8 @@ export const openEventForEditInDataEntry = ({
     if (program instanceof TrackerProgram) {
         const stage = getStageFromEvent(eventContainer.event)?.stage;
         if (!stage) {
-            throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
-                programStageLabel: getTermLabel(program.id, 'programStage'),
+            throw Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+                programStageLabel: getTermLabel('programStage', { programId: program.id }),
             }));
         }
         // TODO: Add attributeValues & enrollmentData

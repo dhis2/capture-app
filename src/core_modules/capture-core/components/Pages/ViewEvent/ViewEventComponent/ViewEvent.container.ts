@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { getTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 import { rollbackAssignee, setAssignee } from './viewEvent.actions';
 import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { ViewEventComponent } from './ViewEvent.component';
@@ -32,7 +31,7 @@ const makeMapStateToProps = () => {
             : getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW);
         const isUserInteractionInProgress = dataEntryHasChanges(state, currentDataEntryKey);
         const programId = state.currentSelections.programId;
-        const eventLabel = programId ? getTermLabel(programId, 'event') : undefined;
+        const eventLabel = programId ? getTermLabel('event', { programId }) : undefined;
         return {
             programStage: programStageSelector(state),
             eventAccess: eventAccessSelector(state),
@@ -44,10 +43,10 @@ const makeMapStateToProps = () => {
             eventId: state.viewEventPage.eventId,
             isEditEventPage: eventDetailsSection.showEditEvent,
             feedbackEmptyText: eventLabel
-                ? tCustomTerm('No feedback for this {{eventLabel}} yet', { eventLabel })
+                ? i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })
                 : i18n.t('No feedback yet'),
             indicatorEmptyText: eventLabel
-                ? tCustomTerm('No indicator output for this {{eventLabel}} yet', { eventLabel })
+                ? i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })
                 : i18n.t('No indicator output yet'),
             programRules: programRulesSelector(state),
         };

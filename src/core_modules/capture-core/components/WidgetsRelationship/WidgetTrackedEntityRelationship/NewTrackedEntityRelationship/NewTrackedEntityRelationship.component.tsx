@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../../../Widget';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
+import { useTermLabel } from '../../../../metaData';
 import { Breadcrumbs } from './Breadcrumbs';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS, type WizardStep } from './wizardSteps.const';
 import {
@@ -50,6 +51,7 @@ const NewTrackedEntityRelationshipPlain = ({
     onSelectFindMode,
     classes,
 }: ComponentProps & WithStyles<typeof styles>) => {
+    const relationshipLabel = useTermLabel('relationship', { programId });
     const [currentStep, setCurrentStep] =
         useState<WizardStep>(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
     const [selectedLinkedEntityMetadata, setSelectedLinkedEntityMetadata] =
@@ -275,7 +277,7 @@ const NewTrackedEntityRelationshipPlain = ({
         <div className={classes.container}>
             <div className={classes.bar}>
                 <LinkButton onClick={onCancel} className={classes.linkText}>
-                    {i18n.t('Go back without saving relationship')}
+                    {i18n.t('Go back without saving {{relationshipLabel}}', { relationshipLabel })}
                 </LinkButton>
             </div>
             <Widget

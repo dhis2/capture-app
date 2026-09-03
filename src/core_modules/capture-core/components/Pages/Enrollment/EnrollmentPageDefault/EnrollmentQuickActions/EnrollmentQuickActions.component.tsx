@@ -10,7 +10,6 @@ import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
 import { useTermLabel } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 
 const styles = {
     contentContainer: {
@@ -82,7 +81,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                 >
                     <QuickActionButton
                         icon={<IconAdd16 color={colors.grey700} />}
-                        label={tCustomTerm('New {{eventLabel}}', { eventLabel })}
+                        label={i18n.t('New {{eventLabel}}', { eventLabel })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
                         disabled={noStageAvailable}
@@ -90,7 +89,7 @@ const EnrollmentQuickActionsComponentPlain = ({
 
                     <QuickActionButton
                         icon={<IconCalendar16 color={colors.grey700} />}
-                        label={tCustomTerm('Schedule an {{eventLabel}}', { eventLabel })}
+                        label={i18n.t('Schedule an {{eventLabel}}', { eventLabel })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
                         disabled={noStageAvailable}

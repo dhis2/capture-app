@@ -14,7 +14,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkAndDeleteModal.types';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 export const UnlinkAndDeleteModal = ({
     setOpenModal,
@@ -23,12 +22,13 @@ export const UnlinkAndDeleteModal = ({
     relationshipId,
     onDeleteEvent,
     onDeleteEventRelationship,
+    stageId,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const eventLabel = useTermLabel('event');
+    const eventLabel = useTermLabel('event', { stageId });
     const { show: showErrorAlert } = useAlert(
-        tCustomTerm('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
+        i18n.t('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
         { critical: true },
     );
 
@@ -64,15 +64,15 @@ export const UnlinkAndDeleteModal = ({
 
     return (
         <Modal dataTest="event-unlink-and-delete-modal">
-            <ModalTitle>{tCustomTerm('Unlink and delete linked {{eventLabel}}', { eventLabel })}</ModalTitle>
+            <ModalTitle>{i18n.t('Unlink and delete linked {{eventLabel}}', { eventLabel })}</ModalTitle>
             <ModalContent>
                 <p>
-                    {tCustomTerm(
+                    {i18n.t(
                         'Are you sure you want to remove the link and delete the linked {{eventLabel}}?',
                         { eventLabel },
                     )}
                     {' '}
-                    {tCustomTerm(
+                    {i18n.t(
                         'This action permanently removes the link, linked {{eventLabel}}, and all related data.',
                         { eventLabel },
                     )}
@@ -91,7 +91,7 @@ export const UnlinkAndDeleteModal = ({
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
                     >
-                        {tCustomTerm('Yes, unlink and delete linked {{eventLabel}}', { eventLabel })}
+                        {i18n.t('Yes, unlink and delete linked {{eventLabel}}', { eventLabel })}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

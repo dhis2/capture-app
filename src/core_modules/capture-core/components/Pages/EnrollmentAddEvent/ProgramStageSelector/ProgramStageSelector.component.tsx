@@ -4,6 +4,7 @@ import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
+import { getTermLabel } from '../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -39,6 +40,7 @@ type ProgramStage = {
 
 type Props = {
     programStages: ProgramStage[];
+    programId: string;
     onSelectProgramStage: (stageId: string) => void;
     onCancel: () => void;
 };
@@ -47,6 +49,7 @@ type ProgramStageSelectorPlainProps = Props & WithStyles<typeof styles>;
 
 const ProgramStageSelectorComponentPlain = ({
     programStages,
+    programId,
     onSelectProgramStage,
     onCancel,
     classes,
@@ -57,13 +60,15 @@ const ProgramStageSelectorComponentPlain = ({
                 !programStage.dataAccess.write
                 || (!programStage.repeatable && programStage.eventCount > 0)
                 || programStage.hiddenProgramStage;
+            const eventsLabel = getTermLabel('event', { programId, stageId: programStage.id, plural: true });
             return (
                 <div
                     key={programStage.id}
                 >
                     <ConditionalTooltip
-                        content={i18n.t('You can\'t add any more {{ programStageName }} events', {
+                        content={i18n.t("You can't add any more {{ programStageName }} {{eventsLabel}}", {
                             programStageName: programStage.displayName,
+                            eventsLabel,
                             interpolation: { escapeValue: false },
                         })}
                         enabled={disableStage}

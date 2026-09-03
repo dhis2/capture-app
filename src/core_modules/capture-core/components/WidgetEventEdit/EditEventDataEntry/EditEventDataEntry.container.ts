@@ -28,6 +28,8 @@ import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
 const customLabels = {
     orgUnitLabel: { key: 'orgUnit' },
+    eventLabel: { key: 'event' },
+    eventsLabel: { key: 'event', plural: true },
 } as const;
 
 const mapStateToProps = (state: any, props: any) => {

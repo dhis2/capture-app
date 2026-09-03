@@ -328,7 +328,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
+            label: i18n.t('Complete {{eventLabel}}', { eventLabel: props.eventLabel }),
             id: 'complete',
         }),
         getPropName: () => 'complete',

@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useRef, useCallback, useState } from 'react';
 import { IconLink24, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
@@ -16,7 +17,6 @@ import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOvervie
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { RequestEvent } from '../DataEntries';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
 
 const styles = {
     header: {
@@ -49,7 +49,7 @@ export const WidgetRelatedStagesPlain = ({
     classes,
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
-    const eventLabel = useTermLabel('event', { programId });
+    const eventLabel = useTermLabel('event', { programId, stageId: programStageId });
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus, constraint } = useRelatedStages({ programStageId, programId });
     const { stageWriteAccessById } = useEnrollmentAccessContext();
@@ -125,7 +125,7 @@ export const WidgetRelatedStagesPlain = ({
                     <span className={classes.icon}>
                         <IconLink24 />
                     </span>
-                    {tCustomTerm('Linked {{eventLabel}}', { eventLabel })}
+                    {i18n.t('Linked {{eventLabel}}', { eventLabel })}
                 </div>
             }
         >

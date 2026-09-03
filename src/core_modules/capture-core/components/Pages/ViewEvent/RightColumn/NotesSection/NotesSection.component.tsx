@@ -1,4 +1,5 @@
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
@@ -7,9 +8,8 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
-import { getTermLabel } from '../../../../../metaData';
 import type { PlainProps } from './NotesSection.types';
+import { getTermLabel } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
@@ -58,9 +58,9 @@ class NotesSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
-                        {tCustomTerm(
+                        {i18n.t(
                             "This {{eventLabel}} doesn't have any {{notesLabel}}",
-                            { eventLabel: getTermLabel(programId, 'event'), notesLabel },
+                            { eventLabel: getTermLabel('event', { programId }), notesLabel },
                         )}
                     </div>
                 )}
@@ -72,7 +72,7 @@ class NotesSectionPlain extends React.Component<Props> {
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,
                     smallMainButton: true,
-                    noteLabel: getTermLabel(programId, 'note'),
+                    noteLabel: getTermLabel('note', { programId }),
                 })}
             </ViewEventSection>
         );

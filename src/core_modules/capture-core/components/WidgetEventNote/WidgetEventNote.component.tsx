@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { Props } from './WidgetEventNote.types';
@@ -6,7 +7,6 @@ import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useTermLabel } from '../../metaData';
-import { tCustomTerm } from '../../utils/tCustomTerm';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props) => {
     const dispatch = useDispatch();
@@ -17,9 +17,9 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
-    const eventLabel = useTermLabel('event');
-    const noteLabel = useTermLabel('note');
-    const notesLabel = useTermLabel('note', { plural: true });
+    const eventLabel = useTermLabel('event', { programId });
+    const noteLabel = useTermLabel('note', { programId });
+    const notesLabel = useTermLabel('note', { programId, plural: true });
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId));
@@ -28,9 +28,15 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={tCustomTerm('{{notesLabel}} about this {{eventLabel}}', { notesLabel, eventLabel })}
-                placeholder={tCustomTerm('Write a {{noteLabel}} about this {{eventLabel}}', { eventLabel, noteLabel })}
-                emptyNoteMessage={tCustomTerm(
+                title={i18n.t(
+                    '{{notesLabel}} about this {{eventLabel}}',
+                    { notesLabel, eventLabel },
+                )}
+                placeholder={i18n.t(
+                    'Write a {{noteLabel}} about this {{eventLabel}}',
+                    { eventLabel, noteLabel },
+                )}
+                emptyNoteMessage={i18n.t(
                     "This {{eventLabel}} doesn't have any {{notesLabel}}",
                     { eventLabel, notesLabel },
                 )}

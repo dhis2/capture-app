@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useMemo } from 'react';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
@@ -6,7 +7,6 @@ import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -26,7 +26,7 @@ export const WidgetTrackedEntityRelationship = ({
     accessReadOnly,
     hideReadOnlyBadge,
 }: WidgetTrackedEntityRelationshipProps) => {
-    const relationshipsLabel = useTermLabel('relationship', { plural: true });
+    const relationshipsLabel = useTermLabel('relationship', { programId, plural: true });
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
     const {
@@ -46,7 +46,7 @@ export const WidgetTrackedEntityRelationship = ({
     if (isError) {
         return (
             <div>
-                {tCustomTerm(
+                {i18n.t(
                     'Something went wrong while loading {{relationshipsLabel}}. Please try again later.',
                     { relationshipsLabel },
                 )}
@@ -60,9 +60,10 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={tCustomTerm('{{trackedEntityTypeName}} {{relationshipsLabel}}', {
+            title={i18n.t('{{trackedEntityTypeName}} {{relationshipsLabel}}', {
                 trackedEntityTypeName,
                 relationshipsLabel,
+                interpolation: { escapeValue: false },
             })}
             isLoading={isLoading}
             relationships={relationships}

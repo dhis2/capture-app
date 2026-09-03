@@ -11,6 +11,7 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentId,
     teiDisplayName,
     trackedEntityName,
+    stageId,
     stageName,
     stageIcon,
     eventDateLabel,
@@ -26,7 +27,7 @@ export const EnrollmentAddEventTopBar = ({
 }: Props) => {
     const { reset } = useReset();
     const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const programStageLabel = useTermLabel('programStage', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
     return (
         <ScopeSelector
             selectedProgramId={programId}

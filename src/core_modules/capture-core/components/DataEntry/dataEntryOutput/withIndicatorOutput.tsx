@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { useHideWidgetByRuleLocations } from '../../../hooks';
@@ -6,7 +7,6 @@ import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 type Props = {
     dataEntryKey?: string;
@@ -26,7 +26,7 @@ const IndicatorOutputWrapper = (props: Props) => {
     return (
         <WidgetIndicator
             dataEntryKey={dataEntryKey}
-            indicatorEmptyText={tCustomTerm('No indicator output for this {{eventLabel}} yet', { eventLabel })}
+            indicatorEmptyText={i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })}
         />
     );
 };

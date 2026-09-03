@@ -368,7 +368,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         const dataEntrySections = {
             [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
-                name: getTermLabel(programId, 'enrollment'),
+                name: getTermLabel('enrollment', { programId }),
             },
             [AOCsectionKey]: {
                 placement: placements.BOTTOM,

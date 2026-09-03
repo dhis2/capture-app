@@ -8,7 +8,6 @@ import {
     getProgramEventAccess,
     useTermLabel,
 } from '../../../../../metaData';
-import { tCustomTerm } from '../../../../../utils/tCustomTerm';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
 const useProgramStageData = (programStageId, stages) =>
@@ -69,7 +68,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 type: dataElementTypes.DATE,
                 header: occurredAtLabel,
                 disabled: !programStageId,
-                tooltipContent: tCustomTerm('Choose a {{programStageLabel}} to filter by {{label}}', {
+                tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
                     programStageLabel,
                     label: occurredAtLabel,
                     interpolation: { escapeValue: false },
@@ -100,7 +99,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                     { text: translatedStatus.SKIPPED, value: statusTypes.SKIPPED },
                 ],
                 disabled: !programStageId,
-                tooltipContent: tCustomTerm('Choose a {{programStageLabel}} to filter by {{label}}', {
+                tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
                     programStageLabel,
                     label: ADDITIONAL_FILTERS_LABELS.status,
                     interpolation: { escapeValue: false },
@@ -116,7 +115,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                         type: dataElementTypes.DATE,
                         header: scheduledAtLabel,
                         disabled: !programStageId,
-                        tooltipContent: tCustomTerm('Choose a {{programStageLabel}} to filter by {{label}}', {
+                        tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
                             programStageLabel,
                             label: scheduledAtLabel,
                             interpolation: { escapeValue: false },

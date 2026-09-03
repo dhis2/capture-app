@@ -8,7 +8,6 @@ import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { PlainProps } from './ViewEventNewRelationshipWrapper.types';
 import { getTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -67,35 +66,24 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
         this.setState({ discardDialogOpen: false });
     }
 
-    renderHeader = () => {
-        const eventLabel = getTermLabel(this.props.programId, 'event');
-        const relationshipLabel = getTermLabel(this.props.programId, 'relationship');
-        return (
-            <div
-                className={this.props.classes.headerContainer}
-            >
-                <div className={this.props.classes.header} >
-                    {tCustomTerm('New {{eventLabel}} {{relationshipLabel}}', { eventLabel, relationshipLabel })}
-                </div>
-            </div>
-        );
-    };
-
     render() {
         const { classes, onCancel, programId, ...passOnProps } = this.props;
-        const eventLabel = getTermLabel(programId, 'event');
-        const relationshipLabel = getTermLabel(programId, 'relationship');
+        const eventLabel = getTermLabel('event', { programId });
+        const relationshipLabel = getTermLabel('relationship', { programId });
         return (
             <div className={classes.container}>
                 <div className={classes.backToEventContainer}>
                     <span>
-                        {tCustomTerm('Adding {{relationshipLabel}} to {{eventLabel}}.', { eventLabel, relationshipLabel })}
+                        {i18n.t(
+                            'Adding {{relationshipLabel}} to {{eventLabel}}.',
+                            { eventLabel, relationshipLabel },
+                        )}
                     </span>
                     <LinkButton
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {tCustomTerm('Go back to {{eventLabel}} without saving {{relationshipLabel}}', {
+                        {i18n.t('Go back to {{eventLabel}} without saving {{relationshipLabel}}', {
                             eventLabel,
                             relationshipLabel,
                         })}
@@ -103,14 +91,17 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={tCustomTerm('New {{eventLabel}} {{relationshipLabel}}', { eventLabel, relationshipLabel })}
+                        header={i18n.t(
+                            'New {{eventLabel}} {{relationshipLabel}}',
+                            { eventLabel, relationshipLabel },
+                        )}
                         onCancel={onCancel}
                         {...passOnProps}
                     />
                 </Card>
                 <DiscardDialog
                     header={i18n.t('Discard unsaved changes?')}
-                    text={tCustomTerm(
+                    text={i18n.t(
                         'Leaving this page will discard any selections you made for a new {{relationshipLabel}}',
                         { relationshipLabel },
                     )}

@@ -68,7 +68,7 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
         })) as Array<MetadataColumnConfig>;
 
 export const useDefaultColumnConfig = (stage: ProgramStage): EventWorkingListsColumnConfigs => {
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const orgUnitLabel = useTermLabel('orgUnit', { stageId: stage.id });
     return useMemo(() => [
         ...getDefaultMainConfig(stage, orgUnitLabel),
         ...getMetaDataConfig(stage),

@@ -223,7 +223,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Event completed'),
+            label: i18n.t('{{eventLabel}} completed', { eventLabel: props.eventLabel }),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),

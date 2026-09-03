@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useCallback } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -6,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -235,8 +235,14 @@ export const EnrollmentPageDefault = () => {
                 ruleEffects={ruleEffects}
                 widgetEnrollmentStatus={widgetEnrollmentStatus}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
-                feedbackEmptyText={tCustomTerm('No feedback for this {{enrollmentLabel}} yet', { enrollmentLabel })}
-                indicatorEmptyText={tCustomTerm('No indicator output for this {{enrollmentLabel}} yet', { enrollmentLabel })}
+                feedbackEmptyText={i18n.t(
+                    'No feedback for this {{enrollmentLabel}} yet',
+                    { enrollmentLabel },
+                )}
+                indicatorEmptyText={i18n.t(
+                    'No indicator output for this {{enrollmentLabel}} yet',
+                    { enrollmentLabel },
+                )}
             />
         </EnrollmentAccessProvider>
     );

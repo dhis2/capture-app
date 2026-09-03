@@ -10,7 +10,6 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {
@@ -189,7 +188,7 @@ const SearchFormIndex = ({
             const attributeLabel = useTermLabel('attribute');
             return (
                 <div className={error ? classes.textError : classes.textInfo}>
-                    {tCustomTerm('Fill in at least {{count}} {{attributeLabel}} to search', {
+                    {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
                         count: minAttributesRequiredToSearch,
                         attributeLabel,
                         defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
@@ -294,7 +293,7 @@ const SearchFormIndex = ({
                         minAttributesRequiredToSearch,
                         unsupportedAttributes,
                     }) => {
-                        const searchByText = tCustomTerm('Search by {{attributesLabel}}', { attributesLabel });
+                        const searchByText = i18n.t('Search by {{attributesLabel}}', { attributesLabel });
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
                             <div key={formId} data-test="form-attributes">

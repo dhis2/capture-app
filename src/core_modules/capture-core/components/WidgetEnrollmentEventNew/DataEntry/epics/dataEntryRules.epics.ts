@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { map, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import { ReduxStore, ApiUtils } from 'capture-core-utils/types/global';
 import { getTrackerProgramThrowIfNotFound, getTermLabel } from '../../../../metaData/helpers';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     newEventWidgetDataEntryActionTypes,
@@ -49,8 +49,8 @@ const runRulesForNewEvent = async ({
     const program = getTrackerProgramThrowIfNotFound(programId);
     const stage = program.getStage(stageId);
     if (!stage) {
-        throw Error(tCustomTerm('{{programStageLabel}} not found', {
-            programStageLabel: getTermLabel(programId, 'programStage'),
+        throw Error(i18n.t('{{programStageLabel}} not found', {
+            programStageLabel: getTermLabel('programStage', { programId, stageId }),
         }));
     }
 

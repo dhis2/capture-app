@@ -1,8 +1,8 @@
+import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { getTermLabel, dataElementTypes } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
@@ -73,7 +73,7 @@ export const loadViewEventDataEntry =
             {
                 id: 'orgUnit',
                 type: 'ORGANISATION_UNIT',
-                validatorContainers: getOrgUnitValidatorContainers(getTermLabel(program.id, 'orgUnit')),
+                validatorContainers: getOrgUnitValidatorContainers(getTermLabel('orgUnit', { programId: program.id })),
             },
             {
                 clientId: 'geometry',
@@ -145,8 +145,8 @@ export const loadViewEventDataEntry =
         if (program instanceof TrackerProgram) {
             const stage = getStageFromEvent(eventContainer.event)?.stage;
             if (!stage) {
-                throw Error(tCustomTerm('{{programStageLabel}} not found in rules execution', {
-                    programStageLabel: getTermLabel(program?.id, 'programStage'),
+                throw Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+                    programStageLabel: getTermLabel('programStage', { programId: program?.id }),
                 }));
             }
 

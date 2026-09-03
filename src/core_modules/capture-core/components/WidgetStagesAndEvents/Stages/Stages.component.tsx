@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType, useMemo } from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import { compose } from 'redux';
@@ -6,7 +7,6 @@ import type { PlainProps, InputProps } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 import { useEnrollmentAccessContext } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 const emptyStateStyle = {
     padding: `0 ${spacersNum.dp12}px`,
@@ -54,7 +54,7 @@ export const StagesPlain = ({
     if (!readableStages.length) {
         return (
             <p style={emptyStateStyle}>
-                {tCustomTerm('No {{programStagesLabel}} found in this program', { programStagesLabel })}
+                {i18n.t('No {{programStagesLabel}} found in this program', { programStagesLabel })}
             </p>
         );
     }

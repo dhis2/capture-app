@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
 import { scopeTypes, useTermLabel } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
-import { tCustomTerm } from '../../utils/tCustomTerm';
 import type { PlainProps } from './TopBarActions.types';
 
 const styles: Readonly<any> = {
@@ -27,7 +26,7 @@ const ActionButtonsPlain = ({
     openConfirmDialog,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
-    const eventLabel = useTermLabel('event', { programId: selectedProgramId ?? undefined });
+    const eventLabel = useTermLabel('event', { programId: selectedProgramId });
     const [openSearch, setOpenSearch] = useState(false);
 
     useEffect(() => {
@@ -67,7 +66,7 @@ const ActionButtonsPlain = ({
                             trackedEntityType: trackedEntityName,
                             interpolation: { escapeValue: false },
                         })
-                        : tCustomTerm('Create new {{eventLabel}}', { eventLabel })
+                        : i18n.t('Create new {{eventLabel}}', { eventLabel })
                     }
                 </SplitButton>
             )}

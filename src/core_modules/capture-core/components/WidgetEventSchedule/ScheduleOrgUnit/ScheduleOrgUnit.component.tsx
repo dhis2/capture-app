@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
@@ -11,7 +12,6 @@ import {
     withLabel,
 } from '../../FormFields/New';
 import { useTermLabel } from '../../../metaData';
-import { tCustomTerm } from '../../../utils/tCustomTerm';
 
 type OrgUnitValue = {
     checked: boolean;
@@ -60,7 +60,7 @@ export const ScheduleOrgUnit = ({
     };
 
     const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
-    const errorMessages = tCustomTerm('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel });
+    const errorMessages = i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel });
 
     return (
         <OrgUnitFieldForForm

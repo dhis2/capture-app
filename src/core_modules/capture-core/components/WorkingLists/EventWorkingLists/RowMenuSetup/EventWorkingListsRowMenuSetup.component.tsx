@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n';
 import React, { useMemo, useState } from 'react';
 import { IconDelete24, colors } from '@dhis2/ui';
 import { EventWorkingListsUpdateTrigger } from '../UpdateTrigger';
@@ -7,8 +8,6 @@ import { useProgramExpiryForUser } from '../../../../hooks';
 import { isValidPeriod } from '../../../../utils/validation/validators/form';
 import { DeleteEventModal } from './DeleteEventModal';
 import { useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
-
 
 export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...passOnProps }: Props) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
@@ -34,11 +33,11 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
         key: 'deleteEventItem',
         clickHandler: ({ id }) => handleOpenDeleteModal(id),
         icon: <IconDelete24 color={colors.red400} />,
-        label: tCustomTerm('Delete {{eventLabel}}', { eventLabel }),
+        label: i18n.t('Delete {{eventLabel}}', { eventLabel }),
         tooltipContent: (row) => {
             const { occurredAt } = row ?? {};
             const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
-            return isWithinValidPeriod ? null : tCustomTerm(
+            return isWithinValidPeriod ? null : i18n.t(
                 '{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be deleted',
                 {
                     occurredAt,
@@ -69,6 +68,7 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
             {deleteModalOpen && eventIdToDelete && (
                 <DeleteEventModal
                     eventId={eventIdToDelete}
+                    programId={programId}
                     onClose={handleCloseDeleteModal}
                     onConfirmDelete={handleConfirmDelete}
                 />

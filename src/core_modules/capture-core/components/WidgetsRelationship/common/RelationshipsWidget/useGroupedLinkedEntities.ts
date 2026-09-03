@@ -4,7 +4,6 @@ import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes, useTermLabel } from '../../../../metaData';
-import { tCustomTerm } from '../../../../utils/tCustomTerm';
 import { RELATIONSHIP_ENTITIES } from '../constants';
 import { convertClientToList, convertServerToClient } from '../../../../converters';
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
@@ -24,7 +23,7 @@ const getFallbackFieldsByRelationshipEntity = (programStageLabel: string) => ({
     }],
     [RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE]: () => [{
         id: 'programStageName',
-        displayName: tCustomTerm('{{programStageLabel}} name', { programStageLabel }),
+        displayName: i18n.t('{{programStageLabel}} name', { programStageLabel }),
         convertValue: (programStageName: any) => programStageName,
     },
     {

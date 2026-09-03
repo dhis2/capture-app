@@ -4,7 +4,6 @@ import { getProgramAndStageForProgram, TrackerProgram, useTermLabel } from '../.
 import { OrgUnitFetcher } from './OrgUnitFetcher/OrgUnitFetcher.container';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { tCustomTerm } from '../../utils/tCustomTerm';
 
 export const WidgetEnrollmentEventNew = ({
     programId,
@@ -13,7 +12,7 @@ export const WidgetEnrollmentEventNew = ({
     ...passOnProps
 }: WidgetProps) => {
     const { program } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const programStageLabel = useTermLabel('programStage', { programId });
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
     const {
         stage,
         formFoundation,
@@ -32,7 +31,7 @@ export const WidgetEnrollmentEventNew = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || isError || !formFoundation) {
         return (
             <div>
-                {tCustomTerm('Program or {{programStageLabel}} is invalid', { programStageLabel })}
+                {i18n.t('Program or {{programStageLabel}} is invalid', { programStageLabel })}
             </div>
         );
     }
