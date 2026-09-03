@@ -1,7 +1,6 @@
 Feature: Breaking the glass page
 
-  # TECH-1662 - Flaky test
-  @skip
+  @with-breaking-the-glass-tei-cleanup
   Scenario: User with search scope access tries to access an enrollment in a protected program
     Given the tei created by this test is cleared from the database
     And you create a new tei in Child programme from Ngelehun CHC
