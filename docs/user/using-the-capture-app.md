@@ -395,6 +395,8 @@ You now have two options:
 > - The event is completed and the program stage has **Block entry form after completed** enabled.
 >
 > Users with the **Edit expired data** authority can still edit events affected by the last two cases.
+>
+> Reopening a completed event also requires the **Uncomplete events** authority (`F_UNCOMPLETE_EVENT`). Without it, the **Complete event** checkbox is disabled on completed events and shows the tooltip *You do not have access to uncomplete this event*.
 
 
 ## Delete an event { #capture_delete_event } 
@@ -680,6 +682,8 @@ The Capture app supports the working lists in tracker programs, and opening a tr
 
     ![](resources/images/search-by-attributes-on-scope-program-preferredSearchOperator.png)
 
+    Tracked entity attributes can also define **minCharactersToSearch** in Maintenance. The same minimum applies to the attribute's filter in working lists, which shows *Please enter at least N characters to filter* until enough characters are entered. Set this value with care for non-text attributes. A filter can only ever hold as many characters as its value type allows - 10 for a date (2026-09-04), 5 for a time (14:30) and 3 for a percentage (100) - so if the minimum is higher than that, the filter cannot be used at all and shows *Minimum characters to search is too high for this filter*.
+
     To execute a search now:
 
 1. Fill in the attributes you want to search with.
@@ -932,6 +936,25 @@ You can show data elements from a single stage in a working list. Select the "Pr
 ![](resources/images/program_stage_working_list.png)
 
 The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists. Additionally, the program stage list can be [filtered by assignee](#assignee-in-the-event-list), just like an event program list.
+
+## Dates and calendars { #capture_dates_and_calendars }
+
+The Capture app displays and accepts dates in the calendar configured for your DHIS2 server. If the server uses a non-Gregorian calendar, such as the Ethiopian or Nepali calendar, all date fields, date pickers, date ranges, age fields and the dates shown in lists and widgets follow that calendar. The order of day, month and year follows the server's date format setting.
+
+The example below shows the report date picker on a server configured to use the Nepali calendar, with the Nepali month and year and the Nepali weekday names.
+
+![](resources/images/nepali-calendar-date-picker.png)
+
+This affects, among others:
+
+- Enrollment, incident, report and scheduled dates in forms and widgets.
+- Date and date range filters in working lists, and the dates shown in list columns.
+- Age fields, where entering a date of birth calculates the age in the configured calendar, and entering an age calculates the date of birth.
+- Validation that depends on dates, such as a program's expiry days and complete events expiry days.
+
+Dates are always stored on the server in the ISO 8601 (Gregorian) calendar and converted for display. A date entered as 2017-04-13 in the Ethiopian calendar is stored as the corresponding Gregorian date, so downloaded lists, the API and other DHIS2 apps that do not apply the calendar setting may show a different, equivalent date.
+
+The calendar is a server-wide setting and cannot be changed per user or per program. Contact your system administrator if dates appear in an unexpected calendar.
 
 ## Implementer / administrator info { #implementer_info } 
 
