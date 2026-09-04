@@ -11,7 +11,6 @@ import {
 } from 'capture-core/components/FormFields/New';
 import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
 import { hasValue } from 'capture-core-utils/validators/form';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
@@ -136,7 +135,7 @@ const ScheduleDatePlain = ({
                 />
                 :
                 <div className={classes.fieldLabel}>
-                    {displayDueDateLabel ? capitalizeFirstLetter(displayDueDateLabel) : i18n.t('Schedule date / Due date', {
+                    {displayDueDateLabel ?? i18n.t('Schedule date / Due date', {
                         interpolation: { escapeValue: false },
                     },
                     )}

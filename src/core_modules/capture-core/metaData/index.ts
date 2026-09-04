@@ -41,8 +41,7 @@ export {
     getProgramAndStageForEventProgram,
     getEventProgramEventAccess,
     extractCustomLabels,
-    resolveLabel,
     getTermLabel,
     useTermLabel,
 } from './helpers';
-export type { CustomLabelKey, CustomLabels, LabelOptions } from './helpers';
+export type { CustomLabelKey, CustomLabels } from './helpers';

@@ -104,7 +104,7 @@ const WidgetEnrollmentPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{capitalizeFirstLetter(enrollmentLabel)}</span>
+                        <span>{i18n.t('Enrollment')}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
