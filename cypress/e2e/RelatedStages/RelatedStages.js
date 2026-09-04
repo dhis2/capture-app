@@ -1,8 +1,12 @@
-import { Given, Then, When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { After, Given, Then, When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../support/date';
 
 const BABY_POSTNATAL_STAGE = 'ZzYYXq4fJie';
 const BIRTH_STAGE = 'A03MvHHogjR';
+const CHILD_PROGRAMME = 'IpHINAT79UW';
+const FIRST_NAME_ATTRIBUTE = 'w75KJ2mc4zz';
+
+let enrolledEntityFirstName;
 
 const importTracker = (importStrategy, payload) =>
     cy.buildApiUrl(`tracker?async=false&importStrategy=${importStrategy}`)
@@ -26,20 +30,49 @@ const unlinkEvent = eventId =>
             });
         });
 
+const clearEnrolledEntity = () => {
+    if (!enrolledEntityFirstName) {
+        return undefined;
+    }
+
+    return cy
+        .buildApiUrl(
+            'tracker',
+            `trackedEntities?program=${CHILD_PROGRAMME}&orgUnitMode=ACCESSIBLE` +
+                `&filter=${FIRST_NAME_ATTRIBUTE}:eq:${enrolledEntityFirstName}` +
+                '&fields=trackedEntity&page=1&pageSize=5',
+        )
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
+            const trackedEntities = apiTrackedEntities.map(({ trackedEntity }) => ({ trackedEntity }));
+
+            if (!trackedEntities.length) {
+                return undefined;
+            }
+
+            return importTracker('DELETE', { trackedEntities });
+        });
+};
+
+After({ tags: '@with-tracked-entity-cleanup' }, () => {
+    clearEnrolledEntity();
+    enrolledEntityFirstName = undefined;
+});
+
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
-Given(/^you make sure the enrollment (.+) has a linkable Baby Postnatal event$/, (enrollmentId) => {
+Given(/^you make sure the enrollment (.+) has a Baby Postnatal event$/, (enrollmentId) => {
     cy.buildApiUrl('tracker', `enrollments/${enrollmentId}?fields=orgUnit,program,events[event,programStage]`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const existingEvent = (body.events ?? [])
-                .find(({ programStage }) => programStage === BABY_POSTNATAL_STAGE);
+            const events = body.events ?? [];
 
-            if (existingEvent) {
-                return unlinkEvent(existingEvent.event);
+            if (events.some(({ programStage }) => programStage === BABY_POSTNATAL_STAGE)) {
+                return undefined;
             }
 
             return importTracker('CREATE', {
@@ -242,6 +275,8 @@ Then('you are redirect to the enrollment dasboard and you see the 2 linked event
 });
 
 And('you fill the Child Program program registration form with unique values', () => {
+    enrolledEntityFirstName = `Sarah-${Date.now()}`;
+
     cy.get('input[type="text"]')
         .eq(1)
         .type('2021-01-01')
@@ -255,31 +290,16 @@ And('you fill the Child Program program registration form with unique values', (
         .blur();
     cy.get('input[type="text"]')
         .eq(4)
-        .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(enrolledEntityFirstName)
         .blur();
     cy.get('input[type="text"]')
         .eq(5)
-        .type(`Beth-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(`Beth-${Date.now()}`)
         .blur();
     cy.get('input[type="text"]')
         .eq(7)
         .type('2021-01-01')
         .blur();
-});
-
-And('you delete the recently added tracked entity', () => {
-    cy.get('[data-test="profile-widget"]')
-        .contains('Person profile')
-        .should('exist');
-    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
-        .click();
-    cy.contains('Delete Person')
-        .click();
-    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
-        cy.contains('Yes, delete Person')
-            .click();
-    });
-    cy.url().should('include', 'selectedTemplateId=IpHINAT79UW');
 });
 
 And(/^you click the save (.*) submit button$/, (TEType) => {

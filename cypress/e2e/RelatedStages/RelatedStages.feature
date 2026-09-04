@@ -2,7 +2,7 @@ Feature: Related stages
 
     Scenario: Edit event -> User is able to link and unlink an existing event
         Given you make sure the event TwoGi1mUFFw is unlinked
-        And you make sure the enrollment ZlWJ5HwZLeQ has a linkable Baby Postnatal event
+        And you make sure the enrollment ZlWJ5HwZLeQ has a Baby Postnatal event
         And you land on a enrollment page domain by having typed #/enrollmentEventEdit?eventId=TwoGi1mUFFw&orgUnitId=lyONqUkY1Bq
         And the Related stages Actions is visible at the bottom of the page
         And the schedule and enter details actions are disabled
@@ -43,7 +43,7 @@ Feature: Related stages
         And you can see the Baby postnatal new event form
 
     Scenario: New event -> User is able to link and unlink an existing event
-        Given you make sure the enrollment EOxeNf2MdBf has a linkable Baby Postnatal event
+        Given you make sure the enrollment EOxeNf2MdBf has a Baby Postnatal event
         And you land on a enrollment page domain by having typed #/enrollment?enrollmentId=EOxeNf2MdBf&orgUnitId=VFF7f43dJv4&programId=IpHINAT79UW&teiId=QhoMgzeGuGq
         And you delete the Birth event
         And you open the Birth new event page and fill in the required data in the form
@@ -81,6 +81,7 @@ Feature: Related stages
         Then you can see the Birth linked event
         And you can see the Baby postnatal new event form
 
+    @with-tracked-entity-cleanup
     Scenario: Enroll trackedEntity -> User is able to schedule an event in a different orgUnit
         Given you are in Child programme and Tombo Wallah CHP organization unit registration page
         When you fill the Child Program program registration form with unique values
@@ -88,8 +89,8 @@ Feature: Related stages
         And you fill in the required values for the Baby postnatal event when scheduling
         And you click the save person submit button
         Then you are redirect to the enrollment dasboard and you see the 2 linked events in different orgUnits
-        And you delete the recently added tracked entity
 
+    @with-tracked-entity-cleanup
     Scenario: Enroll trackedEntity -> User is able to enter details in a different orgUnit
         Given you are in Child programme and Tombo Wallah CHP organization unit registration page
         When you fill the Child Program program registration form with unique values
@@ -100,4 +101,3 @@ Feature: Related stages
         And you can see the Baby postnatal new event form
         And you navigate to the Enrollment dashboard
         And you are redirect to the enrollment dasboard and you see the 2 linked events in different orgUnits
-        And you delete the recently added tracked entity
