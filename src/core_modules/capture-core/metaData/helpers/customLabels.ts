@@ -61,7 +61,7 @@ const LABELS = asLabels({
 
 export type CustomLabelKey = keyof typeof LABELS;
 export type CustomLabels = Record<string, string>;
-export type LabelOptions = { plural?: boolean };
+type LabelOptions = { plural?: boolean };
 
 const ALL_FIELD_NAMES = Object.values(LABELS).flatMap(
     ({ field, pluralField }) => (pluralField ? [field, pluralField] : [field]),
@@ -76,7 +76,7 @@ export const extractCustomLabels = (cached: Record<string, unknown>): CustomLabe
 
 type LabelSource = CustomLabels | undefined | null;
 
-export const resolveLabel = (
+const resolveLabel = (
     sources: LabelSource | Array<LabelSource>,
     key: CustomLabelKey,
     { plural = false }: LabelOptions = {},
@@ -88,12 +88,14 @@ export const resolveLabel = (
     return list.find(source => source?.[target])?.[target];
 };
 
-type TermLabelOptions = LabelOptions & { stageId?: string | null; programId?: string | null };
+type BaseTermOptions = LabelOptions & { stageId?: string | null };
+type GetTermLabelOptions = BaseTermOptions & { programId: string };
+type UseTermLabelOptions = BaseTermOptions & { programId?: string | null };
 
 const resolveTerm = (
     programId: string | null | undefined,
     key: CustomLabelKey,
-    { stageId, plural = false }: TermLabelOptions,
+    { stageId, plural = false }: BaseTermOptions,
 ): string => {
     const program = programId ? programCollection.get(programId) : undefined;
     const stage = program && stageId ? program.getStage(stageId) : undefined;
@@ -105,16 +107,16 @@ const resolveTerm = (
 
 export const getTermLabel = (
     key: CustomLabelKey,
-    options: TermLabelOptions & { programId: string },
+    options: GetTermLabelOptions,
 ): string => resolveTerm(options.programId, key, options);
 
 export const useTermLabel = (
     key: CustomLabelKey,
-    options: TermLabelOptions = {},
+    options: UseTermLabelOptions = {},
 ): string => {
     const { programId, stageId, plural } = options;
-    const currentProgramId = useSelector(({ currentSelections }: any) => currentSelections.programId);
-    const id = programId ?? currentProgramId;
+    const id = useSelector(({ currentSelections }: any) =>
+        programId ?? currentSelections.programId);
     return useMemo(
         () => resolveTerm(id, key, { stageId, plural }),
         [id, key, stageId, plural],

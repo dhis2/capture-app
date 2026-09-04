@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-03T13:57:51.595Z\n"
-"PO-Revision-Date: 2026-09-03T13:57:51.596Z\n"
+"POT-Creation-Date: 2026-09-04T13:31:54.128Z\n"
+"PO-Revision-Date: 2026-09-04T13:31:54.128Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1419,6 +1419,9 @@ msgstr "{{enrollmentLabel}} date"
 
 msgid "Incident date"
 msgstr "Incident date"
+
+msgid "Enrollment"
+msgstr "Enrollment"
 
 msgid "{{enrollmentLabel}} widget could not be loaded. Please try again later"
 msgstr "{{enrollmentLabel}} widget could not be loaded. Please try again later"

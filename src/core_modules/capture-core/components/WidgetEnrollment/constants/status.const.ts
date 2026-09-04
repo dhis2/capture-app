@@ -6,7 +6,7 @@ export const plainStatus = Object.freeze({
     CANCELLED: 'CANCELLED',
 });
 
-export const getTranslatedStatus = () => ({
+export const translatedStatus = Object.freeze({
     [plainStatus.ACTIVE]: i18n.t('Active'),
     [plainStatus.COMPLETED]: i18n.t('Completed'),
     [plainStatus.CANCELLED]: i18n.t('Cancelled'),
