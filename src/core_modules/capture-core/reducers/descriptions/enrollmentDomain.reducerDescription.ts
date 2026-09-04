@@ -42,12 +42,15 @@ const setAssignee = (state, action) => {
 
 export const enrollmentDomainDesc = createReducerDescription(
     {
-        [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, { payload: { enrollment, attributeValues, inactive } }) => ({
+        [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, {
+            payload: { enrollment, attributeValues, inactive, programOwnerId },
+        }) => ({
             ...state,
             enrollment,
             attributeValues,
             enrollmentId: enrollment?.enrollment,
             inactive,
+            programOwnerId,
         }),
         [SET_TRACKED_ENTITY_INACTIVE_STATUS]: (state, { payload: { inactive } }) => ({
             ...state,

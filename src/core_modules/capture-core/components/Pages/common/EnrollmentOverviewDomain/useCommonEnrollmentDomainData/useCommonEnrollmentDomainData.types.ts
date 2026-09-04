@@ -36,4 +36,5 @@ export type Output = {
     enrollment?: EnrollmentData;
     attributeValues?: Array<AttributeValue>;
     readOnly?: boolean;
+    programOwnerId?: string;
 };

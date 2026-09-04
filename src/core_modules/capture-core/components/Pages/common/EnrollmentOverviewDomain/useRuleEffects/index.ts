@@ -1,2 +1,2 @@
-export { useRuleEffects } from './useRuleEffects';
-export type { UseRuleEffectsInput } from './useRuleEffects.types';
+export { useEnrollmentScopeRuleEffects } from './useEnrollmentScopeRuleEffects';
+export { getEnrollmentScopeFormId } from './getEnrollmentScopeFormId';

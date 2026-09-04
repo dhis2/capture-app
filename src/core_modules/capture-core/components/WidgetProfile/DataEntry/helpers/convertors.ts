@@ -14,6 +14,9 @@ export const getOptionSetId = (valueApi: any) => valueApi?.optionSet?.id;
 
 export const getProgramId = (valueApi: any) => valueApi?.program?.id;
 
+export const getUseNameForOptionSet = (valueApi: any) =>
+    (valueApi?.useCodeForOptionSet != null ? !valueApi.useCodeForOptionSet : false);
+
 export const getTrackedEntityTypeId = (valueApi: any) => valueApi?.trackedEntityType?.id;
 
 export const getProgramTrackedEntityAttributes = (valueApi: any) =>

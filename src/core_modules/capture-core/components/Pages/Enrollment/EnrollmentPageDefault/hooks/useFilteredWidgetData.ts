@@ -1,56 +1,29 @@
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { getEnrollmentScopeFormId } from '../../../common/EnrollmentOverviewDomain';
 
-type RulesProps = {
-    type: string;
-    id: string;
-    error?: { id: string; message: string };
-    warning?: { id: string; message: string };
-    displayText?: { id: string; message: string };
-    displayKeyValuePair?: { id: string; key: string; value: string };
+export const useFilteredWidgetData = (enrollmentId?: string) => {
+    const formId = enrollmentId ? getEnrollmentScopeFormId(enrollmentId) : undefined;
+
+    const generalErrors = useSelector(({ rulesEffectsGeneralErrors }: any) =>
+        (formId ? rulesEffectsGeneralErrors?.[formId] : undefined));
+    const generalWarnings = useSelector(({ rulesEffectsGeneralWarnings }: any) =>
+        (formId ? rulesEffectsGeneralWarnings?.[formId] : undefined));
+    const feedback = useSelector(({ rulesEffectsFeedback }: any) =>
+        (formId ? rulesEffectsFeedback?.[formId] : undefined));
+    const indicators = useSelector(({ rulesEffectsIndicators }: any) =>
+        (formId ? rulesEffectsIndicators?.[formId] : undefined));
+
+    return useMemo(() => ({
+        warnings: generalWarnings?.warning ?? [],
+        errors: generalErrors?.error ?? [],
+        feedbacks: [
+            ...(feedback?.displayTexts ?? []),
+            ...(feedback?.displayKeyValuePairs ?? []),
+        ],
+        indicators: [
+            ...(indicators?.displayTexts ?? []),
+            ...(indicators?.displayKeyValuePairs ?? []),
+        ],
+    }), [generalErrors, generalWarnings, feedback, indicators]);
 };
-
-export const useFilteredWidgetData = (rulesEffects?: Array<RulesProps> | null) => useMemo(() => {
-    let warnings: any[] = [];
-    let errors: any[] = [];
-    let feedbacks: any[] = [];
-    let indicators: any[] = [];
-
-    const effectTypes = Object.freeze({
-        SHOWWARNING: 'SHOWWARNING',
-        SHOWERROR: 'SHOWERROR',
-        DISPLAYKEYVALUEPAIRS: 'DISPLAYKEYVALUEPAIRS',
-        DISPLAYTEXT: 'DISPLAYTEXT',
-    });
-
-    const effectIDs = Object.freeze({
-        general: 'general',
-        feedback: 'feedback',
-        indicators: 'indicators',
-    });
-
-    rulesEffects?.forEach((effect) => {
-        if (effect.id === effectIDs.general) {
-            switch (effect.type) {
-            case effectTypes.SHOWWARNING:
-                warnings = [...warnings, effect.warning];
-                break;
-            case effectTypes.SHOWERROR:
-                errors = [...errors, effect.error];
-                break;
-            default:
-                break;
-            }
-        } else if (effect.id === effectIDs.feedback) {
-            feedbacks = [...feedbacks, effect?.displayText || effect?.displayKeyValuePair];
-        } else if (effect.id === effectIDs.indicators) {
-            indicators = [...indicators, effect?.displayText || effect?.displayKeyValuePair];
-        }
-    });
-
-    return {
-        warnings,
-        errors,
-        feedbacks,
-        indicators,
-    };
-}, [rulesEffects]);

@@ -49,7 +49,7 @@ export const updateTeiEpic = (action$: any, store: any) =>
             const {
                 dataEntryId,
                 itemId,
-                orgUnitId,
+                programOwnerId,
                 trackedEntityTypeId,
                 trackedEntityInstanceId,
                 formFoundation,
@@ -67,7 +67,7 @@ export const updateTeiEpic = (action$: any, store: any) =>
                         geometry: deriveGeometryFromFormValues(values),
                         trackedEntity: trackedEntityInstanceId,
                         trackedEntityType: trackedEntityTypeId,
-                        orgUnit: orgUnitId,
+                        orgUnit: programOwnerId,
                     },
                 ],
             };

@@ -1,4 +1,5 @@
 import { actionCreator } from '../../../../actions/actions.utils';
+import type { AttributeValue, EnrollmentData } from './useCommonEnrollmentDomainData';
 
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
@@ -25,8 +26,17 @@ export const enrollmentSiteActionTypes = {
     SET_TRACKED_ENTITY_INACTIVE_STATUS: 'Enrollment.SetTrackedEntityInactiveStatus',
 };
 
-export const setCommonEnrollmentSiteData = (enrollment: any, attributeValues: any, inactive?: boolean) =>
-    actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues, inactive });
+export const setCommonEnrollmentSiteData = (
+    enrollment: EnrollmentData,
+    attributeValues: Array<AttributeValue>,
+    inactive?: boolean,
+    programOwnerId?: string,
+) => actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({
+    enrollment,
+    attributeValues,
+    inactive,
+    programOwnerId,
+});
 
 export const setTrackedEntityInactiveStatus = (inactive: boolean) =>
     actionCreator(enrollmentSiteActionTypes.SET_TRACKED_ENTITY_INACTIVE_STATUS)({ inactive });

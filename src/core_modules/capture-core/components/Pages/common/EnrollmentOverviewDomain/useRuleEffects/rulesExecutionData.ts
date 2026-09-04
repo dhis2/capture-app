@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { convertValue } from '../../../../../converters/serverToClient';
-import { getApplicableRuleEffectsForTrackerProgram } from '../../../../../rules';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound, type TrackerProgram } from '../../../../../metaData';
-import type { UseRuleEffectsInput } from './useRuleEffects.types';
+import type { AttributeValue, EnrollmentData } from '../useCommonEnrollmentDomainData';
 
 const convertDate = (date: string): string => convertValue(date, dataElementTypes.DATE);
 
@@ -22,10 +21,10 @@ const getClientFormattedDataValuesAsObject = (dataValues: any, elementsById: any
         return acc;
     }, {});
 
-const useEventsData = (enrollment: any, program: TrackerProgram) => {
+export const useEventsData = (enrollment: EnrollmentData | undefined, program: TrackerProgram) => {
     const elementsById = useMemo(() => getDataElementsInProgram(program), [program]);
 
-    return useMemo(() => enrollment && enrollment.events.map((event: any) => ({
+    return useMemo(() => enrollment?.events.map((event: any) => ({
         eventId: event.event,
         programId: event.program,
         programStageId: event.programStage,
@@ -40,7 +39,7 @@ const useEventsData = (enrollment: any, program: TrackerProgram) => {
     })), [elementsById, enrollment]);
 };
 
-const useEnrollmentData = (enrollment: any) => useMemo(() => {
+export const useEnrollmentData = (enrollment: EnrollmentData | undefined) => useMemo(() => {
     if (!enrollment) {
         return undefined;
     }
@@ -56,39 +55,19 @@ const useEnrollmentData = (enrollment: any) => useMemo(() => {
     };
 }, [enrollment]);
 
-export const useRuleEffects = ({ orgUnit, program, apiEnrollment, apiAttributeValues }: UseRuleEffectsInput) => {
-    const [ruleEffects, setRuleEffects] = useState<any>(undefined);
+export const useAttributeValuesForRules = (
+    program: TrackerProgram,
+    apiAttributeValues: Array<AttributeValue> | undefined,
+) => {
     const attributesObject = useMemo(() =>
         program.attributes.reduce((acc: any, attribute: any) => {
             acc[attribute.id] = attribute;
             return acc;
         }, {}), [program.attributes]);
 
-    const attributeValues = useMemo(() => apiAttributeValues &&
-        apiAttributeValues
-            .reduce((acc: any, { id, value }) => {
-                acc[id] = convertValue(value, attributesObject[id]?.type);
-                return acc;
-            }, {}), [apiAttributeValues, attributesObject]);
-
-    const enrollmentData = useEnrollmentData(apiEnrollment);
-
-    const otherEvents = useEventsData(apiEnrollment, program);
-
-    useEffect(() => {
-        if (orgUnit && attributeValues && enrollmentData && otherEvents) {
-            const effects = getApplicableRuleEffectsForTrackerProgram({
-                program,
-                orgUnit,
-                otherEvents,
-                attributeValues,
-                enrollmentData,
-            }, true);
-            if (Array.isArray(effects)) {
-                setRuleEffects(effects);
-            }
-        }
-    }, [attributeValues, enrollmentData, orgUnit, otherEvents, program]);
-
-    return ruleEffects;
+    return useMemo(() => apiAttributeValues
+        ?.reduce((acc: any, { id, value }) => {
+            acc[id] = convertValue(value, attributesObject[id]?.type);
+            return acc;
+        }, {}), [apiAttributeValues, attributesObject]);
 };

@@ -20,7 +20,10 @@ import {
     showEnrollmentError,
     updateEnrollmentAndEvents,
     updateOrAddEnrollmentEvents,
+    useEnrollmentScopeRuleEffects,
 } from '../../common/EnrollmentOverviewDomain';
+import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
+import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
@@ -34,6 +37,7 @@ export const EnrollmentAddEventPageDefault = ({
     attributeValues,
     commonDataError,
     trackedEntityInactive,
+    programOwnerId,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
@@ -111,6 +115,16 @@ export const EnrollmentAddEventPageDefault = ({
 
     const dataEntryHasChanges = useSelector((state: ReduxState) => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
+    const trackerProgram = useTrackerProgram(programId);
+    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
+
+    useEnrollmentScopeRuleEffects({
+        enrollmentId,
+        orgUnit: programOwnerOrgUnit,
+        program: trackerProgram,
+        apiEnrollment: enrollment ?? undefined,
+        apiAttributeValues: attributeValues ?? undefined,
+    });
     const selectedProgramStage = [...program?.stages.values() ?? []].find((item: any) => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
@@ -205,6 +219,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
                 trackedEntityInactive={trackedEntityInactive}
+                programOwnerId={programOwnerId}
             />
         </>
     );

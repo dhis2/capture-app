@@ -17,7 +17,7 @@ export type PlainProps = {
     modalState: string;
     errorsMessages: Array<{ id: string; message: string }>;
     warningsMessages: Array<{ id: string; message: string }>;
-    orgUnitId: string;
+    programOwnerId: string;
     pluginContext?: PluginContext;
     accessReadOnly?: boolean;
 };
@@ -31,14 +31,14 @@ export type ReadOnlyPlainProps = {
     onUpdateFormField: (innerAction: any) => void;
     onUpdateFormFieldAsync: (innerAction: any) => void;
     onGetValidationContext: () => Record<string, any>;
-    orgUnitId: string;
+    programOwnerId: string;
     pluginContext?: PluginContext;
     accessReadOnly?: boolean;
 };
 
 export type Props = {
     programAPI: any;
-    orgUnitId: string;
+    programOwnerId: string;
     dataEntryFormConfig: DataEntryFormConfig | null;
     onCancel: () => void;
     onDisable: () => void;

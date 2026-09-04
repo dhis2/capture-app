@@ -14,7 +14,7 @@ type Props = {
     onUpdateFormField: (innerAction: any) => void;
     onUpdateFormFieldAsync: (innerAction: any) => void;
     onGetValidationContext: () => Record<string, any>;
-    orgUnitId: string;
+    programOwnerId: string;
     pluginContext?: PluginContext;
     accessReadOnly?: boolean;
 };
@@ -28,7 +28,7 @@ export const DataEntryReadOnlyComponent = ({
     trackedEntityName,
     formFoundation,
     onGetValidationContext,
-    orgUnitId,
+    programOwnerId,
     pluginContext,
     accessReadOnly,
 }: Props) => (
@@ -53,7 +53,7 @@ export const DataEntryReadOnlyComponent = ({
             onUpdateFormField={onUpdateFormField}
             onUpdateFormFieldAsync={onUpdateFormFieldAsync}
             onGetValidationContext={onGetValidationContext}
-            orgUnitId={orgUnitId}
+            orgUnitId={programOwnerId}
             pluginContext={pluginContext}
             viewMode
         />

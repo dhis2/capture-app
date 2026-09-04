@@ -5,6 +5,7 @@ import {
     getProgramId,
     getProgramRuleActions,
     getProgramStageId,
+    getUseNameForOptionSet,
 } from '../helpers';
 
 const addProgramVariables = (program: any, programRuleVariables: any[]) => {
@@ -13,6 +14,7 @@ const addProgramVariables = (program: any, programRuleVariables: any[]) => {
         programId: getProgramId(programRulesVariable),
         dataElementId: getDataElementId(programRulesVariable),
         trackedEntityAttributeId: getTrackedEntityAttributeId(programRulesVariable),
+        useNameForOptionSet: getUseNameForOptionSet(programRulesVariable),
     }));
 };
 

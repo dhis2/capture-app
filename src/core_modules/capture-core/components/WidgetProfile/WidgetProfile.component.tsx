@@ -26,6 +26,7 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { getEnrollmentScopeFormId } from '../Pages/common/EnrollmentOverviewDomain';
 
 const styles: Readonly<any> = {
     header: {
@@ -71,7 +72,7 @@ const WidgetProfilePlain = ({
     teiId,
     programId,
     readOnlyMode = false,
-    orgUnitId = '',
+    programOwnerId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -86,6 +87,9 @@ const WidgetProfilePlain = ({
         storedGeometry: trackedEntityInstance?.geometry,
         hasError: trackedEntityInstance?.hasError,
     }));
+    const enrollmentId = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollmentId);
+    const hiddenAttributeIds = useSelector(({ rulesEffectsHiddenFields }: any) =>
+        (enrollmentId ? rulesEffectsHiddenFields?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
     const { configIsFetched, dataEntryFormConfig } = useDataEntryFormConfig({ selectedScopeId: programId });
     const {
         loading: trackedEntityInstancesLoading,
@@ -131,15 +135,23 @@ const WidgetProfilePlain = ({
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = program?.trackedEntityType?.changelogEnabled;
 
+    const hiddenFieldIds = useMemo(
+        () => new Set(hiddenAttributeIds ? Object.keys(hiddenAttributeIds) : []),
+        [hiddenAttributeIds],
+    );
+
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
-        .filter((item: any) => item.displayInList)
+        .filter((item: any) => item.displayInList && !hiddenFieldIds.has(item.attribute))
         .map((clientAttribute: any) => {
             const { attribute, key, valueType } = clientAttribute;
             const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };
-        }), [clientAttributesWithSubvalues]);
+        }), [clientAttributesWithSubvalues, hiddenFieldIds]);
+
+    const isEmptyList = !loading && !error
+        && (hasNoAttributes || displayInListAttributes.length === 0);
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
@@ -175,12 +187,17 @@ const WidgetProfilePlain = ({
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {trackedEntityTypeName
-                            ? i18n.t('No attributes configured for {{trackedEntityTypeName}}', {
-                                trackedEntityTypeName,
-                                interpolation: { escapeValue: false },
-                            })
-                            : i18n.t('No attributes configured')}
+                        {i18n.t('No attributes configured')}
+                    </p>
+                </div>
+            );
+        }
+
+        if (displayInListAttributes.length === 0) {
+            return (
+                <div className={classes.container}>
+                    <p className={classes.emptyText}>
+                        {i18n.t('No attributes configured to display')}
                     </p>
                 </div>
             );
@@ -197,8 +214,6 @@ const WidgetProfilePlain = ({
     const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
-
-    const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
@@ -270,7 +285,7 @@ const WidgetProfilePlain = ({
                         onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
-                        orgUnitId={orgUnitId}
+                        programOwnerId={programOwnerId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}

@@ -1,13 +1,14 @@
 import React, { useState, useMemo, ComponentType } from 'react';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, IconAdd16, IconCalendar16 } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
-import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { getEnrollmentScopeFormId } from '../../../common/EnrollmentOverviewDomain';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
 
 const styles = {
@@ -23,13 +24,15 @@ type Props = OwnProps & WithStyles<typeof styles>;
 const EnrollmentQuickActionsComponentPlain = ({
     stages,
     events,
-    ruleEffects,
     classes,
 }: Props) => {
     const [open, setOpen] = useState<boolean>(true);
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
+
+    const hiddenProgramStageIds = useSelector(({ rulesEffectsHiddenProgramStage }: any) =>
+        (enrollmentId ? rulesEffectsHiddenProgramStage?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };
@@ -40,21 +43,15 @@ const EnrollmentQuickActionsComponentPlain = ({
         return mutatedStage;
     }), [events, stages]);
 
-    const hiddenProgramStageRuleEffects = useMemo(
-        () => ruleEffects?.filter((ruleEffect: OutputEffect): boolean => ruleEffect.type === 'HIDEPROGRAMSTAGE'),
-        [ruleEffects],
-    );
-
     const noStageAvailable = useMemo(
         () =>
             stagesWithEventCount.every(
                 (programStage: ProgramStage & EventCount) =>
                     (!programStage.dataAccess?.write) ||
                     (!programStage.repeatable && (programStage.eventCount ?? 0) > 0) ||
-                    hiddenProgramStageRuleEffects
-                        ?.find((ruleEffect: OutputEffect) => ruleEffect.id === programStage.id),
+                    Boolean(hiddenProgramStageIds?.[programStage.id]),
             ),
-        [stagesWithEventCount, hiddenProgramStageRuleEffects],
+        [stagesWithEventCount, hiddenProgramStageIds],
     );
 
     const onNavigationFromQuickActions = (tab: string) => {
