@@ -41,7 +41,6 @@ export const SearchStatusPlain = ({
     trackedEntityName,
     classes,
 }: ComponentProps & WithStyles<typeof getStyles>) => {
-    const attributeLabel = useTermLabel('attribute');
     const attributesLabel = useTermLabel('attribute', { plural: true });
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
         return <SearchResults availableSearchOption={availableSearchOption as any} />;
@@ -119,7 +118,6 @@ export const SearchStatusPlain = ({
                         minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                         searchableFields={searchableFields}
                         attributesLabel={attributesLabel}
-                        attributeLabel={attributeLabel}
                     />
                 </ModalContent>
                 <ModalActions>
