@@ -17,8 +17,8 @@ import { fileURLToPath } from 'node:url';
 const POT = fileURLToPath(new URL('../i18n/en.pot', import.meta.url));
 
 const CUSTOM_TERMS = [
-    { words: ['enrollment'], suggestion: '{{enrollmentLabel}}' },
-    { words: ['enrollments'], suggestion: '{{enrollmentsLabel}}' },
+    { words: ['enrollment', 'enrolment'], suggestion: '{{enrollmentLabel}}' },
+    { words: ['enrollments', 'enrolments'], suggestion: '{{enrollmentsLabel}}' },
     { words: ['event'], suggestion: '{{eventLabel}}' },
     { words: ['events'], suggestion: '{{eventsLabel}}' },
     { words: ['program stage'], suggestion: '{{programStageLabel}}' },
@@ -30,10 +30,8 @@ const CUSTOM_TERMS = [
     { words: ['attribute'], suggestion: '{{attributeLabel}}' },
     { words: ['attributes'], suggestion: '{{attributesLabel}}' },
     { words: ['tracked entity attribute', 'tracked entity attributes'], suggestion: '{{attributeLabel}}' },
-    { words: ['org unit'], suggestion: '{{orgUnitLabel}}' },
-    { words: ['organisation unit'], suggestion: '{{orgUnitLabel}}' },
-    { words: ['registering unit'], suggestion: '{{orgUnitLabel}}' },
-    { words: ['follow-up', 'followup'], suggestion: '{{followUpLabel}}' },
+    { words: ['organisation unit', 'org unit', 'organization unit', 'registering unit'], suggestion: '{{orgUnitLabel}}' },
+    { words: ['follow-up', 'followup', 'follow up'], suggestion: '{{followUpLabel}}' },
 ].sort((a, b) => Math.max(...b.words.map(w => w.length)) - Math.max(...a.words.map(w => w.length)));
 
 const FALLBACKS = new Set([

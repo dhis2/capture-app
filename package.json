@@ -81,7 +81,7 @@
         "verifyCacheVersion": "node scripts/verifyCacheVersion.js",
         "postinstall": "husky && patch-package && node scripts/createSymlinkToInternalPackages.mjs",
         "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/",
-        "i18n:verify": "node scripts/verifyCustomTerminology.mjs",
+        "i18n:verify": "d2-app-scripts i18n extract && node scripts/verifyCustomTerminology.mjs",
         "clean": "./scripts/clean.sh && yarn workspaces run clean"
     },
     "devDependencies": {
