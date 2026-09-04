@@ -9,8 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
-import { EventStatuses } from '../EventRow';
 
 type Props = {
     eventId: string;
@@ -48,7 +48,7 @@ export const SkipAction = ({
         }),
         {
             onMutate: (payload: { status: string }) => {
-                const status = EventStatuses[payload.status];
+                const status = eventStatuses[payload.status];
                 const previousStatus = eventDetails.status;
 
                 status && onUpdateEventStatus(eventId, status);
@@ -68,13 +68,13 @@ export const SkipAction = ({
         !pendingApiResponse && updateEventStatus({ status });
     };
 
-    if (eventDetails.status === EventStatuses.SKIPPED) {
+    if (eventDetails.status === eventStatuses.SKIPPED) {
         return (
             <MenuItem
                 dense
                 icon={<IconRedo16 />}
                 label={i18n.t('Unskip')}
-                onClick={() => handleMenuItemClick(EventStatuses.SCHEDULE)}
+                onClick={() => handleMenuItemClick(eventStatuses.SCHEDULE)}
                 suffix=""
             />
         );
@@ -85,7 +85,7 @@ export const SkipAction = ({
             dense
             icon={<DirectionalArrow />}
             label={i18n.t('Skip')}
-            onClick={() => handleMenuItemClick(EventStatuses.SKIPPED)}
+            onClick={() => handleMenuItemClick(eventStatuses.SKIPPED)}
             suffix=""
         />
     );

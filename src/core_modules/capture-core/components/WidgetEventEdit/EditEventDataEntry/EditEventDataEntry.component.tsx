@@ -36,7 +36,6 @@ import {
     withConditionalTooltip,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
-import { eventStatuses } from '../constants/status.const';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
@@ -324,9 +323,7 @@ const buildCompleteFieldSettingsFn = () => {
                         withDisplayMessages()(
                             withInternalChangeHandler()(
                                 withConditionalTooltip((props: any) => {
-                                    const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
-                                    const canUncompleteEvent = props.canUncompleteEvent;
-                                    const shouldDisable = isEventCompleted && !canUncompleteEvent;
+                                    const shouldDisable = !props.canToggleCompletion;
                                     return shouldDisable
                                         ? i18n.t('You do not have access to uncomplete this event')
                                         : undefined;
@@ -341,16 +338,14 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => {
-            const isEventCompleted = props.eventStatus === eventStatuses.COMPLETED;
-            const canUncompleteEvent = props.canUncompleteEvent;
-            const shouldDisable = isEventCompleted && !canUncompleteEvent;
+            const shouldDisable = !props.canToggleCompletion;
 
             return createComponentProps(props, {
                 label: i18n.t('Complete event'),
                 id: 'complete',
                 disabled: shouldDisable,
                 eventStatus: props.eventStatus,
-                canUncompleteEvent: props.canUncompleteEvent,
+                canToggleCompletion: props.canToggleCompletion,
             });
         },
         getPropName: () => 'complete',
@@ -449,7 +444,7 @@ type Props = {
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;
     eventStatus?: string;
-    canUncompleteEvent?: boolean;
+    canToggleCompletion?: boolean;
     enrollmentId: string;
     isCompleted?: boolean;
     assignee?: UserFormField | null;
@@ -585,7 +580,8 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
 
     render() {
         const { eventStatus } = this.props;
-        const isScheduleOrOverdue = eventStatus && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(eventStatus);
+        const isScheduleOrOverdue =
+            eventStatus === statusTypes.SCHEDULE || eventStatus === statusTypes.OVERDUE;
 
         return isScheduleOrOverdue ? this.renderScheduleView() : this.renderDataEntry();
     }
