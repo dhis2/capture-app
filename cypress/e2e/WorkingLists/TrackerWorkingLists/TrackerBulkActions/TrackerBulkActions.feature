@@ -22,7 +22,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
   Scenario: a deactivated tracked entity row cannot be selected for bulk actions
     Given the tracked entity EaOyKGOIGRp is deactivated
     And you open the main page with Ngelehun and child programe context
-    And the working list is displayed with 25 rows per page
+    And you set the working list to display 25 rows per page
     Then exactly one working list row is deactivated and not selectable
     When you select all rows
     Then the deactivated working list row should not be selected
@@ -44,18 +44,20 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   Scenario: The user should see an error message when trying to bulk complete enrollments with errors
     Given you open the main page with Ngelehun and Malaria focus investigation context
-    And you select the first 3 rows
+    And you set the working list to display 100 rows per page
+    And you select the rows for tracked entities s4NfKOuayqG, QBYMQm9GU4T, dNpxRu1mWG5
     And you click the bulk complete enrollments button
     And the bulk complete enrollments modal should open
     And the modal content should say: This action will complete 2 active enrollments in your selection. 1 enrollment already marked as completed will not be changed.
     When you confirm 2 active enrollments with errors
     Then an error dialog will be displayed to the user
     And you close the error dialog
-    And the unsuccessful enrollments should still be selected
+    And the rows for tracked entities s4NfKOuayqG, dNpxRu1mWG5 should still be selected
 
   Scenario: the user should be able to bulk complete enrollments and events
     Given you open the main page with Ngelehun and Malaria focus investigation context
-    And you select the first 4 rows
+    And you set the working list to display 100 rows per page
+    And you select the rows for tracked entities s4NfKOuayqG, QBYMQm9GU4T, dNpxRu1mWG5, Er7oTDZsq6N
     And you click the bulk complete enrollments button
     And the bulk complete enrollments modal should open
     And the modal content should say: This action will complete 3 active enrollments in your selection. 1 enrollment already marked as completed will not be changed.
@@ -64,7 +66,8 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   Scenario: the user should be able to bulk complete enrollments without completing events
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
-    And you select row number 1
+    And you set the working list to display 100 rows per page
+    And you select the rows for tracked entities YZ64FEtYScT
     And you click the bulk complete enrollments button
     And the bulk complete enrollments modal should open
     And you deselect the complete events checkbox
@@ -74,7 +77,8 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   Scenario: the user should be able to bulk delete enrollments
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
-    And you select the first 3 rows
+    And you set the working list to display 100 rows per page
+    And you select the rows for tracked entities QGyxOe1zewj, YZ64FEtYScT, IPJNnWA0jp6
     And you click the bulk delete enrollments button
     And the bulk delete enrollments modal should open
     When you confirm deleting 3 enrollments
@@ -82,7 +86,8 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   Scenario: the user should be able to bulk delete only active enrollments
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
-    And you select the first 3 rows
+    And you set the working list to display 100 rows per page
+    And you select the rows for tracked entities QGyxOe1zewj, YZ64FEtYScT, IPJNnWA0jp6
     And you click the bulk delete enrollments button
     And the bulk delete enrollments modal should open
     When you deselect completed enrollments
