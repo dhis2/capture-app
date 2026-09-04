@@ -147,7 +147,8 @@ const buildOrgUnitSettingsFn = () => {
     const orgUnitSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Organisation unit'),
+            // Example use of withCustomLabels: orgUnitLabel is injected as a prop by the HOC, resolved against the current program's custom terminology.
+            label: props.orgUnitLabel ?? i18n.t('Organisation unit'),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
         getPropName: () => 'orgUnit',
@@ -223,7 +224,8 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Event completed'),
+            // Example use of withCustomLabels: eventLabel is injected as a prop by the HOC, resolved against the current program's custom terminology.
+            label: i18n.t('{{eventLabel}} completed', { eventLabel: props.eventLabel ?? i18n.t('Event') }),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),

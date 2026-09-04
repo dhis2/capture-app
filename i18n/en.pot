@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-04T09:05:45.649Z\n"
-"PO-Revision-Date: 2026-09-04T09:05:45.649Z\n"
+"POT-Creation-Date: 2026-09-04T09:49:00.998Z\n"
+"PO-Revision-Date: 2026-09-04T09:49:00.998Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -424,11 +424,11 @@ msgstr "Some operations are still running. Please wait."
 msgid "Operations running"
 msgstr "Operations running"
 
-msgid "No feedback for this enrollment yet"
-msgstr "No feedback for this enrollment yet"
+msgid "No feedback for this {{enrollmentLabel}} yet"
+msgstr "No feedback for this {{enrollmentLabel}} yet"
 
-msgid "No indicator output for this enrollment yet"
-msgstr "No indicator output for this enrollment yet"
+msgid "No indicator output for this {{enrollmentLabel}} yet"
+msgstr "No indicator output for this {{enrollmentLabel}} yet"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -717,6 +717,12 @@ msgstr "Notice"
 
 msgid "Close the notice"
 msgstr "Close the notice"
+
+msgid "No feedback for this enrollment yet"
+msgstr "No feedback for this enrollment yet"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "No indicator output for this enrollment yet"
 
 msgid "Quick actions"
 msgstr "Quick actions"
@@ -1533,8 +1539,11 @@ msgstr "Polygon captured"
 msgid "No polygon captured"
 msgstr "No polygon captured"
 
-msgid "Event completed"
-msgstr "Event completed"
+msgid "{{eventLabel}} completed"
+msgstr "{{eventLabel}} completed"
+
+msgid "Event"
+msgstr "Event"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"
