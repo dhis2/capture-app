@@ -20,8 +20,10 @@ const CUSTOM_TERM_VARS = new Set([
     'trackedEntityLabel', 'trackedEntityTypesLabel',
 ]);
 
+const LEADING_VAR_REGEX = /^\{\{(\w+)/;
+
 const capFirstCustomTerm = (template: string, data: Record<string, unknown>) => {
-    const name = template.trimStart().match(/^\{\{(\w+)/)?.[1];
+    const name = LEADING_VAR_REGEX.exec(template.trimStart())?.[1];
     if (!name || !CUSTOM_TERM_VARS.has(name) || typeof data[name] !== 'string') return data;
     return { ...data, [name]: capitalizeFirstLetter(data[name] as string) };
 };
