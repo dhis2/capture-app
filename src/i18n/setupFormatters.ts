@@ -33,17 +33,19 @@ const patchInterpolator = () => {
         const hasCustomTerm = usedVars.some(name => CUSTOM_TERM_VARS.has(name));
         if (!hasCustomTerm) return original(template, data, lng, opts);
 
-        // Capitalize the leading custom-term variable if the template starts with one.
         const leading = /^\{\{\s*(\w+)/.exec(template.trimStart())?.[1];
         const shouldCapitalize = leading && CUSTOM_TERM_VARS.has(leading) && typeof data?.[leading] === 'string';
         const preparedData = shouldCapitalize
             ? { ...data, [leading]: capitalizeFirstLetter(data[leading] as string) }
             : (data ?? {});
 
-        // Skip HTML escaping so custom terms like "R&D" render literally.
-        const preparedOpts = { ...opts, interpolation: { ...opts?.interpolation, escapeValue: false } };
-
-        return original(template, preparedData, lng, preparedOpts);
+        const previousEscapeValue = interpolator.escapeValue;
+        interpolator.escapeValue = false;
+        try {
+            return original(template, preparedData, lng, opts);
+        } finally {
+            interpolator.escapeValue = previousEscapeValue;
+        }
     };
 };
 
