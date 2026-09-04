@@ -4,52 +4,59 @@ import { getCurrentYear } from '../../support/date';
 const BABY_POSTNATAL_STAGE = 'ZzYYXq4fJie';
 const BIRTH_STAGE = 'A03MvHHogjR';
 
+const importTracker = (importStrategy, payload) =>
+    cy.buildApiUrl(`tracker?async=false&importStrategy=${importStrategy}`)
+        .then(url => cy.request('POST', url, payload))
+        .then(({ body }) => {
+            expect(body.status).to.eq('OK');
+        });
+
+const unlinkEvent = eventId =>
+    cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const relationships = body.relationships ?? [];
+
+            if (!relationships.length) {
+                return undefined;
+            }
+
+            return importTracker('DELETE', {
+                relationships: relationships.map(({ relationship }) => ({ relationship })),
+            });
+        });
+
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
-Given(/^you make sure the enrollment (.+) has a Baby Postnatal event$/, (enrollmentId) => {
+Given(/^you make sure the enrollment (.+) has a linkable Baby Postnatal event$/, (enrollmentId) => {
     cy.buildApiUrl('tracker', `enrollments/${enrollmentId}?fields=orgUnit,program,events[event,programStage]`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const events = body.events ?? [];
+            const existingEvent = (body.events ?? [])
+                .find(({ programStage }) => programStage === BABY_POSTNATAL_STAGE);
 
-            if (events.some(({ programStage }) => programStage === BABY_POSTNATAL_STAGE)) {
-                return undefined;
+            if (existingEvent) {
+                return unlinkEvent(existingEvent.event);
             }
 
-            return cy
-                .buildApiUrl('tracker?async=false&importStrategy=CREATE_AND_UPDATE')
-                .then(createUrl => cy.request('POST', createUrl, {
-                    events: [{
-                        program: body.program,
-                        programStage: BABY_POSTNATAL_STAGE,
-                        enrollment: enrollmentId,
-                        orgUnit: body.orgUnit,
-                        occurredAt: `${getCurrentYear()}-07-01`,
-                        status: 'ACTIVE',
-                    }],
-                }))
-                .then(({ body: importSummary }) => {
-                    expect(importSummary.status).to.eq('OK');
-                });
+            return importTracker('CREATE', {
+                events: [{
+                    program: body.program,
+                    programStage: BABY_POSTNATAL_STAGE,
+                    enrollment: enrollmentId,
+                    orgUnit: body.orgUnit,
+                    occurredAt: `${getCurrentYear()}-07-01`,
+                    status: 'ACTIVE',
+                }],
+            });
         });
 });
 
 Given(/^you make sure the event (.+) is unlinked$/, (eventId) => {
-    cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            const relationships = body.relationships ?? [];
-            if (relationships.length) {
-                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((deleteUrl) => {
-                    cy.request('POST', deleteUrl, {
-                        relationships: relationships.map(({ relationship }) => ({ relationship })),
-                    });
-                });
-            }
-        });
+    unlinkEvent(eventId);
 });
 
 And(/^the Related stages Actions is ?(.*) visible at the bottom of the page/, (not) => {
@@ -122,12 +129,7 @@ And('you delete the Birth event', () => {
                 return undefined;
             }
 
-            return cy
-                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
-                .then(eventUrl => cy.request('POST', eventUrl, { events: [eventToDelete] }))
-                .then(({ body: importSummary }) => {
-                    expect(importSummary.status).to.eq('OK');
-                });
+            return importTracker('DELETE', { events: [eventToDelete] });
         })
         .then(() => cy.reload());
 });
@@ -304,12 +306,7 @@ And(/^you delete the events of the enrollmentId (.*)$/, (enrollmentId) => {
                 return undefined;
             }
 
-            return cy
-                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
-                .then(eventUrl => cy.request('POST', eventUrl, { events }))
-                .then(({ body: importSummary }) => {
-                    expect(importSummary.status).to.eq('OK');
-                });
+            return importTracker('DELETE', { events });
         })
         .then(() => cy.reload());
 });
