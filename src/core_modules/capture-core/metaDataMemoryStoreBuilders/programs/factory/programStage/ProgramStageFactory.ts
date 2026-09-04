@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
@@ -243,11 +244,11 @@ export class ProgramStageFactory {
                 const dueDateLabel = cachedProgramStage.displayDueDateLabel;
                 _form.addLabel({
                     id: 'occurredAt',
-                    label: executionLabel ? capitalizeFirstLetter(executionLabel) : 'Report date',
+                    label: executionLabel ? capitalizeFirstLetter(executionLabel) : i18n.t('Report date'),
                 });
                 _form.addLabel({
                     id: 'scheduledAt',
-                    label: dueDateLabel ? capitalizeFirstLetter(dueDateLabel) : 'Scheduled date',
+                    label: dueDateLabel ? capitalizeFirstLetter(dueDateLabel) : i18n.t('Scheduled date'),
                 });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&
