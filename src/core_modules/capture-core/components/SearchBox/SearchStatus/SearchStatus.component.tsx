@@ -17,6 +17,7 @@ import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
+import { useTermLabel } from '../../../metaData';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {
@@ -42,6 +43,7 @@ export const SearchStatusPlain = ({
     trackedEntityName,
     classes,
 }: ComponentProps & WithStyles<typeof getStyles>) => {
+    const attributeLabel = useTermLabel('attribute');
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
         return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }
@@ -114,6 +116,7 @@ export const SearchStatusPlain = ({
                     <NotEnoughAttributesMessage
                         minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                         searchableFields={searchableFields}
+                        attributeLabel={attributeLabel}
                     />
                 </ModalContent>
                 <ModalActions>
