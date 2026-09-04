@@ -1,24 +1,95 @@
-import { Given, Then, When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { After, Given, Then, When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../support/date';
+
+const BABY_POSTNATAL_STAGE = 'ZzYYXq4fJie';
+const BIRTH_STAGE = 'A03MvHHogjR';
+const CHILD_PROGRAMME = 'IpHINAT79UW';
+const FIRST_NAME_ATTRIBUTE = 'w75KJ2mc4zz';
+
+let enrolledEntityFirstName;
+
+const importTracker = (importStrategy, payload) =>
+    cy.buildApiUrl(`tracker?async=false&importStrategy=${importStrategy}`)
+        .then(url => cy.request('POST', url, payload))
+        .then(({ body }) => {
+            expect(body.status).to.eq('OK');
+        });
+
+const unlinkEvent = eventId =>
+    cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const relationships = body.relationships ?? [];
+
+            if (!relationships.length) {
+                return undefined;
+            }
+
+            return importTracker('DELETE', {
+                relationships: relationships.map(({ relationship }) => ({ relationship })),
+            });
+        });
+
+const clearEnrolledEntity = () => {
+    if (!enrolledEntityFirstName) {
+        return undefined;
+    }
+
+    return cy
+        .buildApiUrl(
+            'tracker',
+            `trackedEntities?program=${CHILD_PROGRAMME}&orgUnitMode=ACCESSIBLE` +
+                `&filter=${FIRST_NAME_ATTRIBUTE}:eq:${enrolledEntityFirstName}` +
+                '&fields=trackedEntity&page=1&pageSize=5',
+        )
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
+            const trackedEntities = apiTrackedEntities.map(({ trackedEntity }) => ({ trackedEntity }));
+
+            if (!trackedEntities.length) {
+                return undefined;
+            }
+
+            return importTracker('DELETE', { trackedEntities });
+        });
+};
+
+After({ tags: '@with-tracked-entity-cleanup' }, () => {
+    clearEnrolledEntity();
+    enrolledEntityFirstName = undefined;
+});
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="person-selector-container"]').contains('Person');
 });
 
-Given(/^you make sure the event (.+) is unlinked$/, (eventId) => {
-    cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
+Given(/^you make sure the enrollment (.+) has a Baby Postnatal event$/, (enrollmentId) => {
+    cy.buildApiUrl('tracker', `enrollments/${enrollmentId}?fields=orgUnit,program,events[event,programStage]`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const relationships = body.relationships ?? [];
-            if (relationships.length) {
-                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((deleteUrl) => {
-                    cy.request('POST', deleteUrl, {
-                        relationships: relationships.map(({ relationship }) => ({ relationship })),
-                    });
-                });
+            const events = body.events ?? [];
+
+            if (events.some(({ programStage }) => programStage === BABY_POSTNATAL_STAGE)) {
+                return undefined;
             }
+
+            return importTracker('CREATE', {
+                events: [{
+                    program: body.program,
+                    programStage: BABY_POSTNATAL_STAGE,
+                    enrollment: enrollmentId,
+                    orgUnit: body.orgUnit,
+                    occurredAt: `${getCurrentYear()}-07-01`,
+                    status: 'ACTIVE',
+                }],
+            });
         });
+});
+
+Given(/^you make sure the event (.+) is unlinked$/, (eventId) => {
+    unlinkEvent(eventId);
 });
 
 And(/^the Related stages Actions is ?(.*) visible at the bottom of the page/, (not) => {
@@ -85,18 +156,15 @@ And('you delete the Birth event', () => {
     cy.buildApiUrl('tracker', 'enrollments/EOxeNf2MdBf?fields=events[event,programStage]')
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const { events } = body;
+            const eventToDelete = (body.events ?? []).find(event => event.programStage === BIRTH_STAGE);
 
-            if (events) {
-                const eventToDelete = events.find(event => event.programStage === 'A03MvHHogjR');
-                if (eventToDelete) {
-                    cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
-                        cy.request('POST', eventUrl, { events: [eventToDelete] });
-                        cy.reload();
-                    });
-                }
+            if (!eventToDelete) {
+                return undefined;
             }
-        });
+
+            return importTracker('DELETE', { events: [eventToDelete] });
+        })
+        .then(() => cy.reload());
 });
 
 And('you open the Birth event edit page', () => {
@@ -207,6 +275,8 @@ Then('you are redirect to the enrollment dasboard and you see the 2 linked event
 });
 
 And('you fill the Child Program program registration form with unique values', () => {
+    enrolledEntityFirstName = `Sarah-${Date.now()}`;
+
     cy.get('input[type="text"]')
         .eq(1)
         .type('2021-01-01')
@@ -220,31 +290,16 @@ And('you fill the Child Program program registration form with unique values', (
         .blur();
     cy.get('input[type="text"]')
         .eq(4)
-        .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(enrolledEntityFirstName)
         .blur();
     cy.get('input[type="text"]')
         .eq(5)
-        .type(`Beth-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(`Beth-${Date.now()}`)
         .blur();
     cy.get('input[type="text"]')
         .eq(7)
         .type('2021-01-01')
         .blur();
-});
-
-And('you delete the recently added tracked entity', () => {
-    cy.get('[data-test="profile-widget"]')
-        .contains('Person profile')
-        .should('exist');
-    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
-        .click();
-    cy.contains('Delete Person')
-        .click();
-    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
-        cy.contains('Yes, delete Person')
-            .click();
-    });
-    cy.url().should('include', 'selectedTemplateId=IpHINAT79UW');
 });
 
 And(/^you click the save (.*) submit button$/, (TEType) => {
@@ -265,14 +320,14 @@ And(/^you delete the events of the enrollmentId (.*)$/, (enrollmentId) => {
     cy.buildApiUrl('tracker', `enrollments/${enrollmentId}?fields=events[event]`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const { events } = body;
+            const events = body.events ?? [];
 
-            if (events) {
-                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
-                    cy.request('POST', eventUrl, { events });
-                    cy.reload();
-                });
+            if (!events.length) {
+                return undefined;
             }
-        });
+
+            return importTracker('DELETE', { events });
+        })
+        .then(() => cy.reload());
 });
 
