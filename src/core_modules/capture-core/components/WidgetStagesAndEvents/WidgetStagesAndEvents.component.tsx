@@ -36,6 +36,8 @@ const WidgetStagesAndEventsPlain = ({
         multipleStages,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
+    // Example use of useTermLabel: resolves the plural program-stage and event
+    // labels against the current program's custom terminology.
     const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
     const eventsLabel = useTermLabel('event', { programId, plural: true });
 

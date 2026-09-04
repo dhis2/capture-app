@@ -1,3 +1,10 @@
+/**
+ * Startup patch to d2-i18n's interpolator for configured custom terms:
+ *   - skips HTML escaping so labels render as-is
+ *   - locale-aware capitalizes the first letter of a custom-term variable
+ *     when it is the leading token in a template
+ */
+
 import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
