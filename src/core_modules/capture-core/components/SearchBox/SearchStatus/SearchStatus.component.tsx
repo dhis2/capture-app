@@ -118,8 +118,8 @@ export const SearchStatusPlain = ({
                     <NotEnoughAttributesMessage
                         minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                         searchableFields={searchableFields}
-                        attributesLabel={attributesLabel}
                         attributeLabel={attributeLabel}
+                        attributesLabel={attributesLabel}
                     />
                 </ModalContent>
                 <ModalActions>

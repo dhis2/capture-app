@@ -3,13 +3,13 @@ import i18n from '@dhis2/d2-i18n';
 export const NotEnoughAttributesMessage = ({
     minAttributesRequiredToSearch,
     searchableFields,
-    attributesLabel,
     attributeLabel,
+    attributesLabel,
 }: {
     minAttributesRequiredToSearch: number;
     searchableFields: Array<Record<string, unknown>>;
-    attributesLabel: string;
     attributeLabel: string;
+    attributesLabel: string;
 }) => {
     const searchableFieldsDisplayname = searchableFields?.map((field: any) => field.formName)?.join(', ');
 
@@ -22,8 +22,8 @@ export const NotEnoughAttributesMessage = ({
     }
     if (searchableFields.length > 1) {
         return i18n.t(
-            // eslint-disable-next-line max-len
-            'Fill in at least {{minAttributesRequiredToSearch}} of these {{attributesLabel}} to search{{escape}} {{searchableAttributes}}',
+            'Fill in at least {{minAttributesRequiredToSearch}} of these {{attributesLabel}} to search{{escape}}'
+            + ' {{searchableAttributes}}',
             {
                 escape: ':',
                 minAttributesRequiredToSearch,
