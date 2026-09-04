@@ -109,8 +109,8 @@ export const useTermLabel = (
     options: UseTermLabelOptions = {},
 ): string => {
     const { programId, stageId, plural } = options;
-    const currentProgramId = useSelector(({ currentSelections }: any) => currentSelections.programId);
-    const id = programId ?? currentProgramId;
+    const id = useSelector(({ currentSelections }: any) =>
+        programId ?? currentSelections.programId);
     return useMemo(
         () => resolveTerm(id, key, { stageId, plural }),
         [id, key, stageId, plural],
