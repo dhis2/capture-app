@@ -15,8 +15,8 @@ type InjectedLabels<S extends LabelSpecs> = { [K in keyof S]: string };
 export const withCustomLabels =
     <S extends LabelSpecs>(specs: S) => {
         const entries = Object.entries(specs);
-        return <P extends Record<string, unknown>>(WrappedComponent: React.ComponentType<P & InjectedLabels<S>>) =>
-            (props: P & { programId?: string; stageId?: string }) => {
+        return <P extends Record<string, unknown>>(WrappedComponent: React.ComponentType<P>) =>
+            (props: Omit<P, keyof InjectedLabels<S>> & { programId?: string; stageId?: string }) => {
                 const { programId, stageId } = props;
                 const labels = Object.fromEntries(
                     entries.map(([propName, { key, plural }]) => [
@@ -24,6 +24,7 @@ export const withCustomLabels =
                         capitalizeFirstLetter(useTermLabel(key, { programId, stageId, plural })),
                     ]),
                 ) as InjectedLabels<S>;
-                return React.createElement(WrappedComponent, { ...props, ...labels });
+                const Component = WrappedComponent as React.ComponentType<Record<string, unknown>>;
+                return React.createElement(Component, { ...props, ...labels });
             };
     };

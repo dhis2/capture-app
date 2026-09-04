@@ -1,6 +1,43 @@
-import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { After, defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import moment from 'moment';
 import { getCurrentYear } from '../../support/date';
+
+const MALARIA_FIRST_NAME_ATTRIBUTE = 'TfdH5KvFmMy';
+const MALARIA_PROGRAM = 'qDkgAbB5Jlk';
+
+let malariaEntityFirstName;
+
+const clearMalariaEntity = () => {
+    if (!malariaEntityFirstName) {
+        return undefined;
+    }
+
+    return cy
+        .buildApiUrl(
+            'tracker',
+            `trackedEntities?program=${MALARIA_PROGRAM}&orgUnitMode=ACCESSIBLE` +
+                `&filter=${MALARIA_FIRST_NAME_ATTRIBUTE}:eq:${malariaEntityFirstName}` +
+                '&fields=trackedEntity&page=1&pageSize=5',
+        )
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
+            const trackedEntities = apiTrackedEntities.map(({ trackedEntity }) => ({ trackedEntity }));
+
+            if (!trackedEntities.length) {
+                return undefined;
+            }
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(deleteUrl => cy.request('POST', deleteUrl, { trackedEntities }));
+        });
+};
+
+After({ tags: '@with-malaria-entity-cleanup' }, () => {
+    clearMalariaEntity();
+    malariaEntityFirstName = undefined;
+});
 
 And('you are on the default registration page', () => {
     cy.visit('/#/new');
@@ -537,13 +574,15 @@ Given('you are in the Malaria case diagnosis, treatment and investigation progra
 });
 
 And('you fill the Malaria case diagnosis registration form with values', () => {
+    malariaEntityFirstName = `Ana-${Date.now()}`;
+
     cy.get('input[type="text"]')
         .eq(3)
-        .type(`Ana-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(malariaEntityFirstName)
         .blur();
     cy.get('input[type="text"]')
         .eq(4)
-        .type(`Maria-${Math.round((new Date()).getTime() / 1000)}`)
+        .type(`Maria-${Date.now()}`)
         .blur();
     cy.get('input[type="text"]')
         .eq(5)
@@ -655,24 +694,6 @@ And('you delete the recently added tracked entity', () => {
             .click();
     });
     cy.url().should('include', 'selectedTemplateId=IpHINAT79UW');
-});
-
-And('you delete the recently added malaria entity', () => {
-    // deselect the program stage from the context selector
-    cy.get('[data-test="stage-selector-container-clear-icon"]')
-        .click();
-
-    cy.get('[data-test="profile-widget"]')
-        .contains('Malaria Entity profile')
-        .should('exist');
-    cy.get('[data-test="tracked-entity-profile-overflow-button"]')
-        .click();
-    cy.contains('Delete Malaria Entity')
-        .click();
-    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
-        cy.contains('Yes, delete Malaria Entity')
-            .click();
-    });
 });
 
 And(/^you select (.*) from the available tracked entity types/, (selection) => {
