@@ -3,10 +3,12 @@ import i18n from '@dhis2/d2-i18n';
 export const NotEnoughAttributesMessage = ({
     minAttributesRequiredToSearch,
     searchableFields,
+    attributeLabel,
     attributesLabel,
 }: {
     minAttributesRequiredToSearch: number;
     searchableFields: Array<Record<string, unknown>>;
+    attributeLabel: string;
     attributesLabel: string;
 }) => {
     const searchableFieldsDisplayname = searchableFields?.map((field: any) => field.formName)?.join(', ');
@@ -30,8 +32,9 @@ export const NotEnoughAttributesMessage = ({
             },
         );
     }
-    return i18n.t('Fill in this attribute to search{{escape}} {{searchableAttributes}}', {
+    return i18n.t('Fill in this {{attributeLabel}} to search{{escape}} {{searchableAttributes}}', {
         escape: ':',
+        attributeLabel,
         searchableAttributes: searchableFieldsDisplayname,
     });
 };
