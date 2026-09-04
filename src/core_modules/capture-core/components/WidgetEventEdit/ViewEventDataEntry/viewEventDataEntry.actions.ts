@@ -145,7 +145,7 @@ export const loadViewEventDataEntry =
         if (program instanceof TrackerProgram) {
             const stage = getStageFromEvent(eventContainer.event)?.stage;
             if (!stage) {
-                throw Error(i18n.t('Program stage not found in rules execution'));
+                throw Error(i18n.t('stage not found in rules execution'));
             }
 
             effects = getApplicableRuleEffectsForTrackerProgram({

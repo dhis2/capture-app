@@ -11,15 +11,13 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { customTerms } from '../../utils/customTerms';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes, useTermLabel } from '../../metaData';
+import { dataElementTypes } from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -84,7 +82,6 @@ const WidgetEnrollmentPlain = ({
     onAccessLostFromTransfer,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
-    const enrollmentLabel = useTermLabel('enrollment');
     const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -103,7 +100,7 @@ const WidgetEnrollmentPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{capitalizeFirstLetter(enrollmentLabel)}</span>
+                        <span>{i18n.t('Enrollment')}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
@@ -120,10 +117,7 @@ const WidgetEnrollmentPlain = ({
             >
                 {initError && (
                     <div className={classes.enrollment}>
-                        {customTerms.i18n.t(
-                            '{{enrollmentLabel}} widget could not be loaded. Please try again later',
-                            { enrollmentLabel },
-                        )}
+                        {i18n.t('Enrollment widget could not be loaded. Please try again later')}
                     </div>
                 )}
                 {loading && <LoadingMaskElementCenter />}

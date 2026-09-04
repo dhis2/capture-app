@@ -30,7 +30,7 @@ export const WidgetEnrollmentEventNew = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || isError || !formFoundation) {
         return (
             <div>
-                {i18n.t('Program or program stage is invalid')}
+                {i18n.t('program or stage is invalid')}
             </div>
         );
     }
