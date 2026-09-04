@@ -13,6 +13,8 @@ import { getTermLabel } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
+const headerText = i18n.t('Notes');
+
 const getStyles = (theme: any) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -41,7 +43,7 @@ class NotesSectionPlain extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={i18n.t('Notes')}
+                text={headerText}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />

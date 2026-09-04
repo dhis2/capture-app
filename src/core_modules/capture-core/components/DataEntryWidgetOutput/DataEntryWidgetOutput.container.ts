@@ -18,6 +18,7 @@ const makeMapStateToProps = () => {
         const { dataEntries } = state;
         const ready = !!dataEntries[dataEntryId];
         const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
+        // Example use of getTermLabel: programId comes from the container's selectedScopeId prop.
         const enrollmentLabel = getTermLabel('enrollment', { programId: selectedScopeId });
 
         return {
@@ -37,6 +38,6 @@ const makeMapStateToProps = () => {
 };
 
 export const DataEntryWidgetOutput: ComponentType<OwnProps> =
-  connect(makeMapStateToProps, () => ({}))(
-      (props: any) => (props.ready ? React.createElement(DataEntryWidgetOutputComponent, props) : null),
-  );
+    connect(makeMapStateToProps, () => ({}))(
+        (props: any) => (props.ready ? React.createElement(DataEntryWidgetOutputComponent, props) : null),
+    );
