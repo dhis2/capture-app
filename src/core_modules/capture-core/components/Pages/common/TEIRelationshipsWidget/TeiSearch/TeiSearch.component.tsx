@@ -8,6 +8,7 @@ import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSele
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { Props } from './TeiSearch.types';
+import { useTermLabel } from '../../../../../metaData';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -26,6 +27,7 @@ const getStyles = (theme: any) => ({
 
 const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const [programSectionOpen, setProgramSectionOpen] = useState(true);
+    const attributesLabel = useTermLabel('attribute', { programId: props.selectedProgramId, plural: true });
 
     const getFormId = useCallback((searchGroupId) => {
         const contextId = props.selectedProgramId || props.selectedTrackedEntityTypeId || '';
@@ -99,7 +101,7 @@ const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
         const isUnique = sg.unique;
         const header = isUnique ?
             i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
-            i18n.t('Search by {{attributesLabel}}', { attributesLabel: props.attributesLabel });
+            i18n.t('Search by {{attributesLabel}}', { attributesLabel });
         const collapsed = props.openSearchGroupSection !== searchGroupId;
         const unsupportedAttributes = sg.unsupportedAttributes;
         return (

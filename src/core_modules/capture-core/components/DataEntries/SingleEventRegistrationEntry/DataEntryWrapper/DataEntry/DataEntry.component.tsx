@@ -550,41 +550,13 @@ type DataEntrySection = {
     name?: string,
 };
 
-const buildDataEntrySectionDefinitions = (notesLabel: string, relationshipsLabel: string) => ({
-    [dataEntrySectionNames.BASICINFO]: {
-        placement: placements.TOP,
-        name: i18n.t('Basic info'),
-    },
-    [AOCsectionKey]: {
-        placement: placements.TOP,
-    },
-    [dataEntrySectionNames.STATUS]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Status'),
-    },
-    [dataEntrySectionNames.NOTES]: {
-        placement: placements.BOTTOM,
-        name: notesLabel,
-    },
-    [dataEntrySectionNames.RELATIONSHIPS]: {
-        placement: placements.BOTTOM,
-        name: relationshipsLabel,
-    },
-    [dataEntrySectionNames.ASSIGNEE]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Assignee'),
-    },
-});
-
 class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any };
-    dataEntrySections: { [key: string]: DataEntrySection };
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
         };
-        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel, props.relationshipsLabel);
     }
 
     componentDidMount() {
@@ -659,8 +631,35 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
             onSetSaveTypes,
             onSaveAndAddAnother,
             theme,
+            notesLabel,
+            relationshipsLabel,
             ...passOnProps
         } = this.props;
+        const dataEntrySections: { [key: string]: DataEntrySection } = {
+            [dataEntrySectionNames.BASICINFO]: {
+                placement: placements.TOP,
+                name: i18n.t('Basic info'),
+            },
+            [AOCsectionKey]: {
+                placement: placements.TOP,
+            },
+            [dataEntrySectionNames.STATUS]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('Status'),
+            },
+            [dataEntrySectionNames.NOTES]: {
+                placement: placements.BOTTOM,
+                name: notesLabel,
+            },
+            [dataEntrySectionNames.RELATIONSHIPS]: {
+                placement: placements.BOTTOM,
+                name: relationshipsLabel,
+            },
+            [dataEntrySectionNames.ASSIGNEE]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('Assignee'),
+            },
+        };
         return (
             <div>
                 <div data-test="data-entry-container">
@@ -672,8 +671,10 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
                         selectedOrgUnitId={orgUnit?.id}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
-                        dataEntrySections={this.dataEntrySections}
+                        dataEntrySections={dataEntrySections}
                         relationshipsRef={this.setRelationshipsInstance}
+                        notesLabel={notesLabel}
+                        relationshipsLabel={relationshipsLabel}
                         orgUnit={orgUnit}
                         // @ts-expect-error - keeping original functionality as before ts rewrite
                         orgUnitId={orgUnit?.id}

@@ -1,5 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import {
     CircularLoader,
@@ -11,6 +12,7 @@ import {
     Button,
     NoticeBox,
 } from '@dhis2/ui';
+
 import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
@@ -119,7 +121,6 @@ export const SearchStatusPlain = ({
                         minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                         searchableFields={searchableFields}
                         attributeLabel={attributeLabel}
-                        attributesLabel={attributesLabel}
                     />
                 </ModalContent>
                 <ModalActions>

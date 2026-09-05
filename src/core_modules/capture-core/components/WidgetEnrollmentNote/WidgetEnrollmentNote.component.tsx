@@ -29,10 +29,7 @@ export const WidgetEnrollmentNote = () => {
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
-                title={i18n.t(
-                    '{{notesLabel}} about this {{enrollmentLabel}}',
-                    { notesLabel, enrollmentLabel },
-                )}
+                title={i18n.t('{{notesLabel}} about this {{enrollmentLabel}}', { notesLabel, enrollmentLabel })}
                 placeholder={i18n.t(
                     'Write a {{noteLabel}} about this {{enrollmentLabel}}',
                     { enrollmentLabel, noteLabel },

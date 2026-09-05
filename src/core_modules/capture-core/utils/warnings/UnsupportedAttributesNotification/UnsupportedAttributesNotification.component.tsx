@@ -24,7 +24,6 @@ const UnsupportedAttributesNotificationPlain = ({
     classes,
 }: Props) => {
     const attributeLabel = useTermLabel('attribute');
-    const attributesLabel = useTermLabel('attribute', { plural: true });
     const message =
         i18n.t('The following {{attributeLabel}} type is not supported for searching and has been hidden', {
             count: unsupportedAttributes.length,
@@ -37,7 +36,7 @@ const UnsupportedAttributesNotificationPlain = ({
 
     return (
         <div className={classes.container}>
-            <NoticeBox title={i18n.t('Some {{attributesLabel}} are hidden', { attributesLabel })} warning>
+            <NoticeBox title={i18n.t('Some {{attributeLabel}} are hidden', { attributeLabel })} warning>
                 {message}{': '}
                 {unsupportedAttributes.map((attr, index) => (
                     <span key={attr.trackedEntityAttribute.id} className={classes.attributeName}>

@@ -5,6 +5,7 @@ import React, {
     useEffect,
 } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, CircularLoader, colors } from '@dhis2/ui';
@@ -63,7 +64,6 @@ const SearchResultsIndex = ({
     orgUnitId,
 }: Props & WithStyles<typeof getStyles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
-    const attributesLabel = useTermLabel('attribute', { plural: true });
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
     const [isFallbackLoading, setIsFallbackLoading] = useState(false);
@@ -124,6 +124,7 @@ const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
 
     const { trackedEntityName } = useScopeInfo(currentSearchScopeId);
+    const attributesLabel = useTermLabel('attribute', { programId: currentProgramId, plural: true });
 
     return (<>
         <Widget
@@ -211,8 +212,7 @@ const SearchResultsIndex = ({
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
                     content={i18n.t('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
-                        attributesLabel,
-                        trackedEntityName,
+                        trackedEntityName, attributesLabel, interpolation: { escapeValue: false },
                     })}
                 >
                     <Button

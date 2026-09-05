@@ -118,6 +118,7 @@ function renderFooterContent(args: {
                 title={i18n.t('{{trackedEntityName}} has no searchable {{attributesLabel}}', {
                     trackedEntityName: capitalizeFirstLetter(args.trackedEntityName),
                     attributesLabel: args.attributesLabel,
+                    interpolation: { escapeValue: false },
                 })}
             >
                 {/* eslint-disable-next-line max-len */}
@@ -145,8 +146,8 @@ const Index = ({
         getInitialSearchScopeType(preselectedProgramId),
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
+    const attributesLabel = useTermLabel('attribute', { programId: selectedSearchScopeId, plural: true });
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
-    const attributesLabel = useTermLabel('attribute', { plural: true });
     const {
         searchOption: availableSearchOption,
         isLoading,

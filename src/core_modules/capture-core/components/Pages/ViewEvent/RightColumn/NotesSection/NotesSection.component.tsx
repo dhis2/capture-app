@@ -2,6 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
@@ -35,13 +36,13 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes, ready, notesLabel } = this.props;
+        const { classes, notes, ready, programId } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={notesLabel}
+                text={capitalizeFirstLetter(getTermLabel('note', { programId, plural: true }))}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -49,7 +50,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly, notesLabel, programId } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly, programId } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -60,7 +61,10 @@ class NotesSectionPlain extends React.Component<Props> {
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
                         {i18n.t(
                             "This {{eventLabel}} doesn't have any {{notesLabel}}",
-                            { eventLabel: getTermLabel('event', { programId }), notesLabel },
+                            {
+                                eventLabel: getTermLabel('event', { programId }),
+                                notesLabel: getTermLabel('note', { programId, plural: true }),
+                            },
                         )}
                     </div>
                 )}

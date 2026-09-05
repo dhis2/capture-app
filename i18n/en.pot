@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-04T14:22:45.776Z\n"
-"PO-Revision-Date: 2026-09-04T14:22:45.777Z\n"
+"POT-Creation-Date: 2026-09-05T15:57:35.471Z\n"
+"PO-Revision-Date: 2026-09-05T15:57:35.471Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -193,6 +193,12 @@ msgstr "Assigned user"
 msgid "Search for user"
 msgstr "Search for user"
 
+msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr "Saving to {{programName}} in {{orgUnitName}}"
+
+msgid "Saving to {{programName}}"
+msgstr "Saving to {{programName}}"
+
 msgid "Basic info"
 msgstr "Basic info"
 
@@ -201,12 +207,6 @@ msgstr "Status"
 
 msgid "Assignee"
 msgstr "Assignee"
-
-msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr "Saving to {{programName}} in {{orgUnitName}}"
-
-msgid "Saving to {{programName}}"
-msgstr "Saving to {{programName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -1186,12 +1186,15 @@ msgstr "If none of search results match, you can create a new {{trackedEntityNam
 msgid "Create new"
 msgstr "Create new"
 
+msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+msgstr "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
+
 msgid ""
-"Fill in these {{attributesLabel}} to search{{escape}} {{ "
-"searchableAttributes }}"
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
 msgstr ""
-"Fill in these {{attributesLabel}} to search{{escape}} {{ "
-"searchableAttributes }}"
+"Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
+"search{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this {{attributeLabel}} to search{{escape}} {{searchableAttributes}}"
 msgstr "Fill in this {{attributeLabel}} to search{{escape}} {{searchableAttributes}}"
@@ -1657,11 +1660,11 @@ msgstr "View profile"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "No {{attributesLabel}} configured for {{trackedEntityTypeName}}"
-msgstr "No {{attributesLabel}} configured for {{trackedEntityTypeName}}"
+msgid "No {{attributeLabel}} configured for {{trackedEntityTypeName}}"
+msgstr "No {{attributeLabel}} configured for {{trackedEntityTypeName}}"
 
-msgid "No {{attributesLabel}} configured"
-msgstr "No {{attributesLabel}} configured"
+msgid "No {{attributeLabel}} configured"
+msgstr "No {{attributeLabel}} configured"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
@@ -1888,14 +1891,14 @@ msgid "An error occurred while adding the {{relationshipLabel}}"
 msgstr "An error occurred while adding the {{relationshipLabel}}"
 
 msgid ""
-"Something went wrong while loading {{relationshipsLabel}}. Please try again "
+"Something went wrong while loading {{relationshipLabel}}. Please try again "
 "later."
 msgstr ""
-"Something went wrong while loading {{relationshipsLabel}}. Please try again "
+"Something went wrong while loading {{relationshipLabel}}. Please try again "
 "later."
 
-msgid "{{trackedEntityTypeName}} {{relationshipsLabel}}"
-msgstr "{{trackedEntityTypeName}} {{relationshipsLabel}}"
+msgid "{{trackedEntityTypeName}} {{relationshipLabel}}"
+msgstr "{{trackedEntityTypeName}} {{relationshipLabel}}"
 
 msgid "Delete {{relationshipLabel}}"
 msgstr "Delete {{relationshipLabel}}"
@@ -2379,8 +2382,8 @@ msgstr[1] ""
 "The following {{attributeLabel}} types are not supported for searching and "
 "have been hidden"
 
-msgid "Some {{attributesLabel}} are hidden"
-msgstr "Some {{attributesLabel}} are hidden"
+msgid "Some {{attributeLabel}} are hidden"
+msgstr "Some {{attributeLabel}} are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

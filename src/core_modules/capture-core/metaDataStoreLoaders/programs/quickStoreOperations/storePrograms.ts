@@ -170,11 +170,11 @@ const baseProgramFields = [
 
 const pluralProgramFields = [
     'displayEnrollmentsLabel',
-    'displayRelationshipsLabel',
-    'displayNotesLabel',
-    'displayTrackedEntityAttributesLabel',
     'displayProgramStagesLabel',
     'displayEventsLabel',
+    'displayNotesLabel',
+    'displayRelationshipsLabel',
+    'displayTrackedEntityAttributesLabel',
 ];
 
 const buildFieldsParam = (includePluralLabels: boolean): string => {

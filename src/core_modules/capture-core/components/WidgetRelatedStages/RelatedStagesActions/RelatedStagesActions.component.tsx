@@ -261,10 +261,9 @@ const RelatedStagesActionsPlain = ({
                 )}
 
                 {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
-                    <div>{i18n.t(
-                        'Ambiguous {{relationshipsLabel}}, contact system administrator',
-                        { relationshipsLabel },
-                    )}</div>
+                    <div>
+                        {i18n.t('Ambiguous {{relationshipsLabel}}, contact system administrator', { relationshipsLabel })}
+                    </div>
                 )}
             </div>
 

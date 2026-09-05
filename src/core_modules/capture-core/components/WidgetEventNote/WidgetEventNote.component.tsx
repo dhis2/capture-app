@@ -28,10 +28,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={i18n.t(
-                    '{{notesLabel}} about this {{eventLabel}}',
-                    { notesLabel, eventLabel },
-                )}
+                title={i18n.t('{{notesLabel}} about this {{eventLabel}}', { notesLabel, eventLabel })}
                 placeholder={i18n.t(
                     'Write a {{noteLabel}} about this {{eventLabel}}',
                     { eventLabel, noteLabel },

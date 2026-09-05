@@ -256,4 +256,9 @@ class SearchFormPlain extends React.Component<Props, State> {
     }
 }
 
-export const TeiSearchFormComponent = withStyles(getStyles)(SearchFormPlain) as any;
+const TeiSearchFormWithStyles = withStyles(getStyles)(SearchFormPlain) as any;
+
+export const TeiSearchFormComponent = (props: Omit<OwnProps, 'attributesLabel'>) => {
+    const attributesLabel = useTermLabel('attribute', { plural: true });
+    return <TeiSearchFormWithStyles {...props} attributesLabel={attributesLabel} />;
+};

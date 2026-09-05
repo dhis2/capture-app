@@ -26,9 +26,9 @@ export const WidgetTrackedEntityRelationship = ({
     accessReadOnly,
     hideReadOnlyBadge,
 }: WidgetTrackedEntityRelationshipProps) => {
-    const relationshipsLabel = useTermLabel('relationship', { programId, plural: true });
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
+    const relationshipLabel = useTermLabel('relationship', { programId });
     const {
         data: relationships,
         isError,
@@ -47,8 +47,8 @@ export const WidgetTrackedEntityRelationship = ({
         return (
             <div>
                 {i18n.t(
-                    'Something went wrong while loading {{relationshipsLabel}}. Please try again later.',
-                    { relationshipsLabel },
+                    'Something went wrong while loading {{relationshipLabel}}. Please try again later.',
+                    { relationshipLabel },
                 )}
             </div>
         );
@@ -60,9 +60,9 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={i18n.t('{{trackedEntityTypeName}} {{relationshipsLabel}}', {
+            title={i18n.t('{{trackedEntityTypeName}} {{relationshipLabel}}', {
                 trackedEntityTypeName,
-                relationshipsLabel,
+                relationshipLabel,
                 interpolation: { escapeValue: false },
             })}
             isLoading={isLoading}

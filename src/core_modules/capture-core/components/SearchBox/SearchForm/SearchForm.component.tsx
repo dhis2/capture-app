@@ -103,7 +103,6 @@ const SearchFormIndex = ({
     keptFallbackSearchFormValues,
 }: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
-    const attributesLabel = useTermLabel('attribute', { plural: true });
 
     useFormDataLifecycle(
         searchGroupsForSelectedScope,
@@ -114,6 +113,7 @@ const SearchFormIndex = ({
 
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState<string | null>(null);
+    const attributesLabel = useTermLabel('attribute', { programId: selectedSearchScopeId, plural: true });
 
     useEffect(() => {
         setExpandedFormId(null);

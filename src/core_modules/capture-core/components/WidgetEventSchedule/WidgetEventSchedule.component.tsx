@@ -58,7 +58,6 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const notesLabel = useTermLabel('note', { plural: true, programId, stageId });
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
@@ -77,6 +76,7 @@ const WidgetEventSchedulePlain = ({
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
     const eventLabel = useTermLabel('event', { programId, stageId });
     const noteLabel = useTermLabel('note', { programId, stageId });
+    const notesLabel = useTermLabel('note', { programId, stageId, plural: true });
 
     return (
         <Widget
