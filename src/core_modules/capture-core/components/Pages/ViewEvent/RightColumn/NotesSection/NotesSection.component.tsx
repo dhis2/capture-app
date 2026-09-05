@@ -2,6 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
@@ -12,8 +13,6 @@ import type { PlainProps } from './NotesSection.types';
 import { getTermLabel } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
-
-const headerText = i18n.t('Notes');
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -37,13 +36,13 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes, ready } = this.props;
+        const { classes, notes, ready, programId } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={headerText}
+                text={capitalizeFirstLetter(getTermLabel('note', { programId, plural: true }))}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />

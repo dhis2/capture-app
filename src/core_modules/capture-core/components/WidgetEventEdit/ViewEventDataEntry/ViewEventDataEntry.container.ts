@@ -6,6 +6,7 @@ import { withCustomLabels } from '../../../HOC/withCustomLabels';
 const customLabels = {
     orgUnitLabel: { key: 'orgUnit' },
     eventLabel: { key: 'event' },
+    notesLabel: { key: 'note', plural: true },
 } as const;
 
 const mapStateToProps = (state: any, props: any) => {

@@ -70,6 +70,7 @@ type OwnProps = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
+    attributesLabel: string;
 };
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
@@ -226,7 +227,7 @@ class SearchFormPlain extends React.Component<Props, State> {
         }
         const searchButtonText = searchGroup.unique ?
             this.getUniqueSearchButtonText(searchForm) :
-            i18n.t('Search by attributes');
+            i18n.t('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
         return (
             <div
                 data-test="d2-form-area"
@@ -255,4 +256,9 @@ class SearchFormPlain extends React.Component<Props, State> {
     }
 }
 
-export const TeiSearchFormComponent = withStyles(getStyles)(SearchFormPlain) as any;
+const TeiSearchFormWithStyles = withStyles(getStyles)(SearchFormPlain) as any;
+
+export const TeiSearchFormComponent = (props: Omit<OwnProps, 'attributesLabel'>) => {
+    const attributesLabel = useTermLabel('attribute', { plural: true });
+    return <TeiSearchFormWithStyles {...props} attributesLabel={attributesLabel} />;
+};

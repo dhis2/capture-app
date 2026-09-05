@@ -206,7 +206,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         }
         const searchButtonText = searchGroup.unique
             ? this.getUniqueSearchButtonText(searchForm)
-            : i18n.t('Search by attributes');
+            : i18n.t('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
         return (
             <div
                 data-test="d2-form-area"
@@ -236,4 +236,9 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     }
 }
 
-export const TeiSearchFormComponent = withStyles(styles)(SearchFormPlain);
+const TeiSearchFormWithStyles = withStyles(styles)(SearchFormPlain);
+
+export const TeiSearchFormComponent = (props: Omit<Props, 'attributesLabel'>) => {
+    const attributesLabel = useTermLabel('attribute', { plural: true });
+    return <TeiSearchFormWithStyles {...props} attributesLabel={attributesLabel} />;
+};

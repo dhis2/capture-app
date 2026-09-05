@@ -402,7 +402,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Notes'),
+            label: props.notesLabel,
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
@@ -542,47 +542,21 @@ type Props = {
     formHorizontal: boolean | null,
     recentlyAddedRelationshipId?: string | null,
     onScrollToRelationships: () => void;
+    notesLabel: string,
+    relationshipsLabel: string,
 };
 type DataEntrySection = {
     placement: typeof placements[keyof typeof placements],
     name?: string,
 };
 
-const dataEntrySectionDefinitions = {
-    [dataEntrySectionNames.BASICINFO]: {
-        placement: placements.TOP,
-        name: i18n.t('Basic info'),
-    },
-    [AOCsectionKey]: {
-        placement: placements.TOP,
-    },
-    [dataEntrySectionNames.STATUS]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Status'),
-    },
-    [dataEntrySectionNames.NOTES]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
-    },
-    [dataEntrySectionNames.RELATIONSHIPS]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Relationships'),
-    },
-    [dataEntrySectionNames.ASSIGNEE]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Assignee'),
-    },
-};
-
 class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any };
-    dataEntrySections: { [key: string]: DataEntrySection };
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     componentDidMount() {
@@ -657,8 +631,35 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
             onSetSaveTypes,
             onSaveAndAddAnother,
             theme,
+            notesLabel,
+            relationshipsLabel,
             ...passOnProps
         } = this.props;
+        const dataEntrySections: { [key: string]: DataEntrySection } = {
+            [dataEntrySectionNames.BASICINFO]: {
+                placement: placements.TOP,
+                name: i18n.t('Basic info'),
+            },
+            [AOCsectionKey]: {
+                placement: placements.TOP,
+            },
+            [dataEntrySectionNames.STATUS]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('Status'),
+            },
+            [dataEntrySectionNames.NOTES]: {
+                placement: placements.BOTTOM,
+                name: notesLabel,
+            },
+            [dataEntrySectionNames.RELATIONSHIPS]: {
+                placement: placements.BOTTOM,
+                name: relationshipsLabel,
+            },
+            [dataEntrySectionNames.ASSIGNEE]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('Assignee'),
+            },
+        };
         return (
             <div>
                 <div data-test="data-entry-container">
@@ -670,8 +671,10 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
                         selectedOrgUnitId={orgUnit?.id}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
-                        dataEntrySections={this.dataEntrySections}
+                        dataEntrySections={dataEntrySections}
                         relationshipsRef={this.setRelationshipsInstance}
+                        notesLabel={notesLabel}
+                        relationshipsLabel={relationshipsLabel}
                         orgUnit={orgUnit}
                         // @ts-expect-error - keeping original functionality as before ts rewrite
                         orgUnitId={orgUnit?.id}

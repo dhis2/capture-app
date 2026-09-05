@@ -2,6 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
@@ -15,8 +16,6 @@ import { getTermLabel } from '../../../../../metaData';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
-
-const headerText = i18n.t('Relationships');
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -48,13 +47,13 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     renderHeader = () => {
-        const { classes, relationships, ready } = this.props;
+        const { classes, relationships, ready, programId } = this.props;
         const count = relationships ? relationships.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={headerText}
+                text={capitalizeFirstLetter(getTermLabel('relationship', { programId, plural: true }))}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />

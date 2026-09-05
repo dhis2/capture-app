@@ -18,7 +18,7 @@ import { SearchResultsHeader } from '../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Widget } from '../../Widget';
-import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
+import { getTrackerProgramThrowIfNotFound, useTermLabel } from '../../../metaData';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -124,6 +124,7 @@ const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
 
     const { trackedEntityName } = useScopeInfo(currentSearchScopeId);
+    const attributesLabel = useTermLabel('attribute', { programId: currentProgramId, plural: true });
 
     return (<>
         <Widget
@@ -210,8 +211,8 @@ const SearchResultsIndex = ({
                 </div>
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
-                    content={i18n.t('No searchable attributes for {{trackedEntityName}}', {
-                        trackedEntityName, interpolation: { escapeValue: false },
+                    content={i18n.t('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
+                        trackedEntityName, attributesLabel, interpolation: { escapeValue: false },
                     })}
                 >
                     <Button

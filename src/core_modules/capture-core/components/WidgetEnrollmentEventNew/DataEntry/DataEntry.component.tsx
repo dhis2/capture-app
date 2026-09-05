@@ -308,7 +308,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Notes'),
+            label: props.notesLabel,
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
@@ -442,6 +442,8 @@ type Props = {
     placementDomNodeForSavingText?: HTMLElement;
     programName: string;
     orgUnitFieldValue?: OrgUnit | null;
+    notesLabel: string;
+    relationshipsLabel: string;
 };
 
 type DataEntrySection = {
@@ -449,35 +451,8 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
-    [dataEntrySectionNames.BASICINFO]: {
-        placement: placements.TOP,
-        name: i18n.t('Basic info'),
-    },
-    [dataEntrySectionNames.STATUS]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Status'),
-    },
-    [dataEntrySectionNames.NOTES]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Notes'),
-    },
-    [dataEntrySectionNames.RELATIONSHIPS]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Relationships'),
-    },
-    [dataEntrySectionNames.ASSIGNEE]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Assignee'),
-    },
-    [AOCsectionKey]: {
-        placement: placements.TOP,
-        name: '',
-    },
-};
 class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     relationshipsInstance?: HTMLDivElement | null;
-    dataEntrySections: { [key: string]: DataEntrySection };
     fieldOptions: { theme: any; fieldLabelMediaBasedClass?: string };
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
@@ -485,7 +460,6 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     componentDidMount() {
@@ -517,8 +491,37 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
             programName,
             stage,
             orgUnitFieldValue,
+            notesLabel,
+            relationshipsLabel,
             ...passOnProps
         } = this.props;
+
+        const dataEntrySections: { [key: string]: DataEntrySection } = {
+            [dataEntrySectionNames.BASICINFO]: {
+                placement: placements.TOP,
+                name: i18n.t('Basic info'),
+            },
+            [dataEntrySectionNames.STATUS]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('Status'),
+            },
+            [dataEntrySectionNames.NOTES]: {
+                placement: placements.BOTTOM,
+                name: notesLabel,
+            },
+            [dataEntrySectionNames.RELATIONSHIPS]: {
+                placement: placements.BOTTOM,
+                name: relationshipsLabel,
+            },
+            [dataEntrySectionNames.ASSIGNEE]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('Assignee'),
+            },
+            [AOCsectionKey]: {
+                placement: placements.TOP,
+                name: '',
+            },
+        };
 
         return (
             <div data-test="new-enrollment-event-form">
@@ -528,8 +531,10 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
                     fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
+                    dataEntrySections={dataEntrySections}
                     relationshipsRef={this.setRelationshipsInstance}
+                    notesLabel={notesLabel}
+                    relationshipsLabel={relationshipsLabel}
                     stage={stage}
                     orgUnitIdFieldValue={orgUnitFieldValue?.id}
                     orgUnit={orgUnitFieldValue}

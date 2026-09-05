@@ -44,6 +44,7 @@ export const SearchStatusPlain = ({
     classes,
 }: ComponentProps & WithStyles<typeof getStyles>) => {
     const attributeLabel = useTermLabel('attribute');
+    const attributesLabel = useTermLabel('attribute', { plural: true });
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
         return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }
@@ -102,7 +103,10 @@ export const SearchStatusPlain = ({
                 <NoticeBox title={i18n.t('Too many results')} warning>
                     {i18n.t('This search returned too many results to show.')}
                     {' '}
-                    {i18n.t('Try changing search terms or searching by more attributes to narrow down the results.')}
+                    {i18n.t(
+                        'Try changing search terms or searching by more {{attributesLabel}} to narrow down the results.',
+                        { attributesLabel },
+                    )}
                 </NoticeBox>
             </div>
         );

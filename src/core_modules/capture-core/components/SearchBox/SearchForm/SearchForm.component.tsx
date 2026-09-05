@@ -113,6 +113,7 @@ const SearchFormIndex = ({
 
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState<string | null>(null);
+    const attributesLabel = useTermLabel('attribute', { programId: selectedSearchScopeId, plural: true });
 
     useEffect(() => {
         setExpandedFormId(null);
@@ -292,7 +293,7 @@ const SearchFormIndex = ({
                         minAttributesRequiredToSearch,
                         unsupportedAttributes,
                     }) => {
-                        const searchByText = i18n.t('Search by attributes');
+                        const searchByText = i18n.t('Search by {{attributesLabel}}', { attributesLabel });
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
                             <div key={formId} data-test="form-attributes">
@@ -379,6 +380,7 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
+        attributesLabel,
     ]);
 };
 
