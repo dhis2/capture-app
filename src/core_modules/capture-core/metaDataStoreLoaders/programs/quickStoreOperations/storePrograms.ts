@@ -172,6 +172,9 @@ const pluralProgramFields = [
     'displayEnrollmentsLabel',
     'displayProgramStagesLabel',
     'displayEventsLabel',
+    'displayNotesLabel',
+    'displayRelationshipsLabel',
+    'displayTrackedEntityAttributesLabel',
 ];
 
 const buildFieldsParam = (includePluralLabels: boolean): string => {
