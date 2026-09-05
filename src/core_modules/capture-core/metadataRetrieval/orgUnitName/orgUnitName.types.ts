@@ -1,3 +1,3 @@
 export type OrgUnitNames = {
-    [orgUnitId: string]: string,
+    [orgUnitId: string]: string | null,
 };
