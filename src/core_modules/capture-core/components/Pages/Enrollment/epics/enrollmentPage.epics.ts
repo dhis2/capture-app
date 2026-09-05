@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { concatMap, map, filter } from 'rxjs/operators';
 import { from } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
-
+import { getTermLabel, getScopeInfo } from '../../../../metaData';
 import {
     enrollmentPageActionTypes,
     resetEnrollmentId,
@@ -25,7 +25,6 @@ import {
 import { enrollmentAccessLevels, selectionStatus } from '../EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../../utils/routing';
 import { deriveTeiName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
-import { getScopeInfo } from '../../../../metaData';
 import { scopeTypes } from '../../../../metaData/helpers/constants';
 
 const teiQuery = id => ({
@@ -118,13 +117,17 @@ export const verifyEnrollmentIdSuccessEpic = (action$: any, store: any) =>
         map(({ payload }) => fetchEnrollmentIdSuccess(payload)),
     );
 
-export const enrollmentIdErrorEpic = (action$: any) =>
+export const enrollmentIdErrorEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
-        map(({ payload: { enrollmentId } }) =>
-            showErrorViewOnEnrollmentPage({
-                error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }),
-            })),
+        map(({ payload: { enrollmentId } }) => {
+            const { programId } = store.value.enrollmentPage;
+            const enrollmentLabel = getTermLabel('enrollment', { programId });
+            return showErrorViewOnEnrollmentPage({
+                error: i18n.t('{{enrollmentLabel}} with id "{{enrollmentId}}" does not exist',
+                    { enrollmentLabel, enrollmentId }),
+            });
+        }),
     );
 
 // Epics for teiId

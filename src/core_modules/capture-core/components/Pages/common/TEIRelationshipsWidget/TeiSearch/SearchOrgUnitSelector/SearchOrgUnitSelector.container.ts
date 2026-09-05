@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import {
     setOrgUnitScope,
     setOrgUnit,
@@ -8,20 +9,24 @@ import {
 import { get as getOrgUnitRoots } from '../../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelector as SearchOrgUnitSelectorComponent } from './SearchOrgUnitSelector.component';
 import type { ReduxState, ReduxDispatch } from '../../../../../App/withAppUrlSync.types';
+import { getTermLabel } from '../../../../../../metaData/helpers/customLabels';
 
 const mapStateToProps = (state: ReduxState, props: { searchId: string }) => {
     const searchId = props.searchId;
+    const teiSearch = (state as any).teiSearch[searchId];
+    const programId: string | undefined = teiSearch.selectedProgramId;
 
     const filteredRoots = getOrgUnitRoots(searchId);
     const roots = filteredRoots || getOrgUnitRoots('searchRoots');
 
     return {
-        selectedOrgUnit: (state as any).teiSearch[searchId].selectedOrgUnit,
-        selectedOrgUnitScope: (state as any).teiSearch[searchId].selectedOrgUnitScope,
+        selectedOrgUnit: teiSearch.selectedOrgUnit,
+        selectedOrgUnitScope: teiSearch.selectedOrgUnitScope,
         treeRoots: roots,
-        treeSearchText: (state as any).teiSearch[searchId].orgUnitsSearchText,
-        treeReady: !(state as any).teiSearch[searchId].orgUnitsLoading,
-        treeKey: (state as any).teiSearch[searchId].orgUnitsSearchText || 'initial',
+        treeSearchText: teiSearch.orgUnitsSearchText,
+        treeReady: !teiSearch.orgUnitsLoading,
+        treeKey: teiSearch.orgUnitsSearchText || 'initial',
+        orgUnitLabel: programId ? getTermLabel('orgUnit', { programId }) : i18n.t('organisation unit'),
     };
 };
 

@@ -111,6 +111,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     readOnly,
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
+                    programId,
                 })}
             </ViewEventSection>
         );

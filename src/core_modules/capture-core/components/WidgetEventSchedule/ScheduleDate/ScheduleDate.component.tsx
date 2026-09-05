@@ -70,6 +70,8 @@ const ScheduleDatePlain = ({
     classes,
     hideDueDate,
     expiryPeriod,
+    programId,
+    stageId,
 }: Props) => {
     const validateDate = (dateString: string, internalComponentError: any) => {
         if (!hasValue(dateString)) {
@@ -100,11 +102,11 @@ const ScheduleDatePlain = ({
         if (!isWithinValidPeriod) {
             return {
                 error: true,
-                // eslint-disable-next-line max-len
-                validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
-                    firstValidDate,
-                    interpolation: { escapeValue: false },
-                }),
+                validationText: i18n.t(
+                    'The date entered belongs to an expired period. '
+                        + 'Enter a date after {{firstValidDate}}.',
+                    { firstValidDate, interpolation: { escapeValue: false } },
+                ),
             };
         }
 
@@ -146,6 +148,8 @@ const ScheduleDatePlain = ({
                     eventCountInOrgUnit={eventCountInOrgUnit}
                     orgUnitName={orgUnit?.name}
                     hideDueDate={hideDueDate}
+                    programId={programId}
+                    stageId={stageId}
                 />
             </div>
         </div>

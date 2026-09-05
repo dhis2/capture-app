@@ -8,8 +8,13 @@ import { addFormData } from '../../../../../D2Form/actions/form.actions';
 import { getCategoryOptionsValidatorContainers } from '../../../../Enrollment/fieldValidators';
 import type { ProgramCategory } from '../../../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import type { DataEntryPropToInclude } from '../../../../../DataEntry/actions/dataEntryLoad.utils';
+import { getTermLabel } from '../../../../../../metaData/helpers/customLabels';
 
-const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
+const buildDataEntryPropsToInclude = (
+    orgUnitLabel: string,
+    eventLabel: string,
+    noteLabel: string,
+): Array<DataEntryPropToInclude> => [
     {
         id: 'occurredAt',
         type: 'DATE',
@@ -18,7 +23,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         id: 'orgUnit',
         type: 'ORGANISATION_UNIT',
-        validatorContainers: getOrgUnitValidatorContainers(),
+        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
     },
     {
         clientId: 'geometry',
@@ -28,7 +33,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         id: 'note',
         type: 'TEXT',
-        validatorContainers: getNoteValidatorContainers(),
+        validatorContainers: getNoteValidatorContainers(eventLabel, noteLabel),
         clientIgnore: true,
     },
     {
@@ -49,6 +54,7 @@ const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
 ];
 
 export const getOpenDataEntryActions = (
+    programId: string,
     programCategory?: ProgramCategory | null,
     selectedCategories?: { [key: string]: string } | null,
     orgUnit?: CoreOrgUnit | null,
@@ -59,6 +65,11 @@ export const getOpenDataEntryActions = (
             : undefined,
     };
 
+    const dataEntryPropsToInclude = buildDataEntryPropsToInclude(
+        getTermLabel('orgUnit', { programId }),
+        getTermLabel('event', { programId }),
+        getTermLabel('note', { programId }),
+    );
     if (programCategory && programCategory.categories) {
         dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,

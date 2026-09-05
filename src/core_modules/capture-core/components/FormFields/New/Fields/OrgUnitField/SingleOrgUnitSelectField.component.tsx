@@ -1,13 +1,18 @@
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import * as React from 'react';
 import { cx } from '@emotion/css';
 import { debounce } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 import { useOrgUnitAutoSelect, type AutoSelectOrgUnit } from '../../../../../dataQueries';
+
+const customLabels = {
+    orgUnitLabel: { key: 'orgUnit' },
+} as const;
 
 const getStyles = () => ({
     selectedOrgUnitContainer: {
@@ -107,6 +112,7 @@ type SingleOrgUnitSelectFieldProps = {
     disabled?: boolean;
     maxTreeHeight?: number;
     autoSelectSingleOrgUnit?: boolean;
+    orgUnitLabel: string;
 };
 
 type Props = SingleOrgUnitSelectFieldProps & WithStyles<typeof getStyles>;
@@ -284,7 +290,9 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
                         onKeyDown={this.handleKeyDown}
                         readOnly={!open}
                         disabled={disabled}
-                        placeholder={open ? i18n.t('Search for an organisation unit') : undefined}
+                        placeholder={open
+                            ? i18n.t('Search for an {{orgUnitLabel}}', { orgUnitLabel: this.props.orgUnitLabel })
+                            : undefined}
                         aria-haspopup="tree"
                         aria-controls={open ? this.popoverId : undefined}
                         data-test="org-unit-selector-trigger"
@@ -320,4 +328,4 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         );
     }
 }
-export const SingleOrgUnitSelectField = withStyles(getStyles)(SingleOrgUnitSelectFieldPlain);
+export const SingleOrgUnitSelectField = withCustomLabels(customLabels)(withStyles(getStyles)(SingleOrgUnitSelectFieldPlain));

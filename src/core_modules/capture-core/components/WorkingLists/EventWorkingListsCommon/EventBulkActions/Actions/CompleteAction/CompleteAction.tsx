@@ -6,6 +6,7 @@ import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
 import type { Props } from './CompleteAction.types';
+import { getTermLabel, useTermLabel } from '../../../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -21,9 +22,15 @@ const styles: Readonly<any> = {
     },
 };
 
-const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
+const getTooltipContent = (
+    stageDataWriteAccess: boolean | undefined,
+    bulkDataEntryIsActive: boolean | undefined,
+    programId: string,
+) => {
     if (!stageDataWriteAccess) {
-        return i18n.t('You do not have access to complete events');
+        return i18n.t('You do not have access to complete {{eventsLabel}}', {
+            eventsLabel: getTermLabel('event', { programId, plural: true }),
+        });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -42,7 +49,8 @@ const CompleteActionPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
-    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
+    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive, programId);
     const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {
         eventCounts,
@@ -81,15 +89,21 @@ const CompleteActionPlain = ({
                     dataTest={'bulk-complete-events-dialog'}
                 >
                     <ModalTitle>
-                        {i18n.t('Complete events')}
+                        {i18n.t('Complete {{eventsLabel}}', { eventsLabel })}
                     </ModalTitle>
 
                     <ModalContent>
                         <span className={classes.container}>
                             {eventCounts.active > 0 ?
-                                i18n.t('Are you sure you want to complete all active events in selection?')
+                                i18n.t(
+                                    'Are you sure you want to complete all active {{eventsLabel}} in selection?',
+                                    { eventsLabel },
+                                )
                                 :
-                                i18n.t('There are no active events to complete in the current selection.')
+                                i18n.t(
+                                    'There are no active {{eventsLabel}} to complete in the current selection.',
+                                    { eventsLabel },
+                                )
                             }
                         </span>
                     </ModalContent>
@@ -124,12 +138,12 @@ const CompleteActionPlain = ({
                     dataTest={'bulk-complete-events-dialog'}
                 >
                     <ModalTitle>
-                        {i18n.t('Error completing events')}
+                        {i18n.t('Error completing {{eventsLabel}}', { eventsLabel })}
                     </ModalTitle>
 
                     <ModalContent>
                         <span className={classes.container}>
-                            {i18n.t('There was an error completing the events.')}
+                            {i18n.t('There was an error completing the {{eventsLabel}}.', { eventsLabel })}
 
                             <Widget
                                 open={openAccordion}

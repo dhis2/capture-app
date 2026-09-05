@@ -9,7 +9,7 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
+import { getProgramThrowIfNotFound, dataElementTypes, getTermLabel } from '../../../../metaData';
 import { convertValue } from '../../../../converters/serverToClient';
 import {
     getCurrentClientValues,
@@ -56,7 +56,9 @@ const runRulesForEditSingleEvent = async ({
         : getStageFromEvent(event)?.stage;
 
     if (!stage) {
-        throw Error(i18n.t('stage not found in rules execution'));
+        throw Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+            programStageLabel: getTermLabel('programStage', { programId }),
+        }));
     }
 
     const foundation = stage.stageForm;

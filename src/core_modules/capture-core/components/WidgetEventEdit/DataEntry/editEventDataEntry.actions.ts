@@ -2,13 +2,13 @@ import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
+import { getTermLabel, RenderFoundation, Program } from '../../../metaData';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
 } from '../../../rules';
-import { RenderFoundation, Program } from '../../../metaData';
 import {
     getEventDateValidatorContainers,
     getOrgUnitValidatorContainers,
@@ -99,7 +99,7 @@ export const openEventForEditInDataEntry = ({
     },
     orgUnit: OrgUnit,
     foundation?: RenderFoundation,
-    program: Program | EventProgram | TrackerProgram | null,
+    program: Program | EventProgram | TrackerProgram,
     dataEntryId: string,
     dataEntryKey: string,
     enrollment?: EnrollmentData,
@@ -119,7 +119,7 @@ export const openEventForEditInDataEntry = ({
         {
             id: 'orgUnit',
             type: 'ORGANISATION_UNIT',
-            validatorContainers: getOrgUnitValidatorContainers(),
+            validatorContainers: getOrgUnitValidatorContainers(getTermLabel('orgUnit', { programId: program.id })),
         },
         {
             clientId: 'geometry',
@@ -165,7 +165,9 @@ export const openEventForEditInDataEntry = ({
     if (program instanceof TrackerProgram) {
         const stage = getStageFromEvent(eventContainer.event)?.stage;
         if (!stage) {
-            throw Error(i18n.t('stage not found in rules execution'));
+            throw Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+                programStageLabel: getTermLabel('programStage', { programId: program.id }),
+            }));
         }
         // TODO: Add attributeValues & enrollmentData
         effects = getApplicableRuleEffectsForTrackerProgram({

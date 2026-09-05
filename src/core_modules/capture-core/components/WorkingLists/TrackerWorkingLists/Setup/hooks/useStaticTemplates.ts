@@ -1,9 +1,11 @@
-import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useMemo } from 'react';
 import type { WorkingListTemplate } from '../../../WorkingListsBase';
+import { useTermLabel } from '../../../../../metaData';
 
-export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate | undefined, defaultTemplateId: string) =>
-    useMemo(
+export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate | undefined, defaultTemplateId: string) => {
+    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
+    return useMemo(
         () => [
             defaultAlteredTemplate || {
                 id: defaultTemplateId,
@@ -18,7 +20,7 @@ export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate |
             },
             {
                 id: 'active',
-                name: i18n.t('Active enrollments'),
+                name: i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
                 order: 1,
                 access: {
                     update: false,
@@ -32,7 +34,7 @@ export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate |
             },
             {
                 id: 'complete',
-                name: i18n.t('Completed enrollments'),
+                name: i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
                 order: 2,
                 access: {
                     update: false,
@@ -46,7 +48,7 @@ export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate |
             },
             {
                 id: 'cancelled',
-                name: i18n.t('Cancelled enrollments'),
+                name: i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
                 order: 3,
                 access: {
                     update: false,
@@ -59,5 +61,6 @@ export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate |
                 },
             },
         ],
-        [defaultAlteredTemplate, defaultTemplateId],
+        [defaultAlteredTemplate, defaultTemplateId, enrollmentsLabel],
     );
+};

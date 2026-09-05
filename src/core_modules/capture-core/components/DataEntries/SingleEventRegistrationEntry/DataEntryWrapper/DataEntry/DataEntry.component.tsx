@@ -213,11 +213,11 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: i18n.t('Organisation unit'),
+            label: props.orgUnitLabel,
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -328,7 +328,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
+            label: i18n.t('Complete {{eventLabel}}', { eventLabel: props.eventLabel }),
             id: 'complete',
         }),
         getPropName: () => 'complete',
@@ -406,9 +406,10 @@ const buildNotesSettingsFn = () => {
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
+            noteLabel: props.noteLabel,
         }),
         getPropName: () => 'note',
-        getValidatorContainers: () => getNoteValidatorContainers(),
+        getValidatorContainers: (props: any) => getNoteValidatorContainers(props.eventLabel, props.noteLabel),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.NOTES,

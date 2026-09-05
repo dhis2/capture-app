@@ -33,8 +33,6 @@ const customLabels = {
     noteLabel: { key: 'note' },
 } as const;
 
-const WrappedDataEntryComponent = withCustomLabels(customLabels)(DataEntryComponent);
-
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
@@ -120,5 +118,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withErrorMessageHandler()(WrappedDataEntryComponent)),
+    withLoadingIndicator()(withErrorMessageHandler()(
+        withCustomLabels(customLabels)(DataEntryComponent),
+    )),
 );

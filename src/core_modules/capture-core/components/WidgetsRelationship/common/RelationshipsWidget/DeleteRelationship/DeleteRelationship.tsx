@@ -14,6 +14,7 @@ import {
 import { IconButton } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './DeleteRelationship.types';
+import { useTermLabel } from '../../../../../metaData';
 
 const styles: Readonly<any> = {
     tableCell: {
@@ -28,6 +29,7 @@ export const DeleteRelationshipPlain = ({
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const relationshipLabel = useTermLabel('relationship');
     return (
         <>
             <DataTableCell className={classes.tableCell}>
@@ -48,11 +50,19 @@ export const DeleteRelationshipPlain = ({
                     onClose={() => setIsModalOpen(false)}
                     dataTest={'delete-relationship-modal'}
                 >
-                    <ModalTitle>{i18n.t('Delete relationship')}</ModalTitle>
+                    <ModalTitle>
+                        {i18n.t('Delete {{relationshipLabel}}', { relationshipLabel })}
+                    </ModalTitle>
                     <ModalContent>
-                        {i18n.t('Deleting the relationship is permanent and cannot be undone.')}
+                        {i18n.t(
+                            'Deleting the {{relationshipLabel}} is permanent and cannot be undone.',
+                            { relationshipLabel },
+                        )}
                         {' '}
-                        {i18n.t('Are you sure you want to delete this relationship?')}
+                        {i18n.t(
+                            'Are you sure you want to delete this {{relationshipLabel}}?',
+                            { relationshipLabel },
+                        )}
                     </ModalContent>
 
                     <ModalActions>
@@ -69,7 +79,7 @@ export const DeleteRelationshipPlain = ({
                                     setIsModalOpen(false);
                                 }}
                             >
-                                {i18n.t('Yes, delete relationship')}
+                                {i18n.t('Yes, delete {{relationshipLabel}}', { relationshipLabel })}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

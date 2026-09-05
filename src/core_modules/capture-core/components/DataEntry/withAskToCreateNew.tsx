@@ -2,6 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { RenderFoundation } from '../../metaData';
+import { getTermLabel } from '../../metaData';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
     availableProgramStages?: Array<Record<string, any>>;
     isCompleted?: boolean;
     itemId: string;
+    programId: string;
 };
 
 type State = {
@@ -51,17 +53,17 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             if (!this.state.isOpen) {
                 return null;
             }
-
+            const eventLabel = getTermLabel('event', { programId: this.props.programId });
             return (
                 <Modal
                     hide={!this.state.isOpen}
                     dataTest="modal-ask-to-create-new"
                 >
                     <ModalTitle>
-                        {i18n.t('Generate new event')}
+                        {i18n.t('Generate new {{eventLabel}}', { eventLabel })}
                     </ModalTitle>
                     <ModalContent>
-                        {i18n.t('Do you want to create another event?')}
+                        {i18n.t('Do you want to create another {{eventLabel}}?', { eventLabel })}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>
@@ -81,7 +83,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
                                 }}
                                 primary
                             >
-                                {i18n.t('Yes, create new event')}
+                                {i18n.t('Yes, create new {{eventLabel}}', { eventLabel })}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

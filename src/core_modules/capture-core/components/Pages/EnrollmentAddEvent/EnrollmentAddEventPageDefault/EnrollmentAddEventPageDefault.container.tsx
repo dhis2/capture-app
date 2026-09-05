@@ -26,7 +26,7 @@ import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
-import { TrackerProgram } from '../../../../metaData';
+import { TrackerProgram, useTermLabel } from '../../../../metaData';
 
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
@@ -36,6 +36,7 @@ export const EnrollmentAddEventPageDefault = ({
     trackedEntityInactive,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
+    const programStageLabel = useTermLabel('programStage', { programId, stageId });
 
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
@@ -146,7 +147,7 @@ export const EnrollmentAddEventPageDefault = ({
                 error
                 title={i18n.t('An error has occurred')}
             >
-                {i18n.t('Program stage is invalid')}
+                {i18n.t('{{programStageLabel}} is invalid', { programStageLabel })}
             </NoticeBox>
         );
     }
@@ -159,6 +160,7 @@ export const EnrollmentAddEventPageDefault = ({
                 enrollmentId={enrollmentId}
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
+                stageId={stageId}
                 stageName={selectedProgramStage?.stageForm.name}
                 stageIcon={selectedProgramStage?.icon}
                 eventDateLabel={selectedProgramStage?.stageForm.getLabel('occurredAt')}
