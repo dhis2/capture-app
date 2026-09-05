@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import {
     SingleSelectField,
     withDefaultFieldContainer,
@@ -9,7 +9,6 @@ import {
 import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css';
 import { baseInputStyles } from '../FormComponents/commonProps';
 import type { LinkToExistingProps } from './LinkToExisting.types';
-import { useTermLabel } from '../../../metaData';
 
 const SingleSelectForForm = withDefaultFieldContainer()(
     withLabel({
@@ -30,7 +29,6 @@ export const LinkToExisting = ({
     saveAttempted,
 }: LinkToExistingProps) => {
     const [touched, setTouched] = useState(false);
-    const eventLabel = useTermLabel('event');
 
     const handleChange = (value: string | null) => {
         setTouched(true);
@@ -49,9 +47,8 @@ export const LinkToExisting = ({
         label: event.label,
     }));
 
-    const label = i18n.t('Choose a {{linkableStageLabel}} {{eventLabel}}', {
+    const label = i18n.t('Choose a {{linkableStageLabel}} event', {
         linkableStageLabel,
-        eventLabel,
     });
 
     const shouldShowError = (saveAttempted || touched);
@@ -64,7 +61,7 @@ export const LinkToExisting = ({
             onChange={handleChange}
             onBlur={handleBlur}
             options={options}
-            placeholder={i18n.t('Select an {{eventLabel}}', { eventLabel })}
+            placeholder={i18n.t('Select an event')}
             clearable
             styles={baseInputStyles}
             errorMessage={shouldShowError ? errorMessages.linkedEventId : undefined}

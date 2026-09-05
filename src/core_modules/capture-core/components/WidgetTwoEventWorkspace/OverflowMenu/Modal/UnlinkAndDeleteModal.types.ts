@@ -5,5 +5,4 @@ export type Props = {
     relationshipId: string;
     onDeleteEvent?: (eventId: string) => void;
     onDeleteEventRelationship?: (relationshipId: string) => void;
-    stageId?: string;
 };

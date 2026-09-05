@@ -14,7 +14,6 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -70,7 +69,6 @@ const NewPagePlain = ({
         showMessageThatCategoryOptionIsInvalidForOrgUnit,
     ]);
     const orgUnitId = useSelector(({ currentSelections }: any) => currentSelections.orgUnitId);
-    const orgUnitLabel = useTermLabel('orgUnit');
 
     return (
         <div data-test="registration-page-content" className={classes.container} >
@@ -103,7 +101,7 @@ const NewPagePlain = ({
                             newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                             <>
                                 <IncompleteSelectionsMessage>
-                                    {i18n.t('Choose an {{orgUnitLabel}} to start reporting', { orgUnitLabel })}
+                                    {i18n.t('Choose an organisation unit to start reporting')}
                                 </IncompleteSelectionsMessage>
                                 <Button
                                     dataTest="new-page-cancel-button"
@@ -140,10 +138,7 @@ const NewPagePlain = ({
                         {
                             newPageStatus === newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
                                 <IncompleteSelectionsMessage>
-                                    {i18n.t(
-                                        'The category option is not valid for the selected {{orgUnitLabel}}.',
-                                        { orgUnitLabel },
-                                    )}
+                                    {i18n.t('The category option is not valid for the selected organisation unit.')}
                                     {' '}
                                     {i18n.t('Please select a valid combination.')}
                                 </IncompleteSelectionsMessage>

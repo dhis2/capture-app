@@ -2,7 +2,6 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { useTermLabel } from '../../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -64,42 +63,36 @@ const EmptyStateIcon = () => (
 const documentationLink =
     'https://docs.dhis2.org/en/use/user-guides/dhis-core-version-master/tracking-individual-level-data/capture.html';
 
-const NoSelectionsInfoBoxPlain = ({ classes }: Props) => {
-    const orgUnitLabel = useTermLabel('orgUnit');
-    return (
-        <div className={classes.container}>
-            <div className={classes.innerBox}>
-                <div className={classes.iconContainer}>
-                    <EmptyStateIcon />
-                </div>
-                <h1 className={classes.headingText}>
-                    {i18n.t('Get started with Capture app')}
-                </h1>
-                <div className={classes.content}>
-                    <span>
-                        <strong>{i18n.t('Report data')}</strong>:{' '}
-                        {i18n.t(
-                            'Choose a program and {{orgUnitLabel}} to see existing data and create new records.',
-                            { orgUnitLabel },
-                        )}
-                    </span>
-                    <span>
-                        <strong>{i18n.t('Search')}</strong>:{' '}
-                        {i18n.t('Click \'Search\'. For program-specific results, choose a program first.')}
-                    </span>
-                </div>
-
-                <a
-                    className={classes.link}
-                    href={documentationLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {i18n.t('Learn more about Capture app')}
-                </a>
+const NoSelectionsInfoBoxPlain = ({ classes }: Props) => (
+    <div className={classes.container}>
+        <div className={classes.innerBox}>
+            <div className={classes.iconContainer}>
+                <EmptyStateIcon />
             </div>
+            <h1 className={classes.headingText}>
+                {i18n.t('Get started with Capture app')}
+            </h1>
+            <div className={classes.content}>
+                <span>
+                    <strong>{i18n.t('Report data')}</strong>:{' '}
+                    {i18n.t('Choose a program and organisation unit to see existing data and create new records.')}
+                </span>
+                <span>
+                    <strong>{i18n.t('Search')}</strong>:{' '}
+                    {i18n.t('Click \'Search\'. For program-specific results, choose a program first.')}
+                </span>
+            </div>
+
+            <a
+                className={classes.link}
+                href={documentationLink}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {i18n.t('Learn more about Capture app')}
+            </a>
         </div>
-    );
-};
+    </div>
+);
 
 export const NoSelectionsInfoBox = withStyles(styles)(NoSelectionsInfoBoxPlain);

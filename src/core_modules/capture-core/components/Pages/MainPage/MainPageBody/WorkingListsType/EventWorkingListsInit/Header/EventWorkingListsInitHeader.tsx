@@ -1,9 +1,8 @@
-import i18n from '@dhis2/d2-i18n';
 import { colors, spacers } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { type Props } from './eventWorkingListsInitHeader.types';
-import { useTermLabel } from '../../../../../../../metaData';
 
 export const styles = () => ({
     container: {
@@ -26,27 +25,24 @@ export const styles = () => ({
 });
 
 const EventWorkingListsInitHeaderPlain =
-    ({ children, classes: { container, headerContainer, listContainer, title } }: Props & WithStyles<typeof styles>) => {
-        const eventsLabel = useTermLabel('event', { plural: true });
-        return (
-            <div className={container}>
-                <div
-                    className={headerContainer}
+    ({ children, classes: { container, headerContainer, listContainer, title } }: Props & WithStyles<typeof styles>) => (
+        <div className={container}>
+            <div
+                className={headerContainer}
+            >
+                <span
+                    className={title}
                 >
-                    <span
-                        className={title}
-                    >
-                        {i18n.t('Registered {{eventsLabel}}', { eventsLabel })}
-                    </span>
-                </div>
-                <div
-                    className={listContainer}
-                >
-                    {children}
-                </div>
+                    {i18n.t('Registered events')}
+                </span>
             </div>
-        );
-    };
+            <div
+                className={listContainer}
+            >
+                {children}
+            </div>
+        </div>
+    );
 
 export const EventWorkingListsInitHeader =
     withStyles(styles)(EventWorkingListsInitHeaderPlain) as ComponentType<Props>;

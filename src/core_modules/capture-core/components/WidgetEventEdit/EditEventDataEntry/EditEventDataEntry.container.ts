@@ -7,13 +7,13 @@ import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
     batchActionTypes,
 } from '../DataEntry/editEventDataEntry.actions';
 import type { RenderFoundation } from '../../../metaData';
+
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,
 } from '../../DataEntry/actions/dataEntry.actions';
@@ -24,13 +24,8 @@ import {
     startCreateNewAfterCompleting,
     requestSaveAndCompleteEnrollment,
 } from './editEventDataEntry.actions';
-import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-    eventLabel: { key: 'event' },
-    eventsLabel: { key: 'event', plural: true },
-} as const;
+import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
 const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -163,5 +158,5 @@ const mapDispatchToProps = (dispatch: any, props: any): any => ({
 });
 
 export const EditEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withCustomLabels(customLabels)(EditEventDataEntryComponent)),
+    withLoadingIndicator()(EditEventDataEntryComponent),
 );

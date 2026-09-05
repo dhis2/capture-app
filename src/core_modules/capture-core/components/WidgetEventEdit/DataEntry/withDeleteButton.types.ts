@@ -5,7 +5,6 @@ export type Props = {
     formHorizontal?: boolean;
     formFoundation: RenderFoundation;
     hasDeleteButton?: boolean;
-    programId: string;
 };
 
 export type State = {

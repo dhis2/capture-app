@@ -1,10 +1,10 @@
-import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
-import { getTermLabel } from '../../../../metaData';
+
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
     enrollmentPageActionTypes,
@@ -119,15 +119,12 @@ const handleErrorsFromNewerBackends = ({
             querySingleResource,
         }));
     }
-    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
-    const errorMessage = i18n.t(
-        'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
-        { enrollmentsLabel },
-    );
+    const errorMessage =
+        i18n.t('An error occurred while fetching enrollments. Please enter a valid url.');
     return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
 };
 
-const handleErrorsFromOlderBackends = (error: any, programId: string) => {
+const handleErrorsFromOlderBackends = (error: any) => {
     const { message } = error || {};
     if (message) {
         if (message.includes(serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED)) {
@@ -140,11 +137,7 @@ const handleErrorsFromOlderBackends = (error: any, programId: string) => {
             return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
         }
     }
-    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
-    const errorMessage = i18n.t(
-        'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
-        { enrollmentsLabel },
-    );
+    const errorMessage = i18n.t('An error occurred while fetching enrollments. Please enter a valid url.');
     return showErrorViewOnEnrollmentPage({ error: errorMessage });
 };
 
@@ -172,7 +165,7 @@ export const fetchEnrollmentsEpic = (action$: any, store: any, { querySingleReso
                                 querySingleResource,
                             });
                         }
-                        return of(handleErrorsFromOlderBackends(error, programId));
+                        return of(handleErrorsFromOlderBackends(error));
                     }),
                     map((action: any) => verifyFetchedEnrollments({ teiId, programId, action })),
                 );

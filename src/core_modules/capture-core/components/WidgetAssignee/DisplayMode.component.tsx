@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers, spacersNum, UserAvatar } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Assignee } from './WidgetAssignee.types';
-import { useTermLabel } from '../../metaData';
 
 const styles = () => ({
     wrapper: {
@@ -33,38 +32,32 @@ type Props = {
     onEdit: () => void;
     readOnly?: boolean;
     avatarId?: string;
-    programId?: string;
-    stageId?: string;
 } & WithStyles<typeof styles>;
 
-const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, programId, stageId, classes }: Props) => {
-    const eventLabel = useTermLabel('event', { programId, stageId });
-    if (assignee) {
-        return (
-            <div className={classes.wrapper}>
-                <div className={classes.avatarWrapper}>
-                    {i18n.t('Assigned to')}
-                    <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} small />
-                    {assignee.name}
-                </div>
-                {!readOnly && (
-                    <Button
-                        onClick={onEdit}
-                        className={classes.editButton}
-                        dataTest="widget-assignee-edit"
-                        secondary
-                        small
-                    >
-                        {i18n.t('Edit')}
-                    </Button>
-                )}
+const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, classes }: Props) => (
+    assignee ? (
+        <div className={classes.wrapper}>
+            <div className={classes.avatarWrapper}>
+                {i18n.t('Assigned to')}
+                <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} small />
+                {assignee.name}
             </div>
-        );
-    }
-    return (
+            {!readOnly && (
+                <Button
+                    onClick={onEdit}
+                    className={classes.editButton}
+                    dataTest="widget-assignee-edit"
+                    secondary
+                    small
+                >
+                    {i18n.t('Edit')}
+                </Button>
+            )}
+        </div>
+    ) : (
         <div>
             <div className={classes.emptyMessage} data-test="widget-assignee-empty-message">
-                {i18n.t('No one is assigned to this {{eventLabel}}', { eventLabel })}
+                {i18n.t('No one is assigned to this event')}
             </div>
             {!readOnly && (
                 <Button
@@ -77,7 +70,7 @@ const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, progra
                 </Button>
             )}
         </div>
-    );
-};
+    )
+);
 
 export const DisplayMode = withStyles(styles)(DisplayModePlain);

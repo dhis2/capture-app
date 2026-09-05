@@ -42,10 +42,9 @@ const Breadcrumblink = withStyles(breadcrumblinkStyles)(
 const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyles>) =>
     <span className={classes.slash}>/</span>);
 
-const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate, trackedEntityTypeName, relationshipLabel }: any) => {
-    const initialText = i18n.t('New {{trackedEntityTypeName}} {{relationshipLabel}}', {
+const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate, trackedEntityTypeName }: any) => {
+    const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
         trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
-        relationshipLabel,
     });
     return (currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.value ?
         <Breadcrumblink onClick={onNavigate}>{initialText}</Breadcrumblink> :
@@ -95,14 +94,12 @@ const BreadcrumbsPlain = ({
     onNavigate,
     linkedEntityMetadataName,
     trackedEntityTypeName,
-    relationshipLabel,
     classes,
 }: Props) => (
     <div className={classes.container}>
         <LinkedEntityMetadataSelectorStep
             currentStep={currentStep}
             trackedEntityTypeName={trackedEntityTypeName}
-            relationshipLabel={relationshipLabel}
             onNavigate={() =>
                 onNavigate(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA)}
         />

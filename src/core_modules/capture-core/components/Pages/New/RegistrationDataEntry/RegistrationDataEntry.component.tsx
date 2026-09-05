@@ -5,7 +5,7 @@ import { Button, colors, spacers } from '@dhis2/ui';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { OwnProps, ContainerProps } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
-import { scopeTypes, useTermLabel } from '../../../../metaData';
+import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
@@ -126,7 +126,6 @@ const RegistrationDataEntryPlain = ({
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
     const currentOrgUnitId = useCurrentOrgUnitId();
-    const enrollmentLabel = useTermLabel('enrollment', { programId: selectedScopeId });
 
     const onCancel = useCallback(() => {
         let url;
@@ -199,10 +198,10 @@ const RegistrationDataEntryPlain = ({
                 <div className={classes.container}>
                     <div className={classes.title} >
                         {
-                            teiId ? i18n.t('New {{enrollmentLabel}} in program{{escape}} {{programName}}', {
-                                enrollmentLabel,
+                            teiId ? i18n.t('New Enrollment in program{{escape}} {{programName}}', {
                                 escape: ':',
                                 programName,
+                                interpolation: { escapeValue: false },
                             }) : i18n.t('New {{titleText}}', {
                                 titleText,
                                 interpolation: { escapeValue: false },

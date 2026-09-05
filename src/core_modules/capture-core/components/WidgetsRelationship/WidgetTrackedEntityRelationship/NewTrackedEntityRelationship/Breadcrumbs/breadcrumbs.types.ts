@@ -9,5 +9,4 @@ export type PlainProps = {
     ) => void;
     readonly trackedEntityTypeName?: string;
     readonly linkedEntityMetadataName?: string;
-    readonly relationshipLabel: string;
 };

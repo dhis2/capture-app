@@ -22,16 +22,10 @@ export const eventNotesLoaded = () =>
 export const updateEventNoteField = (value: string) =>
     actionCreator(actionTypes.UPDATE_EVENT_NOTE_FIELD)({ value });
 
-export const requestSaveEventNote = (note: string, programId: string) =>
-    actionCreator(actionTypes.REQUEST_SAVE_EVENT_NOTE)({ note, programId });
+export const requestSaveEventNote = (note: string) =>
+    actionCreator(actionTypes.REQUEST_SAVE_EVENT_NOTE)({ note });
 
-export const startSaveEventNote = (
-    eventUid: string,
-    serverData: any,
-    selections: any,
-    clientId: string,
-    programId: string,
-) =>
+export const startSaveEventNote = (eventUid: string, serverData: any, selections: any, clientId: string) =>
     actionCreator(actionTypes.START_SAVE_EVENT_NOTE)({ selections, clientId }, {
         offline: {
             effect: {
@@ -42,9 +36,6 @@ export const startSaveEventNote = (
                 data: serverData,
             },
             commit: { type: actionTypes.EVENT_NOTE_SAVED, meta: { selections, clientId } },
-            rollback: {
-                type: actionTypes.SAVE_EVENT_NOTE_FAILED,
-                meta: { selections, clientId, programId },
-            },
+            rollback: { type: actionTypes.SAVE_EVENT_NOTE_FAILED, meta: { selections, clientId } },
         },
     });

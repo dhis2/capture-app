@@ -198,11 +198,11 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: props.orgUnitLabel,
+            label: i18n.t('Organisation unit'),
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -312,10 +312,9 @@ const buildNotesSettingsFn = () => {
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,
-            noteLabel: props.noteLabel,
         }),
         getPropName: () => 'note',
-        getValidatorContainers: (props: any) => getNoteValidatorContainers(props.eventLabel, props.noteLabel),
+        getValidatorContainers: () => getNoteValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.NOTES,

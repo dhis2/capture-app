@@ -13,21 +13,17 @@ import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkModal.types';
-import { useTermLabel } from '../../../../metaData';
 
 export const UnlinkModal = ({
     setOpenModal,
     relationshipId,
     originEventId,
     onDeleteEventRelationship,
-    stageId,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const eventLabel = useTermLabel('event', { stageId });
-    const eventsLabel = useTermLabel('event', { stageId, plural: true });
     const { show: showErrorAlert } = useAlert(
-        i18n.t('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
+        i18n.t('An error occurred while unlinking and deleting the event.'),
         { critical: true },
     );
 
@@ -63,19 +59,13 @@ export const UnlinkModal = ({
     return (
         <Modal dataTest="event-unlink-modal">
             <ModalTitle>
-                {i18n.t('Unlink {{eventLabel}}', { eventLabel })}
+                {i18n.t('Unlink event')}
             </ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t(
-                        'Are you sure you want to remove the link between these {{eventsLabel}}?',
-                        { eventsLabel },
-                    )}
+                    {i18n.t('Are you sure you want to remove the link between these events?')}
                     {' '}
-                    {i18n.t(
-                        'This action removes the link itself, but the linked {{eventLabel}} will remain.',
-                        { eventLabel },
-                    )}
+                    {i18n.t('This action removes the link itself, but the linked event will remain.')}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -89,7 +79,7 @@ export const UnlinkModal = ({
                         disabled={mutation.isLoading}
                         dataTest="event-overflow-unlink-event-confirm"
                     >
-                        {i18n.t('Yes, unlink {{eventLabel}}', { eventLabel })}
+                        {i18n.t('Yes, unlink event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

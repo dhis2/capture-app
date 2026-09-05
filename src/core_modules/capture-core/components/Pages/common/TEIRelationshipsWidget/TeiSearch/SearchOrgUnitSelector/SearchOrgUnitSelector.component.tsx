@@ -1,6 +1,5 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import {
     SelectionBoxes,
     withDefaultFieldContainer,
@@ -34,7 +33,6 @@ type Props = {
     onSetOrgUnit: (searchId: string, orgUnit?: Record<string, unknown>) => void;
     onFilterOrgUnits: (searchId: string, searchText: string) => void;
     searchAttempted?: boolean;
-    orgUnitLabel: string;
 };
 
 const orgUnitFieldStyles = {
@@ -81,7 +79,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
 
     getErrorMessage = () => {
         if (!this.isValid() && this.props.searchAttempted) {
-            return i18n.t('Please select an {{orgUnitLabel}}.', { orgUnitLabel: this.props.orgUnitLabel });
+            return i18n.t('Please select an organisation unit.');
         }
         return null;
     }
@@ -114,11 +112,11 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
     }
 
     renderOrgUnitScopeSelector = () => {
-        const { selectedOrgUnitScope, orgUnitLabel } = this.props;
+        const { selectedOrgUnitScope } = this.props;
         return (
             <TeiSearchSelectionBoxes
                 options={options}
-                label={i18n.t('{{orgUnitLabel}} scope', { orgUnitLabel })}
+                label={i18n.t('Organisation unit scope')}
                 styles={selectionBoxesStyles}
                 onSelect={this.onSelectOrgUnitScope}
                 value={selectedOrgUnitScope}
@@ -127,10 +125,10 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
     }
 
     renderOrgUnitField = () => {
-        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, orgUnitLabel } = this.props;
+        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText } = this.props;
         return (
             <TeiSearchOrgUnitField
-                label={capitalizeFirstLetter(orgUnitLabel)}
+                label={i18n.t('Organisation unit')}
                 styles={orgUnitFieldStyles}
                 searchText={treeSearchText}
                 roots={treeRoots}

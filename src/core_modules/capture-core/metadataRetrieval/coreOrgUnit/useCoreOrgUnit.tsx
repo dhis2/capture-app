@@ -1,11 +1,10 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useSelector, useDispatch } from 'react-redux';
 import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { useOrganisationUnit } from '../../dataQueries';
 import { orgUnitFetched } from './coreOrgUnit.actions';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
-import { useTermLabel } from '../../metaData';
 
 export function useCoreOrgUnit(orgUnitId: string): {
     orgUnit?: CoreOrgUnit,
@@ -17,13 +16,6 @@ export function useCoreOrgUnit(orgUnitId: string): {
     // These hooks do no work when id is undefined
     const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
     const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
-    const orgUnitLabel = useTermLabel('orgUnit');
-
-    const errorComponent = (
-        <div>
-            {i18n.t('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
-        </div>
-    );
 
     if (reduxOrgUnit) {
         return { orgUnit: reduxOrgUnit };
@@ -48,3 +40,9 @@ export function useCoreOrgUnit(orgUnitId: string): {
 
     return {};
 }
+
+const errorComponent = (
+    <div>
+        {i18n.t('organisation unit could not be retrieved. Please try again later.')}
+    </div>
+);

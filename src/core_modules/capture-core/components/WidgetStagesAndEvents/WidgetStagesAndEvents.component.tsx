@@ -60,7 +60,6 @@ const WidgetStagesAndEventsPlain = ({
                                 <ReadOnlyBadge
                                     programStageWriteAccess={!anyStageReadAccess || anyStageWriteAccess}
                                     multipleStages={multipleStages}
-                                    programId={programId}
                                 />
                             </div>
                         )}

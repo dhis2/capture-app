@@ -38,7 +38,7 @@ export const useLifecycle = ({
     useEffect(() => {
         if (!isLoading) {
             dispatch(batchActions([
-                ...getOpenDataEntryActions(dataEntryId, itemId, program.id, programCategory, orgUnitContext),
+                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory, orgUnitContext),
             ]));
             dataEntryReadyRef.current = true;
             delayRulesExecutionRef.current = true;

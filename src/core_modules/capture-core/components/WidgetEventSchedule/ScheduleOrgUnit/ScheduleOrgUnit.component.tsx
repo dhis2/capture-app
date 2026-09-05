@@ -1,7 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
 import {
@@ -11,7 +10,6 @@ import {
     withInternalChangeHandler,
     withLabel,
 } from '../../FormFields/New';
-import { useTermLabel } from '../../../metaData';
 
 type OrgUnitValue = {
     checked: boolean;
@@ -47,7 +45,6 @@ export const ScheduleOrgUnit = ({
     orgUnit,
 }: Props) => {
     const [touched, setTouched] = useState(false);
-    const orgUnitLabel = useTermLabel('orgUnit');
 
     const handleSelect = (event: any) => {
         setTouched(true);
@@ -60,11 +57,11 @@ export const ScheduleOrgUnit = ({
     };
 
     const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
-    const errorMessages = i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel });
+    const errorMessages = i18n.t('Please provide a valid organisation unit');
 
     return (
         <OrgUnitFieldForForm
-            label={capitalizeFirstLetter(orgUnitLabel)}
+            label={i18n.t('Organisation unit')}
             value={orgUnit}
             required
             onSelectClick={handleSelect}

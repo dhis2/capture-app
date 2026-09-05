@@ -8,7 +8,7 @@ import { EnrollmentAccessProvider } from '../../common/EnrollmentOverviewDomain'
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
-import { TrackerProgram, useTermLabel } from '../../../../metaData';
+import { TrackerProgram } from '../../../../metaData';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     container: {
@@ -58,7 +58,6 @@ const EnrollmentAddEventPagePain = ({
     classes,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const eventLabel = useTermLabel('event', { programId: program?.id });
     if (pageFailure) {
         return (
             <div>
@@ -94,14 +93,8 @@ const EnrollmentAddEventPagePain = ({
                     onEnrollmentError={onEnrollmentError}
                     onEnrollmentSuccess={onEnrollmentSuccess}
                     onAccessLostFromTransfer={onAccessLostFromTransfer}
-                    feedbackEmptyText={i18n.t(
-                        'No feedback for this {{eventLabel}} yet',
-                        { eventLabel },
-                    )}
-                    indicatorEmptyText={i18n.t(
-                        'No indicator output for this {{eventLabel}} yet',
-                        { eventLabel },
-                    )}
+                    feedbackEmptyText={i18n.t('No feedback for this event yet')}
+                    indicatorEmptyText={i18n.t('No indicator output for this event yet')}
                 />
             </div>
         </EnrollmentAccessProvider>

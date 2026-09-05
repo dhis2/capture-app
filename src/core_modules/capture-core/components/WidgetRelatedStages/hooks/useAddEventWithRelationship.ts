@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { relatedStageActions } from '../constants';
-import { useTermLabel } from '../../../metaData';
 
 const ReactQueryAppNamespace = 'capture';
 
@@ -31,7 +30,6 @@ export const useAddEventWithRelationship = ({
     const queryClient = useQueryClient();
     const { show: showSuccess } = useAlert(({ message }) => message, { success: true });
     const { show: showAlert } = useAlert(({ message }) => message, { critical: true });
-    const eventLabel = useTermLabel('event');
 
     const { mutate } = useMutation(
         ({ serverData }: { serverData: any }) =>
@@ -57,22 +55,12 @@ export const useAddEventWithRelationship = ({
                 if (payload.linkMode === relatedStageActions.ENTER_DATA && payload.eventIdToRedirectTo) {
                     onNavigateToEvent(payload.eventIdToRedirectTo);
                 } else {
-                    showSuccess({
-                        message: i18n.t(
-                            'The {{eventLabel}} was successfully linked',
-                            { eventLabel },
-                        ),
-                    });
+                    showSuccess({ message: i18n.t('The event was successfully linked') });
                 }
             },
             onError: (_, payload: { serverData: Record<string, unknown> }) => {
                 setIsLinking(false);
-                showAlert({
-                    message: i18n.t(
-                        'An error occurred while linking the {{eventLabel}}',
-                        { eventLabel },
-                    ),
-                });
+                showAlert({ message: i18n.t('An error occurred while linking the event') });
                 onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError((payload.serverData as any).events);
             },
         },

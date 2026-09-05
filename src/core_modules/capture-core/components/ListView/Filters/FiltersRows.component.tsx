@@ -1,9 +1,8 @@
-import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Filters } from './Filters.component';
-import { useTermLabel } from '../../../metaData';
 import type {
     Column,
     FiltersOnly,
@@ -68,44 +67,39 @@ export const FiltersRowsPlain = ({
     shouldRenderAdditionalFiltersButtons,
     visibleSelectorId,
     classes,
-}: Props & WithStyles<typeof getStyles>) => {
-    const programStageLabel = useTermLabel('programStage');
-    return (
-        <>
-            <div className={classes.filtersButtons}>
-                <Filters
-                    columns={columns.filter(item => !item.additionalColumn)}
-                    filtersOnly={filtersOnly}
-                    additionalFilters={additionalFilters}
-                    onUpdateFilter={onUpdateFilter}
-                    onClearFilter={onClearFilter}
-                    onSelectRestMenuItem={onSelectRestMenuItem}
-                    stickyFilters={stickyFilters}
-                />
-            </div>
-            {shouldRenderAdditionalFiltersButtons && (
-                <>
+}: Props & WithStyles<typeof getStyles>) => (
+    <>
+        <div className={classes.filtersButtons}>
+            <Filters
+                columns={columns.filter(item => !item.additionalColumn)}
+                filtersOnly={filtersOnly}
+                additionalFilters={additionalFilters}
+                onUpdateFilter={onUpdateFilter}
+                onClearFilter={onClearFilter}
+                onSelectRestMenuItem={onSelectRestMenuItem}
+                stickyFilters={stickyFilters}
+            />
+        </div>
+        {shouldRenderAdditionalFiltersButtons && (
+            <>
+                <div className={classes.break} />
+                <div className={classes.additionalFiltersContainer}>
+                    <div className={classes.additionalFiltersTitle}>{i18n.t('Stage filters').toUpperCase()}</div>
                     <div className={classes.break} />
-                    <div className={classes.additionalFiltersContainer}>
-                        <div className={classes.additionalFiltersTitle}>
-                            {i18n.t('{{programStageLabel}} filters', { programStageLabel }).toUpperCase()}
-                        </div>
-                        <div className={classes.break} />
-                        <Filters
-                            columns={columns.filter(item => item.additionalColumn)}
-                            filtersOnly={additionalFilters}
-                            onUpdateFilter={onUpdateFilter}
-                            onClearFilter={onClearFilter}
-                            onSelectRestMenuItem={onSelectRestMenuItem}
-                            stickyFilters={stickyFilters}
-                            visibleSelectorId={visibleSelectorId}
-                            onRemoveFilter={itemId => onRemoveFilter(itemId, stickyFilters.filtersWithValueOnInit)}
-                        />
-                    </div>
-                </>
-            )}
-        </>
-    );
-};
+                    <Filters
+                        columns={columns.filter(item => item.additionalColumn)}
+                        filtersOnly={additionalFilters}
+                        onUpdateFilter={onUpdateFilter}
+                        onClearFilter={onClearFilter}
+                        onSelectRestMenuItem={onSelectRestMenuItem}
+                        stickyFilters={stickyFilters}
+                        visibleSelectorId={visibleSelectorId}
+                        onRemoveFilter={itemId => onRemoveFilter(itemId, stickyFilters.filtersWithValueOnInit)}
+                    />
+                </div>
+            </>
+        )}
+    </>
+);
 
 export const FiltersRowsComponent = withStyles(getStyles)(FiltersRowsPlain);
