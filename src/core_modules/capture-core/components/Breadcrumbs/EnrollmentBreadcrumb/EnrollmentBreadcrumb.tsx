@@ -1,7 +1,8 @@
-import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
+import { useTermLabel } from '../../../metaData';
 import { DirectionalChevron } from '../../../utils/rtl';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -68,6 +69,8 @@ const BreadcrumbsPlain = ({
     classes,
 }: Props) => {
     const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
+    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const eventLabel = useTermLabel('event', { programId });
 
     const { label } = useWorkingListLabel({
         programId,
@@ -101,14 +104,14 @@ const BreadcrumbsPlain = ({
         {
             key: pageKeys.OVERVIEW,
             onClick: () => handleNavigation(onBackToDashboard, pageKeys.OVERVIEW),
-            label: i18n.t('Enrollment dashboard'),
+            label: i18n.t('{{enrollmentLabel}} dashboard', { enrollmentLabel }),
             selected: page === pageKeys.OVERVIEW,
             condition: true,
         },
         {
             key: pageKeys.VIEW_EVENT,
             onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
-            label: i18n.t('View event'),
+            label: i18n.t('View {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT ||
                 (page === pageKeys.EDIT_EVENT && !eventIsScheduled(eventStatus)),
@@ -116,14 +119,14 @@ const BreadcrumbsPlain = ({
         {
             key: pageKeys.EDIT_EVENT,
             onClick: () => undefined,
-            label: i18n.t('Edit event'),
+            label: i18n.t('Edit {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
         {
             key: pageKeys.NEW_EVENT,
             onClick: () => undefined,
-            label: i18n.t('New event'),
+            label: i18n.t('New {{eventLabel}}', { eventLabel }),
             selected: page === pageKeys.NEW_EVENT,
             condition: page === pageKeys.NEW_EVENT,
         },
@@ -135,6 +138,8 @@ const BreadcrumbsPlain = ({
         onBackToMainPage,
         onBackToDashboard,
         onBackToViewEvent,
+        enrollmentLabel,
+        eventLabel,
     ]);
 
     return (

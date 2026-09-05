@@ -16,6 +16,7 @@ import { D2Form } from '../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import type { Props } from './TeiSearchForm.types';
 import { withGotoInterface } from '../../FormFields/New';
+import { useTermLabel } from '../../../metaData';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
@@ -43,6 +44,20 @@ const styles: Readonly<any> = (theme: any) => ({
 
 type State = {
     showMissingSearchCriteriaModal: boolean;
+};
+
+const MinAttributesRequiredMessage = ({ count }: { count: number }) => {
+    const attributeLabel = useTermLabel('attribute');
+    return (
+        <>
+            {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
+                count,
+                attributeLabel,
+                defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
+                defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+            })}
+        </>
+    );
 };
 
 class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>, State> {
@@ -143,13 +158,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
 
         return (
             <div className={minAttributesRequiredClass}>
-                {
-                    i18n.t('Fill in at least {{count}} attribute to search', {
-                        count: searchGroup.minAttributesRequiredToSearch,
-                        defaultValue: 'Fill in at least {{count}} attribute to search',
-                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    })
-                }
+                <MinAttributesRequiredMessage count={searchGroup.minAttributesRequiredToSearch} />
             </div>
         );
     }
@@ -197,7 +206,7 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
         }
         const searchButtonText = searchGroup.unique
             ? this.getUniqueSearchButtonText(searchForm)
-            : i18n.t('Search by attributes');
+            : i18n.t('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
         return (
             <div
                 data-test="d2-form-area"
@@ -227,4 +236,9 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     }
 }
 
-export const TeiSearchFormComponent = withStyles(styles)(SearchFormPlain);
+const TeiSearchFormWithStyles = withStyles(styles)(SearchFormPlain);
+
+export const TeiSearchFormComponent = (props: Omit<Props, 'attributesLabel'>) => {
+    const attributesLabel = useTermLabel('attribute', { plural: true });
+    return <TeiSearchFormWithStyles {...props} attributesLabel={attributesLabel} />;
+};

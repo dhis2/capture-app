@@ -2,16 +2,22 @@ import React from 'react';
 import { IconAdd16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
+import { useTermLabel } from '../../../../metaData';
 import type { Props } from './addNew.types';
 
 export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, onAddNew }: Props) => {
+    const enrollmentLabel = useTermLabel('enrollment');
+
     if (!canAddNew) {
         return null;
     }
 
     return (
         <ConditionalTooltip
-            content={i18n.t('Only one enrollment per {{tetName}} is allowed in this program', { tetName })}
+            content={i18n.t(
+                'Only one {{enrollmentLabel}} per {{tetName}} is allowed in this program',
+                { enrollmentLabel, tetName },
+            )}
             enabled={onlyEnrollOnce}
         >
             <MenuItem

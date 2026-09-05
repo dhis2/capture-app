@@ -1,11 +1,12 @@
-import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { useMemo } from 'react';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
 import { RelationshipsWidget } from '../common/RelationshipsWidget';
 import { RelationshipSearchEntities, useRelationships } from '../common/useRelationships';
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
+import { useTermLabel } from '../../../metaData';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -27,6 +28,7 @@ export const WidgetTrackedEntityRelationship = ({
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
+    const relationshipLabel = useTermLabel('relationship', { programId });
     const {
         data: relationships,
         isError,
@@ -44,7 +46,10 @@ export const WidgetTrackedEntityRelationship = ({
     if (isError) {
         return (
             <div>
-                {i18n.t('Something went wrong while loading relationships. Please try again later.')}
+                {i18n.t(
+                    'Something went wrong while loading {{relationshipLabel}}. Please try again later.',
+                    { relationshipLabel },
+                )}
             </div>
         );
     }
@@ -55,8 +60,9 @@ export const WidgetTrackedEntityRelationship = ({
 
     return (
         <RelationshipsWidget
-            title={i18n.t('{{trackedEntityTypeName}} relationships', {
+            title={i18n.t('{{trackedEntityTypeName}} {{relationshipLabel}}', {
                 trackedEntityTypeName,
+                relationshipLabel,
                 interpolation: { escapeValue: false },
             })}
             isLoading={isLoading}

@@ -1,10 +1,11 @@
-import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
+import { useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = {
     wrapper: {
@@ -60,6 +61,7 @@ export const EnterDataInOrgUnitPlain = ({
     errorMessages,
     classes,
 }: Props) => {
+    const orgUnitLabel = useTermLabel('orgUnit');
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         const orgUnit = {
             id: e.id,
@@ -95,11 +97,12 @@ export const EnterDataInOrgUnitPlain = ({
                 <IconInfo16 />
                 {i18n.t(
                     relatedStagesDataValues?.orgUnit?.name
-                        ? 'Enter {{linkableStageLabel}} details for {{orgUnitLabel}} in the next step'
-                        : 'Select organisation unit and enter {{linkableStageLabel}} details in the next step',
+                        ? 'Enter {{linkableStageLabel}} details for {{orgUnitName}} in the next step'
+                        : 'Select {{orgUnitLabel}} and enter {{linkableStageLabel}} details in the next step',
                     {
                         linkableStageLabel,
-                        orgUnitLabel: relatedStagesDataValues?.orgUnit?.name,
+                        orgUnitName: relatedStagesDataValues?.orgUnit?.name,
+                        orgUnitLabel,
                     },
                 )}
             </div>

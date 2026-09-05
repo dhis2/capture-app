@@ -33,7 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound, getTermLabel } from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
@@ -362,30 +362,31 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         inMemoryFileStore.clear();
     }
 
-    static dataEntrySectionDefinitions = {
-        [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
-            placement: placements.TOP,
-            name: i18n.t('Enrollment'),
-        },
-        [AOCsectionKey]: {
-            placement: placements.BOTTOM,
-        },
-    };
-
     render() {
-        const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, ...passOnProps } = this.props;
+        const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, programId, ...passOnProps } = this.props;
+
+        const dataEntrySections = {
+            [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
+                placement: placements.TOP,
+                name: getTermLabel('enrollment', { programId }),
+            },
+            [AOCsectionKey]: {
+                placement: placements.BOTTOM,
+            },
+        };
 
         return (
             firstStageMetaData ? (
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
+                    programId={programId}
                     firstStageMetaData={firstStageMetaData}
                     relatedStageActionsOptions={relatedStageActionsOptions}
                 />
             ) : (
                 <DataEntry
                     {...passOnProps}
-                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                    dataEntrySections={dataEntrySections}
                 />
             )
         );

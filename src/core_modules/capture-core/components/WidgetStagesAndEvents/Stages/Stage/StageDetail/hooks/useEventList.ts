@@ -4,8 +4,9 @@ import log from 'loglevel';
 import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
+import { dataElementTypes, DataElement, OptionSet, Option, useTermLabel } from '../../../../../../metaData';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
@@ -37,7 +38,7 @@ const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Assigned to'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    { header: i18n.t('Organisation unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: props.orgUnitLabel, sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('scheduledAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: '', sortDirection: null, isPredefined: true },
 ];
@@ -117,7 +118,10 @@ const useComputeHeaderColumn = (
     hideDueDate: boolean,
     enableUserAssignment: boolean,
     formFoundation?: { getLabel: (key: string) => string },
+    programId?: string,
+    stageId?: string,
 ) => {
+    const orgUnitLabel = capitalizeFirstLetter(useTermLabel('orgUnit', { programId, stageId }));
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
@@ -131,13 +135,13 @@ const useComputeHeaderColumn = (
             return acc;
         }, [] as Array<{ id: string; header: string; type: keyof typeof dataElementTypes; sortDirection: string }>);
         return [
-            ...getBaseColumns({ formFoundation })
+            ...getBaseColumns({ formFoundation, orgUnitLabel })
                 .filter(col =>
                     (enableUserAssignment || col.id !== 'assignedUser') &&
                     (!hideDueDate || col.id !== 'scheduledAt'),
                 ),
             ...dataElementHeaders];
-    }, [dataElements, hideDueDate, enableUserAssignment, formFoundation]);
+    }, [dataElements, hideDueDate, enableUserAssignment, formFoundation, orgUnitLabel]);
 
     return headerColumns;
 };

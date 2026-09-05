@@ -166,10 +166,17 @@ const buildScheduleDateSettingsFn = () => {
                             const isScheduleableStatus =
                             [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
 
+                            const eventLabel = innerProps.eventLabel;
+                            const eventsLabel = innerProps.eventsLabel;
                             return isScheduleableStatus ?
-                                i18n.t('Go to “Schedule” tab to reschedule this event') :
-                                i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
-                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
+                                i18n.t(
+                                    'Go to “Schedule” tab to reschedule this {{eventLabel}}',
+                                    { eventLabel },
+                                ) :
+                                i18n.t(
+                                    'Scheduled date cannot be changed for {{ eventStatus }} {{eventsLabel}}',
+                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus], eventsLabel },
+                                );
                         },
                     })(
                         withDisplayMessages()(
@@ -225,11 +232,11 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: i18n.t('Organisation unit'),
+            label: props.orgUnitLabel,
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -328,7 +335,10 @@ const buildCompleteFieldSettingsFn = () => {
                                     const canUncompleteEvent = props.canUncompleteEvent;
                                     const shouldDisable = isEventCompleted && !canUncompleteEvent;
                                     return shouldDisable
-                                        ? i18n.t('You do not have access to uncomplete this event')
+                                        ? i18n.t(
+                                            'You do not have access to uncomplete this {{eventLabel}}',
+                                            { eventLabel: props.eventLabel },
+                                        )
                                         : undefined;
                                 })(TrueOnlyField),
                             ),
@@ -346,7 +356,7 @@ const buildCompleteFieldSettingsFn = () => {
             const shouldDisable = isEventCompleted && !canUncompleteEvent;
 
             return createComponentProps(props, {
-                label: i18n.t('Complete event'),
+                label: i18n.t('Complete {{eventLabel}}', { eventLabel: props.eventLabel }),
                 id: 'complete',
                 disabled: shouldDisable,
                 eventStatus: props.eventStatus,

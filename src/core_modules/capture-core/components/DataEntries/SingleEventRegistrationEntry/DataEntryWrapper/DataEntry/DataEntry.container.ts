@@ -25,6 +25,15 @@ import {
 import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { newEventSaveTypes } from './newEventSaveTypes';
+import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
+
+const customLabels = {
+    orgUnitLabel: { key: 'orgUnit' },
+    eventLabel: { key: 'event' },
+    noteLabel: { key: 'note' },
+    notesLabel: { key: 'note', plural: true },
+    relationshipsLabel: { key: 'relationship', plural: true },
+} as const;
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -111,5 +120,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withErrorMessageHandler()(DataEntryComponent)),
+    withLoadingIndicator()(withErrorMessageHandler()(
+        withCustomLabels(customLabels)(DataEntryComponent),
+    )),
 );

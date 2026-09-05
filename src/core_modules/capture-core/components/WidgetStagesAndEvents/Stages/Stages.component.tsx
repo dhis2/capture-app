@@ -1,11 +1,12 @@
-import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { type ComponentType, useMemo } from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import { compose } from 'redux';
 import { Stage } from './Stage';
 import type { PlainProps, InputProps } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 import { useEnrollmentAccessContext } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { useTermLabel } from '../../../metaData';
 
 const emptyStateStyle = {
     padding: `0 ${spacersNum.dp12}px`,
@@ -23,6 +24,7 @@ export const StagesPlain = ({
     ...passOnProps
 }: PlainProps) => {
     const { stageReadAccessById } = useEnrollmentAccessContext();
+    const programStagesLabel = useTermLabel('programStage', { programId: passOnProps.programId, plural: true });
     const readableStages = useMemo(
         () => stages.filter(stage => stageReadAccessById[stage.id] ?? stage.dataAccess.read),
         [stages, stageReadAccessById],
@@ -52,7 +54,7 @@ export const StagesPlain = ({
     if (!readableStages.length) {
         return (
             <p style={emptyStateStyle}>
-                {i18n.t('No stages found in this program')}
+                {i18n.t('No {{programStagesLabel}} found in this program', { programStagesLabel })}
             </p>
         );
     }

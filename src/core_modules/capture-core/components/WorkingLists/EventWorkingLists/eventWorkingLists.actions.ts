@@ -12,10 +12,10 @@ export const deleteEventSuccess =
     (eventId: string, storeId: string) => actionCreator(actionTypes.EVENT_DELETE_SUCCESS)({ eventId, storeId });
 
 export const deleteEventError =
-    () => actionCreator(actionTypes.EVENT_DELETE_ERROR)();
+    (programId: string) => actionCreator(actionTypes.EVENT_DELETE_ERROR)(null, { programId });
 
 export const openViewEventPage = (eventId: string, contextOrgUnitId: string | null | undefined) =>
     actionCreator(actionTypes.VIEW_EVENT_PAGE_OPEN)({ eventId, orgUnitId: contextOrgUnitId });
 
-export const requestDeleteEvent = (eventId: string, storeId: string) =>
-    actionCreator(actionTypes.EVENT_REQUEST_DELETE)({ eventId, storeId });
+export const requestDeleteEvent = (eventId: string, storeId: string, programId: string) =>
+    actionCreator(actionTypes.EVENT_REQUEST_DELETE)({ eventId, storeId, programId });

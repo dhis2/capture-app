@@ -13,42 +13,42 @@ export const Placements = {
     BOTTOM: 'BOTTOM',
 };
 
-const StatusLabels = {
-    ACTIVE: i18n.t('Active'),
-    COMPLETED: i18n.t('Completed'),
-    CANCELLED: i18n.t('Cancelled'),
-    SCHEDULE: i18n.t('Scheduled'),
-};
+export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: RenderFoundation, orgUnitLabel: string) => {
+    const statusLabels: Record<string, string> = {
+        ACTIVE: i18n.t('Active'),
+        COMPLETED: i18n.t('Completed'),
+        CANCELLED: i18n.t('Cancelled'),
+        SCHEDULE: i18n.t('Scheduled'),
+    };
 
-const DataEntryFieldsToInclude = {
-    occurredAt: {
-        apiKey: 'occurredAt',
-        type: dataElementTypes.DATE,
-        placement: Placements.TOP,
-    },
-    scheduledAt: {
-        apiKey: 'scheduledAt',
-        type: dataElementTypes.DATE,
-        placement: Placements.TOP,
-    },
-    orgUnit: {
-        apiKey: 'orgUnit',
-        type: dataElementTypes.ORGANISATION_UNIT,
-        placement: Placements.TOP,
-        label: i18n.t('Organisation unit'),
-        convertFn: (orgUnitId: string) => React.createElement(TooltipOrgUnit, { orgUnitId }),
-    },
-    status: {
-        apiKey: 'status',
-        type: dataElementTypes.TEXT,
-        placement: Placements.BOTTOM,
-        label: i18n.t('Status'),
-        convertFn: (value: keyof typeof StatusLabels) => StatusLabels[value],
-    },
-};
+    const dataEntryFieldsToInclude = {
+        occurredAt: {
+            apiKey: 'occurredAt',
+            type: dataElementTypes.DATE,
+            placement: Placements.TOP,
+        },
+        scheduledAt: {
+            apiKey: 'scheduledAt',
+            type: dataElementTypes.DATE,
+            placement: Placements.TOP,
+        },
+        orgUnit: {
+            apiKey: 'orgUnit',
+            type: dataElementTypes.ORGANISATION_UNIT,
+            placement: Placements.TOP,
+            label: orgUnitLabel,
+            convertFn: (orgUnitId: string) => React.createElement(TooltipOrgUnit, { orgUnitId }),
+        },
+        status: {
+            apiKey: 'status',
+            type: dataElementTypes.TEXT,
+            placement: Placements.BOTTOM,
+            label: i18n.t('Status'),
+            convertFn: (value: string) => statusLabels[value],
+        },
+    };
 
-export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: RenderFoundation) => {
-    const dataEntryValues = Object.values(DataEntryFieldsToInclude).map((entry: any) => {
+    const dataEntryValues = Object.values(dataEntryFieldsToInclude).map((entry: any) => {
         const value = linkedEvent[entry.apiKey];
         if (!value) return null;
 

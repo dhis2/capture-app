@@ -10,4 +10,5 @@ export type SearchOrgUnitSelectorProps = {
     onSetOrgUnit: (searchId: string, orgUnit?: any) => void;
     onFilterOrgUnits: (searchId: string, searchText?: string) => void;
     searchAttempted?: boolean;
+    orgUnitLabel: string;
 };

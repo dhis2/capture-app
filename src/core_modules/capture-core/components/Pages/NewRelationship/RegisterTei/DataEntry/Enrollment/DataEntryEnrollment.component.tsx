@@ -6,6 +6,7 @@ import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
 import { relatedStageActions } from '../../../../../WidgetRelatedStages';
+import { getTermLabel } from '../../../../../../metaData';
 
 const NewEnrollmentRelationshipPlain =
     ({
@@ -20,10 +21,14 @@ const NewEnrollmentRelationshipPlain =
         ExistingUniqueValueDialogActions,
     }: Props) => {
         const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
+        const relationshipLabel = getTermLabel('relationship', { programId });
         const relatedStageActionsOptions = {
             [relatedStageActions.ENTER_DATA]: {
                 disabled: true,
-                disabledMessage: i18n.t('Enter details now is not available when creating a relationship'),
+                disabledMessage: i18n.t(
+                    'Enter details now is not available when creating a {{relationshipLabel}}',
+                    { relationshipLabel },
+                ),
             },
             [relatedStageActions.LINK_EXISTING_RESPONSE]: { hidden: true },
         };

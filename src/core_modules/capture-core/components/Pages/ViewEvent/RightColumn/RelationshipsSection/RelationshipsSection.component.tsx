@@ -2,6 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
@@ -11,11 +12,10 @@ import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
+import { getTermLabel } from '../../../../../metaData';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
-
-const headerText = i18n.t('Relationships');
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -47,13 +47,13 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     renderHeader = () => {
-        const { classes, relationships, ready } = this.props;
+        const { classes, relationships, ready, programId } = this.props;
         const count = relationships ? relationships.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={headerText}
+                text={capitalizeFirstLetter(getTermLabel('relationship', { programId, plural: true }))}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -78,7 +78,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, programStage, eventId, relationships, ready, readOnly } = this.props;
+        const { classes, programStage, programId, eventId, relationships, ready, readOnly } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
@@ -94,7 +94,13 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This event doesn't have any relationships")}
+                        {i18n.t(
+                            "This {{eventLabel}} doesn't have any {{relationshipsLabel}}",
+                            {
+                                eventLabel: getTermLabel('event', { programId }),
+                                relationshipsLabel: getTermLabel('relationship', { programId, plural: true }),
+                            },
+                        )}
                     </div>
                 )}
                 {React.createElement(LoadingRelationships as any, {
@@ -107,6 +113,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     readOnly,
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
+                    programId,
                 })}
             </ViewEventSection>
         );

@@ -27,6 +27,7 @@ import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramS
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 import type { PlainProps } from './EventDetailsSection.types';
+import { useTermLabel } from '../../../../metaData';
 
 const getStyles: any = () => ({
     container: {
@@ -82,6 +83,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const eventLabel = useTermLabel('event', { programId, stageId: programStage.id });
 
     const onSaveExternal = useCallback(() => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
@@ -126,7 +128,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         secondary
                         small
                     >
-                        {i18n.t('Edit event')}
+                        {i18n.t('Edit {{eventLabel}}', { eventLabel })}
                     </Button>
                 </div>}
             <OverflowButton
@@ -165,7 +167,10 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
             <ViewEventSection
                 header={(
                     <div className={classes.headerContainer}>
-                        <ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />
+                        <ViewEventSectionHeader
+                            text={i18n.t('{{eventLabel}} details', { eventLabel })}
+                            icon={IconFileDocument24}
+                        />
                         {renderActionsContainer()}
                     </div>
                 )}
