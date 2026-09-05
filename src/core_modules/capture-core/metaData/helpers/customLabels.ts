@@ -1,0 +1,118 @@
+import i18n from '@dhis2/d2-i18n';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { programCollection } from '../../metaDataMemoryStores';
+
+type LabelConfig = {
+    field: string;
+    pluralField?: string;
+    singular: () => string;
+    plural?: () => string;
+};
+
+const asLabels = <T extends string>(labels: Record<T, LabelConfig>) => labels;
+
+const LABELS = asLabels({
+    enrollment: {
+        field: 'displayEnrollmentLabel',
+        pluralField: 'displayEnrollmentsLabel',
+        singular: () => i18n.t('enrollment'),
+        plural: () => i18n.t('enrollments'),
+    },
+    event: {
+        field: 'displayEventLabel',
+        pluralField: 'displayEventsLabel',
+        singular: () => i18n.t('event'),
+        plural: () => i18n.t('events'),
+    },
+    programStage: {
+        field: 'displayProgramStageLabel',
+        pluralField: 'displayProgramStagesLabel',
+        singular: () => i18n.t('program stage'),
+        plural: () => i18n.t('program stages'),
+    },
+    note: {
+        field: 'displayNoteLabel',
+        singular: () => i18n.t('note'),
+    },
+    relationship: {
+        field: 'displayRelationshipLabel',
+        singular: () => i18n.t('relationship'),
+    },
+    attribute: {
+        field: 'displayTrackedEntityAttributeLabel',
+        singular: () => i18n.t('attribute'),
+    },
+    orgUnit: {
+        field: 'displayOrgUnitLabel',
+        singular: () => i18n.t('organisation unit'),
+    },
+    followUp: {
+        field: 'displayFollowUpLabel',
+        singular: () => i18n.t('follow-up'),
+    },
+});
+
+export type CustomLabelKey = keyof typeof LABELS;
+export type CustomLabels = Record<string, string>;
+type LabelOptions = { plural?: boolean };
+
+const ALL_FIELD_NAMES = Object.values(LABELS).flatMap(
+    ({ field, pluralField }) => (pluralField ? [field, pluralField] : [field]),
+);
+
+export const extractCustomLabels = (cached: Record<string, unknown>): CustomLabels =>
+    Object.fromEntries(
+        ALL_FIELD_NAMES
+            .filter(field => typeof cached[field] === 'string')
+            .map(field => [field, cached[field] as string]),
+    );
+
+type LabelSource = CustomLabels | undefined | null;
+
+const resolveLabel = (
+    sources: LabelSource | Array<LabelSource>,
+    key: CustomLabelKey,
+    { plural = false }: LabelOptions = {},
+): string | undefined => {
+    const { field, pluralField } = LABELS[key];
+    const target = plural ? pluralField : field;
+    if (!target) return undefined;
+    const list = Array.isArray(sources) ? sources : [sources];
+    return list.find(source => source?.[target])?.[target];
+};
+
+type BaseTermOptions = LabelOptions & { stageId?: string | null };
+type GetTermLabelOptions = BaseTermOptions & { programId: string };
+type UseTermLabelOptions = BaseTermOptions & { programId?: string | null };
+
+const resolveTerm = (
+    programId: string | null | undefined,
+    key: CustomLabelKey,
+    { stageId, plural = false }: BaseTermOptions,
+): string => {
+    const program = programId ? programCollection.get(programId) : undefined;
+    const stage = program && stageId ? program.getStage(stageId) : undefined;
+    const custom = resolveLabel([stage?.customLabels, program?.customLabels], key, { plural });
+    if (custom) return custom;
+    if (plural) return LABELS[key].plural?.() ?? LABELS[key].singular();
+    return LABELS[key].singular();
+};
+
+export const getTermLabel = (
+    key: CustomLabelKey,
+    options: GetTermLabelOptions,
+): string => resolveTerm(options.programId, key, options);
+
+export const useTermLabel = (
+    key: CustomLabelKey,
+    options: UseTermLabelOptions = {},
+): string => {
+    const { programId, stageId, plural } = options;
+    const id = useSelector(({ currentSelections }: any) =>
+        programId ?? currentSelections.programId);
+    return useMemo(
+        () => resolveTerm(id, key, { stageId, plural }),
+        [id, key, stageId, plural],
+    );
+};

@@ -40,14 +40,8 @@ export {
     getProgramThrowIfNotFound,
     getProgramAndStageForEventProgram,
     getEventProgramEventAccess,
-    CUSTOM_LABEL_FIELDS,
-    resolveLabel,
     extractCustomLabels,
-    getProgramLabel,
-    getStageLabel,
-    getTrackedEntityTypeLabel,
-    useProgramLabel,
-    useStageLabel,
-    useTrackedEntityTypeLabel,
+    getTermLabel,
+    useTermLabel,
 } from './helpers';
-export type { CustomLabelKey, CustomLabels, LabelOptions } from './helpers';
+export type { CustomLabelKey, CustomLabels } from './helpers';

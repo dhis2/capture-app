@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-08-31T05:02:39.077Z\n"
-"PO-Revision-Date: 2026-08-31T05:02:39.077Z\n"
+"POT-Creation-Date: 2026-09-04T13:34:00.324Z\n"
+"PO-Revision-Date: 2026-09-04T13:34:00.324Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -424,11 +424,11 @@ msgstr "Some operations are still running. Please wait."
 msgid "Operations running"
 msgstr "Operations running"
 
-msgid "No feedback for this enrollment yet"
-msgstr "No feedback for this enrollment yet"
+msgid "No feedback for this {{enrollmentLabel}} yet"
+msgstr "No feedback for this {{enrollmentLabel}} yet"
 
-msgid "No indicator output for this enrollment yet"
-msgstr "No indicator output for this enrollment yet"
+msgid "No indicator output for this {{enrollmentLabel}} yet"
+msgstr "No indicator output for this {{enrollmentLabel}} yet"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -717,6 +717,12 @@ msgstr "Notice"
 
 msgid "Close the notice"
 msgstr "Close the notice"
+
+msgid "No feedback for this enrollment yet"
+msgstr "No feedback for this enrollment yet"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "No indicator output for this enrollment yet"
 
 msgid "Quick actions"
 msgstr "Quick actions"
@@ -1533,8 +1539,11 @@ msgstr "Polygon captured"
 msgid "No polygon captured"
 msgstr "No polygon captured"
 
-msgid "Event completed"
-msgstr "Event completed"
+msgid "{{eventLabel}} completed"
+msgstr "{{eventLabel}} completed"
+
+msgid "Event"
+msgstr "Event"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"
@@ -1807,8 +1816,8 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "No stages found in this program"
 msgstr "No stages found in this program"
 
-msgid "Stages and Events"
-msgstr "Stages and Events"
+msgid "{{programStagesLabel}} and {{eventsLabel}}"
+msgstr "{{programStagesLabel}} and {{eventsLabel}}"
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr "An error occurred while unlinking and deleting the event."
@@ -2247,6 +2256,30 @@ msgstr "Visited"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
+
+msgid "enrollments"
+msgstr "enrollments"
+
+msgid "program stage"
+msgstr "program stage"
+
+msgid "program stages"
+msgstr "program stages"
+
+msgid "note"
+msgstr "note"
+
+msgid "relationship"
+msgstr "relationship"
+
+msgid "attribute"
+msgstr "attribute"
+
+msgid "organisation unit"
+msgstr "organisation unit"
+
+msgid "follow-up"
+msgstr "follow-up"
 
 msgid "Program not found"
 msgstr "Program not found"
