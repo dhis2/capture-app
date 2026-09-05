@@ -13,6 +13,8 @@ import { getTermLabel } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
+const headerText = i18n.t('Notes');
+
 const getStyles = (theme: any) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -35,13 +37,13 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes, ready, notesLabel } = this.props;
+        const { classes, notes, ready } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={notesLabel}
+                text={headerText}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -49,7 +51,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly, notesLabel, programId } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly, programId } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -59,8 +61,8 @@ class NotesSectionPlain extends React.Component<Props> {
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
                         {i18n.t(
-                            "This {{eventLabel}} doesn't have any {{notesLabel}}",
-                            { eventLabel: getTermLabel('event', { programId }), notesLabel },
+                            "This {{eventLabel}} doesn't have any notes",
+                            { eventLabel: getTermLabel('event', { programId }) },
                         )}
                     </div>
                 )}

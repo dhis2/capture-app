@@ -212,7 +212,6 @@ const RelatedStagesActionsPlain = ({
     isLinking,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
-    const relationshipsLabel = useTermLabel('relationship', { plural: true });
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
@@ -261,10 +260,7 @@ const RelatedStagesActionsPlain = ({
                 )}
 
                 {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
-                    <div>{i18n.t(
-                        'Ambiguous {{relationshipsLabel}}, contact system administrator',
-                        { relationshipsLabel },
-                    )}</div>
+                    <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
                 )}
             </div>
 

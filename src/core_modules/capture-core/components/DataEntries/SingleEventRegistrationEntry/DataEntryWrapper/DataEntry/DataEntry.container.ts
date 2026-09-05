@@ -31,8 +31,6 @@ const customLabels = {
     orgUnitLabel: { key: 'orgUnit' },
     eventLabel: { key: 'event' },
     noteLabel: { key: 'note' },
-    notesLabel: { key: 'note', plural: true },
-    relationshipsLabel: { key: 'relationship', plural: true },
 } as const;
 
 const makeMapStateToProps = () => {

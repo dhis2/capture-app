@@ -20,7 +20,6 @@ export const WidgetEnrollmentNote = () => {
     } = useEnrollmentAccessContext();
     const enrollmentLabel = useTermLabel('enrollment');
     const noteLabel = useTermLabel('note');
-    const notesLabel = useTermLabel('note', { plural: true });
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
@@ -29,18 +28,12 @@ export const WidgetEnrollmentNote = () => {
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
-                title={i18n.t(
-                    '{{notesLabel}} about this {{enrollmentLabel}}',
-                    { notesLabel, enrollmentLabel },
-                )}
+                title={i18n.t('Notes about this {{enrollmentLabel}}', { enrollmentLabel })}
                 placeholder={i18n.t(
                     'Write a {{noteLabel}} about this {{enrollmentLabel}}',
                     { enrollmentLabel, noteLabel },
                 )}
-                emptyNoteMessage={i18n.t(
-                    "This {{enrollmentLabel}} doesn't have any {{notesLabel}}",
-                    { enrollmentLabel, notesLabel },
-                )}
+                emptyNoteMessage={i18n.t("This {{enrollmentLabel}} doesn't have any notes", { enrollmentLabel })}
                 noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!programWriteAccess}

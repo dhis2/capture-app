@@ -1,10 +1,5 @@
 import { connect } from 'react-redux';
 import { TeiSearchFormComponent } from './TeiSearchForm.component';
-import { withCustomLabels } from '../../../../../../HOC/withCustomLabels';
-
-const customLabels = {
-    attributesLabel: { key: 'attribute', plural: true },
-} as const;
 
 const getAttributesWithValuesCount = (state: any, formId: string) => {
     const formValues = state.formsValues[formId] || {};
@@ -24,6 +19,4 @@ const mapStateToProps = (state: any, props: any) => {
     };
 };
 
-export const TeiSearchForm = connect(mapStateToProps, () => ({}))(
-    withCustomLabels(customLabels)(TeiSearchFormComponent),
-);
+export const TeiSearchForm = connect(mapStateToProps, () => ({}))(TeiSearchFormComponent);

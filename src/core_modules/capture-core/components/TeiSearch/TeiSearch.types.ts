@@ -23,8 +23,4 @@ export type OwnProps = {
     resultsPageSize: number;
 };
 
-type InjectedLabels = {
-    attributesLabel: string;
-};
-
-export type Props = OwnProps & DispatchersFromRedux & PropsFromRedux & InjectedLabels;
+export type Props = OwnProps & DispatchersFromRedux & PropsFromRedux;

@@ -70,7 +70,6 @@ type OwnProps = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
-    attributesLabel: string;
 };
 
 type Props = OwnProps & WithStyles<typeof getStyles>;
@@ -227,7 +226,7 @@ class SearchFormPlain extends React.Component<Props, State> {
         }
         const searchButtonText = searchGroup.unique ?
             this.getUniqueSearchButtonText(searchForm) :
-            i18n.t('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
+            i18n.t('Search by attributes');
         return (
             <div
                 data-test="d2-form-area"

@@ -81,7 +81,7 @@ const WidgetProfilePlain = ({
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
-    const attributesLabel = useTermLabel('attribute', { programId, plural: true });
+    const attributeLabel = useTermLabel('attribute', { programId });
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
@@ -178,11 +178,12 @@ const WidgetProfilePlain = ({
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
                         {trackedEntityTypeName
-                            ? i18n.t('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
-                                attributesLabel,
+                            ? i18n.t('No {{attributeLabel}} configured for {{trackedEntityTypeName}}', {
+                                attributeLabel,
                                 trackedEntityTypeName,
+                                interpolation: { escapeValue: false },
                             })
-                            : i18n.t('No {{attributesLabel}} configured', { attributesLabel })}
+                            : i18n.t('No {{attributeLabel}} configured', { attributeLabel })}
                     </p>
                 </div>
             );

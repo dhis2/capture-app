@@ -8,13 +8,15 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { getTermLabel } from '../../../../../metaData';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
+import { getTermLabel } from '../../../../../metaData';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
+
+const headerText = i18n.t('Relationships');
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -46,13 +48,13 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     renderHeader = () => {
-        const { classes, relationships, ready, relationshipsLabel } = this.props;
+        const { classes, relationships, ready } = this.props;
         const count = relationships ? relationships.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={relationshipsLabel}
+                text={headerText}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -77,7 +79,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, programStage, programId, eventId, relationships, ready, readOnly, relationshipsLabel } = this.props;
+        const { classes, programStage, programId, eventId, relationships, ready, readOnly } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
@@ -94,11 +96,8 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
                         {i18n.t(
-                            "This {{eventLabel}} doesn't have any {{relationshipsLabel}}",
-                            {
-                                eventLabel: getTermLabel('event', { programId }),
-                                relationshipsLabel,
-                            },
+                            "This {{eventLabel}} doesn't have any relationships",
+                            { eventLabel: getTermLabel('event', { programId }) },
                         )}
                     </div>
                 )}

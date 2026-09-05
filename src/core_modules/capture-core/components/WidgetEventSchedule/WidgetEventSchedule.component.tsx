@@ -58,7 +58,6 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const notesLabel = useTermLabel('note', { plural: true, programId, stageId });
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
@@ -125,7 +124,7 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={i18n.t('{{eventLabel}} {{notesLabel}}', { eventLabel, notesLabel })}
+                    sectionName={i18n.t('{{eventLabel}} notes', { eventLabel })}
                 >
                     <NoteSection
                         notes={notes}
@@ -133,10 +132,7 @@ const WidgetEventSchedulePlain = ({
                             'Write a {{noteLabel}} about this scheduled {{eventLabel}}',
                             { eventLabel, noteLabel },
                         )}
-                        emptyNoteMessage={i18n.t(
-                            "This {{eventLabel}} doesn't have any {{notesLabel}}",
-                            { eventLabel, notesLabel },
-                        )}
+                        emptyNoteMessage={i18n.t("This {{eventLabel}} doesn't have any notes", { eventLabel })}
                         handleAddNote={onAddNote}
                         noteLabel={noteLabel}
                     />

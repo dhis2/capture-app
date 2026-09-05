@@ -103,7 +103,6 @@ const SearchFormIndex = ({
     keptFallbackSearchFormValues,
 }: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
-    const attributesLabel = useTermLabel('attribute', { plural: true });
 
     useFormDataLifecycle(
         searchGroupsForSelectedScope,
@@ -293,7 +292,7 @@ const SearchFormIndex = ({
                         minAttributesRequiredToSearch,
                         unsupportedAttributes,
                     }) => {
-                        const searchByText = i18n.t('Search by {{attributesLabel}}', { attributesLabel });
+                        const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
                             <div key={formId} data-test="form-attributes">
@@ -380,7 +379,6 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
-        attributesLabel,
     ]);
 };
 
