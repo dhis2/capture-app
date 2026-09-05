@@ -95,8 +95,11 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
                         {i18n.t(
-                            "This {{eventLabel}} doesn't have any relationships",
-                            { eventLabel: getTermLabel('event', { programId }) },
+                            "This {{eventLabel}} doesn't have any {{relationshipsLabel}}",
+                            {
+                                eventLabel: getTermLabel('event', { programId }),
+                                relationshipsLabel: getTermLabel('relationship', { programId, plural: true }),
+                            },
                         )}
                     </div>
                 )}

@@ -19,6 +19,7 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
     } = useEnrollmentAccessContext();
     const eventLabel = useTermLabel('event', { programId });
     const noteLabel = useTermLabel('note', { programId });
+    const notesLabel = useTermLabel('note', { programId, plural: true });
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId));
@@ -27,12 +28,15 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={i18n.t('Notes about this {{eventLabel}}', { eventLabel })}
+                title={i18n.t('{{notesLabel}} about this {{eventLabel}}', { notesLabel, eventLabel })}
                 placeholder={i18n.t(
                     'Write a {{noteLabel}} about this {{eventLabel}}',
                     { eventLabel, noteLabel },
                 )}
-                emptyNoteMessage={i18n.t("This {{eventLabel}} doesn't have any notes", { eventLabel })}
+                emptyNoteMessage={i18n.t(
+                    "This {{eventLabel}} doesn't have any {{notesLabel}}",
+                    { eventLabel, notesLabel },
+                )}
                 noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!currentStageWriteAccess}

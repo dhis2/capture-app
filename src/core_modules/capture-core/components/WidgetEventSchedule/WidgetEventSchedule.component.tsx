@@ -76,6 +76,7 @@ const WidgetEventSchedulePlain = ({
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
     const eventLabel = useTermLabel('event', { programId, stageId });
     const noteLabel = useTermLabel('note', { programId, stageId });
+    const notesLabel = useTermLabel('note', { programId, stageId, plural: true });
 
     return (
         <Widget
@@ -124,7 +125,7 @@ const WidgetEventSchedulePlain = ({
                 </DataSection>}
                 <DataSection
                     dataTest="note-section"
-                    sectionName={i18n.t('{{eventLabel}} notes', { eventLabel })}
+                    sectionName={i18n.t('{{eventLabel}} {{notesLabel}}', { eventLabel, notesLabel })}
                 >
                     <NoteSection
                         notes={notes}
@@ -132,7 +133,10 @@ const WidgetEventSchedulePlain = ({
                             'Write a {{noteLabel}} about this scheduled {{eventLabel}}',
                             { eventLabel, noteLabel },
                         )}
-                        emptyNoteMessage={i18n.t("This {{eventLabel}} doesn't have any notes", { eventLabel })}
+                        emptyNoteMessage={i18n.t(
+                            "This {{eventLabel}} doesn't have any {{notesLabel}}",
+                            { eventLabel, notesLabel },
+                        )}
                         handleAddNote={onAddNote}
                         noteLabel={noteLabel}
                     />

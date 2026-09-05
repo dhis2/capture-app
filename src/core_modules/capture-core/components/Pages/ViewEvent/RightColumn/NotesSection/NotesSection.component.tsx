@@ -60,8 +60,11 @@ class NotesSectionPlain extends React.Component<Props> {
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
                         {i18n.t(
-                            "This {{eventLabel}} doesn't have any notes",
-                            { eventLabel: getTermLabel('event', { programId }) },
+                            "This {{eventLabel}} doesn't have any {{notesLabel}}",
+                            {
+                                eventLabel: getTermLabel('event', { programId }),
+                                notesLabel: getTermLabel('note', { programId, plural: true }),
+                            },
                         )}
                     </div>
                 )}

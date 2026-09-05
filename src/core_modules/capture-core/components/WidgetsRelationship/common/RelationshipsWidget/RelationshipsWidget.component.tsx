@@ -40,6 +40,7 @@ const RelationshipsWidgetPlain = ({
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships, readOnly);
     const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
     const enrollmentLabel = useTermLabel('enrollment');
+    const relationshipsLabel = useTermLabel('relationship', { plural: true });
 
     if (isLoading) {
         return (
@@ -94,7 +95,10 @@ const RelationshipsWidgetPlain = ({
                 }
                 {(relationships?.length ?? 0) === 0 && (
                     <div className={classes.emptyMessage} data-test="relationships-empty-message">
-                        {i18n.t("This {{enrollmentLabel}} doesn't have any relationships", { enrollmentLabel })}
+                        {i18n.t(
+                            "This {{enrollmentLabel}} doesn't have any {{relationshipsLabel}}",
+                            { enrollmentLabel, relationshipsLabel },
+                        )}
                     </div>
                 )}
                 {children}
