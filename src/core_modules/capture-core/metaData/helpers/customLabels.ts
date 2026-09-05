@@ -105,6 +105,19 @@ const resolveTerm = (
     return LABELS[key].singular();
 };
 
+export const getTermLabelFromProgram = (
+    program: Record<string, unknown> | null | undefined,
+    key: CustomLabelKey,
+    { plural = false }: LabelOptions = {},
+): string => {
+    const { field, pluralField, singular } = LABELS[key];
+    const target = plural ? pluralField : field;
+    const value = target ? program?.[target] : undefined;
+    if (typeof value === 'string') return value;
+    if (plural) return LABELS[key].plural?.() ?? singular();
+    return singular();
+};
+
 export const getTermLabel = (
     key: CustomLabelKey,
     options: GetTermLabelOptions,
