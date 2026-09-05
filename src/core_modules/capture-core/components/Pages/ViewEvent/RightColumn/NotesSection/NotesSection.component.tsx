@@ -9,9 +9,10 @@ import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.com
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import type { PlainProps } from './NotesSection.types';
-import { getTermLabel } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
+
+const headerText = i18n.t('Notes');
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -35,13 +36,13 @@ type Props = PlainProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes, ready, notesLabel } = this.props;
+        const { classes, notes, ready } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={notesLabel}
+                text={headerText}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -49,7 +50,7 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly, notesLabel, programId } = this.props;
+        const { classes, notes, fieldValue, onAddNote, ready, readOnly } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
         return (
             <ViewEventSection
@@ -58,21 +59,17 @@ class NotesSectionPlain extends React.Component<Props> {
             >
                 {isEmpty && (
                     <div className={classes.emptyMessage} data-test="notes-empty-message">
-                        {i18n.t(
-                            "This {{eventLabel}} doesn't have any {{notesLabel}}",
-                            { eventLabel: getTermLabel('event', { programId }), notesLabel },
-                        )}
+                        {i18n.t("This event doesn't have any notes")}
                     </div>
                 )}
                 {React.createElement(LoadingNotes as any, {
                     ready,
                     notes,
                     readOnly,
-                    onAddNote: (note: string) => onAddNote(note, programId),
+                    onAddNote,
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,
                     smallMainButton: true,
-                    noteLabel: getTermLabel('note', { programId }),
                 })}
             </ViewEventSection>
         );

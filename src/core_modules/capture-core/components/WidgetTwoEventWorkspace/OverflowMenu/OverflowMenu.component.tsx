@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import {
     Divider,
@@ -9,13 +8,13 @@ import {
     IconView16,
     MenuItem,
 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { OverflowButton } from '../../Buttons';
 import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Props } from './OverflowMenu.types';
 import { useRelationshipTypeAccess } from '../hooks';
-import { useTermLabel } from '../../../metaData';
 
 export const OverflowMenuComponent = ({
     linkedEvent,
@@ -32,8 +31,6 @@ export const OverflowMenuComponent = ({
     const [isUnlinkModalOpen, setIsUnlinkModalOpen] = useState(false);
     const [isUnlinkAndDeleteModalOpen, setIsUnlinkAndDeleteModalOpen] = useState(false);
     const { relationshipTypeWriteAccess } = useRelationshipTypeAccess(relationshipType);
-    const eventLabel = useTermLabel('event', { stageId: linkedEvent?.programStage });
-    const eventsLabel = useTermLabel('event', { stageId: linkedEvent?.programStage, plural: true });
 
     const handleViewLinkedEvent = () => {
         navigate(`/enrollmentEventEdit?${buildUrlQueryString({ eventId: linkedEvent.event, orgUnitId })}`);
@@ -62,7 +59,7 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense maxWidth="250px">
                         <MenuItem
-                            label={i18n.t('View linked {{eventLabel}}', { eventLabel })}
+                            label={i18n.t('View linked event')}
                             icon={<IconView16 />}
                             dataTest="event-overflow-view-linked-event"
                             onClick={handleViewLinkedEvent}
@@ -70,14 +67,11 @@ export const OverflowMenuComponent = ({
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={i18n.t(
-                                'You do not have access to remove the link between these {{eventsLabel}}',
-                                { eventsLabel },
-                            )}
+                            content={i18n.t('You do not have access to remove the link between these events')}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink {{eventLabel}}', { eventLabel })}
+                                label={i18n.t('Unlink event')}
                                 icon={<IconLink16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense
@@ -87,14 +81,11 @@ export const OverflowMenuComponent = ({
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={i18n.t(
-                                'You do not have access to remove the link and delete the linked {{eventLabel}}',
-                                { eventLabel },
-                            )}
+                            content={i18n.t('You do not have access to remove the link and delete the linked event')}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink and delete linked {{eventLabel}}', { eventLabel })}
+                                label={i18n.t('Unlink and delete linked event')}
                                 icon={<IconDelete16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense
@@ -113,7 +104,6 @@ export const OverflowMenuComponent = ({
                     relationshipId={relationshipId}
                     originEventId={originEventId}
                     onDeleteEventRelationship={onDeleteEventRelationship}
-                    stageId={linkedEvent?.programStage}
                 />
             )}
             {isUnlinkAndDeleteModalOpen && (
@@ -124,7 +114,6 @@ export const OverflowMenuComponent = ({
                     relationshipId={relationshipId}
                     onDeleteEvent={onDeleteEvent}
                     onDeleteEventRelationship={onDeleteEventRelationship}
-                    stageId={linkedEvent?.programStage}
                 />
             )}
         </>

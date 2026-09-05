@@ -66,12 +66,7 @@ export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>, store: R
                     displayName: category.name,
                 })),
             } : null;
-            return batchActions(getOpenDataEntryActions(
-                program.id,
-                programCategory,
-                selectedCategories,
-                orgUnit,
-            ));
+            return batchActions(getOpenDataEntryActions(programCategory, selectedCategories, orgUnit));
         }),
     );
 

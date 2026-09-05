@@ -147,7 +147,8 @@ const buildOrgUnitSettingsFn = () => {
     const orgUnitSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: props.orgUnitLabel,
+            // Example use of withCustomLabels: orgUnitLabel is injected as a prop by the HOC, resolved against the current program's custom terminology.
+            label: props.orgUnitLabel ?? i18n.t('Organisation unit'),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
         getPropName: () => 'orgUnit',
@@ -223,7 +224,8 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('{{eventLabel}} completed', { eventLabel: props.eventLabel }),
+            // Example use of withCustomLabels: eventLabel is injected as a prop by the HOC, resolved against the current program's custom terminology.
+            label: i18n.t('{{eventLabel}} completed', { eventLabel: props.eventLabel ?? i18n.t('Event') }),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
@@ -283,7 +285,6 @@ type Props = {
     dataEntryId: string;
     programId: string;
     itemId: string;
-    notesLabel: string;
 };
 
 type DataEntrySection = {
@@ -291,7 +292,7 @@ type DataEntrySection = {
     name?: string;
 };
 
-const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
+const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -302,13 +303,13 @@ const buildDataEntrySectionDefinitions = (notesLabel: string) => ({
     },
     [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: notesLabel,
+        name: i18n.t('Notes'),
     },
     [AOCsectionKey]: {
         placement: placements.TOP,
         name: '',
     },
-});
+};
 
 class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
     fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
@@ -320,7 +321,7 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = buildDataEntrySectionDefinitions(props.notesLabel);
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     render() {

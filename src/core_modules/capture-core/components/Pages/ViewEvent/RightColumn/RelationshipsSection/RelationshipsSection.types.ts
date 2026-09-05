@@ -5,10 +5,8 @@ export type PlainProps = {
     onOpenAddRelationship: () => void;
     onDeleteRelationship: (clientId: string) => void;
     eventId: string;
-    programId: string;
     programStage: ProgramStage;
     ready: boolean;
     readOnly: boolean;
     orgUnitId: string;
-    relationshipsLabel: string;
 };

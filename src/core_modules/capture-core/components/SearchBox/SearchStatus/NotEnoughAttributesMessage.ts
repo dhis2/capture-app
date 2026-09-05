@@ -3,39 +3,39 @@ import i18n from '@dhis2/d2-i18n';
 export const NotEnoughAttributesMessage = ({
     minAttributesRequiredToSearch,
     searchableFields,
-    attributeLabel,
-    attributesLabel,
 }: {
     minAttributesRequiredToSearch: number;
     searchableFields: Array<Record<string, unknown>>;
-    attributeLabel: string;
-    attributesLabel: string;
 }) => {
     const searchableFieldsDisplayname = searchableFields?.map((field: any) => field.formName)?.join(', ');
 
     if (minAttributesRequiredToSearch === searchableFields.length && searchableFields.length > 1) {
-        return i18n.t('Fill in these {{attributesLabel}} to search{{escape}} {{ searchableAttributes }}', {
+        return i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
             escape: ':',
-            attributesLabel,
             searchableAttributes: searchableFieldsDisplayname,
+            interpolation: {
+                escapeValue: false,
+            },
         });
     }
     if (searchableFields.length > 1) {
-        return i18n.t(
-            'Fill in at least {{minAttributesRequiredToSearch}} of these {{attributesLabel}} to search{{escape}}'
-            + ' {{searchableAttributes}}',
+        // eslint-disable-next-line max-len
+        return i18n.t('Fill in at least {{minAttributesRequiredToSearch}} of these fields to search{{escape}} {{searchableAttributes}}',
             {
                 escape: ':',
                 minAttributesRequiredToSearch,
-                attributesLabel,
                 searchableAttributes: searchableFieldsDisplayname,
+                interpolation: {
+                    escapeValue: false,
+                },
             },
         );
     }
-    return i18n.t('Fill in this {{attributeLabel}} to search{{escape}} {{searchableAttributes}}', {
+    return i18n.t('Fill in this field to search{{escape}} {{searchableAttributes}}', {
         escape: ':',
-        attributeLabel,
         searchableAttributes: searchableFieldsDisplayname,
+        interpolation: {
+            escapeValue: false,
+        },
     });
 };
-

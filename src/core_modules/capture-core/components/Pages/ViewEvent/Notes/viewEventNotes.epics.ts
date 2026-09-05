@@ -69,7 +69,7 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { fromClientDa
                 clientId,
             };
             return batchActions([
-                startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId, payload.programId),
+                startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
                 addNote(noteKey, clientNote),
             ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
         }));

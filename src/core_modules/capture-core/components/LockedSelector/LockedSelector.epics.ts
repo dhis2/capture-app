@@ -17,7 +17,6 @@ import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
-import { getTermLabel } from '../../metaData/helpers/customLabels';
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
@@ -25,17 +24,14 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, sto
         filter(action => action.payload.nextProps.orgUnitId),
         concatMap((action) => {
             const { organisationUnits } = store.value as any;
-            const { orgUnitId, programId } = action.payload.nextProps;
+            const { orgUnitId } = action.payload.nextProps;
             if (organisationUnits[orgUnitId]) {
                 return of(completeUrlUpdate());
             }
-            const orgUnitLabel = getTermLabel('orgUnit', { programId });
             return of(startLoading(), getCoreOrgUnit({
                 orgUnitId,
                 onSuccess: setCurrentOrgUnitBasedOnUrl,
-                onError: () => errorRetrievingOrgUnitBasedOnUrl(
-                    i18n.t('Could not get {{orgUnitLabel}}', { orgUnitLabel }),
-                ),
+                onError: () => errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
             }));
         }),
     );
@@ -67,10 +63,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>)
                 }
 
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
-                    const orgUnitLabel = getTermLabel('orgUnit', { programId });
-                    return invalidSelectionsFromUrl(
-                        i18n.t('Selected program is invalid for selected {{orgUnitLabel}}', { orgUnitLabel }),
-                    );
+                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for selected organisation unit'));
                 }
             }
 

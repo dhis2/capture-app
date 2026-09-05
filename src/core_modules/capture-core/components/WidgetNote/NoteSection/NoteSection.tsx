@@ -71,7 +71,6 @@ const NoteSectionPlain = ({
     notes,
     handleAddNote,
     readOnly,
-    noteLabel,
     classes,
 }: Props) => {
     const [isEditing, setEditing] = useState<boolean>(false);
@@ -159,7 +158,7 @@ const NoteSectionPlain = ({
                         primary
                         small
                     >
-                        {i18n.t('Save {{noteLabel}}', { noteLabel })}
+                        {i18n.t('Save note')}
                     </Button>
                     <Button
                         dataTest="cancel-note-btn"

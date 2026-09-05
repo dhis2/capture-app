@@ -1,12 +1,11 @@
-import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { cx } from '@emotion/css';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
-import { getTermLabel } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -64,9 +63,9 @@ const styles: Readonly<any> = (theme: any) => ({
     },
 });
 
-const getFromNames = (programId: string) => ({
-    PROGRAM_STAGE_INSTANCE: i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
-});
+const fromNames = {
+    PROGRAM_STAGE_INSTANCE: i18n.t('This event'),
+};
 
 type PlainProps = {
     relationships: Array<Relationship>;
@@ -79,7 +78,6 @@ type PlainProps = {
     currentEntityId: string;
     smallMainButton: boolean;
     relationshipsRef: (instance: any) => void;
-    programId: string;
 };
 
 type Props = PlainProps & WithStyles<typeof styles>;
@@ -107,7 +105,7 @@ class RelationshipsPlain extends React.Component<Props> {
         const { onRenderConnectedEntity } = this.props;
 
         if (entity.id === this.props.currentEntityId) {
-            return getFromNames(this.props.programId)[entity.type];
+            return fromNames[entity.type];
         }
 
         return onRenderConnectedEntity ? onRenderConnectedEntity(entity) : entity.name;
@@ -171,10 +169,8 @@ class RelationshipsPlain extends React.Component<Props> {
             writableRelationshipTypes,
             relationshipsRef,
             smallMainButton,
-            programId,
         } = this.props;
         const canCreate = !readOnly && writableRelationshipTypes.length > 0;
-        const relationshipLabel = getTermLabel('relationship', { programId });
         return (
             <div className={classes.container} ref={relationshipsRef}>
                 <div className={classes.relationshipsContainer}>
@@ -189,7 +185,7 @@ class RelationshipsPlain extends React.Component<Props> {
                                 dataTest="add-relationship-button"
                                 secondary
                             >
-                                {i18n.t('Add {{relationshipLabel}}', { relationshipLabel })}
+                                {i18n.t('Add relationship')}
                             </Button>
                         </div>
                     </div>

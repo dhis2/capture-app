@@ -2,7 +2,7 @@ import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
-import { scopeTypes, useTermLabel } from '../../metaData';
+import { scopeTypes } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 
@@ -26,7 +26,6 @@ const ActionButtonsPlain = ({
     openConfirmDialog,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
-    const eventLabel = useTermLabel('event', { programId: selectedProgramId });
     const [openSearch, setOpenSearch] = useState(false);
 
     useEffect(() => {
@@ -66,7 +65,7 @@ const ActionButtonsPlain = ({
                             trackedEntityType: trackedEntityName,
                             interpolation: { escapeValue: false },
                         })
-                        : i18n.t('Create new {{eventLabel}}', { eventLabel })
+                        : i18n.t('Create new event')
                     }
                 </SplitButton>
             )}

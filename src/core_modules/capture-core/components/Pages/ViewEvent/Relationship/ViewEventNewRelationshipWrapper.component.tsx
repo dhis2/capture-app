@@ -7,7 +7,6 @@ import { NewRelationship } from '../../NewRelationship/NewRelationship.container
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { PlainProps } from './ViewEventNewRelationshipWrapper.types';
-import { getTermLabel } from '../../../../metaData';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -66,45 +65,39 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
         this.setState({ discardDialogOpen: false });
     }
 
+    renderHeader = () => (
+        <div
+            className={this.props.classes.headerContainer}
+        >
+            <div className={this.props.classes.header} >
+                {i18n.t('New event relationship')}
+            </div>
+        </div>
+    );
+
     render() {
-        const { classes, onCancel, programId, ...passOnProps } = this.props;
-        const eventLabel = getTermLabel('event', { programId });
-        const relationshipLabel = getTermLabel('relationship', { programId });
+        const { classes, onCancel, ...passOnProps } = this.props;
         return (
             <div className={classes.container}>
                 <div className={classes.backToEventContainer}>
-                    <span>
-                        {i18n.t(
-                            'Adding {{relationshipLabel}} to {{eventLabel}}.',
-                            { eventLabel, relationshipLabel },
-                        )}
-                    </span>
+                    <span>{i18n.t('Adding relationship to event.')}</span>
                     <LinkButton
                         className={classes.backToEventButton}
                         onClick={this.handleDiscard}
                     >
-                        {i18n.t('Go back to {{eventLabel}} without saving {{relationshipLabel}}', {
-                            eventLabel,
-                            relationshipLabel,
-                        })}
+                        {i18n.t('Go back to event without saving relationship')}
                     </LinkButton>
                 </div>
                 <Card className={classes.newRelationshipPaper}>
                     <NewRelationship
-                        header={i18n.t(
-                            'New {{eventLabel}} {{relationshipLabel}}',
-                            { eventLabel, relationshipLabel },
-                        )}
+                        header={i18n.t('New event relationship')}
                         onCancel={onCancel}
                         {...passOnProps}
                     />
                 </Card>
                 <DiscardDialog
                     header={i18n.t('Discard unsaved changes?')}
-                    text={i18n.t(
-                        'Leaving this page will discard any selections you made for a new {{relationshipLabel}}',
-                        { relationshipLabel },
-                    )}
+                    text={i18n.t('Leaving this page will discard any selections you made for a new relationship')}
                     destructiveText={i18n.t('Yes, discard changes')}
                     cancelText={i18n.t('No, cancel')}
                     onDestroy={onCancel}

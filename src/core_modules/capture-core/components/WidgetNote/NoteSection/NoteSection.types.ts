@@ -14,5 +14,4 @@ export type OwnProps = {
     placeholder: string;
     emptyNoteMessage: string;
     readOnly?: boolean;
-    noteLabel: string;
 };

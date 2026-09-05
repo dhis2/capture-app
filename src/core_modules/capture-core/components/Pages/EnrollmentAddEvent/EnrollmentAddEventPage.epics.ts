@@ -100,7 +100,7 @@ export const saveNewEventSucceededEpic = (action$: EpicAction<any>, store: Redux
         }),
     );
 
-export const saveNewEventFailedEpic = (action$: EpicAction<any>, store: any) =>
+export const saveNewEventFailedEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR,
@@ -110,10 +110,9 @@ export const saveNewEventFailedEpic = (action$: EpicAction<any>, store: any) =>
         map((action: any) => {
             const { serverData: { events, enrollments } } = action.meta;
             const rollbackEvents = events ?? enrollments[0].events;
-            const { programId } = store.value.enrollmentPage;
 
             return batchActions([
-                saveFailed(programId),
+                saveFailed(),
                 rollbackEnrollmentEvents({
                     events: rollbackEvents,
                 }),

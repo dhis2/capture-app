@@ -45,8 +45,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     }, [dispatch, contextOrgUnitId]);
 
     const onDeleteEvent = useCallback((eventId: string) => {
-        dispatch(requestDeleteEvent(eventId, storeId, program.id));
-    }, [dispatch, storeId, program.id]);
+        dispatch(requestDeleteEvent(eventId, storeId));
+    }, [dispatch, storeId]);
 
     const getLockedFilters = useCallback((selectedTemplate: any) => {
         if (!selectedTemplate.isDefault) {

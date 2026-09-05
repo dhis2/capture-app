@@ -1,12 +1,10 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
-import { useTermLabel } from '../../../../metaData';
 
-export const Followup = ({ enrollment, onUpdate }: Props) => {
-    const followUpLabel = useTermLabel('followUp');
-    return enrollment.followUp ? (
+export const Followup = ({ enrollment, onUpdate }: Props) =>
+    (enrollment.followUp ? (
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-followup-remove"
@@ -17,7 +15,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) => {
                 })
             }
             icon={<IconFlag16 />}
-            label={i18n.t('Remove mark for {{followUpLabel}}', { followUpLabel })}
+            label={i18n.t('Remove mark for follow-up')}
             suffix=""
         />
     ) : (
@@ -31,8 +29,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) => {
                 })
             }
             icon={<IconFlag16 />}
-            label={i18n.t('Mark for {{followUpLabel}}', { followUpLabel })}
+            label={i18n.t('Mark for follow-up')}
             suffix=""
         />
-    );
-};
+    ));

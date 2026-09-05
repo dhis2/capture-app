@@ -1,11 +1,6 @@
 import { connect } from 'react-redux';
 import { NotesSectionComponent } from './NotesSection.component';
 import { requestSaveEventNote, updateEventNoteField } from '../../Notes/viewEventNotes.actions';
-import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
-
-const customLabels = {
-    notesLabel: { key: 'note', plural: true },
-} as const;
 
 const mapStateToProps = (state: any) => {
     const notesSection = state.viewEventPage.notesSection || {};
@@ -13,19 +8,16 @@ const mapStateToProps = (state: any) => {
         notes: state.notes.viewEvent || [],
         ready: !notesSection.isLoading,
         fieldValue: notesSection.fieldValue,
-        programId: state.currentSelections.programId,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-    onAddNote: (note: string, programId: string) => {
-        dispatch(requestSaveEventNote(note, programId));
+    onAddNote: (note: string) => {
+        dispatch(requestSaveEventNote(note));
     },
     onUpdateNoteField: (value: string) => {
         dispatch(updateEventNoteField(value));
     },
 });
 
-export const NotesSection = connect(mapStateToProps, mapDispatchToProps)(
-    withCustomLabels(customLabels)(NotesSectionComponent),
-);
+export const NotesSection = connect(mapStateToProps, mapDispatchToProps)(NotesSectionComponent);

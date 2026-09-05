@@ -58,7 +58,6 @@ export const newEventSavedAfterReturnedToMainPage = (selections: any) =>
 
 export const startSaveNewEventAfterReturnedToMainPage = (serverData: any, relationshipData: any, selections: any) => {
     const actionType = actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE;
-    const programId = serverData?.events?.[0]?.program;
     return actionCreator(actionType)({ selections }, {
         offline: {
             effect: {
@@ -70,10 +69,7 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: any, relati
                 type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS,
                 meta: { selections, relationshipData, triggerAction: actionType },
             },
-            rollback: {
-                type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE,
-                meta: { selections, programId },
-            },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE, meta: { selections } },
         },
     });
 };
@@ -160,7 +156,6 @@ export const startSaveNewEventAddAnother =
     clientId: string,
 ) => {
     const actionType = actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER;
-    const programId = serverData?.events?.[0]?.program;
     return actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
         offline: {
             effect: {
@@ -173,10 +168,7 @@ export const startSaveNewEventAddAnother =
                 type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS,
                 meta: { selections, relationshipData, triggerAction: actionType },
             },
-            rollback: {
-                type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER,
-                meta: { selections, clientId, programId },
-            },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections, clientId } },
         },
     });
 };

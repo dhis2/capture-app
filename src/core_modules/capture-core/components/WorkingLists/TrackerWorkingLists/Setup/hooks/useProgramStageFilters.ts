@@ -1,13 +1,7 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
-import {
-    type TrackerProgram,
-    type ProgramStage,
-    dataElementTypes,
-    getProgramEventAccess,
-    useTermLabel,
-} from '../../../../../metaData';
+import { type TrackerProgram, type ProgramStage, dataElementTypes, getProgramEventAccess } from '../../../../../metaData';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
 const useProgramStageData = (programStageId, stages) =>
@@ -50,7 +44,6 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
         program.stages,
     );
     const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(program.stages, program.id);
-    const programStageLabel = useTermLabel('programStage', { programId: program.id });
 
     return useMemo(() => {
         const translatedStatus = translatedStatusTypes();
@@ -68,8 +61,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 type: dataElementTypes.DATE,
                 header: occurredAtLabel,
                 disabled: !programStageId,
-                tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
-                    programStageLabel,
+                tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                     label: occurredAtLabel,
                     interpolation: { escapeValue: false },
                 }),
@@ -99,8 +91,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                     { text: translatedStatus.SKIPPED, value: statusTypes.SKIPPED },
                 ],
                 disabled: !programStageId,
-                tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
-                    programStageLabel,
+                tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                     label: ADDITIONAL_FILTERS_LABELS.status,
                     interpolation: { escapeValue: false },
                 }),
@@ -115,8 +106,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                         type: dataElementTypes.DATE,
                         header: scheduledAtLabel,
                         disabled: !programStageId,
-                        tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
-                            programStageLabel,
+                        tooltipContent: i18n.t('Choose a program stage to filter by {{label}}', {
                             label: scheduledAtLabel,
                             interpolation: { escapeValue: false },
                         }),
@@ -154,5 +144,5 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 ]
                 : []),
         ];
-    }, [programStageId, occurredAtLabel, scheduledAtLabel, hideDueDate, options, enableUserAssignment, programStageLabel]);
+    }, [programStageId, occurredAtLabel, scheduledAtLabel, hideDueDate, options, enableUserAssignment]);
 };

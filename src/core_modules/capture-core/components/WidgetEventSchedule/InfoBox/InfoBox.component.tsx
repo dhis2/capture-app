@@ -4,7 +4,6 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
 import type { PlainProps } from './InfoBox.types';
-import { useTermLabel } from '../../../metaData';
 
 const styles = {
     infoBox: {
@@ -25,12 +24,8 @@ const InfoBoxPlain = ({
     hideDueDate,
     eventCountInOrgUnit,
     orgUnitName,
-    programId,
-    stageId,
     classes,
 }: Props) => {
-    const eventLabel = useTermLabel('event', { programId, stageId });
-    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
     if (!scheduleDate || !suggestedScheduleDate) {
         return null;
     }
@@ -63,20 +58,17 @@ const InfoBoxPlain = ({
                     {!!orgUnitName && (
                         <>
                             {' '}
-                            {i18n.t(
-                                'There are {{count}} scheduled {{eventLabel}} in this program '
-                                    + 'in {{orgUnitName}} on this day.',
-                                {
-                                    count: eventCountInOrgUnit,
-                                    orgUnitName,
-                                    eventLabel,
-                                    eventsLabel,
-                                    defaultValue: 'There are {{count}} scheduled {{eventLabel}} in this program '
-                                        + 'in {{orgUnitName}} on this day.',
-                                    defaultValue_plural: 'There are {{count}} scheduled {{eventsLabel}} in this program '
-                                        + 'in {{orgUnitName}} on this day.',
+                            {i18n.t('There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.', {
+                                count: eventCountInOrgUnit,
+                                orgUnitName,
+                                // eslint-disable-next-line max-len
+                                defaultValue: 'There are {{count}} scheduled event in this program in {{orgUnitName}} on this day.',
+                                // eslint-disable-next-line max-len
+                                defaultValue_plural: 'There are {{count}} scheduled events in this program in {{orgUnitName}} on this day.',
+                                interpolation: {
+                                    escapeValue: false,
                                 },
-                            )}
+                            })}
                         </>
                     )}
                 </>

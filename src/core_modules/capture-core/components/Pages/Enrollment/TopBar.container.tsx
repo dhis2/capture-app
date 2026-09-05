@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTermLabel } from '../../../metaData';
+import i18n from '@dhis2/d2-i18n';
 import {
     ScopeSelector,
     useSetProgramId,
@@ -31,7 +31,6 @@ export const TopBar = ({
     teiDisplayName,
     enrollmentsAsOptions,
 }: TopBarProps) => {
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
     const { setProgramIdAndResetEnrollmentContext } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();
@@ -74,7 +73,7 @@ export const TopBar = ({
                     onSelect={id => setEnrollmentId({ enrollmentId: id })}
                     options={enrollmentsAsOptions}
                     selectedValue={enrollmentId}
-                    title={enrollmentLabel}
+                    title={i18n.t('Enrollment')}
                 />
             ) : <></>}
             <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />

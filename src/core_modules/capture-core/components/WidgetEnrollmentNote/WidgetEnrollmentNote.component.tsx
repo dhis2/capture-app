@@ -1,12 +1,11 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAddNoteForEnrollment } from './WidgetEnrollmentNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
-import { useTermLabel } from '../../metaData';
 
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
@@ -18,9 +17,6 @@ export const WidgetEnrollmentNote = () => {
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
-    const enrollmentLabel = useTermLabel('enrollment');
-    const noteLabel = useTermLabel('note');
-    const notesLabel = useTermLabel('note', { plural: true });
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
@@ -29,19 +25,9 @@ export const WidgetEnrollmentNote = () => {
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
-                title={i18n.t(
-                    '{{notesLabel}} about this {{enrollmentLabel}}',
-                    { notesLabel, enrollmentLabel },
-                )}
-                placeholder={i18n.t(
-                    'Write a {{noteLabel}} about this {{enrollmentLabel}}',
-                    { enrollmentLabel, noteLabel },
-                )}
-                emptyNoteMessage={i18n.t(
-                    "This {{enrollmentLabel}} doesn't have any {{notesLabel}}",
-                    { enrollmentLabel, notesLabel },
-                )}
-                noteLabel={noteLabel}
+                title={i18n.t('Notes about this enrollment')}
+                placeholder={i18n.t('Write a note about this enrollment')}
+                emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 readOnly={!programWriteAccess}
                 badge={showWidgetBadge ? (

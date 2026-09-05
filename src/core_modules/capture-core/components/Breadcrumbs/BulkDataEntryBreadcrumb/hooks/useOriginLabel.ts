@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
-import { useTermLabel } from '../../../../metaData';
 
 type Props = {
     programId: string;
@@ -11,34 +10,29 @@ type Props = {
     page: string;
 };
 
-const getWorkingListLabel = (
-    selectedTemplate: any,
-    selectedTemplateId: string,
-    defaultFilterLabels: Record<string, string>,
-) => {
+const DefaultFilterLabels = {
+    default: i18n.t('Program overview'),
+    active: i18n.t('Active enrollments'),
+    complete: i18n.t('Completed enrollments'),
+    cancelled: i18n.t('Cancelled enrollments'),
+};
+
+const getWorkingListLabel = (selectedTemplate: any, selectedTemplateId: string) => {
     if (selectedTemplate && !selectedTemplate.isDefault) {
         return selectedTemplate.name;
     }
     if (selectedTemplateId && !selectedTemplate) {
-        return defaultFilterLabels[selectedTemplateId as keyof typeof defaultFilterLabels];
+        return DefaultFilterLabels[selectedTemplateId as keyof typeof DefaultFilterLabels];
     }
     return i18n.t('Program overview');
 };
 
 export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props) => {
-    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
     const workingListTemplates = useSelector(({ workingListsTemplates }: any) => workingListsTemplates?.teiList);
     const workingListProgramId = useSelector(({ workingListsContext }: any) => workingListsContext?.teiList?.programIdView);
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
     const selectedTemplate = templates?.find(({ id }: any) => id === selectedTemplateId);
     const isSameProgram = workingListProgramId === programId;
-
-    const defaultFilterLabels = useMemo(() => ({
-        default: i18n.t('Program overview'),
-        active: i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
-        complete: i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
-        cancelled: i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
-    }), [enrollmentsLabel]);
 
     const label = useMemo(() => {
         if (page === breadcrumbsKeys.SEARCH_PAGE) {
@@ -50,7 +44,7 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
         }
 
         if (isSameProgram) {
-            return getWorkingListLabel(selectedTemplate, selectedTemplateId, defaultFilterLabels);
+            return getWorkingListLabel(selectedTemplate, selectedTemplateId);
         }
 
         if (!displayFrontPageList) {
@@ -64,7 +58,6 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
         selectedTemplate,
         selectedTemplateId,
         page,
-        defaultFilterLabels,
     ]);
 
     return {

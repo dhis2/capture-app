@@ -1,7 +1,6 @@
 export type Props = {
     dataEntryKey: string;
     dataEntryId: string;
-    programId: string;
 };
 
 export type FormNote = {

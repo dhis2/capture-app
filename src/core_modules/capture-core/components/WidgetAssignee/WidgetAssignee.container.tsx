@@ -4,7 +4,7 @@ import { WidgetAssigneeComponent } from './WidgetAssignee.component';
 import { useUserAvatar, useAssigneeMutation } from './hooks';
 
 const WidgetAssigneeWithHooks = (props: Props) => {
-    const { assignee, readOnly, getSaveContext, onSave, onSaveError, programId, stageId } = props;
+    const { assignee, readOnly, getSaveContext, onSave, onSaveError } = props;
     const { avatarId, isLoading } = useUserAvatar(assignee?.id);
     const onSet = useAssigneeMutation({ assignee, getSaveContext, onSave, onSaveError });
 
@@ -18,8 +18,6 @@ const WidgetAssigneeWithHooks = (props: Props) => {
             readOnly={readOnly}
             avatarId={avatarId}
             onSet={onSet}
-            programId={programId}
-            stageId={stageId}
         />
     );
 };

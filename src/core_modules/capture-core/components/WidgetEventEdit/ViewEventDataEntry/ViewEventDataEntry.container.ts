@@ -3,10 +3,12 @@ import { ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
 
+// Example use of withCustomLabels: injects `orgUnitLabel` and `eventLabel` as
+// props, resolved against the current program's custom terminology (programId
+// is supplied via mapStateToProps below).
 const customLabels = {
     orgUnitLabel: { key: 'orgUnit' },
     eventLabel: { key: 'event' },
-    notesLabel: { key: 'note', plural: true },
 } as const;
 
 const mapStateToProps = (state: any, props: any) => {

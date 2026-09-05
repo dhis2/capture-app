@@ -3,15 +3,13 @@ import i18n from '@dhis2/d2-i18n';
 import { placements } from '../../../../DataEntry/constants/placements.const';
 import { sectionKeysForFirstStageDataEntry } from '../EnrollmentWithFirstStageDataEntry.constants';
 import { AOCsectionKey } from '../../../../DataEntryDhis2Helpers';
-import { useTermLabel } from '../../../../../metaData';
 
-export const useDataEntrySections = (stageName: string, beforeSectionId: string) => {
-    const enrollmentLabel = useTermLabel('enrollment');
-    return useMemo(
+export const useDataEntrySections = (stageName: string, beforeSectionId: string) =>
+    useMemo(
         () => ({
             [sectionKeysForFirstStageDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
-                name: enrollmentLabel,
+                name: i18n.t('Enrollment'),
             },
             [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {
                 beforeSectionId,
@@ -37,6 +35,5 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
                 }),
             },
         }),
-        [stageName, beforeSectionId, enrollmentLabel],
+        [stageName, beforeSectionId],
     );
-};

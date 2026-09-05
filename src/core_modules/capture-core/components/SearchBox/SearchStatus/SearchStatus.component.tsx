@@ -1,5 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+
 import i18n from '@dhis2/d2-i18n';
 import {
     CircularLoader,
@@ -11,11 +12,11 @@ import {
     Button,
     NoticeBox,
 } from '@dhis2/ui';
+
 import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
-import { useTermLabel } from '../../../metaData';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {
@@ -41,8 +42,6 @@ export const SearchStatusPlain = ({
     trackedEntityName,
     classes,
 }: ComponentProps & WithStyles<typeof getStyles>) => {
-    const attributeLabel = useTermLabel('attribute');
-    const attributesLabel = useTermLabel('attribute', { plural: true });
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
         return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }
@@ -101,10 +100,7 @@ export const SearchStatusPlain = ({
                 <NoticeBox title={i18n.t('Too many results')} warning>
                     {i18n.t('This search returned too many results to show.')}
                     {' '}
-                    {i18n.t(
-                        'Try changing search terms or searching by more {{attributesLabel}} to narrow down the results.',
-                        { attributesLabel },
-                    )}
+                    {i18n.t('Try changing search terms or searching by more attributes to narrow down the results.')}
                 </NoticeBox>
             </div>
         );
@@ -118,8 +114,6 @@ export const SearchStatusPlain = ({
                     <NotEnoughAttributesMessage
                         minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                         searchableFields={searchableFields}
-                        attributeLabel={attributeLabel}
-                        attributesLabel={attributesLabel}
                     />
                 </ModalContent>
                 <ModalActions>

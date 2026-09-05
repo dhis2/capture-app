@@ -9,7 +9,6 @@ import { Section, SectionHeaderSimple } from '../../Section';
 import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
-import { useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {
@@ -103,7 +102,6 @@ const SearchFormIndex = ({
     keptFallbackSearchFormValues,
 }: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
-    const attributesLabel = useTermLabel('attribute', { plural: true });
 
     useFormDataLifecycle(
         searchGroupsForSelectedScope,
@@ -184,19 +182,16 @@ const SearchFormIndex = ({
             }
         };
 
-        const FormInformativeMessage = ({ minAttributesRequiredToSearch }) => {
-            const attributeLabel = useTermLabel('attribute');
-            return (
-                <div className={error ? classes.textError : classes.textInfo}>
-                    {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
+        const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
+            (<div className={error ? classes.textError : classes.textInfo}>
+                {
+                    i18n.t('Fill in at least {{count}} attribute to search', {
                         count: minAttributesRequiredToSearch,
-                        attributeLabel,
-                        defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
+                        defaultValue: 'Fill in at least {{count}} attribute to search',
                         defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    })}
-                </div>
-            );
-        };
+                    })
+                }
+            </div>);
 
         const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {
@@ -293,7 +288,7 @@ const SearchFormIndex = ({
                         minAttributesRequiredToSearch,
                         unsupportedAttributes,
                     }) => {
-                        const searchByText = i18n.t('Search by {{attributesLabel}}', { attributesLabel });
+                        const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
                             <div key={formId} data-test="form-attributes">
@@ -380,7 +375,6 @@ const SearchFormIndex = ({
         resultsPageSize,
         error,
         expandedFormId,
-        attributesLabel,
     ]);
 };
 

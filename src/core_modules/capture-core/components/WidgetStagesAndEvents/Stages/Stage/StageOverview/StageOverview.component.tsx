@@ -15,7 +15,7 @@ import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentO
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
-import { dataElementTypes, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes } from '../../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -93,7 +93,7 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
 };
 
 export const StageOverviewPlain = ({
-    title, icon, description, events, stageWriteAccess = true, programId, stageId, classes,
+    title, icon, description, events, stageWriteAccess = true, classes,
 }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const { anyStageWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
@@ -101,8 +101,6 @@ export const StageOverviewPlain = ({
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
-    const eventLabel = useTermLabel('event', { programId, stageId });
-    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
 
     return (
         <div className={classes.container}>
@@ -138,12 +136,10 @@ export const StageOverviewPlain = ({
             </div>
             <div className={classes.infoItems}>
                 <div className={classes.indicator}>
-                    {i18n.t('{{count}} {{eventLabel}}', {
+                    {i18n.t('{{ count }} event', {
                         count: totalEvents,
-                        eventLabel,
-                        eventsLabel,
-                        defaultValue: '{{count}} {{eventLabel}}',
-                        defaultValue_plural: '{{count}} {{eventsLabel}}',
+                        defaultValue: '{{ count }} event',
+                        defaultValue_plural: '{{count}} events',
                     })}
                 </div>
                 {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>
@@ -167,8 +163,6 @@ export const StageOverviewPlain = ({
                 {showStageBadge && (
                     <ReadOnlyBadge
                         programStageWriteAccess={stageWriteAccess}
-                        programId={programId}
-                        stageId={stageId}
                     />
                 )}
             </div>

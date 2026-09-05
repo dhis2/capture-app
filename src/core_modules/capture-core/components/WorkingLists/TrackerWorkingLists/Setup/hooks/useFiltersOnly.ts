@@ -1,24 +1,21 @@
 import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import i18n from '@dhis2/d2-i18n';
-import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
 import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = (
-    { id: programId, enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
+    { enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
     programStageId?: string,
-) => {
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const followUpLabel = useTermLabel('followUp', { programId });
-    return useMemo(() => {
+) =>
+    useMemo(() => {
         const enableUserAssignment =
             !programStageId && Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);
         return [
             {
                 id: MAIN_FILTERS.PROGRAM_STATUS,
                 type: dataElementTypes.TEXT,
-                header: i18n.t('{{enrollmentLabel}} status', { enrollmentLabel }),
+                header: i18n.t('Enrollment status'),
                 options: [
                     { text: i18n.t('Active'), value: 'ACTIVE' },
                     { text: i18n.t('Completed'), value: 'COMPLETED' },
@@ -74,7 +71,7 @@ export const useFiltersOnly = (
             {
                 id: MAIN_FILTERS.FOLLOW_UP,
                 type: dataElementTypes.BOOLEAN,
-                header: capitalizeFirstLetter(followUpLabel),
+                header: i18n.t('Follow up'),
                 showInMoreFilters: true,
                 multiValueFilter: false,
                 transformRecordsFilter: (rawFilter: string) => ({
@@ -99,5 +96,4 @@ export const useFiltersOnly = (
                 ]
                 : []),
         ];
-    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages, programStageId, enrollmentLabel, followUpLabel]);
-};
+    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages, programStageId]);

@@ -24,7 +24,7 @@ export const EventBulkActions = ({
             selectedRowsCount={selectedRowsCount}
             onClearSelection={onClearSelection}
         >
-            {onOpenBulkDataEntryPlugin && (
+            {programId && onOpenBulkDataEntryPlugin && (
                 <BulkDataEntryAction
                     programId={programId}
                     onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}

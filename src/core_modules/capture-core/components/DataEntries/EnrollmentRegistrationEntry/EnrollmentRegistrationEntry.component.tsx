@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes, useTermLabel } from '../../../metaData';
+import { scopeTypes } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
@@ -26,14 +26,13 @@ const translatedTextWithStylesForProgram = (
     trackedEntityName: string,
     programName: string,
     orgUnitName: string,
-    enrollmentLabel: string,
     teiId?: string,
 ) => (
     teiId ? <span>
-        {i18n.t('Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}.', {
-            enrollmentLabel,
+        {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
             programName,
             orgUnitName,
+            interpolation: { escapeValue: false },
         })}
     </span> : <span>
         {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', {
@@ -66,7 +65,6 @@ const EnrollmentRegistrationEntryPlain =
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
-      const enrollmentLabel = useTermLabel('enrollment');
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -124,7 +122,6 @@ const EnrollmentRegistrationEntryPlain =
                               trackedEntityName.toLowerCase(),
                               programName,
                               orgUnit.name,
-                              enrollmentLabel,
                               teiId,
                           )}
                       </InfoIconText>

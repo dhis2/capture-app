@@ -1,10 +1,9 @@
-import i18n from '@dhis2/d2-i18n';
 import { useCallback, useEffect, useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { useTermLabel } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: { [key: string]: boolean };
@@ -24,7 +23,6 @@ export const useBulkCompleteEvents = ({
     programId,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -77,12 +75,7 @@ export const useBulkCompleteEvents = ({
         }),
         {
             onError: () => {
-                showAlert({
-                    message: i18n.t(
-                        'An error occurred while completing {{eventsLabel}}',
-                        { eventsLabel },
-                    ),
-                });
+                showAlert({ message: i18n.t('An error occurred while completing events') });
             },
             onSuccess: (response, { payload }: any) => {
                 const errorReports = response?.validationReport?.errorReports;

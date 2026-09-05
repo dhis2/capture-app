@@ -170,9 +170,6 @@ const baseProgramFields = [
 
 const pluralProgramFields = [
     'displayEnrollmentsLabel',
-    'displayRelationshipsLabel',
-    'displayNotesLabel',
-    'displayTrackedEntityAttributesLabel',
     'displayProgramStagesLabel',
     'displayEventsLabel',
 ];
