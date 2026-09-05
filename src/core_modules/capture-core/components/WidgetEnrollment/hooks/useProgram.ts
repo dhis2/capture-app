@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 
 type ProgramData = {
     featureType: string;
     [key: string]: any;
 };
 
-const fields = [
+const baseFields = [
     'displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,' +
     'displayEnrollmentLabel,displayFollowUpLabel,displayOrgUnitLabel,' +
     'displayRelationshipLabel,displayNoteLabel,displayTrackedEntityAttributeLabel,' +
@@ -16,13 +17,21 @@ const fields = [
     'access,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture',
 ];
 
+const pluralFields = [
+    'displayEnrollmentsLabel,displayProgramStagesLabel,displayEventsLabel',
+];
+
 export const useProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
             () => ({
                 program: {
                     resource: `programs/${programId}`,
-                    params: { fields },
+                    params: {
+                        fields: featureAvailable(FEATURES.customTerminologyPlurals)
+                            ? [...baseFields, ...pluralFields]
+                            : baseFields,
+                    },
                 },
             }),
             [programId],
