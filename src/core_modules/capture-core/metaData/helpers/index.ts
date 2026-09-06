@@ -19,8 +19,12 @@ export { getProgramAndStageForProgram } from './getProgramAndStageForProgram';
 export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';
 export {
     extractCustomLabels,
-    getTermLabelFromProgram,
     getTermLabel,
+    getTermLabelFromProgram,
+    LabelKeys,
     useTermLabel,
+    type CustomLabelKey,
+    type CustomLabels,
+    type TermRequest,
 } from './customLabels';
-export type { CustomLabelKey, CustomLabels } from './customLabels';
+

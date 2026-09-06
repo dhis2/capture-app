@@ -17,7 +17,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes, getTermLabelFromProgram } from '../../metaData';
+import { dataElementTypes, getTermLabelFromProgram, LabelKeys } from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -94,10 +94,11 @@ const WidgetEnrollmentPlain = ({
 
     const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
     const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
-    // Example use of getTermLabelFromProgram: resolves the "enrollment" term against the
-    // widget's own fetched program. Keeps the widget self-contained (no dependency on
-    // the global programCollection memory store or Capture Redux state).
-    const enrollmentLabel = getTermLabelFromProgram('enrollment', { program });
+    // Example use of getTermLabelFromProgram.
+    const { enrollmentLabel, followUpLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollment, LabelKeys.followUp],
+        { program },
+    );
 
     return (
         <div data-test="widget-enrollment">
@@ -130,7 +131,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {i18n.t('Follow-up')}
+                                    {followUpLabel}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />
