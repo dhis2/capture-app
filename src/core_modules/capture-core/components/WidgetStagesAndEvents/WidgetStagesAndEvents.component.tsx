@@ -38,8 +38,7 @@ const WidgetStagesAndEventsPlain = ({
     } = useEnrollmentAccessContext();
     // Example use of useTermLabel.
     const { programStagesLabel, eventsLabel } = useTermLabel(
-        [{ key: LabelKeys.programStage, plural: true },
-            { key: LabelKeys.event, plural: true }],
+        [LabelKeys.programStagePlural, LabelKeys.eventPlural],
         { programId },
     );
 

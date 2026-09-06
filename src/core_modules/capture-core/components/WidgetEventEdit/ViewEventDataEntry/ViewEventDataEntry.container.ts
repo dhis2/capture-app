@@ -5,7 +5,7 @@ import { withCustomLabels } from '../../../HOC/withCustomLabels';
 import { LabelKeys } from '../../../metaData';
 
 // Example use of withCustomLabels.
-const customLabels = [LabelKeys.orgUnit, LabelKeys.event] as const;
+const customLabels = [LabelKeys.orgUnitSingular, LabelKeys.eventSingular] as const;
 
 const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
