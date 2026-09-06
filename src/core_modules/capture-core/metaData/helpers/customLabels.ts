@@ -3,57 +3,59 @@ import { useSelector } from 'react-redux';
 import { programCollection } from '../../metaDataMemoryStores';
 
 type LabelConfig = {
-    field: string;
-    pluralField?: string;
-    singular: () => string;
-    plural?: () => string;
+    apiFieldSingular: string;
+    apiFieldPlural?: string;
+    defaultSingular: () => string;
+    defaultPlural?: () => string;
 };
 
-const asLabels = <T extends string>(labels: Record<T, LabelConfig>) => labels;
-
-const LABELS = asLabels({
+const LABELS = {
     enrollment: {
-        field: 'displayEnrollmentLabel',
-        pluralField: 'displayEnrollmentsLabel',
-        singular: () => i18n.t('enrollment'),
-        plural: () => i18n.t('enrollments'),
+        apiFieldSingular: 'displayEnrollmentLabel',
+        apiFieldPlural: 'displayEnrollmentsLabel',
+        defaultSingular: () => i18n.t('enrollment'),
+        defaultPlural: () => i18n.t('enrollments'),
     },
     event: {
-        field: 'displayEventLabel',
-        pluralField: 'displayEventsLabel',
-        singular: () => i18n.t('event'),
-        plural: () => i18n.t('events'),
+        apiFieldSingular: 'displayEventLabel',
+        apiFieldPlural: 'displayEventsLabel',
+        defaultSingular: () => i18n.t('event'),
+        defaultPlural: () => i18n.t('events'),
     },
     programStage: {
-        field: 'displayProgramStageLabel',
-        pluralField: 'displayProgramStagesLabel',
-        singular: () => i18n.t('program stage'),
-        plural: () => i18n.t('program stages'),
+        apiFieldSingular: 'displayProgramStageLabel',
+        apiFieldPlural: 'displayProgramStagesLabel',
+        defaultSingular: () => i18n.t('program stage'),
+        defaultPlural: () => i18n.t('program stages'),
     },
     note: {
-        field: 'displayNoteLabel',
-        singular: () => i18n.t('note'),
+        apiFieldSingular: 'displayNoteLabel',
+        defaultSingular: () => i18n.t('note'),
     },
     relationship: {
-        field: 'displayRelationshipLabel',
-        singular: () => i18n.t('relationship'),
+        apiFieldSingular: 'displayRelationshipLabel',
+        defaultSingular: () => i18n.t('relationship'),
     },
     attribute: {
-        field: 'displayTrackedEntityAttributeLabel',
-        singular: () => i18n.t('attribute'),
+        apiFieldSingular: 'displayTrackedEntityAttributeLabel',
+        defaultSingular: () => i18n.t('attribute'),
     },
     orgUnit: {
-        field: 'displayOrgUnitLabel',
-        singular: () => i18n.t('organisation unit'),
+        apiFieldSingular: 'displayOrgUnitLabel',
+        defaultSingular: () => i18n.t('organisation unit'),
     },
     followUp: {
-        field: 'displayFollowUpLabel',
-        singular: () => i18n.t('follow-up'),
+        apiFieldSingular: 'displayFollowUpLabel',
+        defaultSingular: () => i18n.t('follow-up'),
     },
-});
+} satisfies Record<string, LabelConfig>;
 
 export type CustomLabelKey = keyof typeof LABELS;
 export type CustomLabels = Record<string, string>;
+
+type KeysWithPlural = {
+    [K in CustomLabelKey]: typeof LABELS[K] extends { apiFieldPlural: string } ? K : never
+}[CustomLabelKey];
 
 export const LabelKeys = {
     enrollmentSingular: 'enrollment',
@@ -63,35 +65,33 @@ export const LabelKeys = {
     programStageSingular: 'programStage',
     programStagePlural: { key: 'programStage', plural: true },
     noteSingular: 'note',
-    notePlural: { key: 'note', plural: true },
     relationshipSingular: 'relationship',
-    relationshipPlural: { key: 'relationship', plural: true },
     attributeSingular: 'attribute',
-    attributePlural: { key: 'attribute', plural: true },
     orgUnitSingular: 'orgUnit',
-    orgUnitPlural: { key: 'orgUnit', plural: true },
     followUpSingular: 'followUp',
-    followUpPlural: { key: 'followUp', plural: true },
 } as const satisfies
     & { [K in CustomLabelKey as `${K}Singular`]: K }
-    & { [K in CustomLabelKey as `${K}Plural`]: { key: K; plural: true } };
+    & Partial<{ [K in KeysWithPlural as `${K}Plural`]: { key: K; plural: true } }>;
 
 export type TermRequest =
     | CustomLabelKey
-    | { key: CustomLabelKey; plural?: boolean };
+    | { key: KeysWithPlural; plural: true }
+    | { key: CustomLabelKey; plural?: false };
 
 type LabelSource = Record<string, unknown> | undefined | null;
 type GetTermLabelFromProgramOptions = { program: LabelSource };
 type GetTermLabelOptions = { programId: string | null | undefined; stageId?: string | null };
 type UseTermLabelOptions = { programId?: string | null; stageId?: string | null };
 
-const ALL_FIELD_NAMES = Object.values(LABELS).flatMap(
-    ({ field, pluralField }) => (pluralField ? [field, pluralField] : [field]),
+const getLabel = (key: CustomLabelKey): LabelConfig => LABELS[key];
+
+const ALL_FIELD_NAMES = Object.values(LABELS as Record<string, LabelConfig>).flatMap(
+    ({ apiFieldSingular, apiFieldPlural }) => (apiFieldPlural ? [apiFieldSingular, apiFieldPlural] : [apiFieldSingular]),
 );
 
 const resolveDefault = (key: CustomLabelKey, plural: boolean): string => {
-    const label = LABELS[key];
-    return plural ? label.plural?.() ?? label.singular() : label.singular();
+    const label = getLabel(key);
+    return plural ? label.defaultPlural?.() ?? label.defaultSingular() : label.defaultSingular();
 };
 
 const resolveLabel = (
@@ -99,8 +99,8 @@ const resolveLabel = (
     key: CustomLabelKey,
     plural: boolean,
 ): string => {
-    const { field, pluralField } = LABELS[key];
-    const target = plural ? pluralField : field;
+    const { apiFieldSingular, apiFieldPlural } = getLabel(key);
+    const target = plural ? apiFieldPlural : apiFieldSingular;
     const found = target
         ? sources
             .map(source => source?.[target])
