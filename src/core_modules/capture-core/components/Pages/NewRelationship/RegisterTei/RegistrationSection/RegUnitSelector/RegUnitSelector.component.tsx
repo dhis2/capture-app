@@ -7,7 +7,7 @@ import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../../../metaData';
 import { withCustomLabels } from '../../../../../../HOC/withCustomLabels';
 
-const customLabels = [LabelKeys.orgUnit] as const;
+const customLabels = [LabelKeys.orgUnitSingular] as const;
 
 const getStyles = () => ({
     label: {

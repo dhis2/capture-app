@@ -9,7 +9,7 @@ import type { ErrorReport } from '../../processErrorReports';
 export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, program, setOpenModal, onDeleteSuccess }: Props) => {
     const [errorReports, setErrorReports] = useState<Array<ErrorReport>>([]);
     const { enrollmentsLabel, eventsLabel } = getTermLabelFromProgram(
-        [{ key: LabelKeys.enrollment, plural: true }, { key: LabelKeys.event, plural: true }],
+        [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
         { program },
     );
     const handleErrors = (errors: Array<ErrorReport>) => {

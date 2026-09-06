@@ -6,7 +6,7 @@ import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../.
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 import { withCustomLabels } from '../../../../../../../HOC/withCustomLabels';
 
-const customLabels = [LabelKeys.orgUnit] as const;
+const customLabels = [LabelKeys.orgUnitSingular] as const;
 
 const getStyles = () => ({
     label: {

@@ -11,7 +11,7 @@ import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUn
 import { useOrgUnitAutoSelect, type AutoSelectOrgUnit } from '../../../../../dataQueries';
 import { LabelKeys } from '../../../../../metaData';
 
-const customLabels = [LabelKeys.orgUnit] as const;
+const customLabels = [LabelKeys.orgUnitSingular] as const;
 
 const getStyles = () => ({
     selectedOrgUnitContainer: {

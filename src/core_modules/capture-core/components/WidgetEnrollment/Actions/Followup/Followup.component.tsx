@@ -5,7 +5,7 @@ import type { Props } from './followup.types';
 import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 
 export const Followup = ({ enrollment, program, onUpdate }: Props) => {
-    const { followUpLabel } = getTermLabelFromProgram([LabelKeys.followUp], { program });
+    const { followUpLabel } = getTermLabelFromProgram([LabelKeys.followUpSingular], { program });
     return enrollment.followUp ? (
         <MenuItem
             dense

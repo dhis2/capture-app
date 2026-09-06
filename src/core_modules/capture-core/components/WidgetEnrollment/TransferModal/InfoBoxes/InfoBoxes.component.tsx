@@ -51,7 +51,7 @@ const InfoBoxesPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const { displayName: ownerOrgUnitName } = useOrgUnitNameWithAncestors(ownerOrgUnitId);
     const { displayName: newOrgUnitName } = useOrgUnitNameWithAncestors(validOrgUnitId ?? null);
-    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
 
     const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel as any)
         && orgUnitScopes.destination === OrgUnitScopes.SEARCH;

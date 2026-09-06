@@ -27,9 +27,9 @@ import {
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
 const customLabels = [
-    LabelKeys.orgUnit,
-    LabelKeys.event,
-    { key: LabelKeys.event, plural: true },
+    LabelKeys.orgUnitSingular,
+    LabelKeys.eventSingular,
+    LabelKeys.eventPlural,
 ] as const;
 
 const mapStateToProps = (state: any, props: any) => {

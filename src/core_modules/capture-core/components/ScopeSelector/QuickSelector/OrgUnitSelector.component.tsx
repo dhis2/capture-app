@@ -9,7 +9,7 @@ import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
 import { LabelKeys } from '../../../metaData';
 
-const customLabels = [LabelKeys.orgUnit] as const;
+const customLabels = [LabelKeys.orgUnitSingular] as const;
 
 const styles = () => ({
     selectBarMenu: {

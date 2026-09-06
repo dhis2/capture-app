@@ -103,7 +103,7 @@ const DateComponentPlain = ({
     const [selectedDate, setSelectedDate] = useState<string>();
     const [validation, setValidation] = useState<{ error: boolean; validationText: string }>();
     const { eventsLabel } = getTermLabelFromProgram(
-        [{ key: LabelKeys.event, plural: true }],
+        [LabelKeys.eventPlural],
         { program },
     );
 

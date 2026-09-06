@@ -6,7 +6,7 @@ import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 import type { Props } from './addNew.types';
 
 export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, program, onAddNew }: Props) => {
-    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
 
     if (!canAddNew) {
         return null;

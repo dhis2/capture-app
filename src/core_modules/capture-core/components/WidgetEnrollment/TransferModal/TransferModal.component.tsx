@@ -23,7 +23,7 @@ export const TransferModal = ({
     isTransferLoading,
 }: TransferModalProps) => {
     const { enrollmentLabel, orgUnitLabel } = getTermLabelFromProgram(
-        [LabelKeys.enrollment, LabelKeys.orgUnit],
+        [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular],
         { program },
     );
     const {

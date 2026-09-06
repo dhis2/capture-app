@@ -17,7 +17,7 @@ import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 export const Delete = ({ canCascadeDeleteEnrollment, enrollment, program, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
     const disabled = !canCascadeDeleteEnrollment;
-    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
     const tooltipContent = i18n.t(
         'You do not have access to delete this {{enrollmentLabel}}',
         { enrollmentLabel },

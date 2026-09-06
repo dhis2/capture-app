@@ -26,7 +26,7 @@ export const DataEntryComponent = ({
     accessReadOnly,
     program,
 }: PlainProps) => {
-    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
     return (
         <DataEntryModalWrapper
             onClose={onCancel}

@@ -82,7 +82,7 @@ const WidgetProfilePlain = ({
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
-    const { attributeLabel } = getTermLabelFromProgram([LabelKeys.attribute], { program });
+    const { attributeLabel } = getTermLabelFromProgram([LabelKeys.attributeSingular], { program });
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
         storedGeometry: trackedEntityInstance?.geometry,

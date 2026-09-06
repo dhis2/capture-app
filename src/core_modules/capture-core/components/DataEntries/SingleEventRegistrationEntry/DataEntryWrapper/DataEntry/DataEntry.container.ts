@@ -28,11 +28,11 @@ import { newEventSaveTypes } from './newEventSaveTypes';
 import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 
 const customLabels = [
-    LabelKeys.orgUnit,
-    LabelKeys.event,
-    LabelKeys.note,
-    { key: LabelKeys.note, plural: true },
-    { key: LabelKeys.relationship, plural: true },
+    LabelKeys.orgUnitSingular,
+    LabelKeys.eventSingular,
+    LabelKeys.noteSingular,
+    LabelKeys.notePlural,
+    LabelKeys.relationshipPlural,
 ] as const;
 
 const makeMapStateToProps = () => {

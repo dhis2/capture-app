@@ -51,7 +51,7 @@ const ActionsPlain = ({
     const [isOpenMap, setOpenMap] = useState(false);
     const [isOpenTransfer, setOpenTransfer] = useState(false);
     const [isOpenCompleteModal, setOpenCompleteModal] = useState(false);
-    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
 
     const handleOnUpdate = (arg) => {
         setOpenActions(false);

@@ -13,7 +13,7 @@ export const CompleteModalComponent = ({
     onCompleteEnrollmentAndEvents,
 }: PlainProps) => {
     const { enrollmentLabel, eventLabel, eventsLabel } = getTermLabelFromProgram(
-        [LabelKeys.enrollment, LabelKeys.event, { key: LabelKeys.event, plural: true }],
+        [LabelKeys.enrollmentSingular, LabelKeys.eventSingular, LabelKeys.eventPlural],
         { program },
     );
     return (

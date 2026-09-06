@@ -19,11 +19,11 @@ import { withCustomLabels } from '../../../HOC/withCustomLabels';
 import { LabelKeys } from '../../../metaData';
 
 const customLabels = [
-    LabelKeys.orgUnit,
-    LabelKeys.event,
-    LabelKeys.note,
-    { key: LabelKeys.note, plural: true },
-    { key: LabelKeys.relationship, plural: true },
+    LabelKeys.orgUnitSingular,
+    LabelKeys.eventSingular,
+    LabelKeys.noteSingular,
+    LabelKeys.notePlural,
+    LabelKeys.relationshipPlural,
 ] as const;
 
 const WrappedDataEntryComponent = withCustomLabels(customLabels)(DataEntryComponent);
