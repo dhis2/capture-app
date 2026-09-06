@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n';
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { programCollection } from '../../metaDataMemoryStores';
 
@@ -61,11 +60,75 @@ const LABELS = asLabels({
 
 export type CustomLabelKey = keyof typeof LABELS;
 export type CustomLabels = Record<string, string>;
-type LabelOptions = { plural?: boolean };
+
+export const LabelKeys = {
+    enrollment: 'enrollment',
+    event: 'event',
+    programStage: 'programStage',
+    note: 'note',
+    relationship: 'relationship',
+    attribute: 'attribute',
+    orgUnit: 'orgUnit',
+    followUp: 'followUp',
+} as const satisfies { [K in CustomLabelKey]: K };
+
+export type TermRequest =
+    | CustomLabelKey
+    | { key: CustomLabelKey; plural?: boolean };
+
+type LabelSource = Record<string, unknown> | undefined | null;
+type GetTermLabelFromProgramOptions = { program: LabelSource };
+type GetTermLabelOptions = { programId: string | null | undefined; stageId?: string | null };
+type UseTermLabelOptions = { programId?: string | null; stageId?: string | null };
 
 const ALL_FIELD_NAMES = Object.values(LABELS).flatMap(
     ({ field, pluralField }) => (pluralField ? [field, pluralField] : [field]),
 );
+
+const resolveDefault = (key: CustomLabelKey, plural: boolean): string => {
+    const label = LABELS[key];
+    return plural ? label.plural?.() ?? label.singular() : label.singular();
+};
+
+const resolveLabel = (
+    sources: ReadonlyArray<LabelSource>,
+    key: CustomLabelKey,
+    plural: boolean,
+): string => {
+    const { field, pluralField } = LABELS[key];
+    const target = plural ? pluralField : field;
+    const found = target
+        ? sources
+            .map(source => source?.[target])
+            .find((value): value is string => typeof value === 'string')
+        : undefined;
+    return found ?? resolveDefault(key, plural);
+};
+
+const resolveFromCollection = (
+    programId: string | null | undefined,
+    stageId: string | null | undefined,
+    key: CustomLabelKey,
+    plural: boolean,
+): string => {
+    const program = programId ? programCollection.get(programId) : undefined;
+    const stage = program && stageId ? program.getStage(stageId) : undefined;
+    return resolveLabel([stage?.customLabels, program?.customLabels], key, plural);
+};
+
+const buildLabels = (
+    requests: ReadonlyArray<TermRequest>,
+    resolve: (key: CustomLabelKey, plural: boolean) => string,
+): CustomLabels => {
+    const entries = requests.map((req) => {
+        const { key, plural } = typeof req === 'string'
+            ? { key: req, plural: false }
+            : { key: req.key, plural: req.plural ?? false };
+        const outputKey = plural ? `${key}sLabel` : `${key}Label`;
+        return [outputKey, resolve(key, plural)];
+    });
+    return Object.fromEntries(entries);
+};
 
 export const extractCustomLabels = (cached: Record<string, unknown>): CustomLabels =>
     Object.fromEntries(
@@ -74,64 +137,24 @@ export const extractCustomLabels = (cached: Record<string, unknown>): CustomLabe
             .map(field => [field, cached[field] as string]),
     );
 
-type LabelSource = CustomLabels | undefined | null;
-
-const resolveLabel = (
-    sources: LabelSource | Array<LabelSource>,
-    key: CustomLabelKey,
-    { plural = false }: LabelOptions = {},
-): string | undefined => {
-    const { field, pluralField } = LABELS[key];
-    const target = plural ? pluralField : field;
-    if (!target) return undefined;
-    const list = Array.isArray(sources) ? sources : [sources];
-    return list.find(source => source?.[target])?.[target];
-};
-
-type BaseTermOptions = LabelOptions & { stageId?: string | null };
-type GetTermLabelOptions = BaseTermOptions & { programId: string };
-type UseTermLabelOptions = BaseTermOptions & { programId?: string | null };
-type GetTermLabelFromProgramOptions = LabelOptions & { program: Record<string, unknown> | null | undefined; };
-
-const resolveTerm = (
-    programId: string | null | undefined,
-    key: CustomLabelKey,
-    { stageId, plural = false }: BaseTermOptions,
-): string => {
-    const program = programId ? programCollection.get(programId) : undefined;
-    const stage = program && stageId ? program.getStage(stageId) : undefined;
-    const custom = resolveLabel([stage?.customLabels, program?.customLabels], key, { plural });
-    if (custom) return custom;
-    if (plural) return LABELS[key].plural?.() ?? LABELS[key].singular();
-    return LABELS[key].singular();
-};
+export const getTermLabel = (
+    requests: ReadonlyArray<TermRequest>,
+    { programId, stageId }: GetTermLabelOptions,
+): CustomLabels =>
+    buildLabels(requests, (key, plural) => resolveFromCollection(programId, stageId, key, plural));
 
 export const getTermLabelFromProgram = (
-    key: CustomLabelKey,
-    { program, plural = false }: GetTermLabelFromProgramOptions,
-): string => {
-    const { field, pluralField, singular } = LABELS[key];
-    const target = plural ? pluralField : field;
-    const value = target ? program?.[target] : undefined;
-    if (typeof value === 'string') return value;
-    if (plural) return LABELS[key].plural?.() ?? singular();
-    return singular();
-};
-
-export const getTermLabel = (
-    key: CustomLabelKey,
-    options: GetTermLabelOptions,
-): string => resolveTerm(options.programId, key, options);
+    requests: ReadonlyArray<TermRequest>,
+    { program }: GetTermLabelFromProgramOptions,
+): CustomLabels =>
+    buildLabels(requests, (key, plural) => resolveLabel([program], key, plural));
 
 export const useTermLabel = (
-    key: CustomLabelKey,
-    options: UseTermLabelOptions = {},
-): string => {
-    const { programId, stageId, plural } = options;
-    const id = useSelector(({ currentSelections }: any) =>
+    requests: ReadonlyArray<TermRequest>,
+    { programId, stageId }: UseTermLabelOptions = {},
+): CustomLabels => {
+    const activeProgramId = useSelector(({ currentSelections }: any) =>
         programId ?? currentSelections.programId);
-    return useMemo(
-        () => resolveTerm(id, key, { stageId, plural }),
-        [id, key, stageId, plural],
-    );
+    return buildLabels(requests, (key, plural) =>
+        resolveFromCollection(activeProgramId, stageId, key, plural));
 };

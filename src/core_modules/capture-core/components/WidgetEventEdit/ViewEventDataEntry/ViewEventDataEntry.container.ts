@@ -2,12 +2,14 @@ import { connect } from 'react-redux';
 import { ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { LabelKeys } from '../../../metaData';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-    eventLabel: { key: 'event' },
-    notesLabel: { key: 'note', plural: true },
-} as const;
+// Example use of withCustomLabels.
+const customLabels = [
+    LabelKeys.orgUnit,
+    LabelKeys.event,
+    { key: LabelKeys.note, plural: true },
+] as const;
 
 const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};

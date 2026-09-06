@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-06T05:46:57.991Z\n"
-"PO-Revision-Date: 2026-09-06T05:46:57.991Z\n"
+"POT-Creation-Date: 2026-09-06T10:59:32.384Z\n"
+"PO-Revision-Date: 2026-09-06T10:59:32.384Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1504,6 +1504,9 @@ msgstr "Geometry (Area)"
 msgid "Geometry (Coordinate)"
 msgstr "Geometry (Coordinate)"
 
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
 msgid "Polygon captured"
 msgstr "Polygon captured"
 
@@ -1512,6 +1515,9 @@ msgstr "No polygon captured"
 
 msgid "{{eventLabel}} completed"
 msgstr "{{eventLabel}} completed"
+
+msgid "Event"
+msgstr "Event"
 
 msgid "{{notesLabel}} about this {{eventLabel}}"
 msgstr "{{notesLabel}} about this {{eventLabel}}"

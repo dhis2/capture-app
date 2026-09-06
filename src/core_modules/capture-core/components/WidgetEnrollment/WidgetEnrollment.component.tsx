@@ -17,7 +17,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes, getTermLabelFromProgram } from '../../metaData';
+import { dataElementTypes, getTermLabelFromProgram, LabelKeys } from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -95,8 +95,11 @@ const WidgetEnrollmentPlain = ({
 
     const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
     const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
-    const enrollmentLabel = getTermLabelFromProgram('enrollment', { program });
-    const followUpLabel = getTermLabelFromProgram('followUp', { program });
+    // Example use of getTermLabelFromProgram.
+    const { enrollmentLabel, followUpLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollment, LabelKeys.followUp],
+        { program },
+    );
 
     return (
         <div data-test="widget-enrollment">
