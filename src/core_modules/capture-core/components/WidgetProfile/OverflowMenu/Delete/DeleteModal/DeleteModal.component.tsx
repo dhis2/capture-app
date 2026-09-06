@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
-import { useTermLabel } from '../../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../../metaData';
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './hooks';
 import type { ErrorReport } from '../../processErrorReports';
 
-export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
+export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, program, setOpenModal, onDeleteSuccess }: Props) => {
     const [errorReports, setErrorReports] = useState<Array<ErrorReport>>([]);
-    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const { enrollmentsLabel, eventsLabel } = getTermLabelFromProgram(
+        [{ key: LabelKeys.enrollment, plural: true }, { key: LabelKeys.event, plural: true }],
+        { program },
+    );
     const handleErrors = (errors: Array<ErrorReport>) => {
         setErrorReports(errors);
     };

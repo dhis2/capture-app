@@ -2,11 +2,11 @@ import React from 'react';
 import { IconAdd16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { useTermLabel } from '../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 import type { Props } from './addNew.types';
 
-export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, onAddNew }: Props) => {
-    const enrollmentLabel = useTermLabel('enrollment');
+export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, program, onAddNew }: Props) => {
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
 
     if (!canAddNew) {
         return null;

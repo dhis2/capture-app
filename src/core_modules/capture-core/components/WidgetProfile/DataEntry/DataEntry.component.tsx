@@ -6,7 +6,7 @@ import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
 import { DataEntryModalWrapper } from './DataEntryModalWrapper.component';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
-import { useTermLabel } from '../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../metaData';
 
 export const DataEntryComponent = ({
     dataEntryId,
@@ -24,8 +24,9 @@ export const DataEntryComponent = ({
     orgUnitId,
     pluginContext,
     accessReadOnly,
+    program,
 }: PlainProps) => {
-    const enrollmentLabel = useTermLabel('enrollment');
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
     return (
         <DataEntryModalWrapper
             onClose={onCancel}

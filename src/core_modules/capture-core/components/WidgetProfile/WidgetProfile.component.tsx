@@ -11,7 +11,7 @@ import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
 import type { Props } from './widgetProfile.types';
-import { useTermLabel } from '../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../metaData';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -81,8 +81,8 @@ const WidgetProfilePlain = ({
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
-    const attributeLabel = useTermLabel('attribute', { programId });
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
+    const { attributeLabel } = getTermLabelFromProgram([LabelKeys.attribute], { program });
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
         storedGeometry: trackedEntityInstance?.geometry,

@@ -2,10 +2,10 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
 import type { Props } from './followup.types';
-import { useTermLabel } from '../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 
-export const Followup = ({ enrollment, onUpdate }: Props) => {
-    const followUpLabel = useTermLabel('followUp');
+export const Followup = ({ enrollment, program, onUpdate }: Props) => {
+    const { followUpLabel } = getTermLabelFromProgram([LabelKeys.followUp], { program });
     return enrollment.followUp ? (
         <MenuItem
             dense

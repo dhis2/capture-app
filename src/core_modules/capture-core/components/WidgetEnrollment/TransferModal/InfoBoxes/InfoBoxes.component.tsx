@@ -4,7 +4,7 @@ import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
-import { useTermLabel } from '../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 
@@ -12,6 +12,7 @@ type Props = {
     ownerOrgUnitId: string;
     validOrgUnitId?: string;
     programAccessLevel: string;
+    program: Record<string, unknown>;
     orgUnitScopes: {
         origin: keyof typeof OrgUnitScopes | null;
         destination: keyof typeof OrgUnitScopes | null;
@@ -45,11 +46,12 @@ const InfoBoxesPlain = ({
     validOrgUnitId,
     programAccessLevel,
     orgUnitScopes,
+    program,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const { displayName: ownerOrgUnitName } = useOrgUnitNameWithAncestors(ownerOrgUnitId);
     const { displayName: newOrgUnitName } = useOrgUnitNameWithAncestors(validOrgUnitId ?? null);
-    const enrollmentLabel = useTermLabel('enrollment');
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollment], { program });
 
     const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel as any)
         && orgUnitScopes.destination === OrgUnitScopes.SEARCH;
