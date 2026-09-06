@@ -62,15 +62,25 @@ export type CustomLabelKey = keyof typeof LABELS;
 export type CustomLabels = Record<string, string>;
 
 export const LabelKeys = {
-    enrollment: 'enrollment',
-    event: 'event',
-    programStage: 'programStage',
-    note: 'note',
-    relationship: 'relationship',
-    attribute: 'attribute',
-    orgUnit: 'orgUnit',
-    followUp: 'followUp',
-} as const satisfies { [K in CustomLabelKey]: K };
+    enrollmentSingular: 'enrollment',
+    enrollmentPlural: { key: 'enrollment', plural: true },
+    eventSingular: 'event',
+    eventPlural: { key: 'event', plural: true },
+    programStageSingular: 'programStage',
+    programStagePlural: { key: 'programStage', plural: true },
+    noteSingular: 'note',
+    notePlural: { key: 'note', plural: true },
+    relationshipSingular: 'relationship',
+    relationshipPlural: { key: 'relationship', plural: true },
+    attributeSingular: 'attribute',
+    attributePlural: { key: 'attribute', plural: true },
+    orgUnitSingular: 'orgUnit',
+    orgUnitPlural: { key: 'orgUnit', plural: true },
+    followUpSingular: 'followUp',
+    followUpPlural: { key: 'followUp', plural: true },
+} as const satisfies
+    & { [K in CustomLabelKey as `${K}Singular`]: K }
+    & { [K in CustomLabelKey as `${K}Plural`]: { key: K; plural: true } };
 
 export type TermRequest =
     | CustomLabelKey
