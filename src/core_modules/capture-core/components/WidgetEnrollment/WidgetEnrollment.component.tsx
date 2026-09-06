@@ -11,7 +11,6 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
@@ -98,14 +97,14 @@ const WidgetEnrollmentPlain = ({
     // Example use of getTermLabelFromProgram: resolves the "enrollment" term against the
     // widget's own fetched program. Keeps the widget self-contained (no dependency on
     // the global programCollection memory store or Capture Redux state).
-    const enrollmentLabel = capitalizeFirstLetter(getTermLabelFromProgram(program, 'enrollment'));
+    const enrollmentLabel = getTermLabelFromProgram('enrollment', { program });
 
     return (
         <div data-test="widget-enrollment">
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{enrollmentLabel}</span>
+                        <span>{i18n.t('{{enrollmentLabel}}', { enrollmentLabel })}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
