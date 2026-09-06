@@ -131,7 +131,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {followUpLabel}
+                                    {i18n.t('{{followUpLabel}}', { followUpLabel })}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />
