@@ -11,14 +11,13 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes, getTermLabelFromProgram } from '../../metaData';
+import { dataElementTypes, getTermLabelFromProgram, LabelKeys } from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -95,17 +94,18 @@ const WidgetEnrollmentPlain = ({
 
     const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
     const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
-    // Example use of getTermLabelFromProgram: resolves the "enrollment" term against the
-    // widget's own fetched program. Keeps the widget self-contained (no dependency on
-    // the global programCollection memory store or Capture Redux state).
-    const enrollmentLabel = capitalizeFirstLetter(getTermLabelFromProgram(program, 'enrollment'));
+    // Example use of getTermLabelFromProgram.
+    const { enrollmentLabel, followUpLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollment, LabelKeys.followUp],
+        { program },
+    );
 
     return (
         <div data-test="widget-enrollment">
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{enrollmentLabel}</span>
+                        <span>{i18n.t('{{enrollmentLabel}}', { enrollmentLabel })}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
@@ -131,7 +131,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {i18n.t('Follow-up')}
+                                    {i18n.t('{{followUpLabel}}', { followUpLabel })}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />

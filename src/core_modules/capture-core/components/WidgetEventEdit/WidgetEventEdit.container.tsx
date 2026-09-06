@@ -152,6 +152,7 @@ const WidgetEventEditPlain = ({
                             >
                                 <ViewEventDataEntry
                                     programId={programId}
+                                    stageId={stageId}
                                     formFoundation={formFoundation}
                                     dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                                     hideDueDate={stage.hideDueDate}
