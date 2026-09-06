@@ -41,6 +41,7 @@ export {
     getProgramAndStageForEventProgram,
     getEventProgramEventAccess,
     extractCustomLabels,
+    getTermLabelFromProgram,
     getTermLabel,
     useTermLabel,
 } from './helpers';

@@ -91,6 +91,7 @@ const resolveLabel = (
 type BaseTermOptions = LabelOptions & { stageId?: string | null };
 type GetTermLabelOptions = BaseTermOptions & { programId: string };
 type UseTermLabelOptions = BaseTermOptions & { programId?: string | null };
+type GetTermLabelFromProgramOptions = LabelOptions & { program: Record<string, unknown> | null | undefined; };
 
 const resolveTerm = (
     programId: string | null | undefined,
@@ -103,6 +104,18 @@ const resolveTerm = (
     if (custom) return custom;
     if (plural) return LABELS[key].plural?.() ?? LABELS[key].singular();
     return LABELS[key].singular();
+};
+
+export const getTermLabelFromProgram = (
+    key: CustomLabelKey,
+    { program, plural = false }: GetTermLabelFromProgramOptions,
+): string => {
+    const { field, pluralField, singular } = LABELS[key];
+    const target = plural ? pluralField : field;
+    const value = target ? program?.[target] : undefined;
+    if (typeof value === 'string') return value;
+    if (plural) return LABELS[key].plural?.() ?? singular();
+    return singular();
 };
 
 export const getTermLabel = (
