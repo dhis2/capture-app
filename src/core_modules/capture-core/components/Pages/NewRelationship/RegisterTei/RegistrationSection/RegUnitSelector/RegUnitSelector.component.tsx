@@ -4,12 +4,10 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirst
 
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
+import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../../../metaData';
 import { withCustomLabels } from '../../../../../../HOC/withCustomLabels';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-} as const;
+const customLabels = [LabelKeys.orgUnit] as const;
 
 const getStyles = () => ({
     label: {

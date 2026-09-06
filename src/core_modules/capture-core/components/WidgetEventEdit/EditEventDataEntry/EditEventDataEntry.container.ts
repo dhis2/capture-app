@@ -13,7 +13,7 @@ import {
     startRunRulesOnUpdateForEditSingleEvent,
     batchActionTypes,
 } from '../DataEntry/editEventDataEntry.actions';
-import type { RenderFoundation } from '../../../metaData';
+import { LabelKeys, type RenderFoundation } from '../../../metaData';
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,
 } from '../../DataEntry/actions/dataEntry.actions';
@@ -26,11 +26,11 @@ import {
 } from './editEventDataEntry.actions';
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-    eventLabel: { key: 'event' },
-    eventsLabel: { key: 'event', plural: true },
-} as const;
+const customLabels = [
+    LabelKeys.orgUnit,
+    LabelKeys.event,
+    { key: LabelKeys.event, plural: true },
+] as const;
 
 const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};

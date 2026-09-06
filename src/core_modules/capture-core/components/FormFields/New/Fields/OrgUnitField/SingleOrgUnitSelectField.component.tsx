@@ -9,10 +9,9 @@ import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 import { useOrgUnitAutoSelect, type AutoSelectOrgUnit } from '../../../../../dataQueries';
+import { LabelKeys } from '../../../../../metaData';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-} as const;
+const customLabels = [LabelKeys.orgUnit] as const;
 
 const getStyles = () => ({
     selectedOrgUnitContainer: {

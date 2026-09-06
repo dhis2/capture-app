@@ -2,13 +2,11 @@ import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
+import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../../../../metaData';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 import { withCustomLabels } from '../../../../../../../HOC/withCustomLabels';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-} as const;
+const customLabels = [LabelKeys.orgUnit] as const;
 
 const getStyles = () => ({
     label: {

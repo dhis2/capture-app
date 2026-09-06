@@ -7,10 +7,9 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirst
 import { OrgUnitField } from '../../FormFields/New';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { LabelKeys } from '../../../metaData';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-} as const;
+const customLabels = [LabelKeys.orgUnit] as const;
 
 const styles = () => ({
     selectBarMenu: {
