@@ -9,7 +9,7 @@ import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventW
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 const styles = {
     contentContainer: {
@@ -31,7 +31,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
-    const eventLabel = useTermLabel('event', { programId: programId as string | undefined });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: programId as string | undefined });
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };

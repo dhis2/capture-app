@@ -4,9 +4,8 @@ import log from 'loglevel';
 import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { dataElementTypes, DataElement, OptionSet, Option, useTermLabel } from '../../../../../../metaData';
+import { dataElementTypes, DataElement, LabelKeys, OptionSet, Option, useTermLabel } from '../../../../../../metaData';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
@@ -121,7 +120,8 @@ const useComputeHeaderColumn = (
     programId?: string,
     stageId?: string,
 ) => {
-    const orgUnitLabel = capitalizeFirstLetter(useTermLabel('orgUnit', { programId, stageId }));
+    const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId, stageId });
+    const orgUnitLabel = i18n.t('{{orgUnitLabel}}', { orgUnitLabel: rawOrgUnitLabel });
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;

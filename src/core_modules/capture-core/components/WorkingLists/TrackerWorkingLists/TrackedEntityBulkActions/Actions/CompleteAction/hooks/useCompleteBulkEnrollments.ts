@@ -7,7 +7,7 @@ import { errorCreator } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import type { ProgramStage } from '../../../../../../../metaData';
-import { useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: Record<string, any>;
@@ -94,7 +94,7 @@ export const useCompleteBulkEnrollments = ({
         ({ message }) => message,
         { critical: true },
     );
-    const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
 
     const removeQueries = () => {
         queryClient.removeQueries(

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
-import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes, LabelKeys, type TrackerProgram, useTermLabel } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
 const getMainConfig = (hasDisplayInReportsAttributes: boolean, orgUnitLabel: string): Array<MainColumnConfig> =>
@@ -142,8 +142,8 @@ export const useDefaultColumnConfig = (
     orgUnitId: string | null | undefined,
     programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs => {
-    const orgUnitLabel = useTermLabel('orgUnit', { programId: program.id });
-    const eventLabel = useTermLabel('event', { programId: program.id, stageId: programStageId });
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: program.id, stageId: programStageId });
     return useMemo(() => {
         const { attributes, stages } = program;
         const searchFilterMetaById = buildSearchFilterMetaById(program);

@@ -6,7 +6,7 @@ import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
-import { getTermLabel } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -64,9 +64,12 @@ const styles: Readonly<any> = (theme: any) => ({
     },
 });
 
-const getFromNames = (programId: string) => ({
-    PROGRAM_STAGE_INSTANCE: i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
-});
+const getFromNames = (programId: string) => {
+    const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+    return {
+        PROGRAM_STAGE_INSTANCE: i18n.t('This {{eventLabel}}', { eventLabel }),
+    };
+};
 
 type PlainProps = {
     relationships: Array<Relationship>;
@@ -174,7 +177,7 @@ class RelationshipsPlain extends React.Component<Props> {
             programId,
         } = this.props;
         const canCreate = !readOnly && writableRelationshipTypes.length > 0;
-        const relationshipLabel = getTermLabel('relationship', { programId });
+        const { relationshipLabel } = getTermLabel([LabelKeys.relationshipSingular], { programId });
         return (
             <div className={classes.container} ref={relationshipsRef}>
                 <div className={classes.relationshipsContainer}>

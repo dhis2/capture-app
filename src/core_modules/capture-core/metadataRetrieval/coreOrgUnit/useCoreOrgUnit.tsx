@@ -5,7 +5,7 @@ import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { useOrganisationUnit } from '../../dataQueries';
 import { orgUnitFetched } from './coreOrgUnit.actions';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 export function useCoreOrgUnit(orgUnitId: string): {
     orgUnit?: CoreOrgUnit,
@@ -17,7 +17,7 @@ export function useCoreOrgUnit(orgUnitId: string): {
     // These hooks do no work when id is undefined
     const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
     const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
 
     const errorComponent = (
         <div>

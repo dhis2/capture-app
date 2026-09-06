@@ -17,7 +17,7 @@ import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
-import { getTermLabel } from '../../metaData/helpers/customLabels';
+import { getTermLabel, LabelKeys } from '../../metaData/helpers/customLabels';
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
@@ -29,7 +29,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, sto
             if (organisationUnits[orgUnitId]) {
                 return of(completeUrlUpdate());
             }
-            const orgUnitLabel = getTermLabel('orgUnit', { programId });
+            const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId });
             return of(startLoading(), getCoreOrgUnit({
                 orgUnitId,
                 onSuccess: setCurrentOrgUnitBasedOnUrl,
@@ -67,7 +67,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>)
                 }
 
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
-                    const orgUnitLabel = getTermLabel('orgUnit', { programId });
+                    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId });
                     return invalidSelectionsFromUrl(
                         i18n.t('Selected program is invalid for selected {{orgUnitLabel}}', { orgUnitLabel }),
                     );

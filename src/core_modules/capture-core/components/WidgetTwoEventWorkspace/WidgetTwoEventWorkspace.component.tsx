@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { spacers } from '@dhis2/ui';
 import { FlatList } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { RenderFoundation } from '../../metaData';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 import { getDataEntryDetails, Placements } from './utils/getDataEntryDetails';
 
 type OwnProps = {
@@ -25,10 +25,11 @@ const styles: Readonly<any> = {
 };
 
 const WidgetTwoEventWorkspacePlain = ({ linkedEvent, dataValues, formFoundation, classes }: Props) => {
-    const orgUnitLabel = capitalizeFirstLetter(useTermLabel('orgUnit', {
+    const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], {
         programId: linkedEvent?.program,
         stageId: linkedEvent?.programStage,
-    }));
+    });
+    const orgUnitLabel = i18n.t('{{orgUnitLabel}}', { orgUnitLabel: rawOrgUnitLabel });
     const dataEntryValues = useMemo(() => getDataEntryDetails(
         linkedEvent,
         formFoundation,

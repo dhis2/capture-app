@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 type Props = {
     eventId: string;
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const DeleteEventModal = ({ eventId, programId, onClose, onConfirmDelete }: Props) => {
-    const eventLabel = useTermLabel('event', { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId });
     const handleConfirm = () => {
         onConfirmDelete(eventId);
         onClose();

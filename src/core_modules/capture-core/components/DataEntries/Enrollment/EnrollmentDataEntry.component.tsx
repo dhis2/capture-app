@@ -33,7 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound, getTermLabel } from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound, getTermLabel, LabelKeys } from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
@@ -365,10 +365,11 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     render() {
         const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, programId, ...passOnProps } = this.props;
 
+        const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
         const dataEntrySections = {
             [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
-                name: getTermLabel('enrollment', { programId }),
+                name: enrollmentLabel,
             },
             [AOCsectionKey]: {
                 placement: placements.BOTTOM,

@@ -15,7 +15,7 @@ import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Props } from './OverflowMenu.types';
 import { useRelationshipTypeAccess } from '../hooks';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 export const OverflowMenuComponent = ({
     linkedEvent,
@@ -32,8 +32,10 @@ export const OverflowMenuComponent = ({
     const [isUnlinkModalOpen, setIsUnlinkModalOpen] = useState(false);
     const [isUnlinkAndDeleteModalOpen, setIsUnlinkAndDeleteModalOpen] = useState(false);
     const { relationshipTypeWriteAccess } = useRelationshipTypeAccess(relationshipType);
-    const eventLabel = useTermLabel('event', { stageId: linkedEvent?.programStage });
-    const eventsLabel = useTermLabel('event', { stageId: linkedEvent?.programStage, plural: true });
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { stageId: linkedEvent?.programStage },
+    );
 
     const handleViewLinkedEvent = () => {
         navigate(`/enrollmentEventEdit?${buildUrlQueryString({ eventId: linkedEvent.event, orgUnitId })}`);

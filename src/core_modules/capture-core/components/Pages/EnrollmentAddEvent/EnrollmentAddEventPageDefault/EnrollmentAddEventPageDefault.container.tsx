@@ -26,7 +26,7 @@ import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
-import { TrackerProgram, useTermLabel } from '../../../../metaData';
+import { LabelKeys, TrackerProgram, useTermLabel } from '../../../../metaData';
 
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
@@ -36,7 +36,7 @@ export const EnrollmentAddEventPageDefault = ({
     trackedEntityInactive,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
-    const programStageLabel = useTermLabel('programStage', { programId, stageId });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { programId, stageId });
 
     const { navigate } = useNavigate();
     const dispatch = useDispatch();

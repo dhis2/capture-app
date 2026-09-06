@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../metaData';
 import { QuickActionButtonTypes } from './QuickActionButton.types';
 
 const styles = {
@@ -17,7 +17,7 @@ const styles = {
 type Props = QuickActionButtonTypes & WithStyles<typeof styles>;
 
 const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disabled = false, classes }: Props) => {
-    const programStagesLabel = useTermLabel('programStage', { plural: true });
+    const { programStagesLabel } = useTermLabel([LabelKeys.programStagePlural]);
     return (
         <ConditionalTooltip
             content={i18n.t('No available {{programStagesLabel}}', { programStagesLabel })}

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 type Template = {
     id: string;
@@ -16,7 +16,7 @@ type Props = {
 export const useWorkingListLabel = ({ programId }: Props) => {
     const workingListTemplate = useSelector((state: any) => state.workingListsTemplates?.eventList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.eventList?.programIdView);
-    const eventLabel = useTermLabel('event', { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId });
 
     const {
         selectedTemplateId,

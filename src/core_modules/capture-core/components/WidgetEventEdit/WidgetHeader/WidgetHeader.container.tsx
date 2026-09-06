@@ -11,7 +11,7 @@ import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCate
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import type { PlainProps } from './WidgetHeader.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = {
     icon: {
@@ -48,7 +48,7 @@ const WidgetHeaderPlain = ({
     const { programCategory } = useCategoryCombinations(programId);
 
     const { icon, name } = stage;
-    const eventLabel = useTermLabel('event', { programId, stageId: stage.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: stage.id });
 
     return (
         <>

@@ -6,7 +6,7 @@ import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props) => {
     const dispatch = useDispatch();
@@ -17,9 +17,10 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
-    const eventLabel = useTermLabel('event', { programId });
-    const noteLabel = useTermLabel('note', { programId });
-    const notesLabel = useTermLabel('note', { programId, plural: true });
+    const { eventLabel, noteLabel, notesLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
+        { programId },
+    );
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId));

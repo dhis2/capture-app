@@ -12,7 +12,7 @@ import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
 import type { Props } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 const styles: Readonly<any> = {
     row: {
@@ -32,7 +32,7 @@ const LinkedEntityTableBodyPlain = ({
     onDeleteRelationship,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const relationshipLabel = useTermLabel('relationship');
+    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular]);
     return (
         <DataTableBody dataTest="relationship-table-body">
             {

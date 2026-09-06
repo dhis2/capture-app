@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
-import { getTermLabel } from '../../../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../../../metaData';
 import {
     initializeNewRelationship,
 } from '../../../../../Pages/NewRelationship/newRelationship.actions';
@@ -77,11 +77,12 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
 
 
             const programId = state.currentSelections.programId;
+            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
             const newRelationship = {
                 clientId: uuid(),
                 from: {
                     id: 'newEvent',
-                    name: i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
+                    name: i18n.t('This {{eventLabel}}', { eventLabel }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -97,10 +98,11 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 r.to.id &&
                 r.to.id === newRelationship.to.id)
             ) {
+                const { relationshipLabel } = getTermLabel([LabelKeys.relationshipSingular], { programId });
                 const message = i18n.t(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        relationshipLabel: getTermLabel('relationship', { programId }),
+                        relationshipLabel,
                         entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
                         interpolation: { escapeValue: false },

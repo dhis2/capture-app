@@ -11,7 +11,7 @@ import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollec
 import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = {
     wrapper: {
@@ -50,7 +50,7 @@ const Schedule = ({
     programStage,
     canAddNewEventToStage,
 }) => {
-    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
     if (hidden) {
@@ -95,7 +95,7 @@ const EnterData = ({
     programStage,
     canAddNewEventToStage,
 }) => {
-    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
     if (hidden) {
@@ -140,8 +140,10 @@ const LinkExistingResponse = ({
     updateSelectedAction,
     programStage,
 }) => {
-    const eventLabel = useTermLabel('event', { stageId: programStage?.id });
-    const eventsLabel = useTermLabel('event', { stageId: programStage?.id, plural: true });
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { stageId: programStage?.id },
+    );
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
     if (hidden) {
@@ -212,7 +214,7 @@ const RelatedStagesActionsPlain = ({
     isLinking,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
-    const relationshipsLabel = useTermLabel('relationship', { plural: true });
+    const { relationshipsLabel } = useTermLabel([LabelKeys.relationshipPlural]);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 

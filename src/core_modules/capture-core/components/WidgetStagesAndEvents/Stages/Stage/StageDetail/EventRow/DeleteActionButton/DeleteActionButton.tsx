@@ -7,7 +7,7 @@ import {
 } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
 import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
-import { dataElementTypes, type ProgramStage, useTermLabel } from '../../../../../../../metaData';
+import { dataElementTypes, LabelKeys, type ProgramStage, useTermLabel } from '../../../../../../../metaData';
 import { useEventEditPermissions } from '../../../../../../../hooks';
 
 type Props = {
@@ -31,7 +31,7 @@ export const DeleteActionButton = ({
 }: Props) => {
     const occurredAtClient = convertServerToClient(occurredAt, dataElementTypes.DATE) as string;
     const occurredAtClientView = convertClientToView(occurredAtClient, dataElementTypes.DATE);
-    const eventLabel = useTermLabel('event', { programId, stageId: programStage?.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: programStage?.id });
 
     const {
         isEventWithinValidPeriod,

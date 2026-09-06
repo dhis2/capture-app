@@ -7,7 +7,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { Props } from './DeleteAction.types';
-import { useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../metaData';
 
 const getTooltipContent = (
     stageDataWriteAccess: boolean | undefined,
@@ -34,7 +34,7 @@ export const DeleteAction = ({
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dataEngine = useDataEngine();
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural]);
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

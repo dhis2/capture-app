@@ -3,7 +3,7 @@ import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
-import { getTermLabel } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../metaData';
 import {
     addRelationship,
     removeRelationship,
@@ -81,11 +81,12 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
 
             const relationshipClientId = uuid();
             const programId = state.currentSelections.programId;
+            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
             const clientRelationship = {
                 clientId: relationshipClientId,
                 from: {
                     id: eventId,
-                    name: i18n.t('This {{eventLabel}}', { eventLabel: getTermLabel('event', { programId }) }),
+                    name: i18n.t('This {{eventLabel}}', { eventLabel }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -101,10 +102,11 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
                     r.to.id &&
                     r.to.id === clientRelationship.to.id)
             ) {
+                const { relationshipLabel } = getTermLabel([LabelKeys.relationshipSingular], { programId });
                 const message = i18n.t(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        relationshipLabel: getTermLabel('relationship', { programId }),
+                        relationshipLabel,
                         entityName: clientRelationship.from.name,
                         relationshipTypeName: clientRelationship.relationshipType.name,
                     },

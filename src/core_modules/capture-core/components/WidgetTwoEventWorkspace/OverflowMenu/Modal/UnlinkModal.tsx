@@ -13,7 +13,7 @@ import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkModal.types';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 export const UnlinkModal = ({
     setOpenModal,
@@ -24,8 +24,10 @@ export const UnlinkModal = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const eventLabel = useTermLabel('event', { stageId });
-    const eventsLabel = useTermLabel('event', { stageId, plural: true });
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { stageId },
+    );
     const { show: showErrorAlert } = useAlert(
         i18n.t('An error occurred while unlinking and deleting the {{eventLabel}}.', { eventLabel }),
         { critical: true },

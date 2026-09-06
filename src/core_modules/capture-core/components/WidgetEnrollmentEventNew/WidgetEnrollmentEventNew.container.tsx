@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { getProgramAndStageForProgram, TrackerProgram, useTermLabel } from '../../metaData';
+import { getProgramAndStageForProgram, LabelKeys, TrackerProgram, useTermLabel } from '../../metaData';
 import { OrgUnitFetcher } from './OrgUnitFetcher/OrgUnitFetcher.container';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
@@ -12,7 +12,7 @@ export const WidgetEnrollmentEventNew = ({
     ...passOnProps
 }: WidgetProps) => {
     const { program } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const programStageLabel = useTermLabel('programStage', { programId, stageId });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { programId, stageId });
     const {
         stage,
         formFoundation,

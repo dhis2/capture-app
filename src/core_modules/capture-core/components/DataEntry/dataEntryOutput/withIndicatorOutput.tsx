@@ -6,7 +6,7 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 type Props = {
     dataEntryKey?: string;
@@ -15,7 +15,7 @@ type Props = {
 
 const IndicatorOutputWrapper = (props: Props) => {
     const { dataEntryKey, programRules } = props;
-    const eventLabel = useTermLabel('event');
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 

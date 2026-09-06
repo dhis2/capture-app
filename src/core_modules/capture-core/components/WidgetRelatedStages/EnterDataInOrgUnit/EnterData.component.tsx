@@ -5,7 +5,7 @@ import { colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = {
     wrapper: {
@@ -61,7 +61,7 @@ export const EnterDataInOrgUnitPlain = ({
     errorMessages,
     classes,
 }: Props) => {
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         const orgUnit = {
             id: e.id,

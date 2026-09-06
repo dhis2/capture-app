@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
-import { getTermLabel } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../metaData';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -23,7 +23,7 @@ export const getEventFromUrlEpic = (
             const eventId = action.payload.eventId;
             const orgUnit = action.payload.orgUnit;
             const prevProgramId = store.value.currentSelections.programId;
-            const eventLabel = getTermLabel('event', { programId: prevProgramId });
+            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: prevProgramId });
             return getEvent(eventId, absoluteApiPath, querySingleResource)
                 .then((eventContainer: any) => {
                     if (!eventContainer) {

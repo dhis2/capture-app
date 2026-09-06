@@ -6,7 +6,7 @@ import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
 import type { Props } from './CompleteAction.types';
-import { getTermLabel, useTermLabel } from '../../../../../../metaData';
+import { getTermLabel, LabelKeys, useTermLabel } from '../../../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -28,8 +28,9 @@ const getTooltipContent = (
     programId: string,
 ) => {
     if (!stageDataWriteAccess) {
+        const { eventsLabel } = getTermLabel([LabelKeys.eventPlural], { programId });
         return i18n.t('You do not have access to complete {{eventsLabel}}', {
-            eventsLabel: getTermLabel('event', { programId, plural: true }),
+            eventsLabel,
         });
     }
     if (bulkDataEntryIsActive) {
@@ -49,7 +50,7 @@ const CompleteActionPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { programId });
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive, programId);
     const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {

@@ -3,14 +3,14 @@ import React from 'react';
 import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { Validated } from '../Validated/Validated.container';
 import type { OrgUnitFetcherProps } from './orgUnitFetcher.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 export const OrgUnitFetcher = ({
     orgUnitId,
     ...passOnProps
 }: OrgUnitFetcherProps) => {
     const { error, orgUnit } = useCoreOrgUnit(orgUnitId);
-    const orgUnitLabel = useTermLabel('orgUnit', { programId: passOnProps.program?.id });
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId: passOnProps.program?.id });
 
     if (error) {
         return (

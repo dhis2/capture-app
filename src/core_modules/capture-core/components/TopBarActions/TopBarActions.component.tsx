@@ -2,7 +2,7 @@ import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
-import { scopeTypes, useTermLabel } from '../../metaData';
+import { LabelKeys, scopeTypes, useTermLabel } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 
@@ -26,7 +26,7 @@ const ActionButtonsPlain = ({
     openConfirmDialog,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
-    const eventLabel = useTermLabel('event', { programId: selectedProgramId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: selectedProgramId });
     const [openSearch, setOpenSearch] = useState(false);
 
     useEffect(() => {

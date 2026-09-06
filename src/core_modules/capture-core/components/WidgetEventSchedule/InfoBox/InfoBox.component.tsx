@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
 import type { PlainProps } from './InfoBox.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const styles = {
     infoBox: {
@@ -29,8 +29,10 @@ const InfoBoxPlain = ({
     stageId,
     classes,
 }: Props) => {
-    const eventLabel = useTermLabel('event', { programId, stageId });
-    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { programId, stageId },
+    );
     if (!scheduleDate || !suggestedScheduleDate) {
         return null;
     }

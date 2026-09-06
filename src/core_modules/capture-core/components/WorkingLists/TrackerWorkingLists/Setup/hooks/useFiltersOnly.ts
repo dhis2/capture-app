@@ -1,16 +1,17 @@
 import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import i18n from '@dhis2/d2-i18n';
-import { dataElementTypes, type TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes, LabelKeys, type TrackerProgram, useTermLabel } from '../../../../../metaData';
 import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = (
     { id: programId, enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
     programStageId?: string,
 ) => {
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const followUpLabel = useTermLabel('followUp', { programId });
+    const { enrollmentLabel, followUpLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.followUpSingular],
+        { programId },
+    );
     return useMemo(() => {
         const enableUserAssignment =
             !programStageId && Array.from(stages.values()).find((stage: any) => stage.enableUserAssignment);
@@ -74,7 +75,7 @@ export const useFiltersOnly = (
             {
                 id: MAIN_FILTERS.FOLLOW_UP,
                 type: dataElementTypes.BOOLEAN,
-                header: capitalizeFirstLetter(followUpLabel),
+                header: i18n.t('{{followUpLabel}}', { followUpLabel }),
                 showInMoreFilters: true,
                 multiValueFilter: false,
                 transformRecordsFilter: (rawFilter: string) => ({

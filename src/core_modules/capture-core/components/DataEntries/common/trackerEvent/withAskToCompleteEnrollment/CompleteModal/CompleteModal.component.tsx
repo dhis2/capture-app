@@ -2,7 +2,7 @@ import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } fr
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps, PlainPropsWithEvents } from './completeModal.types';
-import { useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../metaData';
 
 export const CompleteEnrollmentAndEventsModalComponent = ({
     programStageName,
@@ -12,9 +12,9 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
     onCompleteEnrollmentAndEvents,
     onCompleteEnrollment,
 }: PlainPropsWithEvents) => {
-    const enrollmentLabel = useTermLabel('enrollment');
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const { enrollmentLabel, eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.eventSingular, LabelKeys.eventPlural],
+    );
     return (
         <Modal position="middle" large dataTest="enrollment-complete-modal">
             <ModalTitle>
@@ -97,7 +97,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
 };
 
 export const CompleteEnrollmentModalComponent = ({ programStageName, onCancel, onCompleteEnrollment }: PlainProps) => {
-    const enrollmentLabel = useTermLabel('enrollment');
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     return (
         <Modal position="middle" large>
             <ModalTitle>

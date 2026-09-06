@@ -14,7 +14,7 @@ import {
 import { IconButton } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './DeleteRelationship.types';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 const styles: Readonly<any> = {
     tableCell: {
@@ -29,7 +29,7 @@ export const DeleteRelationshipPlain = ({
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const relationshipLabel = useTermLabel('relationship');
+    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular]);
     return (
         <>
             <DataTableCell className={classes.tableCell}>

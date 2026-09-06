@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
-import { getTermLabel } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../metaData';
 import { rollbackAssignee, setAssignee } from './viewEvent.actions';
 import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { ViewEventComponent } from './ViewEvent.component';
@@ -31,7 +31,9 @@ const makeMapStateToProps = () => {
             : getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW);
         const isUserInteractionInProgress = dataEntryHasChanges(state, currentDataEntryKey);
         const programId = state.currentSelections.programId;
-        const eventLabel = programId ? getTermLabel('event', { programId }) : undefined;
+        const eventLabel = programId
+            ? getTermLabel([LabelKeys.eventSingular], { programId }).eventLabel
+            : undefined;
         return {
             programStage: programStageSelector(state),
             eventAccess: eventAccessSelector(state),

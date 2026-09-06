@@ -3,7 +3,7 @@ import log from 'loglevel';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { dataElementTypes, useTermLabel } from '../../../../metaData';
+import { dataElementTypes, LabelKeys, useTermLabel } from '../../../../metaData';
 import { RELATIONSHIP_ENTITIES } from '../constants';
 import { convertClientToList, convertServerToClient } from '../../../../converters';
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
@@ -170,7 +170,7 @@ export const useGroupedLinkedEntities = (
     relationships?: Array<InputRelationshipData>,
     readOnly?: boolean,
 ): GroupedLinkedEntities => {
-    const programStageLabel = useTermLabel('programStage');
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular]);
     return useMemo(() => {
         if (!relationships?.length || !relationshipTypes?.length) {
             return [];

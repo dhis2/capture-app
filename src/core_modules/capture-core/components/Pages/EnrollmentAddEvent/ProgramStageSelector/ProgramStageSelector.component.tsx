@@ -4,7 +4,7 @@ import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
-import { getTermLabel } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -60,7 +60,10 @@ const ProgramStageSelectorComponentPlain = ({
                 !programStage.dataAccess.write
                 || (!programStage.repeatable && programStage.eventCount > 0)
                 || programStage.hiddenProgramStage;
-            const eventsLabel = getTermLabel('event', { programId, stageId: programStage.id, plural: true });
+            const { eventsLabel } = getTermLabel(
+                [LabelKeys.eventPlural],
+                { programId, stageId: programStage.id },
+            );
             return (
                 <div
                     key={programStage.id}

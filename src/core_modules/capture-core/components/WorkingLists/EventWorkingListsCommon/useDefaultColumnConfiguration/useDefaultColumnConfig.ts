@@ -1,9 +1,8 @@
 import { useMemo } from 'react';
 import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import i18n from '@dhis2/d2-i18n';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ProgramStage } from '../../../../metaData';
-import { dataElementTypes as elementTypeKeys, useTermLabel } from '../../../../metaData';
+import { dataElementTypes as elementTypeKeys, LabelKeys, useTermLabel } from '../../../../metaData';
 import { mainPropertyNames } from '../../../../events/mainPropertyNames.const';
 import type {
     MainColumnConfig,
@@ -22,7 +21,7 @@ const getDefaultMainConfig = (stage: ProgramStage, orgUnitLabel: string): Array<
         id: mainPropertyNames.ORGANISATION_UNIT,
         visible: true,
         type: elementTypeKeys.ORGANISATION_UNIT,
-        header: capitalizeFirstLetter(orgUnitLabel),
+        header: i18n.t('{{orgUnitLabel}}', { orgUnitLabel }),
         apiName: 'orgUnit',
         filterHidden: true,
     }, {
@@ -68,7 +67,7 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
         })) as Array<MetadataColumnConfig>;
 
 export const useDefaultColumnConfig = (stage: ProgramStage): EventWorkingListsColumnConfigs => {
-    const orgUnitLabel = useTermLabel('orgUnit', { stageId: stage.id });
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { stageId: stage.id });
     return useMemo(() => [
         ...getDefaultMainConfig(stage, orgUnitLabel),
         ...getMetaDataConfig(stage),

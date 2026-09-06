@@ -14,7 +14,7 @@ import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -74,9 +74,10 @@ const WidgetEventSchedulePlain = ({
         const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate && !validation?.error);
         setIsFormValid(formIsValid());
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
-    const eventLabel = useTermLabel('event', { programId, stageId });
-    const noteLabel = useTermLabel('note', { programId, stageId });
-    const notesLabel = useTermLabel('note', { programId, stageId, plural: true });
+    const { eventLabel, noteLabel, notesLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
+        { programId, stageId },
+    );
 
     return (
         <Widget

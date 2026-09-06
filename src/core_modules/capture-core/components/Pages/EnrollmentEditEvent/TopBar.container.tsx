@@ -1,7 +1,7 @@
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { dataEntryKeys } from 'capture-core/constants';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { useTermLabel, type ProgramStage } from '../../../metaData';
+import { LabelKeys, useTermLabel, type ProgramStage } from '../../../metaData';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import {
     ScopeSelector,
@@ -47,8 +47,8 @@ export const TopBar = ({
     isUserInteractionInProgress,
 }: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const programStageLabel = useTermLabel('programStage', {
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], {
         programId,
         stageId: programStage?.id,
     });
@@ -107,7 +107,7 @@ export const TopBar = ({
                     },
                 ]}
                 selectedValue="alwaysPreselected"
-                title={capitalizeFirstLetter(programStageLabel)}
+                title={i18n.t('{{programStageLabel}}', { programStageLabel })}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             />
             {programStage && (
