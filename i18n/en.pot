@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-07T09:53:09.676Z\n"
-"PO-Revision-Date: 2026-09-07T09:53:09.676Z\n"
+"POT-Creation-Date: 2026-09-07T10:37:51.439Z\n"
+"PO-Revision-Date: 2026-09-07T10:37:51.439Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -95,6 +95,9 @@ msgstr "Enrolled"
 
 msgid "Previously enrolled"
 msgstr "Previously enrolled"
+
+msgid "{{orgUnitLabel}}"
+msgstr "{{orgUnitLabel}}"
 
 msgid "Date of {{enrollmentLabel}}"
 msgstr "Date of {{enrollmentLabel}}"
@@ -907,9 +910,6 @@ msgstr "Show all"
 
 msgid "Program"
 msgstr "Program"
-
-msgid "{{orgUnitLabel}}"
-msgstr "{{orgUnitLabel}}"
 
 msgid "Registration"
 msgstr "Registration"

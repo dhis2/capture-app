@@ -1,6 +1,5 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import {
     SelectionBoxes,
     withDefaultFieldContainer,
@@ -130,7 +129,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
         const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, orgUnitLabel } = this.props;
         return (
             <TeiSearchOrgUnitField
-                label={capitalizeFirstLetter(orgUnitLabel)}
+                label={i18n.t('{{orgUnitLabel}}', { orgUnitLabel })}
                 styles={orgUnitFieldStyles}
                 searchText={treeSearchText}
                 roots={treeRoots}
