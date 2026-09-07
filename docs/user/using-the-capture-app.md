@@ -678,11 +678,15 @@ The Capture app supports the working lists in tracker programs, and opening a tr
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-0.png)
 
-    To enhance search performance, you can configure the **preferredSearchOperator** or **blockedSearchOperators** metadata in Maintenance. Tracked entity attributes with the following value types apply these settings: TEXT, LONG_TEXT, EMAIL, PHONE_NUMBER and PERCENTAGE. If preferredSearchOperator is not defined, the search falls back to the first available operator in [LIKE, SW, EQ] that is not listed in blockedSearchOperators. Attributes with other value types ignore the preferredSearchOperator. Helper text messages are displayed below the attribute search fields to guide the user.
+    To improve search performance, an administrator can control which operators an attribute is searched with. In the Metadata Management app, open the tracked entity attribute and go to the **Search performance** section. **Preferred search operator** is the operator the app tries first, and can be set to *EQ | Equals*, *SW | Starts with*, *EW | Ends with* or *LIKE | Contains*. **Blocked search operators** are the operators that must not be used, and a search that would use a blocked operator returns no results.
+
+    These settings only apply to attributes with the value types text, long text, email and phone number. Attributes with other value types are searched with a fixed operator and ignore the preferred search operator. Unique attributes and attributes with an option set are always matched with *equals*. If no preferred operator is set, the search uses the first of *contains*, *starts with* and *equals* that is not blocked. Helper text below each attribute search field tells the user how that field will be matched.
 
     ![](resources/images/search-by-attributes-on-scope-program-preferredSearchOperator.png)
 
-    Tracked entity attributes can also define **minCharactersToSearch** in the Metadata Management app. The same minimum applies to the attribute's filter in working lists, which shows *Please enter at least N characters to filter* until enough characters are entered. Set this value with care for non-text attributes. A filter can only ever hold as many characters as its value type allows - 10 for a date (2026-09-04), 5 for a time (14:30) and 3 for a percentage (100) - so if the minimum is higher than that, the filter cannot be used at all and shows *Minimum characters to search is too high for this filter*.
+    The same section has **Minimum characters required to search**, the number of characters the user must enter before the app searches on that attribute, where 0 means no minimum. The minimum applies to the attribute's filter in working lists as well, which shows *Please enter at least N characters to filter* until enough characters have been entered.
+
+    Set a minimum with care for attributes that are not text. Filters for some value types can only ever hold as many characters as the value type allows - 10 for a date (2026-09-04), 5 for a time (14:30) and 3 for a percentage (100) - so a minimum higher than that can never be reached, and the filter shows *Minimum characters to search is too high for this filter* instead.
 
     To execute a search now:
 
