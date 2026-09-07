@@ -1,103 +1,26 @@
-import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 import { programCollection } from '../../metaDataMemoryStores';
-
-type LabelConfig = {
-    field: string;
-    pluralField?: string;
-    singular: () => string;
-    plural?: () => string;
-};
-
-const asLabels = <T extends string>(labels: Record<T, LabelConfig>) => labels;
-
-const LABELS = asLabels({
-    enrollment: {
-        field: 'displayEnrollmentLabel',
-        pluralField: 'displayEnrollmentsLabel',
-        singular: () => i18n.t('enrollment'),
-        plural: () => i18n.t('enrollments'),
-    },
-    event: {
-        field: 'displayEventLabel',
-        pluralField: 'displayEventsLabel',
-        singular: () => i18n.t('event'),
-        plural: () => i18n.t('events'),
-    },
-    programStage: {
-        field: 'displayProgramStageLabel',
-        pluralField: 'displayProgramStagesLabel',
-        singular: () => i18n.t('program stage'),
-        plural: () => i18n.t('program stages'),
-    },
-    note: {
-        field: 'displayNoteLabel',
-        pluralField: 'displayNotesLabel',
-        singular: () => i18n.t('note'),
-        plural: () => i18n.t('notes'),
-    },
-    relationship: {
-        field: 'displayRelationshipLabel',
-        pluralField: 'displayRelationshipsLabel',
-        singular: () => i18n.t('relationship'),
-        plural: () => i18n.t('relationships'),
-    },
-    attribute: {
-        field: 'displayTrackedEntityAttributeLabel',
-        pluralField: 'displayTrackedEntityAttributesLabel',
-        singular: () => i18n.t('attribute'),
-        plural: () => i18n.t('attributes'),
-    },
-    orgUnit: {
-        field: 'displayOrgUnitLabel',
-        singular: () => i18n.t('organisation unit'),
-    },
-    followUp: {
-        field: 'displayFollowUpLabel',
-        singular: () => i18n.t('follow-up'),
-    },
-});
+import { LABELS, type LabelConfig } from './constants/customLabels.const';
 
 export type CustomLabelKey = keyof typeof LABELS;
 export type CustomLabels = Record<string, string>;
-
-export const LabelKeys = {
-    enrollmentSingular: 'enrollment',
-    enrollmentPlural: { key: 'enrollment', plural: true },
-    eventSingular: 'event',
-    eventPlural: { key: 'event', plural: true },
-    programStageSingular: 'programStage',
-    programStagePlural: { key: 'programStage', plural: true },
-    noteSingular: 'note',
-    notePlural: { key: 'note', plural: true },
-    relationshipSingular: 'relationship',
-    relationshipPlural: { key: 'relationship', plural: true },
-    attributeSingular: 'attribute',
-    attributePlural: { key: 'attribute', plural: true },
-    orgUnitSingular: 'orgUnit',
-    orgUnitPlural: { key: 'orgUnit', plural: true },
-    followUpSingular: 'followUp',
-    followUpPlural: { key: 'followUp', plural: true },
-} as const satisfies
-    & { [K in CustomLabelKey as `${K}Singular`]: K }
-    & { [K in CustomLabelKey as `${K}Plural`]: { key: K; plural: true } };
-
-export type TermRequest =
-    | CustomLabelKey
-    | { key: CustomLabelKey; plural?: boolean };
+export type TermRequest = CustomLabelKey | { key: CustomLabelKey; plural?: boolean };
 
 type LabelSource = Record<string, unknown> | undefined | null;
-type GetTermLabelFromProgramOptions = { program: LabelSource };
-type GetTermLabelOptions = { programId: string | null | undefined; stageId?: string | null };
-type UseTermLabelOptions = { programId?: string | null; stageId?: string | null };
 
-const ALL_FIELD_NAMES = Object.values(LABELS).flatMap(
-    ({ field, pluralField }) => (pluralField ? [field, pluralField] : [field]),
+type ProgramScope = { programId: string | null | undefined; stageId?: string | null };
+type OptionalProgramScope = { programId?: string | null; stageId?: string | null };
+type ProgramContainer = { program: LabelSource };
+
+const getLabel = (key: CustomLabelKey): LabelConfig => LABELS[key];
+
+const ALL_FIELD_NAMES = Object.values(LABELS as Record<string, LabelConfig>).flatMap(
+    ({ apiFieldSingular, apiFieldPlural }) => (apiFieldPlural ? [apiFieldSingular, apiFieldPlural] : [apiFieldSingular]),
 );
 
 const resolveDefault = (key: CustomLabelKey, plural: boolean): string => {
-    const label = LABELS[key];
-    return plural ? label.plural?.() ?? label.singular() : label.singular();
+    const label = getLabel(key);
+    return plural ? label.defaultPlural?.() ?? label.defaultSingular() : label.defaultSingular();
 };
 
 const resolveLabel = (
@@ -105,8 +28,8 @@ const resolveLabel = (
     key: CustomLabelKey,
     plural: boolean,
 ): string => {
-    const { field, pluralField } = LABELS[key];
-    const target = plural ? pluralField : field;
+    const { apiFieldSingular, apiFieldPlural } = getLabel(key);
+    const target = plural ? apiFieldPlural : apiFieldSingular;
     const found = target
         ? sources
             .map(source => source?.[target])
@@ -131,37 +54,42 @@ const buildLabels = (
     resolve: (key: CustomLabelKey, plural: boolean) => string,
 ): CustomLabels => {
     const entries = requests.map((req) => {
-        const { key, plural } = typeof req === 'string'
-            ? { key: req, plural: false }
-            : { key: req.key, plural: req.plural ?? false };
+        const isString = typeof req === 'string';
+        const key = isString ? req : req.key;
+        const plural = !isString && (req.plural ?? false);
         const outputKey = plural ? `${key}sLabel` : `${key}Label`;
         return [outputKey, resolve(key, plural)];
     });
     return Object.fromEntries(entries);
 };
 
+/** Use in metadata-load code (factories) to pluck label fields from a raw API object. */
 export const extractCustomLabels = (cached: Record<string, unknown>): CustomLabels =>
     Object.fromEntries(
-        ALL_FIELD_NAMES
-            .filter(field => typeof cached[field] === 'string')
-            .map(field => [field, cached[field] as string]),
+        ALL_FIELD_NAMES.flatMap((field) => {
+            const value = cached[field];
+            return typeof value === 'string' ? [[field, value]] : [];
+        }),
     );
 
+/** Use outside React (selectors, thunks); reads from `programCollection`. */
 export const getTermLabel = (
     requests: ReadonlyArray<TermRequest>,
-    { programId, stageId }: GetTermLabelOptions,
+    { programId, stageId }: ProgramScope,
 ): CustomLabels =>
     buildLabels(requests, (key, plural) => resolveFromCollection(programId, stageId, key, plural));
 
+/** Use in self-contained widgets that already own the program object (no Redux dep). */
 export const getTermLabelFromProgram = (
     requests: ReadonlyArray<TermRequest>,
-    { program }: GetTermLabelFromProgramOptions,
+    { program }: ProgramContainer,
 ): CustomLabels =>
     buildLabels(requests, (key, plural) => resolveLabel([program], key, plural));
 
+/** Use inside React components; `programId` falls back to `currentSelections.programId`. */
 export const useTermLabel = (
     requests: ReadonlyArray<TermRequest>,
-    { programId, stageId }: UseTermLabelOptions = {},
+    { programId, stageId }: OptionalProgramScope = {},
 ): CustomLabels => {
     const activeProgramId = useSelector(({ currentSelections }: any) =>
         programId ?? currentSelections.programId);

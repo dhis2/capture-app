@@ -23,30 +23,27 @@ const CUSTOM_TERM_VARS = new Set([
     'trackedEntityLabel', 'trackedEntityTypesLabel',
 ]);
 
-const patchInterpolator = () => {
-    const interpolator = (i18n as any).services?.interpolator;
-    if (!interpolator) return;
-
+const interpolator = (i18n as any).services?.interpolator;
+if (interpolator) {
     const original = interpolator.interpolate.bind(interpolator);
+
     interpolator.interpolate = (template: string, data: Record<string, unknown>, lng: string, opts: any) => {
         const usedVars = [...template.matchAll(/\{\{\s*(\w+)/g)].map(m => m[1]);
-        const hasCustomTerm = usedVars.some(name => CUSTOM_TERM_VARS.has(name));
-        if (!hasCustomTerm) return original(template, data, lng, opts);
+        if (!usedVars.some(name => CUSTOM_TERM_VARS.has(name))) {
+            return original(template, data, lng, opts);
+        }
 
         const leading = /^\{\{\s*(\w+)/.exec(template.trimStart())?.[1];
-        const shouldCapitalize = leading && CUSTOM_TERM_VARS.has(leading) && typeof data?.[leading] === 'string';
-        const preparedData = shouldCapitalize
+        const preparedData = leading && CUSTOM_TERM_VARS.has(leading) && typeof data?.[leading] === 'string'
             ? { ...data, [leading]: capitalizeFirstLetter(data[leading] as string) }
             : (data ?? {});
 
-        const previousEscapeValue = interpolator.escapeValue;
+        const previousEscape = interpolator.escapeValue;
         interpolator.escapeValue = false;
         try {
             return original(template, preparedData, lng, opts);
         } finally {
-            interpolator.escapeValue = previousEscapeValue;
+            interpolator.escapeValue = previousEscape;
         }
     };
-};
-
-patchInterpolator();
+}
