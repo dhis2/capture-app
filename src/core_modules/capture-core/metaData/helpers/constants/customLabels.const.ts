@@ -28,15 +28,21 @@ export const LABELS = {
     },
     note: {
         apiFieldSingular: 'displayNoteLabel',
+        apiFieldPlural: 'displayNotesLabel',
         defaultSingular: () => i18n.t('note'),
+        defaultPlural: () => i18n.t('notes'),
     },
     relationship: {
         apiFieldSingular: 'displayRelationshipLabel',
+        apiFieldPlural: 'displayRelationshipsLabel',
         defaultSingular: () => i18n.t('relationship'),
+        defaultPlural: () => i18n.t('relationships'),
     },
     attribute: {
         apiFieldSingular: 'displayTrackedEntityAttributeLabel',
+        apiFieldPlural: 'displayTrackedEntityAttributesLabel',
         defaultSingular: () => i18n.t('attribute'),
+        defaultPlural: () => i18n.t('attributes'),
     },
     orgUnit: {
         apiFieldSingular: 'displayOrgUnitLabel',
@@ -56,8 +62,11 @@ export const LabelKeys = {
     programStageSingular: 'programStage',
     programStagePlural: { key: 'programStage', plural: true },
     noteSingular: 'note',
+    notePlural: { key: 'note', plural: true },
     relationshipSingular: 'relationship',
+    relationshipPlural: { key: 'relationship', plural: true },
     attributeSingular: 'attribute',
+    attributePlural: { key: 'attribute', plural: true },
     orgUnitSingular: 'orgUnit',
     followUpSingular: 'followUp',
 } as const;
