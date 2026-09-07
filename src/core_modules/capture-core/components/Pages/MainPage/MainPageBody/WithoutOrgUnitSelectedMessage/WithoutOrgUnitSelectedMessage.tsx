@@ -3,7 +3,7 @@ import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
-import { programTypes, TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, programTypes, TrackerProgram, useTermLabel } from '../../../../../metaData';
 import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
 
 const styles: Readonly<any> = {
@@ -52,7 +52,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({
 }: Props) => {
     const { program, programType } = useProgramInfo(programId);
     const isTracker = programType === programTypes.TRACKER_PROGRAM;
-    const orgUnitLabel = useTermLabel('orgUnit', { programId });
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId });
 
     const trackedEntityName = program instanceof TrackerProgram
         ? program.trackedEntityType?.name

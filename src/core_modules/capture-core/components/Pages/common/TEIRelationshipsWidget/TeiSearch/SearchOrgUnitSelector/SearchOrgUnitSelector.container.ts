@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
 import {
     setOrgUnitScope,
     setOrgUnit,
@@ -9,7 +8,7 @@ import {
 import { get as getOrgUnitRoots } from '../../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelector as SearchOrgUnitSelectorComponent } from './SearchOrgUnitSelector.component';
 import type { ReduxState, ReduxDispatch } from '../../../../../App/withAppUrlSync.types';
-import { getTermLabel } from '../../../../../../metaData/helpers/customLabels';
+import { getTermLabel, LabelKeys } from '../../../../../../metaData';
 
 const mapStateToProps = (state: ReduxState, props: { searchId: string }) => {
     const searchId = props.searchId;
@@ -26,7 +25,7 @@ const mapStateToProps = (state: ReduxState, props: { searchId: string }) => {
         treeSearchText: teiSearch.orgUnitsSearchText,
         treeReady: !teiSearch.orgUnitsLoading,
         treeKey: teiSearch.orgUnitsSearchText || 'initial',
-        orgUnitLabel: programId ? getTermLabel('orgUnit', { programId }) : i18n.t('organisation unit'),
+        orgUnitLabel: getTermLabel([LabelKeys.orgUnitSingular], { programId }).orgUnitLabel,
     };
 };
 

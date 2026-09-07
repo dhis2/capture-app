@@ -8,7 +8,7 @@ import { addFormData } from '../../../../../D2Form/actions/form.actions';
 import { getCategoryOptionsValidatorContainers } from '../../../../Enrollment/fieldValidators';
 import type { ProgramCategory } from '../../../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import type { DataEntryPropToInclude } from '../../../../../DataEntry/actions/dataEntryLoad.utils';
-import { getTermLabel, LabelKeys } from '../../../../../../metaData/helpers/customLabels';
+import { getTermLabel, LabelKeys } from '../../../../../../metaData';
 
 const buildDataEntryPropsToInclude = (
     orgUnitLabel: string,

@@ -8,7 +8,7 @@ import { availableCardListButtonState, enrollmentTypes } from './CardList.consta
 import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { useTermLabel } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../metaData';
 
 type Props = {
     currentSearchScopeId?: string,
@@ -80,7 +80,7 @@ const CardListButtons: FC<Props> = ({
 }) => {
     const dispatch = useDispatch();
     const navigationButtonsState: AvailableCardListButtonState = deriveNavigationButtonState(enrollmentType);
-    const enrollmentLabel = useTermLabel('enrollment');
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     const onHandleClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
         event.stopPropagation();
 

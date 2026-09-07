@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { SearchGroup, useTermLabel } from '../../metaData';
+import { SearchGroup, useTermLabel, LabelKeys } from '../../metaData';
 import { UnsupportedAttributesNotification } from '../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
@@ -178,6 +178,6 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
 const TeiSearchWithStyles = withStyles(styles)(TeiSearchPlain);
 
 export const TeiSearchComponent = (props: Omit<Props, 'attributesLabel'>) => {
-    const attributesLabel = useTermLabel('attribute', { programId: props.selectedProgramId, plural: true });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: props.selectedProgramId });
     return <TeiSearchWithStyles {...props} attributesLabel={attributesLabel} />;
 };

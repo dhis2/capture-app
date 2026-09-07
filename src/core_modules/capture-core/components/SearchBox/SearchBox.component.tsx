@@ -14,7 +14,7 @@ import { searchScopes } from './SearchBox.constants';
 import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
-import { scopeTypes, useTermLabel } from '../../metaData';
+import { scopeTypes, useTermLabel, LabelKeys } from '../../metaData';
 
 const getStyles: Readonly<any> = {
     half: {
@@ -146,7 +146,7 @@ const Index = ({
         getInitialSearchScopeType(preselectedProgramId),
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
-    const attributesLabel = useTermLabel('attribute', { programId: selectedSearchScopeId, plural: true });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: selectedSearchScopeId });
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
         searchOption: availableSearchOption,

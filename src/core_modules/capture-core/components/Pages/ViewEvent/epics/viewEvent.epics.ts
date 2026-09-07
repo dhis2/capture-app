@@ -28,7 +28,7 @@ import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
 import { resetLocationChange } from '../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
-import { getTermLabel, LabelKeys } from '../../../../metaData/helpers/customLabels';
+import { getTermLabel, LabelKeys } from '../../../../metaData';
 
 export const getEventOpeningFromEventListEpic = (
     action$: any,

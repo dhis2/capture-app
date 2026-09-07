@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-07T08:46:11.965Z\n"
-"PO-Revision-Date: 2026-09-07T08:46:11.965Z\n"
+"POT-Creation-Date: 2026-09-07T09:53:09.676Z\n"
+"PO-Revision-Date: 2026-09-07T09:53:09.676Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -974,12 +974,6 @@ msgstr "This {{eventLabel}} doesn't have any {{relationshipsLabel}}"
 msgid "Warnings"
 msgstr "Warnings"
 
-msgid "No feedback yet"
-msgstr "No feedback yet"
-
-msgid "No indicator output yet"
-msgstr "No indicator output yet"
-
 msgid "{{eventLabel}} could not be loaded. Are you sure it exists?"
 msgstr "{{eventLabel}} could not be loaded. Are you sure it exists?"
 
@@ -1010,9 +1004,6 @@ msgstr "Please select an {{orgUnitLabel}}."
 
 msgid "{{orgUnitLabel}} scope"
 msgstr "{{orgUnitLabel}} scope"
-
-msgid "organisation unit"
-msgstr "organisation unit"
 
 msgid "Selected program"
 msgstr "Selected program"
@@ -2283,6 +2274,9 @@ msgstr "attribute"
 
 msgid "attributes"
 msgstr "attributes"
+
+msgid "organisation unit"
+msgstr "organisation unit"
 
 msgid "follow-up"
 msgstr "follow-up"

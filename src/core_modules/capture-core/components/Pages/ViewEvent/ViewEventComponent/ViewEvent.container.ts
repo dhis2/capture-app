@@ -31,9 +31,7 @@ const makeMapStateToProps = () => {
             : getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW);
         const isUserInteractionInProgress = dataEntryHasChanges(state, currentDataEntryKey);
         const programId = state.currentSelections.programId;
-        const eventLabel = programId
-            ? getTermLabel([LabelKeys.eventSingular], { programId }).eventLabel
-            : undefined;
+        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
         return {
             programStage: programStageSelector(state),
             eventAccess: eventAccessSelector(state),
@@ -44,12 +42,8 @@ const makeMapStateToProps = () => {
             getAssignedUserSaveContext: () => assignedUserContextSelector(state),
             eventId: state.viewEventPage.eventId,
             isEditEventPage: eventDetailsSection.showEditEvent,
-            feedbackEmptyText: eventLabel
-                ? i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel })
-                : i18n.t('No feedback yet'),
-            indicatorEmptyText: eventLabel
-                ? i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })
-                : i18n.t('No indicator output yet'),
+            feedbackEmptyText: i18n.t('No feedback for this {{eventLabel}} yet', { eventLabel }),
+            indicatorEmptyText: i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel }),
             programRules: programRulesSelector(state),
         };
     };

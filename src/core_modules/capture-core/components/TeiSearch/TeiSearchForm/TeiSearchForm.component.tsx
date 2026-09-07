@@ -16,7 +16,7 @@ import { D2Form } from '../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import type { Props } from './TeiSearchForm.types';
 import { withGotoInterface } from '../../FormFields/New';
-import { useTermLabel } from '../../../metaData';
+import { useTermLabel, LabelKeys } from '../../../metaData';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
@@ -47,7 +47,7 @@ type State = {
 };
 
 const MinAttributesRequiredMessage = ({ count }: { count: number }) => {
-    const attributeLabel = useTermLabel('attribute');
+    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular]);
     return (
         <>
             {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
@@ -239,6 +239,6 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
 const TeiSearchFormWithStyles = withStyles(styles)(SearchFormPlain);
 
 export const TeiSearchFormComponent = (props: Omit<Props, 'attributesLabel'>) => {
-    const attributesLabel = useTermLabel('attribute', { plural: true });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural]);
     return <TeiSearchFormWithStyles {...props} attributesLabel={attributesLabel} />;
 };

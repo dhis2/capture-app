@@ -17,7 +17,7 @@ import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
-import { getTermLabel, LabelKeys } from '../../metaData/helpers/customLabels';
+import { getTermLabel, LabelKeys } from '../../metaData';
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(

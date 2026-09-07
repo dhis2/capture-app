@@ -18,7 +18,7 @@ import { SearchResultsHeader } from '../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Widget } from '../../Widget';
-import { getTrackerProgramThrowIfNotFound, useTermLabel } from '../../../metaData';
+import { getTrackerProgramThrowIfNotFound, useTermLabel, LabelKeys } from '../../../metaData';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -124,7 +124,7 @@ const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
 
     const { trackedEntityName } = useScopeInfo(currentSearchScopeId);
-    const attributesLabel = useTermLabel('attribute', { programId: currentProgramId, plural: true });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: currentProgramId });
 
     return (<>
         <Widget
