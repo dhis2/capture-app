@@ -682,7 +682,7 @@ The Capture app supports the working lists in tracker programs, and opening a tr
 
     ![](resources/images/search-by-attributes-on-scope-program-preferredSearchOperator.png)
 
-    Tracked entity attributes can also define **minCharactersToSearch** in Maintenance. The same minimum applies to the attribute's filter in working lists, which shows *Please enter at least N characters to filter* until enough characters are entered. Set this value with care for non-text attributes. A filter can only ever hold as many characters as its value type allows - 10 for a date (2026-09-04), 5 for a time (14:30) and 3 for a percentage (100) - so if the minimum is higher than that, the filter cannot be used at all and shows *Minimum characters to search is too high for this filter*.
+    Tracked entity attributes can also define **minCharactersToSearch** in the Metadata Management app. The same minimum applies to the attribute's filter in working lists, which shows *Please enter at least N characters to filter* until enough characters are entered. Set this value with care for non-text attributes. A filter can only ever hold as many characters as its value type allows - 10 for a date (2026-09-04), 5 for a time (14:30) and 3 for a percentage (100) - so if the minimum is higher than that, the filter cannot be used at all and shows *Minimum characters to search is too high for this filter*.
 
     To execute a search now:
 
