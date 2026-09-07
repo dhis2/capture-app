@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 type Props = {
     programId: string;
@@ -26,7 +26,7 @@ const getWorkingListLabel = (
 };
 
 export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props) => {
-    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
     const workingListTemplates = useSelector(({ workingListsTemplates }: any) => workingListsTemplates?.teiList);
     const workingListProgramId = useSelector(({ workingListsContext }: any) => workingListsContext?.teiList?.programIdView);
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};

@@ -12,17 +12,20 @@ import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField';
 import { useTransferValidation } from './hooks/useTransferValidation';
 import { InfoBoxes } from './InfoBoxes';
-import { useTermLabel } from '../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../metaData';
 
 export const TransferModal = ({
     enrollment,
     ownerOrgUnitId,
+    program,
     setOpenTransfer,
     onUpdateOwnership,
     isTransferLoading,
 }: TransferModalProps) => {
-    const enrollmentLabel = useTermLabel('enrollment', { programId: enrollment.program });
-    const orgUnitLabel = useTermLabel('orgUnit', { programId: enrollment.program });
+    const { enrollmentLabel, orgUnitLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular],
+        { program },
+    );
     const {
         selectedOrgUnit,
         handleOrgUnitChange,
@@ -70,6 +73,7 @@ export const TransferModal = ({
                     validOrgUnitId={selectedOrgUnit?.id}
                     programAccessLevel={programAccessLevel}
                     orgUnitScopes={orgUnitScopes}
+                    program={program}
                 />
             </ModalContent>
 

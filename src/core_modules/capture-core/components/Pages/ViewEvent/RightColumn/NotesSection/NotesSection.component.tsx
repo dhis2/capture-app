@@ -2,7 +2,6 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
@@ -10,7 +9,7 @@ import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.com
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import type { PlainProps } from './NotesSection.types';
-import { getTermLabel } from '../../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
@@ -39,10 +38,11 @@ class NotesSectionPlain extends React.Component<Props> {
         const { classes, notes, ready, programId } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
+        const { notesLabel } = getTermLabel([LabelKeys.notePlural], { programId });
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={capitalizeFirstLetter(getTermLabel('note', { programId, plural: true }))}
+                text={i18n.t('{{notesLabel}}', { notesLabel })}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -52,6 +52,10 @@ class NotesSectionPlain extends React.Component<Props> {
     render() {
         const { classes, notes, fieldValue, onAddNote, ready, readOnly, programId } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
+        const { eventLabel, notesLabel, noteLabel } = getTermLabel(
+            [LabelKeys.eventSingular, LabelKeys.notePlural, LabelKeys.noteSingular],
+            { programId },
+        );
         return (
             <ViewEventSection
                 collapsable
@@ -62,8 +66,8 @@ class NotesSectionPlain extends React.Component<Props> {
                         {i18n.t(
                             "This {{eventLabel}} doesn't have any {{notesLabel}}",
                             {
-                                eventLabel: getTermLabel('event', { programId }),
-                                notesLabel: getTermLabel('note', { programId, plural: true }),
+                                eventLabel,
+                                notesLabel,
                             },
                         )}
                     </div>
@@ -76,7 +80,7 @@ class NotesSectionPlain extends React.Component<Props> {
                     onBlur: this.props.onUpdateNoteField,
                     value: fieldValue,
                     smallMainButton: true,
-                    noteLabel: getTermLabel('note', { programId }),
+                    noteLabel,
                 })}
             </ViewEventSection>
         );

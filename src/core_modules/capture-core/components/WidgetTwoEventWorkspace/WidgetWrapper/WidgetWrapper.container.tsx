@@ -4,7 +4,7 @@ import { colors, spacersNum, IconLink16 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 export const styles: Readonly<any> = {
     container: {
@@ -41,7 +41,7 @@ export const styles: Readonly<any> = {
 };
 
 const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: PlainProps & WithStyles<typeof styles>) => {
-    const eventLabel = useTermLabel('event', { stageId: stage?.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: stage?.id });
     if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
         return (
             <div className={classes.container}>

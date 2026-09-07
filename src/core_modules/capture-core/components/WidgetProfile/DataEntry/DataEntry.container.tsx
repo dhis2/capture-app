@@ -178,6 +178,7 @@ export const DataEntry = ({
             saveAttempted={saveAttempted}
             trackedEntityName={trackedEntityName}
             formFoundation={formFoundation}
+            program={programAPI}
             onUpdateFormField={onUpdateFormField}
             onUpdateFormFieldAsync={onUpdateFormFieldAsync}
             modalState={modalState}

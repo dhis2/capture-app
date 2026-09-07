@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { relatedStageActions } from '../constants';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const ReactQueryAppNamespace = 'capture';
 
@@ -31,7 +31,7 @@ export const useAddEventWithRelationship = ({
     const queryClient = useQueryClient();
     const { show: showSuccess } = useAlert(({ message }) => message, { success: true });
     const { show: showAlert } = useAlert(({ message }) => message, { critical: true });
-    const eventLabel = useTermLabel('event');
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
 
     const { mutate } = useMutation(
         ({ serverData }: { serverData: any }) =>

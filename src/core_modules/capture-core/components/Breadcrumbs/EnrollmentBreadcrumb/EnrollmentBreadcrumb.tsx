@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import { DirectionalChevron } from '../../../utils/rtl';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -69,8 +69,10 @@ const BreadcrumbsPlain = ({
     classes,
 }: Props) => {
     const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const eventLabel = useTermLabel('event', { programId });
+    const { enrollmentLabel, eventLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.eventSingular],
+        { programId },
+    );
 
     const { label } = useWorkingListLabel({
         programId,

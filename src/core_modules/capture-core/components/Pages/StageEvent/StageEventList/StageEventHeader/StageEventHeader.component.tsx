@@ -4,7 +4,7 @@ import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { PlainProps } from './StageEventHeader.types';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 const getStyles = () => ({
     wrapper: {
@@ -23,8 +23,10 @@ const getStyles = () => ({
 type Props = PlainProps & WithStyles<typeof getStyles>;
 
 const StageEventHeaderPlain = ({ icon, title, events, programId, stageId, classes }: Props) => {
-    const eventLabel = useTermLabel('event', { programId, stageId });
-    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { programId, stageId },
+    );
     return (
         <div data-test="stage-event-header" className={classes.wrapper}>
             <div className={classes.icon}>{

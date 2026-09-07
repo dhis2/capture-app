@@ -6,7 +6,7 @@ import { RelationshipSearchEntities, useRelationships } from '../common/useRelat
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,
@@ -28,7 +28,7 @@ export const WidgetTrackedEntityRelationship = ({
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
-    const relationshipLabel = useTermLabel('relationship', { programId });
+    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular], { programId });
     const {
         data: relationships,
         isError,

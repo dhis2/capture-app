@@ -6,7 +6,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: Record<string, boolean>;
@@ -34,7 +34,7 @@ export const useDeleteEnrollments = ({
         ({ message }) => message,
         { critical: true },
     );
-    const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
 
     const updateStatusToDelete = useCallback((status: string) => {
         setStatusToDelete(prevStatus => ({

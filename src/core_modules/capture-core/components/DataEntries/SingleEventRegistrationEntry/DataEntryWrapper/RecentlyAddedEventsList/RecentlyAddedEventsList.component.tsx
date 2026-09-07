@@ -6,7 +6,7 @@ import { Card } from '@dhis2/ui';
 import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
 import { listId } from './RecentlyAddedEventsList.const';
 import type { Props } from './RecentlyAddedEventsList.types';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 const styles = (theme: any) => ({
     container: {
@@ -19,8 +19,9 @@ const styles = (theme: any) => ({
 
 const NewEventsListPlain = (props: Props & WithStyles<typeof styles>) => {
     const { classes, ...passOnProps } = props;
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+    );
     const eventsAdded = props.events ? Object.keys(props.events).length : 0;
     if (eventsAdded === 0) {
         return null;

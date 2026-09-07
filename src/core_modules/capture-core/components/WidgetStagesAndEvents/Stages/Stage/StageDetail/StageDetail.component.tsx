@@ -23,7 +23,7 @@ import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
@@ -108,8 +108,10 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const eventLabel = useTermLabel('event', { programId, stageId });
-    const eventsLabel = useTermLabel('event', { programId, stageId, plural: true });
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { programId, stageId },
+    );
     const { stageWriteAccessById } = useEnrollmentAccessContext();
     const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;
     const headerColumns = useComputeHeaderColumn(

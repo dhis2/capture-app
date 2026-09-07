@@ -2,10 +2,10 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { InfoIconText } from '../../InfoIconText';
 import type { Props } from './scheduleText.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 export const ScheduleText = ({ orgUnitName, stageName, programName, programId, stageId }: Props) => {
-    const eventLabel = useTermLabel('event', { programId, stageId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId });
     return (
         <InfoIconText>
             <span>

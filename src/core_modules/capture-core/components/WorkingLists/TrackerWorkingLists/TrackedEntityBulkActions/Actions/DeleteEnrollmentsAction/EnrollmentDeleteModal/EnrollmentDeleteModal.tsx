@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
 import type { PlainProps } from './EnrollmentDeleteModal.types';
-import { useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
 
 const styles: Readonly<any> = {
     modalContent: {
@@ -27,9 +27,11 @@ const EnrollmentDeleteModalPlain = ({
     setIsDeleteDialogOpen,
     classes,
 }: PlainProps & WithStyles<typeof styles>) => {
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { enrollmentsLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
+        { programId },
+    );
     const {
         deleteEnrollments,
         isDeletingEnrollments,

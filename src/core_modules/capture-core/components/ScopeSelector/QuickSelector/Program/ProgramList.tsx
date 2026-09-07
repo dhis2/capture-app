@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FiltrableMenuItems } from '../FiltrableMenuItems';
 import type { Program, Icon } from '../../../../metaData';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 import { OptionLabel } from '../../OptionLabel';
 
 const styles = () => ({
@@ -32,7 +32,7 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgUnit, classes }: Props) => {
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
     const areAllProgramsAvailable =
         programOptions.length === programsArray.filter(program => program.access.data.read).length;
 

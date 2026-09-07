@@ -6,7 +6,7 @@ import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
@@ -18,9 +18,9 @@ export const WidgetEnrollmentNote = () => {
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
-    const enrollmentLabel = useTermLabel('enrollment');
-    const noteLabel = useTermLabel('note');
-    const notesLabel = useTermLabel('note', { plural: true });
+    const { enrollmentLabel, noteLabel, notesLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
+    );
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));

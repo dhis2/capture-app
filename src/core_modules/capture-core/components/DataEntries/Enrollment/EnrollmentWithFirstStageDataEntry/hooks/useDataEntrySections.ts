@@ -3,10 +3,10 @@ import i18n from '@dhis2/d2-i18n';
 import { placements } from '../../../../DataEntry/constants/placements.const';
 import { sectionKeysForFirstStageDataEntry } from '../EnrollmentWithFirstStageDataEntry.constants';
 import { AOCsectionKey } from '../../../../DataEntryDhis2Helpers';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 export const useDataEntrySections = (stageName: string, beforeSectionId: string) => {
-    const enrollmentLabel = useTermLabel('enrollment');
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     return useMemo(
         () => ({
             [sectionKeysForFirstStageDataEntry.ENROLLMENT]: {

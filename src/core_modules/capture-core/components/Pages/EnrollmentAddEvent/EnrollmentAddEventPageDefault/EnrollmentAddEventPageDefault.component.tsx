@@ -8,7 +8,7 @@ import { EnrollmentAccessProvider } from '../../common/EnrollmentOverviewDomain'
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
-import { TrackerProgram, useTermLabel } from '../../../../metaData';
+import { LabelKeys, TrackerProgram, useTermLabel } from '../../../../metaData';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     container: {
@@ -58,7 +58,7 @@ const EnrollmentAddEventPagePain = ({
     classes,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const eventLabel = useTermLabel('event', { programId: program?.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: program?.id });
     if (pageFailure) {
         return (
             <div>

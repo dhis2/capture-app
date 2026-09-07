@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { concatMap, map, filter } from 'rxjs/operators';
 import { from } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
-import { getTermLabel, getScopeInfo } from '../../../../metaData';
+import { getTermLabel, getScopeInfo, LabelKeys } from '../../../../metaData';
 import {
     enrollmentPageActionTypes,
     resetEnrollmentId,
@@ -122,7 +122,7 @@ export const enrollmentIdErrorEpic = (action$: any, store: any) =>
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) => {
             const { programId } = store.value.enrollmentPage;
-            const enrollmentLabel = getTermLabel('enrollment', { programId });
+            const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
             return showErrorViewOnEnrollmentPage({
                 error: i18n.t('{{enrollmentLabel}} with id "{{enrollmentId}}" does not exist',
                     { enrollmentLabel, enrollmentId }),

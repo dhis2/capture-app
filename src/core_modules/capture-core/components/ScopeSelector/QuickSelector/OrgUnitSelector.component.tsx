@@ -3,14 +3,12 @@ import i18n from '@dhis2/d2-i18n';
 // @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { OrgUnitField } from '../../FormFields/New';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { LabelKeys } from '../../../metaData';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-} as const;
+const customLabels = [LabelKeys.orgUnitSingular] as const;
 
 const styles = () => ({
     selectBarMenu: {
@@ -71,7 +69,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
                 content={i18n.t('Choose an {{orgUnitLabel}} in the form below', { orgUnitLabel })}
             >
                 <SelectorBarItem
-                    label={capitalizeFirstLetter(orgUnitLabel)}
+                    label={i18n.t('{{orgUnitLabel}}', { orgUnitLabel })}
                     noValueMessage={isReadOnly
                         ? i18n.t('None selected')
                         : i18n.t('Choose an {{orgUnitLabel}}', { orgUnitLabel })}

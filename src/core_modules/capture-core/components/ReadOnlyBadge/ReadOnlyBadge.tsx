@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 import type { Props, Access, ReadOnlyMessageInput } from './ReadOnlyBadge.types';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 const styles = {
     label: {
@@ -79,10 +79,14 @@ const ReadOnlyBadgePlain = ({
     stageId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const programStageLabel = useTermLabel('programStage', { programId, stageId });
-    const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
-    const eventLabel = useTermLabel('event', { programId, stageId });
+    const { enrollmentLabel, programStagesLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.programStagePlural],
+        { programId },
+    );
+    const { programStageLabel, eventLabel } = useTermLabel(
+        [LabelKeys.programStageSingular, LabelKeys.eventSingular],
+        { programId, stageId },
+    );
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,

@@ -22,18 +22,18 @@ import {
 import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
-import type { RenderFoundation } from '../../../../../metaData';
+import { LabelKeys, type RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { newEventSaveTypes } from './newEventSaveTypes';
 import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-    eventLabel: { key: 'event' },
-    noteLabel: { key: 'note' },
-    notesLabel: { key: 'note', plural: true },
-    relationshipsLabel: { key: 'relationship', plural: true },
-} as const;
+const customLabels = [
+    LabelKeys.orgUnitSingular,
+    LabelKeys.eventSingular,
+    LabelKeys.noteSingular,
+    LabelKeys.notePlural,
+    LabelKeys.relationshipPlural,
+] as const;
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();

@@ -5,7 +5,7 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { NewRelationship } from '../../../Pages/NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
-import { getTermLabel } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../metaData';
 
 const getStyles = (theme: any) => ({
     headerContainer: {
@@ -83,8 +83,10 @@ class NewEventNewRelationshipWrapper extends React.Component<Props & WithStyles<
 
     render() {
         const { classes, onCancel, programId, ...passOnProps } = this.props;
-        const eventLabel = getTermLabel('event', { programId });
-        const relationshipLabel = getTermLabel('relationship', { programId });
+        const { eventLabel, relationshipLabel } = getTermLabel(
+            [LabelKeys.eventSingular, LabelKeys.relationshipSingular],
+            { programId },
+        );
         return (
             <div>
                 <div className={classes.backToEventContainer}>

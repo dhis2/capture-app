@@ -10,7 +10,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
 import { Widget } from '../Widget';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     title: {
@@ -36,7 +36,7 @@ const WidgetBreakingTheGlassPlain = ({
         setReason(value);
     }, [setReason]);
     const disabled = useMemo(() => reason.length === 0, [reason]);
-    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
 
     return (
         <div data-test="breaking-the-glass-widget" className={classes.background}>

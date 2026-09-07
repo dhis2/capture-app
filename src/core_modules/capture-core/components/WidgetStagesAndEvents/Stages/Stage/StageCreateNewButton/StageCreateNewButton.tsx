@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React, { useMemo } from 'react';
 import { Button, IconAdd16 } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 type Props = {
     onCreateNew: () => void;
@@ -21,9 +21,10 @@ export const StageCreateNewButton = ({
     eventName,
     stageId,
 }: Props) => {
-    const programStageLabel = useTermLabel('programStage', { stageId });
-    const eventLabel = useTermLabel('event', { stageId });
-    const eventsLabel = useTermLabel('event', { stageId, plural: true });
+    const { programStageLabel, eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.programStageSingular, LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { stageId },
+    );
     const { isDisabled, tooltipContent } = useMemo(() => {
         if (preventAddingEventActionInEffect) {
             return {

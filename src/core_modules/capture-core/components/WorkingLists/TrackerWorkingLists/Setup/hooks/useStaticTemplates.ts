@@ -1,10 +1,10 @@
 import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import type { WorkingListTemplate } from '../../../WorkingListsBase';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate | undefined, defaultTemplateId: string) => {
-    const enrollmentsLabel = useTermLabel('enrollment', { plural: true });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
     return useMemo(
         () => [
             defaultAlteredTemplate || {

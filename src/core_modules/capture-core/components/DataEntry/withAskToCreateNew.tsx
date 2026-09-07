@@ -2,7 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { RenderFoundation } from '../../metaData';
-import { getTermLabel } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../metaData';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
@@ -53,7 +53,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             if (!this.state.isOpen) {
                 return null;
             }
-            const eventLabel = getTermLabel('event', { programId: this.props.programId });
+            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: this.props.programId });
             return (
                 <Modal
                     hide={!this.state.isOpen}

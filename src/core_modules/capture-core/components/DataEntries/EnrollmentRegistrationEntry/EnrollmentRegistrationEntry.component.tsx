@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes, useTermLabel } from '../../../metaData';
+import { LabelKeys, scopeTypes, useTermLabel } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { EnrollmentDataEntry } from '../Enrollment';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
@@ -66,7 +66,7 @@ const EnrollmentRegistrationEntryPlain =
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
-      const enrollmentLabel = useTermLabel('enrollment');
+      const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {

@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
-import { getTermLabel, dataElementTypes } from '../../../metaData';
+import { getTermLabel, LabelKeys, dataElementTypes } from '../../../metaData';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
@@ -60,6 +60,7 @@ export const loadViewEventDataEntry =
         attributeValues?: Array<AttributeValue>;
         onCategoriesQuery?: Promise<any> | null;
     }) => {
+        const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
         const dataEntryPropsToInclude = [
             {
                 id: 'occurredAt',
@@ -73,7 +74,7 @@ export const loadViewEventDataEntry =
             {
                 id: 'orgUnit',
                 type: 'ORGANISATION_UNIT',
-                validatorContainers: getOrgUnitValidatorContainers(getTermLabel('orgUnit', { programId: program.id })),
+                validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
             },
             {
                 clientId: 'geometry',
@@ -145,8 +146,9 @@ export const loadViewEventDataEntry =
         if (program instanceof TrackerProgram) {
             const stage = getStageFromEvent(eventContainer.event)?.stage;
             if (!stage) {
+                const { programStageLabel } = getTermLabel([LabelKeys.programStageSingular], { programId: program?.id });
                 throw Error(i18n.t('{{programStageLabel}} not found in rules execution', {
-                    programStageLabel: getTermLabel('programStage', { programId: program?.id }),
+                    programStageLabel,
                 }));
             }
 

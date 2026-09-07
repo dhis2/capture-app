@@ -5,7 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -153,7 +153,7 @@ const styles: Readonly<any> = {
 };
 
 const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string }) => {
-    const enrollmentLabel = useTermLabel('enrollment');
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     return (
         <IncompleteSelectionsMessage>
             {enrollmentId ?
@@ -184,10 +184,10 @@ const MissingMessagePlain = ({
     const { resetTeiId } = useResetTeiId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const { programId, teiId, enrollmentId } = useLocationQuery();
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
-    const orgUnitLabel = useTermLabel('orgUnit', { programId });
-    const eventLabel = useTermLabel('event', { programId });
+    const { enrollmentLabel, enrollmentsLabel, orgUnitLabel, eventLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.orgUnitSingular, LabelKeys.eventSingular],
+        { programId },
+    );
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);

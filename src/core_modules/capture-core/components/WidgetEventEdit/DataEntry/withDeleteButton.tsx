@@ -2,7 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { Props, State } from './withDeleteButton.types';
-import { getTermLabel } from '../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../metaData';
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
     class DeleteButtonHOC extends React.Component<Props, State> {
@@ -19,7 +19,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderDeleteButton = (hasDeleteButton?: boolean) => {
-            const eventLabel = getTermLabel('event', { programId: this.props.programId });
+            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: this.props.programId });
             return (
                 hasDeleteButton ? (<div>
                     <Button

@@ -7,7 +7,7 @@ import { relatedStageStatus, relatedStageActions } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 import { useProgramExpiryForUser } from '../../../hooks';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 type RefHandle = {
     eventHasLinkableStageRelationship: () => boolean;
@@ -51,8 +51,8 @@ const RelatedStagesActionsPlain = ({
     });
     const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const orgUnitLabel = useTermLabel('orgUnit', { programId });
-    const eventLabel = useTermLabel('event', { programId, stageId: constraint?.programStage?.id });
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: constraint?.programStage?.id });
 
     useEffect(() => {
         if (!orgUnitLoading && (data as any)?.length === 1) {

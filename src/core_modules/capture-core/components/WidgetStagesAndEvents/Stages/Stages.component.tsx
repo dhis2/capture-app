@@ -6,7 +6,7 @@ import { Stage } from './Stage';
 import type { PlainProps, InputProps } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 import { useEnrollmentAccessContext } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const emptyStateStyle = {
     padding: `0 ${spacersNum.dp12}px`,
@@ -24,7 +24,10 @@ export const StagesPlain = ({
     ...passOnProps
 }: PlainProps) => {
     const { stageReadAccessById } = useEnrollmentAccessContext();
-    const programStagesLabel = useTermLabel('programStage', { programId: passOnProps.programId, plural: true });
+    const { programStagesLabel } = useTermLabel(
+        [LabelKeys.programStagePlural],
+        { programId: passOnProps.programId },
+    );
     const readableStages = useMemo(
         () => stages.filter(stage => stageReadAccessById[stage.id] ?? stage.dataAccess.read),
         [stages, stageReadAccessById],

@@ -1,6 +1,6 @@
 import React from 'react';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { useTermLabel } from '../../../../metaData';
+import i18n from '@dhis2/d2-i18n';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 import { ScopeSelector, SingleLockedSelect, useReset } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
 import type { Props } from './topBar.types';
@@ -26,8 +26,8 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentsAsOptions,
 }: Props) => {
     const { reset } = useReset();
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const programStageLabel = useTermLabel('programStage', { programId, stageId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { programId, stageId });
     return (
         <ScopeSelector
             selectedProgramId={programId}
@@ -76,7 +76,7 @@ export const EnrollmentAddEventTopBar = ({
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={capitalizeFirstLetter(programStageLabel)}
+                        title={i18n.t('{{programStageLabel}}', { programStageLabel })}
                         isUserInteractionInProgress={userInteractionInProgress}
                     />
 

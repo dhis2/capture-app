@@ -14,7 +14,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -70,7 +70,7 @@ const NewPagePlain = ({
         showMessageThatCategoryOptionIsInvalidForOrgUnit,
     ]);
     const orgUnitId = useSelector(({ currentSelections }: any) => currentSelections.orgUnitId);
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
 
     return (
         <div data-test="registration-page-content" className={classes.container} >

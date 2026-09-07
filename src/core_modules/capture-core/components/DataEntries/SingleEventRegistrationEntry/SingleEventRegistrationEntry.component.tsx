@@ -6,11 +6,11 @@ import { NewEventDataEntryWrapper } from './DataEntryWrapper/NewEventDataEntryWr
 import { NewRelationshipWrapper } from './NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';
 import { cancelNewEventAndReturnToMainPage } from './DataEntryWrapper/DataEntry/actions/dataEntry.actions';
 import type { Props } from './SingleEventRegistrationEntry.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eventAccess }: Props) => {
     const dispatch = useDispatch();
-    const eventLabel = useTermLabel('event');
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
 
     if (!eventAccess.write) {
         return (

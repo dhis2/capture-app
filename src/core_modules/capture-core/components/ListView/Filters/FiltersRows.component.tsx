@@ -3,7 +3,7 @@ import * as React from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Filters } from './Filters.component';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import type {
     Column,
     FiltersOnly,
@@ -69,7 +69,7 @@ export const FiltersRowsPlain = ({
     visibleSelectorId,
     classes,
 }: Props & WithStyles<typeof getStyles>) => {
-    const programStageLabel = useTermLabel('programStage');
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular]);
     return (
         <>
             <div className={classes.filtersButtons}>

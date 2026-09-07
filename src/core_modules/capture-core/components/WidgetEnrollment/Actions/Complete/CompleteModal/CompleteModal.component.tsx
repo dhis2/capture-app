@@ -2,18 +2,20 @@ import React from 'react';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './completeModal.types';
-import { useTermLabel } from '../../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../../metaData';
 
 export const CompleteModalComponent = ({
     programStagesWithActiveEvents,
     programStagesWithoutAccess,
+    program,
     setOpenCompleteModal,
     onCompleteEnrollment,
     onCompleteEnrollmentAndEvents,
 }: PlainProps) => {
-    const enrollmentLabel = useTermLabel('enrollment');
-    const eventLabel = useTermLabel('event');
-    const eventsLabel = useTermLabel('event', { plural: true });
+    const { enrollmentLabel, eventLabel, eventsLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollmentSingular, LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { program },
+    );
     return (
         <Modal position="middle" large dataTest="widget-enrollment-complete-modal">
             <ModalTitle>{i18n.t('Complete {{enrollmentLabel}}', { enrollmentLabel })}</ModalTitle>

@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: { [key: string]: boolean };
@@ -24,7 +24,7 @@ export const useBulkCompleteEvents = ({
     programId,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { programId });
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

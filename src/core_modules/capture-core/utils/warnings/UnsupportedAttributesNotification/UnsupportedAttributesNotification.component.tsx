@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBox, spacers } from '@dhis2/ui';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import type { SearchAttribute } from '../../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -23,7 +23,7 @@ const UnsupportedAttributesNotificationPlain = ({
     unsupportedAttributes,
     classes,
 }: Props) => {
-    const attributeLabel = useTermLabel('attribute');
+    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular]);
     const message =
         i18n.t('The following {{attributeLabel}} type is not supported for searching and has been hidden', {
             count: unsupportedAttributes.length,

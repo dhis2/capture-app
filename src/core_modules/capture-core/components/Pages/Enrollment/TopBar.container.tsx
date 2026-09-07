@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import {
     ScopeSelector,
     useSetProgramId,
@@ -31,7 +31,7 @@ export const TopBar = ({
     teiDisplayName,
     enrollmentsAsOptions,
 }: TopBarProps) => {
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
     const { setProgramIdAndResetEnrollmentContext } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();

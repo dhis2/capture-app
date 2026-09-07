@@ -5,7 +5,7 @@ import { Button, colors, spacers } from '@dhis2/ui';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import type { OwnProps, ContainerProps } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
-import { scopeTypes, useTermLabel } from '../../../../metaData';
+import { LabelKeys, scopeTypes, useTermLabel } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
@@ -126,7 +126,7 @@ const RegistrationDataEntryPlain = ({
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
     const currentOrgUnitId = useCurrentOrgUnitId();
-    const enrollmentLabel = useTermLabel('enrollment', { programId: selectedScopeId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId: selectedScopeId });
 
     const onCancel = useCallback(() => {
         let url;

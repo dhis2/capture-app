@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { dataEntryIds } from 'capture-core/constants';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
 import { NoticeBox } from '../../NoticeBox';
@@ -64,7 +64,7 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateEnrollmentEventsError,
     userInteractionInProgress,
 }: PlainProps) => {
-    const eventLabel = useTermLabel('event', { programId: program?.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: program?.id });
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <TopBar

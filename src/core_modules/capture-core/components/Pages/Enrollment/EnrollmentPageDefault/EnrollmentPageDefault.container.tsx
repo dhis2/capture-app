@@ -6,7 +6,7 @@ import { formatMomentEn } from 'capture-core-utils/date';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -54,7 +54,7 @@ export const EnrollmentPageDefault = () => {
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {

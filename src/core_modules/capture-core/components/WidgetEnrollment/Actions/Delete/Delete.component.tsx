@@ -12,12 +12,12 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
 import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip/';
-import { useTermLabel } from '../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 
-export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Props) => {
+export const Delete = ({ canCascadeDeleteEnrollment, enrollment, program, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
     const disabled = !canCascadeDeleteEnrollment;
-    const enrollmentLabel = useTermLabel('enrollment');
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
     const tooltipContent = i18n.t(
         'You do not have access to delete this {{enrollmentLabel}}',
         { enrollmentLabel },

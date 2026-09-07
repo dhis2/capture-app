@@ -2,7 +2,6 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
@@ -12,7 +11,7 @@ import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
-import { getTermLabel } from '../../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../../metaData';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
@@ -50,10 +49,11 @@ class RelationshipsSectionPlain extends React.Component<Props> {
         const { classes, relationships, ready, programId } = this.props;
         const count = relationships ? relationships.length : 0;
         const badgeCount = ready ? count : undefined;
+        const { relationshipsLabel } = getTermLabel([LabelKeys.relationshipPlural], { programId });
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={capitalizeFirstLetter(getTermLabel('relationship', { programId, plural: true }))}
+                text={i18n.t('{{relationshipsLabel}}', { relationshipsLabel })}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -86,6 +86,10 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             programStage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write);
 
         const isEmpty = ready && (!relationships || relationships.length === 0);
+        const { eventLabel, relationshipsLabel } = getTermLabel(
+            [LabelKeys.eventSingular, LabelKeys.relationshipPlural],
+            { programId },
+        );
 
         return hasRelationshipTypes && (
             <ViewEventSection
@@ -97,8 +101,8 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                         {i18n.t(
                             "This {{eventLabel}} doesn't have any {{relationshipsLabel}}",
                             {
-                                eventLabel: getTermLabel('event', { programId }),
-                                relationshipsLabel: getTermLabel('relationship', { programId, plural: true }),
+                                eventLabel,
+                                relationshipsLabel,
                             },
                         )}
                     </div>

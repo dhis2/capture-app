@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import i18n from '@dhis2/d2-i18n';
 import {
     SingleOrgUnitSelectField,
     withDefaultFieldContainer,
@@ -11,7 +11,7 @@ import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
-import { useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 type OrgUnitValue = {
     checked: boolean;
@@ -50,7 +50,7 @@ export const OrgUnitSelectorForRelatedStages = ({
     saveAttempted,
 }: Props) => {
     const [touched, setTouched] = useState(false);
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
 
     const handleSelect = (event: OrgUnitValue) => {
         setTouched(true);
@@ -66,7 +66,7 @@ export const OrgUnitSelectorForRelatedStages = ({
 
     return (
         <OrgUnitFieldForForm
-            label={capitalizeFirstLetter(orgUnitLabel)}
+            label={i18n.t('{{orgUnitLabel}}', { orgUnitLabel })}
             value={relatedStagesDataValues.orgUnit}
             required
             onSelectClick={handleSelect}

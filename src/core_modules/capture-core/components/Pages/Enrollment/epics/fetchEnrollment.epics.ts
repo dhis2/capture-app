@@ -4,7 +4,7 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
-import { getTermLabel } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../metaData';
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
     enrollmentPageActionTypes,
@@ -119,7 +119,7 @@ const handleErrorsFromNewerBackends = ({
             querySingleResource,
         }));
     }
-    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
+    const { enrollmentsLabel } = getTermLabel([LabelKeys.enrollmentPlural], { programId });
     const errorMessage = i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },
@@ -140,7 +140,7 @@ const handleErrorsFromOlderBackends = (error: any, programId: string) => {
             return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
         }
     }
-    const enrollmentsLabel = getTermLabel('enrollment', { programId, plural: true });
+    const { enrollmentsLabel } = getTermLabel([LabelKeys.enrollmentPlural], { programId });
     const errorMessage = i18n.t(
         'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
         { enrollmentsLabel },

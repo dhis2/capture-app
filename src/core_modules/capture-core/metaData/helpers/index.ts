@@ -20,6 +20,11 @@ export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';
 export {
     extractCustomLabels,
     getTermLabel,
+    getTermLabelFromProgram,
     useTermLabel,
+    type CustomLabelKey,
+    type CustomLabels,
+    type TermRequest,
 } from './customLabels';
-export type { CustomLabelKey, CustomLabels } from './customLabels';
+export { LabelKeys } from './constants/customLabels.const';
+

@@ -6,7 +6,7 @@ import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
 import { relatedStageActions } from '../../../../../../WidgetRelatedStages';
-import { getTermLabel } from '../../../../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../../../../metaData';
 
 const NewEnrollmentRelationshipPlain =
     ({
@@ -22,7 +22,7 @@ const NewEnrollmentRelationshipPlain =
         ExistingUniqueValueDialogActions,
     }: Props) => {
         const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
-        const relationshipLabel = getTermLabel('relationship', { programId });
+        const { relationshipLabel } = getTermLabel([LabelKeys.relationshipSingular], { programId });
         const relatedStageActionsOptions = {
             [relatedStageActions.ENTER_DATA]: {
                 disabled: true,

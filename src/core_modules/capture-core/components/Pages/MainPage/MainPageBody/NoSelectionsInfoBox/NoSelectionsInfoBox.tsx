@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -65,7 +65,7 @@ const documentationLink =
     'https://docs.dhis2.org/en/use/user-guides/dhis-core-version-master/tracking-individual-level-data/capture.html';
 
 const NoSelectionsInfoBoxPlain = ({ classes }: Props) => {
-    const orgUnitLabel = useTermLabel('orgUnit');
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
     return (
         <div className={classes.container}>
             <div className={classes.innerBox}>

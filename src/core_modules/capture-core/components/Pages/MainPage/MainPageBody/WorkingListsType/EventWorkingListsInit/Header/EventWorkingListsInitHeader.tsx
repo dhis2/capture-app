@@ -3,7 +3,7 @@ import { colors, spacers } from '@dhis2/ui';
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { type Props } from './eventWorkingListsInitHeader.types';
-import { useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
 
 export const styles = () => ({
     container: {
@@ -27,7 +27,7 @@ export const styles = () => ({
 
 const EventWorkingListsInitHeaderPlain =
     ({ children, classes: { container, headerContainer, listContainer, title } }: Props & WithStyles<typeof styles>) => {
-        const eventsLabel = useTermLabel('event', { plural: true });
+        const { eventsLabel } = useTermLabel([LabelKeys.eventPlural]);
         return (
             <div className={container}>
                 <div

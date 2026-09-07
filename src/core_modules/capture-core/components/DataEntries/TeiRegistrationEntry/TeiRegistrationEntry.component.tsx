@@ -4,7 +4,7 @@ import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes, useTermLabel } from '../../../metaData';
+import { LabelKeys, scopeTypes, useTermLabel } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
@@ -60,7 +60,7 @@ const TeiRegistrationEntryPlain =
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
       const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
-      const enrollmentLabel = useTermLabel('enrollment');
+      const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {

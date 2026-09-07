@@ -5,7 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
 import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
-import { useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
@@ -15,9 +15,10 @@ import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
-    const programStageLabel = useTermLabel('programStage', { programId });
-    const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
-    const eventLabel = useTermLabel('event', { programId });
+    const { programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
+        [LabelKeys.programStageSingular, LabelKeys.programStagePlural, LabelKeys.eventSingular],
+        { programId },
+    );
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
         teiId,

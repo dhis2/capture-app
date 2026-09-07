@@ -6,7 +6,7 @@ import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useTermLabel } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../metaData';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -36,10 +36,11 @@ const WidgetStagesAndEventsPlain = ({
         multipleStages,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
-    // Example use of useTermLabel: resolves the plural program-stage and event
-    // labels against the current program's custom terminology.
-    const programStagesLabel = useTermLabel('programStage', { programId, plural: true });
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    // Example use of useTermLabel.
+    const { programStagesLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.programStagePlural, LabelKeys.eventPlural],
+        { programId },
+    );
 
     return (
         <div

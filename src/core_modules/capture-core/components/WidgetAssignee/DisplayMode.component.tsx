@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers, spacersNum, UserAvatar } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Assignee } from './WidgetAssignee.types';
-import { useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 const styles = () => ({
     wrapper: {
@@ -38,7 +38,7 @@ type Props = {
 } & WithStyles<typeof styles>;
 
 const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, programId, stageId, classes }: Props) => {
-    const eventLabel = useTermLabel('event', { programId, stageId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId });
     if (assignee) {
         return (
             <div className={classes.wrapper}>

@@ -11,7 +11,7 @@ import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
 import { EventStatuses } from '../EventRow';
-import { useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
 
 type Props = {
     eventId: string;
@@ -29,7 +29,7 @@ export const SkipAction = ({
     onUpdateEventStatus,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const eventLabel = useTermLabel('event', {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], {
         programId: eventDetails.program,
         stageId: eventDetails.programStage,
     });

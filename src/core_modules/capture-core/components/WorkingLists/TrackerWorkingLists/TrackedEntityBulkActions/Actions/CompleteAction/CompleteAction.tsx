@@ -16,7 +16,7 @@ import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
 import type { PlainProps } from './CompleteAction.types';
-import { useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -64,9 +64,11 @@ const CompleteActionPlain = ({
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
-    const enrollmentLabel = useTermLabel('enrollment', { programId });
-    const enrollmentsLabel = useTermLabel('enrollment', { programId, plural: true });
-    const eventsLabel = useTermLabel('event', { programId, plural: true });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { enrollmentsLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
+        { programId },
+    );
     const {
         completeEnrollments,
         enrollmentCounts,

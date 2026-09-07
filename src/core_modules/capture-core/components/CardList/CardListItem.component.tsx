@@ -19,6 +19,7 @@ import {
     OptionSet,
     type TrackerProgram,
     useTermLabel,
+    LabelKeys,
 } from '../../metaData';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
@@ -154,8 +155,10 @@ const CardListItemIndex = ({
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitId, enrolledAt } = deriveEnrollmentOrgUnitIdAndDate(enrollments, enrollmentType, currentProgramId);
     const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId ?? null);
-    const enrollmentLabel = useTermLabel('enrollment', { programId: currentProgramId });
-    const orgUnitLabel = useTermLabel('orgUnit', { programId: currentProgramId });
+    const { enrollmentLabel, orgUnitLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular],
+        { programId: currentProgramId },
+    );
     const program: TrackerProgram | undefined = enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;

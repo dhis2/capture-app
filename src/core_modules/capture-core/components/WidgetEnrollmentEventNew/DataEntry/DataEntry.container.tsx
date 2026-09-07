@@ -16,14 +16,15 @@ import type { AddEventSaveType } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 import { useProgramExpiryForUser } from '../../../hooks';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { LabelKeys } from '../../../metaData';
 
-const customLabels = {
-    orgUnitLabel: { key: 'orgUnit' },
-    eventLabel: { key: 'event' },
-    noteLabel: { key: 'note' },
-    notesLabel: { key: 'note', plural: true },
-    relationshipsLabel: { key: 'relationship', plural: true },
-} as const;
+const customLabels = [
+    LabelKeys.orgUnitSingular,
+    LabelKeys.eventSingular,
+    LabelKeys.noteSingular,
+    LabelKeys.notePlural,
+    LabelKeys.relationshipPlural,
+] as const;
 
 const WrappedDataEntryComponent = withCustomLabels(customLabels)(DataEntryComponent);
 

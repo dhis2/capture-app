@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-05T15:57:35.471Z\n"
-"PO-Revision-Date: 2026-09-05T15:57:35.471Z\n"
+"POT-Creation-Date: 2026-09-07T09:56:21.750Z\n"
+"PO-Revision-Date: 2026-09-07T09:56:21.750Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -813,6 +813,9 @@ msgstr "Choose a {{programStageLabel}} for a new {{eventLabel}}"
 msgid "{{programStagesLabel}} could not be loaded"
 msgstr "{{programStagesLabel}} could not be loaded"
 
+msgid "{{programStageLabel}}"
+msgstr "{{programStageLabel}}"
+
 msgid "The category option is not valid for the selected {{orgUnitLabel}}."
 msgstr "The category option is not valid for the selected {{orgUnitLabel}}."
 
@@ -905,6 +908,9 @@ msgstr "Show all"
 msgid "Program"
 msgstr "Program"
 
+msgid "{{orgUnitLabel}}"
+msgstr "{{orgUnitLabel}}"
+
 msgid "Registration"
 msgstr "Registration"
 
@@ -953,20 +959,20 @@ msgstr ""
 msgid "Errors"
 msgstr "Errors"
 
+msgid "{{notesLabel}}"
+msgstr "{{notesLabel}}"
+
 msgid "This {{eventLabel}} doesn't have any {{notesLabel}}"
 msgstr "This {{eventLabel}} doesn't have any {{notesLabel}}"
+
+msgid "{{relationshipsLabel}}"
+msgstr "{{relationshipsLabel}}"
 
 msgid "This {{eventLabel}} doesn't have any {{relationshipsLabel}}"
 msgstr "This {{eventLabel}} doesn't have any {{relationshipsLabel}}"
 
 msgid "Warnings"
 msgstr "Warnings"
-
-msgid "No feedback yet"
-msgstr "No feedback yet"
-
-msgid "No indicator output yet"
-msgstr "No indicator output yet"
 
 msgid "{{eventLabel}} could not be loaded. Are you sure it exists?"
 msgstr "{{eventLabel}} could not be loaded. Are you sure it exists?"
@@ -998,9 +1004,6 @@ msgstr "Please select an {{orgUnitLabel}}."
 
 msgid "{{orgUnitLabel}} scope"
 msgstr "{{orgUnitLabel}} scope"
-
-msgid "organisation unit"
-msgstr "organisation unit"
 
 msgid "Selected program"
 msgstr "Selected program"
@@ -1428,6 +1431,9 @@ msgstr "{{enrollmentLabel}}"
 
 msgid "{{enrollmentLabel}} widget could not be loaded. Please try again later"
 msgstr "{{enrollmentLabel}} widget could not be loaded. Please try again later"
+
+msgid "{{followUpLabel}}"
+msgstr "{{followUpLabel}}"
 
 msgid "Started at{{escape}}"
 msgstr "Started at{{escape}}"
@@ -2268,6 +2274,9 @@ msgstr "attribute"
 
 msgid "attributes"
 msgstr "attributes"
+
+msgid "organisation unit"
+msgstr "organisation unit"
 
 msgid "follow-up"
 msgstr "follow-up"
