@@ -29,7 +29,6 @@ const CUSTOM_TERMS = [
     { words: ['relationships'], suggestion: '{{relationshipsLabel}}' },
     { words: ['attribute'], suggestion: '{{attributeLabel}}' },
     { words: ['attributes'], suggestion: '{{attributesLabel}}' },
-    { words: ['tracked entity attribute', 'tracked entity attributes'], suggestion: '{{attributeLabel}}' },
     { words: ['organisation unit', 'org unit', 'organization unit', 'registering unit'], suggestion: '{{orgUnitLabel}}' },
     { words: ['follow-up', 'followup', 'follow up'], suggestion: '{{followUpLabel}}' },
 ].sort((a, b) => Math.max(...b.words.map(w => w.length)) - Math.max(...a.words.map(w => w.length)));
@@ -121,9 +120,7 @@ function main() {
         .filter(({ hits }) => hits.length > 0);
 
     if (violations.length === 0) {
-        console.log(`\n${DIVIDER}`);
-        console.log(' i18n:verify — no custom-terminology violations in en.pot ✓');
-        console.log(`${DIVIDER}\n`);
+        console.log('i18n:verify — no custom-terminology violations in en.pot');
         return;
     }
 
