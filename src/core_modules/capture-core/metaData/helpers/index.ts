@@ -21,10 +21,10 @@ export {
     extractCustomLabels,
     getTermLabel,
     getTermLabelFromProgram,
-    LabelKeys,
     useTermLabel,
     type CustomLabelKey,
     type CustomLabels,
     type TermRequest,
 } from './customLabels';
+export { LabelKeys } from './constants/customLabels.const';
 

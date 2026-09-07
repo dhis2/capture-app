@@ -33,7 +33,14 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound, getTermLabel, LabelKeys } from '../../../metaData';
+import {
+    type Enrollment,
+    ProgramStage,
+    RenderFoundation,
+    getProgramThrowIfNotFound,
+    getTermLabel,
+    LabelKeys,
+} from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
