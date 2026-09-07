@@ -235,7 +235,10 @@ Then(/^you can load the view with the name ?(.*)$/, (name) => {
 When('you change the sharing settings', () => {
     cy.get('[data-test="list-view-menu-button"]').click();
     cy.contains('Share view').click();
-    cy.get('[placeholder="Search"]').type('Boateng');
+    cy.get('[data-test="sharing-dialog"]')
+        .find('[placeholder="Search"]')
+        .should('be.enabled')
+        .type('Boateng');
     cy.contains('Kevin Boateng').click();
     cy.contains('Choose a level').click();
     cy.contains('View and edit').click({ force: true });

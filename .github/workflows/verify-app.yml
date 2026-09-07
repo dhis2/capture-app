@@ -158,6 +158,16 @@ jobs:
           CYPRESS_dhis2Password_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_PASSWORD_TRACKER_AUTO_TEST_RESTRICTED }}
           NODE_OPTIONS: "--openssl-legacy-provider"
 
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: cypress-failure-dev-${{ matrix.spec-group.id }}
+          path: |
+            cypress/screenshots
+            cypress/videos
+          if-no-files-found: ignore
+          retention-days: 7
+
   build:
     runs-on: ubuntu-latest
     needs: [lint, typescript, unit-tests]

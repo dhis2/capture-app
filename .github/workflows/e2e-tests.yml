@@ -147,6 +147,16 @@ jobs:
                   CYPRESS_dhis2Password_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_PASSWORD_TRACKER_AUTO_TEST_RESTRICTED }}
                   NODE_OPTIONS: "--openssl-legacy-provider"
 
+            - uses: actions/upload-artifact@v7
+              if: failure()
+              with:
+                  name: cypress-failure-${{ matrix.versions }}-${{ matrix.spec-group.id }}
+                  path: |
+                      cypress/screenshots
+                      cypress/videos
+                  if-no-files-found: ignore
+                  retention-days: 7
+
     call-e2e-tests-result:
         needs: cypress
         uses: ./.github/workflows/e2e-tests-result.yml
