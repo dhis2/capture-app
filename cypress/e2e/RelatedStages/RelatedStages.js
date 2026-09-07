@@ -8,13 +8,6 @@ const FIRST_NAME_ATTRIBUTE = 'w75KJ2mc4zz';
 
 let enrolledEntityFirstName;
 
-const importTracker = (importStrategy, payload) =>
-    cy.buildApiUrl(`tracker?async=false&importStrategy=${importStrategy}`)
-        .then(url => cy.request('POST', url, payload))
-        .then(({ body }) => {
-            expect(body.status).to.eq('OK');
-        });
-
 const unlinkEvent = eventId =>
     cy.buildApiUrl('tracker', `events/${eventId}?fields=relationships[relationship]`)
         .then(url => cy.request(url))
@@ -25,7 +18,7 @@ const unlinkEvent = eventId =>
                 return undefined;
             }
 
-            return importTracker('DELETE', {
+            return cy.importTracker('DELETE', {
                 relationships: relationships.map(({ relationship }) => ({ relationship })),
             });
         });
@@ -51,7 +44,7 @@ const clearEnrolledEntity = () => {
                 return undefined;
             }
 
-            return importTracker('DELETE', { trackedEntities });
+            return cy.importTracker('DELETE', { trackedEntities });
         });
 };
 
@@ -75,7 +68,7 @@ Given(/^you make sure the enrollment (.+) has a Baby Postnatal event$/, (enrollm
                 return undefined;
             }
 
-            return importTracker('CREATE', {
+            return cy.importTracker('CREATE', {
                 events: [{
                     program: body.program,
                     programStage: BABY_POSTNATAL_STAGE,
@@ -162,7 +155,7 @@ And('you delete the Birth event', () => {
                 return undefined;
             }
 
-            return importTracker('DELETE', { events: [eventToDelete] });
+            return cy.importTracker('DELETE', { events: [eventToDelete] });
         })
         .then(() => cy.reload());
 });
@@ -326,7 +319,7 @@ And(/^you delete the events of the enrollmentId (.*)$/, (enrollmentId) => {
                 return undefined;
             }
 
-            return importTracker('DELETE', { events });
+            return cy.importTracker('DELETE', { events });
         })
         .then(() => cy.reload());
 });
