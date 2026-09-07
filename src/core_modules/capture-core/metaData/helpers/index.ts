@@ -18,14 +18,13 @@ export { getProgramEventAccess } from './getProgramEventAccess';
 export { getProgramAndStageForProgram } from './getProgramAndStageForProgram';
 export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';
 export {
-    CUSTOM_LABEL_FIELDS,
-    resolveLabel,
     extractCustomLabels,
-    getProgramLabel,
-    getStageLabel,
-    getTrackedEntityTypeLabel,
-    useProgramLabel,
-    useStageLabel,
-    useTrackedEntityTypeLabel,
+    getTermLabel,
+    getTermLabelFromProgram,
+    useTermLabel,
+    type CustomLabelKey,
+    type CustomLabels,
+    type TermRequest,
 } from './customLabels';
-export type { CustomLabelKey, CustomLabels, LabelOptions } from './customLabels';
+export { LabelKeys } from './constants/customLabels.const';
+
