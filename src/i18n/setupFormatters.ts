@@ -20,7 +20,6 @@ const CUSTOM_TERM_VARS = new Set([
     'relationshipLabel', 'relationshipsLabel',
     'noteLabel', 'notesLabel',
     'attributeLabel', 'attributesLabel',
-    'trackedEntityLabel', 'trackedEntityTypesLabel',
 ]);
 
 const interpolator = (i18n as any).services?.interpolator;
