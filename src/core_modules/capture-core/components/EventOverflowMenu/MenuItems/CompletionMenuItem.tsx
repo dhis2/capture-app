@@ -10,19 +10,13 @@ import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { statusTypes as enrollmentStatuses } from '../../../enrollment';
 import { CompleteModal } from '../../DataEntries/common/trackerEvent/withAskToCompleteEnrollment/CompleteModal';
+import { statusTypes as enrollmentStatuses } from '../../../enrollment';
 import {
     updateEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
+    setExternalEnrollmentStatus,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-
-export const shouldAskCompleteEnrollmentPrompt = (
-    eventStatus?: string,
-    askFlag?: boolean,
-    enrollmentStatus?: string,
-) => eventStatus !== eventStatuses.COMPLETED
-    && Boolean(askFlag)
-    && enrollmentStatus === enrollmentStatuses.ACTIVE;
 
 const updateEventStatus = async (
     dataEngine: any,
@@ -57,7 +51,7 @@ type MenuItemProps = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
-    shouldAskCompleteEnrollment?: boolean;
+    askCompleteEnrollmentOnEventComplete?: boolean;
     onAskCompleteEnrollment?: () => void;
 };
 
@@ -68,7 +62,7 @@ export const CompletionMenuItem = ({
     onSuccess,
     onError,
     onClose,
-    shouldAskCompleteEnrollment,
+    askCompleteEnrollmentOnEventComplete,
     onAskCompleteEnrollment,
 }: MenuItemProps) => {
     const dataEngine = useDataEngine();
@@ -103,8 +97,11 @@ export const CompletionMenuItem = ({
             suffix={null}
             onClick={() => {
                 onClose();
-                if (shouldAskCompleteEnrollment && onAskCompleteEnrollment) onAskCompleteEnrollment();
-                else updateCompletionStatus();
+                if (!isCompleted && askCompleteEnrollmentOnEventComplete && onAskCompleteEnrollment) {
+                    onAskCompleteEnrollment();
+                } else {
+                    updateCompletionStatus();
+                }
             }}
         />
     );
@@ -158,6 +155,7 @@ export const CompleteMenuItemModal = ({
         {
             onMutate: (updatedEnrollment) => {
                 const currentEvent = enrollment.events?.find((e: any) => e.event === eventId) ?? {};
+                dispatch(setExternalEnrollmentStatus(enrollmentStatuses.COMPLETED));
                 dispatch(updateEnrollmentAndEvents({
                     ...updatedEnrollment,
                     events: [
@@ -166,8 +164,15 @@ export const CompleteMenuItemModal = ({
                     ],
                 }));
             },
-            onError: (error) => { handleError(error); dispatch(rollbackEnrollmentAndEvents()); },
-            onSuccess: () => dispatch(commitEnrollmentAndEvents()),
+            onError: (error) => {
+                handleError(error);
+                dispatch(rollbackEnrollmentAndEvents());
+                onError?.();
+            },
+            onSuccess: () => {
+                dispatch(commitEnrollmentAndEvents());
+                onSuccess?.(eventStatuses.COMPLETED);
+            },
         },
     );
 

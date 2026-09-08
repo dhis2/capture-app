@@ -47,6 +47,7 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
     onSaveAndCompleteEnrollment,
+    widgetEnrollmentStatus,
     onCancelEditEvent,
     onHandleScheduleSave,
     onSaveExternal,
@@ -112,6 +113,7 @@ export const EnrollmentEditEventPageComponent = ({
             onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
             onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
             onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
+            widgetEnrollmentStatus={widgetEnrollmentStatus}
             onSaveAndCompleteEnrollmentSuccessActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS}
             onSaveAndCompleteEnrollmentErrorActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR}
             events={events}
