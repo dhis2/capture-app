@@ -110,7 +110,10 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
         completedAtClient: completedAt,
         scheduledAtClient: scheduledAt,
     });
-    const showEditButton = !isEditEventPage && !isEventReadOnly;
+    // TODO: Restore `!isEventReadOnly` when DHIS2-21921 lands.
+    // Until then, single-event uncomplete still goes through the "Edit event" button,
+    // so the completion factor of isEventReadOnly must not hide the button.
+    const showEditButton = !isEditEventPage && !isEventBlockedByExpiry && eventAccess.write;
 
     return (
         <div className={classes.container}>

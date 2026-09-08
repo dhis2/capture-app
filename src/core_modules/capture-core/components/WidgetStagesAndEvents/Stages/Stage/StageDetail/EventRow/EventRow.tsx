@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     CircularLoader,
@@ -12,7 +12,7 @@ import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { EventOverflowMenu, DeleteMenuItemModal } from '../../../../../EventOverflowMenu';
+import { EventOverflowMenu, DeleteMenuItemModal, CompleteMenuItemModal } from '../../../../../EventOverflowMenu';
 import { EventChangelogWrapper } from '../../../../../WidgetEventEdit/EventChangelogWrapper';
 import { getReadOnlyMessage } from '../../../../../ReadOnlyBadge';
 import {
@@ -50,8 +50,10 @@ const EventRowPlain = ({
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [completeModalOpen, setCompleteModalOpen] = useState(false);
     const [changelogOpen, setChangelogOpen] = useState(false);
     const dispatch = useDispatch();
+    const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
     const getUpdatedAt = useServerFormattedNow();
 
     const {
@@ -144,6 +146,10 @@ const EventRowPlain = ({
                                     onCompletionMutate={onCompletionStatusMutate}
                                     onCompletionSuccess={onCompletionStatusSuccess}
                                     onCompletionError={onCompletionStatusError}
+                                    askCompleteEnrollmentOnEventComplete={
+                                        programStage?.askCompleteEnrollmentOnEventComplete
+                                    }
+                                    onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
                                     onDeleteRequest={() => setDeleteModalOpen(true)}
                                     isEventBlockedByExpiry={isEventBlockedByExpiry}
                                     canToggleCompletion={canToggleCompletion}
@@ -159,6 +165,17 @@ const EventRowPlain = ({
                             onDeleteEvent={onDeleteEvent}
                             onRollbackDeleteEvent={onRollbackDeleteEvent}
                             setDeleteModalOpen={setDeleteModalOpen}
+                        />
+                    )}
+                    {completeModalOpen && enrollment && (
+                        <CompleteMenuItemModal
+                            eventId={id}
+                            enrollment={enrollment}
+                            programStageName={programStage?.name}
+                            onClose={() => setCompleteModalOpen(false)}
+                            onMutate={onCompletionStatusMutate}
+                            onSuccess={onCompletionStatusSuccess}
+                            onError={onCompletionStatusError}
                         />
                     )}
                     {changelogOpen && programStage?.stageForm && (

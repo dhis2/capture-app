@@ -64,7 +64,4 @@ Cypress.Commands.add('loginByApi', ({ username, password, baseUrl }) => {
             },
         });
     }
-
-    // Set base url for the app platform
-    window.localStorage.setItem('DHIS2_BASE_URL', baseUrl);
 });

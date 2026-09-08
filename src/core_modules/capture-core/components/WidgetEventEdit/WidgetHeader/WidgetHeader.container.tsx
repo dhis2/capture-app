@@ -18,7 +18,7 @@ import {
     deleteEnrollmentEvent,
     addPersistedEnrollmentEvents,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { EventOverflowMenu, DeleteMenuItemModal } from '../../EventOverflowMenu';
+import { EventOverflowMenu, DeleteMenuItemModal, CompleteMenuItemModal } from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
@@ -64,12 +64,13 @@ const WidgetHeaderPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [completeModalOpen, setCompleteModalOpen] = useState(false);
 
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
 
-    const storedEvent = useSelector((state: any) =>
-        state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
+    const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
+    const storedEvent = enrollment?.events?.find((event: { event: string }) => event.event === eventId);
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
@@ -121,6 +122,34 @@ const WidgetHeaderPlain = ({
 
     const { icon, name } = stage;
     const pendingApiResponse = !!storedEvent?.pendingApiResponse;
+
+    const renderDeleteMenuItemModal = () => {
+        if (!deleteModalOpen || !storedEvent) return null;
+        return (
+            <DeleteMenuItemModal
+                eventId={eventId}
+                eventDetails={storedEvent}
+                onDeleteEvent={onDeleteEvent}
+                onRollbackDeleteEvent={onRollbackDeleteEvent}
+                setDeleteModalOpen={setDeleteModalOpen}
+            />
+        );
+    };
+
+    const renderCompleteMenuItemModal = () => {
+        if (!completeModalOpen || !enrollment) return null;
+        return (
+            <CompleteMenuItemModal
+                eventId={eventId}
+                enrollment={enrollment}
+                programStageName={name}
+                onClose={() => setCompleteModalOpen(false)}
+                onMutate={onCompletionStatusMutate}
+                onSuccess={onCompletionStatusSuccess}
+                onError={onCompletionStatusError}
+            />
+        );
+    };
 
     return (
         <>
@@ -176,6 +205,8 @@ const WidgetHeaderPlain = ({
                                         onCompletionMutate={onCompletionStatusMutate}
                                         onCompletionSuccess={onCompletionStatusSuccess}
                                         onCompletionError={onCompletionStatusError}
+                                        askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
+                                        onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
                                         onDeleteRequest={() => setDeleteModalOpen(true)}
                                         isEventBlockedByExpiry={isEventBlockedByExpiry}
                                         canToggleCompletion={canToggleCompletion}
@@ -187,15 +218,8 @@ const WidgetHeaderPlain = ({
                     </div>
                 )}
             </div>
-            {deleteModalOpen && storedEvent && (
-                <DeleteMenuItemModal
-                    eventId={eventId}
-                    eventDetails={storedEvent}
-                    onDeleteEvent={onDeleteEvent}
-                    onRollbackDeleteEvent={onRollbackDeleteEvent}
-                    setDeleteModalOpen={setDeleteModalOpen}
-                />
-            )}
+            {renderDeleteMenuItemModal()}
+            {renderCompleteMenuItemModal()}
         </>
     );
 };

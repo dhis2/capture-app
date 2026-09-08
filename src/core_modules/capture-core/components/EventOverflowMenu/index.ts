@@ -2,6 +2,7 @@ export {
     DeleteMenuItem,
     DeleteMenuItemModal,
     CompletionMenuItem,
+    CompleteMenuItemModal,
     ChangelogMenuItem,
     SkipMenuItem,
 } from './MenuItems';

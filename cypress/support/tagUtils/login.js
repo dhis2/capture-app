@@ -11,6 +11,19 @@ const loginUser = (_username) => {
             // * https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow----but-only-once
             // * https://docs.cypress.io/api/commands/session#Multiple-login-commands
             cy.loginByApi({ username, password, baseUrl });
+            // The app-adapter reads DHIS2_BASE_URL from IndexedDB first (before
+            // localStorage), so a stale URL cached there from a previous manual
+            // login will bypass any localStorage fix entirely. We delete the db
+            // before app scripts run via onBeforeLoad so the app falls through to
+            // the localStorage value we set here.
+            // cy.visit inside cy.session does not resolve relative URLs via
+            // Cypress's baseUrl — must pass an absolute URL.
+            cy.visit(Cypress.config('baseUrl'), {
+                onBeforeLoad(win) {
+                    win.indexedDB.deleteDatabase('dhis2-base-url-db');
+                    win.localStorage.setItem('DHIS2_BASE_URL', baseUrl);
+                },
+            });
         },
         {
             cacheAcrossSpecs: true,

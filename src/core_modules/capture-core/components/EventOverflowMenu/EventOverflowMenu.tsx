@@ -33,6 +33,9 @@ type Props = {
     onCompletionSuccess: (newStatus: string) => void;
     onCompletionError: () => void;
 
+    askCompleteEnrollmentOnEventComplete?: boolean;
+    onAskCompleteEnrollment?: () => void;
+
     onDeleteRequest: () => void;
 };
 
@@ -53,6 +56,8 @@ export const EventOverflowMenu = ({
     onCompletionMutate,
     onCompletionSuccess,
     onCompletionError,
+    askCompleteEnrollmentOnEventComplete,
+    onAskCompleteEnrollment,
     onDeleteRequest,
 }: Props) => (
     <FlyoutMenu dense maxWidth={maxWidth} dataTest={dataTest}>
@@ -85,6 +90,8 @@ export const EventOverflowMenu = ({
                         onClose={onClose}
                         canToggleCompletion={canToggleCompletion}
                         readOnlyMessage={readOnlyMessage}
+                        askCompleteEnrollmentOnEventComplete={askCompleteEnrollmentOnEventComplete}
+                        onAskCompleteEnrollment={onAskCompleteEnrollment}
                     />
                 )}
 
