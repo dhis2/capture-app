@@ -4,13 +4,6 @@ import { setCommonEnrollmentSiteData } from '../enrollment.actions';
 import type { Output } from './useCommonEnrollmentDomainData.types';
 import { useApiDataQuery } from '../../../../../utils/reactQueryHelpers';
 
-// Program rules can reference program-scoped TEAs (stored on the enrollment) as well as
-// TET-scoped TEAs. Merge both so the value map fed to the rules engine is complete.
-const mergeAttributeValues = (enrollmentAttrs: Array<any> = [], teAttrs: Array<any> = []) => [
-    ...enrollmentAttrs,
-    ...teAttrs.filter(ta => !enrollmentAttrs.some(ea => ea.attribute === ta.attribute)),
-];
-
 export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: string, programId: string): Output => {
     const dispatch = useDispatch();
 
@@ -29,7 +22,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             id: teiId,
             params: {
                 program: programId,
-                fields: ['enrollments[*],attributes,inactive,programOwners[program,orgUnit]'],
+                fields: ['enrollments[*,!attributes],attributes,inactive,programOwners[program,orgUnit]'],
             },
         },
         {
@@ -39,13 +32,11 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         },
     ) as any;
 
-    const enrollment = data?.enrollments?.find((e: any) => e.enrollment === enrollmentId);
-    const attributeValues = mergeAttributeValues(enrollment?.attributes, data?.attributes);
-
     const fetchedEnrollmentData = {
         reference: data,
-        enrollment,
-        attributeValues,
+        enrollment: data?.enrollments
+            ?.find((enrollment: any) => enrollment.enrollment === enrollmentId),
+        attributeValues: data?.attributes,
         inactive: Boolean(data?.inactive),
         programOwnerId: data?.programOwners?.find((p: any) => p.program === programId)?.orgUnit,
     };
