@@ -6,7 +6,6 @@ export type PlainProps = {
     events: Array<ApiEnrollmentEvent>;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;
-    onUpdateEventStatus: (eventId: string, status: string) => void;
     onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void;
 } & StageCommonProps;
 
@@ -15,6 +14,5 @@ export type InputProps = {
     events?: Array<ApiEnrollmentEvent> | null;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;
-    onUpdateEventStatus: (eventId: string, status: string) => void;
     onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void;
 } & StageCommonProps;

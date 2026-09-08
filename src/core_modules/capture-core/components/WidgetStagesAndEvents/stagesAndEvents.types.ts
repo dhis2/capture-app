@@ -6,7 +6,6 @@ type ExtractedProps = {
     events: Array<Event> | null;
     onEventClick: (eventId: string) => void;
     onDeleteEvent: (eventId: string) => void;
-    onUpdateEventStatus: (eventId: string, status: string) => void;
     onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void;
     className?: string;
 };

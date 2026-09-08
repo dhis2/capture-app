@@ -94,7 +94,6 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         enableUserAssignment = false,
         onEventClick,
         onDeleteEvent,
-        onUpdateEventStatus,
         onRollbackDeleteEvent,
         onViewAll,
         onCreateNew,
@@ -199,14 +198,12 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         id={row.id as string}
                         pendingApiResponse={row.pendingApiResponse as boolean}
                         eventDetails={eventDetails}
-                        stageWriteAccess={stageWriteAccess}
                         programStage={stage}
                         programId={programId}
                         cells={cells}
                         onEventClick={onEventClick}
                         onDeleteEvent={onDeleteEvent}
                         onRollbackDeleteEvent={onRollbackDeleteEvent}
-                        onUpdateEventStatus={onUpdateEventStatus}
                     />
                 );
             });

@@ -16,6 +16,7 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
+import { getReadOnlyMessage } from '../ReadOnlyBadge';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
@@ -99,23 +100,38 @@ const WidgetEventEditPlain = ({
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
 
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
     const completedAt = loadedValues?.eventContainer?.event?.completedAt;
+    const scheduledAt = loadedValues?.eventContainer?.event?.scheduledAt;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isEventReadOnly, canToggleCompletion } = useEventEditPermissions({
+    const {
+        isEventReadOnly, canToggleCompletion, canEditProgramStage,
+        isEventBlockedByExpiry, isEventBlockedByCompletion, isEventCompleted,
+    } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
+        scheduledAtClient: scheduledAt,
+    });
+    const readOnlyMessage = getReadOnlyMessage({
+        access: { program: true, trackedEntityType: true, programStage: true },
+        trackedEntityName: undefined,
+        multipleStages: false,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
+        isEventCompleted,
+        canToggleCompletion,
+        trackedEntityInactive: false,
     });
 
     return orgUnit && loadedValues ? (
@@ -140,9 +156,14 @@ const WidgetEventEditPlain = ({
                             stage={stage}
                             programId={programId}
                             orgUnit={orgUnit}
+                            teiId={teiId}
+                            enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
                             readOnly={isEventReadOnly}
+                            isEventBlockedByExpiry={isEventBlockedByExpiry}
                             canToggleCompletion={canToggleCompletion}
+                            canEditProgramStage={canEditProgramStage}
+                            readOnlyMessage={readOnlyMessage}
                         />
                     }
                     noncollapsible
@@ -179,7 +200,7 @@ const WidgetEventEditPlain = ({
                                     eventStatus={eventStatus}
                                     canToggleCompletion={canToggleCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={!isEventReadOnly}
+                                    hasDeleteButton={!isEventBlockedByExpiry}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}
@@ -189,7 +210,9 @@ const WidgetEventEditPlain = ({
                                     hideDueDate={stage.hideDueDate}
                                     assignee={assignee}
                                     onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
-                                    onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
+                                    onSaveAndCompleteEnrollmentErrorActionType={
+                                        onSaveAndCompleteEnrollmentErrorActionType
+                                    }
                                     onSaveAndCompleteEnrollmentSuccessActionType={
                                         onSaveAndCompleteEnrollmentSuccessActionType
                                     }

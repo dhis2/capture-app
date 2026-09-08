@@ -7,8 +7,9 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useDispatch } from 'react-redux';
 import { errorCreator } from 'capture-core-utils';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
-import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { statusTypes as enrollmentStatuses } from '../../../enrollment';
+import { removeEventChangelogQueries } from '../../WidgetsChangelog';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { CompleteModal } from '../../DataEntries/common/trackerEvent/withAskToCompleteEnrollment/CompleteModal';
 import {
     updateEnrollmentAndEvents,
@@ -50,6 +51,8 @@ type MenuItemProps = {
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
     onClose: () => void;
+    canToggleCompletion: boolean;
+    readOnlyMessage: string;
     askCompleteEnrollmentOnEventComplete?: boolean;
     onAskCompleteEnrollment?: () => void;
 };
@@ -61,6 +64,8 @@ export const CompletionMenuItem = ({
     onSuccess,
     onError,
     onClose,
+    canToggleCompletion,
+    readOnlyMessage,
     askCompleteEnrollmentOnEventComplete,
     onAskCompleteEnrollment,
 }: MenuItemProps) => {
@@ -88,21 +93,24 @@ export const CompletionMenuItem = ({
     );
 
     return (
-        <MenuItem
-            dense
-            dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
-            icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
-            label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
-            suffix={null}
-            onClick={() => {
-                onClose();
-                if (!isCompleted && askCompleteEnrollmentOnEventComplete && onAskCompleteEnrollment) {
-                    onAskCompleteEnrollment();
-                } else {
-                    updateCompletionStatus();
-                }
-            }}
-        />
+        <ConditionalTooltip content={readOnlyMessage} enabled={!canToggleCompletion}>
+            <MenuItem
+                dense
+                disabled={!canToggleCompletion}
+                dataTest={isCompleted ? 'uncomplete-event-menu-item' : 'complete-event-menu-item'}
+                icon={isCompleted ? <IconUndo16 /> : <IconCheckmark16 />}
+                label={isCompleted ? i18n.t('Mark incomplete') : i18n.t('Mark complete')}
+                suffix={null}
+                onClick={() => {
+                    onClose();
+                    if (!isCompleted && askCompleteEnrollmentOnEventComplete && onAskCompleteEnrollment) {
+                        onAskCompleteEnrollment();
+                    } else {
+                        updateCompletionStatus();
+                    }
+                }}
+            />
+        </ConditionalTooltip>
     );
 };
 

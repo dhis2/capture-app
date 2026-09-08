@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
+import { spacersNum, Button, CircularLoader, IconEdit24, IconMore16, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useServerFormattedNow } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -14,10 +15,13 @@ import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
+    deleteEnrollmentEvent,
+    addPersistedEnrollmentEvents,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { CompletionMenuItem, CompleteMenuItemModal } from '../../EventOverflowMenu';
+import { EventOverflowMenu, DeleteMenuItemModal, CompleteMenuItemModal } from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
+import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -42,16 +46,24 @@ const WidgetHeaderPlain = ({
     stage,
     programId,
     orgUnit,
+    teiId,
+    enrollmentId,
     setChangeLogIsOpen,
     classes,
     readOnly,
+    isEventBlockedByExpiry,
     canToggleCompletion,
+    canEditProgramStage,
+    readOnlyMessage,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
+    const { navigate } = useNavigate();
+    const getUpdatedAt = useServerFormattedNow();
 
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [completeModalOpen, setCompleteModalOpen] = useState(false);
 
     const showEditButton = !readOnly;
@@ -63,9 +75,13 @@ const WidgetHeaderPlain = ({
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
             const { completedAt, ...eventWithoutCompletion } = storedEvent;
-            dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
+            dispatch(updateEnrollmentEvent(eventId, {
+                ...eventWithoutCompletion,
+                status: newStatus,
+                updatedAt: getUpdatedAt(),
+            }));
         }
-    }, [dispatch, storedEvent, eventId]);
+    }, [dispatch, storedEvent, eventId, getUpdatedAt]);
 
     const onCompletionStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(eventId));
@@ -76,7 +92,64 @@ const WidgetHeaderPlain = ({
         dispatch(rollbackEnrollmentEvent(eventId));
     }, [dispatch, eventId]);
 
+    const onSkipStatusMutate = useCallback((newStatus: string) => {
+        if (storedEvent) {
+            dispatch(updateEnrollmentEvent(eventId, {
+                ...storedEvent,
+                status: newStatus,
+                updatedAt: getUpdatedAt(),
+            }));
+        }
+    }, [dispatch, storedEvent, eventId, getUpdatedAt]);
+
+    const onSkipStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentEvent(eventId));
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
+    }, [dispatch, eventId]);
+
+    const onSkipStatusError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(eventId));
+    }, [dispatch, eventId]);
+
+    const onDeleteEvent = useCallback((eventToDeleteId: string) => {
+        dispatch(deleteEnrollmentEvent(eventToDeleteId));
+        navigate(`/enrollment?${buildUrlQueryString({ orgUnitId: orgUnit.id, teiId, enrollmentId })}`);
+    }, [dispatch, navigate, orgUnit.id, teiId, enrollmentId]);
+
+    const onRollbackDeleteEvent = useCallback((eventDetails: ApiEnrollmentEvent) => {
+        dispatch(addPersistedEnrollmentEvents({ events: [eventDetails] }));
+    }, [dispatch]);
+
     const { icon, name } = stage;
+    const pendingApiResponse = !!storedEvent?.pendingApiResponse;
+
+    const renderDeleteMenuItemModal = () => {
+        if (!deleteModalOpen || !storedEvent) return null;
+        return (
+            <DeleteMenuItemModal
+                eventId={eventId}
+                eventDetails={storedEvent}
+                onDeleteEvent={onDeleteEvent}
+                onRollbackDeleteEvent={onRollbackDeleteEvent}
+                setDeleteModalOpen={setDeleteModalOpen}
+            />
+        );
+    };
+
+    const renderCompleteMenuItemModal = () => {
+        if (!completeModalOpen || !enrollment) return null;
+        return (
+            <CompleteMenuItemModal
+                eventId={eventId}
+                enrollment={enrollment}
+                programStageName={name}
+                onClose={() => setCompleteModalOpen(false)}
+                onMutate={onCompletionStatusMutate}
+                onSuccess={onCompletionStatusSuccess}
+                onError={onCompletionStatusError}
+            />
+        );
+    };
 
     return (
         <>
@@ -95,7 +168,7 @@ const WidgetHeaderPlain = ({
             <div className={classes.menu}>
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
-                        {showEditButton && (
+                        {showEditButton && !pendingApiResponse && (
                             <Button
                                 small
                                 secondary
@@ -107,56 +180,46 @@ const WidgetHeaderPlain = ({
                             </Button>
                         )}
 
-                        <OverflowButton
-                            open={actionsIsOpen}
-                            onClick={() => setActionsIsOpen(prev => !prev)}
-                            icon={<IconMore16 />}
-                            small
-                            secondary
-                            dataTest={'tracker-program-event-overflow-button'}
-                            component={
-                                <FlyoutMenu
-                                    dense
-                                    maxWidth="250px"
-                                    dataTest={'tracker-program-event-overflow-menu'}
-                                >
-                                    {canToggleCompletion && (
-                                        <CompletionMenuItem
-                                            eventId={eventId}
-                                            eventStatus={eventStatus}
-                                            onMutate={onCompletionStatusMutate}
-                                            onSuccess={onCompletionStatusSuccess}
-                                            onError={onCompletionStatusError}
-                                            onClose={() => setActionsIsOpen(false)}
-                                            askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
-                                            onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
-                                        />
-                                    )}
-                                    <MenuItem
-                                        label={i18n.t('View changelog')}
-                                        suffix=""
-                                        onClick={() => {
-                                            setChangeLogIsOpen(true);
-                                            setActionsIsOpen(false);
-                                        }}
+                        {pendingApiResponse && <CircularLoader small dataTest="widget-header-saving-loader" />}
+
+                        {!pendingApiResponse && (
+                            <OverflowButton
+                                open={actionsIsOpen}
+                                onClick={() => setActionsIsOpen(prev => !prev)}
+                                icon={<IconMore16 />}
+                                small
+                                secondary
+                                dataTest={'tracker-program-event-overflow-button'}
+                                component={(
+                                    <EventOverflowMenu
+                                        eventId={eventId}
+                                        eventStatus={eventStatus}
+                                        maxWidth="250px"
+                                        dataTest="tracker-program-event-overflow-menu"
+                                        onOpenChangelog={() => setChangeLogIsOpen(true)}
+                                        onClose={() => setActionsIsOpen(false)}
+                                        hideMutationActions={!canEditProgramStage}
+                                        onSkipMutate={onSkipStatusMutate}
+                                        onSkipSuccess={onSkipStatusSuccess}
+                                        onSkipError={onSkipStatusError}
+                                        onCompletionMutate={onCompletionStatusMutate}
+                                        onCompletionSuccess={onCompletionStatusSuccess}
+                                        onCompletionError={onCompletionStatusError}
+                                        askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
+                                        onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
+                                        onDeleteRequest={() => setDeleteModalOpen(true)}
+                                        isEventBlockedByExpiry={isEventBlockedByExpiry}
+                                        canToggleCompletion={canToggleCompletion}
+                                        readOnlyMessage={readOnlyMessage}
                                     />
-                                </FlyoutMenu>
-                            }
-                        />
+                                )}
+                            />
+                        )}
                     </div>
                 )}
             </div>
-            {completeModalOpen && enrollment && (
-                <CompleteMenuItemModal
-                    eventId={eventId}
-                    enrollment={enrollment}
-                    programStageName={name}
-                    onClose={() => setCompleteModalOpen(false)}
-                    onMutate={onCompletionStatusMutate}
-                    onSuccess={onCompletionStatusSuccess}
-                    onError={onCompletionStatusError}
-                />
-            )}
+            {renderDeleteMenuItemModal()}
+            {renderCompleteMenuItemModal()}
         </>
     );
 };
