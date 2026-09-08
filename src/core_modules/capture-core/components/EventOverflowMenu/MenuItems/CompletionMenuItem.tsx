@@ -10,7 +10,6 @@ import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { statusTypes as enrollmentStatuses } from '../../../enrollment';
 import { CompleteModal } from '../../DataEntries/common/trackerEvent/withAskToCompleteEnrollment/CompleteModal';
-import { statusTypes as enrollmentStatuses } from '../../../enrollment';
 import {
     updateEnrollmentAndEvents,
     commitEnrollmentAndEvents,
@@ -128,6 +127,7 @@ export const CompleteMenuItemModal = ({
 }: ModalProps) => {
     const dataEngine = useDataEngine();
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const handleError = (error: unknown) => {
@@ -140,7 +140,10 @@ export const CompleteMenuItemModal = ({
         {
             onMutate: () => onMutate?.(eventStatuses.COMPLETED),
             onError: (error) => { handleError(error); onError?.(); },
-            onSuccess: () => onSuccess?.(eventStatuses.COMPLETED),
+            onSuccess: () => {
+                removeEventChangelogQueries(queryClient, eventId);
+                onSuccess?.(eventStatuses.COMPLETED);
+            },
         },
     );
 
@@ -171,6 +174,7 @@ export const CompleteMenuItemModal = ({
             },
             onSuccess: () => {
                 dispatch(commitEnrollmentAndEvents());
+                removeEventChangelogQueries(queryClient, eventId);
                 onSuccess?.(eventStatuses.COMPLETED);
             },
         },
