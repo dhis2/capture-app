@@ -114,6 +114,46 @@ const EventRowPlain = ({
         dispatch(rollbackEnrollmentEvent(id));
     }, [dispatch, id]);
 
+    const renderDeleteMenuItemModal = () => {
+        if (!deleteModalOpen) return null;
+        return (
+            <DeleteMenuItemModal
+                eventId={id}
+                eventDetails={eventDetails}
+                onDeleteEvent={onDeleteEvent}
+                onRollbackDeleteEvent={onRollbackDeleteEvent}
+                setDeleteModalOpen={setDeleteModalOpen}
+            />
+        );
+    };
+
+    const renderCompleteMenuItemModal = () => {
+        if (!completeModalOpen || !enrollment) return null;
+        return (
+            <CompleteMenuItemModal
+                eventId={id}
+                enrollment={enrollment}
+                programStageName={programStage?.name}
+                onClose={() => setCompleteModalOpen(false)}
+                onMutate={onCompletionStatusMutate}
+                onSuccess={onCompletionStatusSuccess}
+                onError={onCompletionStatusError}
+            />
+        );
+    };
+
+    const renderChangelog = () => {
+        if (!changelogOpen || !programStage?.stageForm) return null;
+        return (
+            <EventChangelogWrapper
+                isOpen
+                setIsOpen={setChangelogOpen}
+                eventId={id}
+                formFoundation={programStage.stageForm}
+            />
+        );
+    };
+
     return (
         <DataTableRow
             className={getRowClass(classes, !!pendingApiResponse)}
@@ -158,34 +198,9 @@ const EventRowPlain = ({
                             )}
                         />
                     )}
-                    {deleteModalOpen && (
-                        <DeleteMenuItemModal
-                            eventId={id}
-                            eventDetails={eventDetails}
-                            onDeleteEvent={onDeleteEvent}
-                            onRollbackDeleteEvent={onRollbackDeleteEvent}
-                            setDeleteModalOpen={setDeleteModalOpen}
-                        />
-                    )}
-                    {completeModalOpen && enrollment && (
-                        <CompleteMenuItemModal
-                            eventId={id}
-                            enrollment={enrollment}
-                            programStageName={programStage?.name}
-                            onClose={() => setCompleteModalOpen(false)}
-                            onMutate={onCompletionStatusMutate}
-                            onSuccess={onCompletionStatusSuccess}
-                            onError={onCompletionStatusError}
-                        />
-                    )}
-                    {changelogOpen && programStage?.stageForm && (
-                        <EventChangelogWrapper
-                            isOpen
-                            setIsOpen={setChangelogOpen}
-                            eventId={id}
-                            formFoundation={programStage.stageForm}
-                        />
-                    )}
+                    {renderDeleteMenuItemModal()}
+                    {renderCompleteMenuItemModal()}
+                    {renderChangelog()}
                 </>
             </DataTableCell>
         </DataTableRow>
