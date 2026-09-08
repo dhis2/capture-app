@@ -19,7 +19,6 @@ import {
     DeleteEventModal,
     CompletionMenuItem,
     CompleteMenuItemModal,
-    shouldAskCompleteEnrollmentPrompt,
 } from '../../../../../EventOverflowMenu';
 import { SkipAction } from './SkipAction';
 import {
@@ -87,12 +86,6 @@ const EventRowPlain = ({
         dispatch(rollbackEnrollmentEvent(id));
     }, [dispatch, id]);
 
-    const shouldAskCompleteEnrollment = shouldAskCompleteEnrollmentPrompt(
-        eventDetails.status,
-        programStage?.askCompleteEnrollmentOnEventComplete,
-        enrollment?.status,
-    );
-
     const renderCompleteMenuItemModal = () => {
         if (!completeModalOpen || !enrollment) return null;
         return (
@@ -151,7 +144,9 @@ const EventRowPlain = ({
                                                 onSuccess={onCompletionStatusSuccess}
                                                 onError={onCompletionStatusError}
                                                 onClose={() => setActionsOpen(false)}
-                                                shouldAskCompleteEnrollment={shouldAskCompleteEnrollment}
+                                                askCompleteEnrollmentOnEventComplete={
+                                                    programStage?.askCompleteEnrollmentOnEventComplete
+                                                }
                                                 onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
                                             />
                                         )}

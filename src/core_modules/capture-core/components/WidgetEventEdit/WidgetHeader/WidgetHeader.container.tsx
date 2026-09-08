@@ -15,11 +15,7 @@ import {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import {
-    CompletionMenuItem,
-    CompleteMenuItemModal,
-    shouldAskCompleteEnrollmentPrompt,
-} from '../../EventOverflowMenu';
+import { CompletionMenuItem, CompleteMenuItemModal } from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';
@@ -82,12 +78,6 @@ const WidgetHeaderPlain = ({
 
     const { icon, name } = stage;
 
-    const shouldAskCompleteEnrollment = shouldAskCompleteEnrollmentPrompt(
-        eventStatus,
-        stage.askCompleteEnrollmentOnEventComplete,
-        enrollment?.status,
-    );
-
     return (
         <>
             {icon && (
@@ -138,7 +128,7 @@ const WidgetHeaderPlain = ({
                                             onSuccess={onCompletionStatusSuccess}
                                             onError={onCompletionStatusError}
                                             onClose={() => setActionsIsOpen(false)}
-                                            shouldAskCompleteEnrollment={shouldAskCompleteEnrollment}
+                                            askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
                                             onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
                                         />
                                     )}

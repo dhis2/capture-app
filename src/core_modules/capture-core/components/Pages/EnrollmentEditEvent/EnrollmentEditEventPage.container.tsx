@@ -138,6 +138,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
+    const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
         selectedScopeId: programId,
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
@@ -347,6 +348,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
+                widgetEnrollmentStatus={widgetEnrollmentStatus}
                 eventStatus={event?.status}
                 eventAccess={eventAccess}
                 scheduleDate={scheduleDate}

@@ -1,7 +1,3 @@
 export { DeleteMenuItem } from './DeleteMenuItem';
 export { DeleteEventModal } from './DeleteEventModal';
-export {
-    CompletionMenuItem,
-    CompleteMenuItemModal,
-    shouldAskCompleteEnrollmentPrompt,
-} from './CompletionMenuItem';
+export { CompletionMenuItem, CompleteMenuItemModal } from './CompletionMenuItem';
