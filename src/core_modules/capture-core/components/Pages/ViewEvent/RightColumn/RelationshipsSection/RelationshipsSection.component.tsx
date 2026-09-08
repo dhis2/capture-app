@@ -2,6 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
@@ -53,7 +54,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={i18n.t('{{relationshipsLabel}}', { relationshipsLabel })}
+                text={capitalizeFirstLetter(relationshipsLabel)}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />

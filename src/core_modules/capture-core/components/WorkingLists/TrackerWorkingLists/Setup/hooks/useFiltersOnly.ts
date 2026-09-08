@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { dataElementTypes, LabelKeys, type TrackerProgram, useTermLabel } from '../../../../../metaData';
 import { MAIN_FILTERS } from '../../constants';
 
@@ -75,7 +76,7 @@ export const useFiltersOnly = (
             {
                 id: MAIN_FILTERS.FOLLOW_UP,
                 type: dataElementTypes.BOOLEAN,
-                header: i18n.t('{{followUpLabel}}', { followUpLabel }),
+                header: capitalizeFirstLetter(followUpLabel),
                 showInMoreFilters: true,
                 multiValueFilter: false,
                 transformRecordsFilter: (rawFilter: string) => ({
