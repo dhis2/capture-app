@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     CircularLoader,
@@ -14,7 +14,13 @@ import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteMenuItem, DeleteEventModal, CompletionMenuItem } from '../../../../../EventOverflowMenu';
+import {
+    DeleteMenuItem,
+    DeleteEventModal,
+    CompletionMenuItem,
+    CompleteMenuItemModal,
+    shouldAskCompleteEnrollmentPrompt,
+} from '../../../../../EventOverflowMenu';
 import { SkipAction } from './SkipAction';
 import {
     updateEnrollmentEvent,
@@ -56,7 +62,9 @@ const EventRowPlain = ({
 }: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [completeModalOpen, setCompleteModalOpen] = useState(false);
     const dispatch = useDispatch();
+    const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
 
     const { isEventReadOnly, canToggleCompletion } = useEventEditPermissions({
         programId,
@@ -78,6 +86,27 @@ const EventRowPlain = ({
     const onCompletionStatusError = useCallback(() => {
         dispatch(rollbackEnrollmentEvent(id));
     }, [dispatch, id]);
+
+    const shouldAskCompleteEnrollment = shouldAskCompleteEnrollmentPrompt(
+        eventDetails.status,
+        programStage?.askCompleteEnrollmentOnEventComplete,
+        enrollment?.status,
+    );
+
+    const renderCompleteMenuItemModal = () => {
+        if (!completeModalOpen || !enrollment) return null;
+        return (
+            <CompleteMenuItemModal
+                eventId={id}
+                enrollment={enrollment}
+                programStageName={programStage?.name}
+                onClose={() => setCompleteModalOpen(false)}
+                onMutate={onCompletionStatusMutate}
+                onSuccess={onCompletionStatusSuccess}
+                onError={onCompletionStatusError}
+            />
+        );
+    };
 
     return (
         <DataTableRow
@@ -122,6 +151,8 @@ const EventRowPlain = ({
                                                 onSuccess={onCompletionStatusSuccess}
                                                 onError={onCompletionStatusError}
                                                 onClose={() => setActionsOpen(false)}
+                                                shouldAskCompleteEnrollment={shouldAskCompleteEnrollment}
+                                                onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
                                             />
                                         )}
 
@@ -144,6 +175,8 @@ const EventRowPlain = ({
                                 setDeleteModalOpen={setDeleteModalOpen}
                             />
                         )}
+
+                        {renderCompleteMenuItemModal()}
                     </>
                 )}
             </DataTableCell>

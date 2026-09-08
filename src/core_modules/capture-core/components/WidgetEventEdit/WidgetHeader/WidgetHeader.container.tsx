@@ -15,7 +15,11 @@ import {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { CompletionMenuItem } from '../../EventOverflowMenu';
+import {
+    CompletionMenuItem,
+    CompleteMenuItemModal,
+    shouldAskCompleteEnrollmentPrompt,
+} from '../../EventOverflowMenu';
 import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';
@@ -52,12 +56,13 @@ const WidgetHeaderPlain = ({
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
+    const [completeModalOpen, setCompleteModalOpen] = useState(false);
 
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
 
-    const storedEvent = useSelector((state: any) =>
-        state.enrollmentDomain?.enrollment?.events?.find((event: any) => event.event === eventId));
+    const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
+    const storedEvent = enrollment?.events?.find((event: { event: string }) => event.event === eventId);
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
         if (storedEvent) {
@@ -76,6 +81,12 @@ const WidgetHeaderPlain = ({
     }, [dispatch, eventId]);
 
     const { icon, name } = stage;
+
+    const shouldAskCompleteEnrollment = shouldAskCompleteEnrollmentPrompt(
+        eventStatus,
+        stage.askCompleteEnrollmentOnEventComplete,
+        enrollment?.status,
+    );
 
     return (
         <>
@@ -127,6 +138,8 @@ const WidgetHeaderPlain = ({
                                             onSuccess={onCompletionStatusSuccess}
                                             onError={onCompletionStatusError}
                                             onClose={() => setActionsIsOpen(false)}
+                                            shouldAskCompleteEnrollment={shouldAskCompleteEnrollment}
+                                            onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
                                         />
                                     )}
                                     <MenuItem
@@ -143,6 +156,17 @@ const WidgetHeaderPlain = ({
                     </div>
                 )}
             </div>
+            {completeModalOpen && enrollment && (
+                <CompleteMenuItemModal
+                    eventId={eventId}
+                    enrollment={enrollment}
+                    programStageName={name}
+                    onClose={() => setCompleteModalOpen(false)}
+                    onMutate={onCompletionStatusMutate}
+                    onSuccess={onCompletionStatusSuccess}
+                    onError={onCompletionStatusError}
+                />
+            )}
         </>
     );
 };
