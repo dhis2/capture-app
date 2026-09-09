@@ -28,6 +28,7 @@ const {
     DELETE_ENROLLMENT_EVENT_RELATIONSHIP,
     SET_TRACKED_ENTITY_INACTIVE_STATUS,
     SET_ENROLLMENT_RULE_EFFECTS,
+    UPDATE_ENROLLMENT_PROGRAM_OWNER,
 } = enrollmentSiteActionTypes;
 
 const setAssignee = (state, action) => {
@@ -57,6 +58,11 @@ export const enrollmentDomainDesc = createReducerDescription(
         [SET_ENROLLMENT_RULE_EFFECTS]: (state, { payload: { rulesEffects } }) => ({
             ...state,
             ruleEffects: rulesEffects ?? null,
+        }),
+        [UPDATE_ENROLLMENT_PROGRAM_OWNER]: (state, { payload: { programOwnerId } }) => ({
+            ...state,
+            programOwnerId,
+            ruleEffects: null,
         }),
         [SET_TRACKED_ENTITY_INACTIVE_STATUS]: (state, { payload: { inactive } }) => ({
             ...state,

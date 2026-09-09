@@ -25,10 +25,14 @@ export const enrollmentSiteActionTypes = {
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
     SET_TRACKED_ENTITY_INACTIVE_STATUS: 'Enrollment.SetTrackedEntityInactiveStatus',
     SET_ENROLLMENT_RULE_EFFECTS: 'Enrollment.SetEnrollmentRuleEffects',
+    UPDATE_ENROLLMENT_PROGRAM_OWNER: 'Enrollment.UpdateProgramOwner',
 };
 
 export const setEnrollmentRuleEffects = (rulesEffects: any) =>
     actionCreator(enrollmentSiteActionTypes.SET_ENROLLMENT_RULE_EFFECTS)({ rulesEffects });
+
+export const updateEnrollmentProgramOwner = (programOwnerId: string) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_PROGRAM_OWNER)({ programOwnerId });
 
 export const setCommonEnrollmentSiteData = (
     enrollment: EnrollmentData,
