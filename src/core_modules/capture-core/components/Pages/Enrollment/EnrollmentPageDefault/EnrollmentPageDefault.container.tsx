@@ -100,7 +100,6 @@ export const EnrollmentPageDefault = () => {
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
-        force: true,
     });
 
     const outputEffects = useFilteredWidgetData();
