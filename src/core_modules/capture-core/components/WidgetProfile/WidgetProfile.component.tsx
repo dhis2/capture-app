@@ -26,7 +26,7 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { getEnrollmentScopeFormId } from '../Pages/common/EnrollmentOverviewDomain';
+import { selectEnrollmentHiddenAttributeIds } from '../Pages/common/EnrollmentOverviewDomain';
 
 const styles: Readonly<any> = {
     header: {
@@ -87,9 +87,7 @@ const WidgetProfilePlain = ({
         storedGeometry: trackedEntityInstance?.geometry,
         hasError: trackedEntityInstance?.hasError,
     }));
-    const enrollmentId = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollmentId);
-    const hiddenAttributeIds = useSelector(({ rulesEffectsHiddenFields }: any) =>
-        (enrollmentId ? rulesEffectsHiddenFields?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
+    const hiddenAttributeIds = useSelector(selectEnrollmentHiddenAttributeIds);
     const { configIsFetched, dataEntryFormConfig } = useDataEntryFormConfig({ selectedScopeId: programId });
     const {
         loading: trackedEntityInstancesLoading,

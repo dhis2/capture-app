@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../../rules';
+import { getApplicableRuleEffectsForTrackerProgram } from '../../../../../rules';
 import type { TrackerProgram } from '../../../../../metaData';
-import { getEnrollmentScopeFormId } from './getEnrollmentScopeFormId';
+import { setEnrollmentRuleEffects } from '../enrollment.actions';
 import { useAttributeValuesForRules, useEnrollmentData, useEventsData } from './rulesExecutionData';
 import type { AttributeValue, EnrollmentData } from '../useCommonEnrollmentDomainData';
 
@@ -24,16 +24,15 @@ export const useEnrollmentScopeRuleEffects = ({
     force = false,
 }: Input) => {
     const dispatch = useDispatch();
-    const formId = enrollmentId && getEnrollmentScopeFormId(enrollmentId);
-    const hasWarmStoreOnMount = useSelector(({ rulesEffectsHiddenFields }: any) =>
-        (formId ? rulesEffectsHiddenFields?.[formId] !== undefined : false));
+    const hasWarmStoreOnMount = useSelector(({ enrollmentDomain }: any) =>
+        enrollmentDomain?.enrollmentId === enrollmentId && enrollmentDomain?.ruleEffects != null);
     const skipOnce = useRef(!force && hasWarmStoreOnMount);
     const attributeValues = useAttributeValuesForRules(program, apiAttributeValues);
     const enrollmentData = useEnrollmentData(apiEnrollment);
     const otherEvents = useEventsData(apiEnrollment, program);
 
     useEffect(() => {
-        if (formId && orgUnit && attributeValues && enrollmentData && otherEvents) {
+        if (enrollmentId && orgUnit && attributeValues && enrollmentData && otherEvents) {
             if (skipOnce.current) {
                 skipOnce.current = false;
                 return;
@@ -45,7 +44,7 @@ export const useEnrollmentScopeRuleEffects = ({
                 attributeValues,
                 enrollmentData,
             });
-            dispatch(updateRulesEffects(effects, formId));
+            dispatch(setEnrollmentRuleEffects(effects));
         }
-    }, [dispatch, formId, attributeValues, enrollmentData, orgUnit, otherEvents, program]);
+    }, [dispatch, enrollmentId, attributeValues, enrollmentData, orgUnit, otherEvents, program]);
 };

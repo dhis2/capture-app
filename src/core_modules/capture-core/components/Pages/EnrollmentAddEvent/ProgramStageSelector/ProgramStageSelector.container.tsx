@@ -8,7 +8,7 @@ import { Widget } from '../../../Widget';
 import {
     useCommonEnrollmentDomainData,
     useEnrollmentScopeRuleEffects,
-    getEnrollmentScopeFormId,
+    selectEnrollmentHiddenProgramStageIds,
 } from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
@@ -41,8 +41,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
     });
-    const hiddenProgramStageIds = useSelector(({ rulesEffectsHiddenProgramStage }: any) =>
-        (enrollmentId ? rulesEffectsHiddenProgramStage?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
+    const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
 
     useEffect(() => {
         if (enrollmentsError || programError) {

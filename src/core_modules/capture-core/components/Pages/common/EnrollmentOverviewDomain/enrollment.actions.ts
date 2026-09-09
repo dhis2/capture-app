@@ -24,7 +24,11 @@ export const enrollmentSiteActionTypes = {
     COMMIT_ENROLLMENT_AND_EVENTS: 'Enrollment.CommitEnrollmentAndEvents',
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
     SET_TRACKED_ENTITY_INACTIVE_STATUS: 'Enrollment.SetTrackedEntityInactiveStatus',
+    SET_ENROLLMENT_RULE_EFFECTS: 'Enrollment.SetEnrollmentRuleEffects',
 };
+
+export const setEnrollmentRuleEffects = (rulesEffects: any) =>
+    actionCreator(enrollmentSiteActionTypes.SET_ENROLLMENT_RULE_EFFECTS)({ rulesEffects });
 
 export const setCommonEnrollmentSiteData = (
     enrollment: EnrollmentData,

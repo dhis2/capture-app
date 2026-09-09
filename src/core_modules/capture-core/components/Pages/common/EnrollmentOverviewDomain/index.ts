@@ -20,7 +20,12 @@ export {
     rollbackEnrollmentEvents,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
-export { useEnrollmentScopeRuleEffects, getEnrollmentScopeFormId } from './useRuleEffects';
+export {
+    useEnrollmentScopeRuleEffects,
+    selectEnrollmentHiddenAttributeIds,
+    selectEnrollmentHiddenProgramStageIds,
+    selectEnrollmentWidgetEffects,
+} from './useRuleEffects';
 export {
     EnrollmentAccessProvider,
     useEnrollmentAccessContext,

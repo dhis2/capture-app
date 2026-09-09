@@ -103,7 +103,7 @@ export const EnrollmentPageDefault = () => {
         force: true,
     });
 
-    const outputEffects = useFilteredWidgetData(enrollmentId);
+    const outputEffects = useFilteredWidgetData();
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {

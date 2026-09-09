@@ -8,7 +8,7 @@ import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { getEnrollmentScopeFormId } from '../../../common/EnrollmentOverviewDomain';
+import { selectEnrollmentHiddenProgramStageIds } from '../../../common/EnrollmentOverviewDomain';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
 
 const styles = {
@@ -31,8 +31,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
 
-    const hiddenProgramStageIds = useSelector(({ rulesEffectsHiddenProgramStage }: any) =>
-        (enrollmentId ? rulesEffectsHiddenProgramStage?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
+    const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };

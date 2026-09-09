@@ -1,2 +1,6 @@
 export { useEnrollmentScopeRuleEffects } from './useEnrollmentScopeRuleEffects';
-export { getEnrollmentScopeFormId } from './getEnrollmentScopeFormId';
+export {
+    selectEnrollmentHiddenAttributeIds,
+    selectEnrollmentHiddenProgramStageIds,
+    selectEnrollmentWidgetEffects,
+} from './enrollmentRuleEffects.selectors';

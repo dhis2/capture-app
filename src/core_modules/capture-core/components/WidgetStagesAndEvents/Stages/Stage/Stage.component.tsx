@@ -8,8 +8,7 @@ import { Widget } from '../../../Widget';
 import { StageDetail } from './StageDetail/StageDetail.component';
 import { StageCreateNewButton } from './StageCreateNewButton';
 import { useEnrollmentAccessContext } from '../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { getEnrollmentScopeFormId } from '../../../Pages/common/EnrollmentOverviewDomain';
-import { useLocationQuery } from '../../../../utils/routing';
+import { selectEnrollmentHiddenProgramStageIds } from '../../../Pages/common/EnrollmentOverviewDomain';
 
 const styles = {
     overview: {
@@ -30,9 +29,7 @@ export const StagePlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
-    const { enrollmentId } = useLocationQuery();
-    const hiddenProgramStageIds = useSelector(({ rulesEffectsHiddenProgramStage }: any) =>
-        (enrollmentId ? rulesEffectsHiddenProgramStage?.[getEnrollmentScopeFormId(enrollmentId)] : undefined));
+    const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
     const preventAddingNewEvents = Boolean(hiddenProgramStageIds?.[id]);
     const hideProgramStage = preventAddingNewEvents && events.length === 0;
     const { stageWriteAccessById } = useEnrollmentAccessContext();
