@@ -4,6 +4,7 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import {
     placements,
     withCleanUp,
@@ -148,7 +149,7 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             // Example use of withCustomLabels.
-            label: props.orgUnitLabel,
+            label: capitalizeFirstLetter(props.orgUnitLabel),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
         getPropName: () => 'orgUnit',
