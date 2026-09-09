@@ -39,8 +39,7 @@ const clearEnrolledEntity = () => {
         )
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const apiTrackedEntities = body.trackedEntities || body.instances || [];
-            const trackedEntities = apiTrackedEntities.map(({ trackedEntity }) => ({ trackedEntity }));
+            const trackedEntities = (body.trackedEntities ?? []).map(({ trackedEntity }) => ({ trackedEntity }));
 
             if (!trackedEntities.length) {
                 return undefined;
