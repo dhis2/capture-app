@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { placements } from '../../../../DataEntry/constants/placements.const';
 import { sectionKeysForFirstStageDataEntry } from '../EnrollmentWithFirstStageDataEntry.constants';
 import { AOCsectionKey } from '../../../../DataEntryDhis2Helpers';
@@ -11,7 +12,7 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
         () => ({
             [sectionKeysForFirstStageDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
-                name: enrollmentLabel,
+                name: capitalizeFirstLetter(enrollmentLabel),
             },
             [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {
                 beforeSectionId,

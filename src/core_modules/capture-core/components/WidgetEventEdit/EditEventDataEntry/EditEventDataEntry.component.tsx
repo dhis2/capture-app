@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -232,7 +233,7 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: props.orgUnitLabel,
+            label: capitalizeFirstLetter(props.orgUnitLabel),
             required: true,
         }),
         getPropName: () => 'orgUnit',

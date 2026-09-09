@@ -2,6 +2,7 @@ import React, { type ComponentType, Component } from 'react';
 import { compose } from 'redux';
 import type { WithStyles } from 'capture-core-utils/styles';
 import { withStyles, withTheme } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import i18n from '@dhis2/d2-i18n';
 import { isLangRtl } from '../../../utils/rtl';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
@@ -198,7 +199,7 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: props.orgUnitLabel,
+            label: capitalizeFirstLetter(props.orgUnitLabel),
             required: true,
         }),
         getPropName: () => 'orgUnit',
@@ -308,7 +309,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: props.notesLabel,
+            label: capitalizeFirstLetter(props.notesLabel),
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,

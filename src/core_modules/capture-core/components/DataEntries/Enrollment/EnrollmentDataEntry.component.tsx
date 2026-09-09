@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { isLangRtl } from '../../../utils/rtl';
 import {
     DataEntry,
@@ -376,7 +377,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         const dataEntrySections = {
             [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
-                name: enrollmentLabel,
+                name: capitalizeFirstLetter(enrollmentLabel),
             },
             [AOCsectionKey]: {
                 placement: placements.BOTTOM,
