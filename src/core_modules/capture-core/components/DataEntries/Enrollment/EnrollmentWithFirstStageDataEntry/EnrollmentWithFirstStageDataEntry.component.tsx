@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { isLangRtl } from '../../../../utils/rtl';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { LabelKeys } from '../../../../metaData';
+import { withCustomLabels } from '../../../../HOC/withCustomLabels';
 import { DataEntry } from '../../../DataEntry';
 import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
 import {
@@ -177,15 +178,12 @@ const getCompleteFieldSettingsFn = () => {
     const completeSettings = {
         isApplicable: (props: any) => props.firstStageMetaData && props.firstStageMetaData.stage?.stageForm,
         getComponent: () => completeComponent,
-        getComponentProps: (props: any) => {
-            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: props.programId });
-            return createComponentProps(props, {
-                label: i18n.t('Complete {{eventLabel}}', {
-                    eventLabel,
-                }),
-                id: 'complete',
-            });
-        },
+        getComponentProps: (props: any) => createComponentProps(props, {
+            label: i18n.t('Complete {{eventLabel}}', {
+                eventLabel: props.eventLabel,
+            }),
+            id: 'complete',
+        }),
         getPropName: () => stageMainDataIds.COMPLETE,
         getValidatorContainers: () => [],
         getMeta: () => ({
@@ -272,4 +270,7 @@ const getAssigneeSettingsFn = () => {
 const StageLocationHOC = withDataEntryFieldIfApplicable(getStageGeometrySettings())(withCleanUp()(DataEntry));
 const CompleteHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC);
 const AssigneeHOC = withDataEntryFieldIfApplicable(getAssigneeSettingsFn())(CompleteHOC);
-export const FirstStageDataEntry = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(AssigneeHOC);
+const ReportDateHOC = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(AssigneeHOC);
+export const FirstStageDataEntry = withCustomLabels(
+    [LabelKeys.eventSingular] as const,
+)(ReportDateHOC);

@@ -2,12 +2,15 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { Props, State } from './withDeleteButton.types';
-import { getTermLabel, LabelKeys } from '../../../metaData';
+import { LabelKeys } from '../../../metaData';
+import { withCustomLabels } from '../../../HOC/withCustomLabels';
+
+type InternalProps = Props & { eventLabel: string };
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
-    class DeleteButtonHOC extends React.Component<Props, State> {
+    class DeleteButtonHOC extends React.Component<InternalProps, State> {
         innerInstance: any;
-        constructor(props: Props) {
+        constructor(props: InternalProps) {
             super(props);
             this.state = {
                 isOpen: false,
@@ -19,7 +22,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderDeleteButton = (hasDeleteButton?: boolean) => {
-            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: this.props.programId });
+            const { eventLabel } = this.props;
             return (
                 hasDeleteButton ? (<div>
                     <Button
@@ -72,7 +75,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         };
 
         render() {
-            const { onDelete, hasDeleteButton, ...passOnProps } = this.props;
+            const { onDelete, hasDeleteButton, eventLabel, ...passOnProps } = this.props;
 
             return (
                 <InnerComponent
@@ -85,4 +88,5 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
     };
 
 
-export const withDeleteButton = () => (InnerComponent: React.ComponentType<any>) => getDeleteButton(InnerComponent);
+export const withDeleteButton = () => (InnerComponent: React.ComponentType<any>) =>
+    withCustomLabels([LabelKeys.eventSingular] as const)(getDeleteButton(InnerComponent));

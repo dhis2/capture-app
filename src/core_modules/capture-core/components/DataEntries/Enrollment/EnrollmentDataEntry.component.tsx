@@ -39,9 +39,9 @@ import {
     ProgramStage,
     RenderFoundation,
     getProgramThrowIfNotFound,
-    getTermLabel,
     LabelKeys,
 } from '../../../metaData';
+import { withCustomLabels } from '../../../HOC/withCustomLabels';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
@@ -363,6 +363,7 @@ type FinalTeiDataEntryProps = {
         };
     };
     formFoundation: RenderFoundation;
+    enrollmentLabel: string;
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -371,9 +372,11 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 
     render() {
-        const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, programId, ...passOnProps } = this.props;
+        const {
+            enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, programId,
+            enrollmentLabel, ...passOnProps
+        } = this.props;
 
-        const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
         const dataEntrySections = {
             [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
@@ -402,10 +405,14 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
+const FinalEnrollmentDataEntryWithLabels = withCustomLabels(
+    [LabelKeys.enrollmentSingular] as const,
+)(FinalEnrollmentDataEntry);
+
 const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
     withDataEntryFields(
         getCategoryOptionsSettingsFn(),
-    )(FinalEnrollmentDataEntry));
+    )(FinalEnrollmentDataEntryWithLabels));
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
