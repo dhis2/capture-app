@@ -60,7 +60,8 @@ const computeLoadingState = (
     trackedEntityInstancesLoading: boolean,
     userRolesLoading: boolean,
     configIsFetched: boolean,
-) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
+    ruleEffectsPending: boolean,
+) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched || ruleEffectsPending;
 
 const computeError = (
     programsError: any,
@@ -71,6 +72,7 @@ const computeError = (
 const WidgetProfilePlain = ({
     teiId,
     programId,
+    enrollmentId,
     readOnlyMode = false,
     programOwnerId = '',
     onUpdateTeiAttributeValues,
@@ -88,6 +90,8 @@ const WidgetProfilePlain = ({
         hasError: trackedEntityInstance?.hasError,
     }));
     const hiddenAttributeIds = useSelector(selectEnrollmentHiddenAttributeIds);
+    const ruleEffectsPending = useSelector(({ enrollmentDomain }: any) =>
+        Boolean(enrollmentId) && (enrollmentDomain?.enrollmentId !== enrollmentId || enrollmentDomain?.ruleEffects == null));
     const { configIsFetched, dataEntryFormConfig } = useDataEntryFormConfig({ selectedScopeId: programId });
     const {
         loading: trackedEntityInstancesLoading,
@@ -123,7 +127,9 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
+    const loading = computeLoadingState(
+        programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched, ruleEffectsPending,
+    );
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
