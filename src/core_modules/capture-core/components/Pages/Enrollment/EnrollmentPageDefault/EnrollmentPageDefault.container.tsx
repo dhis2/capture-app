@@ -17,6 +17,7 @@ import {
     updateIncidentDate,
     useCommonEnrollmentDomainData,
     useEnrollmentScopeRuleEffects,
+    selectEnrollmentWidgetEffects,
 } from '../../common/EnrollmentOverviewDomain';
 import {
     deleteEnrollment,
@@ -28,7 +29,6 @@ import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { DataStoreKeyByPage, EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { useProgramMetadata, useProgramStages } from './hooks';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
-import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 import {
     useEnrollmentPageLayout,
@@ -102,7 +102,7 @@ export const EnrollmentPageDefault = () => {
         apiAttributeValues: attributeValues,
     });
 
-    const outputEffects = useFilteredWidgetData();
+    const outputEffects = useSelector(selectEnrollmentWidgetEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
