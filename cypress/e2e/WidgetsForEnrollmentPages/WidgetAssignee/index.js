@@ -1,18 +1,18 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
-const EVENT_FIELDS = 'event,program,programStage,enrollment,orgUnit,occurredAt,scheduledAt,status,dataValues';
-
 Given(/^you make sure the event (.+) has no assigned user$/, (eventId) => {
-    cy.buildApiUrl('tracker', `events/${eventId}?fields=${EVENT_FIELDS},assignedUser`)
+    cy.buildApiUrl('tracker', `events/${eventId}`)
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const { assignedUser, ...event } = body;
-
-            if (!assignedUser) {
+            if (!body.assignedUser) {
                 return undefined;
             }
 
-            return cy.importTracker('UPDATE', { events: [event] });
+            const eventToUpdate = { ...body, assignedUser: null };
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(eventUrl => cy.request('POST', eventUrl, { events: [eventToUpdate] }));
         });
 });
 

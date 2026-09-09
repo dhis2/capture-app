@@ -4,14 +4,6 @@ Cypress.Commands.add('buildApiUrl', (...urlParts) =>
         .join('/'),
 );
 
-Cypress.Commands.add('importTracker', (importStrategy, payload) =>
-    cy.buildApiUrl(`tracker?async=false&importStrategy=${importStrategy}`)
-        .then(url => cy.request('POST', url, payload))
-        .then(({ body }) => {
-            expect(body.status).to.eq('OK');
-        }),
-);
-
 Cypress.Commands.add(
     'shouldIncludeClass',
     { prevSubject: true },

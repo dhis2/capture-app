@@ -18,9 +18,11 @@ const unlinkEvent = eventId =>
                 return undefined;
             }
 
-            return cy.importTracker('DELETE', {
-                relationships: relationships.map(({ relationship }) => ({ relationship })),
-            });
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(deleteUrl => cy.request('POST', deleteUrl, {
+                    relationships: relationships.map(({ relationship }) => ({ relationship })),
+                }));
         });
 
 const clearEnrolledEntity = () => {
@@ -44,7 +46,9 @@ const clearEnrolledEntity = () => {
                 return undefined;
             }
 
-            return cy.importTracker('DELETE', { trackedEntities });
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(deleteUrl => cy.request('POST', deleteUrl, { trackedEntities }));
         });
 };
 
@@ -68,16 +72,18 @@ Given(/^you make sure the enrollment (.+) has a Baby Postnatal event$/, (enrollm
                 return undefined;
             }
 
-            return cy.importTracker('CREATE', {
-                events: [{
-                    program: body.program,
-                    programStage: BABY_POSTNATAL_STAGE,
-                    enrollment: enrollmentId,
-                    orgUnit: body.orgUnit,
-                    occurredAt: `${getCurrentYear()}-07-01`,
-                    status: 'ACTIVE',
-                }],
-            });
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=CREATE')
+                .then(createUrl => cy.request('POST', createUrl, {
+                    events: [{
+                        program: body.program,
+                        programStage: BABY_POSTNATAL_STAGE,
+                        enrollment: enrollmentId,
+                        orgUnit: body.orgUnit,
+                        occurredAt: `${getCurrentYear()}-07-01`,
+                        status: 'ACTIVE',
+                    }],
+                }));
         });
 });
 
@@ -155,7 +161,9 @@ And('you delete the Birth event', () => {
                 return undefined;
             }
 
-            return cy.importTracker('DELETE', { events: [eventToDelete] });
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(eventUrl => cy.request('POST', eventUrl, { events: [eventToDelete] }));
         })
         .then(() => cy.reload());
 });
@@ -319,7 +327,9 @@ And(/^you delete the events of the enrollmentId (.*)$/, (enrollmentId) => {
                 return undefined;
             }
 
-            return cy.importTracker('DELETE', { events });
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                .then(eventUrl => cy.request('POST', eventUrl, { events }));
         })
         .then(() => cy.reload());
 });
