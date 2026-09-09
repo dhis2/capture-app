@@ -25,25 +25,25 @@ export const enrollmentSiteActionTypes = {
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
     SET_TRACKED_ENTITY_INACTIVE_STATUS: 'Enrollment.SetTrackedEntityInactiveStatus',
     SET_ENROLLMENT_RULE_EFFECTS: 'Enrollment.SetEnrollmentRuleEffects',
-    UPDATE_ENROLLMENT_PROGRAM_OWNER: 'Enrollment.UpdateProgramOwner',
+    UPDATE_ENROLLMENT_OWNER_ORG_UNIT: 'Enrollment.UpdateOwnerOrgUnit',
 };
 
 export const setEnrollmentRuleEffects = (rulesEffects: any) =>
     actionCreator(enrollmentSiteActionTypes.SET_ENROLLMENT_RULE_EFFECTS)({ rulesEffects });
 
-export const updateEnrollmentProgramOwner = (programOwnerId: string) =>
-    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_PROGRAM_OWNER)({ programOwnerId });
+export const updateEnrollmentOwnerOrgUnit = (ownerOrgUnitId: string) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_OWNER_ORG_UNIT)({ ownerOrgUnitId });
 
 export const setCommonEnrollmentSiteData = (
     enrollment: EnrollmentData,
     attributeValues: Array<AttributeValue>,
     inactive?: boolean,
-    programOwnerId?: string,
+    ownerOrgUnitId?: string,
 ) => actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({
     enrollment,
     attributeValues,
     inactive,
-    programOwnerId,
+    ownerOrgUnitId,
 });
 
 export const setTrackedEntityInactiveStatus = (inactive: boolean) =>

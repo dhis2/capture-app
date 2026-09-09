@@ -1,7 +1,7 @@
 export type Props = {
     teiId: string;
     programId: string;
-    programOwnerId: string;
+    ownerOrgUnitId: string;
     enrollmentId?: string;
     readOnlyMode?: boolean;
     onUpdateTeiAttributeValues?: (attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void;

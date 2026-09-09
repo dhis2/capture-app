@@ -99,7 +99,7 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const { enrollment: enrollmentSite, attributeValues, readOnly: trackedEntityInactive, programOwnerId } =
+    const { enrollment: enrollmentSite, attributeValues, readOnly: trackedEntityInactive, ownerOrgUnitId } =
         useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
@@ -122,7 +122,7 @@ export const EnrollmentEditEventPage = () => {
             enrollmentSite={enrollmentSite}
             attributeValues={attributeValues}
             trackedEntityInactive={trackedEntityInactive}
-            programOwnerId={programOwnerId}
+            ownerOrgUnitId={ownerOrgUnitId}
             event={storedEvent}
         />
     ) : <LoadingMaskForPage />;
@@ -138,7 +138,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     enrollmentSite,
     attributeValues,
     trackedEntityInactive,
-    programOwnerId,
+    ownerOrgUnitId,
     event,
 }: Props) => {
     const { navigate } = useNavigate();
@@ -162,10 +162,10 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const hideWidgets = useHideWidgetByRuleLocations(
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
-    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
+    const { orgUnit: ownerOrgUnit } = useCoreOrgUnit(ownerOrgUnitId);
     useEnrollmentScopeRuleEffects({
         enrollmentId,
-        orgUnit: programOwnerOrgUnit,
+        orgUnit: ownerOrgUnit,
         program,
         apiEnrollment: enrollmentSite,
         apiAttributeValues: attributeValues ?? undefined,
@@ -380,7 +380,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
                 onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
                 userInteractionInProgress={userInteractionInProgress}
-                programOwnerId={programOwnerId}
+                ownerOrgUnitId={ownerOrgUnitId}
             />
         </EnrollmentAccessProvider>
     );

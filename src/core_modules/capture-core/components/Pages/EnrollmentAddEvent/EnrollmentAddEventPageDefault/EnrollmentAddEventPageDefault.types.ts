@@ -10,7 +10,7 @@ import { Program } from '../../../../metaData';
 
 export type Props = {
     program: Program | null | undefined;
-    programOwnerId?: string;
+    ownerOrgUnitId?: string;
     stageId: string;
     orgUnitId: string;
     teiId: string;
@@ -53,5 +53,5 @@ export type ContainerProps = {
     attributeValues: Array<AttributeValue> | null | undefined;
     commonDataError: boolean;
     trackedEntityInactive: boolean;
-    programOwnerId?: string;
+    ownerOrgUnitId?: string;
 };

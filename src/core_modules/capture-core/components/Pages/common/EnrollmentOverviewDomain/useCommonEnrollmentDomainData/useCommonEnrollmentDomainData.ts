@@ -12,7 +12,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
         inactive: storedInactive,
-        programOwnerId: storedProgramOwnerId,
+        ownerOrgUnitId: storedProgramOwnerId,
     } = useSelector(({ enrollmentDomain }: any) => enrollmentDomain);
 
     const { data, error } = useApiDataQuery(
@@ -38,7 +38,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
             ?.find((enrollment: any) => enrollment.enrollment === enrollmentId),
         attributeValues: data?.attributes,
         inactive: Boolean(data?.inactive),
-        programOwnerId: data?.programOwners?.find((p: any) => p.program === programId)?.orgUnit,
+        ownerOrgUnitId: data?.programOwners?.find((p: any) => p.program === programId)?.orgUnit,
     };
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                 fetchedEnrollmentData.attributeValues
                     .map(({ attribute, value }: any) => ({ id: attribute, value })),
                 fetchedEnrollmentData.inactive,
-                fetchedEnrollmentData.programOwnerId,
+                fetchedEnrollmentData.ownerOrgUnitId,
             ));
         }
     }, [
@@ -59,15 +59,15 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         fetchedEnrollmentData.enrollment,
         fetchedEnrollmentData.attributeValues,
         fetchedEnrollmentData.inactive,
-        fetchedEnrollmentData.programOwnerId,
+        fetchedEnrollmentData.ownerOrgUnitId,
     ]);
 
     const inEffectData = enrollmentId === storedEnrollmentId ? {
         enrollment: storedEnrollment,
         attributeValues: storedAttributeValues,
         readOnly: Boolean(storedInactive),
-        programOwnerId: storedProgramOwnerId,
-    } : { enrollment: undefined, attributeValues: undefined, readOnly: false, programOwnerId: undefined };
+        ownerOrgUnitId: storedProgramOwnerId,
+    } : { enrollment: undefined, attributeValues: undefined, readOnly: false, ownerOrgUnitId: undefined };
 
     return {
         error,

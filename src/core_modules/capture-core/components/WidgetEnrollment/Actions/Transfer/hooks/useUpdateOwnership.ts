@@ -7,7 +7,7 @@ import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
-import { updateEnrollmentProgramOwner } from '../../../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
+import { updateEnrollmentOwnerOrgUnit } from '../../../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
 
 export type UpdateEnrollmentOwnership = (params: {
     orgUnitId: string;
@@ -67,7 +67,7 @@ export const useUpdateOwnership = ({
         }),
         {
             onSuccess: (_, { orgUnitId, programAccessLevel, orgUnitScopes }: any) => {
-                dispatch(updateEnrollmentProgramOwner(orgUnitId));
+                dispatch(updateEnrollmentOwnerOrgUnit(orgUnitId));
                 // If the user is transferring ownership to a capture scope, we stay on the same page
                 if (orgUnitScopes.destination === OrgUnitScopes.CAPTURE) {
                     refetchTEI();

@@ -68,10 +68,10 @@ export const EnrollmentPageDefault = () => {
         enrollment,
         attributeValues,
         readOnly: trackedEntityInactive,
-        programOwnerId,
+        ownerOrgUnitId,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const program = useTrackerProgram(programId);
-    const { orgUnit: programOwnerOrgUnit, error: programOwnerOrgUnitError } = useCoreOrgUnit(programOwnerId);
+    const { orgUnit: ownerOrgUnit, error: ownerOrgUnitError } = useCoreOrgUnit(ownerOrgUnitId);
 
     const onStatusToggleSuccess = useCallback(() => {
         dispatch(setTrackedEntityInactiveStatus(!trackedEntityInactive));
@@ -88,15 +88,15 @@ export const EnrollmentPageDefault = () => {
         https://dhis2.atlassian.net/browse/DHIS2-17574
     */
 
-    if (programMetaDataError || enrollmentsError || programOwnerOrgUnitError) {
+    if (programMetaDataError || enrollmentsError || ownerOrgUnitError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
-            { programMetaDataError, enrollmentsError, programOwnerOrgUnitError },
+            { programMetaDataError, enrollmentsError, ownerOrgUnitError },
         ));
     }
 
     useEnrollmentScopeRuleEffects({
         enrollmentId,
-        orgUnit: programOwnerOrgUnit,
+        orgUnit: ownerOrgUnit,
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
@@ -203,7 +203,7 @@ export const EnrollmentPageDefault = () => {
                 availableWidgets={WidgetsForEnrollmentPageDefault}
                 teiId={teiId}
                 orgUnitId={orgUnitId}
-                programOwnerId={programOwnerId}
+                ownerOrgUnitId={ownerOrgUnitId}
                 program={program}
                 stages={stages}
                 events={enrollment?.events}

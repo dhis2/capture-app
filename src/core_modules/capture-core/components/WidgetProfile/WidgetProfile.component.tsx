@@ -74,7 +74,7 @@ const WidgetProfilePlain = ({
     programId,
     enrollmentId,
     readOnlyMode = false,
-    programOwnerId = '',
+    ownerOrgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -289,7 +289,7 @@ const WidgetProfilePlain = ({
                         onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
-                        programOwnerId={programOwnerId}
+                        ownerOrgUnitId={ownerOrgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}

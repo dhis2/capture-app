@@ -37,7 +37,7 @@ export const EnrollmentAddEventPageDefault = ({
     attributeValues,
     commonDataError,
     trackedEntityInactive,
-    programOwnerId,
+    ownerOrgUnitId,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
@@ -116,11 +116,11 @@ export const EnrollmentAddEventPageDefault = ({
     const dataEntryHasChanges = useSelector((state: ReduxState) => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
     const trackerProgram = useTrackerProgram(programId);
-    const { orgUnit: programOwnerOrgUnit } = useCoreOrgUnit(programOwnerId);
+    const { orgUnit: ownerOrgUnit } = useCoreOrgUnit(ownerOrgUnitId);
 
     useEnrollmentScopeRuleEffects({
         enrollmentId,
-        orgUnit: programOwnerOrgUnit,
+        orgUnit: ownerOrgUnit,
         program: trackerProgram,
         apiEnrollment: enrollment ?? undefined,
         apiAttributeValues: attributeValues ?? undefined,
@@ -219,7 +219,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
                 trackedEntityInactive={trackedEntityInactive}
-                programOwnerId={programOwnerId}
+                ownerOrgUnitId={ownerOrgUnitId}
             />
         </>
     );

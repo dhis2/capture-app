@@ -28,7 +28,7 @@ const {
     DELETE_ENROLLMENT_EVENT_RELATIONSHIP,
     SET_TRACKED_ENTITY_INACTIVE_STATUS,
     SET_ENROLLMENT_RULE_EFFECTS,
-    UPDATE_ENROLLMENT_PROGRAM_OWNER,
+    UPDATE_ENROLLMENT_OWNER_ORG_UNIT,
 } = enrollmentSiteActionTypes;
 
 const setAssignee = (state, action) => {
@@ -45,23 +45,23 @@ const setAssignee = (state, action) => {
 export const enrollmentDomainDesc = createReducerDescription(
     {
         [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, {
-            payload: { enrollment, attributeValues, inactive, programOwnerId },
+            payload: { enrollment, attributeValues, inactive, ownerOrgUnitId },
         }) => ({
             ...state,
             enrollment,
             attributeValues,
             enrollmentId: enrollment?.enrollment,
             inactive,
-            programOwnerId,
+            ownerOrgUnitId,
             ruleEffects: null,
         }),
         [SET_ENROLLMENT_RULE_EFFECTS]: (state, { payload: { rulesEffects } }) => ({
             ...state,
             ruleEffects: rulesEffects ?? null,
         }),
-        [UPDATE_ENROLLMENT_PROGRAM_OWNER]: (state, { payload: { programOwnerId } }) => ({
+        [UPDATE_ENROLLMENT_OWNER_ORG_UNIT]: (state, { payload: { ownerOrgUnitId } }) => ({
             ...state,
-            programOwnerId,
+            ownerOrgUnitId,
             ruleEffects: null,
         }),
         [SET_TRACKED_ENTITY_INACTIVE_STATUS]: (state, { payload: { inactive } }) => ({

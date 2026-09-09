@@ -143,7 +143,7 @@ export const cleanTeiModal = () => actionCreator(dataEntryActionTypes.CLEAN_TEI_
 export const updateTeiRequest = ({
     itemId,
     dataEntryId,
-    programOwnerId,
+    ownerOrgUnitId,
     trackedEntityTypeId,
     trackedEntityInstanceId,
     onSaveExternal,
@@ -153,7 +153,7 @@ export const updateTeiRequest = ({
 }: {
     itemId: string;
     dataEntryId: string;
-    programOwnerId: string;
+    ownerOrgUnitId: string;
     trackedEntityTypeId: string;
     trackedEntityInstanceId: string;
     onSaveExternal?: (eventServerValues: any, uid: string) => void;
@@ -164,7 +164,7 @@ export const updateTeiRequest = ({
     actionCreator(dataEntryActionTypes.TEI_UPDATE_REQUEST)({
         itemId,
         dataEntryId,
-        programOwnerId,
+        ownerOrgUnitId,
         trackedEntityTypeId,
         trackedEntityInstanceId,
         formFoundation,
