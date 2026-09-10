@@ -8,6 +8,7 @@ export {
     getProgramId,
     getProgramRuleActions,
     getOptionSetId,
+    getUseNameForOptionSet,
     getTrackedEntityTypeId,
     getProgramTrackedEntityAttributes,
 } from './convertors';

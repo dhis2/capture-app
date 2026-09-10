@@ -3,6 +3,7 @@ import {
     getTrackedEntityAttributeId,
     getDataElementId,
     getProgramId,
+    getUseNameForOptionSet,
     getProgramRuleActions,
     getProgramStageId,
 } from '../helpers';
@@ -13,6 +14,7 @@ const addProgramVariables = (program: any, programRuleVariables: any[]) => {
         programId: getProgramId(programRulesVariable),
         dataElementId: getDataElementId(programRulesVariable),
         trackedEntityAttributeId: getTrackedEntityAttributeId(programRulesVariable),
+        useNameForOptionSet: getUseNameForOptionSet(programRulesVariable),
     }));
 };
 
