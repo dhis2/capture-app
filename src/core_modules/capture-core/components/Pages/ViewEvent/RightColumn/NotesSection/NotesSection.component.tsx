@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
@@ -14,6 +13,8 @@ import type { PlainProps } from './NotesSection.types';
 import { LabelKeys } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
+
+const customLabels = [LabelKeys.eventSingular, LabelKeys.notePlural, LabelKeys.noteSingular] as const;
 
 const getStyles = (theme: any) => ({
     badge: {
@@ -93,6 +94,5 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 }
 
-export const NotesSectionComponent = withCustomLabels(
-    [LabelKeys.eventSingular, LabelKeys.notePlural, LabelKeys.noteSingular] as const,
-)(withStyles(getStyles)(NotesSectionPlain)) as ComponentType<PlainProps>;
+export const NotesSectionComponent =
+    withCustomLabels(customLabels)(withStyles(getStyles)(NotesSectionPlain)) as ComponentType<PlainProps>;

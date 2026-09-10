@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { ComponentType } from 'react';
 import log from 'loglevel';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -17,8 +18,11 @@ import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSel
 import { withGotoInterface } from '../../../../../FormFields/New';
 import { LabelKeys, useTermLabel } from '../../../../../../metaData';
 import type { SearchGroup } from '../../../../../../metaData';
+import { withCustomLabels } from '../../../../../../HOC/withCustomLabels';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
+
+const customLabels = [LabelKeys.attributePlural] as const;
 
 const getStyles = (theme: any) => ({
     orgUnitSection: {
@@ -70,10 +74,13 @@ type OwnProps = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
+};
+
+type LabelProps = {
     attributesLabel: string;
 };
 
-type Props = OwnProps & WithStyles<typeof getStyles>;
+type Props = OwnProps & LabelProps & WithStyles<typeof getStyles>;
 
 class SearchFormPlain extends React.Component<Props, State> {
     formInstance: any;
@@ -256,9 +263,5 @@ class SearchFormPlain extends React.Component<Props, State> {
     }
 }
 
-const TeiSearchFormWithStyles = withStyles(getStyles)(SearchFormPlain) as any;
-
-export const TeiSearchFormComponent = (props: Omit<OwnProps, 'attributesLabel'>) => {
-    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural]);
-    return <TeiSearchFormWithStyles {...props} attributesLabel={attributesLabel} />;
-};
+export const TeiSearchFormComponent =
+    withCustomLabels(customLabels)(withStyles(getStyles)(SearchFormPlain)) as ComponentType<OwnProps>;

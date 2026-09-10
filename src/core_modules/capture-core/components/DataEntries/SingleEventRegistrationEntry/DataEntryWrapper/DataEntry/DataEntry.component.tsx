@@ -650,11 +650,11 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
             },
             [dataEntrySectionNames.NOTES]: {
                 placement: placements.BOTTOM,
-                name: notesLabel,
+                name: capitalizeFirstLetter(notesLabel),
             },
             [dataEntrySectionNames.RELATIONSHIPS]: {
                 placement: placements.BOTTOM,
-                name: relationshipsLabel,
+                name: capitalizeFirstLetter(relationshipsLabel),
             },
             [dataEntrySectionNames.ASSIGNEE]: {
                 placement: placements.BOTTOM,

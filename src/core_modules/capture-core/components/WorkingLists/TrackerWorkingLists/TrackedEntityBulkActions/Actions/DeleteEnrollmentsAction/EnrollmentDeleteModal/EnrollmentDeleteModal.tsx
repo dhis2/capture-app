@@ -27,9 +27,8 @@ const EnrollmentDeleteModalPlain = ({
     setIsDeleteDialogOpen,
     classes,
 }: PlainProps & WithStyles<typeof styles>) => {
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
-    const { enrollmentsLabel, eventsLabel } = useTermLabel(
-        [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
+    const { enrollmentLabel, enrollmentsLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
         { programId },
     );
     const {
@@ -122,8 +121,11 @@ const EnrollmentDeleteModalPlain = ({
             <ModalContent>
                 <div className={classes.modalContent}>
                     <div>
-                        {/* eslint-disable-next-line max-len */}
-                        {i18n.t('This action will permanently delete the selected {{enrollmentsLabel}}, including all associated data and {{eventsLabel}}.', { enrollmentsLabel, eventsLabel })}
+                        {i18n.t(
+                            'This action will permanently delete the selected {{enrollmentsLabel}}, '
+                            + 'including all associated data and {{eventsLabel}}.',
+                            { enrollmentsLabel, eventsLabel },
+                        )}
                     </div>
 
                     <div>

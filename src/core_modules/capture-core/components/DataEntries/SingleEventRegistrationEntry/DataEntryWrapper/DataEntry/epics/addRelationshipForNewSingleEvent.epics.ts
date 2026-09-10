@@ -74,10 +74,12 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
             const toEntity = payload.entity;
-
-
             const programId = state.currentSelections.programId;
-            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+            const { eventLabel, relationshipLabel } = getTermLabel(
+                [LabelKeys.eventSingular, LabelKeys.relationshipSingular],
+                { programId },
+            );
+
             const newRelationship = {
                 clientId: uuid(),
                 from: {
@@ -98,14 +100,12 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 r.to.id &&
                 r.to.id === newRelationship.to.id)
             ) {
-                const { relationshipLabel } = getTermLabel([LabelKeys.relationshipSingular], { programId });
                 const message = i18n.t(
                     '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
                         relationshipLabel,
                         entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
-                        interpolation: { escapeValue: false },
                     },
                 );
                 return relationshipAlreadyExists(dataEntryId, itemId, message);

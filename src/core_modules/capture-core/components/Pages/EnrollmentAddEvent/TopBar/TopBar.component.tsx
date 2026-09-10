@@ -59,7 +59,7 @@ export const EnrollmentAddEventTopBar = ({
                 onClear={() => onResetEnrollmentId()}
                 options={enrollmentsAsOptions || []}
                 selectedValue={enrollmentId}
-                title={enrollmentLabel}
+                title={capitalizeFirstLetter(enrollmentLabel)}
                 isUserInteractionInProgress={userInteractionInProgress}
             />
             {stageName && (

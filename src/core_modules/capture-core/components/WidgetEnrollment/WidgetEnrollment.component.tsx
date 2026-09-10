@@ -96,7 +96,7 @@ const WidgetEnrollmentPlain = ({
 
     const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
     const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
-    // Example use of getTermLabelFromProgram.
+
     const { enrollmentLabel, followUpLabel } = getTermLabelFromProgram(
         [LabelKeys.enrollmentSingular, LabelKeys.followUpSingular],
         { program },

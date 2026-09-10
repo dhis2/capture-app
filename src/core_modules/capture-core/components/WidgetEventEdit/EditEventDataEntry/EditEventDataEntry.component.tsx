@@ -167,16 +167,17 @@ const buildScheduleDateSettingsFn = () => {
                             const isScheduleableStatus =
                             [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
 
-                            const eventLabel = innerProps.eventLabel;
-                            const eventsLabel = innerProps.eventsLabel;
                             return isScheduleableStatus ?
                                 i18n.t(
                                     'Go to “Schedule” tab to reschedule this {{eventLabel}}',
-                                    { eventLabel },
+                                    { eventLabel: innerProps.eventLabel },
                                 ) :
                                 i18n.t(
                                     'Scheduled date cannot be changed for {{ eventStatus }} {{eventsLabel}}',
-                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus], eventsLabel },
+                                    {
+                                        eventStatus: translatedStatusTypes()[innerProps.eventStatus],
+                                        eventsLabel: innerProps.eventsLabel,
+                                    },
                                 );
                         },
                     })(

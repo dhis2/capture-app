@@ -64,9 +64,8 @@ const CompleteActionPlain = ({
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
-    const { enrollmentsLabel, eventsLabel } = useTermLabel(
-        [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
+    const { enrollmentLabel, enrollmentsLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
         { programId },
     );
     const {
@@ -105,11 +104,14 @@ const CompleteActionPlain = ({
                 <div className={classes.container}>
                     <span>
                         {hasPartiallyUploadedEnrollments ?
-                            // eslint-disable-next-line max-len
-                            i18n.t('Some {{enrollmentsLabel}} were completed successfully, but there was an error while completing the rest. Please see the details below.', { enrollmentsLabel }) :
                             i18n.t(
-                                // eslint-disable-next-line max-len
-                                'There was an error while completing the {{enrollmentsLabel}}. Please see the details below.',
+                                'Some {{enrollmentsLabel}} were completed successfully, but there was an error '
+                                + 'while completing the rest. Please see the details below.',
+                                { enrollmentsLabel },
+                            ) :
+                            i18n.t(
+                                'There was an error while completing the {{enrollmentsLabel}}. '
+                                + 'Please see the details below.',
                                 { enrollmentsLabel },
                             )
                         }

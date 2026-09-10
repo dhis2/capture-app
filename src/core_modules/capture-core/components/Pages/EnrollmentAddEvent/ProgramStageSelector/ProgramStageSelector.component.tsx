@@ -72,7 +72,6 @@ const ProgramStageSelectorComponentPlain = ({
                         content={i18n.t("You can't add any more {{ programStageName }} {{eventsLabel}}", {
                             programStageName: programStage.displayName,
                             eventsLabel,
-                            interpolation: { escapeValue: false },
                         })}
                         enabled={disableStage}
                     >

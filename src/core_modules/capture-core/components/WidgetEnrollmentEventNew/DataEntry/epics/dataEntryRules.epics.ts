@@ -50,7 +50,7 @@ const runRulesForNewEvent = async ({
     const stage = program.getStage(stageId);
     if (!stage) {
         const { programStageLabel } = getTermLabel([LabelKeys.programStageSingular], { programId, stageId });
-        throw Error(i18n.t('{{programStageLabel}} not found', { programStageLabel }));
+        throw new Error(i18n.t('{{programStageLabel}} not found', { programStageLabel }));
     }
 
     const foundation = stage.stageForm;

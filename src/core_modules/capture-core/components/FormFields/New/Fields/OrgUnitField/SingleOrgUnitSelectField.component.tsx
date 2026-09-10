@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
+import type { ComponentType } from 'react';
 import { cx } from '@emotion/css';
 import { debounce } from 'lodash';
 import { v4 as uuid } from 'uuid';
@@ -111,10 +112,13 @@ type SingleOrgUnitSelectFieldProps = {
     disabled?: boolean;
     maxTreeHeight?: number;
     autoSelectSingleOrgUnit?: boolean;
+};
+
+type LabelProps = {
     orgUnitLabel: string;
 };
 
-type Props = SingleOrgUnitSelectFieldProps & WithStyles<typeof getStyles>;
+type Props = SingleOrgUnitSelectFieldProps & LabelProps & WithStyles<typeof getStyles>;
 
 class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnitSelectFieldState> {
     anchorRef: React.RefObject<HTMLDivElement>;
@@ -327,4 +331,6 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
         );
     }
 }
-export const SingleOrgUnitSelectField = withCustomLabels(customLabels)(withStyles(getStyles)(SingleOrgUnitSelectFieldPlain));
+export const SingleOrgUnitSelectField = withCustomLabels(customLabels)(
+    withStyles(getStyles)(SingleOrgUnitSelectFieldPlain),
+) as ComponentType<SingleOrgUnitSelectFieldProps>;

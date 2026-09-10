@@ -181,7 +181,6 @@ const WidgetProfilePlain = ({
                             ? i18n.t('No {{attributeLabel}} configured for {{trackedEntityTypeName}}', {
                                 attributeLabel,
                                 trackedEntityTypeName,
-                                interpolation: { escapeValue: false },
                             })
                             : i18n.t('No {{attributeLabel}} configured', { attributeLabel })}
                     </p>

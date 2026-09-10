@@ -54,6 +54,8 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
+const customLabels = [LabelKeys.enrollmentSingular] as const;
+
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
@@ -107,7 +109,7 @@ const getEnrollmentDateSettings = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -154,7 +156,7 @@ const getIncidentDateSettings = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -202,7 +204,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
                 onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                 onGetCustomFieldLabeClass: (props: any) =>
                     `${props.fieldOptions &&
-                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
             })(
                 withDisplayMessages()(
                     withInternalChangeHandler()(
@@ -221,7 +223,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
                 onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                 onGetCustomFieldLabeClass: (props: any) =>
                     `${props.fieldOptions &&
-                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
             })(
                 withDisplayMessages()(
                     withInternalChangeHandler()(
@@ -290,7 +292,7 @@ const getCategoryOptionsSettingsFn = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -373,8 +375,12 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 
     render() {
         const {
-            enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, programId,
-            enrollmentLabel, ...passOnProps
+            enrollmentMetadata,
+            firstStageMetaData,
+            relatedStageActionsOptions,
+            programId,
+            enrollmentLabel,
+            ...passOnProps
         } = this.props;
 
         const dataEntrySections = {
@@ -405,14 +411,10 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const FinalEnrollmentDataEntryWithLabels = withCustomLabels(
-    [LabelKeys.enrollmentSingular] as const,
-)(FinalEnrollmentDataEntry);
-
 const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
     withDataEntryFields(
         getCategoryOptionsSettingsFn(),
-    )(FinalEnrollmentDataEntryWithLabels));
+    )(withCustomLabels(customLabels)(FinalEnrollmentDataEntry)));
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);

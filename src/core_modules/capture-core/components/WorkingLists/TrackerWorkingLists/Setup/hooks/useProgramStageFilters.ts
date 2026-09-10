@@ -72,7 +72,6 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
                     programStageLabel,
                     label: occurredAtLabel,
-                    interpolation: { escapeValue: false },
                 }),
                 transformRecordsFilter: (filter: string) => {
                     const queryArgs: any = {};
@@ -103,7 +102,6 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                 tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
                     programStageLabel,
                     label: ADDITIONAL_FILTERS_LABELS.status,
-                    interpolation: { escapeValue: false },
                 }),
                 transformRecordsFilter: (rawFilter: string) => ({
                     status: rawFilter.split(':')[1],
@@ -119,7 +117,6 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                         tooltipContent: i18n.t('Choose a {{programStageLabel}} to filter by {{label}}', {
                             programStageLabel,
                             label: scheduledAtLabel,
-                            interpolation: { escapeValue: false },
                         }),
                         transformRecordsFilter: (filter: string) => {
                             const queryArgs: any = {};

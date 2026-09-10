@@ -167,7 +167,7 @@ export const openEventForEditInDataEntry = ({
         const stage = getStageFromEvent(eventContainer.event)?.stage;
         if (!stage) {
             const { programStageLabel } = getTermLabel([LabelKeys.programStageSingular], { programId: program.id });
-            throw Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+            throw new Error(i18n.t('{{programStageLabel}} not found in rules execution', {
                 programStageLabel,
             }));
         }

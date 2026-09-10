@@ -18,6 +18,8 @@ import { LabelKeys } from '../../../../../metaData';
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
 
+const customLabels = [LabelKeys.eventSingular, LabelKeys.relationshipPlural] as const;
+
 const getStyles = (theme: any) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -129,6 +131,5 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 }
 
-export const RelationshipsSectionComponent = withCustomLabels(
-    [LabelKeys.eventSingular, LabelKeys.relationshipPlural] as const,
-)(withStyles(getStyles)(RelationshipsSectionPlain)) as ComponentType<PlainProps>;
+export const RelationshipsSectionComponent =
+    withCustomLabels(customLabels)(withStyles(getStyles)(RelationshipsSectionPlain)) as ComponentType<PlainProps>;

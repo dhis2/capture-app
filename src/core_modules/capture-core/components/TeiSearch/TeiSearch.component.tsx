@@ -29,8 +29,12 @@ type State = {
     programSectionOpen: boolean;
 };
 
-class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, State> {
-    constructor(props: Props & WithStyles<typeof styles>) {
+type LabelProps = {
+    attributesLabel: string;
+};
+
+class TeiSearchPlain extends React.Component<Props & LabelProps & WithStyles<typeof styles>, State> {
+    constructor(props: Props & LabelProps & WithStyles<typeof styles>) {
         super(props);
         this.state = { programSectionOpen: true };
     }
@@ -177,7 +181,10 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
 
 const TeiSearchWithStyles = withStyles(styles)(TeiSearchPlain);
 
-export const TeiSearchComponent = (props: Omit<Props, 'attributesLabel'>) => {
+// Hand-rolled wrapper (not withCustomLabels HOC): the HOC reads programId from props,
+// but this component's program source is `selectedProgramId` — passing it explicitly to
+// useTermLabel keeps the correct program's custom labels when Redux currentSelections differs.
+export const TeiSearchComponent = (props: Props) => {
     const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: props.selectedProgramId });
     return <TeiSearchWithStyles {...props} attributesLabel={attributesLabel} />;
 };

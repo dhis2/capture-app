@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { ComponentType } from 'react';
 import log from 'loglevel';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -17,8 +18,15 @@ import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSel
 import type { Props } from './TeiSearchForm.types';
 import { withGotoInterface } from '../../FormFields/New';
 import { useTermLabel, LabelKeys } from '../../../metaData';
+import { withCustomLabels } from '../../../HOC/withCustomLabels';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
+
+const customLabels = [LabelKeys.attributePlural] as const;
+
+type LabelProps = {
+    attributesLabel: string;
+};
 
 const styles: Readonly<any> = (theme: any) => ({
     orgUnitSection: {
@@ -60,10 +68,10 @@ const MinAttributesRequiredMessage = ({ count }: { count: number }) => {
     );
 };
 
-class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>, State> {
+class SearchFormPlain extends React.Component<Props & LabelProps & WithStyles<typeof styles>, State> {
     formInstance: any;
     orgUnitSelectorInstance: typeof SearchOrgUnitSelector | undefined;
-    constructor(props: Props & WithStyles<typeof styles>) {
+    constructor(props: Props & LabelProps & WithStyles<typeof styles>) {
         super(props);
         this.state = {
             showMissingSearchCriteriaModal: false,
@@ -236,9 +244,5 @@ class SearchFormPlain extends React.Component<Props & WithStyles<typeof styles>,
     }
 }
 
-const TeiSearchFormWithStyles = withStyles(styles)(SearchFormPlain);
-
-export const TeiSearchFormComponent = (props: Omit<Props, 'attributesLabel'>) => {
-    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural]);
-    return <TeiSearchFormWithStyles {...props} attributesLabel={attributesLabel} />;
-};
+export const TeiSearchFormComponent =
+    withCustomLabels(customLabels)(withStyles(styles)(SearchFormPlain)) as ComponentType<Props>;
