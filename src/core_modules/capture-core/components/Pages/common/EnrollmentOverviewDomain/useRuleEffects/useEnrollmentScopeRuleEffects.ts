@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApplicableRuleEffectsForTrackerProgram } from '../../../../../rules';
 import type { TrackerProgram } from '../../../../../metaData';
@@ -24,12 +24,19 @@ export const useEnrollmentScopeRuleEffects = ({
     const dispatch = useDispatch();
     const domainAligned = useSelector(({ enrollmentDomain }: any) =>
         Boolean(enrollmentId) && enrollmentDomain?.enrollmentId === enrollmentId);
+    const hasFreshEffectsOnMount = useSelector(({ enrollmentDomain }: any) =>
+        enrollmentDomain?.enrollmentId === enrollmentId && enrollmentDomain?.ruleEffects != null);
+    const shouldSkipInitialRun = useRef(hasFreshEffectsOnMount);
     const attributeValues = useAttributeValuesForRules(program, apiAttributeValues);
     const enrollmentData = useEnrollmentData(apiEnrollment);
     const otherEvents = useEventsData(apiEnrollment, program);
 
     useEffect(() => {
         if (!domainAligned || !orgUnit || !attributeValues || !enrollmentData || !otherEvents) return;
+        if (shouldSkipInitialRun.current) {
+            shouldSkipInitialRun.current = false;
+            return;
+        }
         const effects = getApplicableRuleEffectsForTrackerProgram({
             program,
             orgUnit,
