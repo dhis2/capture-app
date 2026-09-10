@@ -48,6 +48,10 @@ const ALLOWLIST = new Set([
     'This is not an event program or the metadata is corrupt. See log for details.',
     // "event program" = DHIS2 programType, not user's event terminology
     '{{programName}} is an event program and does not have {{enrollmentsLabel}}.',
+    // NoSelectionsInfoBox — only renders when no program is selected, so no program-specific label to use
+    'Choose a program and organisation unit to see existing data and create new records.',
+    // ProgramList — program picker shows generic label rather than any single program's custom label
+    'Some programs are being filtered by the chosen organisation unit',
 ]);
 
 // POT may split long msgids across multiple lines; concatenate them.
