@@ -106,11 +106,7 @@ function reportViolations(violations) {
         console.error('');
     }
     console.error(`\x1b[1;31m${violations.length} custom-terminology violation(s) in en.pot.\x1b[0m\n`);
-    console.error('Fix by wrapping the offending word in a custom-terminology template. Example:');
-    console.error("  BEFORE:  i18n.t('Delete event')");
-    console.error("  AFTER:   i18n.t('Delete {{eventLabel}}', { eventLabel })");
-    console.error("  Where `eventLabel = useTermLabel('event', { programId })`");
-    console.error('  (or getTermLabel outside React).\n');
+    console.error('Fix by wrapping the offending word in a custom-terminology template.\n');
     console.error('If a hit is a genuine exception, add the exact msgid to the ALLOWLIST');
     console.error('in scripts/verifyCustomTerminology.mjs.');
     console.error(`\n${DIVIDER}\n`);
