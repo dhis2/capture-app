@@ -38,6 +38,7 @@ const getStyles: Readonly<any> = {
     additionalFiltersTitle: {
         color: colors.grey600,
         fontSize: 12,
+        textTransform: 'uppercase',
     },
 };
 
@@ -88,7 +89,7 @@ export const FiltersRowsPlain = ({
                     <div className={classes.break} />
                     <div className={classes.additionalFiltersContainer}>
                         <div className={classes.additionalFiltersTitle}>
-                            {i18n.t('{{programStageLabel}} filters', { programStageLabel }).toUpperCase()}
+                            {i18n.t('{{programStageLabel}} filters', { programStageLabel })}
                         </div>
                         <div className={classes.break} />
                         <Filters

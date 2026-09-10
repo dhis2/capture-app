@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 // @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, spacers } from '@dhis2/ui';
@@ -21,22 +21,20 @@ const styles = () => ({
 });
 
 type OwnProps = {
-    handleClickOrgUnit?: (
-        orgUnitId: string | null | undefined,
-        orgUnitObject: Record<string, any> | null | undefined
-    ) => void;
+    handleClickOrgUnit?: (orgUnitId: string, orgUnitObject: Record<string, any>) => void;
     onReset: () => void;
     selectedOrgUnitId?: string;
-    selectedOrgUnit?: {
-        name: string;
-    };
+    selectedOrgUnit?: Record<string, any>;
     previousOrgUnitId?: string;
     isReadOnly?: boolean;
     tooltip?: boolean;
+};
+
+type LabelProps = {
     orgUnitLabel: string;
 };
 
-type Props = OwnProps & WithStyles<typeof styles>;
+type Props = OwnProps & LabelProps & WithStyles<typeof styles>;
 
 type State = {
     open: boolean;
@@ -99,4 +97,5 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
     }
 }
 
-export const OrgUnitSelector = withCustomLabels(customLabels)(withStyles(styles)(OrgUnitSelectorPlain));
+export const OrgUnitSelector =
+    withCustomLabels(customLabels)(withStyles(styles)(OrgUnitSelectorPlain)) as ComponentType<OwnProps>;

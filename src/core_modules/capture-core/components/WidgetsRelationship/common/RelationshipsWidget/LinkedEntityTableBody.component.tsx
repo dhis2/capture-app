@@ -65,12 +65,9 @@ const LinkedEntityTableBodyPlain = ({
                                                     <DataTableCell
                                                         className={classes.row}
                                                         key={`${entityId}-${id}`}
-                                                        onClick={() => !pendingApiResponse &&
-                                                            onLinkedRecordClick({
-                                                                ...context.navigation,
-                                                                ...navigation,
-                                                            } as Parameters<typeof onLinkedRecordClick>[0])
-                                                        }
+                                                        onClick={() => !pendingApiResponse && onLinkedRecordClick(
+                                                            { ...context.navigation, ...navigation } as any,
+                                                        )}
                                                         // @ts-expect-error - UI library expects a ref prop,
                                                         // but it is not defined in the types
                                                         ref={(tableCell) => {

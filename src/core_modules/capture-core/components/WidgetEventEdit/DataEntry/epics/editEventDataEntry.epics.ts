@@ -57,7 +57,7 @@ const runRulesForEditSingleEvent = async ({
 
     if (!stage) {
         const { programStageLabel } = getTermLabel([LabelKeys.programStageSingular], { programId });
-        throw Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+        throw new Error(i18n.t('{{programStageLabel}} not found in rules execution', {
             programStageLabel,
         }));
     }

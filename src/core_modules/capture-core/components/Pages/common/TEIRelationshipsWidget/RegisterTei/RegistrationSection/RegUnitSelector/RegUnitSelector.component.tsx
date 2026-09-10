@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
@@ -17,7 +17,11 @@ const getStyles = () => ({
     },
 });
 
-type Props = RegUnitSelectorProps & WithStyles<typeof getStyles>;
+type LabelProps = {
+    orgUnitLabel: string;
+};
+
+type Props = RegUnitSelectorProps & LabelProps & WithStyles<typeof getStyles>;
 
 class RegUnitSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
@@ -61,4 +65,5 @@ class RegUnitSelectorPlain extends React.Component<Props> {
     }
 }
 
-export const RegUnitSelectorComponent = withCustomLabels(customLabels)(withStyles(getStyles)(RegUnitSelectorPlain));
+export const RegUnitSelectorComponent =
+    withCustomLabels(customLabels)(withStyles(getStyles)(RegUnitSelectorPlain)) as ComponentType<RegUnitSelectorProps>;

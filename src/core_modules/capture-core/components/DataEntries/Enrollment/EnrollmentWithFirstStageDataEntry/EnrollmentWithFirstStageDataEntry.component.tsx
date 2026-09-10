@@ -28,6 +28,8 @@ import { stageMainDataIds } from './getDataEntryPropsToInclude';
 import { withTransformPropName } from '../../../../HOC';
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 
+const customLabels = [LabelKeys.eventSingular] as const;
+
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
@@ -271,6 +273,4 @@ const StageLocationHOC = withDataEntryFieldIfApplicable(getStageGeometrySettings
 const CompleteHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC);
 const AssigneeHOC = withDataEntryFieldIfApplicable(getAssigneeSettingsFn())(CompleteHOC);
 const ReportDateHOC = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(AssigneeHOC);
-export const FirstStageDataEntry = withCustomLabels(
-    [LabelKeys.eventSingular] as const,
-)(ReportDateHOC);
+export const FirstStageDataEntry = withCustomLabels(customLabels)(ReportDateHOC);

@@ -63,7 +63,6 @@ export const WidgetTrackedEntityRelationship = ({
             title={i18n.t('{{trackedEntityTypeName}} {{relationshipLabel}}', {
                 trackedEntityTypeName,
                 relationshipLabel,
-                interpolation: { escapeValue: false },
             })}
             isLoading={isLoading}
             relationships={relationships}

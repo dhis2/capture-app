@@ -103,6 +103,14 @@ const handleNotFoundError = async ({ programOwnerId, programId, breakTheGlassAcc
     );
 };
 
+const buildGenericFetchError = (programId: string) => {
+    const { enrollmentsLabel } = getTermLabel([LabelKeys.enrollmentPlural], { programId });
+    return i18n.t(
+        'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
+        { enrollmentsLabel },
+    );
+};
+
 const handleErrorsFromNewerBackends = ({
     error,
     programOwnerId,
@@ -119,12 +127,7 @@ const handleErrorsFromNewerBackends = ({
             querySingleResource,
         }));
     }
-    const { enrollmentsLabel } = getTermLabel([LabelKeys.enrollmentPlural], { programId });
-    const errorMessage = i18n.t(
-        'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
-        { enrollmentsLabel },
-    );
-    return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
+    return of(showErrorViewOnEnrollmentPage({ error: buildGenericFetchError(programId) }));
 };
 
 const handleErrorsFromOlderBackends = (error: any, programId: string) => {
@@ -140,12 +143,7 @@ const handleErrorsFromOlderBackends = (error: any, programId: string) => {
             return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
         }
     }
-    const { enrollmentsLabel } = getTermLabel([LabelKeys.enrollmentPlural], { programId });
-    const errorMessage = i18n.t(
-        'An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid url.',
-        { enrollmentsLabel },
-    );
-    return showErrorViewOnEnrollmentPage({ error: errorMessage });
+    return showErrorViewOnEnrollmentPage({ error: buildGenericFetchError(programId) });
 };
 
 export const fetchEnrollmentsEpic = (action$: any, store: any, { querySingleResource }: any) =>

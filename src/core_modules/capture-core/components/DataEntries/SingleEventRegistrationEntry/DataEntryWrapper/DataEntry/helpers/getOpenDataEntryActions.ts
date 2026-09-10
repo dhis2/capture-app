@@ -69,11 +69,13 @@ export const getOpenDataEntryActions = (
         [LabelKeys.orgUnitSingular, LabelKeys.eventSingular, LabelKeys.noteSingular],
         { programId },
     );
+
     const dataEntryPropsToInclude = buildDataEntryPropsToInclude(
         orgUnitLabel,
         eventLabel,
         noteLabel,
     );
+
     if (programCategory && programCategory.categories) {
         dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,

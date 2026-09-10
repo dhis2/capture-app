@@ -1,4 +1,5 @@
 import React from 'react';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { LabelKeys, useTermLabel } from '../../../metaData';
 import {
     ScopeSelector,
@@ -74,7 +75,7 @@ export const TopBar = ({
                     onSelect={id => setEnrollmentId({ enrollmentId: id })}
                     options={enrollmentsAsOptions}
                     selectedValue={enrollmentId}
-                    title={enrollmentLabel}
+                    title={capitalizeFirstLetter(enrollmentLabel)}
                 />
             ) : <></>}
             <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />

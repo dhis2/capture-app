@@ -212,7 +212,7 @@ const SearchResultsIndex = ({
                 <ConditionalTooltip
                     enabled={!availableSearchGroup}
                     content={i18n.t('No searchable {{attributesLabel}} for {{trackedEntityName}}', {
-                        trackedEntityName, attributesLabel, interpolation: { escapeValue: false },
+                        trackedEntityName, attributesLabel,
                     })}
                 >
                     <Button

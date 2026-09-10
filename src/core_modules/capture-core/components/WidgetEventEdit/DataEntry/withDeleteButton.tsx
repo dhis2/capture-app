@@ -5,12 +5,18 @@ import type { Props, State } from './withDeleteButton.types';
 import { LabelKeys } from '../../../metaData';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
 
-type InternalProps = Props & { eventLabel: string };
+const customLabels = [LabelKeys.eventSingular] as const;
+
+type LabelProps = {
+    eventLabel: string;
+};
+
+type PropsWithLabel = Props & LabelProps;
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
-    class DeleteButtonHOC extends React.Component<InternalProps, State> {
+    class DeleteButtonHOC extends React.Component<PropsWithLabel, State> {
         innerInstance: any;
-        constructor(props: InternalProps) {
+        constructor(props: PropsWithLabel) {
             super(props);
             this.state = {
                 isOpen: false,
@@ -89,4 +95,4 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
 
 
 export const withDeleteButton = () => (InnerComponent: React.ComponentType<any>) =>
-    withCustomLabels([LabelKeys.eventSingular] as const)(getDeleteButton(InnerComponent));
+    withCustomLabels(customLabels)(getDeleteButton(InnerComponent));

@@ -92,7 +92,7 @@ export const TopBar = ({
                 onClear={() => resetEnrollmentId('enrollment', { programId: programId ?? undefined, teiId })}
                 options={enrollmentsAsOptions}
                 selectedValue={enrollmentId}
-                title={enrollmentLabel}
+                title={capitalizeFirstLetter(enrollmentLabel)}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             />
             <SingleLockedSelect

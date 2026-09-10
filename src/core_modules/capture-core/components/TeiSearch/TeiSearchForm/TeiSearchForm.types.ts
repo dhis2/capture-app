@@ -10,5 +10,4 @@ export type Props = {
     searchGroup: SearchGroup;
     attributesWithValuesCount: number;
     formsValues: { [formElement: string]: any };
-    attributesLabel: string;
 };

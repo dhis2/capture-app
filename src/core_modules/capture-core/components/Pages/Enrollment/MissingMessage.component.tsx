@@ -254,10 +254,9 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
             <IncompleteSelectionsMessage>
-                {/* eslint-disable-next-line max-len */}
                 {i18n.t(
-                    // eslint-disable-next-line max-len
-                    'You do not have permissions to access to this program, {{orgUnitLabel}} or record, contact your administrator for more information.',
+                    'You do not have permissions to access to this program, {{orgUnitLabel}} '
+                    + 'or record, contact your administrator for more information.',
                     { orgUnitLabel },
                 )}
             </IncompleteSelectionsMessage>

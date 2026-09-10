@@ -36,7 +36,6 @@ const WidgetStagesAndEventsPlain = ({
         multipleStages,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
-    // Example use of useTermLabel.
     const { programStagesLabel, eventsLabel } = useTermLabel(
         [LabelKeys.programStagePlural, LabelKeys.eventPlural],
         { programId },

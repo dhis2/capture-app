@@ -122,8 +122,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     },
     [enrollmentSiteActionTypes.SAVE_FAILED]: (_state, action) => {
         const programId = action.payload.programId;
-        const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+        const { enrollmentLabel, eventLabel } = getTermLabel(
+            [LabelKeys.enrollmentSingular, LabelKeys.eventSingular],
+            { programId },
+        );
         return addErrorFeedback({
             message: i18n.t(
                 'Error saving the {{enrollmentLabel}} {{eventLabel}}',
@@ -133,8 +135,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     },
     [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
         const programId = action.meta.programId;
-        const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+        const { enrollmentLabel, eventLabel } = getTermLabel(
+            [LabelKeys.enrollmentSingular, LabelKeys.eventSingular],
+            { programId },
+        );
         return addErrorFeedback({
             message: i18n.t(
                 'Error deleting the {{enrollmentLabel}} {{eventLabel}}',
@@ -156,16 +160,20 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: i18n.t('Error updating the Assignee') }),
     [enrollmentNoteActionTypes.ADD_NOTE_FAILED_FOR_ENROLLMENT]: (_state, action) => {
         const programId = action.meta.selections.programId;
-        const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
-        const { noteLabel } = getTermLabel([LabelKeys.noteSingular], { programId });
+        const { enrollmentLabel, noteLabel } = getTermLabel(
+            [LabelKeys.enrollmentSingular, LabelKeys.noteSingular],
+            { programId },
+        );
         return addErrorFeedback({
             message: i18n.t('Could not save {{enrollmentLabel}} {{noteLabel}}', { enrollmentLabel, noteLabel }),
         });
     },
     [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: (_state, action) => {
         const programId = action.meta.programId;
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
-        const { noteLabel } = getTermLabel([LabelKeys.noteSingular], { programId });
+        const { eventLabel, noteLabel } = getTermLabel(
+            [LabelKeys.eventSingular, LabelKeys.noteSingular],
+            { programId },
+        );
         return addErrorFeedback({
             message: i18n.t('Could not save {{eventLabel}} {{noteLabel}}', { eventLabel, noteLabel }),
         });

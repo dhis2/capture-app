@@ -221,8 +221,12 @@ export const useCompleteBulkEnrollments = ({
                             serverResponse,
                             enrollments,
                         }));
-                    // eslint-disable-next-line max-len
-                    showAlert({ message: i18n.t('An unknown error occurred when completing {{enrollmentsLabel}}', { enrollmentsLabel }) });
+                    showAlert({
+                        message: i18n.t(
+                            'An unknown error occurred when completing {{enrollmentsLabel}}',
+                            { enrollmentsLabel },
+                        ),
+                    });
                     return;
                 }
                 const validEnrollments = filterValidEnrollments(enrollments, errors);
