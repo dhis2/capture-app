@@ -1,9 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 
@@ -11,6 +12,7 @@ type Props = {
     ownerOrgUnitId: string;
     validOrgUnitId?: string;
     programAccessLevel: string;
+    program: Record<string, unknown>;
     orgUnitScopes: {
         origin: keyof typeof OrgUnitScopes | null;
         destination: keyof typeof OrgUnitScopes | null;
@@ -44,10 +46,12 @@ const InfoBoxesPlain = ({
     validOrgUnitId,
     programAccessLevel,
     orgUnitScopes,
+    program,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const { displayName: ownerOrgUnitName } = useOrgUnitNameWithAncestors(ownerOrgUnitId);
     const { displayName: newOrgUnitName } = useOrgUnitNameWithAncestors(validOrgUnitId ?? null);
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
 
     const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel as any)
         && orgUnitScopes.destination === OrgUnitScopes.SEARCH;
@@ -57,20 +61,26 @@ const InfoBoxesPlain = ({
             {newOrgUnitName && (
                 <div className={cx(classes.alert, { info: true })}>
                     <IconInfo16 color={colors.grey600} />
-                    {i18n.t('Transferring enrollment ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}', {
-                        ownerOrgUnit: ownerOrgUnitName,
-                        newOrgUnit: newOrgUnitName,
-                        escape: '.',
-                    })}
+                    {i18n.t(
+                        'Transferring {{enrollmentLabel}} ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}',
+                        {
+                            enrollmentLabel,
+                            ownerOrgUnit: ownerOrgUnitName,
+                            newOrgUnit: newOrgUnitName,
+                            escape: '.',
+                        },
+                    )}
                 </div>
             )}
 
             {showWarning && (
                 <div className={cx(classes.alert, { warning: true })}>
                     <IconWarning16 />
-                    {i18n.t('You will lose access to the enrollment when transferring ownership to {{organisationUnit}}.', {
-                        organisationUnit: newOrgUnitName,
-                    })}
+                    {i18n.t(
+                        'You will lose access to the {{enrollmentLabel}} '
+                            + 'when transferring ownership to {{organisationUnit}}.',
+                        { enrollmentLabel, organisationUnit: newOrgUnitName },
+                    )}
                 </div>
             )}
         </div>

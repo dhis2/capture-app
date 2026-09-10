@@ -6,7 +6,7 @@ export type Props = {
     stage?: ProgramStage;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
-    programId?: string;
+    programId: string;
     onOpenBulkDataEntryPlugin?: () => void;
     bulkDataEntryIsActive?: boolean;
 };

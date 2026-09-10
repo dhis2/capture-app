@@ -295,9 +295,10 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId }: any) => ({
+    getProps: ({ dataEntryKey, dataEntryId, program }: any) => ({
         dataEntryKey,
         dataEntryId,
+        programId: program.id,
     }),
 };
 

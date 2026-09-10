@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { isLangRtl } from '../../../../utils/rtl';
+import { LabelKeys } from '../../../../metaData';
+import { withCustomLabels } from '../../../../HOC/withCustomLabels';
 import { DataEntry } from '../../../DataEntry';
 import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
 import {
@@ -25,6 +27,8 @@ import { getEventDateValidatorContainers } from './fieldValidators/eventDate.val
 import { stageMainDataIds } from './getDataEntryPropsToInclude';
 import { withTransformPropName } from '../../../../HOC';
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
+
+const customLabels = [LabelKeys.eventSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -177,7 +181,9 @@ const getCompleteFieldSettingsFn = () => {
         isApplicable: (props: any) => props.firstStageMetaData && props.firstStageMetaData.stage?.stageForm,
         getComponent: () => completeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
+            label: i18n.t('Complete {{eventLabel}}', {
+                eventLabel: props.eventLabel,
+            }),
             id: 'complete',
         }),
         getPropName: () => stageMainDataIds.COMPLETE,
@@ -266,4 +272,5 @@ const getAssigneeSettingsFn = () => {
 const StageLocationHOC = withDataEntryFieldIfApplicable(getStageGeometrySettings())(withCleanUp()(DataEntry));
 const CompleteHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC);
 const AssigneeHOC = withDataEntryFieldIfApplicable(getAssigneeSettingsFn())(CompleteHOC);
-export const FirstStageDataEntry = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(AssigneeHOC);
+const ReportDateHOC = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(AssigneeHOC);
+export const FirstStageDataEntry = withCustomLabels(customLabels)(ReportDateHOC);

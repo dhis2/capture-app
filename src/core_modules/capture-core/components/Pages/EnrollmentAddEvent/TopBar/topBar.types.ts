@@ -6,6 +6,7 @@ export type Props = {
     enrollmentId: string;
     teiDisplayName?: string;
     trackedEntityName?: string;
+    stageId?: string;
     stageName?: string;
     stageIcon?: Icon;
     eventDateLabel?: string;

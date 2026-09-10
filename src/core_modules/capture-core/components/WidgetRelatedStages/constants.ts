@@ -9,7 +9,6 @@ export const relatedStageActions = Object.freeze({
 export const mainOptionTranslatedTexts = {
     [relatedStageActions.SCHEDULE_IN_ORG]: i18n.t('Schedule'),
     [relatedStageActions.ENTER_DATA]: i18n.t('Enter details now'),
-    [relatedStageActions.LINK_EXISTING_RESPONSE]: i18n.t('Link to an existing event'),
 };
 
 export const relatedStageStatus = Object.freeze({

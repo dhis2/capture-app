@@ -15,6 +15,18 @@ import {
 import type { AddEventSaveType } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 import { useProgramExpiryForUser } from '../../../hooks';
+import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { LabelKeys } from '../../../metaData';
+
+const customLabels = [
+    LabelKeys.orgUnitSingular,
+    LabelKeys.eventSingular,
+    LabelKeys.noteSingular,
+    LabelKeys.notePlural,
+    LabelKeys.relationshipPlural,
+] as const;
+
+const WrappedDataEntryComponent = withCustomLabels(customLabels)(DataEntryComponent);
 
 export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
@@ -77,7 +89,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
     return (
-        <DataEntryComponent
+        <WrappedDataEntryComponent
             {...passOnProps}
             id={id}
             orgUnitFieldValue={orgUnitFieldValue}

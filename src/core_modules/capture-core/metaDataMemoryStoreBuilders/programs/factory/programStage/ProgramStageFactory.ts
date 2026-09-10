@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
@@ -239,8 +240,16 @@ export class ProgramStageFactory {
                 _form.description = cachedProgramStage.description;
                 _form.featureType = ProgramStageFactory._getFeatureType(cachedProgramStage);
                 _form.access = cachedProgramStage.access;
-                _form.addLabel({ id: 'occurredAt', label: cachedProgramStage.displayExecutionDateLabel || 'Report date' });
-                _form.addLabel({ id: 'scheduledAt', label: cachedProgramStage.displayDueDateLabel || 'Scheduled date' });
+                const executionLabel = cachedProgramStage.displayExecutionDateLabel;
+                const dueDateLabel = cachedProgramStage.displayDueDateLabel;
+                _form.addLabel({
+                    id: 'occurredAt',
+                    label: executionLabel ? capitalizeFirstLetter(executionLabel) : i18n.t('Report date'),
+                });
+                _form.addLabel({
+                    id: 'scheduledAt',
+                    label: dueDateLabel ? capitalizeFirstLetter(dueDateLabel) : i18n.t('Scheduled date'),
+                });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&
                     camelCaseUppercaseString(cachedProgramStage.validationStrategy);

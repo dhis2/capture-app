@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
 import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
@@ -14,6 +15,10 @@ import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
+    const { programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
+        [LabelKeys.programStageSingular, LabelKeys.programStagePlural, LabelKeys.eventSingular],
+        { programId },
+    );
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
         teiId,
@@ -103,16 +108,20 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         <>
             {program ?
                 <Widget
-                    header={i18n.t('Choose a stage for a new event')}
+                    header={i18n.t('Choose a {{programStageLabel}} for a new {{eventLabel}}', {
+                        programStageLabel,
+                        eventLabel,
+                    })}
                     noncollapsible
                 >
                     <ProgramStageSelectorComponent
                         programStages={availableStages}
+                        programId={programId}
                         onSelectProgramStage={onSelectProgramStage}
                         onCancel={onCancel}
                     />
                 </Widget>
-                : i18n.t('Program Stages could not be loaded')}
+                : i18n.t('{{programStagesLabel}} could not be loaded', { programStagesLabel })}
         </>
     );
 };

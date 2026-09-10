@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { SearchGroup } from '../../metaData';
+import { SearchGroup, useTermLabel, LabelKeys } from '../../metaData';
 import { UnsupportedAttributesNotification } from '../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
@@ -29,8 +29,12 @@ type State = {
     programSectionOpen: boolean;
 };
 
-class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, State> {
-    constructor(props: Props & WithStyles<typeof styles>) {
+type LabelProps = {
+    attributesLabel: string;
+};
+
+class TeiSearchPlain extends React.Component<Props & LabelProps & WithStyles<typeof styles>, State> {
+    constructor(props: Props & LabelProps & WithStyles<typeof styles>) {
         super(props);
         this.state = { programSectionOpen: true };
     }
@@ -105,7 +109,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
         const isUnique = sg.unique;
         const header = isUnique ?
             i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
-            i18n.t('Search by attributes');
+            i18n.t('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         const unsupportedAttributes = sg.unsupportedAttributes;
         return (
@@ -175,4 +179,12 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
     }
 }
 
-export const TeiSearchComponent = withStyles(styles)(TeiSearchPlain);
+const TeiSearchWithStyles = withStyles(styles)(TeiSearchPlain);
+
+// Hand-rolled wrapper (not withCustomLabels HOC): the HOC reads programId from props,
+// but this component's program source is `selectedProgramId` — passing it explicitly to
+// useTermLabel keeps the correct program's custom labels when Redux currentSelections differs.
+export const TeiSearchComponent = (props: Props) => {
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: props.selectedProgramId });
+    return <TeiSearchWithStyles {...props} attributesLabel={attributesLabel} />;
+};

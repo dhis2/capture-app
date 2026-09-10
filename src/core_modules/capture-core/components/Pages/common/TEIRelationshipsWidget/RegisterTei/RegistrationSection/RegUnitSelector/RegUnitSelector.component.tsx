@@ -1,9 +1,12 @@
-import React from 'react';
-import i18n from '@dhis2/d2-i18n';
+import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
+import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../../../../metaData';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
+import { withCustomLabels } from '../../../../../../../HOC/withCustomLabels';
+
+const customLabels = [LabelKeys.orgUnitSingular] as const;
 
 const getStyles = () => ({
     label: {
@@ -14,7 +17,11 @@ const getStyles = () => ({
     },
 });
 
-type Props = RegUnitSelectorProps & WithStyles<typeof getStyles>;
+type LabelProps = {
+    orgUnitLabel: string;
+};
+
+type Props = RegUnitSelectorProps & LabelProps & WithStyles<typeof getStyles>;
 
 class RegUnitSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
@@ -45,11 +52,11 @@ class RegUnitSelectorPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, onUpdateSelectedOrgUnit, programId, ...passOnProps } = this.props;
+        const { classes, onUpdateSelectedOrgUnit, programId, orgUnitLabel, ...passOnProps } = this.props;
         return (
             <ComposedRegUnitSelector
                 labelClass={classes.label}
-                label={i18n.t('Organisation Unit')}
+                label={capitalizeFirstLetter(orgUnitLabel)}
                 styles={RegUnitSelectorPlain.baseComponentStyles}
                 onUpdateSelectedOrgUnit={this.handleUpdateSelectedOrgUnit}
                 {...passOnProps}
@@ -58,4 +65,5 @@ class RegUnitSelectorPlain extends React.Component<Props> {
     }
 }
 
-export const RegUnitSelectorComponent = withStyles(getStyles)(RegUnitSelectorPlain);
+export const RegUnitSelectorComponent =
+    withCustomLabels(customLabels)(withStyles(getStyles)(RegUnitSelectorPlain)) as ComponentType<RegUnitSelectorProps>;

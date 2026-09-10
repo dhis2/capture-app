@@ -2,6 +2,7 @@ import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum, colors } from '@dh
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import React, { type ComponentType, useState } from 'react';
+import { getTermLabelFromProgram, LabelKeys } from '../../../metaData';
 import { Cancel } from './Cancel';
 import { Complete, CompleteModal } from './Complete';
 import { Delete } from './Delete';
@@ -31,6 +32,7 @@ const ActionsPlain = ({
     enrollment = {},
     events,
     programStages,
+    program,
     ownerOrgUnitId,
     tetName,
     canAddNew,
@@ -49,6 +51,7 @@ const ActionsPlain = ({
     const [isOpenMap, setOpenMap] = useState(false);
     const [isOpenTransfer, setOpenTransfer] = useState(false);
     const [isOpenCompleteModal, setOpenCompleteModal] = useState(false);
+    const { enrollmentLabel } = getTermLabelFromProgram([LabelKeys.enrollmentSingular], { program });
 
     const handleOnUpdate = (arg) => {
         setOpenActions(false);
@@ -79,6 +82,7 @@ const ActionsPlain = ({
                             onlyEnrollOnce={onlyEnrollOnce}
                             tetName={tetName}
                             canAddNew={canAddNew}
+                            program={program}
                             onAddNew={onAddNew}
                         />
                         <Complete
@@ -92,6 +96,7 @@ const ActionsPlain = ({
                         />
                         <Followup
                             enrollment={enrollment}
+                            program={program}
                             onUpdate={handleOnUpdate}
                         />
                         <Transfer
@@ -116,12 +121,13 @@ const ActionsPlain = ({
                         <Delete
                             canCascadeDeleteEnrollment={canCascadeDeleteEnrollment}
                             enrollment={enrollment}
+                            program={program}
                             onDelete={handleOnDelete}
                         />
                     </FlyoutMenu>
                 }
             >
-                {i18n.t('Enrollment actions')}
+                {i18n.t('{{enrollmentLabel}} actions', { enrollmentLabel })}
             </DropdownButton>
             {loading && (
                 <div className={classes.loading}>
@@ -140,6 +146,7 @@ const ActionsPlain = ({
                 <TransferModal
                     enrollment={enrollment}
                     ownerOrgUnitId={ownerOrgUnitId}
+                    program={program}
                     setOpenTransfer={setOpenTransfer}
                     onUpdateOwnership={onUpdateOwnership}
                     isTransferLoading={isTransferLoading}
@@ -150,6 +157,7 @@ const ActionsPlain = ({
                     enrollment={enrollment}
                     events={events}
                     programStages={programStages}
+                    program={program}
                     setOpenCompleteModal={setOpenCompleteModal}
                     onUpdateStatus={handleOnUpdateStatus}
                 />

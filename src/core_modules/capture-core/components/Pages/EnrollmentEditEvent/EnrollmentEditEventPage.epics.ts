@@ -16,13 +16,14 @@ export const updateEventSucceededEpic = (action$: EpicAction<any>) =>
         return commitEnrollmentEvent(eventId);
     }));
 
-export const updateEventFailedEpic = (action$: EpicAction<any>) =>
+export const updateEventFailedEpic = (action$: EpicAction<any>, store: any) =>
     action$.pipe(
         ofType(
             editActionTypes.EVENT_SCHEDULE_ERROR,
         ),
         map((action: any) => {
             const { eventId } = action.meta;
-            return batchActions([saveFailed(), rollbackEnrollmentEvent(eventId)]);
+            const { programId } = store.value.enrollmentPage;
+            return batchActions([saveFailed(programId), rollbackEnrollmentEvent(eventId)]);
         }),
     );

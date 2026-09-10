@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { isLangRtl } from '../../../utils/rtl';
 import {
     DataEntry,
@@ -33,7 +34,14 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
+import {
+    type Enrollment,
+    ProgramStage,
+    RenderFoundation,
+    getProgramThrowIfNotFound,
+    LabelKeys,
+} from '../../../metaData';
+import { withCustomLabels } from '../../../HOC/withCustomLabels';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
@@ -45,6 +53,8 @@ import {
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
+
+const customLabels = [LabelKeys.enrollmentSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -99,7 +109,7 @@ const getEnrollmentDateSettings = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -146,7 +156,7 @@ const getIncidentDateSettings = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -194,7 +204,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
                 onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                 onGetCustomFieldLabeClass: (props: any) =>
                     `${props.fieldOptions &&
-                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
             })(
                 withDisplayMessages()(
                     withInternalChangeHandler()(
@@ -213,7 +223,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
                 onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                 onGetCustomFieldLabeClass: (props: any) =>
                     `${props.fieldOptions &&
-                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
             })(
                 withDisplayMessages()(
                     withInternalChangeHandler()(
@@ -282,7 +292,7 @@ const getCategoryOptionsSettingsFn = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -355,6 +365,7 @@ type FinalTeiDataEntryProps = {
         };
     };
     formFoundation: RenderFoundation;
+    enrollmentLabel: string;
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -362,30 +373,38 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         inMemoryFileStore.clear();
     }
 
-    static dataEntrySectionDefinitions = {
-        [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
-            placement: placements.TOP,
-            name: i18n.t('Enrollment'),
-        },
-        [AOCsectionKey]: {
-            placement: placements.BOTTOM,
-        },
-    };
-
     render() {
-        const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, ...passOnProps } = this.props;
+        const {
+            enrollmentMetadata,
+            firstStageMetaData,
+            relatedStageActionsOptions,
+            programId,
+            enrollmentLabel,
+            ...passOnProps
+        } = this.props;
+
+        const dataEntrySections = {
+            [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
+                placement: placements.TOP,
+                name: capitalizeFirstLetter(enrollmentLabel),
+            },
+            [AOCsectionKey]: {
+                placement: placements.BOTTOM,
+            },
+        };
 
         return (
             firstStageMetaData ? (
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
+                    programId={programId}
                     firstStageMetaData={firstStageMetaData}
                     relatedStageActionsOptions={relatedStageActionsOptions}
                 />
             ) : (
                 <DataEntry
                     {...passOnProps}
-                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                    dataEntrySections={dataEntrySections}
                 />
             )
         );
@@ -395,7 +414,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
     withDataEntryFields(
         getCategoryOptionsSettingsFn(),
-    )(FinalEnrollmentDataEntry));
+    )(withCustomLabels(customLabels)(FinalEnrollmentDataEntry)));
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);

@@ -85,7 +85,8 @@ export const updateEnrollmentEventWithoutId = (uid: string, eventData: any) =>
         uid,
     });
 
-export const saveFailed = () => actionCreator(enrollmentSiteActionTypes.SAVE_FAILED)();
+export const saveFailed = (programId: string) =>
+    actionCreator(enrollmentSiteActionTypes.SAVE_FAILED)({ programId });
 
 export const updateEnrollmentAttributeValues = (attributeValues: Array<{ [key: string]: string }>) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_ATTRIBUTE_VALUES)({

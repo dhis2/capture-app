@@ -9,6 +9,8 @@ export type Props = {
     trackedEntityName?: string;
     trackedEntityInactive?: boolean;
     inlineLabel?: boolean;
+    programId?: string;
+    stageId?: string;
 };
 
 export type Access = {
@@ -25,4 +27,8 @@ export type ReadOnlyMessageInput = {
     canEditCompletedEvent: boolean;
     withinCompleteEventsExpiry: boolean;
     trackedEntityInactive: boolean;
+    enrollmentLabel: string;
+    programStageLabel: string;
+    programStagesLabel: string;
+    eventLabel: string;
 };

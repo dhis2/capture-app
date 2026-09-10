@@ -184,7 +184,6 @@ export type CachedTrackedEntityType = {
     id: string,
     access: Access,
     displayName: string,
-    displayTrackedEntityTypesLabel?: string | null,
     trackedEntityTypeAttributes?: Array<CachedTrackedEntityTypeAttribute> | null,
     translations: Array<CachedTrackedEntityTypeTranslation>,
     minAttributesRequiredToSearch: number,

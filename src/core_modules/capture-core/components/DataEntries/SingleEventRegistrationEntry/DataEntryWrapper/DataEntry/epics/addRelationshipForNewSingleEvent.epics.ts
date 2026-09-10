@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
-
+import { getTermLabel, LabelKeys } from '../../../../../../metaData';
 import {
     initializeNewRelationship,
 } from '../../../../../Pages/NewRelationship/newRelationship.actions';
@@ -74,13 +74,17 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
             const toEntity = payload.entity;
-
+            const programId = state.currentSelections.programId;
+            const { eventLabel, relationshipLabel } = getTermLabel(
+                [LabelKeys.eventSingular, LabelKeys.relationshipSingular],
+                { programId },
+            );
 
             const newRelationship = {
                 clientId: uuid(),
                 from: {
                     id: 'newEvent',
-                    name: i18n.t('This event'),
+                    name: i18n.t('This {{eventLabel}}', { eventLabel }),
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
@@ -97,11 +101,11 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
                 r.to.id === newRelationship.to.id)
             ) {
                 const message = i18n.t(
-                    'Relationship of type {{relationshipTypeName}} to {{entityName}} already exists',
+                    '{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
+                        relationshipLabel,
                         entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
-                        interpolation: { escapeValue: false },
                     },
                 );
                 return relationshipAlreadyExists(dataEntryId, itemId, message);

@@ -1,5 +1,6 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import {
     ScopeSelector,
     useSetProgramId,
@@ -31,6 +32,7 @@ export const TopBar = ({
     teiDisplayName,
     enrollmentsAsOptions,
 }: TopBarProps) => {
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
     const { setProgramIdAndResetEnrollmentContext } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();
@@ -73,7 +75,7 @@ export const TopBar = ({
                     onSelect={id => setEnrollmentId({ enrollmentId: id })}
                     options={enrollmentsAsOptions}
                     selectedValue={enrollmentId}
-                    title={i18n.t('Enrollment')}
+                    title={capitalizeFirstLetter(enrollmentLabel)}
                 />
             ) : <></>}
             <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />

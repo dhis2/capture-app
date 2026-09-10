@@ -5,6 +5,7 @@ export type Props = {
     enrollment: any;
     events: Array<{ status: string; event: string; programStage: string }>;
     programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
+    program: Record<string, unknown>;
     refetchEnrollment: QueryRefetchFunction;
     refetchTEI: QueryRefetchFunction;
     ownerOrgUnitId: string;
@@ -26,6 +27,7 @@ export type PlainProps = {
     enrollment: any;
     events: Array<{ status: string; event: string; programStage: string }>;
     programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
+    program: Record<string, unknown>;
     ownerOrgUnitId: string;
     onUpdate: (arg: Record<string, any>) => void;
     onUpdateStatus: (arg: Record<string, any>, redirect?: boolean) => void;

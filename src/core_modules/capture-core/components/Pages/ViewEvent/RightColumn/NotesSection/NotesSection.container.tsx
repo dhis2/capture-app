@@ -8,12 +8,13 @@ const mapStateToProps = (state: any) => {
         notes: state.notes.viewEvent || [],
         ready: !notesSection.isLoading,
         fieldValue: notesSection.fieldValue,
+        programId: state.currentSelections.programId,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-    onAddNote: (note: string) => {
-        dispatch(requestSaveEventNote(note));
+    onAddNote: (note: string, programId: string) => {
+        dispatch(requestSaveEventNote(note, programId));
     },
     onUpdateNoteField: (value: string) => {
         dispatch(updateEventNoteField(value));
