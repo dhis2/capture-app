@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import {
     SingleOrgUnitSelectField,
     withDefaultFieldContainer,
@@ -66,7 +66,7 @@ export const OrgUnitSelectorForRelatedStages = ({
 
     return (
         <OrgUnitFieldForForm
-            label={i18n.t('{{orgUnitLabel}}', { orgUnitLabel })}
+            label={capitalizeFirstLetter(orgUnitLabel)}
             value={relatedStagesDataValues.orgUnit}
             required
             onSelectClick={handleSelect}

@@ -1,6 +1,6 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../../../../metaData';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
@@ -52,7 +52,7 @@ class RegUnitSelectorPlain extends React.Component<Props> {
         return (
             <ComposedRegUnitSelector
                 labelClass={classes.label}
-                label={i18n.t('{{orgUnitLabel}}', { orgUnitLabel })}
+                label={capitalizeFirstLetter(orgUnitLabel)}
                 styles={RegUnitSelectorPlain.baseComponentStyles}
                 onUpdateSelectedOrgUnit={this.handleUpdateSelectedOrgUnit}
                 {...passOnProps}

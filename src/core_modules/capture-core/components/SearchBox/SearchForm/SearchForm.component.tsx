@@ -84,6 +84,30 @@ const expandTheFirstForm = (searchGroupsForSelectedScope, expandedFormId, setExp
         });
 };
 
+type FormInformativeMessageProps = {
+    minAttributesRequiredToSearch: number;
+    className: string;
+    programId?: string;
+};
+
+const FormInformativeMessage = ({
+    minAttributesRequiredToSearch,
+    className,
+    programId,
+}: FormInformativeMessageProps) => {
+    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular], { programId });
+    return (
+        <div className={className}>
+            {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
+                count: minAttributesRequiredToSearch,
+                attributeLabel,
+                defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
+                defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+            })}
+        </div>
+    );
+};
+
 const SearchFormIndex = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
@@ -182,20 +206,6 @@ const SearchFormIndex = ({
             } else {
                 setError(true);
             }
-        };
-
-        const FormInformativeMessage = ({ minAttributesRequiredToSearch }) => {
-            const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular]);
-            return (
-                <div className={error ? classes.textError : classes.textInfo}>
-                    {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
-                        count: minAttributesRequiredToSearch,
-                        attributeLabel,
-                        defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
-                        defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    })}
-                </div>
-            );
         };
 
         const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -342,6 +352,8 @@ const SearchFormIndex = ({
                                             </Button>
                                             <FormInformativeMessage
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
+                                                className={error ? classes.textError : classes.textInfo}
+                                                programId={selectedSearchScopeId}
                                             />
                                         </div>
                                         {!!unsupportedAttributes?.length && (

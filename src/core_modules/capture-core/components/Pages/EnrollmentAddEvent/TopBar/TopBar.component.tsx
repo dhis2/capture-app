@@ -1,5 +1,5 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { LabelKeys, useTermLabel } from '../../../../metaData';
 import { ScopeSelector, SingleLockedSelect, useReset } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
@@ -76,7 +76,7 @@ export const EnrollmentAddEventTopBar = ({
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={i18n.t('{{programStageLabel}}', { programStageLabel })}
+                        title={capitalizeFirstLetter(programStageLabel)}
                         isUserInteractionInProgress={userInteractionInProgress}
                     />
 

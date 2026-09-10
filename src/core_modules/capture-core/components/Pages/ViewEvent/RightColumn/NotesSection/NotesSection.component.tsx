@@ -2,14 +2,16 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconMessages24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 import type { PlainProps } from './NotesSection.types';
-import { getTermLabel, LabelKeys } from '../../../../../metaData';
+import { LabelKeys } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
@@ -31,18 +33,23 @@ const getStyles = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type LabelProps = {
+    eventLabel: string;
+    noteLabel: string;
+    notesLabel: string;
+};
+
+type Props = PlainProps & LabelProps & WithStyles<typeof getStyles>;
 
 class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes, ready, programId } = this.props;
+        const { classes, notes, ready, notesLabel } = this.props;
         const count = notes ? notes.length : 0;
         const badgeCount = ready ? count : undefined;
-        const { notesLabel } = getTermLabel([LabelKeys.notePlural], { programId });
         return (
             <ViewEventSectionHeader
                 icon={IconMessages24}
-                text={i18n.t('{{notesLabel}}', { notesLabel })}
+                text={capitalizeFirstLetter(notesLabel)}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -50,12 +57,11 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, notes, fieldValue, onAddNote, ready, readOnly, programId } = this.props;
+        const {
+            classes, notes, fieldValue, onAddNote, ready, readOnly, programId,
+            eventLabel, notesLabel, noteLabel,
+        } = this.props;
         const isEmpty = ready && (!notes || notes.length === 0);
-        const { eventLabel, notesLabel, noteLabel } = getTermLabel(
-            [LabelKeys.eventSingular, LabelKeys.notePlural, LabelKeys.noteSingular],
-            { programId },
-        );
         return (
             <ViewEventSection
                 collapsable
@@ -87,4 +93,6 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 }
 
-export const NotesSectionComponent = withStyles(getStyles)(NotesSectionPlain) as ComponentType<PlainProps>;
+export const NotesSectionComponent = withCustomLabels(
+    [LabelKeys.eventSingular, LabelKeys.notePlural, LabelKeys.noteSingular] as const,
+)(withStyles(getStyles)(NotesSectionPlain)) as ComponentType<PlainProps>;

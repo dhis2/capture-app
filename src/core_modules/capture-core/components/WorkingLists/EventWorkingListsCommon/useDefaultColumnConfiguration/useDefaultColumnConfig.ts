@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ProgramStage } from '../../../../metaData';
 import { dataElementTypes as elementTypeKeys, LabelKeys, useTermLabel } from '../../../../metaData';
 import { mainPropertyNames } from '../../../../events/mainPropertyNames.const';
@@ -21,7 +22,7 @@ const getDefaultMainConfig = (stage: ProgramStage, orgUnitLabel: string): Array<
         id: mainPropertyNames.ORGANISATION_UNIT,
         visible: true,
         type: elementTypeKeys.ORGANISATION_UNIT,
-        header: i18n.t('{{orgUnitLabel}}', { orgUnitLabel }),
+        header: capitalizeFirstLetter(orgUnitLabel),
         apiName: 'orgUnit',
         filterHidden: true,
     }, {

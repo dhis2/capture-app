@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, WithStyles, withTheme } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
@@ -213,7 +214,7 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: props.orgUnitLabel,
+            label: capitalizeFirstLetter(props.orgUnitLabel),
             required: true,
         }),
         getPropName: () => 'orgUnit',
@@ -402,7 +403,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: props.notesLabel,
+            label: capitalizeFirstLetter(props.notesLabel),
             onAddNote: props.onAddNote,
             id: 'notes',
             dataEntryId: props.id,

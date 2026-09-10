@@ -813,9 +813,6 @@ msgstr "Choose a {{programStageLabel}} for a new {{eventLabel}}"
 msgid "{{programStagesLabel}} could not be loaded"
 msgstr "{{programStagesLabel}} could not be loaded"
 
-msgid "{{programStageLabel}}"
-msgstr "{{programStageLabel}}"
-
 msgid "The category option is not valid for the selected {{orgUnitLabel}}."
 msgstr "The category option is not valid for the selected {{orgUnitLabel}}."
 
@@ -908,9 +905,6 @@ msgstr "Show all"
 msgid "Program"
 msgstr "Program"
 
-msgid "{{orgUnitLabel}}"
-msgstr "{{orgUnitLabel}}"
-
 msgid "Registration"
 msgstr "Registration"
 
@@ -959,14 +953,8 @@ msgstr ""
 msgid "Errors"
 msgstr "Errors"
 
-msgid "{{notesLabel}}"
-msgstr "{{notesLabel}}"
-
 msgid "This {{eventLabel}} doesn't have any {{notesLabel}}"
 msgstr "This {{eventLabel}} doesn't have any {{notesLabel}}"
-
-msgid "{{relationshipsLabel}}"
-msgstr "{{relationshipsLabel}}"
 
 msgid "This {{eventLabel}} doesn't have any {{relationshipsLabel}}"
 msgstr "This {{eventLabel}} doesn't have any {{relationshipsLabel}}"
@@ -1426,14 +1414,8 @@ msgstr "{{enrollmentLabel}} date"
 msgid "Incident date"
 msgstr "Incident date"
 
-msgid "{{enrollmentLabel}}"
-msgstr "{{enrollmentLabel}}"
-
 msgid "{{enrollmentLabel}} widget could not be loaded. Please try again later"
 msgstr "{{enrollmentLabel}} widget could not be loaded. Please try again later"
-
-msgid "{{followUpLabel}}"
-msgstr "{{followUpLabel}}"
 
 msgid "Started at{{escape}}"
 msgstr "Started at{{escape}}"

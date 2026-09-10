@@ -2,16 +2,18 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 
 import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
-import { getTermLabel, LabelKeys } from '../../../../../metaData';
+import { LabelKeys } from '../../../../../metaData';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
@@ -34,7 +36,12 @@ const getStyles = (theme: any) => ({
     },
 });
 
-type Props = PlainProps & WithStyles<typeof getStyles>;
+type LabelProps = {
+    eventLabel: string;
+    relationshipsLabel: string;
+};
+
+type Props = PlainProps & LabelProps & WithStyles<typeof getStyles>;
 
 class RelationshipsSectionPlain extends React.Component<Props> {
     handleOpenAddRelationship = () => {
@@ -46,14 +53,13 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     renderHeader = () => {
-        const { classes, relationships, ready, programId } = this.props;
+        const { classes, relationships, ready, relationshipsLabel } = this.props;
         const count = relationships ? relationships.length : 0;
         const badgeCount = ready ? count : undefined;
-        const { relationshipsLabel } = getTermLabel([LabelKeys.relationshipPlural], { programId });
         return (
             <ViewEventSectionHeader
                 icon={IconLink24}
-                text={i18n.t('{{relationshipsLabel}}', { relationshipsLabel })}
+                text={capitalizeFirstLetter(relationshipsLabel)}
                 badgeClass={classes.badge}
                 badgeCount={badgeCount}
             />
@@ -78,7 +84,10 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 
     render() {
-        const { classes, programStage, programId, eventId, relationships, ready, readOnly } = this.props;
+        const {
+            classes, programStage, programId, eventId, relationships, ready, readOnly,
+            eventLabel, relationshipsLabel,
+        } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
@@ -86,10 +95,6 @@ class RelationshipsSectionPlain extends React.Component<Props> {
             programStage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write);
 
         const isEmpty = ready && (!relationships || relationships.length === 0);
-        const { eventLabel, relationshipsLabel } = getTermLabel(
-            [LabelKeys.eventSingular, LabelKeys.relationshipPlural],
-            { programId },
-        );
 
         return hasRelationshipTypes && (
             <ViewEventSection
@@ -124,4 +129,6 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 }
 
-export const RelationshipsSectionComponent = withStyles(getStyles)(RelationshipsSectionPlain) as ComponentType<PlainProps>;
+export const RelationshipsSectionComponent = withCustomLabels(
+    [LabelKeys.eventSingular, LabelKeys.relationshipPlural] as const,
+)(withStyles(getStyles)(RelationshipsSectionPlain)) as ComponentType<PlainProps>;

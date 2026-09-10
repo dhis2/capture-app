@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
 import {
@@ -63,7 +64,7 @@ export const ScheduleOrgUnit = ({
 
     return (
         <OrgUnitFieldForForm
-            label={i18n.t('{{orgUnitLabel}}', { orgUnitLabel })}
+            label={capitalizeFirstLetter(orgUnitLabel)}
             value={orgUnit}
             required
             onSelectClick={handleSelect}

@@ -4,6 +4,7 @@ import log from 'loglevel';
 import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { dataElementTypes, DataElement, LabelKeys, OptionSet, Option, useTermLabel } from '../../../../../../metaData';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
@@ -121,7 +122,7 @@ const useComputeHeaderColumn = (
     stageId?: string,
 ) => {
     const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId, stageId });
-    const orgUnitLabel = i18n.t('{{orgUnitLabel}}', { orgUnitLabel: rawOrgUnitLabel });
+    const orgUnitLabel = capitalizeFirstLetter(rawOrgUnitLabel);
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
