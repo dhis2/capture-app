@@ -154,9 +154,6 @@ const WidgetProfilePlain = ({
             };
         }), [clientAttributesWithSubvalues, hiddenFieldIds]);
 
-    const isEmptyList = !loading && !error
-        && (hasNoAttributes || displayInListAttributes.length === 0);
-
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
     }, [queryClient, teiId]);
@@ -218,6 +215,8 @@ const WidgetProfilePlain = ({
     const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
+
+    const isEmptyList = !loading && !error && (hasNoAttributes || displayInListAttributes.length === 0);
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
