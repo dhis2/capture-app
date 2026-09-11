@@ -165,18 +165,13 @@ export type ListViewBuilderContextData = {
 };
 
 export type SharingSettings = {
-    externalAccess: boolean,
-    publicAccess: string,
-    userAccesses: Array<{
-        id: string,
-        name: string,
-        access: string,
-    }>,
-    userGroupAccesses: Array<{
-        id: string,
-        name: string,
-        access: string,
-    }>,
+    sharing: {
+        owner?: string,
+        public: string,
+        external?: boolean,
+        users: Record<string, { id: string, access: string }>,
+        userGroups: Record<string, { id: string, access: string }>,
+    },
 };
 export type SetTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string) => void;
 

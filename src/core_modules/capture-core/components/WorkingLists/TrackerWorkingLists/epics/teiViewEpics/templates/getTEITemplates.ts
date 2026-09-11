@@ -13,8 +13,7 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
         resource: 'trackedEntityInstanceFilters',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,sortOrder,entityQueryCriteria,access,externalAccess,publicAccess,' +
-            'user,userAccesses,userGroupAccesses',
+            fields: 'id,displayName,sortOrder,entityQueryCriteria,access,sharing',
         },
     });
     return apiRes && apiRes.trackedEntityInstanceFilters ? apiRes.trackedEntityInstanceFilters : [];
@@ -36,6 +35,7 @@ export const getTEITemplates = (
                         sortOrder,
                         id,
                         access,
+                        sharing,
                         entityQueryCriteria: {
                             enrollmentStatus,
                             enrollmentCreatedDate,
@@ -47,11 +47,6 @@ export const getTEITemplates = (
                             assignedUserMode,
                             assignedUsers,
                         } = {},
-                        externalAccess,
-                        publicAccess,
-                        user,
-                        userAccesses,
-                        userGroupAccesses,
                     }: any) => ({
                         id,
                         name: displayName,
@@ -68,11 +63,7 @@ export const getTEITemplates = (
                             attributeValueFilters,
                         },
                         access,
-                        externalAccess,
-                        publicAccess,
-                        user,
-                        userAccesses,
-                        userGroupAccesses,
+                        sharing,
                     }),
                 ),
             ],

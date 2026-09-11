@@ -13,8 +13,7 @@ const getApiTEIFilters = async (programId: string, querySingleResource: QuerySin
         resource: 'programStageWorkingLists',
         params: {
             filter: `program.id:eq:${programId}`,
-            fields: 'id,displayName,programStage,sortOrder,programStageQueryCriteria,' +
-                'access,externalAccess,publicAccess,user,userAccesses,userGroupAccesses',
+            fields: 'id,displayName,programStage,sortOrder,programStageQueryCriteria,access,sharing',
         },
     });
     return apiRes && apiRes.programStageWorkingLists ? apiRes.programStageWorkingLists : [];
@@ -35,6 +34,7 @@ export const getProgramStageTemplates = (
                         displayName,
                         id,
                         access,
+                        sharing,
                         programStage: { id: programStage },
                         programStageQueryCriteria: {
                             enrollmentStatus,
@@ -51,11 +51,6 @@ export const getProgramStageTemplates = (
                             assignedUserMode,
                             assignedUsers,
                         } = {},
-                        externalAccess,
-                        publicAccess,
-                        user,
-                        userAccesses,
-                        userGroupAccesses,
                     }: any) => ({
                         id,
                         name: displayName,
@@ -76,11 +71,7 @@ export const getProgramStageTemplates = (
                             attributeValueFilters,
                         },
                         access,
-                        externalAccess,
-                        publicAccess,
-                        user,
-                        userAccesses,
-                        userGroupAccesses,
+                        sharing,
                     }),
                 ),
             ],

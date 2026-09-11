@@ -28,15 +28,19 @@ export const SharingDialog = ({ onClose, open, templateId, templateSharingType, 
                 const {
                     externalAccess,
                     publicAccess,
+                    user,
                     userAccesses,
                     userGroupAccesses,
                 } = sharing.object;
 
                 onClose({
-                    externalAccess,
-                    publicAccess,
-                    userAccesses: userAccesses.map(({ id, access }) => ({ id, access })),
-                    userGroupAccesses: userGroupAccesses.map(({ id, access }) => ({ id, access })),
+                    sharing: {
+                        ...(user?.id && { owner: user.id }),
+                        public: publicAccess,
+                        external: externalAccess,
+                        users: Object.fromEntries(userAccesses.map(({ id, access }) => [id, { id, access }])),
+                        userGroups: Object.fromEntries(userGroupAccesses.map(({ id, access }) => [id, { id, access }])),
+                    },
                 });
             } },
     );
