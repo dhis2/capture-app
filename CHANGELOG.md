@@ -1,3 +1,10 @@
+## [107.0.6](https://github.com/dhis2/capture-app/compare/v107.0.5...v107.0.6) (2026-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21727] program rules on enrollment+event registration page ([#4707](https://github.com/dhis2/capture-app/issues/4707)) ([e47b248](https://github.com/dhis2/capture-app/commit/e47b2486f0794e28bd10a7559a1cb9794916250a))
+
 ## [107.0.5](https://github.com/dhis2/capture-app/compare/v107.0.4...v107.0.5) (2026-08-31)
 
 
