@@ -1,3 +1,10 @@
+## [107.0.7](https://github.com/dhis2/capture-app/compare/v107.0.6...v107.0.7) (2026-09-11)
+
+
+### Bug Fixes
+
+* [DHIS2-22007] comparison between the new and the cached rule messages ([#4709](https://github.com/dhis2/capture-app/issues/4709)) ([f6ae759](https://github.com/dhis2/capture-app/commit/f6ae7592e7b9e0c4f5fb7b01b9c422e48d4d41e8))
+
 ## [107.0.6](https://github.com/dhis2/capture-app/compare/v107.0.5...v107.0.6) (2026-09-10)
 
 
