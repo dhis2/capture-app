@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { spacersNum } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
@@ -7,6 +8,7 @@ import { Widget } from '../../../Widget';
 import { StageDetail } from './StageDetail/StageDetail.component';
 import { StageCreateNewButton } from './StageCreateNewButton';
 import { useEnrollmentAccessContext } from '../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { selectEnrollmentHiddenProgramStageIds } from '../../../Pages/common/EnrollmentOverviewDomain';
 
 const styles = {
     overview: {
@@ -22,16 +24,13 @@ const styles = {
     },
 };
 
-const rulesEffectHideProgramStage = (ruleEffects: Array<{id: string, type: string}> | undefined, stageId: string) => (
-    Boolean(ruleEffects?.find(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === stageId))
-);
-
 export const StagePlain = ({
-    stage, events, classes, onCreateNew, ruleEffects, ...passOnProps
+    stage, events, classes, onCreateNew, ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
-    const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
+    const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
+    const preventAddingNewEvents = Boolean(hiddenProgramStageIds?.[id]);
     const hideProgramStage = preventAddingNewEvents && events.length === 0;
     const { stageWriteAccessById } = useEnrollmentAccessContext();
     const effectiveStageWriteAccess = stageWriteAccessById[stage.id] ?? stage.dataAccess.write;

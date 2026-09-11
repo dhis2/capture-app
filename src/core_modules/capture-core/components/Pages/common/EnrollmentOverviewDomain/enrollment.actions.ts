@@ -1,4 +1,5 @@
 import { actionCreator } from '../../../../actions/actions.utils';
+import type { AttributeValue, EnrollmentData } from './useCommonEnrollmentDomainData';
 
 export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
@@ -23,10 +24,27 @@ export const enrollmentSiteActionTypes = {
     COMMIT_ENROLLMENT_AND_EVENTS: 'Enrollment.CommitEnrollmentAndEvents',
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
     SET_TRACKED_ENTITY_INACTIVE_STATUS: 'Enrollment.SetTrackedEntityInactiveStatus',
+    SET_ENROLLMENT_RULE_EFFECTS: 'Enrollment.SetEnrollmentRuleEffects',
+    UPDATE_ENROLLMENT_OWNER_ORG_UNIT: 'Enrollment.UpdateOwnerOrgUnit',
 };
 
-export const setCommonEnrollmentSiteData = (enrollment: any, attributeValues: any, inactive?: boolean) =>
-    actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({ enrollment, attributeValues, inactive });
+export const setEnrollmentRuleEffects = (rulesEffects: any) =>
+    actionCreator(enrollmentSiteActionTypes.SET_ENROLLMENT_RULE_EFFECTS)({ rulesEffects });
+
+export const updateEnrollmentOwnerOrgUnit = (ownerOrgUnitId: string) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_OWNER_ORG_UNIT)({ ownerOrgUnitId });
+
+export const setCommonEnrollmentSiteData = (
+    enrollment: EnrollmentData,
+    attributeValues: Array<AttributeValue>,
+    inactive?: boolean,
+    ownerOrgUnitId?: string,
+) => actionCreator(enrollmentSiteActionTypes.COMMON_ENROLLMENT_SITE_DATA_SET)({
+    enrollment,
+    attributeValues,
+    inactive,
+    ownerOrgUnitId,
+});
 
 export const setTrackedEntityInactiveStatus = (inactive: boolean) =>
     actionCreator(enrollmentSiteActionTypes.SET_TRACKED_ENTITY_INACTIVE_STATUS)({ inactive });

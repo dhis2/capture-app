@@ -1,4 +1,3 @@
-import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { TrackerProgram } from 'capture-core/metaData';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
@@ -44,7 +43,6 @@ export type Props = {
     onUpdateEnrollmentStatus: (enrollment: any) => void;
     onUpdateEnrollmentStatusSuccess: (params?: { redirect?: boolean }) => void;
     onUpdateEnrollmentStatusError: (message: string) => void;
-    ruleEffects?: Array<{id: string; type: keyof typeof effectActions}>;
     widgetEnrollmentStatus?: string | null;
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;
