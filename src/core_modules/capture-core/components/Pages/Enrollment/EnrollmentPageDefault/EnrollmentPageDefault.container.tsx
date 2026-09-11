@@ -5,7 +5,9 @@ import { errorCreator } from 'capture-core-utils';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { useQueryClient } from '@tanstack/react-query';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -50,6 +52,7 @@ import { useHideWidgetByRuleLocations } from '../../../../hooks';
 export const EnrollmentPageDefault = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
@@ -181,7 +184,8 @@ export const EnrollmentPageDefault = () => {
     );
     const onUpdateEnrollmentStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentAndEvents());
-    }, [dispatch]);
+        removeEventChangelogQueries(queryClient);
+    }, [dispatch, queryClient]);
 
     const onBackToMainPage = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);

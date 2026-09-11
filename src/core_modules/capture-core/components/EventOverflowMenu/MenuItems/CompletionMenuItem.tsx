@@ -2,13 +2,14 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { MenuItem, IconCheckmark16, IconUndo16 } from '@dhis2/ui';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useDispatch } from 'react-redux';
 import { errorCreator } from 'capture-core-utils';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
-import { CompleteModal } from '../../DataEntries/common/trackerEvent/withAskToCompleteEnrollment/CompleteModal';
+import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { statusTypes as enrollmentStatuses } from '../../../enrollment';
+import { CompleteModal } from '../../DataEntries/common/trackerEvent/withAskToCompleteEnrollment/CompleteModal';
 import {
     updateEnrollmentAndEvents,
     commitEnrollmentAndEvents,
@@ -64,6 +65,7 @@ export const CompletionMenuItem = ({
     onAskCompleteEnrollment,
 }: MenuItemProps) => {
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const isCompleted = eventStatus === eventStatuses.COMPLETED;
@@ -78,7 +80,10 @@ export const CompletionMenuItem = ({
                 log.error(errorCreator('An error occurred when updating event status')({ error, eventId, newStatus }));
                 onError?.();
             },
-            onSuccess: () => onSuccess?.(newStatus),
+            onSuccess: () => {
+                removeEventChangelogQueries(queryClient, eventId);
+                onSuccess?.(newStatus);
+            },
         },
     );
 
@@ -122,6 +127,7 @@ export const CompleteMenuItemModal = ({
 }: ModalProps) => {
     const dataEngine = useDataEngine();
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const handleError = (error: unknown) => {
@@ -134,7 +140,10 @@ export const CompleteMenuItemModal = ({
         {
             onMutate: () => onMutate?.(eventStatuses.COMPLETED),
             onError: (error) => { handleError(error); onError?.(); },
-            onSuccess: () => onSuccess?.(eventStatuses.COMPLETED),
+            onSuccess: () => {
+                removeEventChangelogQueries(queryClient, eventId);
+                onSuccess?.(eventStatuses.COMPLETED);
+            },
         },
     );
 
@@ -165,6 +174,7 @@ export const CompleteMenuItemModal = ({
             },
             onSuccess: () => {
                 dispatch(commitEnrollmentAndEvents());
+                removeEventChangelogQueries(queryClient, eventId);
                 onSuccess?.(eventStatuses.COMPLETED);
             },
         },

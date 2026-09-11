@@ -20,8 +20,7 @@ import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
 import { OverflowButton } from '../../../Buttons';
-import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
-import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
+import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
@@ -64,7 +63,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const {
         classes,
         eventId,
-        eventData,
         onOpenEditEvent,
         isEditEventPage,
         programStage,
@@ -74,7 +72,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         showEditButton,
         ...passOnProps
     } = props;
-    const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
+    const orgUnitId = useSelector((state: { viewEventPage: { loadedValues: any } }) =>
+        state.viewEventPage.loadedValues?.orgUnit?.id);
+    const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
     const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
@@ -85,14 +85,13 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const { canToggleCompletion } = useEventEditPermissions({
         programId,
         stage: programStage,
-        eventStatus: eventData?.eventContainer?.event?.status,
-        occurredAtClient: convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
-        completedAtClient: eventData?.eventContainer?.event?.completedAt,
+        eventStatus: loadedValues?.eventContainer?.event?.status,
+        occurredAtClient: convertFormToClient(loadedValues?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
     });
 
     const onSaveExternal = useCallback(() => {
-        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
-        queryClient.removeQueries(queryKey);
+        removeEventChangelogQueries(queryClient, eventId);
         onBackToAllEvents();
     }, [eventId, queryClient, onBackToAllEvents]);
 
@@ -190,7 +189,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
-                    eventData={eventData?.eventContainer?.values}
                     eventId={eventId}
                     formFoundation={programStage.stageForm}
                 />
