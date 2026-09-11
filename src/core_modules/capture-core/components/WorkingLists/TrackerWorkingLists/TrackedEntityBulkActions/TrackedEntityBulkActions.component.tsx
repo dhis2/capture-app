@@ -45,14 +45,9 @@ export const TrackedEntityBulkActionsComponent = ({
                 programDataWriteAccess={programDataWriteAccess}
                 programId={programId}
                 onUpdateList={onUpdateList}
+                removeRowsFromSelection={removeRowsFromSelection}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
             />
-
-            {/* <DeleteTeiAction */}
-            {/*     selectedRows={selectedRows} */}
-            {/*     selectedRowsCount={selectedRowsCount} */}
-            {/*     onUpdateList={onUpdateList} */}
-            {/* /> */}
         </BulkActionBar>
     );
 };

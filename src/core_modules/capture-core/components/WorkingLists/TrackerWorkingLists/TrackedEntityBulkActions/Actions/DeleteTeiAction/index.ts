@@ -1,1 +1,0 @@
-export { DeleteTeiAction } from './DeleteTeiAction';

@@ -2,6 +2,7 @@ export type PlainProps = {
     selectedRows: Record<string, boolean>;
     programDataWriteAccess: boolean;
     programId: string;
-    onUpdateList: () => void;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
     bulkDataEntryIsActive: boolean;
 };

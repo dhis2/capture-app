@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
     Button,
     ButtonStrip,
@@ -14,7 +14,9 @@ import {
 } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
-import { Widget } from '../../../../../Widget';
+import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
+import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import { useLocationQuery } from '../../../../../../utils/routing';
 import type { PlainProps } from './CompleteAction.types';
 
 const styles: Readonly<any> = {
@@ -30,9 +32,6 @@ const styles: Readonly<any> = {
         display: 'flex',
         justifyContent: 'center',
         margin: '20px 0',
-    },
-    errorContainer: {
-        padding: '0px 20px',
     },
 };
 
@@ -58,10 +57,12 @@ const CompleteActionPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
-    const [openAccordion, setOpenAccordion] = useState(false);
+    const { orgUnitId } = useLocationQuery();
     const {
         completeEnrollments,
         enrollmentCounts,
+        enrollmentIdToTeiId,
+        knownEventUids,
         isLoading,
         validationError,
         isCompleting,
@@ -78,6 +79,16 @@ const CompleteActionPlain = ({
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
+    const getRecordHref = useMemo(
+        () => createEnrollmentErrorHrefResolver({
+            programId,
+            orgUnitId,
+            enrollmentIdToTeiId,
+            knownEventUids,
+        }),
+        [programId, orgUnitId, enrollmentIdToTeiId, knownEventUids],
+    );
+
     const ModalTextContent = () => {
         // If the data is still loading, show a spinner
         if (!enrollmentCounts || isLoading) {
@@ -90,39 +101,17 @@ const CompleteActionPlain = ({
 
         // If there was an error importing the data, show an error message
         if (validationError) {
-            const errors = (validationError as any)?.details?.validationReport?.errorReports;
+            const errors = validationError.validationReport.errorReports;
+            const introText = hasPartiallyUploadedEnrollments
+                // eslint-disable-next-line max-len
+                ? i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.')
+                : i18n.t('There was an error while completing the enrollments. Please see the details below.');
             return (
-                <div className={classes.container}>
-                    <span>
-                        {hasPartiallyUploadedEnrollments ?
-                            // eslint-disable-next-line max-len
-                            i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.') :
-                            i18n.t('There was an error while completing the enrollments. Please see the details below.')
-                        }
-                    </span>
-
-                    <Widget
-                        open={openAccordion}
-                        onOpen={() => setOpenAccordion(true)}
-                        onClose={() => setOpenAccordion(false)}
-                        borderless
-                        header={i18n.t('Details (Advanced)')}
-                    >
-                        <span className={classes.errorContainer}>
-                            <ul>
-                                {errors ? errors.map(errorReport => (
-                                    <li key={`${errorReport.uid}-${errorReport.errorCode}`}>
-                                        {errorReport?.message}
-                                    </li>
-                                )) : (
-                                    <li>
-                                        {i18n.t('An unknown error occurred.')}
-                                    </li>
-                                )}
-                            </ul>
-                        </span>
-                    </Widget>
-                </div>
+                <BulkActionErrorDetails
+                    introText={introText}
+                    errorReports={errors}
+                    getRecordHref={getRecordHref}
+                />
             );
         }
 
