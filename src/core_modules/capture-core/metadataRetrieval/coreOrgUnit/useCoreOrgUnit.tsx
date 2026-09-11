@@ -6,6 +6,12 @@ import { useOrganisationUnit } from '../../dataQueries';
 import { orgUnitFetched } from './coreOrgUnit.actions';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
 
+type CoreOrgUnitFields = {
+    displayName: string,
+    code: string,
+    path: string,
+};
+
 export function useCoreOrgUnit(orgUnitId: string): {
     orgUnit?: CoreOrgUnit,
     error?: any,
@@ -14,7 +20,7 @@ export function useCoreOrgUnit(orgUnitId: string): {
     const reduxOrgUnit = useSelector(({ organisationUnits }: any) => organisationUnits && organisationUnits[orgUnitId]);
     const fetchId = reduxOrgUnit ? undefined : orgUnitId;
     // These hooks do no work when id is undefined
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
+    const { orgUnit, error } = useOrganisationUnit<CoreOrgUnitFields>(fetchId, 'displayName,code,path');
     const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
 
     if (reduxOrgUnit) {
