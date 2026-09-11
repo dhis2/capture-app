@@ -55,8 +55,8 @@ const getValueByKeyFromEvent = (event: ApiEnrollmentEvent, { id, resolveValue }:
 
 const convertStatusForView = (event: ApiEnrollmentEvent) => {
     const { status, options } = getEventStatus(event);
-    const isPositive = [statusTypes.COMPLETED].includes(status);
-    const isNegative = [statusTypes.OVERDUE].includes(status);
+    const isPositive = status === statusTypes.COMPLETED;
+    const isNegative = status === statusTypes.OVERDUE;
     return {
         isNegative,
         isPositive,
