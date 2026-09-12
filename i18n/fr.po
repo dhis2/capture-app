@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-08-24T07:37:43.159Z\n"
+"POT-Creation-Date: 2026-09-11T15:38:29.603Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -1814,11 +1814,11 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "Le widget du profil n'a pas pu être chargé. Veuillez réessayer plus tard."
 
-msgid "No attributes configured for {{trackedEntityTypeName}}"
-msgstr "Aucun attribut configuré pour {{trackedEntityTypeName}}"
-
 msgid "No attributes configured"
 msgstr "Aucun attribut configuré"
+
+msgid "No attributes configured to display"
+msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "Profil de {{trackedEntityTypeName}}"
