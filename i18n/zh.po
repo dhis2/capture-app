@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-08-07T10:34:07.592Z\n"
+"POT-Creation-Date: 2026-09-11T15:38:29.603Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -1654,11 +1654,11 @@ msgstr "查看简介"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
-msgid "No attributes configured for {{trackedEntityTypeName}}"
-msgstr "没有为{{trackedEntityTypeName}}"
-
 msgid "No attributes configured"
 msgstr "未配置属性"
+
+msgid "No attributes configured to display"
+msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} 个人资料"
