@@ -218,10 +218,16 @@ const CompleteEnrollmentsActionPlain = ({
             {modalIsOpen && validationError && (
                 <BulkActionErrorModal
                     title={i18n.t('Error completing enrollments')}
-                    introText={hasPartiallyUploadedEnrollments
-                        // eslint-disable-next-line max-len
-                        ? i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.')
-                        : i18n.t('There was an error while completing the enrollments. Please see the details below.')}
+                    introText={
+                        hasPartiallyUploadedEnrollments
+                            ? i18n.t(
+                                'Some enrollments were completed successfully, but there was an error while ' +
+                                'completing the rest. Please see the details below.',
+                            )
+                            : i18n.t(
+                                'There was an error while completing the enrollments. Please see the details below.',
+                            )
+                    }
                     errorReports={validationError.validationReport.errorReports}
                     getRecordHref={getRecordHref}
                     onClose={closeModal}

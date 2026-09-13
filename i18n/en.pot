@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-13T17:28:33.450Z\n"
-"PO-Revision-Date: 2026-09-13T17:28:33.451Z\n"
+"POT-Creation-Date: 2026-09-13T17:52:58.827Z\n"
+"PO-Revision-Date: 2026-09-13T17:52:58.828Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2072,13 +2072,6 @@ msgid "Error completing enrollments"
 msgstr "Error completing enrollments"
 
 msgid ""
-"Some enrollments were completed successfully, but there was an error while "
-"completing the rest. Please see the details below."
-msgstr ""
-"Some enrollments were completed successfully, but there was an error while "
-"completing the rest. Please see the details below."
-
-msgid ""
 "There was an error while completing the enrollments. Please see the details "
 "below."
 msgstr ""
@@ -2097,12 +2090,6 @@ msgstr "You do not have access to delete enrollments"
 msgid "Delete enrollments"
 msgstr "Delete enrollments"
 
-msgid "Delete selected enrollments"
-msgstr "Delete selected enrollments"
-
-msgid "An error occurred while loading the selected enrollments. Please try again."
-msgstr "An error occurred while loading the selected enrollments. Please try again."
-
 msgid "Error deleting enrollments"
 msgstr "Error deleting enrollments"
 
@@ -2112,6 +2099,9 @@ msgid ""
 msgstr ""
 "There was an error while deleting the enrollments. Please see the details "
 "below."
+
+msgid "An error occurred while loading the selected enrollments. Please try again."
+msgstr "An error occurred while loading the selected enrollments. Please try again."
 
 msgid ""
 "This action will permanently delete the selected enrollments, including all "
@@ -2134,6 +2124,9 @@ msgid "Cancelled enrollments ({{count}})"
 msgid_plural "Cancelled enrollments ({{count}})"
 msgstr[0] "Cancelled enrollments ({{count}})"
 msgstr[1] "Cancelled enrollments ({{count}})"
+
+msgid "Delete selected enrollments"
+msgstr "Delete selected enrollments"
 
 msgid "Delete {{count}} enrollment"
 msgid_plural "Delete {{count}} enrollment"
