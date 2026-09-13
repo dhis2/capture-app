@@ -1,10 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import {
-    BulkActionConfirmModal,
-} from '../../../../WorkingListsCommon/BulkActionBar/BulkActionConfirmModal';
 import {
     BulkActionErrorModal,
 } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
@@ -79,18 +76,35 @@ export const DeleteAction = ({
             </ConditionalTooltip>
 
             {isModalOpen && !validationError && (
-                <BulkActionConfirmModal
-                    title={i18n.t('Delete events')}
-                    confirmLabel={i18n.t('Delete')}
-                    onConfirm={() => deleteEvents()}
-                    onCancel={closeModal}
-                    isPending={isPending}
+                <Modal
+                    small
+                    onClose={closeModal}
                     dataTest="bulk-delete-events-dialog"
                 >
-                    {i18n.t('This cannot be undone.')}
-                    {' '}
-                    {i18n.t('Are you sure you want to delete the selected events?')}
-                </BulkActionConfirmModal>
+                    <ModalTitle>{i18n.t('Delete events')}</ModalTitle>
+                    <ModalContent>
+                        {i18n.t('This cannot be undone.')}
+                        {' '}
+                        {i18n.t('Are you sure you want to delete the selected events?')}
+                    </ModalContent>
+                    <ModalActions>
+                        <ButtonStrip>
+                            <Button
+                                secondary
+                                onClick={closeModal}
+                            >
+                                {i18n.t('Cancel')}
+                            </Button>
+                            <Button
+                                destructive
+                                onClick={() => deleteEvents()}
+                                loading={isPending}
+                            >
+                                {i18n.t('Delete')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
             )}
 
             {isModalOpen && validationError && (
