@@ -95,7 +95,7 @@ const CompleteEnrollmentsActionPlain = ({
 
     const closeModal = () => setIsModalOpen(false);
 
-    const ModalTextContent = () => {
+    const renderContent = () => {
         // If the data is still loading, show a spinner
         if (!enrollmentCounts || isLoading) {
             return (
@@ -176,7 +176,7 @@ const CompleteEnrollmentsActionPlain = ({
                 >
                     <ModalTitle>{i18n.t('Complete enrollments')}</ModalTitle>
                     <ModalContent>
-                        <ModalTextContent />
+                        {renderContent()}
                     </ModalContent>
 
                     <ModalActions>
