@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
+import { useBulkDeleteEnrollments } from '../hooks/useBulkDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
 import {
     BulkActionErrorModal,
@@ -44,7 +44,7 @@ const EnrollmentDeleteModalPlain = ({
         isEnrollmentsError,
         validationError,
         enrollmentIdToTeiId,
-    } = useDeleteEnrollments({
+    } = useBulkDeleteEnrollments({
         selectedRows,
         programId,
         onUpdateList,

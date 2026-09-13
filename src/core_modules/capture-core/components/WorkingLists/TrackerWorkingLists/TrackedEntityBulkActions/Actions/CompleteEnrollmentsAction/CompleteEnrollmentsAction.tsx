@@ -13,7 +13,7 @@ import {
     ModalTitle,
 } from '@dhis2/ui';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
+import { useBulkCompleteEnrollments } from './hooks/useBulkCompleteEnrollments';
 import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
 import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
@@ -68,7 +68,7 @@ const CompleteEnrollmentsActionPlain = ({
         isCompleting,
         hasPartiallyUploadedEnrollments,
         isError: errorFetchingTrackedEntities,
-    } = useCompleteBulkEnrollments({
+    } = useBulkCompleteEnrollments({
         selectedRows,
         programId,
         modalIsOpen,

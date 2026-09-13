@@ -89,7 +89,7 @@ const filterValidEnrollments = (enrollments: Enrollment[], errors: ErrorReport[]
 };
 
 
-export const useCompleteBulkEnrollments = ({
+export const useBulkCompleteEnrollments = ({
     selectedRows,
     programId,
     stages,
