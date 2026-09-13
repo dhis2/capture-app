@@ -64,9 +64,8 @@ const CompleteEventsActionPlain = ({
         () => createEventErrorHrefResolver({
             programId,
             orgUnitId,
-            knownEventUids: new Set(Object.keys(selectedRows)),
         }),
-        [programId, orgUnitId, selectedRows],
+        [programId, orgUnitId],
     );
 
     const closeDialog = () => setIsCompleteDialogOpen(false);

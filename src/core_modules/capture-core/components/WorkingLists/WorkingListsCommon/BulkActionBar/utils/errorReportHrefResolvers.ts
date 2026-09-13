@@ -20,15 +20,14 @@ const resolveEventRoute = (programId: string): EventRoute | null => {
 type EventFlavorDeps = {
     programId?: string;
     orgUnitId?: string;
-    knownEventUids: Set<string>;
 };
 
 export const createEventErrorHrefResolver = ({
-    programId, orgUnitId, knownEventUids,
+    programId, orgUnitId,
 }: EventFlavorDeps): ErrorReportHrefResolver =>
     (errorReport: ErrorReport) => {
         const uid = errorReport.uid;
-        if (!uid || !programId || !knownEventUids.has(uid)) return null;
+        if (!uid || !programId) return null;
         const route = resolveEventRoute(programId);
         if (!route) return null;
         return route === 'viewEvent'
@@ -40,11 +39,10 @@ type EnrollmentFlavorDeps = {
     programId?: string;
     orgUnitId?: string;
     enrollmentIdToTeiId: Record<string, string>;
-    knownEventUids?: Set<string>;
 };
 
 export const createEnrollmentErrorHrefResolver = ({
-    programId, orgUnitId, enrollmentIdToTeiId, knownEventUids,
+    programId, orgUnitId, enrollmentIdToTeiId,
 }: EnrollmentFlavorDeps): ErrorReportHrefResolver =>
     (errorReport: ErrorReport) => {
         const uid = errorReport.uid;
@@ -59,7 +57,6 @@ export const createEnrollmentErrorHrefResolver = ({
         }
 
         if (errorReport.trackerType === 'EVENT') {
-            if (!knownEventUids?.has(uid)) return null;
             return `#/enrollmentEventEdit?${buildUrlQueryString({ eventId: uid, orgUnitId })}`;
         }
 

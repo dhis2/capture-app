@@ -49,9 +49,8 @@ export const DeleteEventsAction = ({
         () => createEventErrorHrefResolver({
             programId,
             orgUnitId,
-            knownEventUids: new Set(Object.keys(selectedRows)),
         }),
-        [programId, orgUnitId, selectedRows],
+        [programId, orgUnitId],
     );
 
     const closeModal = () => setIsModalOpen(false);

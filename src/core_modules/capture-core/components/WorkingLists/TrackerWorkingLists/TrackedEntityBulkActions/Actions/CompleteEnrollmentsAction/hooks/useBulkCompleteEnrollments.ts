@@ -246,16 +246,6 @@ export const useBulkCompleteEnrollments = ({
         }, {});
     }, [trackedEntities]);
 
-    const knownEventUids = useMemo(() => {
-        const set = new Set<string>();
-        (trackedEntities?.activeEnrollments ?? []).forEach((enrollment: Enrollment) => {
-            (enrollment.events ?? []).forEach((event) => {
-                if (event.event) set.add(event.event);
-            });
-        });
-        return set;
-    }, [trackedEntities]);
-
     const onStartCompleteEnrollments = useCallback(({ completeEvents }: { completeEvents: boolean }) => {
         const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
         validateAndImportEnrollments({ enrollments });
@@ -265,7 +255,6 @@ export const useBulkCompleteEnrollments = ({
         completeEnrollments: onStartCompleteEnrollments,
         enrollmentCounts,
         enrollmentIdToTeiId,
-        knownEventUids,
         isLoading: isInitialLoadingTrackedEntities,
         isError: isTrackedEntitiesError,
         validationError,

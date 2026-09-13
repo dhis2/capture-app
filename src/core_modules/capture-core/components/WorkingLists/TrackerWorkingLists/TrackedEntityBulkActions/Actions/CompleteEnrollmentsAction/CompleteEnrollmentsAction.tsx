@@ -62,7 +62,6 @@ const CompleteEnrollmentsActionPlain = ({
         completeEnrollments,
         enrollmentCounts,
         enrollmentIdToTeiId,
-        knownEventUids,
         isLoading,
         validationError,
         isCompleting,
@@ -84,9 +83,8 @@ const CompleteEnrollmentsActionPlain = ({
             programId,
             orgUnitId,
             enrollmentIdToTeiId,
-            knownEventUids,
         }),
-        [programId, orgUnitId, enrollmentIdToTeiId, knownEventUids],
+        [programId, orgUnitId, enrollmentIdToTeiId],
     );
 
     const ModalTextContent = () => {
