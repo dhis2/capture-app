@@ -1,6 +1,6 @@
 import React from 'react';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
-import { CompleteEnrollmentsAction, DeleteEnrollmentsAction } from './Actions';
+import { CompleteAction, DeleteEnrollmentsAction } from './Actions';
 import type { Props } from './TrackedEntityBulkActions.types';
 
 export const TrackedEntityBulkActionsComponent = ({
@@ -30,7 +30,7 @@ export const TrackedEntityBulkActionsComponent = ({
                 onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                 selectionInProgress
             />
-            <CompleteEnrollmentsAction
+            <CompleteAction
                 programId={programId}
                 programDataWriteAccess={programDataWriteAccess}
                 selectedRows={selectedRows}

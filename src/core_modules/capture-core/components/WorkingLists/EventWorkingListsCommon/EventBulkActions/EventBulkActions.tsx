@@ -1,6 +1,6 @@
 import React from 'react';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
-import { CompleteEventsAction, DeleteEventsAction } from './Actions';
+import { CompleteAction, DeleteAction } from './Actions';
 import type { Props } from './EventBulkActions.types';
 
 export const EventBulkActions = ({
@@ -31,7 +31,7 @@ export const EventBulkActions = ({
                     selectionInProgress
                 />
             )}
-            <CompleteEventsAction
+            <CompleteAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
@@ -40,7 +40,7 @@ export const EventBulkActions = ({
                 programId={programId}
             />
 
-            <DeleteEventsAction
+            <DeleteAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}

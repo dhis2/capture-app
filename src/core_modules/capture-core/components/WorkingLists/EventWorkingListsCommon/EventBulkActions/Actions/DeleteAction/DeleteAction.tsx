@@ -8,7 +8,7 @@ import {
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import { useBulkDeleteEvents } from './hooks/useBulkDeleteEvents';
-import type { Props } from './DeleteEventsAction.types';
+import type { Props } from './DeleteAction.types';
 
 const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
     if (!stageDataWriteAccess) {
@@ -20,7 +20,7 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-export const DeleteEventsAction = ({
+export const DeleteAction = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,

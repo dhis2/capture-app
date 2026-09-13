@@ -1,2 +1,2 @@
-export { CompleteEnrollmentsAction } from './CompleteEnrollmentsAction';
+export { CompleteAction } from './CompleteAction';
 export { DeleteEnrollmentsAction } from './DeleteEnrollmentsAction';

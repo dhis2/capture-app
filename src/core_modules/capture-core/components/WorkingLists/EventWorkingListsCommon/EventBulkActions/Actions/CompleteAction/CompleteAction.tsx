@@ -9,7 +9,7 @@ import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
-import type { Props } from './CompleteEventsAction.types';
+import type { Props } from './CompleteAction.types';
 
 const styles: Readonly<any> = {
     container: {
@@ -32,7 +32,7 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-const CompleteEventsActionPlain = ({
+const CompleteActionPlain = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,
@@ -136,4 +136,4 @@ const CompleteEventsActionPlain = ({
     );
 };
 
-export const CompleteEventsAction = withStyles(styles)(CompleteEventsActionPlain) as ComponentType<Props>;
+export const CompleteAction = withStyles(styles)(CompleteActionPlain) as ComponentType<Props>;

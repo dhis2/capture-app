@@ -17,7 +17,7 @@ import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
 import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
-import type { PlainProps } from './CompleteEnrollmentsAction.types';
+import type { PlainProps } from './CompleteAction.types';
 
 const styles: Readonly<any> = {
     container: {
@@ -45,7 +45,7 @@ const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActiv
     return '';
 };
 
-const CompleteEnrollmentsActionPlain = ({
+const CompleteActionPlain = ({
     selectedRows,
     programId,
     stages,
@@ -229,4 +229,4 @@ const CompleteEnrollmentsActionPlain = ({
     );
 };
 
-export const CompleteEnrollmentsAction = withStyles(styles)(CompleteEnrollmentsActionPlain);
+export const CompleteAction = withStyles(styles)(CompleteActionPlain);
