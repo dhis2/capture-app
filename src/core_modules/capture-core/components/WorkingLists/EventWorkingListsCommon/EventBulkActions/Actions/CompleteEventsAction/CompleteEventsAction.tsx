@@ -9,7 +9,15 @@ import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
-import type { Props } from './CompleteEventsAction.types';
+
+type Props = {
+    selectedRows: { [key: string]: boolean };
+    stageDataWriteAccess?: boolean;
+    bulkDataEntryIsActive?: boolean;
+    onUpdateList: (disableClearSelections?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+    programId?: string;
+};
 
 const styles: Readonly<any> = {
     container: {

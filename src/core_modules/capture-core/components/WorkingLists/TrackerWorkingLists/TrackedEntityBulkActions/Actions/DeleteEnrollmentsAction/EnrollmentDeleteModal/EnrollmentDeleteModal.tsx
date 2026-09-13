@@ -9,7 +9,14 @@ import {
 } from '../../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEnrollmentErrorHrefResolver } from '../../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../../utils/routing';
-import type { PlainProps } from './EnrollmentDeleteModal.types';
+
+type PlainProps = {
+    selectedRows: Record<string, boolean>;
+    programId: string;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+    setIsDeleteDialogOpen: (open: boolean) => void;
+};
 
 const styles: Readonly<any> = {
     modalContent: {

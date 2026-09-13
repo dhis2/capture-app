@@ -17,7 +17,17 @@ import { useBulkCompleteEnrollments } from './hooks/useBulkCompleteEnrollments';
 import { BulkActionErrorDetails } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorDetails';
 import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
-import type { PlainProps } from './CompleteEnrollmentsAction.types';
+import type { ProgramStage } from '../../../../../../metaData';
+
+type PlainProps = {
+    selectedRows: Record<string, any>;
+    programId: string;
+    stages: Map<string, ProgramStage>;
+    programDataWriteAccess: boolean;
+    onUpdateList: (disableClearSelections?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+    bulkDataEntryIsActive: boolean;
+};
 
 const styles: Readonly<any> = {
     container: {

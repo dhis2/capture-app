@@ -4,7 +4,15 @@ import { Button } from '@dhis2/ui';
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import type { PlainProps } from './DeleteEnrollmentsAction.types';
+
+type PlainProps = {
+    selectedRows: Record<string, boolean>;
+    programDataWriteAccess: boolean;
+    programId: string;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+    bulkDataEntryIsActive: boolean;
+};
 
 const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
     if (!programDataWriteAccess) {
