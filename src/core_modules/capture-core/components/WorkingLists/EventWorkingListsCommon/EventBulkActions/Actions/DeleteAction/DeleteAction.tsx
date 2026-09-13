@@ -37,7 +37,6 @@ export const DeleteAction = ({
         mutate: deleteEvents,
         isPending,
         validationError,
-        reset,
     } = useBulkDeleteEvents({
         selectedRows,
         active: isModalOpen,
@@ -55,10 +54,7 @@ export const DeleteAction = ({
         [programId, orgUnitId, selectedRows],
     );
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-        reset();
-    };
+    const closeModal = () => setIsModalOpen(false);
 
     return (
         <>
