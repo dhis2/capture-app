@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-13T17:52:58.827Z\n"
-"PO-Revision-Date: 2026-09-13T17:52:58.828Z\n"
+"POT-Creation-Date: 2026-09-13T18:06:54.938Z\n"
+"PO-Revision-Date: 2026-09-13T18:06:54.938Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2087,19 +2087,6 @@ msgstr "An unknown error occurred when completing enrollments"
 msgid "You do not have access to delete enrollments"
 msgstr "You do not have access to delete enrollments"
 
-msgid "Delete enrollments"
-msgstr "Delete enrollments"
-
-msgid "Error deleting enrollments"
-msgstr "Error deleting enrollments"
-
-msgid ""
-"There was an error while deleting the enrollments. Please see the details "
-"below."
-msgstr ""
-"There was an error while deleting the enrollments. Please see the details "
-"below."
-
 msgid "An error occurred while loading the selected enrollments. Please try again."
 msgstr "An error occurred while loading the selected enrollments. Please try again."
 
@@ -2125,6 +2112,16 @@ msgid_plural "Cancelled enrollments ({{count}})"
 msgstr[0] "Cancelled enrollments ({{count}})"
 msgstr[1] "Cancelled enrollments ({{count}})"
 
+msgid "Error deleting enrollments"
+msgstr "Error deleting enrollments"
+
+msgid ""
+"There was an error while deleting the enrollments. Please see the details "
+"below."
+msgstr ""
+"There was an error while deleting the enrollments. Please see the details "
+"below."
+
 msgid "Delete selected enrollments"
 msgstr "Delete selected enrollments"
 
@@ -2132,6 +2129,9 @@ msgid "Delete {{count}} enrollment"
 msgid_plural "Delete {{count}} enrollment"
 msgstr[0] "Delete {{count}} enrollment"
 msgstr[1] "Delete {{count}} enrollments"
+
+msgid "Delete enrollments"
+msgstr "Delete enrollments"
 
 msgid "An error occurred when deleting enrollments"
 msgstr "An error occurred when deleting enrollments"

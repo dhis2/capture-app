@@ -20,6 +20,7 @@ type StatusToDelete = { active: boolean; completed: boolean; cancelled: boolean 
 type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
+    modalIsOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     setIsDeleteDialogOpen: (open: boolean) => void;
@@ -49,6 +50,7 @@ const findFullyDeletedTeiIds = (
 export const useBulkDeleteEnrollments = ({
     selectedRows,
     programId,
+    modalIsOpen,
     onUpdateList,
     removeRowsFromSelection,
     setIsDeleteDialogOpen,
@@ -88,7 +90,7 @@ export const useBulkDeleteEnrollments = ({
             }),
         },
         {
-            enabled: Object.keys(selectedRows).length > 0,
+            enabled: modalIsOpen && Object.keys(selectedRows).length > 0,
             select: (data: any): Enrollment[] => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return [];
