@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-13T16:07:15.056Z\n"
-"PO-Revision-Date: 2026-09-13T16:07:15.057Z\n"
+"POT-Creation-Date: 2026-09-13T16:11:25.538Z\n"
+"PO-Revision-Date: 2026-09-13T16:11:25.538Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2207,9 +2207,6 @@ msgstr "Deselect all"
 
 msgid "Details (Advanced)"
 msgstr "Details (Advanced)"
-
-msgid "Unknown error"
-msgstr "Unknown error"
 
 msgid "An unknown error occurred."
 msgstr "An unknown error occurred."
