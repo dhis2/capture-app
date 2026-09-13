@@ -178,8 +178,7 @@ const EnrollmentDeleteModalPlain = ({
                     </Button>
                     <Button
                         destructive
-                        // @ts-expect-error - keeping original functionality as before ts rewrite
-                        onClick={deleteEnrollments}
+                        onClick={() => deleteEnrollments()}
                         disabled={isDeletingEnrollments || numberOfEnrollmentsToDelete === 0}
                     >
                         {i18n.t('Delete {{count}} enrollment', {

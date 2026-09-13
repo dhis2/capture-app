@@ -45,7 +45,6 @@ const CompleteActionPlain = ({
     const { orgUnitId } = useLocationQuery();
     const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-
     const {
         eventCounts,
         isLoading,
@@ -90,7 +89,7 @@ const CompleteActionPlain = ({
             {isCompleteDialogOpen && eventCounts && !validationError && (
                 <Modal
                     small
-                    onClose={closeDialog}
+                    onClose={() => setIsCompleteDialogOpen(false)}
                     dataTest="bulk-complete-events-dialog"
                 >
                     <ModalTitle>{i18n.t('Complete events')}</ModalTitle>
@@ -106,7 +105,7 @@ const CompleteActionPlain = ({
                         <ButtonStrip>
                             <Button
                                 secondary
-                                onClick={closeDialog}
+                                onClick={() => setIsCompleteDialogOpen(false)}
                             >
                                 {i18n.t('Cancel')}
                             </Button>

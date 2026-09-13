@@ -42,7 +42,7 @@ const findFullyDeletedTeiIds = (
         [e.trackedEntity]: [...(acc[e.trackedEntity] ?? []), e],
     }), {});
     return Object.entries(grouped)
-        .filter(([, teiEnrollments]) => teiEnrollments.every(wasDeleted))
+        .filter(([, teiEnrollments]) => teiEnrollments.length > 0 && teiEnrollments.every(wasDeleted))
         .map(([teiId]) => teiId);
 };
 
@@ -54,7 +54,7 @@ export const useDeleteEnrollments = ({
     setIsDeleteDialogOpen,
 }: Props) => {
     const queryClient = useQueryClient();
-    const [statusToDelete, setStatusToDelete] = useState<StatusToDelete>({
+    const [statusToDelete, setStatusToDelete] = useState({
         active: true,
         completed: true,
         cancelled: true,
@@ -137,6 +137,9 @@ export const useDeleteEnrollments = ({
             queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
             onUpdateList(true);
         },
+        onValidationError: (report) => {
+            log.error(errorCreator('A validation error occurred when deleting enrollments')({ report }));
+        },
         onFatalError: (serverResponse) => {
             log.error(errorCreator('An error occurred when deleting enrollments')({ serverResponse }));
             showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
@@ -159,11 +162,11 @@ export const useDeleteEnrollments = ({
         const counts = enrollments.reduce((acc, enrollment) => {
             if (enrollment.status === 'ACTIVE') acc.active += 1;
             else if (enrollment.status === 'CANCELLED') acc.cancelled += 1;
-            else acc.completed += 1;
+            else if (enrollment.status === 'COMPLETED') acc.completed += 1;
             return acc;
         }, { active: 0, completed: 0, cancelled: 0 });
 
-        return { ...counts, total: enrollments.length };
+        return { ...counts, total: counts.active + counts.completed + counts.cancelled };
     }, [enrollments]);
 
     const numberOfEnrollmentsToDelete = useMemo(() => {

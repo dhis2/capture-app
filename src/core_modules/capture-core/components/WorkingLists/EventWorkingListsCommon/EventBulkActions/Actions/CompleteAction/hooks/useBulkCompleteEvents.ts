@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from 'react';
+import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
+import { errorCreator } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
@@ -89,7 +91,11 @@ export const useBulkCompleteEvents = ({
             removeRowsFromSelection(validEventIds);
             onUpdateList(true);
         },
-        onFatalError: () => {
+        onValidationError: (report) => {
+            log.error(errorCreator('A validation error occurred while completing events')({ report }));
+        },
+        onFatalError: (serverResponse) => {
+            log.error(errorCreator('An error occurred while completing events')({ serverResponse }));
             showAlert({ message: i18n.t('An error occurred while completing events') });
         },
     });

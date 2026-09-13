@@ -52,6 +52,9 @@ export const useBulkDeleteEvents = ({
             removeRowsFromSelection(succeededUids);
             onUpdateList(true);
         },
+        onValidationError: (report) => {
+            log.error(errorCreator('A validation error occurred while deleting the events')({ report }));
+        },
         onFatalError: (serverResponse) => {
             log.error(errorCreator('An error occurred while deleting the events')({ serverResponse }));
             showAlert({ message: i18n.t('An error occurred while deleting the events') });
