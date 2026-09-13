@@ -8,15 +8,9 @@ import {
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import { useBulkDeleteEvents } from './hooks/useBulkDeleteEvents';
+import type { EventBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
-type Props = {
-    selectedRows: Record<string, boolean>;
-    stageDataWriteAccess?: boolean;
-    onUpdateList: (disableClearSelection?: boolean) => void;
-    removeRowsFromSelection: (rows: Array<string>) => void;
-    bulkDataEntryIsActive?: boolean;
-    programId?: string;
-};
+type Props = EventBulkActionProps;
 
 const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
     if (!stageDataWriteAccess) {

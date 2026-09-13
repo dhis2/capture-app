@@ -11,8 +11,8 @@ type Event = { event: string; [key: string]: any };
 
 type Props = {
     selectedRows: Record<string, boolean>;
-    isModalOpen: boolean;
     programId?: string;
+    isModalOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     setIsModalOpen: (open: boolean) => void;
@@ -20,8 +20,8 @@ type Props = {
 
 export const useBulkCompleteEvents = ({
     selectedRows,
-    isModalOpen,
     programId,
+    isModalOpen,
     onUpdateList,
     removeRowsFromSelection,
     setIsModalOpen,

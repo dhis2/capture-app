@@ -9,15 +9,7 @@ import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommo
 import { useLocationQuery } from '../../../../../../utils/routing';
 import { useBulkDeleteEnrollments } from './hooks/useBulkDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
-
-type Props = {
-    selectedRows: Record<string, boolean>;
-    programDataWriteAccess: boolean;
-    programId: string;
-    onUpdateList: (disableClearSelection?: boolean) => void;
-    removeRowsFromSelection: (rows: Array<string>) => void;
-    bulkDataEntryIsActive: boolean;
-};
+import type { EnrollmentBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
 const styles: Readonly<any> = {
     modalContent: {
@@ -52,7 +44,7 @@ const DeleteEnrollmentsActionPlain = ({
     removeRowsFromSelection,
     bulkDataEntryIsActive,
     classes,
-}: Props & WithStyles<typeof styles>) => {
+}: EnrollmentBulkActionProps & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
     const { orgUnitId } = useLocationQuery();
@@ -76,7 +68,7 @@ const DeleteEnrollmentsActionPlain = ({
         isModalOpen,
         onUpdateList,
         removeRowsFromSelection,
-        setIsModalOpen: setIsModalOpen,
+        setIsModalOpen,
     });
 
     const getRecordHref = useMemo(

@@ -18,15 +18,10 @@ import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionB
 import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { ProgramStage } from '../../../../../../metaData';
+import type { EnrollmentBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
-type Props = {
-    selectedRows: Record<string, any>;
-    programId: string;
+type Props = EnrollmentBulkActionProps & {
     stages: Map<string, ProgramStage>;
-    programDataWriteAccess: boolean;
-    onUpdateList: (disableClearSelections?: boolean) => void;
-    removeRowsFromSelection: (rows: Array<string>) => void;
-    bulkDataEntryIsActive: boolean;
 };
 
 const styles: Readonly<any> = {

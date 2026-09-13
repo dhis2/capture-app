@@ -8,16 +8,10 @@ import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import type { EventBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 import { useLocationQuery } from '../../../../../../utils/routing';
 
-type Props = {
-    selectedRows: { [key: string]: boolean };
-    stageDataWriteAccess?: boolean;
-    bulkDataEntryIsActive?: boolean;
-    onUpdateList: (disableClearSelections?: boolean) => void;
-    removeRowsFromSelection: (rows: Array<string>) => void;
-    programId?: string;
-};
+type Props = EventBulkActionProps;
 
 const styles: Readonly<any> = {
     container: {

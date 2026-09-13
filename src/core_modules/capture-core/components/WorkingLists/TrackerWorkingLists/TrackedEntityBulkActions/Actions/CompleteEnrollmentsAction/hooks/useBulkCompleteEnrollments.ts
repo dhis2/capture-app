@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react';
-import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
+import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
 import type { ErrorReport, ValidationReportContainer } from '../../../../../WorkingListsCommon/BulkActionBar/types';
 import type { ProgramStage } from '../../../../../../../metaData';
@@ -27,6 +27,8 @@ type Props = {
     removeRowsFromSelection: (rows: Array<string>) => void;
     setIsModalOpen: (open: boolean) => void;
 };
+
+const QueryKey = ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities'];
 
 const validateEnrollments = async ({ dataEngine, enrollments }: { dataEngine: any; enrollments: Enrollment[] }) =>
     dataEngine.mutate({
@@ -107,10 +109,7 @@ export const useBulkCompleteEnrollments = ({
     );
 
     const removeQueries = useCallback(() => {
-        queryClient.removeQueries([
-            ReactQueryAppNamespace,
-            'WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities',
-        ]);
+        queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
     }, [queryClient]);
 
     const {
@@ -118,7 +117,7 @@ export const useBulkCompleteEnrollments = ({
         isError: isTrackedEntitiesError,
         isInitialLoading: isInitialLoadingTrackedEntities,
     } = useApiDataQuery(
-        ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities', selectedRows],
+        [...QueryKey, selectedRows],
         {
             resource: 'tracker/trackedEntities',
             params: () => ({

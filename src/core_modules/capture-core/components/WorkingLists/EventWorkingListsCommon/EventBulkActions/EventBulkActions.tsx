@@ -4,14 +4,14 @@ import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
 import { CompleteEventsAction, DeleteEventsAction } from './Actions';
 
 type Props = {
-    selectedRows: { [key: string]: boolean };
+    selectedRows: Record<string, boolean>;
     onClearSelection: () => void;
     stage?: ProgramStage;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     programId?: string;
     onOpenBulkDataEntryPlugin?: () => void;
-    bulkDataEntryIsActive?: boolean;
+    bulkDataEntryIsActive: boolean;
 };
 
 export const EventBulkActions = ({
