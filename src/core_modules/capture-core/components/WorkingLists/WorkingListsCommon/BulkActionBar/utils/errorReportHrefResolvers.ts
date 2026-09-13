@@ -1,21 +1,7 @@
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
-import { EventProgram, getProgramFromProgramIdThrowIfNotFound } from '../../../../../metaData';
+import { EventProgram } from '../../../../../metaData';
+import { programCollection } from '../../../../../metaDataMemoryStores/programCollection/programCollection';
 import { buildUrlQueryString } from '../../../../../utils/routing';
 import type { ErrorReport, ErrorReportHrefResolver } from '../types';
-
-type EventRoute = 'viewEvent' | 'enrollmentEventEdit';
-
-const resolveEventRoute = (programId: string): EventRoute | null => {
-    try {
-        return getProgramFromProgramIdThrowIfNotFound(programId) instanceof EventProgram
-            ? 'viewEvent'
-            : 'enrollmentEventEdit';
-    } catch (error) {
-        log.error(errorCreator('Could not resolve program for error link')({ error, programId }));
-        return null;
-    }
-};
 
 type EventFlavorDeps = {
     programId?: string;
@@ -28,9 +14,11 @@ export const createEventErrorHrefResolver = ({
     (errorReport: ErrorReport) => {
         const uid = errorReport.uid;
         if (!uid || !programId) return null;
-        const route = resolveEventRoute(programId);
-        if (!route) return null;
-        return route === 'viewEvent'
+
+        const program = programCollection.get(programId);
+        if (!program) return null;
+
+        return program instanceof EventProgram
             ? `#/viewEvent?${buildUrlQueryString({ viewEventId: uid, orgUnitId })}`
             : `#/enrollmentEventEdit?${buildUrlQueryString({ eventId: uid, orgUnitId })}`;
     };
