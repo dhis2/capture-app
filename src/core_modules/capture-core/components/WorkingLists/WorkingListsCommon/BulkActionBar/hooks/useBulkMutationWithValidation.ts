@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { extractValidationReport } from '../utils';
 import type { ValidationReportContainer } from '../types';
 
 type Options<TData, TVariables> = {
@@ -45,10 +44,17 @@ export const useBulkMutationWithValidation = <TData, TVariables>({
         },
     });
 
-    const validationError = useMemo(
-        () => extractValidationReport({ data, error }),
-        [data, error],
-    );
+    const validationError = useMemo((): ValidationReportContainer | null => {
+        const fromData = data as ValidationReportContainer | undefined;
+        if (fromData?.validationReport?.errorReports?.length) {
+            return fromData;
+        }
+        const fromError = error?.details as ValidationReportContainer | undefined;
+        if (fromError?.validationReport?.errorReports?.length) {
+            return fromError;
+        }
+        return null;
+    }, [data, error]);
 
     useEffect(() => {
         if (active === false) reset();
