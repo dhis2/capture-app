@@ -1,1 +1,1 @@
-export { CompleteAction } from './CompleteAction';
+export { CompleteEnrollmentsAction } from './CompleteEnrollmentsAction';
