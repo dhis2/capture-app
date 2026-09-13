@@ -42,12 +42,12 @@ export const DeleteEventsAction = ({
     const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
 
     const {
-        mutate: deleteEvents,
+        deleteEvents,
         isPending,
         validationError,
     } = useBulkDeleteEvents({
         selectedRows,
-        active: isModalOpen,
+        isModalOpen,
         onUpdateList,
         removeRowsFromSelection,
         setIsModalOpen,

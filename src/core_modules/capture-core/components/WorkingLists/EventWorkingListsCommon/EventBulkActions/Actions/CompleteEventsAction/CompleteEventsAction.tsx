@@ -49,20 +49,20 @@ const CompleteEventsActionPlain = ({
     programId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const { orgUnitId } = useLocationQuery();
     const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
     const {
+        completeEvents,
         eventCounts,
+        isPending,
         isLoading,
-        isCompletingEvents,
-        onCompleteEvents,
         validationError,
     } = useBulkCompleteEvents({
         selectedRows,
-        isCompleteDialogOpen,
-        setIsCompleteDialogOpen,
+        isModalOpen,
+        setIsModalOpen,
         removeRowsFromSelection,
         onUpdateList,
         programId,
@@ -76,7 +76,7 @@ const CompleteEventsActionPlain = ({
         [programId, orgUnitId],
     );
 
-    const closeDialog = () => setIsCompleteDialogOpen(false);
+    const closeModal = () => setIsModalOpen(false);
 
     return (
         <>
@@ -86,17 +86,17 @@ const CompleteEventsActionPlain = ({
             >
                 <Button
                     small
-                    onClick={() => setIsCompleteDialogOpen(true)}
+                    onClick={() => setIsModalOpen(true)}
                     disabled={disabled}
                 >
                     {i18n.t('Complete')}
                 </Button>
             </ConditionalTooltip>
 
-            {isCompleteDialogOpen && eventCounts && !validationError && (
+            {isModalOpen && eventCounts && !validationError && (
                 <Modal
                     small
-                    onClose={() => setIsCompleteDialogOpen(false)}
+                    onClose={() => setIsModalOpen(false)}
                     dataTest="bulk-complete-events-dialog"
                 >
                     <ModalTitle>{i18n.t('Complete events')}</ModalTitle>
@@ -112,15 +112,15 @@ const CompleteEventsActionPlain = ({
                         <ButtonStrip>
                             <Button
                                 secondary
-                                onClick={() => setIsCompleteDialogOpen(false)}
+                                onClick={() => setIsModalOpen(false)}
                             >
                                 {i18n.t('Cancel')}
                             </Button>
                             <Button
                                 primary
-                                onClick={onCompleteEvents}
+                                onClick={completeEvents}
                                 disabled={isLoading || eventCounts.active === 0}
-                                loading={isCompletingEvents}
+                                loading={isPending}
                             >
                                 {i18n.t('Complete')}
                             </Button>
@@ -129,13 +129,13 @@ const CompleteEventsActionPlain = ({
                 </Modal>
             )}
 
-            {isCompleteDialogOpen && validationError && (
+            {isModalOpen && validationError && (
                 <BulkActionErrorModal
                     title={i18n.t('Error completing events')}
                     introText={i18n.t('There was an error completing the events.')}
                     errorReports={validationError.validationReport.errorReports}
                     getRecordHref={getRecordHref}
-                    onClose={closeDialog}
+                    onClose={closeModal}
                     dataTest="bulk-complete-events-dialog"
                 />
             )}

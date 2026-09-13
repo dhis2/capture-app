@@ -20,10 +20,10 @@ type StatusToDelete = { active: boolean; completed: boolean; cancelled: boolean 
 type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
-    modalIsOpen: boolean;
+    isModalOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
-    setIsDeleteDialogOpen: (open: boolean) => void;
+    setIsModalOpen: (open: boolean) => void;
 };
 
 const QueryKey = ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities'];
@@ -50,10 +50,10 @@ const findFullyDeletedTeiIds = (
 export const useBulkDeleteEnrollments = ({
     selectedRows,
     programId,
-    modalIsOpen,
+    isModalOpen,
     onUpdateList,
     removeRowsFromSelection,
-    setIsDeleteDialogOpen,
+    setIsModalOpen,
 }: Props) => {
     const queryClient = useQueryClient();
     const [statusToDelete, setStatusToDelete] = useState({
@@ -90,7 +90,7 @@ export const useBulkDeleteEnrollments = ({
             }),
         },
         {
-            enabled: modalIsOpen && Object.keys(selectedRows).length > 0,
+            enabled: isModalOpen && Object.keys(selectedRows).length > 0,
             select: (data: any): Enrollment[] => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return [];
@@ -119,14 +119,15 @@ export const useBulkDeleteEnrollments = ({
 
     const {
         mutate: deleteEnrollments,
-        isPending: isDeletingEnrollments,
+        isPending,
         validationError,
     } = useBulkMutationWithValidation<any, void>({
         mutationFn,
+        active: isModalOpen,
         onSuccess: () => {
             queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
             onUpdateList();
-            setIsDeleteDialogOpen(false);
+            setIsModalOpen(false);
         },
         onPartialSuccess: (report) => {
             const failedEnrollmentUids = new Set(
@@ -180,9 +181,9 @@ export const useBulkDeleteEnrollments = ({
 
     return {
         deleteEnrollments,
-        isDeletingEnrollments,
-        isLoadingEnrollments: isInitialLoadingEnrollments,
-        isEnrollmentsError,
+        isPending,
+        isLoading: isInitialLoadingEnrollments,
+        isError: isEnrollmentsError,
         enrollmentCounts,
         statusToDelete,
         updateStatusToDelete,

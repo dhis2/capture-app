@@ -3,7 +3,7 @@ import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Checkbox } from '@dhis2/ui';
 
-type PlainProps = {
+type Props = {
     label: string;
     checked: boolean;
     disabled?: boolean;
@@ -54,7 +54,7 @@ const CustomCheckboxPlain = ({
     disabled,
     dataTest,
     classes,
-}: PlainProps & WithStyles<typeof styles>) => (
+}: Props & WithStyles<typeof styles>) => (
     <button
         type="button"
         onClick={() => onChange(id)}

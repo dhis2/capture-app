@@ -7,24 +7,24 @@ import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
 
+type Event = { event: string; [key: string]: any };
+
 type Props = {
     selectedRows: Record<string, boolean>;
-    isCompleteDialogOpen: boolean;
-    setIsCompleteDialogOpen: (isCompleteDialogOpen: boolean) => void;
+    isModalOpen: boolean;
+    programId?: string;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
-    programId?: string;
+    setIsModalOpen: (open: boolean) => void;
 };
-
-type Payload = Array<{ event: string; [key: string]: any }>;
 
 export const useBulkCompleteEvents = ({
     selectedRows,
-    isCompleteDialogOpen,
-    setIsCompleteDialogOpen,
-    removeRowsFromSelection,
-    onUpdateList,
+    isModalOpen,
     programId,
+    onUpdateList,
+    removeRowsFromSelection,
+    setIsModalOpen,
 }: Props) => {
     const dataEngine = useDataEngine();
     const { show: showAlert } = useAlert(
@@ -44,7 +44,7 @@ export const useBulkCompleteEvents = ({
             }),
         },
         {
-            enabled: Object.keys(selectedRows).length > 0 && isCompleteDialogOpen && !!programId,
+            enabled: isModalOpen && Object.keys(selectedRows).length > 0 && !!programId,
             staleTime: 0,
             cacheTime: 0,
             select: (data: any) => {
@@ -63,7 +63,7 @@ export const useBulkCompleteEvents = ({
     );
 
     const mutationFn = useCallback(
-        ({ payload }: { payload: Payload }) => dataEngine.mutate({
+        ({ payload }: { payload: Event[] }) => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
             type: 'create',
             data: { events: payload },
@@ -72,15 +72,15 @@ export const useBulkCompleteEvents = ({
     );
 
     const {
-        mutate: completeEvents,
-        isPending: isCompletingEvents,
+        mutate: mutateCompleteEvents,
+        isPending,
         validationError,
-    } = useBulkMutationWithValidation<any, { payload: Payload }>({
+    } = useBulkMutationWithValidation<any, { payload: Event[] }>({
         mutationFn,
-        active: isCompleteDialogOpen,
+        active: isModalOpen,
         onSuccess: () => {
             onUpdateList();
-            setIsCompleteDialogOpen(false);
+            setIsModalOpen(false);
         },
         onPartialSuccess: (report, { payload }) => {
             const errorReports = report.validationReport.errorReports;
@@ -100,17 +100,17 @@ export const useBulkCompleteEvents = ({
         },
     });
 
-    const onCompleteEvents = useCallback(() => {
+    const completeEvents = useCallback(() => {
         if (!events) return;
 
-        const serverPayload: Payload = events.activeEvents.map((event: any) => ({
+        const payload: Event[] = events.activeEvents.map((event: any) => ({
             ...event,
             status: 'COMPLETED',
             program: event.program || programId || event.programId,
         }));
 
-        completeEvents({ payload: serverPayload });
-    }, [completeEvents, events, programId]);
+        mutateCompleteEvents({ payload });
+    }, [mutateCompleteEvents, events, programId]);
 
     const eventCounts = useMemo(() => {
         if (!events) return null;
@@ -121,10 +121,10 @@ export const useBulkCompleteEvents = ({
     }, [events]);
 
     return {
+        completeEvents,
         eventCounts,
-        validationError,
-        onCompleteEvents,
-        isCompletingEvents,
+        isPending,
         isLoading: isInitialLoading,
+        validationError,
     };
 };

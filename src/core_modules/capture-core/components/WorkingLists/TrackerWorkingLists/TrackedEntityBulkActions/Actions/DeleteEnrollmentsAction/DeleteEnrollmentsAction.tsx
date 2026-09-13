@@ -10,7 +10,7 @@ import { useLocationQuery } from '../../../../../../utils/routing';
 import { useBulkDeleteEnrollments } from './hooks/useBulkDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
 
-type PlainProps = {
+type Props = {
     selectedRows: Record<string, boolean>;
     programDataWriteAccess: boolean;
     programId: string;
@@ -52,8 +52,8 @@ const DeleteEnrollmentsActionPlain = ({
     removeRowsFromSelection,
     bulkDataEntryIsActive,
     classes,
-}: PlainProps & WithStyles<typeof styles>) => {
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+}: Props & WithStyles<typeof styles>) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
     const { orgUnitId } = useLocationQuery();
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
@@ -61,22 +61,22 @@ const DeleteEnrollmentsActionPlain = ({
 
     const {
         deleteEnrollments,
-        isDeletingEnrollments,
+        isPending,
         enrollmentCounts,
-        isLoadingEnrollments,
+        isLoading,
         statusToDelete,
         updateStatusToDelete,
         numberOfEnrollmentsToDelete,
-        isEnrollmentsError,
+        isError,
         validationError,
         enrollmentIdToTeiId,
     } = useBulkDeleteEnrollments({
         selectedRows,
         programId,
-        modalIsOpen: isDeleteDialogOpen,
+        isModalOpen,
         onUpdateList,
         removeRowsFromSelection,
-        setIsDeleteDialogOpen,
+        setIsModalOpen: setIsModalOpen,
     });
 
     const getRecordHref = useMemo(
@@ -92,12 +92,12 @@ const DeleteEnrollmentsActionPlain = ({
         return null;
     }
 
-    const closeDialog = () => setIsDeleteDialogOpen(false);
+    const closeModal = () => setIsModalOpen(false);
 
-    const canShowDelete = !isEnrollmentsError && !isLoadingEnrollments && !!enrollmentCounts;
+    const canShowDelete = !isError && !isLoading && !!enrollmentCounts;
 
     const renderContent = () => {
-        if (isEnrollmentsError) {
+        if (isError) {
             return (
                 <div className={classes.modalContent}>
                     {i18n.t('An error occurred while loading the selected enrollments. Please try again.')}
@@ -105,7 +105,7 @@ const DeleteEnrollmentsActionPlain = ({
             );
         }
 
-        if (isLoadingEnrollments || !enrollmentCounts) {
+        if (isLoading || !enrollmentCounts) {
             return (
                 <span className={classes.loadingContainer}>
                     <CircularLoader />
@@ -116,8 +116,8 @@ const DeleteEnrollmentsActionPlain = ({
         return (
             <div className={classes.modalContent}>
                 <div>
-                    {/* eslint-disable-next-line max-len */}
-                    {i18n.t('This action will permanently delete the selected enrollments, including all associated data and events.')}
+                    {i18n.t('This action will permanently delete the selected enrollments, ' +
+                        'including all associated data and events.')}
                 </div>
                 <div>{i18n.t('Please select which enrollment statuses you want to delete:')}</div>
                 <div>
@@ -160,7 +160,7 @@ const DeleteEnrollmentsActionPlain = ({
                     )}
                     errorReports={validationError.validationReport.errorReports}
                     getRecordHref={getRecordHref}
-                    onClose={closeDialog}
+                    onClose={closeModal}
                     dataTest="bulk-delete-enrollments-dialog"
                 />
             );
@@ -168,21 +168,21 @@ const DeleteEnrollmentsActionPlain = ({
 
         return (
             <Modal
-                onClose={closeDialog}
+                onClose={closeModal}
                 dataTest="bulk-delete-enrollments-dialog"
             >
                 <ModalTitle>{i18n.t('Delete selected enrollments')}</ModalTitle>
                 <ModalContent>{renderContent()}</ModalContent>
                 <ModalActions>
                     <ButtonStrip>
-                        <Button secondary onClick={closeDialog}>
+                        <Button secondary onClick={closeModal}>
                             {i18n.t('Cancel')}
                         </Button>
                         {canShowDelete && (
                             <Button
                                 destructive
                                 onClick={() => deleteEnrollments()}
-                                disabled={isDeletingEnrollments || numberOfEnrollmentsToDelete === 0}
+                                disabled={isPending || numberOfEnrollmentsToDelete === 0}
                             >
                                 {i18n.t('Delete {{count}} enrollment', {
                                     count: numberOfEnrollmentsToDelete,
@@ -200,12 +200,12 @@ const DeleteEnrollmentsActionPlain = ({
     return (
         <>
             <ConditionalTooltip enabled={disabled} content={tooltipContent}>
-                <Button small disabled={disabled} onClick={() => setIsDeleteDialogOpen(true)}>
+                <Button small disabled={disabled} onClick={() => setIsModalOpen(true)}>
                     {i18n.t('Delete enrollments')}
                 </Button>
             </ConditionalTooltip>
 
-            {isDeleteDialogOpen && renderModal()}
+            {isModalOpen && renderModal()}
         </>
     );
 };

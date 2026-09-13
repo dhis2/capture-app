@@ -22,9 +22,10 @@ type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
     stages: Map<string, ProgramStage>;
-    modalIsOpen: boolean;
-    onUpdateList: (disableClearSelections?: boolean) => void;
+    isModalOpen: boolean;
+    onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
+    setIsModalOpen: (open: boolean) => void;
 };
 
 const validateEnrollments = async ({ dataEngine, enrollments }: { dataEngine: any; enrollments: Enrollment[] }) =>
@@ -93,9 +94,10 @@ export const useBulkCompleteEnrollments = ({
     selectedRows,
     programId,
     stages,
-    modalIsOpen,
+    isModalOpen,
     removeRowsFromSelection,
     onUpdateList,
+    setIsModalOpen,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
@@ -128,7 +130,7 @@ export const useBulkCompleteEnrollments = ({
             }),
         },
         {
-            enabled: modalIsOpen && Object.keys(selectedRows).length > 0,
+            enabled: isModalOpen && Object.keys(selectedRows).length > 0,
             select: (data: any) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return null;
@@ -157,6 +159,7 @@ export const useBulkCompleteEnrollments = ({
             onSuccess: () => {
                 onUpdateList();
                 removeQueries();
+                setIsModalOpen(false);
             },
             onError: (serverResponse, variables) => {
                 removeQueries();
@@ -214,7 +217,7 @@ export const useBulkCompleteEnrollments = ({
         validationError,
     } = useBulkMutationWithValidation<any, { enrollments: Enrollment[] }>({
         mutationFn: validateMutationFn,
-        active: modalIsOpen,
+        active: isModalOpen,
         onSuccess: (_response, { enrollments }) => {
             importEnrollments({ enrollments });
         },
@@ -258,7 +261,7 @@ export const useBulkCompleteEnrollments = ({
         isLoading: isInitialLoadingTrackedEntities,
         isError: isTrackedEntitiesError,
         validationError,
-        isCompleting: isImportingEnrollments || isImportingPartialEnrollments || isValidatingEnrollments,
+        isPending: isImportingEnrollments || isImportingPartialEnrollments || isValidatingEnrollments,
         hasPartiallyUploadedEnrollments,
     };
 };

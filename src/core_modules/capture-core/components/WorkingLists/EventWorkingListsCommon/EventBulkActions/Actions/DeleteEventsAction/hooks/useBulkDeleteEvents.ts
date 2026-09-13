@@ -7,7 +7,7 @@ import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon
 
 type Props = {
     selectedRows: Record<string, boolean>;
-    active: boolean;
+    isModalOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     setIsModalOpen: (open: boolean) => void;
@@ -15,7 +15,7 @@ type Props = {
 
 export const useBulkDeleteEvents = ({
     selectedRows,
-    active,
+    isModalOpen,
     onUpdateList,
     removeRowsFromSelection,
     setIsModalOpen,
@@ -33,13 +33,17 @@ export const useBulkDeleteEvents = ({
             data: {
                 events: Object.keys(selectedRows).map(id => ({ event: id })),
             },
-        }),
+        }) as Promise<any>,
         [dataEngine, selectedRows],
     );
 
-    return useBulkMutationWithValidation<any, void>({
+    const {
+        mutate: deleteEvents,
+        isPending,
+        validationError,
+    } = useBulkMutationWithValidation<any, void>({
         mutationFn,
-        active,
+        active: isModalOpen,
         onSuccess: () => {
             onUpdateList();
             setIsModalOpen(false);
@@ -60,4 +64,10 @@ export const useBulkDeleteEvents = ({
             showAlert({ message: i18n.t('An error occurred while deleting the events') });
         },
     });
+
+    return {
+        deleteEvents,
+        isPending,
+        validationError,
+    };
 };

@@ -19,7 +19,7 @@ import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommo
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { ProgramStage } from '../../../../../../metaData';
 
-type PlainProps = {
+type Props = {
     selectedRows: Record<string, any>;
     programId: string;
     stages: Map<string, ProgramStage>;
@@ -64,8 +64,8 @@ const CompleteEnrollmentsActionPlain = ({
     removeRowsFromSelection,
     bulkDataEntryIsActive,
     classes,
-}: PlainProps & WithStyles<typeof styles>) => {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+}: Props & WithStyles<typeof styles>) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const { orgUnitId } = useLocationQuery();
     const {
@@ -74,16 +74,17 @@ const CompleteEnrollmentsActionPlain = ({
         enrollmentIdToTeiId,
         isLoading,
         validationError,
-        isCompleting,
+        isPending,
         hasPartiallyUploadedEnrollments,
         isError: errorFetchingTrackedEntities,
     } = useBulkCompleteEnrollments({
         selectedRows,
         programId,
-        modalIsOpen,
+        isModalOpen,
         stages,
         onUpdateList,
         removeRowsFromSelection,
+        setIsModalOpen,
     });
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
@@ -97,7 +98,7 @@ const CompleteEnrollmentsActionPlain = ({
         [programId, orgUnitId, enrollmentIdToTeiId],
     );
 
-    const closeModal = () => setModalIsOpen(false);
+    const closeModal = () => setIsModalOpen(false);
 
     const ModalTextContent = () => {
         // If the data is still loading, show a spinner
@@ -167,13 +168,13 @@ const CompleteEnrollmentsActionPlain = ({
                 <Button
                     small
                     disabled={disabled}
-                    onClick={() => setModalIsOpen(true)}
+                    onClick={() => setIsModalOpen(true)}
                 >
                     {i18n.t('Complete enrollments')}
                 </Button>
             </ConditionalTooltip>
 
-            {modalIsOpen && !validationError && (
+            {isModalOpen && !validationError && (
                 <Modal
                     onClose={closeModal}
                     dataTest={'bulk-complete-enrollments-dialog'}
@@ -200,7 +201,7 @@ const CompleteEnrollmentsActionPlain = ({
                                     primary
                                     onClick={() => completeEnrollments({ completeEvents })}
                                     disabled={isLoading || enrollmentCounts?.active === 0}
-                                    loading={isCompleting}
+                                    loading={isPending}
                                     dataTest={'bulk-complete-enrollments-confirm-button'}
                                 >
                                     {i18n.t('Complete {{count}} enrollment', {
@@ -215,7 +216,7 @@ const CompleteEnrollmentsActionPlain = ({
                 </Modal>
             )}
 
-            {modalIsOpen && validationError && (
+            {isModalOpen && validationError && (
                 <BulkActionErrorModal
                     title={i18n.t('Error completing enrollments')}
                     introText={
