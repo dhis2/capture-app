@@ -61,7 +61,7 @@ export type Event = {
     orgUnit: string;
     program: string;
     programStage: string;
-    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
     trackedEntity: string;
     notes?: Array<Record<string, unknown>>;
     pendingApiResponse?: boolean | null;
