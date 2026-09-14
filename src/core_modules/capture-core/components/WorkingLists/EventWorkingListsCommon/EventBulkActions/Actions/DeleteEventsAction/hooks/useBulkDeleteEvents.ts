@@ -49,9 +49,7 @@ export const useBulkDeleteEvents = ({
             setIsModalOpen(false);
         },
         onPartialSuccess: (report) => {
-            const failedUids = new Set(
-                report.validationReport.errorReports.map(e => e.uid).filter(Boolean) as string[],
-            );
+            const failedUids = new Set(report.validationReport.errorReports.map(e => e.uid));
             const succeededUids = Object.keys(selectedRows).filter(id => !failedUids.has(id));
             removeRowsFromSelection(succeededUids);
             onUpdateList(true);

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useQueryClient } from '@tanstack/react-query';
@@ -28,6 +28,31 @@ type Props = {
 
 const QueryKey = ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities'];
 
+const flattenEnrollmentsFromTrackedEntities = (apiTrackedEntities: any[]): Enrollment[] =>
+    apiTrackedEntities.flatMap((apiTrackedEntity: any) =>
+        (apiTrackedEntity.enrollments ?? []).map((enrollment: Enrollment) => ({
+            ...enrollment,
+            trackedEntity: enrollment.trackedEntity ?? apiTrackedEntity.trackedEntity,
+        })));
+
+const buildEnrollmentIdToTeiIdMap = (enrollments: Enrollment[]): Record<string, string> => {
+    const map: Record<string, string> = {};
+    enrollments.forEach((enrollment) => {
+        map[enrollment.enrollment] = enrollment.trackedEntity;
+    });
+    return map;
+};
+
+const countEnrollmentsByStatus = (enrollments: Enrollment[]) => {
+    const counts = enrollments.reduce((acc, enrollment) => {
+        if (enrollment.status === 'ACTIVE') acc.active += 1;
+        else if (enrollment.status === 'CANCELLED') acc.cancelled += 1;
+        else if (enrollment.status === 'COMPLETED') acc.completed += 1;
+        return acc;
+    }, { active: 0, completed: 0, cancelled: 0 });
+    return { ...counts, total: counts.active + counts.completed + counts.cancelled };
+};
+
 const findFullyDeletedTeiIds = (
     enrollments: Enrollment[],
     statusToDelete: StatusToDelete,
@@ -43,7 +68,7 @@ const findFullyDeletedTeiIds = (
         [e.trackedEntity]: [...(acc[e.trackedEntity] ?? []), e],
     }), {});
     return Object.entries(grouped)
-        .filter(([, teiEnrollments]) => teiEnrollments.length > 0 && teiEnrollments.every(wasDeleted))
+        .filter(([, teiEnrollments]) => teiEnrollments.every(wasDeleted))
         .map(([teiId]) => teiId);
 };
 
@@ -74,6 +99,12 @@ export const useBulkDeleteEnrollments = ({
         }));
     }, []);
 
+    useEffect(() => {
+        if (!isModalOpen) {
+            setStatusToDelete({ active: true, completed: true, cancelled: true });
+        }
+    }, [isModalOpen]);
+
     const {
         data: enrollments,
         isInitialLoading: isInitialLoadingEnrollments,
@@ -94,12 +125,7 @@ export const useBulkDeleteEnrollments = ({
             select: (data: any): Enrollment[] => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return [];
-
-                return apiTrackedEntities.flatMap((apiTrackedEntity: any) =>
-                    (apiTrackedEntity.enrollments ?? []).map((enrollment: Enrollment) => ({
-                        ...enrollment,
-                        trackedEntity: enrollment.trackedEntity ?? apiTrackedEntity.trackedEntity,
-                    })));
+                return flattenEnrollmentsFromTrackedEntities(apiTrackedEntities);
             },
         },
     );
@@ -130,9 +156,7 @@ export const useBulkDeleteEnrollments = ({
             setIsModalOpen(false);
         },
         onPartialSuccess: (report) => {
-            const failedEnrollmentUids = new Set(
-                report.validationReport.errorReports.map(e => e.uid).filter(Boolean) as string[],
-            );
+            const failedEnrollmentUids = new Set(report.validationReport.errorReports.map(e => e.uid));
             const fullyDeletedTeiIds = findFullyDeletedTeiIds(
                 enrollments ?? [], statusToDelete, failedEnrollmentUids,
             );
@@ -149,28 +173,15 @@ export const useBulkDeleteEnrollments = ({
         },
     });
 
-    const enrollmentIdToTeiId = useMemo(() => {
-        const map: Record<string, string> = {};
-        (enrollments ?? []).forEach((enrollment) => {
-            if (enrollment.enrollment && enrollment.trackedEntity) {
-                map[enrollment.enrollment] = enrollment.trackedEntity;
-            }
-        });
-        return map;
-    }, [enrollments]);
+    const enrollmentIdToTeiId = useMemo(
+        () => buildEnrollmentIdToTeiIdMap(enrollments ?? []),
+        [enrollments],
+    );
 
-    const enrollmentCounts = useMemo(() => {
-        if (!enrollments) return null;
-
-        const counts = enrollments.reduce((acc, enrollment) => {
-            if (enrollment.status === 'ACTIVE') acc.active += 1;
-            else if (enrollment.status === 'CANCELLED') acc.cancelled += 1;
-            else if (enrollment.status === 'COMPLETED') acc.completed += 1;
-            return acc;
-        }, { active: 0, completed: 0, cancelled: 0 });
-
-        return { ...counts, total: counts.active + counts.completed + counts.cancelled };
-    }, [enrollments]);
+    const enrollmentCounts = useMemo(
+        () => (enrollments ? countEnrollmentsByStatus(enrollments) : null),
+        [enrollments],
+    );
 
     const numberOfEnrollmentsToDelete = useMemo(() => {
         if (!enrollmentCounts) return 0;
@@ -184,11 +195,11 @@ export const useBulkDeleteEnrollments = ({
         isPending,
         isLoading: isInitialLoadingEnrollments,
         isError: isEnrollmentsError,
+        validationError,
         enrollmentCounts,
+        enrollmentIdToTeiId,
         statusToDelete,
         updateStatusToDelete,
         numberOfEnrollmentsToDelete,
-        validationError,
-        enrollmentIdToTeiId,
     };
 };

@@ -1,10 +1,10 @@
 export type TrackerType = 'ENROLLMENT' | 'EVENT' | 'TRACKED_ENTITY' | 'RELATIONSHIP';
 
 export type ErrorReport = {
-    uid?: string;
+    uid: string;
     errorCode: string;
     message: string;
-    trackerType?: TrackerType;
+    trackerType: TrackerType;
 };
 
 export type ValidationReport = {

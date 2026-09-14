@@ -9,6 +9,25 @@ import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon
 
 type Event = { event: string; [key: string]: any };
 
+const bucketEventsByStatus = (apiEvents: any[]): {
+    activeEvents: Event[];
+    completedEvents: Event[];
+} => apiEvents.reduce(
+    (acc, event) => {
+        if (event.status === 'ACTIVE') acc.activeEvents.push(event);
+        else acc.completedEvents.push(event);
+        return acc;
+    },
+    { activeEvents: [] as Event[], completedEvents: [] as Event[] },
+);
+
+const buildCompleteEventsPayload = (activeEvents: Event[], fallbackProgramId?: string): Event[] =>
+    activeEvents.map(event => ({
+        ...event,
+        status: 'COMPLETED',
+        program: event.program || fallbackProgramId || event.programId,
+    }));
+
 type Props = {
     selectedRows: Record<string, boolean>;
     programId?: string;
@@ -47,18 +66,7 @@ export const useBulkCompleteEvents = ({
             enabled: isModalOpen && Object.keys(selectedRows).length > 0 && !!programId,
             staleTime: 0,
             cacheTime: 0,
-            select: (data: any) => {
-                const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, data);
-
-                return apiEvents.reduce((acc, event) => {
-                    if (event.status === 'ACTIVE') {
-                        acc.activeEvents.push(event);
-                    } else {
-                        acc.completedEvents.push(event);
-                    }
-                    return acc;
-                }, { activeEvents: [], completedEvents: [] });
-            },
+            select: (data: any) => bucketEventsByStatus(handleAPIResponse(REQUESTED_ENTITIES.events, data)),
         },
     );
 
@@ -83,8 +91,7 @@ export const useBulkCompleteEvents = ({
             setIsModalOpen(false);
         },
         onPartialSuccess: (report, { payload }) => {
-            const errorReports = report.validationReport.errorReports;
-            const erroredUids = new Set(errorReports.map(e => e.uid).filter(Boolean));
+            const erroredUids = new Set(report.validationReport.errorReports.map(e => e.uid));
             const validEventIds = payload
                 .map(event => event.event)
                 .filter(id => !erroredUids.has(id));
@@ -102,14 +109,7 @@ export const useBulkCompleteEvents = ({
 
     const completeEvents = useCallback(() => {
         if (!events) return;
-
-        const payload: Event[] = events.activeEvents.map((event: any) => ({
-            ...event,
-            status: 'COMPLETED',
-            program: event.program || programId || event.programId,
-        }));
-
-        mutateCompleteEvents({ payload });
+        mutateCompleteEvents({ payload: buildCompleteEventsPayload(events.activeEvents, programId) });
     }, [mutateCompleteEvents, events, programId]);
 
     const eventCounts = useMemo(() => {
@@ -122,9 +122,9 @@ export const useBulkCompleteEvents = ({
 
     return {
         completeEvents,
-        eventCounts,
         isPending,
         isLoading: isInitialLoading,
         validationError,
+        eventCounts,
     };
 };

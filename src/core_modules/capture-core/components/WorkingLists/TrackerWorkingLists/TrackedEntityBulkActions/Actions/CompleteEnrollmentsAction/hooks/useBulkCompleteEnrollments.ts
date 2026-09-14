@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -72,23 +72,45 @@ const formatServerPayload = (
     }));
 };
 
-const filterValidEnrollments = (enrollments: Enrollment[], errors: ErrorReport[]): Enrollment[] => {
-    const invalidEnrollments = new Set<string>();
+const bucketEnrollmentsByStatus = (apiTrackedEntities: any[]): {
+    activeEnrollments: Enrollment[];
+    completedEnrollments: Enrollment[];
+} => apiTrackedEntities
+    .flatMap((trackedEntity: any) => trackedEntity.enrollments)
+    .reduce(
+        (acc, enrollment: Enrollment) => {
+            if (enrollment.status === 'ACTIVE') acc.activeEnrollments.push(enrollment);
+            else acc.completedEnrollments.push(enrollment);
+            return acc;
+        },
+        { activeEnrollments: [] as Enrollment[], completedEnrollments: [] as Enrollment[] },
+    );
 
-    errors.forEach((errorReport) => {
-        if (errorReport.trackerType === 'ENROLLMENT' && errorReport.uid) {
-            invalidEnrollments.add(errorReport.uid);
-        } else if (errorReport.trackerType === 'EVENT' && errorReport.uid) {
-            const invalidEnrollment = enrollments.find(enrollment =>
-                enrollment.events?.some(event => event.event === errorReport.uid),
-            );
-            if (invalidEnrollment) {
-                invalidEnrollments.add(invalidEnrollment.enrollment);
-            }
-        }
-    });
+const findInvalidEnrollmentIdForError = (
+    errorReport: ErrorReport,
+    enrollments: Enrollment[],
+): string | null => {
+    if (errorReport.trackerType === 'ENROLLMENT') return errorReport.uid;
+    if (errorReport.trackerType === 'EVENT') {
+        const parent = enrollments.find(e =>
+            e.events?.some(event => event.event === errorReport.uid),
+        );
+        return parent?.enrollment ?? null;
+    }
+    return null;
+};
 
-    return enrollments.filter(enrollment => !invalidEnrollments.has(enrollment.enrollment));
+const filterValidEnrollments = (enrollments: Enrollment[], errors: ErrorReport[]): Enrollment[] | null => {
+    const invalidEnrollmentIds = errors.reduce<Set<string> | null>((acc, errorReport) => {
+        if (acc === null) return null;
+        const invalidId = findInvalidEnrollmentIdForError(errorReport, enrollments);
+        if (invalidId === null) return null;
+        acc.add(invalidId);
+        return acc;
+    }, new Set<string>());
+
+    if (invalidEnrollmentIds === null) return null;
+    return enrollments.filter(enrollment => !invalidEnrollmentIds.has(enrollment.enrollment));
 };
 
 
@@ -133,18 +155,7 @@ export const useBulkCompleteEnrollments = ({
             select: (data: any) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return null;
-
-                return apiTrackedEntities
-                    .flatMap((trackedEntity: any) => trackedEntity.enrollments)
-                    .reduce((acc: { activeEnrollments: Enrollment[]; completedEnrollments: Enrollment[] },
-                        enrollment: Enrollment) => {
-                        if (enrollment.status === 'ACTIVE') {
-                            acc.activeEnrollments.push(enrollment);
-                        } else {
-                            acc.completedEnrollments.push(enrollment);
-                        }
-                        return acc;
-                    }, { activeEnrollments: [], completedEnrollments: [] });
+                return bucketEnrollmentsByStatus(apiTrackedEntities);
             },
         },
     );
@@ -174,6 +185,7 @@ export const useBulkCompleteEnrollments = ({
         mutate: importPartialEnrollments,
         isPending: isImportingPartialEnrollments,
         isSuccess: hasPartiallyUploadedEnrollments,
+        reset: resetPartialImport,
     } = useMutation(
         ({ enrollments }: { enrollments: Enrollment[] }) => importValidEnrollments({ dataEngine, enrollments }),
         {
@@ -192,6 +204,10 @@ export const useBulkCompleteEnrollments = ({
         },
     );
 
+    useEffect(() => {
+        if (!isModalOpen) resetPartialImport();
+    }, [isModalOpen, resetPartialImport]);
+
     const validateMutationFn = useCallback(
         ({ enrollments }: { enrollments: Enrollment[] }) =>
             validateEnrollments({ dataEngine, enrollments }) as Promise<any>,
@@ -202,11 +218,8 @@ export const useBulkCompleteEnrollments = ({
         report: ValidationReportContainer,
         { enrollments }: { enrollments: Enrollment[] },
     ) => {
-        const validEnrollments = filterValidEnrollments(
-            enrollments,
-            report.validationReport.errorReports,
-        );
-        if (validEnrollments.length === 0) return;
+        const validEnrollments = filterValidEnrollments(enrollments, report.validationReport.errorReports);
+        if (!validEnrollments || validEnrollments.length === 0) return;
         importPartialEnrollments({ enrollments: validEnrollments });
     };
 
@@ -221,7 +234,9 @@ export const useBulkCompleteEnrollments = ({
             importEnrollments({ enrollments });
         },
         onPartialSuccess: importValidSubset,
-        onValidationError: importValidSubset,
+        onValidationError: (report) => {
+            log.error(errorCreator('A validation error occurred when completing enrollments')({ report }));
+        },
         onFatalError: (error, { enrollments }) => {
             log.error(errorCreator('An unknown error occurred when completing enrollments')({
                 error, enrollments,
@@ -241,26 +256,24 @@ export const useBulkCompleteEnrollments = ({
             ...(trackedEntities?.completedEnrollments ?? []),
         ];
         return allEnrollments.reduce<Record<string, string>>((acc, enrollment) => {
-            if (enrollment?.enrollment && enrollment?.trackedEntity) {
-                acc[enrollment.enrollment] = enrollment.trackedEntity;
-            }
+            acc[enrollment.enrollment] = enrollment.trackedEntity;
             return acc;
         }, {});
     }, [trackedEntities]);
 
-    const onStartCompleteEnrollments = useCallback(({ completeEvents }: { completeEvents: boolean }) => {
+    const completeEnrollments = useCallback(({ completeEvents }: { completeEvents: boolean }) => {
         const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
         validateAndImportEnrollments({ enrollments });
     }, [trackedEntities, stages, validateAndImportEnrollments]);
 
     return {
-        completeEnrollments: onStartCompleteEnrollments,
-        enrollmentCounts,
-        enrollmentIdToTeiId,
+        completeEnrollments,
+        isPending: isImportingEnrollments || isImportingPartialEnrollments || isValidatingEnrollments,
         isLoading: isInitialLoadingTrackedEntities,
         isError: isTrackedEntitiesError,
         validationError,
-        isPending: isImportingEnrollments || isImportingPartialEnrollments || isValidatingEnrollments,
+        enrollmentCounts,
+        enrollmentIdToTeiId,
         hasPartiallyUploadedEnrollments,
     };
 };
