@@ -1,11 +1,17 @@
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
+import {
+    Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle,
+} from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
-import { Widget } from '../../../../../Widget';
-import type { Props } from './CompleteAction.types';
+import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
+import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
+import type { EventBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
+import { useLocationQuery } from '../../../../../../utils/routing';
+
+type Props = EventBulkActionProps;
 
 const styles: Readonly<any> = {
     container: {
@@ -15,9 +21,6 @@ const styles: Readonly<any> = {
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-    },
-    errorContainer: {
-        padding: '0px 20px',
     },
 };
 
@@ -40,24 +43,34 @@ const CompleteActionPlain = ({
     programId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
-    const [openAccordion, setOpenAccordion] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { orgUnitId } = useLocationQuery();
+    const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
-    const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {
+        completeEvents,
         eventCounts,
+        isPending,
         isLoading,
-        isCompletingEvents,
-        onCompleteEvents,
         validationError,
     } = useBulkCompleteEvents({
         selectedRows,
-        isCompleteDialogOpen,
-        setIsCompleteDialogOpen,
+        isModalOpen,
+        setIsModalOpen,
         removeRowsFromSelection,
         onUpdateList,
         programId,
     });
+
+    const getRecordHref = useMemo(
+        () => createEventErrorHrefResolver({
+            programId,
+            orgUnitId,
+        }),
+        [programId, orgUnitId],
+    );
+
+    const closeModal = () => setIsModalOpen(false);
 
     return (
         <>
@@ -67,107 +80,58 @@ const CompleteActionPlain = ({
             >
                 <Button
                     small
-                    onClick={() => setIsCompleteDialogOpen(true)}
+                    onClick={() => setIsModalOpen(true)}
                     disabled={disabled}
                 >
                     {i18n.t('Complete')}
                 </Button>
             </ConditionalTooltip>
 
-            {isCompleteDialogOpen && eventCounts && !validationError && (
+            {isModalOpen && eventCounts && !validationError && (
                 <Modal
                     small
-                    onClose={() => setIsCompleteDialogOpen(false)}
-                    dataTest={'bulk-complete-events-dialog'}
+                    onClose={() => setIsModalOpen(false)}
+                    dataTest="bulk-complete-events-dialog"
                 >
-                    <ModalTitle>
-                        {i18n.t('Complete events')}
-                    </ModalTitle>
-
+                    <ModalTitle>{i18n.t('Complete events')}</ModalTitle>
                     <ModalContent>
                         <span className={classes.container}>
-                            {eventCounts.active > 0 ?
-                                i18n.t('Are you sure you want to complete all active events in selection?')
-                                :
-                                i18n.t('There are no active events to complete in the current selection.')
+                            {eventCounts.active > 0
+                                ? i18n.t('Are you sure you want to complete all active events in selection?')
+                                : i18n.t('There are no active events to complete in the current selection.')
                             }
                         </span>
                     </ModalContent>
-
                     <ModalActions>
                         <ButtonStrip>
                             <Button
                                 secondary
-                                onClick={() => setIsCompleteDialogOpen(false)}
+                                onClick={() => setIsModalOpen(false)}
                             >
                                 {i18n.t('Cancel')}
                             </Button>
-
                             <Button
                                 primary
-                                onClick={onCompleteEvents}
-                                disabled={isLoading || eventCounts?.active === 0}
-                                loading={isCompletingEvents}
+                                onClick={completeEvents}
+                                disabled={isLoading || eventCounts.active === 0}
+                                loading={isPending}
                             >
                                 {i18n.t('Complete')}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>
-
                 </Modal>
             )}
 
-            {isCompleteDialogOpen && validationError && (
-                <Modal
-                    small
-                    onClose={() => setIsCompleteDialogOpen(false)}
-                    dataTest={'bulk-complete-events-dialog'}
-                >
-                    <ModalTitle>
-                        {i18n.t('Error completing events')}
-                    </ModalTitle>
-
-                    <ModalContent>
-                        <span className={classes.container}>
-                            {i18n.t('There was an error completing the events.')}
-
-                            <Widget
-                                open={openAccordion}
-                                onOpen={() => setOpenAccordion(true)}
-                                onClose={() => setOpenAccordion(false)}
-                                borderless
-                                header={i18n.t('Details (Advanced)')}
-                            >
-                                <span className={classes.errorContainer}>
-                                    <ul>
-                                        {validationError?.validationReport?.errorReports ?
-                                            validationError.validationReport.errorReports.map(errorReport => (
-                                                <li key={`${errorReport.uid}-${errorReport.errorCode}`}>
-                                                    {errorReport?.message}
-                                                </li>
-                                            )) : (
-                                                <li>
-                                                    {i18n.t('An unknown error occurred.')}
-                                                </li>
-                                            )
-                                        }
-                                    </ul>
-                                </span>
-                            </Widget>
-                        </span>
-                    </ModalContent>
-
-                    <ModalActions>
-                        <ButtonStrip>
-                            <Button
-                                secondary
-                                onClick={() => setIsCompleteDialogOpen(false)}
-                            >
-                                {i18n.t('Close')}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
+            {isModalOpen && validationError && (
+                <BulkActionErrorModal
+                    title={i18n.t('Error completing events')}
+                    introText={i18n.t('There was an error completing the events.')}
+                    errorReports={validationError.validationReport.errorReports}
+                    getRecordHref={getRecordHref}
+                    onClose={closeModal}
+                    dataTest="bulk-complete-events-dialog"
+                />
             )}
         </>
     );

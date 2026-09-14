@@ -1,26 +1,84 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
+import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
+
+type Enrollment = {
+    enrollment: string;
+    program?: string;
+    status?: string;
+    trackedEntity: string;
+};
+
+type StatusToDelete = { active: boolean; completed: boolean; cancelled: boolean };
 
 type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
-    onUpdateList: () => void;
-    setIsDeleteDialogOpen: (open: boolean) => void;
+    isModalOpen: boolean;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+    setIsModalOpen: (open: boolean) => void;
 };
 
 const QueryKey = ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities'];
 
+const flattenEnrollmentsFromTrackedEntities = (apiTrackedEntities: any[]): Enrollment[] =>
+    apiTrackedEntities.flatMap((apiTrackedEntity: any) =>
+        (apiTrackedEntity.enrollments ?? []).map((enrollment: Enrollment) => ({
+            ...enrollment,
+            trackedEntity: enrollment.trackedEntity ?? apiTrackedEntity.trackedEntity,
+        })));
+
+const buildEnrollmentIdToTeiIdMap = (enrollments: Enrollment[]): Record<string, string> => {
+    const map: Record<string, string> = {};
+    enrollments.forEach((enrollment) => {
+        map[enrollment.enrollment] = enrollment.trackedEntity;
+    });
+    return map;
+};
+
+const countEnrollmentsByStatus = (enrollments: Enrollment[]) => {
+    const counts = enrollments.reduce((acc, enrollment) => {
+        if (enrollment.status === 'ACTIVE') acc.active += 1;
+        else if (enrollment.status === 'CANCELLED') acc.cancelled += 1;
+        else if (enrollment.status === 'COMPLETED') acc.completed += 1;
+        return acc;
+    }, { active: 0, completed: 0, cancelled: 0 });
+    return { ...counts, total: counts.active + counts.completed + counts.cancelled };
+};
+
+const findFullyDeletedTeiIds = (
+    enrollments: Enrollment[],
+    statusToDelete: StatusToDelete,
+    failedEnrollmentUids: Set<string>,
+): string[] => {
+    const wasDeleted = ({ enrollment, status }: Enrollment) => {
+        const key = status?.toLowerCase();
+        if (!key || !(key in statusToDelete)) return false;
+        return statusToDelete[key as keyof StatusToDelete] && !failedEnrollmentUids.has(enrollment);
+    };
+    const grouped = enrollments.reduce<Record<string, Enrollment[]>>((acc, e) => ({
+        ...acc,
+        [e.trackedEntity]: [...(acc[e.trackedEntity] ?? []), e],
+    }), {});
+    return Object.entries(grouped)
+        .filter(([, teiEnrollments]) => teiEnrollments.every(wasDeleted))
+        .map(([teiId]) => teiId);
+};
+
 export const useDeleteEnrollments = ({
     selectedRows,
     programId,
+    isModalOpen,
     onUpdateList,
-    setIsDeleteDialogOpen,
+    removeRowsFromSelection,
+    setIsModalOpen,
 }: Props) => {
     const queryClient = useQueryClient();
     const [statusToDelete, setStatusToDelete] = useState({
@@ -37,9 +95,15 @@ export const useDeleteEnrollments = ({
     const updateStatusToDelete = useCallback((status: string) => {
         setStatusToDelete(prevStatus => ({
             ...prevStatus,
-            [status]: !prevStatus[status],
+            [status]: !prevStatus[status as keyof StatusToDelete],
         }));
     }, []);
+
+    useEffect(() => {
+        if (!isModalOpen) {
+            setStatusToDelete({ active: true, completed: true, cancelled: true });
+        }
+    }, [isModalOpen]);
 
     const {
         data: enrollments,
@@ -50,101 +114,90 @@ export const useDeleteEnrollments = ({
         {
             resource: 'tracker/trackedEntities',
             params: () => ({
-                fields: 'trackedEntity,enrollments[enrollment,program,status]',
+                fields: 'trackedEntity,enrollments[enrollment,program,status,trackedEntity]',
                 trackedEntities: Object.keys(selectedRows).join(','),
                 pageSize: 100,
                 program: programId,
             }),
         },
         {
-            enabled: Object.keys(selectedRows).length > 0,
-            select: (data: any) => {
+            enabled: isModalOpen && Object.keys(selectedRows).length > 0,
+            select: (data: any): Enrollment[] => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, data);
                 if (!apiTrackedEntities) return [];
-
-                return apiTrackedEntities
-                    .flatMap(apiTrackedEntity => apiTrackedEntity.enrollments);
+                return flattenEnrollmentsFromTrackedEntities(apiTrackedEntities);
             },
         },
     );
 
-    const { mutate: deleteEnrollments, isLoading: isDeletingEnrollments } = useMutation<any>(
+    const mutationFn = useCallback(
         () => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
-                enrollments: enrollments
-                    .filter(({ status }) => status && statusToDelete[status.toLowerCase()])
+                enrollments: (enrollments ?? [])
+                    .filter(({ status }) => status && statusToDelete[status.toLowerCase() as keyof StatusToDelete])
                     .map(({ enrollment }) => ({ enrollment })),
             },
-        }),
-        {
-            onError: (error) => {
-                log.error(errorCreator('An error occurred when deleting enrollments')({ error }));
-                showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
-            },
-            onSuccess: () => {
-                queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
-                onUpdateList();
-                setIsDeleteDialogOpen(false);
-            },
-        },
+        }) as Promise<any>,
+        [dataEngine, enrollments, statusToDelete],
     );
 
-    const enrollmentCounts = useMemo(() => {
-        if (!enrollments) {
-            return null;
-        }
+    const {
+        mutate: deleteEnrollments,
+        isPending,
+        validationError,
+    } = useBulkMutationWithValidation<any, void>({
+        mutationFn,
+        active: isModalOpen,
+        onSuccess: () => {
+            queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
+            onUpdateList();
+            setIsModalOpen(false);
+        },
+        onPartialSuccess: (report) => {
+            const failedEnrollmentUids = new Set(report.validationReport.errorReports.map(e => e.uid));
+            const fullyDeletedTeiIds = findFullyDeletedTeiIds(
+                enrollments ?? [], statusToDelete, failedEnrollmentUids,
+            );
+            removeRowsFromSelection(fullyDeletedTeiIds);
+            queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
+            onUpdateList(true);
+        },
+        onValidationError: (report) => {
+            log.error(errorCreator('A validation error occurred when deleting enrollments')({ report }));
+        },
+        onFatalError: (serverResponse) => {
+            log.error(errorCreator('An error occurred when deleting enrollments')({ serverResponse }));
+            showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
+        },
+    });
 
-        const {
-            activeEnrollments,
-            completedEnrollments,
-            cancelledEnrollments,
-        } = enrollments.reduce((acc, enrollment) => {
-            if (enrollment.status === 'ACTIVE') {
-                acc.activeEnrollments += 1;
-            } else if (enrollment.status === 'CANCELLED') {
-                acc.cancelledEnrollments += 1;
-            } else {
-                acc.completedEnrollments += 1;
-            }
+    const enrollmentIdToTeiId = useMemo(
+        () => buildEnrollmentIdToTeiIdMap(enrollments ?? []),
+        [enrollments],
+    );
 
-            return acc;
-        }, { activeEnrollments: 0, completedEnrollments: 0, cancelledEnrollments: 0 });
-
-        return {
-            active: activeEnrollments,
-            completed: completedEnrollments,
-            cancelled: cancelledEnrollments,
-            total: enrollments.length,
-        };
-    }, [enrollments]);
+    const enrollmentCounts = useMemo(
+        () => (enrollments ? countEnrollmentsByStatus(enrollments) : null),
+        [enrollments],
+    );
 
     const numberOfEnrollmentsToDelete = useMemo(() => {
-        if (!enrollments || !enrollmentCounts) {
-            return 0;
-        }
-
-        let total = 0;
-        if (statusToDelete.active) {
-            total += enrollmentCounts.active;
-        }
-        if (statusToDelete.completed) {
-            total += enrollmentCounts.completed;
-        }
-        if (statusToDelete.cancelled) {
-            total += enrollmentCounts.cancelled;
-        }
-
-        return total;
-    }, [enrollments, enrollmentCounts, statusToDelete]);
+        if (!enrollmentCounts) return 0;
+        return (['active', 'completed', 'cancelled'] as const)
+            .filter(status => statusToDelete[status])
+            .reduce((total, status) => total + enrollmentCounts[status], 0);
+    }, [enrollmentCounts, statusToDelete]);
 
     return {
         deleteEnrollments,
-        isDeletingEnrollments,
-        isLoadingEnrollments: isInitialLoadingEnrollments,
-        isEnrollmentsError,
+        isPending,
+        isLoading: isInitialLoadingEnrollments,
+        isError: isEnrollmentsError,
+        validationError,
         enrollmentCounts,
+        enrollmentIdToTeiId,
         statusToDelete,
         updateStatusToDelete,
         numberOfEnrollmentsToDelete,
