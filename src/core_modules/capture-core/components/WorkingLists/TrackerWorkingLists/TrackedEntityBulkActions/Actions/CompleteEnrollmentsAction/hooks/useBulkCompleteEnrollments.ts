@@ -234,8 +234,9 @@ export const useBulkCompleteEnrollments = ({
             importEnrollments({ enrollments });
         },
         onPartialSuccess: importValidSubset,
-        onValidationError: (report) => {
+        onValidationError: (report, variables) => {
             log.error(errorCreator('A validation error occurred when completing enrollments')({ report }));
+            importValidSubset(report, variables);
         },
         onFatalError: (error, { enrollments }) => {
             log.error(errorCreator('An unknown error occurred when completing enrollments')({
