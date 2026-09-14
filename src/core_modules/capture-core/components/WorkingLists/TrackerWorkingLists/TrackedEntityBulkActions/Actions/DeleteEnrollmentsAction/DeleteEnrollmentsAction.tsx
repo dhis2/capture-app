@@ -7,8 +7,8 @@ import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
-import { useBulkDeleteEnrollments } from './hooks/useBulkDeleteEnrollments';
-import { CustomCheckbox } from './CustomCheckbox';
+import { useDeleteEnrollments } from './hooks/useDeleteEnrollments';
+import { CustomCheckbox } from './EnrollmentDeleteModal/CustomCheckbox';
 import type { EnrollmentBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
 const styles: Readonly<any> = {
@@ -62,7 +62,7 @@ const DeleteEnrollmentsActionPlain = ({
         isError,
         validationError,
         enrollmentIdToTeiId,
-    } = useBulkDeleteEnrollments({
+    } = useDeleteEnrollments({
         selectedRows,
         programId,
         isModalOpen,

@@ -22,7 +22,7 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-export const DeleteEventsAction = ({
+export const DeleteAction = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,

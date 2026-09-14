@@ -34,7 +34,7 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-const CompleteEventsActionPlain = ({
+const CompleteActionPlain = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,
@@ -137,4 +137,4 @@ const CompleteEventsActionPlain = ({
     );
 };
 
-export const CompleteEventsAction = withStyles(styles)(CompleteEventsActionPlain) as ComponentType<Props>;
+export const CompleteAction = withStyles(styles)(CompleteActionPlain) as ComponentType<Props>;

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ProgramStage } from '../../../../metaData';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
-import { CompleteEventsAction, DeleteEventsAction } from './Actions';
+import { CompleteAction, DeleteAction } from './Actions';
 
 type Props = {
     selectedRows: Record<string, boolean>;
@@ -42,7 +42,7 @@ export const EventBulkActions = ({
                     selectionInProgress
                 />
             )}
-            <CompleteEventsAction
+            <CompleteAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
@@ -51,7 +51,7 @@ export const EventBulkActions = ({
                 programId={programId}
             />
 
-            <DeleteEventsAction
+            <DeleteAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}

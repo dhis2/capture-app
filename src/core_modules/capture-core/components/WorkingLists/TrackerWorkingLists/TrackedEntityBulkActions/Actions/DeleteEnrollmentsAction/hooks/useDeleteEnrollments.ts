@@ -72,7 +72,7 @@ const findFullyDeletedTeiIds = (
         .map(([teiId]) => teiId);
 };
 
-export const useBulkDeleteEnrollments = ({
+export const useDeleteEnrollments = ({
     selectedRows,
     programId,
     isModalOpen,
