@@ -1,4 +1,3 @@
-import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { Icon } from 'capture-core/metaData';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes, Option } from '../../../metaData';
@@ -43,7 +42,6 @@ export type StageCommonProps = {
     onViewAll: (stageId: string) => void;
     onCreateNew: (stageId: string) => void;
     onEventClick: (eventId: string) => void;
-    ruleEffects?: Array<{id: string; type: typeof effectActions[keyof typeof effectActions]}>;
 }
 
 export type DataValue = {

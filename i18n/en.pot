@@ -1709,11 +1709,11 @@ msgstr "View profile"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "No attributes configured for {{trackedEntityTypeName}}"
-msgstr "No attributes configured for {{trackedEntityTypeName}}"
-
 msgid "No attributes configured"
 msgstr "No attributes configured"
+
+msgid "No attributes configured to display"
+msgstr "No attributes configured to display"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
