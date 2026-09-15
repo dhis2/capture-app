@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-11T15:38:29.603Z\n"
-"PO-Revision-Date: 2026-09-11T15:38:29.603Z\n"
+"POT-Creation-Date: 2026-09-15T07:58:29.108Z\n"
+"PO-Revision-Date: 2026-09-15T07:58:29.108Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -81,14 +81,11 @@ msgstr "View {{programName}} dashboard"
 msgid "View dashboard"
 msgstr "View dashboard"
 
-msgid "View active enrollment"
-msgstr "View active enrollment"
-
 msgid "Re-enroll in {{programName}}"
 msgstr "Re-enroll in {{programName}}"
 
-msgid "Re-enroll"
-msgstr "Re-enroll"
+msgid "View active enrollment"
+msgstr "View active enrollment"
 
 msgid "Enrolled"
 msgstr "Enrolled"
