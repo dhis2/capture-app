@@ -1,3 +1,10 @@
+## [107.0.10](https://github.com/dhis2/capture-app/compare/v107.0.9...v107.0.10) (2026-09-15)
+
+
+### Bug Fixes
+
+* [DHIS2-22080] perpetual option codes in profile widget ([#4732](https://github.com/dhis2/capture-app/issues/4732)) ([6bab113](https://github.com/dhis2/capture-app/commit/6bab113d075ba1a1290c4ed138a72cd979bb9f2b))
+
 ## [107.0.9](https://github.com/dhis2/capture-app/compare/v107.0.8...v107.0.9) (2026-09-15)
 
 
