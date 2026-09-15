@@ -21,13 +21,13 @@ import { errorCreator } from 'capture-core-utils';
 import { sortDataFromEvent } from './hooks/sortFunctions';
 import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
+import { countNonSkippedEvents } from '../../../../../events/countNonSkippedEvents';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
 import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-
 
 const styles: Readonly<any> = {
     row: {
@@ -259,7 +259,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         const renderCreateNewButton = () => (stageWriteAccess ? (
             <div className={classes.newButton}>
                 <StageCreateNewButton
-                    eventCount={events.length}
+                    eventCount={countNonSkippedEvents(events)}
                     onCreateNew={handleCreateNew}
                     preventAddingEventActionInEffect={hiddenProgramStage}
                     repeatable={repeatable}

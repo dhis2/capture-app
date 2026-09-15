@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, IconAdd16, IconCalendar16 } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { Widget } from '../../../../Widget';
+import { countNonSkippedEvents } from '../../../../../events/countNonSkippedEvents';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
@@ -35,10 +36,7 @@ const EnrollmentQuickActionsComponentPlain = ({
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };
-        mutatedStage.eventCount = (events
-            ?.filter(event => event.programStage === stage.id)
-            ?.length
-        );
+        mutatedStage.eventCount = countNonSkippedEvents(events, stage.id);
         return mutatedStage;
     }), [events, stages]);
 
