@@ -104,7 +104,6 @@ const WidgetHeaderPlain = ({
 
     const onSkipStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentEvent(eventId));
-        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
     }, [dispatch, eventId]);
 
     const onSkipStatusError = useCallback(() => {
