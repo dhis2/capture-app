@@ -7,18 +7,14 @@ import type { ValidationOptions } from '../../DateAndTimeFields/DateField/Date.t
 
 type Props = {
     value?: any;
-    width?: number;
     onBlur: (value: any, options: ValidationOptions) => void;
     [key: string]: any;
 }
 
-function DateTimeDatePlain(props: Props) {
-    const { value, ...passOnProps } = props;
-
+function DateTimeDatePlain({ value, ...passOnProps }: Props) {
     return (
         <DateField
             value={value}
-            width={150}
             {...passOnProps}
         />
     );

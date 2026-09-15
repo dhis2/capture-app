@@ -1,8 +1,7 @@
 .fieldsContainer {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
     align-items: flex-start;
 }
 
@@ -15,7 +14,7 @@
 }
 
 .inputContainer {
-    flex-grow: 1;
+    min-width: 0;
     padding: 0;
 }
 

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-15T08:01:22.196Z\n"
-"PO-Revision-Date: 2026-09-15T08:01:22.196Z\n"
+"POT-Creation-Date: 2026-09-15T11:17:29.750Z\n"
+"PO-Revision-Date: 2026-09-15T11:17:29.750Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2360,18 +2360,6 @@ msgstr "Some attributes are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "From date"
-msgstr "From date"
-
-msgid "From time"
-msgstr "From time"
-
-msgid "To date"
-msgstr "To date"
-
-msgid "To time"
-msgstr "To time"
 
 msgid "Page {{currentPage}}"
 msgstr "Page {{currentPage}}"
