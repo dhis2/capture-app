@@ -5,7 +5,7 @@ import type { RelatedStagesEvents } from '../RelatedStagesActions/RelatedStagesA
 
 export const useCanAddNewEventToStage = (programStage?: ProgramStage, existingRelatedEvents: RelatedStagesEvents[] = []) => {
     const hiddenProgramStages = useSelector((state: any) =>
-        state.rulesEffectsHiddenProgramStageDesc?.['enrollmentEvent-newEvent'],
+        state.rulesEffectsHiddenProgramStage?.['enrollmentEvent-newEvent'],
     );
 
     return useMemo(() => {
