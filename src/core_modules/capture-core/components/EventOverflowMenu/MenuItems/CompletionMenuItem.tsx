@@ -178,12 +178,10 @@ export const CompleteMenuItemModal = ({
             onError: (error) => {
                 handleError(error);
                 dispatch(rollbackEnrollmentAndEvents());
-                onError?.();
             },
             onSuccess: () => {
                 dispatch(commitEnrollmentAndEvents());
                 removeEventChangelogQueries(queryClient, eventId);
-                onSuccess?.(eventStatuses.COMPLETED);
             },
         },
     );

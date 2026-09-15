@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     CircularLoader,
@@ -33,9 +34,6 @@ const styles: Readonly<any> = {
         opacity: 0.5,
     },
 };
-
-const getRowClass = (classes: Record<string, string>, disabled: boolean) =>
-    (disabled ? classes.rowDisabled : classes.row);
 
 const EventRowPlain = ({
     id,
@@ -156,7 +154,7 @@ const EventRowPlain = ({
 
     return (
         <DataTableRow
-            className={getRowClass(classes, !!pendingApiResponse)}
+            className={cx(classes.row, { [classes.rowDisabled]: !!pendingApiResponse })}
             key={id}
         >
             {cells}

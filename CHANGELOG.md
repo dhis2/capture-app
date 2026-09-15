@@ -1,3 +1,38 @@
+## [107.0.10](https://github.com/dhis2/capture-app/compare/v107.0.9...v107.0.10) (2026-09-15)
+
+
+### Bug Fixes
+
+* [DHIS2-22080] perpetual option codes in profile widget ([#4732](https://github.com/dhis2/capture-app/issues/4732)) ([6bab113](https://github.com/dhis2/capture-app/commit/6bab113d075ba1a1290c4ed138a72cd979bb9f2b))
+
+## [107.0.9](https://github.com/dhis2/capture-app/compare/v107.0.8...v107.0.9) (2026-09-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4735](https://github.com/dhis2/capture-app/issues/4735)) ([b191f6e](https://github.com/dhis2/capture-app/commit/b191f6e4a232b08ae96b9accad1dffe3131f3d8c))
+
+## [107.0.8](https://github.com/dhis2/capture-app/compare/v107.0.7...v107.0.8) (2026-09-11)
+
+
+### Bug Fixes
+
+* [DHIS2-18620][DHIS2-21937] Hidden TEA is displayed in the TEI profile ([#4704](https://github.com/dhis2/capture-app/issues/4704)) ([39f2d52](https://github.com/dhis2/capture-app/commit/39f2d52b627ef1a2474cccc464245700e458fb22))
+
+## [107.0.7](https://github.com/dhis2/capture-app/compare/v107.0.6...v107.0.7) (2026-09-11)
+
+
+### Bug Fixes
+
+* [DHIS2-22007] comparison between the new and the cached rule messages ([#4709](https://github.com/dhis2/capture-app/issues/4709)) ([f6ae759](https://github.com/dhis2/capture-app/commit/f6ae7592e7b9e0c4f5fb7b01b9c422e48d4d41e8))
+
+## [107.0.6](https://github.com/dhis2/capture-app/compare/v107.0.5...v107.0.6) (2026-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-21727] program rules on enrollment+event registration page ([#4707](https://github.com/dhis2/capture-app/issues/4707)) ([e47b248](https://github.com/dhis2/capture-app/commit/e47b2486f0794e28bd10a7559a1cb9794916250a))
+
 ## [107.0.5](https://github.com/dhis2/capture-app/compare/v107.0.4...v107.0.5) (2026-08-31)
 
 
