@@ -10,7 +10,7 @@ type CommonEventDetails = {
     enrollment?: string;
     scheduledAt: string;
     dataValues: Array<{ dataElement: string; value: any }>;
-    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
 };
 
 export type RequestEvent = {
