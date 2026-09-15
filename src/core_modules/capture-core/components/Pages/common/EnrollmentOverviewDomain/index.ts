@@ -16,6 +16,7 @@ export {
     setExternalEnrollmentStatus,
     deleteEnrollmentEvent,
     deleteEnrollmentEventRelationship,
+    addPersistedEnrollmentEvents,
     commitEnrollmentEvents,
     rollbackEnrollmentEvents,
 } from './enrollment.actions';
