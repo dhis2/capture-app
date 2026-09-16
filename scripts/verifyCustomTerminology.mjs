@@ -31,7 +31,7 @@ const CUSTOM_TERMS = [
     { words: ['attributes'], suggestion: '{{attributesLabel}}' },
     { words: ['organisation unit', 'org unit', 'organization unit', 'registering unit'], suggestion: '{{orgUnitLabel}}' },
     { words: ['follow-up', 'followup', 'follow up'], suggestion: '{{followUpLabel}}' },
-].sort((a, b) => Math.max(...b.words.map(w => w.length)) - Math.max(...a.words.map(w => w.length)));
+];
 
 const FALLBACKS = new Set([
     'enrollment', 'enrollments',
