@@ -9,6 +9,7 @@ import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../utils
 import { useBulkMutationWithValidation } from '../../../../WorkingListsCommon/BulkActionBar/hooks';
 import type { ErrorReport, ValidationReportContainer } from '../../../../WorkingListsCommon/BulkActionBar/types';
 import type { ProgramStage } from '../../../../../../metaData';
+import { removeEventChangelogQueries } from '../../../../../WidgetsChangelog';
 
 type Enrollment = {
     enrollment: string;
@@ -166,7 +167,10 @@ export const useBulkCompleteEnrollments = ({
     } = useMutation(
         ({ enrollments }: { enrollments: Enrollment[] }) => importValidEnrollments({ dataEngine, enrollments }),
         {
-            onSuccess: () => {
+            onSuccess: (_response, { enrollments }) => {
+                if (enrollments.some(enrollment => (enrollment.events?.length ?? 0) > 0)) {
+                    removeEventChangelogQueries(queryClient);
+                }
                 onUpdateList();
                 removeQueries();
                 setIsModalOpen(false);
@@ -190,6 +194,9 @@ export const useBulkCompleteEnrollments = ({
         ({ enrollments }: { enrollments: Enrollment[] }) => importValidEnrollments({ dataEngine, enrollments }),
         {
             onSuccess: (_response, { enrollments }) => {
+                if (enrollments.some(enrollment => (enrollment.events?.length ?? 0) > 0)) {
+                    removeEventChangelogQueries(queryClient);
+                }
                 const enrollmentIds = enrollments.map(enrollment => enrollment.trackedEntity);
                 removeRowsFromSelection(enrollmentIds);
                 removeQueries();

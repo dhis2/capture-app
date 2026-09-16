@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
+import { useAuthority, Authorities } from '../../../../../../utils/authority';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
@@ -34,8 +34,6 @@ const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActiv
     return '';
 };
 
-const CASCADE_DELETE_TEI_AUTHORITY = 'F_ENROLLMENT_CASCADE_DELETE';
-
 const DeleteEnrollmentsActionPlain = ({
     selectedRows,
     programDataWriteAccess,
@@ -46,7 +44,7 @@ const DeleteEnrollmentsActionPlain = ({
     classes,
 }: EnrollmentBulkActionProps & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
+    const { hasAuthority } = useAuthority(Authorities.ENROLLMENT_CASCADE_DELETE);
     const { orgUnitId } = useLocationQuery();
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;

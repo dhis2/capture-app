@@ -1,3 +1,31 @@
+# [107.2.0](https://github.com/dhis2/capture-app/compare/v107.1.0...v107.2.0) (2026-09-16)
+
+
+### Features
+
+* [DHIS2-21941] Self contained changelog widget ([#4690](https://github.com/dhis2/capture-app/issues/4690)) ([ccb6747](https://github.com/dhis2/capture-app/commit/ccb6747c6fe957bc61181e1c116b2d41caae6a14))
+
+# [107.1.0](https://github.com/dhis2/capture-app/compare/v107.0.10...v107.1.0) (2026-09-16)
+
+
+### Features
+
+* [DHIS2-21655] Uncomplete events from view mode ([#4649](https://github.com/dhis2/capture-app/issues/4649)) ([0fb1588](https://github.com/dhis2/capture-app/commit/0fb1588856cd8a19d775c5c270966e66fdbb2b7c))
+
+## [107.0.10](https://github.com/dhis2/capture-app/compare/v107.0.9...v107.0.10) (2026-09-15)
+
+
+### Bug Fixes
+
+* [DHIS2-22080] perpetual option codes in profile widget ([#4732](https://github.com/dhis2/capture-app/issues/4732)) ([6bab113](https://github.com/dhis2/capture-app/commit/6bab113d075ba1a1290c4ed138a72cd979bb9f2b))
+
+## [107.0.9](https://github.com/dhis2/capture-app/compare/v107.0.8...v107.0.9) (2026-09-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4735](https://github.com/dhis2/capture-app/issues/4735)) ([b191f6e](https://github.com/dhis2/capture-app/commit/b191f6e4a232b08ae96b9accad1dffe3131f3d8c))
+
 ## [107.0.8](https://github.com/dhis2/capture-app/compare/v107.0.7...v107.0.8) (2026-09-11)
 
 

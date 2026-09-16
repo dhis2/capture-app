@@ -1,11 +1,13 @@
 import { useCallback, useMemo } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
+import { useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../utils/api';
 import { useBulkMutationWithValidation } from '../../../../WorkingListsCommon/BulkActionBar/hooks';
+import { removeEventChangelogQueries } from '../../../../../WidgetsChangelog';
 
 type Event = { event: string; [key: string]: any };
 
@@ -46,6 +48,7 @@ export const useBulkCompleteEvents = ({
     setIsModalOpen,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -87,6 +90,7 @@ export const useBulkCompleteEvents = ({
         mutationFn,
         active: isModalOpen,
         onSuccess: () => {
+            removeEventChangelogQueries(queryClient);
             onUpdateList();
             setIsModalOpen(false);
         },
@@ -95,6 +99,7 @@ export const useBulkCompleteEvents = ({
             const validEventIds = payload
                 .map(event => event.event)
                 .filter(id => !erroredUids.has(id));
+            removeEventChangelogQueries(queryClient);
             removeRowsFromSelection(validEventIds);
             onUpdateList(true);
         },

@@ -44,15 +44,14 @@ import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/Enrollmen
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer, convertServerToClient } from '../../../converters';
-import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
-import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
+import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { statusTypes } from '../../../enrollment';
 import { cancelEditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import type { UserFormField } from '../../FormFields/UserField';
-import type { ProgramStage } from '../../../metaData';
+import { getProgramEventAccess, type ProgramStage } from '../../../metaData';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
@@ -144,6 +143,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
+    const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
         selectedScopeId: programId,
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
@@ -258,8 +258,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch, navigate, orgUnitId, enrollmentId, eventId]);
 
     const onSaveExternal = useCallback(() => {
-        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
-        queryClient.removeQueries(queryKey);
+        removeEventChangelogQueries(queryClient, eventId);
         navigate(`enrollment?${buildUrlQueryString({ orgUnitId, enrollmentId })}`);
     }, [navigate, orgUnitId, enrollmentId, eventId, queryClient]);
 
@@ -279,11 +278,10 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
+    const eventAccess = getProgramEventAccess(programId, stageId ?? null);
     const {
-        eventAccess,
-        isEventWithinValidPeriod,
-        isWithinCompleteExpiry,
-        canEditCompletedEvent,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -326,9 +324,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
             program={program}
             currentStageId={stageId}
             trackedEntityInactive={trackedEntityInactive}
-            isEventWithinValidPeriod={isEventWithinValidPeriod}
-            canEditCompletedEvent={canEditCompletedEvent}
-            isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
+            isEventBlockedByExpiry={isEventBlockedByExpiry}
+            isEventBlockedByCompletion={isEventBlockedByCompletion}
         >
             <EnrollmentEditEventPageComponent
                 pageLayout={pageLayout}
@@ -362,6 +359,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
+                widgetEnrollmentStatus={widgetEnrollmentStatus}
                 eventStatus={event?.status}
                 eventAccess={eventAccess}
                 scheduleDate={scheduleDate}

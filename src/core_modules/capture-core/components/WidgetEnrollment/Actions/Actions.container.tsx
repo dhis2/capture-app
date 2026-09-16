@@ -3,7 +3,7 @@ import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
 import { useUpdateEnrollment, useDeleteEnrollment } from '../dataMutation/dataMutation';
 import { useUpdateOwnership } from './Transfer/hooks';
-import { useAuthorities } from '../../../utils/authority/useAuthorities';
+import { useAuthority, Authorities } from '../../../utils/authority';
 
 export const Actions = ({
     enrollment = {},
@@ -21,7 +21,7 @@ export const Actions = ({
 }: Props) => {
     const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError, onSuccess);
     const { deleteMutation, deleteLoading } = useDeleteEnrollment(onDelete, onError, onSuccess);
-    const { hasAuthority } = useAuthorities({ authorities: ['F_ENROLLMENT_CASCADE_DELETE'] });
+    const { hasAuthority } = useAuthority(Authorities.ENROLLMENT_CASCADE_DELETE);
     const { updateEnrollmentOwnership, isTransferLoading } = useUpdateOwnership({
         teiId: enrollment.trackedEntity,
         programId: enrollment.program,
