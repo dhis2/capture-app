@@ -32,7 +32,7 @@ export const getStructureEvents = (compareDates: CompareDates, processValue: Pro
     return (currentEvent: EventData = {}, otherEvents: EventsData = []) => {
         const otherEventsFiltered = otherEvents
             .filter(event => event.occurredAt &&
-                    [eventStatuses.COMPLETED, eventStatuses.ACTIVE, eventStatuses.VISITED].includes(event.status as any) &&
+                    [eventStatuses.COMPLETED, eventStatuses.ACTIVE].includes(event.status as any) &&
                     event.eventId !== currentEvent.eventId,
             );
         const events = Object.keys(currentEvent).length ?
