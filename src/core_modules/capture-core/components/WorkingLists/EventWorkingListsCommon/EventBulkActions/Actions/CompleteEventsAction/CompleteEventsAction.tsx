@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import {
     Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle,
 } from '@dhis2/ui';
-import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
+import { useBulkCompleteEvents } from './useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
@@ -34,7 +34,7 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-const CompleteActionPlain = ({
+const CompleteEventsActionPlain = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,
@@ -137,4 +137,4 @@ const CompleteActionPlain = ({
     );
 };
 
-export const CompleteAction = withStyles(styles)(CompleteActionPlain) as ComponentType<Props>;
+export const CompleteEventsAction = withStyles(styles)(CompleteEventsActionPlain) as ComponentType<Props>;

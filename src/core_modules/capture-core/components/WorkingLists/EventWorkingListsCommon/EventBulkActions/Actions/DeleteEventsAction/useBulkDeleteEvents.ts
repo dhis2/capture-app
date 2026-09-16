@@ -3,7 +3,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
+import { useBulkMutationWithValidation } from '../../../../WorkingListsCommon/BulkActionBar/hooks';
 
 type Props = {
     selectedRows: Record<string, boolean>;

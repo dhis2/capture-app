@@ -7,7 +7,7 @@ import {
 } from '../../../../WorkingListsCommon/BulkActionBar/BulkActionErrorModal';
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
-import { useBulkDeleteEvents } from './hooks/useBulkDeleteEvents';
+import { useBulkDeleteEvents } from './useBulkDeleteEvents';
 import type { EventBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
 type Props = EventBulkActionProps;
@@ -22,7 +22,7 @@ const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive
     return '';
 };
 
-export const DeleteAction = ({
+export const DeleteEventsAction = ({
     selectedRows,
     stageDataWriteAccess,
     bulkDataEntryIsActive,

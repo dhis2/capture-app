@@ -3,9 +3,9 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
+import { useApiDataQuery } from '../../../../../../utils/reactQueryHelpers';
+import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../utils/api';
+import { useBulkMutationWithValidation } from '../../../../WorkingListsCommon/BulkActionBar/hooks';
 
 type Event = { event: string; [key: string]: any };
 
@@ -52,7 +52,7 @@ export const useBulkCompleteEvents = ({
     );
 
     const { data: events, isInitialLoading } = useApiDataQuery(
-        ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'Events', selectedRows, programId],
+        ['WorkingLists', 'BulkActionBar', 'CompleteEventsAction', selectedRows, programId],
         {
             resource: 'tracker/events',
             params: () => ({

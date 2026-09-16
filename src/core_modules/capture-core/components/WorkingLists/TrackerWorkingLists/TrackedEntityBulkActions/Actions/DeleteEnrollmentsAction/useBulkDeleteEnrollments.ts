@@ -4,9 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
+import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../utils/api';
+import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../utils/reactQueryHelpers';
+import { useBulkMutationWithValidation } from '../../../../WorkingListsCommon/BulkActionBar/hooks';
 
 type Enrollment = {
     enrollment: string;
@@ -72,7 +72,7 @@ const findFullyDeletedTeiIds = (
         .map(([teiId]) => teiId);
 };
 
-export const useDeleteEnrollments = ({
+export const useBulkDeleteEnrollments = ({
     selectedRows,
     programId,
     isModalOpen,

@@ -4,11 +4,11 @@ import i18n from '@dhis2/d2-i18n';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
-import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { useBulkMutationWithValidation } from '../../../../../WorkingListsCommon/BulkActionBar/hooks';
-import type { ErrorReport, ValidationReportContainer } from '../../../../../WorkingListsCommon/BulkActionBar/types';
-import type { ProgramStage } from '../../../../../../../metaData';
+import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../utils/api';
+import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../utils/reactQueryHelpers';
+import { useBulkMutationWithValidation } from '../../../../WorkingListsCommon/BulkActionBar/hooks';
+import type { ErrorReport, ValidationReportContainer } from '../../../../WorkingListsCommon/BulkActionBar/types';
+import type { ProgramStage } from '../../../../../../metaData';
 
 type Enrollment = {
     enrollment: string;
@@ -28,7 +28,7 @@ type Props = {
     setIsModalOpen: (open: boolean) => void;
 };
 
-const QueryKey = ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities'];
+const QueryKey = ['WorkingLists', 'BulkActionBar', 'CompleteEnrollmentsAction', 'trackedEntities'];
 
 const validateEnrollments = async ({ dataEngine, enrollments }: { dataEngine: any; enrollments: Enrollment[] }) =>
     dataEngine.mutate({
@@ -114,7 +114,7 @@ const filterValidEnrollments = (enrollments: Enrollment[], errors: ErrorReport[]
 };
 
 
-export const useCompleteBulkEnrollments = ({
+export const useBulkCompleteEnrollments = ({
     selectedRows,
     programId,
     stages,
