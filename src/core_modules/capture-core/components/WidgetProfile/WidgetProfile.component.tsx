@@ -82,7 +82,7 @@ const WidgetProfilePlain = ({
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
-    const { attributeLabel } = getTermLabelFromProgram([LabelKeys.attributeSingular], { program });
+    const { attributesLabel } = getTermLabelFromProgram([LabelKeys.attributePlural], { program });
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
         storedGeometry: trackedEntityInstance?.geometry,
@@ -178,11 +178,11 @@ const WidgetProfilePlain = ({
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
                         {trackedEntityTypeName
-                            ? i18n.t('No {{attributeLabel}} configured for {{trackedEntityTypeName}}', {
-                                attributeLabel,
+                            ? i18n.t('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
+                                attributesLabel,
                                 trackedEntityTypeName,
                             })
-                            : i18n.t('No {{attributeLabel}} configured', { attributeLabel })}
+                            : i18n.t('No {{attributesLabel}} configured', { attributesLabel })}
                     </p>
                 </div>
             );

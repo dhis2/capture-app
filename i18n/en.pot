@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-16T18:03:22.140Z\n"
-"PO-Revision-Date: 2026-09-16T18:03:22.140Z\n"
+"POT-Creation-Date: 2026-09-16T18:34:12.368Z\n"
+"PO-Revision-Date: 2026-09-16T18:34:12.368Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -42,6 +42,9 @@ msgstr "Bulk data entry"
 msgid "Program overview"
 msgstr "Program overview"
 
+msgid "Search"
+msgstr "Search"
+
 msgid "Active {{enrollmentsLabel}}"
 msgstr "Active {{enrollmentsLabel}}"
 
@@ -50,9 +53,6 @@ msgstr "Completed {{enrollmentsLabel}}"
 
 msgid "Cancelled {{enrollmentsLabel}}"
 msgstr "Cancelled {{enrollmentsLabel}}"
-
-msgid "Search"
-msgstr "Search"
 
 msgid "{{enrollmentLabel}} dashboard"
 msgstr "{{enrollmentLabel}} dashboard"
@@ -1008,7 +1008,7 @@ msgstr "Search by {{attributesLabel}}"
 msgid "Fill in at least {{count}} {{attributeLabel}} to search"
 msgid_plural "Fill in at least {{count}} {{attributeLabel}} to search"
 msgstr[0] "Fill in at least {{count}} {{attributeLabel}} to search"
-msgstr[1] "Fill in at least {{count}} attributes to search"
+msgstr[1] "Fill in at least {{count}} {{attributesLabel}} to search"
 
 msgid "Search {{attributeName}}"
 msgstr "Search {{attributeName}}"
@@ -1651,11 +1651,11 @@ msgstr "View profile"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "No {{attributeLabel}} configured for {{trackedEntityTypeName}}"
-msgstr "No {{attributeLabel}} configured for {{trackedEntityTypeName}}"
+msgid "No {{attributesLabel}} configured for {{trackedEntityTypeName}}"
+msgstr "No {{attributesLabel}} configured for {{trackedEntityTypeName}}"
 
-msgid "No {{attributeLabel}} configured"
-msgstr "No {{attributeLabel}} configured"
+msgid "No {{attributesLabel}} configured"
+msgstr "No {{attributesLabel}} configured"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
@@ -1668,6 +1668,9 @@ msgstr "Select an {{eventLabel}}"
 
 msgid "{{ linkableStageLabel }} can only have one {{eventLabel}}"
 msgstr "{{ linkableStageLabel }} can only have one {{eventLabel}}"
+
+msgid "Enter details now"
+msgstr "Enter details now"
 
 msgid "{{ linkableStageLabel }} has no linkable {{eventsLabel}}"
 msgstr "{{ linkableStageLabel }} has no linkable {{eventsLabel}}"
@@ -1686,9 +1689,6 @@ msgstr "Enter details"
 
 msgid "Linked {{eventLabel}}"
 msgstr "Linked {{eventLabel}}"
-
-msgid "Enter details now"
-msgstr "Enter details now"
 
 msgid "The {{eventLabel}} was successfully linked"
 msgstr "The {{eventLabel}} was successfully linked"
