@@ -1,3 +1,10 @@
+# [107.2.0](https://github.com/dhis2/capture-app/compare/v107.1.0...v107.2.0) (2026-09-16)
+
+
+### Features
+
+* [DHIS2-21941] Self contained changelog widget ([#4690](https://github.com/dhis2/capture-app/issues/4690)) ([ccb6747](https://github.com/dhis2/capture-app/commit/ccb6747c6fe957bc61181e1c116b2d41caae6a14))
+
 # [107.1.0](https://github.com/dhis2/capture-app/compare/v107.0.10...v107.1.0) (2026-09-16)
 
 
