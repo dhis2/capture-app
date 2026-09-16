@@ -5,11 +5,12 @@ import {
     MenuItem,
     IconRedo16,
 } from '@dhis2/ui';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
+import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 import { DirectionalArrow } from '../../../../../../../utils/rtl';
 
 type Props = {
@@ -28,6 +29,7 @@ export const SkipAction = ({
     onUpdateEventStatus,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -55,6 +57,9 @@ export const SkipAction = ({
 
                 return { previousStatus };
             },
+            onSuccess: () => {
+                removeEventChangelogQueries(queryClient, eventId);
+            },
             onError: (error: unknown, payload: { status: string }, context?: { previousStatus: string }) => {
                 showError({ message: i18n.t('An error occurred when updating event status') });
                 log.error(errorCreator('An error occurred when updating event status')({ error, payload, context }));
@@ -75,7 +80,7 @@ export const SkipAction = ({
                 icon={<IconRedo16 />}
                 label={i18n.t('Unskip')}
                 onClick={() => handleMenuItemClick(eventStatuses.SCHEDULE)}
-                suffix=""
+                suffix={null}
             />
         );
     }
@@ -86,7 +91,7 @@ export const SkipAction = ({
             icon={<DirectionalArrow />}
             label={i18n.t('Skip')}
             onClick={() => handleMenuItemClick(eventStatuses.SKIPPED)}
-            suffix=""
+            suffix={null}
         />
     );
 };
