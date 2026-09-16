@@ -66,7 +66,7 @@ function extractStrings(potContents) {
             return;
         }
         const c = line.match(continuation);
-        if (c && entries.length) entries[entries.length - 1].value += c[1];
+        if (c && entries.length) entries.at(-1).value += c[1];
     });
 
     let currentMsgid = null;
