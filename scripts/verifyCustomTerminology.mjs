@@ -54,27 +54,26 @@ const ALLOWLIST = new Set([
     'Some programs are being filtered by the chosen organisation unit',
 ]);
 
-// POT may split long msgids across multiple lines; concatenate them.
-function extractMsgids(potContents) {
-    const lines = potContents.split('\n');
-    const msgids = [];
-    let i = 0;
-    while (i < lines.length) {
-        const match = lines[i].match(/^msgid "(.*)"$/);
-        if (match) {
-            let value = match[1];
-            let j = i + 1;
-            while (j < lines.length && /^"(.*)"$/.test(lines[j])) {
-                value += lines[j].match(/^"(.*)"$/)[1];
-                j += 1;
-            }
-            if (value !== '') msgids.push({ value, line: i + 1 });
-            i = j;
-        } else {
-            i += 1;
+function extractStrings(potContents) {
+    const header = /^(msgid|msgstr(?:\[\d+\])?) "(.*)"$/;
+    const continuation = /^"(.*)"$/;
+
+    const entries = [];
+    potContents.split('\n').forEach((line, idx) => {
+        const h = line.match(header);
+        if (h) {
+            entries.push({ kind: h[1], value: h[2], line: idx + 1 });
+            return;
         }
-    }
-    return msgids;
+        const c = line.match(continuation);
+        if (c && entries.length) entries[entries.length - 1].value += c[1];
+    });
+
+    let currentMsgid = null;
+    return entries.flatMap(({ kind, value, line }) => {
+        if (kind === 'msgid') currentMsgid = value;
+        return value && currentMsgid ? [{ value, line, msgid: currentMsgid, kind }] : [];
+    });
 }
 
 function findViolations(msgid) {
@@ -99,7 +98,8 @@ function reportViolations(violations) {
     console.error(`\n${DIVIDER}\n`);
     for (const v of violations) {
         console.error(`  ${relPot}:${v.line}`);
-        console.error(`    msgid: "${v.msgid}"`);
+        console.error(`    msgid:      "${v.msgid}"`);
+        if (v.value !== v.msgid) console.error(`    ${v.kind.padEnd(11)} "${v.value}"`);
         for (const h of v.hits) {
             console.error(`      ✗ "${h.word}"  →  use ${h.suggestion}`);
         }
@@ -113,10 +113,10 @@ function reportViolations(violations) {
 }
 
 function main() {
-    const msgids = extractMsgids(readFileSync(POT, 'utf8'));
-    const violations = msgids
-        .filter(({ value }) => !FALLBACKS.has(value) && !ALLOWLIST.has(value))
-        .map(({ value, line }) => ({ msgid: value, line, hits: findViolations(value) }))
+    const strings = extractStrings(readFileSync(POT, 'utf8'));
+    const violations = strings
+        .filter(({ msgid, value }) => !ALLOWLIST.has(msgid) && !FALLBACKS.has(value))
+        .map(({ value, line, msgid, kind }) => ({ msgid, value, line, kind, hits: findViolations(value) }))
         .filter(({ hits }) => hits.length > 0);
 
     if (violations.length === 0) {
