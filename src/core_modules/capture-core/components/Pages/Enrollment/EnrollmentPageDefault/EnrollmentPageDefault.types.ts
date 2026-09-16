@@ -9,10 +9,9 @@ import type {
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
-import { EventStatuses } from '../../../Breadcrumbs/EnrollmentBreadcrumb/EnrollmentBreadcrumb';
+import type { StatusType } from '../../../../events/statusTypes';
 
 type EnrollmentPageKeyTypes = typeof EnrollmentPageKeys[keyof typeof EnrollmentPageKeys];
-type EventStatus = typeof EventStatuses[keyof typeof EventStatuses];
 
 export type Props = {
     currentPage: EnrollmentPageKeyTypes;
@@ -28,7 +27,7 @@ export type Props = {
     onBackToDashboard?: () => void;
     onBackToViewEvent?: () => void;
     userInteractionInProgress?: boolean;
-    eventStatus?: EventStatus;
+    eventStatus?: StatusType;
     onDelete: () => void;
     onAddNew: () => void;
     onViewAll: (stageId: string) => void;

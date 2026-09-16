@@ -6,7 +6,9 @@ export const statusTypes = {
     COMPLETED: 'COMPLETED',
     OVERDUE: 'OVERDUE',
     SKIPPED: 'SKIPPED',
-};
+} as const;
+
+export type StatusType = typeof statusTypes[keyof typeof statusTypes];
 
 
 export const translatedStatusTypes = (options?: string) => ({
