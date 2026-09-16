@@ -1,2 +1,6 @@
-export { useRuleEffects } from './useRuleEffects';
-export type { UseRuleEffectsInput } from './useRuleEffects.types';
+export { useEnrollmentScopeRuleEffects } from './useEnrollmentScopeRuleEffects';
+export {
+    selectEnrollmentHiddenAttributeIds,
+    selectEnrollmentHiddenProgramStageIds,
+    selectEnrollmentWidgetEffects,
+} from './enrollmentRuleEffects.selectors';

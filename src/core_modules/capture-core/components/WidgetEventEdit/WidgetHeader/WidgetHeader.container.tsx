@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -10,6 +10,14 @@ import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import {
+    updateEnrollmentEvent,
+    commitEnrollmentEvent,
+    rollbackEnrollmentEvent,
+} from '../../Pages/common/EnrollmentOverviewDomain';
+import { CompletionMenuItem, CompleteMenuItemModal } from '../../EventOverflowMenu';
+import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { pageKeys } from '../../App/withAppUrlSync';
 import type { PlainProps } from './WidgetHeader.types';
 
 const styles: Readonly<any> = {
@@ -29,6 +37,7 @@ const styles: Readonly<any> = {
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const WidgetHeaderPlain = ({
+    eventId,
     eventStatus,
     stage,
     programId,
@@ -36,15 +45,36 @@ const WidgetHeaderPlain = ({
     setChangeLogIsOpen,
     classes,
     readOnly,
+    canToggleCompletion,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
 
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
+    const [completeModalOpen, setCompleteModalOpen] = useState(false);
 
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
+
+    const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
+    const storedEvent = enrollment?.events?.find((event: { event: string }) => event.event === eventId);
+
+    const onCompletionStatusMutate = useCallback((newStatus: string) => {
+        if (storedEvent) {
+            const { completedAt, ...eventWithoutCompletion } = storedEvent;
+            dispatch(updateEnrollmentEvent(eventId, { ...eventWithoutCompletion, status: newStatus }));
+        }
+    }, [dispatch, storedEvent, eventId]);
+
+    const onCompletionStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentEvent(eventId));
+        dispatch(changeEventFromUrl(eventId, pageKeys.ENROLLMENT_EVENT));
+    }, [dispatch, eventId]);
+
+    const onCompletionStatusError = useCallback(() => {
+        dispatch(rollbackEnrollmentEvent(eventId));
+    }, [dispatch, eventId]);
 
     const { icon, name } = stage;
 
@@ -90,6 +120,18 @@ const WidgetHeaderPlain = ({
                                     maxWidth="250px"
                                     dataTest={'tracker-program-event-overflow-menu'}
                                 >
+                                    {canToggleCompletion && (
+                                        <CompletionMenuItem
+                                            eventId={eventId}
+                                            eventStatus={eventStatus}
+                                            onMutate={onCompletionStatusMutate}
+                                            onSuccess={onCompletionStatusSuccess}
+                                            onError={onCompletionStatusError}
+                                            onClose={() => setActionsIsOpen(false)}
+                                            askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
+                                            onAskCompleteEnrollment={() => setCompleteModalOpen(true)}
+                                        />
+                                    )}
                                     <MenuItem
                                         label={i18n.t('View changelog')}
                                         suffix=""
@@ -104,6 +146,17 @@ const WidgetHeaderPlain = ({
                     </div>
                 )}
             </div>
+            {completeModalOpen && enrollment && (
+                <CompleteMenuItemModal
+                    eventId={eventId}
+                    enrollment={enrollment}
+                    programStageName={name}
+                    onClose={() => setCompleteModalOpen(false)}
+                    onMutate={onCompletionStatusMutate}
+                    onSuccess={onCompletionStatusSuccess}
+                    onError={onCompletionStatusError}
+                />
+            )}
         </>
     );
 };

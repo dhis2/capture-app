@@ -20,6 +20,7 @@ import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
     useEventEditPermissions,
+    useProgramExpiryForUser,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
@@ -101,14 +102,15 @@ const WidgetEventEditPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
-    const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
+    const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
     const completedAt = loadedValues?.eventContainer?.event?.completedAt;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const { isEventReadOnly, canToggleCompletion } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
@@ -133,12 +135,14 @@ const WidgetEventEditPlain = ({
                 <Widget
                     header={
                         <WidgetHeader
+                            eventId={eventId}
                             eventStatus={eventStatus}
                             stage={stage}
                             programId={programId}
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            readOnly={readOnly}
+                            readOnly={isEventReadOnly}
+                            canToggleCompletion={canToggleCompletion}
                         />
                     }
                     noncollapsible
@@ -174,9 +178,9 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    canUncompleteEvent={canUncompleteEvent}
+                                    canToggleCompletion={canToggleCompletion}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={!readOnly}
+                                    hasDeleteButton={!isEventReadOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}
@@ -202,7 +206,6 @@ const WidgetEventEditPlain = ({
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
                     eventId={loadedValues.eventContainer.id}
-                    eventData={loadedValues.eventContainer.values}
                     formFoundation={formFoundation}
                 />
             )}
