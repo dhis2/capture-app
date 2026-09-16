@@ -119,7 +119,7 @@ export type CaptureClientEvent = {
     trackedEntityInstanceId?: string,
     enrollmentId?: string,
     enrollmentStatus?: string,
-    status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
+    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
     occurredAt: string,
     scheduledAt: string,
     completedAt: string,
