@@ -20,13 +20,13 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
-import { removeTrackedEntityChangelogQueries } from '../WidgetsChangelog';
+import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
+import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
 import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { selectEnrollmentHiddenAttributeIds } from '../Pages/common/EnrollmentOverviewDomain';
 
 const styles: Readonly<any> = {
     header: {
@@ -60,8 +60,7 @@ const computeLoadingState = (
     trackedEntityInstancesLoading: boolean,
     userRolesLoading: boolean,
     configIsFetched: boolean,
-    ruleEffectsPending: boolean,
-) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched || ruleEffectsPending;
+) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
 
 const computeError = (
     programsError: any,
@@ -72,9 +71,8 @@ const computeError = (
 const WidgetProfilePlain = ({
     teiId,
     programId,
-    enrollmentId,
     readOnlyMode = false,
-    ownerOrgUnitId = '',
+    orgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -90,9 +88,6 @@ const WidgetProfilePlain = ({
         storedGeometry: trackedEntityInstance?.geometry,
         hasError: trackedEntityInstance?.hasError,
     }));
-    const hiddenAttributeIds = useSelector(selectEnrollmentHiddenAttributeIds);
-    const ruleEffectsPending = useSelector(({ enrollmentDomain }: any) =>
-        Boolean(enrollmentId) && (enrollmentDomain?.enrollmentId !== enrollmentId || enrollmentDomain?.ruleEffects == null));
     const { configIsFetched, dataEntryFormConfig } = useDataEntryFormConfig({ selectedScopeId: programId });
     const {
         loading: trackedEntityInstancesLoading,
@@ -128,9 +123,7 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(
-        programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched, ruleEffectsPending,
-    );
+    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
@@ -140,23 +133,18 @@ const WidgetProfilePlain = ({
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = program?.trackedEntityType?.changelogEnabled;
 
-    const hiddenFieldIds = useMemo(
-        () => new Set(hiddenAttributeIds ? Object.keys(hiddenAttributeIds) : []),
-        [hiddenAttributeIds],
-    );
-
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
-        .filter((item: any) => item.displayInList && !hiddenFieldIds.has(item.attribute))
+        .filter((item: any) => item.displayInList)
         .map((clientAttribute: any) => {
             const { attribute, key, valueType } = clientAttribute;
             const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };
-        }), [clientAttributesWithSubvalues, hiddenFieldIds]);
+        }), [clientAttributesWithSubvalues]);
 
     const onSaveExternal = useCallback(() => {
-        removeTrackedEntityChangelogQueries(queryClient, teiId);
+        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
     }, [queryClient, teiId]);
 
     useEffect(() => {
@@ -200,16 +188,6 @@ const WidgetProfilePlain = ({
             );
         }
 
-        if (displayInListAttributes.length === 0) {
-            return (
-                <div className={classes.container}>
-                    <p className={classes.emptyText}>
-                        {i18n.t('No {{attributesLabel}} configured to display', { attributesLabel })}
-                    </p>
-                </div>
-            );
-        }
-
         return (
             <div className={classes.container}>
                 <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
@@ -222,7 +200,7 @@ const WidgetProfilePlain = ({
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
 
-    const isEmptyList = !loading && !error && (hasNoAttributes || displayInListAttributes.length === 0);
+    const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
@@ -294,7 +272,7 @@ const WidgetProfilePlain = ({
                         onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
-                        ownerOrgUnitId={ownerOrgUnitId}
+                        orgUnitId={orgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}

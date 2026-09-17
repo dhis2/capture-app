@@ -96,24 +96,20 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const occurredAt = useSelector((state: any) => state.viewEventPage.loadedValues?.dataEntryValues?.occurredAt);
     const eventStatus = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.status);
     const completedAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.completedAt);
-    const scheduledAt = useSelector((state: any) => state.viewEventPage.loadedValues?.eventContainer?.event?.scheduledAt);
 
     const {
-        isEventBlockedByExpiry,
-        isEventBlockedByCompletion,
-        isEventReadOnly,
+        isEventWithinValidPeriod,
+        isWithinCompleteExpiry,
+        canEditCompletedEvent,
+        readOnly,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
-        scheduledAtClient: scheduledAt,
     });
-    // TODO: Restore `!isEventReadOnly` when DHIS2-21921 lands.
-    // Until then, single-event uncomplete still goes through the "Edit event" button,
-    // so the completion factor of isEventReadOnly must not hide the button.
-    const showEditButton = !isEditEventPage && !isEventBlockedByExpiry && eventAccess.write;
+    const showEditButton = !isEditEventPage && !readOnly;
 
     return (
         <div className={classes.container}>
@@ -127,8 +123,9 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 />
                 <ViewEventReadOnlyBadge
                     eventAccess={eventAccess}
-                    isEventBlockedByExpiry={isEventBlockedByExpiry}
-                    isEventBlockedByCompletion={isEventBlockedByCompletion}
+                    isEventWithinValidPeriod={isEventWithinValidPeriod}
+                    canEditCompletedEvent={canEditCompletedEvent}
+                    isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
                 />
             </div>
             <div className={classes.contentContainer}>
@@ -141,7 +138,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
                 />
                 <RightColumnWrapper
                     eventAccess={eventAccess}
-                    readOnly={isEventReadOnly}
+                    readOnly={readOnly}
                     programStage={programStage}
                     dataEntryKey={currentDataEntryKey}
                     assignee={assignee}

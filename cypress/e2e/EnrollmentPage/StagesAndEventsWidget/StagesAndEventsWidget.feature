@@ -60,13 +60,13 @@ Feature: User interacts with Stages and Events Widget
     Scenario: User can skip a scheduled event
         Given you open the enrollment page by typing #/enrollment?enrollmentId=gL8BooqKhdX&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=RABlFsj5Omi
         And there is an Overdue event in the TB visit stage
-        When you skip the Overdue event
+        When you click the Skip event overflow button on the Overdue event
         Then the event should be skipped
 
     Scenario: User can unskip a scheduled event
         Given you open the enrollment page by typing #/enrollment?enrollmentId=gL8BooqKhdX&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=RABlFsj5Omi
         And there is an Skipped event in the TB visit stage
-        When you unskip the Skipped event
+        When you click the Unskip event overflow button on the Skipped event
         Then there is an Overdue event in the TB visit stage
 
     @with-restore-deleted-event

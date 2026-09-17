@@ -3,7 +3,6 @@ import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
 import { LabelKeys, useTermLabel } from '../../../metaData';
-import { statusTypes, type StatusType } from '../../../events/statusTypes';
 import { DirectionalChevron } from '../../../utils/rtl';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -15,6 +14,16 @@ import {
 
 type EnrollmentPageKeyTypes = typeof EnrollmentPageKeys[keyof typeof EnrollmentPageKeys];
 
+export const EventStatuses = {
+    ACTIVE: 'ACTIVE',
+    COMPLETED: 'COMPLETED',
+    SKIPPED: 'SKIPPED',
+    SCHEDULE: 'SCHEDULE',
+    OVERDUE: 'OVERDUE',
+} as const;
+
+type EventStatus = typeof EventStatuses[keyof typeof EventStatuses];
+
 type OwnProps = {
     onBackToMainPage: () => void;
     onBackToDashboard?: () => void;
@@ -22,7 +31,7 @@ type OwnProps = {
     displayFrontPageList: boolean;
     programId: string;
     userInteractionInProgress?: boolean;
-    eventStatus?: StatusType;
+    eventStatus?: EventStatus;
     page: 'mainPage' | EnrollmentPageKeyTypes;
 };
 type WarningKey = typeof pageKeys[keyof typeof pageKeys];
@@ -42,9 +51,9 @@ const pageKeys = {
     ...EnrollmentPageKeys,
 } as const;
 
-const eventIsScheduled = (eventStatus?: StatusType): boolean =>
+const eventIsScheduled = (eventStatus?: EventStatus): boolean =>
     !!eventStatus &&
-    ([statusTypes.SCHEDULE, statusTypes.OVERDUE, statusTypes.SKIPPED] as StatusType[])
+    ([EventStatuses.SCHEDULE, EventStatuses.OVERDUE, EventStatuses.SKIPPED] as EventStatus[])
         .includes(eventStatus);
 
 

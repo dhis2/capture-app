@@ -362,7 +362,7 @@ export class InputBuilder {
         const convertDate = (dateString?: string | null) => this.toLocalDate(dateString, RuleLocalDate.currentDate());
 
         return new RuleEnrollmentJs(
-            enrollment || 'registration',
+            enrollment!,
             programName || '',
             convertDate(incidentDate),
             convertDate(enrollmentDate),

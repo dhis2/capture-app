@@ -39,9 +39,10 @@ import {
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
-    getProps: ({ stages, events }: any) => ({
+    getProps: ({ stages, events, ruleEffects }: any) => ({
         stages,
         events,
+        ruleEffects,
     }),
 };
 
@@ -54,8 +55,10 @@ export const StagesAndEvents: WidgetConfig = {
         onViewAll,
         onCreateNew,
         onDeleteEvent,
+        onUpdateEventStatus,
         onRollbackDeleteEvent,
         onEventClick,
+        ruleEffects,
     }: any): StagesAndEventProps => ({
         programId: program.id,
         stages,
@@ -63,8 +66,10 @@ export const StagesAndEvents: WidgetConfig = {
         onViewAll,
         onCreateNew,
         onDeleteEvent,
+        onUpdateEventStatus,
         onRollbackDeleteEvent,
         onEventClick,
+        ruleEffects,
     }),
 };
 
@@ -138,16 +143,14 @@ export const ProfileWidget: WidgetConfig = {
     getProps: ({
         teiId,
         program,
-        ownerOrgUnitId,
-        enrollmentId,
+        orgUnitId,
         onUpdateTeiAttributeValues,
         onDeleteTrackedEntitySuccess,
         onStatusToggleSuccess,
     }: any): WidgetProfileProps => ({
         teiId,
         programId: program.id,
-        ownerOrgUnitId,
-        enrollmentId,
+        orgUnitId,
         onUpdateTeiAttributeValues,
         onDeleteSuccess: onDeleteTrackedEntitySuccess,
         onStatusToggleSuccess,

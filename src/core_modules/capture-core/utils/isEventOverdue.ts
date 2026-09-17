@@ -3,5 +3,5 @@ import { statusTypes } from 'capture-core/events/statusTypes';
 
 export const isEventOverdue = (event: {
     scheduledAt: string;
-    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
 }) => moment(event.scheduledAt).isBefore(moment().startOf('day')) && event.status === statusTypes.SCHEDULE;

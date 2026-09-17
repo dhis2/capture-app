@@ -2,12 +2,10 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
-import { updateEnrollmentOwnerOrgUnit } from '../../../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
 
 export type UpdateEnrollmentOwnership = (params: {
     orgUnitId: string;
@@ -47,7 +45,6 @@ export const useUpdateOwnership = ({
     onAccessLostFromTransfer,
 }: Props): ReturnTypes => {
     const dataEngine = useDataEngine();
-    const dispatch = useDispatch();
     const { show: showErrorAlert } = useAlert(
         i18n.t('An error occurred while transferring ownership'),
         { critical: true },
@@ -66,8 +63,7 @@ export const useUpdateOwnership = ({
             },
         }),
         {
-            onSuccess: (_, { orgUnitId, programAccessLevel, orgUnitScopes }: any) => {
-                dispatch(updateEnrollmentOwnerOrgUnit(orgUnitId));
+            onSuccess: (_, { programAccessLevel, orgUnitScopes }: any) => {
                 // If the user is transferring ownership to a capture scope, we stay on the same page
                 if (orgUnitScopes.destination === OrgUnitScopes.CAPTURE) {
                     refetchTEI();

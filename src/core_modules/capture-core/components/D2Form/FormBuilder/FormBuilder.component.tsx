@@ -6,7 +6,6 @@ import { makeCancelablePromise } from 'capture-core-utils';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import { FormField, FormPlugin } from './components';
-import { messageStateKeys } from '../../../reducers/descriptions/rulesEffects.reducerDescription';
 import type {
     PostProcessErrorMessage,
     FieldConfig,
@@ -490,11 +489,11 @@ export class FormBuilder extends React.Component<Props> {
             return ruleMessage;
         }
 
-        if (Object.values(messageStateKeys).some((key) => {
+        if (Object.keys(ruleMessage).some((key) => {
             const currentMessage = ruleMessage[key];
             const prevMessage = prevRuleMessage[key];
-            if (Array.isArray(currentMessage) && Array.isArray(prevMessage)) {
-                if (prevMessage.length !== currentMessage.length) {
+            if (Array.isArray(currentMessage)) {
+                if (!Array.isArray(prevMessage) || prevMessage.length !== currentMessage.length) {
                     return true;
                 }
                 return currentMessage.some((value, index) => value !== prevMessage[index]);

@@ -2,11 +2,11 @@ import i18n from '@dhis2/d2-i18n';
 import React, { useCallback } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { useDispatch, useSelector } from 'react-redux';
-import { useQueryClient } from '@tanstack/react-query';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { LabelKeys, useTermLabel } from '../../../../metaData';
-import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import {
     commitEnrollmentAndEvents,
     EnrollmentAccessProvider,
@@ -17,8 +17,7 @@ import {
     updateEnrollmentDate,
     updateIncidentDate,
     useCommonEnrollmentDomainData,
-    useEnrollmentScopeRuleEffects,
-    selectEnrollmentWidgetEffects,
+    useRuleEffects,
 } from '../../common/EnrollmentOverviewDomain';
 import {
     deleteEnrollment,
@@ -30,6 +29,7 @@ import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { DataStoreKeyByPage, EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { useProgramMetadata, useProgramStages } from './hooks';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
+import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 import {
     useEnrollmentPageLayout,
@@ -43,6 +43,7 @@ import {
     addPersistedEnrollmentEvents,
     deleteEnrollmentEvent,
     setTrackedEntityInactiveStatus,
+    updateEnrollmentEventStatus,
 } from '../../common/EnrollmentOverviewDomain/enrollment.actions';
 import { useHideWidgetByRuleLocations } from '../../../../hooks';
 
@@ -50,10 +51,11 @@ import { useHideWidgetByRuleLocations } from '../../../../hooks';
 export const EnrollmentPageDefault = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
-    const queryClient = useQueryClient();
+    const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
         pageLayout,
@@ -64,15 +66,13 @@ export const EnrollmentPageDefault = () => {
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_OVERVIEW,
     });
 
+    const program = useTrackerProgram(programId);
     const {
         error: enrollmentsError,
         enrollment,
         attributeValues,
         readOnly: trackedEntityInactive,
-        ownerOrgUnitId,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-    const program = useTrackerProgram(programId);
-    const { orgUnit: ownerOrgUnit, error: ownerOrgUnitError } = useCoreOrgUnit(ownerOrgUnitId);
 
     const onStatusToggleSuccess = useCallback(() => {
         dispatch(setTrackedEntityInactiveStatus(!trackedEntityInactive));
@@ -89,21 +89,20 @@ export const EnrollmentPageDefault = () => {
         https://dhis2.atlassian.net/browse/DHIS2-17574
     */
 
-    if (programMetaDataError || enrollmentsError || ownerOrgUnitError) {
+    if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
-            { programMetaDataError, enrollmentsError, ownerOrgUnitError },
+            { programMetaDataError, enrollmentsError },
         ));
     }
 
-    useEnrollmentScopeRuleEffects({
-        enrollmentId,
-        orgUnit: ownerOrgUnit,
+    const ruleEffects = useRuleEffects({
+        orgUnit,
         program,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
     });
 
-    const outputEffects = useSelector(selectEnrollmentWidgetEffects);
+    const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
@@ -154,6 +153,14 @@ export const EnrollmentPageDefault = () => {
         dispatch(addPersistedEnrollmentEvents({ events: [eventDetails] }));
     }, [dispatch]);
 
+    const onUpdateEventStatus = useCallback((eventId: string, status: string) => {
+        const nowClient = fromClientDate(new Date());
+        const nowServer = new Date(nowClient.getServerZonedISOString());
+        const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
+
+        dispatch(updateEnrollmentEventStatus(eventId, status, updatedAt));
+    }, [dispatch, fromClientDate]);
+
     const onAddNew = () => {
         navigate(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
@@ -176,8 +183,7 @@ export const EnrollmentPageDefault = () => {
     );
     const onUpdateEnrollmentStatusSuccess = useCallback(() => {
         dispatch(commitEnrollmentAndEvents());
-        removeEventChangelogQueries(queryClient);
-    }, [dispatch, queryClient]);
+    }, [dispatch]);
 
     const onBackToMainPage = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
@@ -189,6 +195,10 @@ export const EnrollmentPageDefault = () => {
         );
     }
 
+    if (error) {
+        return error?.errorComponent;
+    }
+
     return (
         <EnrollmentAccessProvider program={program} trackedEntityInactive={trackedEntityInactive}>
             <EnrollmentPageLayout
@@ -197,7 +207,6 @@ export const EnrollmentPageDefault = () => {
                 availableWidgets={WidgetsForEnrollmentPageDefault}
                 teiId={teiId}
                 orgUnitId={orgUnitId}
-                ownerOrgUnitId={ownerOrgUnitId}
                 program={program}
                 stages={stages}
                 events={enrollment?.events}
@@ -213,6 +222,7 @@ export const EnrollmentPageDefault = () => {
                 hideWidgets={hideWidgets}
                 onEventClick={onEventClick}
                 onDeleteEvent={onDeleteEvent}
+                onUpdateEventStatus={onUpdateEventStatus}
                 onRollbackDeleteEvent={onRollbackDeleteEvent}
                 onLinkedRecordClick={onLinkedRecordClick}
                 onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
@@ -222,6 +232,7 @@ export const EnrollmentPageDefault = () => {
                 onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                ruleEffects={ruleEffects}
                 widgetEnrollmentStatus={widgetEnrollmentStatus}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
                 feedbackEmptyText={i18n.t(

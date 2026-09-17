@@ -1,20 +1,4 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-
-Given(/^you make sure the event (.+) has no assigned user$/, (eventId) => {
-    cy.buildApiUrl('tracker', `events/${eventId}`)
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            if (!body.assignedUser) {
-                return undefined;
-            }
-
-            const eventToUpdate = { ...body, assignedUser: null };
-
-            return cy
-                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
-                .then(eventUrl => cy.request('POST', eventUrl, { events: [eventToUpdate] }));
-        });
-});
+import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 When('you assign the user Geetha in the view mode', () => {
     cy.get('[data-test="widget-assignee"]').within(() => {

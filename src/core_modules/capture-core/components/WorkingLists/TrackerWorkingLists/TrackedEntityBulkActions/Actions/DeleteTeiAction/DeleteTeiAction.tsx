@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useAuthority, Authorities } from '../../../../../../utils/authority';
+import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 import type { PlainProps } from './DeleteTeiAction.types';
 import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+
+const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
+
 
 // TODO - Add program and TEType access checks before adding action to prod
 export const DeleteTeiAction = ({
@@ -14,7 +17,7 @@ export const DeleteTeiAction = ({
     onUpdateList,
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const { hasAuthority } = useAuthority(Authorities.TEI_CASCADE_DELETE);
+    const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
     const { enrollmentsLabel, eventsLabel } = useTermLabel(
         [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
     );

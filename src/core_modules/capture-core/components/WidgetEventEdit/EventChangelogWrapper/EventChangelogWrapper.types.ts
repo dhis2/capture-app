@@ -8,4 +8,5 @@ type PassOnProps = {
 
 export type Props = PassOnProps & {
     formFoundation: RenderFoundation,
+    eventData: Record<string, unknown>,
 };

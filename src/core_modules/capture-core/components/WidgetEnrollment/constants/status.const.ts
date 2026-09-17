@@ -11,3 +11,12 @@ export const translatedStatus = Object.freeze({
     [plainStatus.COMPLETED]: i18n.t('Completed'),
     [plainStatus.CANCELLED]: i18n.t('Cancelled'),
 });
+
+export const eventStatuses = Object.freeze({
+    ACTIVE: 'ACTIVE',
+    COMPLETED: 'COMPLETED',
+    VISITED: 'VISITED',
+    SCHEDULE: 'SCHEDULE',
+    OVERDUE: 'OVERDUE',
+    SKIPPED: 'SKIPPED',
+});

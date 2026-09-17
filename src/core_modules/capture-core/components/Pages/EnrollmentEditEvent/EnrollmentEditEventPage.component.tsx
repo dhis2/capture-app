@@ -28,7 +28,6 @@ export const EnrollmentEditEventPageComponent = ({
     teiDisplayName,
     widgetEffects,
     hideWidgets,
-    ownerOrgUnitId,
     onDelete,
     onAddNew,
     onLinkedRecordClick,
@@ -49,7 +48,6 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
     onSaveAndCompleteEnrollment,
-    widgetEnrollmentStatus,
     onCancelEditEvent,
     onHandleScheduleSave,
     onSaveExternal,
@@ -117,14 +115,12 @@ export const EnrollmentEditEventPageComponent = ({
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                 onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
-                widgetEnrollmentStatus={widgetEnrollmentStatus}
                 onSaveAndCompleteEnrollmentSuccessActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS}
                 onSaveAndCompleteEnrollmentErrorActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR}
                 events={events}
                 pageStatus={pageStatus}
                 widgetEffects={widgetEffects}
                 hideWidgets={hideWidgets}
-                ownerOrgUnitId={ownerOrgUnitId}
                 onDelete={onDelete}
                 onAddNew={onAddNew}
                 eventAccess={eventAccess}

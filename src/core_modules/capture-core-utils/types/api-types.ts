@@ -19,7 +19,7 @@ export type ApiEnrollmentEvent = {
     orgUnit: string;
     trackedEntity: string;
     enrollmentStatus: string;
-    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
     occurredAt: string;
     scheduledAt: string;
     completedAt?: string;

@@ -14,7 +14,7 @@ import { isEventOverdue } from '../../../../../../../utils/isEventOverdue';
 import { RECORD_TYPE, buildUrlByElementType } from '../getListDataCommon';
 
 const convertServerStatusToClient = (
-    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
     scheduledAt: string,
 ) => {
     const translatedStatus = translatedStatusTypes();

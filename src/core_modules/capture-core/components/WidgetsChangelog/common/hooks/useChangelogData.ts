@@ -40,7 +40,7 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
             ? undefined
             : `${columnToSortBy}:${sortDirection}`;
 
-    const { data, isInitialLoading, isError, dataUpdatedAt } = useApiDataQuery(
+    const { data, isInitialLoading, isError } = useApiDataQuery(
         [
             'changelog',
             entityType,
@@ -74,11 +74,9 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
         setAttributeToFilterBy,
         filterValue,
         setFilterValue,
-        filterParam,
         page,
         pageSize,
         isLoading: isInitialLoading,
         isError,
-        dataUpdatedAt,
     };
 };

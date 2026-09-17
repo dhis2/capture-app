@@ -16,15 +16,13 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
-import { getReadOnlyMessage } from '../ReadOnlyBadge';
 import {
     useEnrollmentEditEventPageMode,
     useAvailableProgramStages,
     useEventEditPermissions,
-    useProgramExpiryForUser,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
-import { dataElementTypes, LabelKeys, useTermLabel } from '../../metaData';
+import { dataElementTypes } from '../../metaData';
 
 const styles: Readonly<any> = {
     container: {
@@ -100,51 +98,22 @@ const WidgetEventEditPlain = ({
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
 
-    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus, eventId);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
-    const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
+    const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
     const completedAt = loadedValues?.eventContainer?.event?.completedAt;
-    const scheduledAt = loadedValues?.eventContainer?.event?.scheduledAt;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
-    const expiryPeriod = useProgramExpiryForUser(programId);
-    const {
-        isEventReadOnly, canToggleCompletion, canEditProgramStage,
-        isEventBlockedByExpiry, isEventBlockedByCompletion, isEventCompleted,
-    } = useEventEditPermissions({
+    const { readOnly, expiryPeriod, canUncompleteEvent } = useEventEditPermissions({
         programId,
         stage,
         eventStatus,
         occurredAtClient: convertFormToClient(occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: completedAt,
-        scheduledAtClient: scheduledAt,
-    });
-    const { enrollmentLabel, programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
-        [
-            LabelKeys.enrollmentSingular,
-            LabelKeys.programStageSingular,
-            LabelKeys.programStagePlural,
-            LabelKeys.eventSingular,
-        ],
-        { programId, stageId },
-    );
-    const readOnlyMessage = getReadOnlyMessage({
-        access: { program: true, trackedEntityType: true, programStage: true },
-        trackedEntityName: undefined,
-        multipleStages: false,
-        isEventBlockedByExpiry,
-        isEventBlockedByCompletion,
-        isEventCompleted,
-        canToggleCompletion,
-        trackedEntityInactive: false,
-        enrollmentLabel,
-        programStageLabel,
-        programStagesLabel,
-        eventLabel,
     });
 
     return orgUnit && loadedValues ? (
@@ -164,19 +133,12 @@ const WidgetEventEditPlain = ({
                 <Widget
                     header={
                         <WidgetHeader
-                            eventId={eventId}
                             eventStatus={eventStatus}
                             stage={stage}
                             programId={programId}
                             orgUnit={orgUnit}
-                            teiId={teiId}
-                            enrollmentId={enrollmentId}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            readOnly={isEventReadOnly}
-                            isEventBlockedByExpiry={isEventBlockedByExpiry}
-                            canToggleCompletion={canToggleCompletion}
-                            canEditProgramStage={canEditProgramStage}
-                            readOnlyMessage={readOnlyMessage}
+                            readOnly={readOnly}
                         />
                     }
                     noncollapsible
@@ -212,9 +174,9 @@ const WidgetEventEditPlain = ({
                                     expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
-                                    canToggleCompletion={canToggleCompletion}
+                                    canUncompleteEvent={canUncompleteEvent}
                                     onCancelEditEvent={onCancelEditEvent}
-                                    hasDeleteButton={!isEventBlockedByExpiry}
+                                    hasDeleteButton={!readOnly}
                                     onHandleScheduleSave={onHandleScheduleSave}
                                     onSaveExternal={onSaveExternal}
                                     initialScheduleDate={initialScheduleDate}
@@ -224,9 +186,7 @@ const WidgetEventEditPlain = ({
                                     hideDueDate={stage.hideDueDate}
                                     assignee={assignee}
                                     onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
-                                    onSaveAndCompleteEnrollmentErrorActionType={
-                                        onSaveAndCompleteEnrollmentErrorActionType
-                                    }
+                                    onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
                                     onSaveAndCompleteEnrollmentSuccessActionType={
                                         onSaveAndCompleteEnrollmentSuccessActionType
                                     }
@@ -242,6 +202,7 @@ const WidgetEventEditPlain = ({
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
                     eventId={loadedValues.eventContainer.id}
+                    eventData={loadedValues.eventContainer.values}
                     formFoundation={formFoundation}
                 />
             )}

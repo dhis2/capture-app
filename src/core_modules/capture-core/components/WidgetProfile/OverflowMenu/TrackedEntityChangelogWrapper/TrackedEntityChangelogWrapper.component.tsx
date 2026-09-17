@@ -68,6 +68,7 @@ export const TrackedEntityChangelogWrapper = ({
             close={() => setIsOpen(false)}
             programId={programAPI.id}
             dataItemDefinitions={dataItemDefinitions}
+            trackedEntityData={transformedTrackedEntityData}
         />
     );
 };

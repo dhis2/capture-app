@@ -1,7 +1,6 @@
 import type { ProgramStage } from '../../../metaData';
 import { Program } from '../../../metaData';
 import type { HideWidgets, WidgetEffects } from '../common/EnrollmentOverviewDomain';
-import type { AttributeValue } from '../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { UserFormField } from '../../FormFields/UserField';
 import type { LinkedRecordClick } from '../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type {
@@ -13,7 +12,6 @@ export type PlainProps = {
     programStage?: ProgramStage | null;
     widgetEffects: WidgetEffects;
     hideWidgets: HideWidgets;
-    ownerOrgUnitId?: string;
     teiId: string;
     enrollmentId: string;
     eventId: string;
@@ -47,7 +45,6 @@ export type PlainProps = {
     onAccessLostFromTransfer?: () => void;
     pageStatus: string;
     eventStatus?: string;
-    widgetEnrollmentStatus?: { value: string | null };
     eventAccess: {
         read: boolean;
         write: boolean;
@@ -73,8 +70,6 @@ export type Props = {
     orgUnitId: string;
     event: any;
     enrollmentSite: any;
-    attributeValues?: Array<AttributeValue>;
     trackedEntityInactive?: boolean;
-    ownerOrgUnitId?: string;
     initMode?: string;
 };

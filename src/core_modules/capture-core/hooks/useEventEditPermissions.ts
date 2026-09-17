@@ -1,12 +1,9 @@
 import { useProgramExpiryForUser } from './useProgramExpiryForUser';
 import { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
-import { getProgramEventAccess, type ProgramStage } from '../metaData';
-import {
-    isValidPeriod,
-    isWithinCompleteEventsExpiry,
-} from '../utils/validation/validators/form';
-import { statusTypes as eventStatuses } from '../events/statusTypes';
-import { useAuthority, Authorities } from '../utils/authority';
+import { getProgramEventAccess, ProgramStage } from '../metaData';
+import { isValidPeriod, isWithinCompleteEventsExpiry } from '../utils/validation/validators/form';
+import { eventStatuses } from '../components/WidgetEventEdit/constants/status.const';
+import { useAuthorities } from '../utils/authority/useAuthorities';
 
 type Input = {
     programId: string,
@@ -14,44 +11,24 @@ type Input = {
     eventStatus?: string,
     occurredAtClient?: string,
     completedAtClient?: string,
-    scheduledAtClient?: string,
 };
 
-const checkWithinValidPeriod = (
-    referenceDate: string | undefined,
-    expiryPeriod: any,
-): boolean =>
-    (referenceDate ? isValidPeriod(referenceDate, expiryPeriod).isWithinValidPeriod : true);
-
-const computeExpiryBlocked = (
-    isWithinValidPeriod: boolean,
+type Output = {
+    eventAccess: { read: boolean, write: boolean } | null,
+    isEventWithinValidPeriod: boolean,
     isWithinCompleteExpiry: boolean,
-    hasEditExpiredAuthority: boolean,
-): boolean => (!isWithinValidPeriod || !isWithinCompleteExpiry) && !hasEditExpiredAuthority;
+    canEditCompletedEvent: boolean,
+    canUncompleteEvent: boolean,
+    expiryPeriod: ReturnType<typeof useProgramExpiryForUser>,
+    readOnly: boolean,
+};
 
-const computeCanToggleCompletion = (
-    canEditProgramStage: boolean,
-    isEventBlockedByExpiry: boolean,
-    hasUncompleteAuthority: boolean,
-    eventStatus?: string,
-): boolean =>
-    canEditProgramStage
-    && !isEventBlockedByExpiry
-    && (
-        eventStatus === eventStatuses.ACTIVE
-        || (eventStatus === eventStatuses.COMPLETED && hasUncompleteAuthority)
-    );
+// An event is read-only when ANY of the following is true:
+//   - No write access to the program stage (eventAccess.write is false).
+//   - occurredAt is outside the program's expiry period (overridden by F_EDIT_EXPIRED).
+//   - The event is completed and past the completeEventsExpiryDays window (overridden by F_EDIT_EXPIRED).
+//   - The event is completed on a stage with blockEntryForm set (overridden by F_EDIT_EXPIRED).
 
-const computeIsEventReadOnly = (
-    canEditProgramStage: boolean,
-    isEventBlockedByExpiry: boolean,
-    isCompletedAndBlockingForm: boolean,
-    eventStatus?: string,
-): boolean =>
-    !canEditProgramStage
-    || isEventBlockedByExpiry
-    || isCompletedAndBlockingForm
-    || eventStatus === eventStatuses.SKIPPED;
 
 export const useEventEditPermissions = ({
     programId,
@@ -59,53 +36,33 @@ export const useEventEditPermissions = ({
     eventStatus,
     occurredAtClient,
     completedAtClient,
-    scheduledAtClient,
-}: Input) => {
-    // Expiry
+}: Input): Output => {
+    const eventAccess = getProgramEventAccess(programId, stage?.id ?? null);
     const expiryPeriod = useProgramExpiryForUser(programId);
     const completeEventsExpiryDays = useCompleteEventsExpiryForUser(programId);
-    const { hasAuthority: hasEditExpiredAuthority } = useAuthority(Authorities.EDIT_EXPIRED);
-    const expiryReferenceDate = occurredAtClient || scheduledAtClient;
-    const isWithinValidPeriod = checkWithinValidPeriod(expiryReferenceDate, expiryPeriod ?? null);
+    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const { hasAuthority: canEditExpired } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
+
+    const { isWithinValidPeriod: isEventWithinValidPeriod } = isValidPeriod(occurredAtClient ?? '', expiryPeriod ?? null);
     const isWithinCompleteExpiry = isWithinCompleteEventsExpiry(completedAtClient, completeEventsExpiryDays);
-    const isEventBlockedByExpiry = computeExpiryBlocked(
-        isWithinValidPeriod, isWithinCompleteExpiry, hasEditExpiredAuthority,
+
+    const canEditCompletedEvent = canEditExpired || !(
+        stage?.blockEntryForm
+        && eventStatus === eventStatuses.COMPLETED
     );
 
-    // Program stage Access
-    const stageAccess = getProgramEventAccess(programId, stage?.id ?? null);
-    const canEditProgramStage = !!stageAccess?.write;
-
-    // Status
-    const isEventCompleted = eventStatus === eventStatuses.COMPLETED;
-    const isEventOverdueOrScheduled =
-        eventStatus === eventStatuses.OVERDUE || eventStatus === eventStatuses.SCHEDULE;
-    const isCompletedAndBlockingForm = !!(stage?.blockEntryForm && isEventCompleted);
-
-    // Completion
-    const { hasAuthority: hasUncompleteAuthority } = useAuthority(Authorities.UNCOMPLETE_EVENT);
-    const canToggleCompletion = computeCanToggleCompletion(
-        canEditProgramStage, isEventBlockedByExpiry, hasUncompleteAuthority, eventStatus,
-    );
-    const isEventBlockedByCompletion = isCompletedAndBlockingForm && !hasUncompleteAuthority;
-
-    // Overall
-    const isEventReadOnly = computeIsEventReadOnly(
-        canEditProgramStage, isEventBlockedByExpiry, isCompletedAndBlockingForm, eventStatus,
-    );
+    const readOnly = !eventAccess?.write
+        || !isEventWithinValidPeriod
+        || !isWithinCompleteExpiry
+        || !canEditCompletedEvent;
 
     return {
-        // Program stage Access
-        canEditProgramStage,
-        // Expiry
-        isEventBlockedByExpiry,
-        // Completion
-        canToggleCompletion,
-        isEventBlockedByCompletion,
-        // Status
-        isEventCompleted,
-        isEventOverdueOrScheduled,
-        // Overall
-        isEventReadOnly,
+        eventAccess,
+        isEventWithinValidPeriod,
+        isWithinCompleteExpiry,
+        canEditCompletedEvent,
+        canUncompleteEvent,
+        expiryPeriod,
+        readOnly,
     };
 };

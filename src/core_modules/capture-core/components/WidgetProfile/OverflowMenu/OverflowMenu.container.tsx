@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { useAuthority, Authorities } from '../../../utils/authority';
+import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import type { Props } from './OverflowMenu.types';
 import { OverflowMenuComponent } from './OverflowMenu.component';
 
@@ -19,7 +18,7 @@ export const OverflowMenu = ({
     programAPI,
     readOnlyMode,
 }: Props) => {
-    const { hasAuthority } = useAuthority(Authorities.TEI_CASCADE_DELETE);
+    const { hasAuthority } = useAuthorities({ authorities: ['F_TEI_CASCADE_DELETE'] });
 
     return (
         <OverflowMenuComponent

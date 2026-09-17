@@ -19,7 +19,7 @@ const convertFn = pipe(convertServerToClient, convertClientToView);
 
 export const DataEntry = ({
     programAPI,
-    ownerOrgUnitId,
+    orgUnitId,
     onCancel,
     onDisable,
     onEnable,
@@ -46,16 +46,16 @@ export const DataEntry = ({
     const onGetValidationContext = useCallback(
         () => ({
             programId: programAPI.id,
-            orgUnitId: ownerOrgUnitId,
+            orgUnitId,
             trackedEntityInstanceId,
             trackedEntityTypeId: programAPI.trackedEntityType.id,
         }),
-        [programAPI, ownerOrgUnitId, trackedEntityInstanceId],
+        [programAPI, orgUnitId, trackedEntityInstanceId],
     );
 
     const context = useLifecycle({
         programAPI,
-        ownerOrgUnitId,
+        orgUnitId,
         clientAttributesWithSubvalues,
         userRoles,
         dataEntryId,
@@ -123,7 +123,7 @@ export const DataEntry = ({
                 updateTeiRequest({
                     itemId,
                     dataEntryId,
-                    ownerOrgUnitId,
+                    orgUnitId,
                     trackedEntityInstanceId,
                     trackedEntityTypeId: programAPI.trackedEntityType.id,
                     onSaveExternal,
@@ -137,7 +137,7 @@ export const DataEntry = ({
         dispatch,
         itemId,
         dataEntryId,
-        ownerOrgUnitId,
+        orgUnitId,
         trackedEntityInstanceId,
         programAPI,
         formValidated,
@@ -163,7 +163,7 @@ export const DataEntry = ({
                 onUpdateFormField={onUpdateFormField}
                 onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 onGetValidationContext={onGetValidationContext}
-                ownerOrgUnitId={ownerOrgUnitId}
+                orgUnitId={orgUnitId}
                 pluginContext={pluginContext}
                 accessReadOnly={accessReadOnly}
             />
@@ -185,7 +185,7 @@ export const DataEntry = ({
             onGetValidationContext={onGetValidationContext}
             errorsMessages={errorsMessages}
             warningsMessages={warningsMessages}
-            ownerOrgUnitId={ownerOrgUnitId}
+            orgUnitId={orgUnitId}
             pluginContext={pluginContext}
             accessReadOnly={accessReadOnly}
         />

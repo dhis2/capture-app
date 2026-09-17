@@ -66,7 +66,6 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
         attributeValues,
         error: commonDataError,
         readOnly: trackedEntityInactive,
-        ownerOrgUnitId,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
         selectedScopeId: validIds[IdTypes.PROGRAM_ID]?.id ?? null,
@@ -97,10 +96,9 @@ const EnrollmentAddEventPagePlain = ({ classes }: WithStyles<typeof styles>) => 
             <EnrollmentAddEventPageDefault
                 pageLayout={pageLayout!}
                 enrollment={enrollment}
-                attributeValues={attributeValues}
+                attributeValues={attributeValues as Record<string, unknown> | null | undefined}
                 commonDataError={Boolean(commonDataError)}
                 trackedEntityInactive={Boolean(trackedEntityInactive)}
-                ownerOrgUnitId={ownerOrgUnitId}
             />
         );
     }

@@ -14,7 +14,6 @@ import {
     updateEnrollmentAndEvents,
     updateEnrollmentEvent,
     useCommonEnrollmentDomainData,
-    useEnrollmentScopeRuleEffects,
     deleteEnrollmentEvent,
     deleteEnrollmentEventRelationship,
     updateOrAddEnrollmentEvents,
@@ -23,7 +22,6 @@ import {
 } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useTrackerProgram } from '../../../hooks/useTrackerProgram';
-import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
@@ -44,14 +42,15 @@ import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/Enrollmen
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer, convertServerToClient } from '../../../converters';
-import { removeEventChangelogQueries } from '../../WidgetsChangelog';
+import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
+import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
 import { statusTypes } from '../../../enrollment';
 import { cancelEditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import type { UserFormField } from '../../FormFields/UserField';
-import { getProgramEventAccess, type ProgramStage } from '../../../metaData';
+import type { ProgramStage } from '../../../metaData';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
@@ -98,7 +97,7 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    const { enrollment: enrollmentSite, attributeValues, readOnly: trackedEntityInactive, ownerOrgUnitId } =
+    const { enrollment: enrollmentSite, readOnly: trackedEntityInactive } =
         useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
@@ -119,9 +118,7 @@ export const EnrollmentEditEventPage = () => {
             orgUnitId={orgUnitId}
             initMode={initMode}
             enrollmentSite={enrollmentSite}
-            attributeValues={attributeValues}
             trackedEntityInactive={trackedEntityInactive}
-            ownerOrgUnitId={ownerOrgUnitId}
             event={storedEvent}
         />
     ) : <LoadingMaskForPage />;
@@ -135,15 +132,12 @@ const EnrollmentEditEventPageWithContextPlain = ({
     orgUnitId,
     initMode,
     enrollmentSite,
-    attributeValues,
     trackedEntityInactive,
-    ownerOrgUnitId,
     event,
 }: Props) => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
-    const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
         selectedScopeId: programId,
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
@@ -162,14 +156,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const hideWidgets = useHideWidgetByRuleLocations(
         program.programRules.concat(programStage?.programRules as ProgramRule[]),
     );
-    const { orgUnit: ownerOrgUnit } = useCoreOrgUnit(ownerOrgUnitId);
-    useEnrollmentScopeRuleEffects({
-        enrollmentId,
-        orgUnit: ownerOrgUnit,
-        program,
-        apiEnrollment: enrollmentSite,
-        apiAttributeValues: attributeValues ?? undefined,
-    });
+
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [navigate, orgUnitId, programId]);
@@ -258,7 +245,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch, navigate, orgUnitId, enrollmentId, eventId]);
 
     const onSaveExternal = useCallback(() => {
-        removeEventChangelogQueries(queryClient, eventId);
+        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
+        queryClient.removeQueries(queryKey);
         navigate(`enrollment?${buildUrlQueryString({ orgUnitId, enrollmentId })}`);
     }, [navigate, orgUnitId, enrollmentId, eventId, queryClient]);
 
@@ -272,24 +260,23 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
-    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status, event?.event);
+    const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const userInteractionInProgress = useSelector(state => dataEntryHasChanges(state, dataEntryKey));
 
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
 
-    const eventAccess = getProgramEventAccess(programId, stageId ?? null);
     const {
-        isEventBlockedByExpiry,
-        isEventBlockedByCompletion,
-        isEventOverdueOrScheduled,
+        eventAccess,
+        isEventWithinValidPeriod,
+        isWithinCompleteExpiry,
+        canEditCompletedEvent,
     } = useEventEditPermissions({
         programId,
         stage: programStage,
         eventStatus: event?.status,
         occurredAtClient: convertServerToClient(event?.occurredAt, dataElementTypes.DATE) as string,
         completedAtClient: convertServerToClient(event?.completedAt, dataElementTypes.DATE) as string,
-        scheduledAtClient: convertServerToClient(event?.scheduledAt, dataElementTypes.DATE) as string,
     });
 
     const pageStatus = getPageStatus({
@@ -326,8 +313,9 @@ const EnrollmentEditEventPageWithContextPlain = ({
             program={program}
             currentStageId={stageId}
             trackedEntityInactive={trackedEntityInactive}
-            isEventBlockedByExpiry={!isEventOverdueOrScheduled && isEventBlockedByExpiry}
-            isEventBlockedByCompletion={isEventBlockedByCompletion}
+            isEventWithinValidPeriod={isEventWithinValidPeriod}
+            canEditCompletedEvent={canEditCompletedEvent}
+            isWithinCompleteEventsExpiry={isWithinCompleteExpiry}
         >
             <EnrollmentEditEventPageComponent
                 pageLayout={pageLayout}
@@ -361,7 +349,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
-                widgetEnrollmentStatus={widgetEnrollmentStatus}
                 eventStatus={event?.status}
                 eventAccess={eventAccess}
                 scheduleDate={scheduleDate}
@@ -380,7 +367,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
                 onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
                 onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
                 userInteractionInProgress={userInteractionInProgress}
-                ownerOrgUnitId={ownerOrgUnitId}
             />
         </EnrollmentAccessProvider>
     );

@@ -1,6 +1,5 @@
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
-import type { AttributeValue } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
 import type {
     PageLayoutConfig,
@@ -10,7 +9,6 @@ import { Program } from '../../../../metaData';
 
 export type Props = {
     program: Program | null | undefined;
-    ownerOrgUnitId?: string;
     stageId: string;
     orgUnitId: string;
     teiId: string;
@@ -50,8 +48,7 @@ export type ContainerProps = {
         occurredAt?: string;
         enrollment?: string;
     } | null | undefined;
-    attributeValues: Array<AttributeValue> | null | undefined;
+    attributeValues: Record<string, unknown> | null | undefined;
     commonDataError: boolean;
     trackedEntityInactive: boolean;
-    ownerOrgUnitId?: string;
 };

@@ -254,7 +254,6 @@ export type RulesEngineInput = {
     selectedOrgUnit: OrgUnit | null,
     selectedUserRoles?: Array<string> | null,
     optionSets: OptionSets,
-    isEnrollmentFormWithEvent?: boolean,
 };
 
 export type Translator = (value: string) => string;

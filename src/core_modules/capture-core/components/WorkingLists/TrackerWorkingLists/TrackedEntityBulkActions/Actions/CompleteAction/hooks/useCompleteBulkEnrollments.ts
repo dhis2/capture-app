@@ -8,7 +8,6 @@ import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../ut
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import type { ProgramStage } from '../../../../../../../metaData';
 import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
-import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 
 type Props = {
     selectedRows: Record<string, any>;
@@ -157,10 +156,7 @@ export const useCompleteBulkEnrollments = ({
     } = useMutation<any>(
         ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
         {
-            onSuccess: (_, { enrollments }: any) => {
-                if (enrollments.some(e => e.events?.length > 0)) {
-                    removeEventChangelogQueries(queryClient);
-                }
+            onSuccess: () => {
                 onUpdateList();
                 removeQueries();
             },
@@ -184,10 +180,7 @@ export const useCompleteBulkEnrollments = ({
     } = useMutation(
         ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
         {
-            onSuccess: (_, { enrollments }) => {
-                if (enrollments.some(e => e.events?.length > 0)) {
-                    removeEventChangelogQueries(queryClient);
-                }
+            onSuccess: (serverResponse, { enrollments }) => {
                 const enrollmentIds = enrollments.map(enrollment => enrollment.trackedEntity);
                 removeRowsFromSelection(enrollmentIds);
                 removeQueries();

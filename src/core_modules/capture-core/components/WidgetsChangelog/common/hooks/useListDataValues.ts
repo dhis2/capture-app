@@ -11,27 +11,24 @@ import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
 import { RECORD_TYPE, subValueGetterByElementType } from '../utils/getSubValueForChangelogData';
 import { makeQuerySingleResource } from '../../../../utils/api';
-import { useCurrentEntityValues } from './useCurrentEntityValues';
 
 type Props = {
     rawRecords: any;
     dataItemDefinitions: ItemDefinitions;
     entityId: string;
+    entityData: any;
     entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
     programId?: string;
     sortDirection: SortDirection;
-    columnToSortBy: string;
-    filterParam?: string;
     page: number;
     pageSize: number;
-    rawDataUpdatedAt: number;
 };
 
 const fetchFormattedValues = async ({
     rawRecords,
     dataItemDefinitions,
     entityId,
-    currentValues,
+    entityData,
     entityType,
     programId,
     absoluteApiPath,
@@ -41,7 +38,8 @@ const fetchFormattedValues = async ({
     if (!rawRecords) return [];
 
     const getItemDefinition = (change: Change) => {
-        const fieldId = change.dataElement ?? change.attribute ?? change.field;
+        const { dataElement, attribute, field } = change;
+        const fieldId = dataElement ?? attribute ?? field;
         if (!fieldId) {
             log.error('Could not find fieldId in change:', change);
             return null;
@@ -91,11 +89,12 @@ const fetchFormattedValues = async ({
                 return null;
             };
 
-            const isLatestValue = currentValues[metadataElement.id] === change.currentValue;
-
             const [previousValueClient, currentValueClient] = await Promise.all([
                 change.previousValue ? getValue(change.previousValue, false) : null,
-                getValue(change.currentValue, isLatestValue),
+                getValue(
+                    change.currentValue,
+                    entityData?.[change.attribute ?? change.dataElement]?.value === change.currentValue,
+                ),
             ]);
 
             const { firstName, surname, username } = createdBy;
@@ -124,34 +123,14 @@ export const useListDataValues = ({
     rawRecords,
     dataItemDefinitions,
     entityId,
+    entityData,
     entityType,
     programId,
     sortDirection,
-    columnToSortBy,
-    filterParam,
     page,
     pageSize,
-    rawDataUpdatedAt,
 }: Props) => {
     const dataEngine = useDataEngine();
-    const hasFileOrImageField = useMemo(
-        () => Object.values(dataItemDefinitions ?? {}).some(
-            (definition: any) =>
-                definition?.type === dataElementTypes.FILE_RESOURCE ||
-                definition?.type === dataElementTypes.IMAGE,
-        ),
-        [dataItemDefinitions],
-    );
-    const {
-        currentValues,
-        isLoading: isCurrentValuesLoading,
-        dataUpdatedAt: currentValuesUpdatedAt,
-    } = useCurrentEntityValues({
-        entityId,
-        entityType,
-        programId,
-        enabled: hasFileOrImageField,
-    });
     const { baseUrl, apiVersion } = useConfig();
     const { fromServerDate } = useTimeZoneConversion();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
@@ -167,16 +146,7 @@ export const useListDataValues = ({
         entityType,
         entityId,
         'formattedData',
-        {
-            columnToSortBy,
-            sortDirection,
-            page,
-            pageSize,
-            programId,
-            filterParam,
-            rawDataUpdatedAt,
-            currentValuesUpdatedAt,
-        },
+        { sortDirection, page, pageSize, programId, rawRecords },
     ];
 
     const { data: processedRecords, isError, isInitialLoading } = useQuery(
@@ -185,7 +155,7 @@ export const useListDataValues = ({
             rawRecords,
             dataItemDefinitions,
             entityId,
-            currentValues,
+            entityData,
             entityType,
             programId,
             absoluteApiPath,
@@ -193,12 +163,12 @@ export const useListDataValues = ({
             fromServerDate,
         }),
         {
-            enabled: !!rawRecords && !!dataItemDefinitions && !!entityId && !!entityType && !isCurrentValuesLoading,
+            enabled: !!rawRecords && !!dataItemDefinitions && !!entityId && !!entityType,
             keepPreviousData: true,
             staleTime: Infinity,
             cacheTime: Infinity,
         },
     );
 
-    return { processedRecords, isLoading: isInitialLoading || isCurrentValuesLoading, isError };
+    return { processedRecords, isLoading: isInitialLoading, isError };
 };

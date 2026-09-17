@@ -1,8 +1,9 @@
 import React, { useMemo, useCallback } from 'react';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { getTrackerProgramThrowIfNotFound } from '../../../../../../metaData';
 import { statusTypes } from '../../../../../../enrollment';
 import { statusTypes as eventStatuses } from '../../../../../../events/statusTypes';
-import { useServerFormattedNow } from '../../../../../../hooks';
 import { CompleteEnrollmentAndEventsModalComponent, CompleteEnrollmentModalComponent } from './CompleteModal.component';
 import type { Props } from './completeModal.types';
 
@@ -16,7 +17,7 @@ export const CompleteModal = ({
     hasActiveEvents,
     programStageName,
 }: Props) => {
-    const getUpdatedAt = useServerFormattedNow();
+    const { fromClientDate } = useTimeZoneConversion();
     const programStages = useMemo(() => {
         const program = getTrackerProgramThrowIfNotFound(programId);
         return [...program.stages.values()];
@@ -52,7 +53,9 @@ export const CompleteModal = ({
     }, [enrollment, onCompleteEnrollment]);
 
     const onHandleCompleteEnrollmentAndEvents = useCallback(() => {
-        const updatedAt = getUpdatedAt();
+        const nowClient = fromClientDate(new Date());
+        const nowServer = new Date(nowClient.getServerZonedISOString());
+        const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc: any, event: any) => {
             const { access } = programStages.find((p: any) => p.id === event.programStage) || {};
             const isCurrentEvent = eventId && event.event === eventId;
@@ -68,7 +71,7 @@ export const CompleteModal = ({
             events: eventsToComplete,
         };
         onCompleteEnrollment(enrollmentWithCompletedEvents);
-    }, [events, programStages, enrollment, onCompleteEnrollment, getUpdatedAt, eventId]);
+    }, [events, programStages, enrollment, onCompleteEnrollment, fromClientDate, eventId]);
 
     return hasActiveEvents ? (
         <CompleteEnrollmentAndEventsModalComponent

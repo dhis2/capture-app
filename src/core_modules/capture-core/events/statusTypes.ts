@@ -6,9 +6,8 @@ export const statusTypes = {
     COMPLETED: 'COMPLETED',
     OVERDUE: 'OVERDUE',
     SKIPPED: 'SKIPPED',
-} as const;
-
-export type StatusType = typeof statusTypes[keyof typeof statusTypes];
+    VISITED: 'VISITED',
+};
 
 
 export const translatedStatusTypes = (options?: string) => ({
@@ -25,4 +24,5 @@ export const translatedStatusTypes = (options?: string) => ({
         interpolation: { escapeValue: false },
     }) : i18n.t('Overdue'),
     [statusTypes.SKIPPED]: i18n.t('Skipped'),
+    [statusTypes.VISITED]: i18n.t('Visited'),
 });

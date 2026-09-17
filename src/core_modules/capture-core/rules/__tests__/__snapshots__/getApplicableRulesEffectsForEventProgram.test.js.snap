@@ -25,7 +25,6 @@ Object {
       "valueType": "TEXT",
     },
   },
-  "isEnrollmentFormWithEvent": undefined,
   "optionSets": Object {
     "0": Object {
       "displayName": undefined,
