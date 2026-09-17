@@ -70,6 +70,7 @@ const ScheduleDatePlain = ({
     classes,
     hideDueDate,
     expiryPeriod,
+    saveAttempted,
 }: Props) => {
     const validateDate = (dateString: string, internalComponentError: any) => {
         if (!hasValue(dateString)) {
@@ -113,6 +114,11 @@ const ScheduleDatePlain = ({
             validationText: '',
         };
     };
+
+    let errorMessage: string | undefined;
+    if (validation?.error) errorMessage = validation.validationText;
+    else if (saveAttempted && !hasValue(scheduleDate)) errorMessage = i18n.t('A value is required');
+
     return (
         <div className={hideDueDate ? classes.autoScheduledWrapper : classes.fieldWrapper}>
             {!hideDueDate ?
@@ -129,7 +135,7 @@ const ScheduleDatePlain = ({
                     }}
                     calendarType={systemSettingsStore.get().calendar}
                     dateFormat={systemSettingsStore.get().dateFormat}
-                    validation={validation}
+                    errorMessage={errorMessage}
                 />
                 :
                 <div className={classes.fieldLabel}>
@@ -139,15 +145,17 @@ const ScheduleDatePlain = ({
                     )}
                 </div>
             }
-            <div className={classes.infoBox}>
-                <InfoBox
-                    scheduleDate={serverScheduleDate}
-                    suggestedScheduleDate={serverSuggestedScheduleDate}
-                    eventCountInOrgUnit={eventCountInOrgUnit}
-                    orgUnitName={orgUnit?.name}
-                    hideDueDate={hideDueDate}
-                />
-            </div>
+            {serverScheduleDate && serverSuggestedScheduleDate && (
+                <div className={classes.infoBox}>
+                    <InfoBox
+                        scheduleDate={serverScheduleDate}
+                        suggestedScheduleDate={serverSuggestedScheduleDate}
+                        eventCountInOrgUnit={eventCountInOrgUnit}
+                        orgUnitName={orgUnit?.name}
+                        hideDueDate={hideDueDate}
+                    />
+                </div>
+            )}
         </div>
     );
 };

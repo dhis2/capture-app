@@ -32,4 +32,5 @@ export type PlainProps = {
         error: boolean;
         validationText: string;
     }) => void;
+    saveAttempted?: boolean;
 };

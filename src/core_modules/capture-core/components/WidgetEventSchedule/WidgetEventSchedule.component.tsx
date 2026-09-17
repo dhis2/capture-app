@@ -94,6 +94,7 @@ const WidgetEventSchedulePlain = ({
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
                         validation={validation}
                         setValidation={setValidation}
+                        saveAttempted={saveAttempted}
                         {...passOnProps}
                     />
                     <Divider className={classes.divider} />
@@ -141,7 +142,6 @@ const WidgetEventSchedulePlain = ({
                     hasChanges={scheduleDate !== suggestedScheduleDate}
                     onCancel={onCancel}
                     onSchedule={onSchedule}
-                    validation={validation}
                 />
                 <ScheduleText
                     programName={programName}
