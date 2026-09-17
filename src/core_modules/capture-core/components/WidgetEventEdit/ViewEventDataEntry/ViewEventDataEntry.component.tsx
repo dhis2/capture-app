@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { dataEntryIds } from 'capture-core/constants';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';

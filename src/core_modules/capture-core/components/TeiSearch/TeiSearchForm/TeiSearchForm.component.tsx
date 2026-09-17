@@ -55,14 +55,15 @@ type State = {
 };
 
 const MinAttributesRequiredMessage = ({ count }: { count: number }) => {
-    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular]);
+    const { attributeLabel, attributesLabel } = useTermLabel([LabelKeys.attributeSingular, LabelKeys.attributePlural]);
     return (
         <>
             {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
                 count,
                 attributeLabel,
+                attributesLabel,
                 defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
-                defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                defaultValue_plural: 'Fill in at least {{count}} {{attributesLabel}} to search',
             })}
         </>
     );

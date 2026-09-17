@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { LabelKeys, useTermLabel } from '../../../../metaData';
 
@@ -35,14 +36,7 @@ export const useWorkingListLabel = ({
     const selectedTemplate: Template | undefined = templates?.find(({ id }) => id === selectedTemplateId);
     const isSameProgram: boolean = workingListProgramId === programId;
 
-    const defaultFilterLabels: { [key in DefaultFilterKey]: string } = {
-        [DefaultFilterKeys.DEFAULT]: i18n.t('Program overview'),
-        [DefaultFilterKeys.ACTIVE]: i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
-        [DefaultFilterKeys.COMPLETE]: i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
-        [DefaultFilterKeys.CANCELLED]: i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
-    };
-
-    const getLabel = (): string => {
+    const label: string = useMemo(() => {
         if (isLoadingTemplates) return i18n.t('Loading...');
 
         if (isSameProgram) {
@@ -52,6 +46,12 @@ export const useWorkingListLabel = ({
 
             if (selectedTemplateId && !selectedTemplate &&
                 DefaultFilterKeys[selectedTemplateId.toUpperCase() as keyof typeof DefaultFilterKeys]) {
+                const defaultFilterLabels: { [key in DefaultFilterKey]: string } = {
+                    [DefaultFilterKeys.DEFAULT]: i18n.t('Program overview'),
+                    [DefaultFilterKeys.ACTIVE]: i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
+                    [DefaultFilterKeys.COMPLETE]: i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
+                    [DefaultFilterKeys.CANCELLED]: i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
+                };
                 return defaultFilterLabels[selectedTemplateId as DefaultFilterKey];
             }
 
@@ -61,9 +61,16 @@ export const useWorkingListLabel = ({
         if (!displayFrontPageList) return i18n.t('Search');
 
         return i18n.t('Program overview');
-    };
+    }, [
+        isLoadingTemplates,
+        isSameProgram,
+        selectedTemplate,
+        selectedTemplateId,
+        displayFrontPageList,
+        enrollmentsLabel,
+    ]);
 
     return {
-        label: getLabel(),
+        label,
     };
 };

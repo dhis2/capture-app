@@ -21,7 +21,7 @@ export const DataEntryComponent = ({
     onGetValidationContext,
     errorsMessages,
     warningsMessages,
-    orgUnitId,
+    ownerOrgUnitId,
     pluginContext,
     accessReadOnly,
     program,
@@ -67,7 +67,7 @@ export const DataEntryComponent = ({
                 onUpdateFormField={onUpdateFormField}
                 onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 onGetValidationContext={onGetValidationContext}
-                orgUnitId={orgUnitId}
+                orgUnitId={ownerOrgUnitId}
                 pluginContext={pluginContext}
                 fieldOptions={{ autoSelectSingleOrgUnit: false }}
             />

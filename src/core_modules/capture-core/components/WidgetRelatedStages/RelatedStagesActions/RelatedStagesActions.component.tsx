@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
+import { relatedStageActions, relatedStageStatus } from '../constants';
 import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
@@ -79,7 +79,7 @@ const Schedule = ({
                 name={`related-stage-action-${relatedStageActions.SCHEDULE_IN_ORG}`}
                 checked={relatedStageActions.SCHEDULE_IN_ORG === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
+                label={i18n.t('Schedule')}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
                 dataTest="related-stages-actions-schedule"
@@ -124,7 +124,7 @@ const EnterData = ({
                 name={`related-stage-action-${relatedStageActions.ENTER_DATA}`}
                 checked={relatedStageActions.ENTER_DATA === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
+                label={i18n.t('Enter details now')}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.ENTER_DATA}
                 dataTest="related-stages-actions-enter-details"

@@ -87,7 +87,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (_state, action) =>
         addErrorFeedback({ message: action.payload.errorMessage }),
     [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: (_state, action) => {
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.meta.programId });
+        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.payload.programId });
         return addErrorFeedback({ message: i18n.t('Could not delete {{eventLabel}}', { eventLabel }) });
     },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: () =>

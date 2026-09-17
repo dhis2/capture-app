@@ -38,15 +38,23 @@ const resolveLabel = (
     return found ?? resolveDefault(key, plural);
 };
 
+const resolvedLabelCache: Record<string, string> = {};
+
 const resolveFromCollection = (
     programId: string | null | undefined,
     stageId: string | null | undefined,
     key: CustomLabelKey,
     plural: boolean,
 ): string => {
+    const cacheKey = `${programId}|${stageId}|${key}|${plural}`;
+    const cached = resolvedLabelCache[cacheKey];
+    if (cached !== undefined) return cached;
+
     const program = programId ? programCollection.get(programId) : undefined;
     const stage = program && stageId ? program.getStage(stageId) : undefined;
-    return resolveLabel([stage?.customLabels, program?.customLabels], key, plural);
+    const value = resolveLabel([stage?.customLabels, program?.customLabels], key, plural);
+    resolvedLabelCache[cacheKey] = value;
+    return value;
 };
 
 const buildLabels = (
