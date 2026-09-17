@@ -206,7 +206,7 @@ Given(/there is an (.*) event in the TB visit stage$/, (eventStatus) => {
         });
 });
 
-When(/you click the (.*) event overflow button on the (.*) event$/, (buttonName, eventStatus) => {
+const clickEventOverflowMenuItem = (buttonName, eventStatus) => {
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
         .contains('[data-test="stage-content"]', 'TB visit')
@@ -218,6 +218,16 @@ When(/you click the (.*) event overflow button on the (.*) event$/, (buttonName,
     cy.get('[data-test="overflow-menu"]')
         .contains(buttonName)
         .click({ force: true });
+};
+
+When(/you click the Delete event overflow button on the (.*) event$/, (eventStatus) => {
+    clickEventOverflowMenuItem('Delete', eventStatus);
+});
+
+When(/you (skip|unskip) the (.*) event$/, (action, eventStatus) => {
+    cy.intercept('POST', '**/tracker?async=false&importStrategy=UPDATE').as('updateEventStatus');
+    clickEventOverflowMenuItem(action === 'skip' ? 'Skip' : 'Unskip', eventStatus);
+    cy.wait('@updateEventStatus').its('response.statusCode').should('eq', 200);
 });
 
 Then('the event should be skipped', () => {

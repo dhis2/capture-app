@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
-import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { formatMomentEn } from 'capture-core-utils/date';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
+import { useServerFormattedNow } from 'capture-core/hooks';
 import { CompleteModalComponent } from './CompleteModal.component';
-import { eventStatuses, plainStatus } from '../../../constants/status.const';
+import { plainStatus } from '../../../constants/status.const';
 import type { Props } from './completeModal.types';
 
 export const CompleteModal = ({
@@ -13,7 +13,7 @@ export const CompleteModal = ({
     setOpenCompleteModal,
     onUpdateStatus,
 }: Props) => {
-    const { fromClientDate } = useTimeZoneConversion();
+    const getUpdatedAt = useServerFormattedNow();
     const { programStagesWithActiveEvents, programStagesWithoutAccess } = useMemo(
         () =>
             events.reduce(
@@ -48,9 +48,7 @@ export const CompleteModal = ({
     }, [onUpdateStatus, enrollment]);
 
     const onHandleCompleteEnrollmentAndEvents = useCallback(() => {
-        const nowClient = fromClientDate(new Date());
-        const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = getUpdatedAt();
         const eventsToComplete = events.reduce((acc, event) => {
             const { access } = programStages.find(p => p.id === event.programStage) || {} as any;
             if (event.status === eventStatuses.ACTIVE && access.data.write) {
@@ -65,7 +63,7 @@ export const CompleteModal = ({
         };
 
         onUpdateStatus(completedEnrollment, true);
-    }, [events, onUpdateStatus, programStages, enrollment, fromClientDate]);
+    }, [events, onUpdateStatus, programStages, enrollment, getUpdatedAt]);
 
     return (
         <CompleteModalComponent

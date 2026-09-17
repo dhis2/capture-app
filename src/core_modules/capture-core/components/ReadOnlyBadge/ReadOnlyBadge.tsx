@@ -3,7 +3,8 @@ import { IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
-import type { Props, Access, ReadOnlyMessageInput } from './ReadOnlyBadge.types';
+import { getReadOnlyMessage } from './getReadOnlyMessage';
+import type { Props, Access } from './ReadOnlyBadge.types';
 import { LabelKeys, useTermLabel } from '../../metaData';
 
 const styles = {
@@ -12,65 +13,12 @@ const styles = {
     },
 } as const;
 
-const getEnrollmentMessage = (enrollmentLabel: string): string =>
-    i18n.t('You only have view access to this {{enrollmentLabel}}', { enrollmentLabel });
-
-const getProgramMessage = (): string => i18n.t('You only have view access to this program');
-
-const getTrackedEntityMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
-    ? i18n.t('You only have view access to this {{trackedEntityName}}', { trackedEntityName, escapeValue: false })
-    : i18n.t('You only have view access to this tracked entity type'));
-
-const getProgramStageMessage = (
-    multipleStages: boolean,
-    programStageLabel: string,
-    programStagesLabel: string,
-): string => (multipleStages
-    ? i18n.t('You only have view access to these {{programStagesLabel}}', { programStagesLabel })
-    : i18n.t('You only have view access to this {{programStageLabel}}', { programStageLabel }));
-
-const getExpiredMessage = (eventLabel: string): string =>
-    i18n.t('This {{eventLabel}} is outside the editing period', { eventLabel });
-
-const getCompletedEventMessage = (eventLabel: string): string =>
-    i18n.t('This {{eventLabel}} has been completed', { eventLabel });
-
-const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
-    ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
-    : i18n.t('This tracked entity is deactivated'));
-
-// eslint-disable-next-line complexity
-const getReadOnlyMessage = ({
-    access,
-    trackedEntityName,
-    multipleStages,
-    eventWithinValidPeriod,
-    canEditCompletedEvent,
-    withinCompleteEventsExpiry,
-    trackedEntityInactive,
-    enrollmentLabel,
-    programStageLabel,
-    programStagesLabel,
-    eventLabel,
-}: ReadOnlyMessageInput): string => {
-    if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
-    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage(enrollmentLabel);
-    if (!access.program) return getProgramMessage();
-    if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
-    if (!access.programStage) return getProgramStageMessage(multipleStages, programStageLabel, programStagesLabel);
-    if (!eventWithinValidPeriod) return getExpiredMessage(eventLabel);
-    if (!canEditCompletedEvent) return getCompletedEventMessage(eventLabel);
-    if (!withinCompleteEventsExpiry) return getExpiredMessage(eventLabel);
-    return '';
-};
-
 const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
     trackedEntityTypeWriteAccess = true,
     programStageWriteAccess = true,
-    eventWithinValidPeriod = true,
-    canEditCompletedEvent = true,
-    withinCompleteEventsExpiry = true,
+    isEventBlockedByExpiry = false,
+    isEventBlockedByCompletion = false,
     multipleStages = false,
     trackedEntityName,
     trackedEntityInactive = false,
@@ -96,9 +44,8 @@ const ReadOnlyBadgePlain = ({
         access,
         trackedEntityName,
         multipleStages,
-        eventWithinValidPeriod,
-        canEditCompletedEvent,
-        withinCompleteEventsExpiry,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
         trackedEntityInactive,
         enrollmentLabel,
         programStageLabel,
