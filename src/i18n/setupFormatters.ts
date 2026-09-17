@@ -17,9 +17,9 @@ const CUSTOM_TERM_VARS = new Set([
     'programStageLabel', 'programStagesLabel',
     'linkableStageLabel',
     'followUpLabel', 'orgUnitLabel',
-    'relationshipLabel',
-    'noteLabel',
-    'attributeLabel',
+    'relationshipLabel', 'relationshipsLabel',
+    'noteLabel', 'notesLabel',
+    'attributeLabel', 'attributesLabel',
 ]);
 
 const interpolator = (i18n as any).services?.interpolator;
