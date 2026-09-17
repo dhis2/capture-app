@@ -58,14 +58,16 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Then list should contain the new note: edit mode note
 
   Scenario: You can assign a user to a event in the view mode
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=z4PCgdaBXFh&orgUnitId=g8upMTyEZGZ
+    Given you make sure the event z4PCgdaBXFh has no assigned user
+    And you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=z4PCgdaBXFh&orgUnitId=g8upMTyEZGZ
     When you assign the user Geetha in the view mode
     Then the event has the user Geetha Alwan assigned
     When you remove the assigned user
     Then the event has no assignd user
 
   Scenario: You can assign a user to a event in the edit mode
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=TMw2x87EZmo&orgUnitId=g8upMTyEZGZ
+    Given you make sure the event TMw2x87EZmo has no assigned user
+    And you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=TMw2x87EZmo&orgUnitId=g8upMTyEZGZ
     When you assign the user Tracker demo User in the edit mode
     Then the event has the user Tracker demo User assigned
     When you remove the assigned user

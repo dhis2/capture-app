@@ -3,7 +3,8 @@ import { IconInfo16, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
-import type { Props, Access, ReadOnlyMessageInput } from './ReadOnlyBadge.types';
+import { getReadOnlyMessage } from './getReadOnlyMessage';
+import type { Props, Access } from './ReadOnlyBadge.types';
 
 const styles = {
     label: {
@@ -11,54 +12,12 @@ const styles = {
     },
 } as const;
 
-const getEnrollmentMessage = (): string => i18n.t('You only have view access to this enrollment');
-
-const getProgramMessage = (): string => i18n.t('You only have view access to this program');
-
-const getTrackedEntityMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
-    ? i18n.t('You only have view access to this {{trackedEntityName}}', { trackedEntityName, escapeValue: false })
-    : i18n.t('You only have view access to this tracked entity type'));
-
-const getProgramStageMessage = (multipleStages: boolean): string => (multipleStages
-    ? i18n.t('You only have view access to these program stages')
-    : i18n.t('You only have view access to this program stage'));
-
-const getExpiredMessage = (): string => i18n.t('This event is outside the editing period');
-
-const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
-
-const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
-    ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
-    : i18n.t('This tracked entity is deactivated'));
-
-// eslint-disable-next-line complexity
-const getReadOnlyMessage = ({
-    access,
-    trackedEntityName,
-    multipleStages,
-    eventWithinValidPeriod,
-    canEditCompletedEvent,
-    withinCompleteEventsExpiry,
-    trackedEntityInactive,
-}: ReadOnlyMessageInput): string => {
-    if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
-    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
-    if (!access.program) return getProgramMessage();
-    if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
-    if (!access.programStage) return getProgramStageMessage(multipleStages);
-    if (!eventWithinValidPeriod) return getExpiredMessage();
-    if (!canEditCompletedEvent) return getCompletedEventMessage();
-    if (!withinCompleteEventsExpiry) return getExpiredMessage();
-    return '';
-};
-
 const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
     trackedEntityTypeWriteAccess = true,
     programStageWriteAccess = true,
-    eventWithinValidPeriod = true,
-    canEditCompletedEvent = true,
-    withinCompleteEventsExpiry = true,
+    isEventBlockedByExpiry = false,
+    isEventBlockedByCompletion = false,
     multipleStages = false,
     trackedEntityName,
     trackedEntityInactive = false,
@@ -74,9 +33,8 @@ const ReadOnlyBadgePlain = ({
         access,
         trackedEntityName,
         multipleStages,
-        eventWithinValidPeriod,
-        canEditCompletedEvent,
-        withinCompleteEventsExpiry,
+        isEventBlockedByExpiry,
+        isEventBlockedByCompletion,
         trackedEntityInactive,
     });
     if (!message) return null;

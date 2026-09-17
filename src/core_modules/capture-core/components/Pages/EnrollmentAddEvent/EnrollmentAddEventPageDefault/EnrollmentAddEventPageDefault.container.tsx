@@ -1,7 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { formatMomentEn } from 'capture-core-utils/date';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox } from '@dhis2/ui';
 import type { ReduxState } from '../../../App/withAppUrlSync.types';
@@ -12,7 +10,7 @@ import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentP
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 import { useWidgetDataFromStore } from '../hooks';
-import { useHideWidgetByRuleLocations } from '../../../../hooks';
+import { useHideWidgetByRuleLocations, useServerFormattedNow } from '../../../../hooks';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -20,7 +18,10 @@ import {
     showEnrollmentError,
     updateEnrollmentAndEvents,
     updateOrAddEnrollmentEvents,
+    useEnrollmentScopeRuleEffects,
 } from '../../common/EnrollmentOverviewDomain';
+import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
+import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
@@ -34,12 +35,13 @@ export const EnrollmentAddEventPageDefault = ({
     attributeValues,
     commonDataError,
     trackedEntityInactive,
+    ownerOrgUnitId,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
-    const { fromClientDate } = useTimeZoneConversion();
+    const getUpdatedAt = useServerFormattedNow();
 
     const handleCancel = useCallback(() => {
         navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -71,9 +73,7 @@ export const EnrollmentAddEventPageDefault = ({
         ({ enrollments, events, linkMode }: any) => {
             if (linkMode && linkMode === relatedStageActions.ENTER_DATA) return;
 
-            const nowClient = fromClientDate(new Date());
-            const nowServer = new Date(nowClient.getServerZonedISOString());
-            const updatedAt = formatMomentEn(nowServer, 'YYYY-MM-DDTHH:mm:ss');
+            const updatedAt = getUpdatedAt();
 
             const eventsWithUpdatedDate = events.map((event: any) => ({
                 ...convertEventAttributeOptions(event),
@@ -89,7 +89,7 @@ export const EnrollmentAddEventPageDefault = ({
 
             navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [fromClientDate, navigate, programId, orgUnitId, teiId, enrollmentId, dispatch],
+        [getUpdatedAt, navigate, programId, orgUnitId, teiId, enrollmentId, dispatch],
     );
 
     const handleAddNew = useCallback(() => {
@@ -111,6 +111,16 @@ export const EnrollmentAddEventPageDefault = ({
 
     const dataEntryHasChanges = useSelector((state: ReduxState) => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
+    const trackerProgram = useTrackerProgram(programId);
+    const { orgUnit: ownerOrgUnit } = useCoreOrgUnit(ownerOrgUnitId);
+
+    useEnrollmentScopeRuleEffects({
+        enrollmentId,
+        orgUnit: ownerOrgUnit,
+        program: trackerProgram,
+        apiEnrollment: enrollment ?? undefined,
+        apiAttributeValues: attributeValues ?? undefined,
+    });
     const selectedProgramStage = [...program?.stages.values() ?? []].find((item: any) => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
@@ -205,6 +215,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
                 trackedEntityInactive={trackedEntityInactive}
+                ownerOrgUnitId={ownerOrgUnitId}
             />
         </>
     );

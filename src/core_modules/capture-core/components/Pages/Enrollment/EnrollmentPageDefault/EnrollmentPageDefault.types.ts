@@ -1,4 +1,3 @@
-import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { TrackerProgram } from 'capture-core/metaData';
 import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
@@ -10,10 +9,9 @@ import type {
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
-import { EventStatuses } from '../../../Breadcrumbs/EnrollmentBreadcrumb/EnrollmentBreadcrumb';
+import type { StatusType } from '../../../../events/statusTypes';
 
 type EnrollmentPageKeyTypes = typeof EnrollmentPageKeys[keyof typeof EnrollmentPageKeys];
-type EventStatus = typeof EventStatuses[keyof typeof EventStatuses];
 
 export type Props = {
     currentPage: EnrollmentPageKeyTypes;
@@ -29,7 +27,7 @@ export type Props = {
     onBackToDashboard?: () => void;
     onBackToViewEvent?: () => void;
     userInteractionInProgress?: boolean;
-    eventStatus?: EventStatus;
+    eventStatus?: StatusType;
     onDelete: () => void;
     onAddNew: () => void;
     onViewAll: (stageId: string) => void;
@@ -44,7 +42,6 @@ export type Props = {
     onUpdateEnrollmentStatus: (enrollment: any) => void;
     onUpdateEnrollmentStatusSuccess: (params?: { redirect?: boolean }) => void;
     onUpdateEnrollmentStatusError: (message: string) => void;
-    ruleEffects?: Array<{id: string; type: keyof typeof effectActions}>;
     widgetEnrollmentStatus?: string | null;
     pageLayout: PageLayoutConfig;
     availableWidgets: Readonly<{ [key: string]: WidgetConfig }>;

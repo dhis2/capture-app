@@ -11,6 +11,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
@@ -105,7 +106,7 @@ const WidgetEnrollmentPlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{i18n.t('{{enrollmentLabel}}', { enrollmentLabel })}</span>
+                        <span>{capitalizeFirstLetter(enrollmentLabel)}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
@@ -131,7 +132,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {i18n.t('{{followUpLabel}}', { followUpLabel })}
+                                    {capitalizeFirstLetter(followUpLabel)}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />

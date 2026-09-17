@@ -83,7 +83,7 @@ export const rulesEffectsHiddenProgramStageDesc = createReducerDescription({
 
         return newState;
     },
-}, 'rulesEffectsHiddenProgramStageDesc');
+}, 'rulesEffectsHiddenProgramStage');
 
 
 const mapMessageEffectTypeToStateKey = {
