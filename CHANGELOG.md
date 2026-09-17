@@ -1,3 +1,10 @@
+# [107.3.0](https://github.com/dhis2/capture-app/compare/v107.2.0...v107.3.0) (2026-09-16)
+
+
+### Features
+
+* [DHIS2-21875] Unify overflow menu between View Event page and Stages and Events widget ([#4657](https://github.com/dhis2/capture-app/issues/4657)) ([bac1fa9](https://github.com/dhis2/capture-app/commit/bac1fa9888bbf588bad8b514bbd27d96a546389e))
+
 # [107.2.0](https://github.com/dhis2/capture-app/compare/v107.1.0...v107.2.0) (2026-09-16)
 
 
