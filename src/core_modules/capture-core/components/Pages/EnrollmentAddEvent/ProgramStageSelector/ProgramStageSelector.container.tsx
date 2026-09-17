@@ -1,10 +1,15 @@
 import i18n from '@dhis2/d2-i18n';
 import React, { useEffect, useMemo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
-import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
+import {
+    useCommonEnrollmentDomainData,
+    useEnrollmentScopeRuleEffects,
+    selectEnrollmentHiddenProgramStageIds,
+} from '../../common/EnrollmentOverviewDomain';
 import { LabelKeys, useTermLabel } from '../../../../metaData';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
@@ -20,7 +25,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         { programId },
     );
     const { tab } = useLocationQuery();
-    const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(
+    const { error: enrollmentsError, enrollment, attributeValues, ownerOrgUnitId } = useCommonEnrollmentDomainData(
         teiId,
         enrollmentId,
         programId,
@@ -31,15 +36,17 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         isError: programError,
     } = useProgramFromIndexedDB(programId);
 
-    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const { orgUnit } = useCoreOrgUnit(ownerOrgUnitId);
     const programRules = useTrackerProgram(programId);
 
-    const ruleEffects = useRuleEffects({
+    useEnrollmentScopeRuleEffects({
+        enrollmentId,
         orgUnit,
         program: programRules,
         apiEnrollment: enrollment,
         apiAttributeValues: attributeValues,
     });
+    const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
 
     useEffect(() => {
         if (enrollmentsError || programError) {
@@ -62,12 +69,10 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
                 displayName: currentStage.displayName,
                 style: currentStage.style,
                 repeatable: currentStage.repeatable,
-                hiddenProgramStage: ruleEffects?.find(
-                    (ruleEffect: any) => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === currentStage.id,
-                ),
+                hiddenProgramStage: Boolean(hiddenProgramStageIds?.[currentStage.id]),
             });
             return accStage;
-        }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
+        }, []), [enrollment?.events, program?.programStages, programLoading, hiddenProgramStageIds]);
 
     const onSelectProgramStage = useCallback((newStageId: string) =>
         navigate(`enrollmentEventNew?${buildUrlQueryString({

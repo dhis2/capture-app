@@ -8,7 +8,6 @@ import {
     Button,
     IconMore16,
     FlyoutMenu,
-    MenuItem,
 } from '@dhis2/ui';
 import { useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
@@ -20,14 +19,14 @@ import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
 import { OverflowButton } from '../../../Buttons';
-import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
-import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
+import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
+import { ChangelogMenuItem } from '../../../EventOverflowMenu';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { useProgramExpiryForUser } from '../../../../hooks';
-import { useAuthorities } from '../../../../utils/authority/useAuthorities';
+import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
+import { convertFormToClient } from '../../../../converters';
+import { dataElementTypes, LabelKeys, useTermLabel } from '../../../../metaData';
 import type { PlainProps } from './EventDetailsSection.types';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 const getStyles: any = () => ({
     container: {
@@ -64,7 +63,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const {
         classes,
         eventId,
-        eventData,
         onOpenEditEvent,
         isEditEventPage,
         programStage,
@@ -74,7 +72,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         showEditButton,
         ...passOnProps
     } = props;
-    const orgUnitId = useSelector((state: any) => state.viewEventPage.loadedValues?.orgUnit?.id);
+    const orgUnitId = useSelector((state: { viewEventPage: { loadedValues: any } }) =>
+        state.viewEventPage.loadedValues?.orgUnit?.id);
+    const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
     const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
@@ -82,12 +82,17 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { hasAuthority: canUncompleteEvent } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const { canToggleCompletion } = useEventEditPermissions({
+        programId,
+        stage: programStage,
+        eventStatus: loadedValues?.eventContainer?.event?.status,
+        occurredAtClient: convertFormToClient(loadedValues?.dataEntryValues?.occurredAt, dataElementTypes.DATE) as string,
+        completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
+        scheduledAtClient: loadedValues?.eventContainer?.event?.scheduledAt,
+    });
     const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: programStage.id });
-
     const onSaveExternal = useCallback(() => {
-        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
-        queryClient.removeQueries(queryKey);
+        removeEventChangelogQueries(queryClient, eventId);
         onBackToAllEvents();
     }, [eventId, queryClient, onBackToAllEvents]);
 
@@ -105,7 +110,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                     onSaveExternal={onSaveExternal}
                     expiryPeriod={expiryPeriod}
                     programId={programId}
-                    canUncompleteEvent={canUncompleteEvent}
+                    canToggleCompletion={canToggleCompletion}
                     {...passOnProps}
                 /> :
                 <ViewEventDataEntry
@@ -144,13 +149,9 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         maxWidth="250px"
                         dataTest="event-program-event-overflow-menu"
                     >
-                        <MenuItem
-                            label={i18n.t('View changelog')}
-                            suffix={null}
-                            onClick={() => {
-                                setChangeLogIsOpen(true);
-                                setActionsIsOpen(false);
-                            }}
+                        <ChangelogMenuItem
+                            onOpenChangelog={() => setChangeLogIsOpen(true)}
+                            onClose={() => setActionsIsOpen(false)}
                         />
                     </FlyoutMenu>
                 )}
@@ -188,7 +189,6 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
-                    eventData={eventData?.eventContainer?.values}
                     eventId={eventId}
                     formFoundation={programStage.stageForm}
                 />

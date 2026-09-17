@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n';
 import { useCallback, useEffect, useMemo } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
+import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
 
@@ -24,6 +25,7 @@ export const useBulkCompleteEvents = ({
     programId,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
     const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { programId });
     const { show: showAlert } = useAlert(
         ({ message }) => message,
@@ -35,7 +37,8 @@ export const useBulkCompleteEvents = ({
         {
             resource: 'tracker/events',
             params: () => ({
-                fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
+                fields: 'event,status,program,programStage,orgUnit,occurredAt,scheduledAt,' +
+                    'enrollment,trackedEntity,attributeOptionCombo,notes,assignedUser,geometry,followUp',
                 pageSize: 100,
                 program: programId,
                 events: Object.keys(selectedRows).join(','),
@@ -93,9 +96,11 @@ export const useBulkCompleteEvents = ({
                             .find(errorReport => errorReport.uid === eventId),
                         );
 
+                    removeEventChangelogQueries(queryClient);
                     removeRowsFromSelection(validEventIds);
                     onUpdateList(true);
                 } else {
+                    removeEventChangelogQueries(queryClient);
                     onUpdateList();
                     setIsCompleteDialogOpen(false);
                 }
