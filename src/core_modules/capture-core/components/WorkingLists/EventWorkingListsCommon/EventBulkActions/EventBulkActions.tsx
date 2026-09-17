@@ -1,7 +1,18 @@
 import React from 'react';
+import type { ProgramStage } from '../../../../metaData';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
-import { CompleteAction, DeleteAction } from './Actions';
-import type { Props } from './EventBulkActions.types';
+import { CompleteEventsAction, DeleteEventsAction } from './Actions';
+
+type Props = {
+    selectedRows: Record<string, boolean>;
+    onClearSelection: () => void;
+    stage?: ProgramStage;
+    onUpdateList: (disableClearSelection?: boolean) => void;
+    removeRowsFromSelection: (rows: Array<string>) => void;
+    programId?: string;
+    onOpenBulkDataEntryPlugin?: () => void;
+    bulkDataEntryIsActive: boolean;
+};
 
 export const EventBulkActions = ({
     selectedRows,
@@ -31,7 +42,7 @@ export const EventBulkActions = ({
                     selectionInProgress
                 />
             )}
-            <CompleteAction
+            <CompleteEventsAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
@@ -40,11 +51,13 @@ export const EventBulkActions = ({
                 programId={programId}
             />
 
-            <DeleteAction
+            <DeleteEventsAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
                 onUpdateList={onUpdateList}
+                removeRowsFromSelection={removeRowsFromSelection}
+                programId={programId}
             />
         </BulkActionBar>
     );

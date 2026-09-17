@@ -2,7 +2,15 @@ import React from 'react';
 import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Checkbox } from '@dhis2/ui';
-import type { PlainProps } from './CustomCheckbox.types';
+
+type Props = {
+    label: string;
+    checked: boolean;
+    disabled?: boolean;
+    id: string;
+    onChange: (status: string) => void;
+    dataTest?: string;
+};
 
 const styles: Readonly<any> = {
     checkboxButton: {
@@ -46,7 +54,7 @@ const CustomCheckboxPlain = ({
     disabled,
     dataTest,
     classes,
-}: PlainProps & WithStyles<typeof styles>) => (
+}: Props & WithStyles<typeof styles>) => (
     <button
         type="button"
         onClick={() => onChange(id)}

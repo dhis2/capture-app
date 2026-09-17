@@ -1,6 +1,6 @@
 import React from 'react';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
-import { CompleteAction, DeleteEnrollmentsAction } from './Actions';
+import { CompleteEnrollmentsAction, DeleteEnrollmentsAction } from './Actions';
 import type { Props } from './TrackedEntityBulkActions.types';
 
 export const TrackedEntityBulkActionsComponent = ({
@@ -30,7 +30,7 @@ export const TrackedEntityBulkActionsComponent = ({
                 onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                 selectionInProgress
             />
-            <CompleteAction
+            <CompleteEnrollmentsAction
                 programId={programId}
                 programDataWriteAccess={programDataWriteAccess}
                 selectedRows={selectedRows}
@@ -45,14 +45,9 @@ export const TrackedEntityBulkActionsComponent = ({
                 programDataWriteAccess={programDataWriteAccess}
                 programId={programId}
                 onUpdateList={onUpdateList}
+                removeRowsFromSelection={removeRowsFromSelection}
                 bulkDataEntryIsActive={bulkDataEntryIsActive}
             />
-
-            {/* <DeleteTeiAction */}
-            {/*     selectedRows={selectedRows} */}
-            {/*     selectedRowsCount={selectedRowsCount} */}
-            {/*     onUpdateList={onUpdateList} */}
-            {/* /> */}
         </BulkActionBar>
     );
 };
