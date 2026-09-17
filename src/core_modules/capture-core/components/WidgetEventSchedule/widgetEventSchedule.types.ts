@@ -53,6 +53,7 @@ export type Props = {
       path: string;
   } | null) => void;
    setIsFormValid: (valid: boolean) => void;
+   saveAttempted: boolean;
    serverSuggestedScheduleDate?: string | null;
    eventCountInOrgUnit: number;
    notes: Array<{

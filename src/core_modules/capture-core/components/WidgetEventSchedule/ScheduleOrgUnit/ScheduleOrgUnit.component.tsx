@@ -25,6 +25,7 @@ type Props = {
     onSelectOrgUnit: (orgUnit: OrgUnitValue) => void;
     onDeselectOrgUnit: () => void;
     orgUnit?: OrgUnitValue | null;
+    saveAttempted?: boolean;
 };
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(
@@ -43,6 +44,7 @@ export const ScheduleOrgUnit = ({
     onSelectOrgUnit,
     onDeselectOrgUnit,
     orgUnit,
+    saveAttempted,
 }: Props) => {
     const [touched, setTouched] = useState(false);
 
@@ -56,8 +58,8 @@ export const ScheduleOrgUnit = ({
         onDeselectOrgUnit();
     };
 
-    const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
-    const errorMessages = i18n.t('Please provide a valid organisation unit');
+    const shouldShowError = !isValidOrgUnit(orgUnit) && (saveAttempted || touched);
+    const errorMessage = i18n.t('Please provide a valid organisation unit');
 
     return (
         <OrgUnitFieldForForm
@@ -67,7 +69,7 @@ export const ScheduleOrgUnit = ({
             onSelectClick={handleSelect}
             onBlur={handleDeselect}
             styles={baseInputStyles}
-            errorMessage={shouldShowError ? errorMessages : undefined}
+            errorMessage={shouldShowError ? errorMessage : undefined}
         />
     );
 };

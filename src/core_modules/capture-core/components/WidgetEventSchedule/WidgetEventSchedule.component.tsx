@@ -55,6 +55,7 @@ const WidgetEventSchedulePlain = ({
     categoryOptionsError,
     validation,
     setValidation,
+    saveAttempted,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
@@ -101,6 +102,7 @@ const WidgetEventSchedulePlain = ({
                             orgUnit={orgUnit}
                             onSelectOrgUnit={onSelectOrgUnit}
                             onDeselectOrgUnit={onDeselectOrgUnit}
+                            saveAttempted={saveAttempted}
                             {...passOnProps}
                         />
                     </div>

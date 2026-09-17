@@ -54,6 +54,7 @@ export const WidgetEventSchedule = ({
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
+    const [saveAttempted, setSaveAttempted] = useState(false);
     const [validation, setValidation] = useState<any>();
     const isFirstRender = useRef(true);
     useEffect(() => {
@@ -99,6 +100,7 @@ export const WidgetEventSchedule = ({
     }, [storedAssignee]);
 
     const onHandleSchedule = useCallback(() => {
+        setSaveAttempted(true);
         if (!isFormValid) { return; }
         if (programCategory?.categories &&
             Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
@@ -204,6 +206,7 @@ export const WidgetEventSchedule = ({
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             setScheduledOrgUnit={setScheduledOrgUnit}
+            saveAttempted={saveAttempted}
             setIsFormValid={setIsFormValid}
             setValidation={setValidation}
             onSchedule={onHandleSchedule}
