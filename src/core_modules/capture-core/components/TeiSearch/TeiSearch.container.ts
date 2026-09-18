@@ -21,6 +21,7 @@ const makeMapStateToProps = () => {
             searchGroups,
             showResults: !!currentTeiSearch.searchResults,
             selectedProgramId: currentTeiSearch.selectedProgramId,
+            programId: currentTeiSearch.selectedProgramId,
             selectedTrackedEntityTypeId: currentTeiSearch.selectedTrackedEntityTypeId,
             openSearchGroupSection: currentTeiSearch.openSearchGroupSection,
         };
