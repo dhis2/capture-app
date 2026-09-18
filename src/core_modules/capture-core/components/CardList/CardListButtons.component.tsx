@@ -133,11 +133,11 @@ const CardListButtons: FC<Props> = ({
         });
     }
 
-    if (showReEnroll && programName) {
+    if (showReEnroll && program) {
         buttons.push({
             dataTest: 're-enrollment-button',
             onClick: onReEnrollClick,
-            label: getReEnrollLabel(programName),
+            label: getReEnrollLabel(program.name),
         });
     }
 
