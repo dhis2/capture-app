@@ -88,6 +88,7 @@ const CardListButtons: FC<Props> = ({
         ? programCollection.get(currentSearchScopeId) as TrackerProgram | undefined
         : undefined;
     const onlyEnrollOnce = Boolean(program?.onlyEnrollOnce);
+    const programWriteAccess = Boolean(program?.access?.data?.write);
     const trackedEntityTypeWriteAccess = Boolean(program?.trackedEntityType?.access?.data?.write);
 
     const hasActiveEnrollment = enrollmentType === enrollmentTypes.ACTIVE;
@@ -96,7 +97,8 @@ const CardListButtons: FC<Props> = ({
         || enrollmentType === enrollmentTypes.CANCELLED;
 
     const showViewActiveEnrollment = hasActiveEnrollment;
-    const showReEnroll = hasPreviousEnrollment && !onlyEnrollOnce && trackedEntityTypeWriteAccess;
+    const showReEnroll =
+        hasPreviousEnrollment && !onlyEnrollOnce && programWriteAccess && trackedEntityTypeWriteAccess;
     const showViewDashboard = !showViewActiveEnrollment;
 
     const onViewDashboardClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
