@@ -50,9 +50,7 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
     }, [onChange, value]);
 
     const handleBlur = (newValue: Value, extraErrorInfo?: { error?: any; errorCode?: any }) => {
-        const bothTouched = dateTouched.current && timeTouched.current;
-        const bothHaveValues = !!newValue.date && !!newValue.time;
-        const touched = bothTouched && bothHaveValues;
+        const touched = dateTouched.current && timeTouched.current;
 
         if (!newValue.date && !newValue.time) {
             onBlur(undefined, { touched }, {});
