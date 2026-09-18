@@ -101,7 +101,7 @@ Feature: User interacts with Search page
         And you fill in the last name with values that will return results
         And you click search
         And you can see the first page of the results
-        And you click the view dashboard button
+        And you click the view active enrollment button
         Then you are navigated to the enrollment dashboard page
 
     Scenario: Searching using attributes in TEType navigates user to dashboard view

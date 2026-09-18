@@ -217,6 +217,12 @@ When('you click the view dashboard button', () => {
         .click();
 });
 
+When('you click the view active enrollment button', () => {
+    cy.get('[data-test="view-active-enrollment-button"]')
+        .first()
+        .click();
+});
+
 When('you remove the Child Programme selection', () => {
     cy.get('[data-test="program-selector-container-clear-icon"]')
         .click();
