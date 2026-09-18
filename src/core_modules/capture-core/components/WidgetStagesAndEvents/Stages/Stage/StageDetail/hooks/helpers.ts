@@ -22,10 +22,6 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
     if (isEventOverdue(event)) {
         return { status: statusTypes.OVERDUE, options: daysUntilDueDate ? dueDateFromNow : undefined };
     }
-    // DHIS2-11576: VISITED status is treated as ACTIVE
-    if (event.status === 'VISITED') {
-        return { status: statusTypes.ACTIVE, options: undefined };
-    }
 
     if (event.status === statusTypes.SCHEDULE) {
         if (!event.scheduledAt) {
@@ -55,8 +51,8 @@ const getValueByKeyFromEvent = (event: ApiEnrollmentEvent, { id, resolveValue }:
 
 const convertStatusForView = (event: ApiEnrollmentEvent) => {
     const { status, options } = getEventStatus(event);
-    const isPositive = [statusTypes.COMPLETED].includes(status);
-    const isNegative = [statusTypes.OVERDUE].includes(status);
+    const isPositive = status === statusTypes.COMPLETED;
+    const isNegative = status === statusTypes.OVERDUE;
     return {
         isNegative,
         isPositive,
