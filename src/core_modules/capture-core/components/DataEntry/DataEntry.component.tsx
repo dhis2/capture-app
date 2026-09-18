@@ -343,7 +343,7 @@ class DataEntryPlain extends React.Component<Props> {
                     <div className={directionClasses.formContainer}>
                         <div className={directionClasses.formInnerContainer}>
                             {this.renderDataEntryFieldsByPlacement(placements.TOP)}
-                            {this.renderD2Form()}
+                            {this.props.orgUnitId && this.renderD2Form()}
                             {this.renderDataEntryFieldsByPlacement(placements.BOTTOM)}
                             {notes &&
                                 <div className={classes.notes}>
