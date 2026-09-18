@@ -25,7 +25,7 @@ import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useC
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
 import { convertFormToClient } from '../../../../converters';
-import { dataElementTypes } from '../../../../metaData';
+import { dataElementTypes, LabelKeys, useTermLabel } from '../../../../metaData';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
@@ -90,6 +90,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
         scheduledAtClient: loadedValues?.eventContainer?.event?.scheduledAt,
     });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: programStage.id });
     const onSaveExternal = useCallback(() => {
         removeEventChangelogQueries(queryClient, eventId);
         onBackToAllEvents();
@@ -132,7 +133,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         secondary
                         small
                     >
-                        {i18n.t('Edit event')}
+                        {i18n.t('Edit {{eventLabel}}', { eventLabel })}
                     </Button>
                 </div>}
             <OverflowButton
@@ -167,7 +168,10 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
             <ViewEventSection
                 header={(
                     <div className={classes.headerContainer}>
-                        <ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />
+                        <ViewEventSectionHeader
+                            text={i18n.t('{{eventLabel}} details', { eventLabel })}
+                            icon={IconFileDocument24}
+                        />
                         {renderActionsContainer()}
                     </div>
                 )}

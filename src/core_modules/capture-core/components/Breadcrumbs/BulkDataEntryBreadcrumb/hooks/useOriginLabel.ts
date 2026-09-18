@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 type Props = {
     programId: string;
@@ -10,24 +11,22 @@ type Props = {
     page: string;
 };
 
-const DefaultFilterLabels = {
-    default: i18n.t('Program overview'),
-    active: i18n.t('Active enrollments'),
-    complete: i18n.t('Completed enrollments'),
-    cancelled: i18n.t('Cancelled enrollments'),
-};
-
-const getWorkingListLabel = (selectedTemplate: any, selectedTemplateId: string) => {
+const getWorkingListLabel = (
+    selectedTemplate: any,
+    selectedTemplateId: string,
+    defaultFilterLabels: Record<string, string>,
+) => {
     if (selectedTemplate && !selectedTemplate.isDefault) {
         return selectedTemplate.name;
     }
     if (selectedTemplateId && !selectedTemplate) {
-        return DefaultFilterLabels[selectedTemplateId as keyof typeof DefaultFilterLabels];
+        return defaultFilterLabels[selectedTemplateId as keyof typeof defaultFilterLabels];
     }
     return i18n.t('Program overview');
 };
 
 export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props) => {
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
     const workingListTemplates = useSelector(({ workingListsTemplates }: any) => workingListsTemplates?.teiList);
     const workingListProgramId = useSelector(({ workingListsContext }: any) => workingListsContext?.teiList?.programIdView);
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
@@ -44,7 +43,13 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
         }
 
         if (isSameProgram) {
-            return getWorkingListLabel(selectedTemplate, selectedTemplateId);
+            const defaultFilterLabels = {
+                default: i18n.t('Program overview'),
+                active: i18n.t('Active {{enrollmentsLabel}}', { enrollmentsLabel }),
+                complete: i18n.t('Completed {{enrollmentsLabel}}', { enrollmentsLabel }),
+                cancelled: i18n.t('Cancelled {{enrollmentsLabel}}', { enrollmentsLabel }),
+            };
+            return getWorkingListLabel(selectedTemplate, selectedTemplateId, defaultFilterLabels);
         }
 
         if (!displayFrontPageList) {
@@ -52,12 +57,13 @@ export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props)
         }
         return i18n.t('Program overview');
     }, [
-        displayFrontPageList,
+        page,
         isLoadingTemplates,
         isSameProgram,
         selectedTemplate,
         selectedTemplateId,
-        page,
+        displayFrontPageList,
+        enrollmentsLabel,
     ]);
 
     return {

@@ -23,6 +23,7 @@ import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/vie
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { PlainProps } from './WidgetHeader.types';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const styles: Readonly<any> = {
     icon: {
@@ -120,6 +121,7 @@ const WidgetHeaderPlain = ({
     }, [dispatch]);
 
     const { icon, name } = stage;
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: stage.id });
     const pendingApiResponse = !!storedEvent?.pendingApiResponse;
 
     const renderDeleteMenuItemModal = () => {
@@ -175,7 +177,7 @@ const WidgetHeaderPlain = ({
                                 onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                                 data-test="widget-enrollment-event-edit-button"
                             >
-                                {i18n.t('Edit event')}
+                                {i18n.t('Edit {{eventLabel}}', { eventLabel })}
                             </Button>
                         )}
 
@@ -193,6 +195,8 @@ const WidgetHeaderPlain = ({
                                     <EventOverflowMenu
                                         eventId={eventId}
                                         eventStatus={eventStatus}
+                                        programId={programId}
+                                        stageId={stage.id}
                                         maxWidth="250px"
                                         dataTest="tracker-program-event-overflow-menu"
                                         onOpenChangelog={() => setChangeLogIsOpen(true)}

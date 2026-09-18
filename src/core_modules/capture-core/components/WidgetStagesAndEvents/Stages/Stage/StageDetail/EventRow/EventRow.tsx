@@ -10,7 +10,7 @@ import {
 } from '@dhis2/ui';
 import { useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
 import { convertServerToClient } from 'capture-core/converters';
-import { dataElementTypes } from 'capture-core/metaData';
+import { dataElementTypes, LabelKeys, useTermLabel } from 'capture-core/metaData';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { EventOverflowMenu, DeleteMenuItemModal, CompleteMenuItemModal } from '../../../../../EventOverflowMenu';
@@ -68,6 +68,15 @@ const EventRowPlain = ({
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
         scheduledAtClient: convertServerToClient(eventDetails.scheduledAt, dataElementTypes.DATE) as string,
     });
+    const { enrollmentLabel, programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
+        [
+            LabelKeys.enrollmentSingular,
+            LabelKeys.programStageSingular,
+            LabelKeys.programStagePlural,
+            LabelKeys.eventSingular,
+        ],
+        { programId, stageId: programStage?.id },
+    );
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: canEditProgramStage },
         trackedEntityName: undefined,
@@ -77,6 +86,10 @@ const EventRowPlain = ({
         isEventCompleted,
         canToggleCompletion,
         trackedEntityInactive: false,
+        enrollmentLabel,
+        programStageLabel,
+        programStagesLabel,
+        eventLabel,
     });
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
@@ -175,6 +188,8 @@ const EventRowPlain = ({
                                 <EventOverflowMenu
                                     eventId={id}
                                     eventStatus={eventDetails.status}
+                                    programId={programId}
+                                    stageId={programStage?.id}
                                     onOpenChangelog={() => setChangelogOpen(true)}
                                     onClose={() => setActionsOpen(false)}
                                     hideMutationActions={!canEditProgramStage}

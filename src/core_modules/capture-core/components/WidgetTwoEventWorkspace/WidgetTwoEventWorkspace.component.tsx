@@ -2,7 +2,9 @@ import React, { useMemo } from 'react';
 import { spacers } from '@dhis2/ui';
 import { FlatList } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { RenderFoundation } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../metaData';
 import { getDataEntryDetails, Placements } from './utils/getDataEntryDetails';
 
 type OwnProps = {
@@ -23,10 +25,16 @@ const styles: Readonly<any> = {
 };
 
 const WidgetTwoEventWorkspacePlain = ({ linkedEvent, dataValues, formFoundation, classes }: Props) => {
+    const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], {
+        programId: linkedEvent?.program,
+        stageId: linkedEvent?.programStage,
+    });
+    const orgUnitLabel = capitalizeFirstLetter(rawOrgUnitLabel);
     const dataEntryValues = useMemo(() => getDataEntryDetails(
         linkedEvent,
         formFoundation,
-    ), [linkedEvent, formFoundation]);
+        orgUnitLabel,
+    ), [linkedEvent, formFoundation, orgUnitLabel]);
 
     const listValues = useMemo(() => {
         const elements = formFoundation.getElements();

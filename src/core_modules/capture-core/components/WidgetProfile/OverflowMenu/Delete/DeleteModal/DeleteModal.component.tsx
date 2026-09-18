@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../../metaData';
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './hooks';
 import type { ErrorReport } from '../../processErrorReports';
 
-export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
+export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, program, setOpenModal, onDeleteSuccess }: Props) => {
     const [errorReports, setErrorReports] = useState<Array<ErrorReport>>([]);
+    const { enrollmentsLabel, eventsLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
+        { program },
+    );
     const handleErrors = (errors: Array<ErrorReport>) => {
         setErrorReports(errors);
     };
@@ -23,10 +28,11 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
             <ModalContent>
                 <p>
                     {/* eslint-disable-next-line max-len */}
-                    {i18n.t('Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated enrollments and events in all programs.',
+                    {i18n.t('Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated {{enrollmentsLabel}} and {{eventsLabel}} in all programs.',
                         {
                             trackedEntityTypeName,
-                            interpolation: { escapeValue: false },
+                            enrollmentsLabel,
+                            eventsLabel,
                         },
                     )}
                 </p>

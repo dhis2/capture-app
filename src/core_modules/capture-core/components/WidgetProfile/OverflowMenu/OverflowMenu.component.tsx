@@ -75,6 +75,7 @@ const Modals = ({
             <DeleteModal
                 trackedEntityTypeName={trackedEntityTypeName}
                 trackedEntity={trackedEntity}
+                program={programAPI}
                 setOpenModal={setDeleteModalIsOpen}
                 onDeleteSuccess={onDeleteSuccess}
             />

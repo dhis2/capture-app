@@ -5,6 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -151,17 +152,20 @@ const styles: Readonly<any> = {
     },
 };
 
-const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string }) => (
-    <IncompleteSelectionsMessage>
-        {enrollmentId ?
-            i18n.t('Invalid enrollment id {{enrollmentId}}.', {
-                enrollmentId,
-                interpolation: { escapeValue: false },
-            }) :
-            i18n.t('Choose an enrollment to view the dashboard.')
-        }
-    </IncompleteSelectionsMessage>
-);
+const EnrollmentSelectionMessage = ({ enrollmentId }: { enrollmentId?: string }) => {
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
+    return (
+        <IncompleteSelectionsMessage>
+            {enrollmentId ?
+                i18n.t('Invalid {{enrollmentLabel}} id {{enrollmentId}}.', {
+                    enrollmentLabel,
+                    enrollmentId,
+                }) :
+                i18n.t('Choose an {{enrollmentLabel}} to view the dashboard.', { enrollmentLabel })
+            }
+        </IncompleteSelectionsMessage>
+    );
+};
 
 type PlainProps = Record<string, never>;
 
@@ -180,6 +184,10 @@ const MissingMessagePlain = ({
     const { resetTeiId } = useResetTeiId();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const { programId, teiId, enrollmentId } = useLocationQuery();
+    const { enrollmentLabel, enrollmentsLabel, orgUnitLabel, eventLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.orgUnitSingular, LabelKeys.eventSingular],
+        { programId },
+    );
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
@@ -188,9 +196,10 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose a program to add new or see existing enrollments for {{teiDisplayName}}', {
-                    teiDisplayName, interpolation: { escapeValue: false },
-                })}
+                {i18n.t(
+                    'Choose a program to add new or see existing {{enrollmentsLabel}} for {{teiDisplayName}}',
+                    { enrollmentsLabel, teiDisplayName },
+                )}
             </IncompleteSelectionsMessage>
         }
 
@@ -213,13 +222,16 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION_ADD_NEW &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('There are no active enrollments.')}
+                    {i18n.t('There are no active {{enrollmentsLabel}}.', { enrollmentsLabel })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToTrackerProgramRegistrationPage}
                         >
-                            {i18n.t('Add new enrollment for {{teiDisplayName}} in this program.', { teiDisplayName })}
+                            {i18n.t(
+                                'Add new {{enrollmentLabel}} for {{teiDisplayName}} in this program.',
+                                { enrollmentLabel, teiDisplayName },
+                            )}
                         </LinkButton>
                     </div>
                 </div>
@@ -242,8 +254,11 @@ const MissingMessagePlain = ({
         {
             missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
             <IncompleteSelectionsMessage>
-                {/* eslint-disable-next-line max-len */}
-                {i18n.t('You do not have permissions to access to this program, registering unit or record, contact your administrator for more information.')}
+                {i18n.t(
+                    'You do not have permissions to access to this program, {{orgUnitLabel}} '
+                    + 'or record, contact your administrator for more information.',
+                    { orgUnitLabel },
+                )}
             </IncompleteSelectionsMessage>
         }
 
@@ -271,8 +286,8 @@ const MissingMessagePlain = ({
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
                     {/* eslint-disable-next-line max-len */}
-                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} enrollment. ', {
-                        teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
+                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} {{enrollmentLabel}}. ', {
+                        teiDisplayName, programName, tetName, enrollmentLabel,
                     })}
                     <div>
                         <LinkButton
@@ -292,15 +307,15 @@ const MissingMessagePlain = ({
             missingStatus === missingStatuses.EVENT_PROGRAM_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('{{programName}} is an event program and does not have enrollments.', {
-                        programName, interpolation: { escapeValue: false },
+                    {i18n.t('{{programName}} is an event program and does not have {{enrollmentsLabel}}.', {
+                        programName, enrollmentsLabel,
                     })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToEventProgramRegistrationPage}
                         >
-                            {i18n.t('Create a new event in this program.')}
+                            {i18n.t('Create a new {{eventLabel}} in this program.', { eventLabel })}
                         </LinkButton>
                     </div>
                     <div>

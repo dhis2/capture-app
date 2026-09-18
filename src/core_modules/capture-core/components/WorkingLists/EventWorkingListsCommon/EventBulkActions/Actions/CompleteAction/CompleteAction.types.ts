@@ -4,5 +4,5 @@ export type Props = {
     bulkDataEntryIsActive?: boolean;
     onUpdateList: (disableClearSelections?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
-    programId?: string;
+    programId: string;
 };

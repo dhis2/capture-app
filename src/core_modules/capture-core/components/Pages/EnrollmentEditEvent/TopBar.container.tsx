@@ -1,7 +1,7 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { dataEntryKeys } from 'capture-core/constants';
-import type { ProgramStage } from '../../../metaData';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { LabelKeys, useTermLabel, type ProgramStage } from '../../../metaData';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import {
     ScopeSelector,
@@ -47,6 +47,11 @@ export const TopBar = ({
     isUserInteractionInProgress,
 }: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], {
+        programId,
+        stageId: programStage?.id,
+    });
 
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
@@ -87,7 +92,7 @@ export const TopBar = ({
                 onClear={() => resetEnrollmentId('enrollment', { programId: programId ?? undefined, teiId })}
                 options={enrollmentsAsOptions}
                 selectedValue={enrollmentId}
-                title={i18n.t('Enrollment')}
+                title={capitalizeFirstLetter(enrollmentLabel)}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             />
             <SingleLockedSelect
@@ -102,7 +107,7 @@ export const TopBar = ({
                     },
                 ]}
                 selectedValue="alwaysPreselected"
-                title={i18n.t('Stage')}
+                title={capitalizeFirstLetter(programStageLabel)}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             />
             {programStage && (

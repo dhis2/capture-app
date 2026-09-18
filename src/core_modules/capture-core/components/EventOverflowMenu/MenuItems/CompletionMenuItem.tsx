@@ -17,6 +17,7 @@ import {
     rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
 } from '../../Pages/common/EnrollmentOverviewDomain';
+import { LabelKeys, useTermLabel } from '../../../metaData';
 
 const updateEventStatus = async (
     dataEngine: any,
@@ -47,6 +48,8 @@ const updateEventStatus = async (
 type MenuItemProps = {
     eventId: string;
     eventStatus?: string;
+    programId: string;
+    stageId?: string;
     onMutate?: (newStatus: string) => void;
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
@@ -60,6 +63,8 @@ type MenuItemProps = {
 export const CompletionMenuItem = ({
     eventId,
     eventStatus,
+    programId,
+    stageId,
     onMutate,
     onSuccess,
     onError,
@@ -71,6 +76,7 @@ export const CompletionMenuItem = ({
 }: MenuItemProps) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId });
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const isCompleted = eventStatus === eventStatuses.COMPLETED;
@@ -81,7 +87,7 @@ export const CompletionMenuItem = ({
         {
             onMutate: () => onMutate?.(newStatus),
             onError: (error) => {
-                showError({ message: i18n.t('An error occurred when updating event status') });
+                showError({ message: i18n.t('An error occurred when updating {{eventLabel}} status', { eventLabel }) });
                 log.error(errorCreator('An error occurred when updating event status')({ error, eventId, newStatus }));
                 onError?.();
             },
@@ -136,10 +142,11 @@ export const CompleteMenuItemModal = ({
     const dataEngine = useDataEngine();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: enrollment.program });
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const handleError = (error: unknown) => {
-        showError({ message: i18n.t('An error occurred when updating event status') });
+        showError({ message: i18n.t('An error occurred when updating {{eventLabel}} status', { eventLabel }) });
         log.error(errorCreator('An error occurred when updating event status')({ error, eventId }));
     };
 

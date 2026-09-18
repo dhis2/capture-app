@@ -10,6 +10,7 @@ import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { selectEnrollmentHiddenProgramStageIds } from '../../../common/EnrollmentOverviewDomain';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
+import { LabelKeys, useTermLabel } from '../../../../../metaData';
 
 const styles = {
     contentContainer: {
@@ -30,6 +31,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: programId as string | undefined });
 
     const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
 
@@ -75,7 +77,7 @@ const EnrollmentQuickActionsComponentPlain = ({
                 >
                     <QuickActionButton
                         icon={<IconAdd16 color={colors.grey700} />}
-                        label={i18n.t('New event')}
+                        label={i18n.t('New {{eventLabel}}', { eventLabel })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
                         disabled={noStageAvailable}
@@ -83,7 +85,7 @@ const EnrollmentQuickActionsComponentPlain = ({
 
                     <QuickActionButton
                         icon={<IconCalendar16 color={colors.grey700} />}
-                        label={i18n.t('Schedule an event')}
+                        label={i18n.t('Schedule an {{eventLabel}}', { eventLabel })}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
                         disabled={noStageAvailable}

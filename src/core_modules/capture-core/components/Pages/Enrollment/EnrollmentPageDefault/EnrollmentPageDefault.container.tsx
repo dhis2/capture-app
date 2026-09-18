@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { useCallback } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQueryClient } from '@tanstack/react-query';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import { LabelKeys, useTermLabel } from '../../../../metaData';
 import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import {
     commitEnrollmentAndEvents,
@@ -52,6 +53,7 @@ export const EnrollmentPageDefault = () => {
     const queryClient = useQueryClient();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
         pageLayout,
@@ -222,8 +224,14 @@ export const EnrollmentPageDefault = () => {
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 widgetEnrollmentStatus={widgetEnrollmentStatus}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
-                feedbackEmptyText={i18n.t('No feedback for this enrollment yet')}
-                indicatorEmptyText={i18n.t('No indicator output for this enrollment yet')}
+                feedbackEmptyText={i18n.t(
+                    'No feedback for this {{enrollmentLabel}} yet',
+                    { enrollmentLabel },
+                )}
+                indicatorEmptyText={i18n.t(
+                    'No indicator output for this {{enrollmentLabel}} yet',
+                    { enrollmentLabel },
+                )}
             />
         </EnrollmentAccessProvider>
     );

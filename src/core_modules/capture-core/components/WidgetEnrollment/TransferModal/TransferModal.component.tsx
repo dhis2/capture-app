@@ -12,14 +12,20 @@ import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField';
 import { useTransferValidation } from './hooks/useTransferValidation';
 import { InfoBoxes } from './InfoBoxes';
+import { getTermLabelFromProgram, LabelKeys } from '../../../metaData';
 
 export const TransferModal = ({
     enrollment,
     ownerOrgUnitId,
+    program,
     setOpenTransfer,
     onUpdateOwnership,
     isTransferLoading,
 }: TransferModalProps) => {
+    const { enrollmentLabel, orgUnitLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular],
+        { program },
+    );
     const {
         selectedOrgUnit,
         handleOrgUnitChange,
@@ -51,7 +57,10 @@ export const TransferModal = ({
 
             <ModalContent>
                 <div>
-                    {i18n.t('Choose the organisation unit to which enrollment ownership should be transferred.')}
+                    {i18n.t(
+                        'Choose the {{orgUnitLabel}} to which {{enrollmentLabel}} ownership should be transferred.',
+                        { orgUnitLabel, enrollmentLabel },
+                    )}
                 </div>
 
                 <OrgUnitField
@@ -64,6 +73,7 @@ export const TransferModal = ({
                     validOrgUnitId={selectedOrgUnit?.id}
                     programAccessLevel={programAccessLevel}
                     orgUnitScopes={orgUnitScopes}
+                    program={program}
                 />
             </ModalContent>
 

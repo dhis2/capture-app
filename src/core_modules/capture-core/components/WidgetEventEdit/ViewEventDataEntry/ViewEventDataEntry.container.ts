@@ -4,7 +4,6 @@ import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withCustomLabels } from '../../../HOC/withCustomLabels';
 import { LabelKeys } from '../../../metaData';
 
-// Example use of withCustomLabels.
 const customLabels = [LabelKeys.orgUnitSingular, LabelKeys.eventSingular] as const;
 
 const mapStateToProps = (state: any, props: any) => {

@@ -28,5 +28,6 @@ export const AssigneeSection = ({
         readOnly={readOnly}
         onSave={onSaveAssignee}
         onSaveError={onSaveAssigneeError}
+        stageId={programStage?.id}
     />
 );

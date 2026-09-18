@@ -5,6 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 import { getReadOnlyMessage } from './getReadOnlyMessage';
 import type { Props, Access } from './ReadOnlyBadge.types';
+import { LabelKeys, useTermLabel } from '../../metaData';
 
 const styles = {
     label: {
@@ -22,8 +23,18 @@ const ReadOnlyBadgePlain = ({
     trackedEntityName,
     trackedEntityInactive = false,
     inlineLabel = false,
+    programId,
+    stageId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
+    const { enrollmentLabel, programStagesLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.programStagePlural],
+        { programId },
+    );
+    const { programStageLabel, eventLabel } = useTermLabel(
+        [LabelKeys.programStageSingular, LabelKeys.eventSingular],
+        { programId, stageId },
+    );
     const access: Access = {
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,
@@ -36,6 +47,10 @@ const ReadOnlyBadgePlain = ({
         isEventBlockedByExpiry,
         isEventBlockedByCompletion,
         trackedEntityInactive,
+        enrollmentLabel,
+        programStageLabel,
+        programStagesLabel,
+        eventLabel,
     });
     if (!message) return null;
 

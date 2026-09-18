@@ -120,7 +120,7 @@ export const requestDeleteEventEpic = (
     action$.pipe(
         ofType(actionTypes.EVENT_REQUEST_DELETE),
         concatMap((action) => {
-            const { eventId, storeId } = action.payload;
+            const { eventId, storeId, programId } = action.payload;
             const deletePromise = mutate({
                 resource: 'tracker?async=false&importStrategy=DELETE',
                 type: 'create',
@@ -131,7 +131,7 @@ export const requestDeleteEventEpic = (
                 .then(() => deleteEventSuccess(eventId, storeId))
                 .catch((error) => {
                     log.error(errorCreator('Could not delete event')({ error, eventId }));
-                    return deleteEventError();
+                    return deleteEventError(programId);
                 });
 
             return from(deletePromise).pipe(

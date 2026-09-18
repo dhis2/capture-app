@@ -17,6 +17,7 @@ import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
+import { useTermLabel, LabelKeys } from '../../../metaData';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {
@@ -42,6 +43,10 @@ export const SearchStatusPlain = ({
     trackedEntityName,
     classes,
 }: ComponentProps & WithStyles<typeof getStyles>) => {
+    const { attributeLabel, attributesLabel } = useTermLabel([
+        LabelKeys.attributeSingular,
+        LabelKeys.attributePlural,
+    ]);
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
         return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }
@@ -100,7 +105,10 @@ export const SearchStatusPlain = ({
                 <NoticeBox title={i18n.t('Too many results')} warning>
                     {i18n.t('This search returned too many results to show.')}
                     {' '}
-                    {i18n.t('Try changing search terms or searching by more attributes to narrow down the results.')}
+                    {i18n.t(
+                        'Try changing search terms or searching by more {{attributesLabel}} to narrow down the results.',
+                        { attributesLabel },
+                    )}
                 </NoticeBox>
             </div>
         );
@@ -114,6 +122,7 @@ export const SearchStatusPlain = ({
                     <NotEnoughAttributesMessage
                         minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                         searchableFields={searchableFields}
+                        attributeLabel={attributeLabel}
                     />
                 </ModalContent>
                 <ModalActions>
