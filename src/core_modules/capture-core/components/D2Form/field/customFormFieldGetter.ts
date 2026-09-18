@@ -44,7 +44,11 @@ const fieldForTypes: any = {
     [dataElementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
     [dataElementTypes.DATE]: getDateFieldConfig,
     [dataElementTypes.DATETIME]: getDateTimeFieldConfig,
-    [dataElementTypes.TIME]: getTextFieldConfig,
+    [dataElementTypes.TIME]:
+    (metaData: DataElement, options: any, querySingleResource: QuerySingleResource) => {
+        const fieldConfig = getTextFieldConfig(metaData, options, querySingleResource, { placeholder: 'hh:mm' });
+        return fieldConfig;
+    },
     [dataElementTypes.PERCENTAGE]: getTextFieldConfig,
     [dataElementTypes.URL]: getTextFieldConfig,
     [dataElementTypes.AGE]: getAgeFieldConfig,
