@@ -5,11 +5,11 @@ import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 import { DateField } from '../../DateAndTimeFields/DateField/Date.component';
 import type { ValidationOptions } from '../../DateAndTimeFields/DateField/Date.types';
 
-type Props = {
+type Props = Readonly<{
     value?: any;
     onBlur: (value: any, options: ValidationOptions) => void;
     [key: string]: any;
-}
+}>
 
 function DateTimeDatePlain({ value, ...passOnProps }: Props) {
     return (
