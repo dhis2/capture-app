@@ -54,7 +54,6 @@ export const StagesAndEvents: WidgetConfig = {
         onViewAll,
         onCreateNew,
         onDeleteEvent,
-        onUpdateEventStatus,
         onRollbackDeleteEvent,
         onEventClick,
     }: any): StagesAndEventProps => ({
@@ -64,7 +63,6 @@ export const StagesAndEvents: WidgetConfig = {
         onViewAll,
         onCreateNew,
         onDeleteEvent,
-        onUpdateEventStatus,
         onRollbackDeleteEvent,
         onEventClick,
     }),

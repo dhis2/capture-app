@@ -29,7 +29,7 @@ export type EnrollmentEvent = {
     trackedEntityInstanceId: string;
     enrollmentId: string;
     enrollmentStatus: string;
-    status: 'COMPLETED' | 'ACTIVE' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    status: 'COMPLETED' | 'ACTIVE' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
     eventDate?: string;
     dueDate?: string;
     lastUpdated: string;

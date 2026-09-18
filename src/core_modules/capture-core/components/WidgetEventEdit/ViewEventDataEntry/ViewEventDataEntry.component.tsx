@@ -4,6 +4,7 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import type { ReduxAction } from 'capture-core-utils/types';
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import {
     placements,
     withCleanUp,
@@ -147,7 +148,8 @@ const buildOrgUnitSettingsFn = () => {
     const orgUnitSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Organisation unit'),
+            // Example use of withCustomLabels.
+            label: capitalizeFirstLetter(props.orgUnitLabel),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
         getPropName: () => 'orgUnit',
@@ -223,7 +225,8 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            label: i18n.t('Event completed'),
+            // Example use of withCustomLabels.
+            label: i18n.t('{{eventLabel}} completed', { eventLabel: props.eventLabel }),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),

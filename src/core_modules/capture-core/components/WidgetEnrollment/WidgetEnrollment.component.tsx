@@ -11,13 +11,14 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { dataElementTypes } from '../../metaData';
+import { dataElementTypes, getTermLabelFromProgram, LabelKeys } from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
@@ -94,13 +95,18 @@ const WidgetEnrollmentPlain = ({
 
     const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
     const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
+    // Example use of getTermLabelFromProgram.
+    const { enrollmentLabel, followUpLabel } = getTermLabelFromProgram(
+        [LabelKeys.enrollmentSingular, LabelKeys.followUpSingular],
+        { program },
+    );
 
     return (
         <div data-test="widget-enrollment">
             <Widget
                 header={
                     <div className={classes.header}>
-                        <span>{i18n.t('Enrollment')}</span>
+                        <span>{capitalizeFirstLetter(enrollmentLabel)}</span>
                         {showWidgetBadge && (
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
@@ -126,7 +132,7 @@ const WidgetEnrollmentPlain = ({
                         <div className={classes.statuses} data-test="widget-enrollment-status">
                             {enrollment.followUp && (
                                 <Tag negative>
-                                    {i18n.t('Follow-up')}
+                                    {capitalizeFirstLetter(followUpLabel)}
                                 </Tag>
                             )}
                             <Status status={enrollment.status} />

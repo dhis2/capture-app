@@ -47,6 +47,7 @@ export type PlainProps = {
     onAccessLostFromTransfer?: () => void;
     pageStatus: string;
     eventStatus?: string;
+    widgetEnrollmentStatus?: { value: string | null };
     eventAccess: {
         read: boolean;
         write: boolean;
