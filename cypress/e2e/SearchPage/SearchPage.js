@@ -354,6 +354,18 @@ Then('you stay in the same page with results from all programs being displayed',
     cy.contains('Results found in all programs').should('exist');
 });
 
+Given('you are in the search page with Malaria focus investigation and org unit being preselected from the url', () => {
+    cy.visit('/#/search?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
+When('you fill in the last name with Fjordsen', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('input[type="text"]')
+        .eq(1)
+        .type('Fjordsen')
+        .blur();
+});
+
 When('you click the re-enroll button', () => {
     cy.get('[data-test="re-enrollment-button"]')
         .first()
