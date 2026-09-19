@@ -217,6 +217,12 @@ When('you click the view dashboard button', () => {
         .click();
 });
 
+When('you click the view active enrollment button', () => {
+    cy.get('[data-test="view-active-enrollment-button"]')
+        .first()
+        .click();
+});
+
 When('you remove the Child Programme selection', () => {
     cy.get('[data-test="program-selector-container-clear-icon"]')
         .click();
@@ -304,15 +310,16 @@ When('you press enter after filling in the first and last name with values that 
         .type('{enter}', { force: true });
 });
 
-When('you press enter after filling in the unique identifier field with values that will return a tracked entity instance', () => {
-    cy.get('[data-test="form-unique"]')
-        .find('input[type="text"]')
-        .first()
-        .clear()
-        .type('3131112445555')
-        .blur()
-        .type('{enter}', { force: true });
-});
+When('you press enter after filling in the unique identifier field with values that will return a tracked entity instance',
+    () => {
+        cy.get('[data-test="form-unique"]')
+            .find('input[type="text"]')
+            .first()
+            .clear()
+            .type('3131112445555')
+            .blur()
+            .type('{enter}', { force: true });
+    });
 
 When('you fill in the first name with value and last name with empty space', () => {
     cy.get('[data-test="form-attributes"]')
@@ -338,10 +345,23 @@ When('you click the back button', () => {
 });
 
 Then('you should be taken to the main page with org unit and program preselected', () => {
-    cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default`);
+    const expectedUrl =
+        `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default`;
+    cy.url().should('eq', expectedUrl);
 });
 
 Then('you stay in the same page with results from all programs being displayed', () => {
     cy.contains('Results found in all programs').should('exist');
+});
+
+When('you click the re-enroll button', () => {
+    cy.get('[data-test="re-enrollment-button"]')
+        .first()
+        .click();
+});
+
+Then('you are navigated to the registration page', () => {
+    cy.url().should('include', '/#/new?');
+    cy.url().should('include', 'teiId=');
+    cy.get('[data-test="registration-page-content"]').should('exist');
 });

@@ -4,10 +4,13 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, type ButtonEventHandler } from '@dhis2/ui';
 import { useDispatch } from 'react-redux';
 import { searchScopes } from '../SearchBox';
-import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
+import { enrollmentTypes } from './CardList.constants';
 import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { useNavigate, buildUrlQueryString } from '../../utils/routing';
+import { programCollection } from '../../metaDataMemoryStores';
+import { TrackerProgram } from '../../metaData';
 
 type Props = {
     currentSearchScopeId?: string,
@@ -16,9 +19,8 @@ type Props = {
     orgUnitId: string,
     enrollmentType: string,
     programName?: string,
+    inactive?: boolean,
 };
-
-type AvailableCardListButtonState = keyof typeof availableCardListButtonState;
 
 const buttonStyles = (theme: any) => ({
     buttonMargin: {
@@ -28,23 +30,10 @@ const buttonStyles = (theme: any) => ({
     },
 });
 
-const deriveNavigationButtonState = (type: string): AvailableCardListButtonState => {
-    switch (type) {
-    case enrollmentTypes.ACTIVE:
-        return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
-    case enrollmentTypes.CANCELLED:
-    case enrollmentTypes.COMPLETED:
-        return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
-    default:
-        return availableCardListButtonState.DONT_SHOW_BUTTON;
-    }
-};
-
 type ButtonProp = {
     dataTest: string;
     onClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>>;
     label: string;
-    hide?: boolean;
 };
 
 type ActionButtonsProps = {
@@ -55,7 +44,7 @@ type ActionButtonsInternalProps = ActionButtonsProps & WithStyles<typeof buttonS
 
 const ActionButtonsInternal: FC<ActionButtonsInternalProps> = ({ buttonProps, classes }) => (
     <>{buttonProps.map((props: ButtonProp) => (
-        !props.hide && <Button
+        <Button
             small
             className={classes.buttonMargin}
             dataTest={props.dataTest}
@@ -69,6 +58,47 @@ const ActionButtonsInternal: FC<ActionButtonsInternalProps> = ({ buttonProps, cl
 
 const ActionButtons = withStyles(buttonStyles)(ActionButtonsInternal) as React.ComponentType<ActionButtonsProps>;
 
+const getViewDashboardLabel = (searchScopeType?: string, programName?: string): string => {
+    if (searchScopeType === searchScopes.ALL_PROGRAMS && programName) {
+        return i18n.t('View {{programName}} dashboard', {
+            programName,
+            interpolation: { escapeValue: false },
+        });
+    }
+    return i18n.t('View dashboard');
+};
+
+const getReEnrollLabel = (programName: string): string =>
+    i18n.t('Re-enroll in {{programName}}', {
+        programName,
+        interpolation: { escapeValue: false },
+    });
+
+const computeButtonVisibility = (
+    enrollmentType: string,
+    program: TrackerProgram | undefined,
+    inactive: boolean | undefined,
+) => {
+    const hasActiveEnrollment = enrollmentType === enrollmentTypes.ACTIVE;
+    const hasPreviousEnrollment =
+        enrollmentType === enrollmentTypes.COMPLETED
+        || enrollmentType === enrollmentTypes.CANCELLED;
+
+    const canReEnroll = Boolean(
+        program
+        && !inactive
+        && !program.onlyEnrollOnce
+        && program.access?.data?.write
+        && program.trackedEntityType?.access?.data?.write,
+    );
+
+    return {
+        showViewActiveEnrollment: hasActiveEnrollment,
+        showViewDashboard: !hasActiveEnrollment,
+        showReEnroll: hasPreviousEnrollment && canReEnroll,
+    };
+};
+
 const CardListButtons: FC<Props> = ({
     currentSearchScopeId,
     currentSearchScopeType,
@@ -76,61 +106,59 @@ const CardListButtons: FC<Props> = ({
     orgUnitId,
     enrollmentType,
     programName,
+    inactive,
 }) => {
     const dispatch = useDispatch();
-    const navigationButtonsState: AvailableCardListButtonState = deriveNavigationButtonState(enrollmentType);
-    const onHandleClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
+    const { navigate } = useNavigate();
+
+    const program = currentSearchScopeId
+        ? programCollection.get(currentSearchScopeId) as TrackerProgram | undefined
+        : undefined;
+
+    const { showViewActiveEnrollment, showViewDashboard, showReEnroll } =
+        computeButtonVisibility(enrollmentType, program, inactive);
+
+    const onViewDashboardClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
         event.stopPropagation();
+        const programId = currentSearchScopeType === searchScopes.TRACKED_ENTITY_TYPE
+            ? undefined
+            : currentSearchScopeId;
+        dispatch(navigateToEnrollmentOverview({ teiId: id, programId, orgUnitId }));
+    }, [dispatch, id, currentSearchScopeType, currentSearchScopeId, orgUnitId]);
 
-        switch (currentSearchScopeType) {
-        case searchScopes.ALL_PROGRAMS:
-        case searchScopes.PROGRAM:
-            dispatch(navigateToEnrollmentOverview({
-                teiId: id,
-                programId: currentSearchScopeId,
-                orgUnitId,
-            }));
-            break;
-        case searchScopes.TRACKED_ENTITY_TYPE:
-            dispatch(navigateToEnrollmentOverview({
-                teiId: id,
-                orgUnitId,
-            }));
-            break;
-        default:
-            break;
-        }
-    }, [currentSearchScopeType, dispatch, id, currentSearchScopeId, orgUnitId]);
+    const onReEnrollClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
+        event.stopPropagation();
+        if (!currentSearchScopeId) return;
+        navigate(`/new?${buildUrlQueryString({ teiId: id, programId: currentSearchScopeId, orgUnitId })}`);
+    }, [navigate, id, currentSearchScopeId, orgUnitId]);
 
-    const buttonLists: ButtonProp[] = [{
-        dataTest: 'view-dashboard-button',
-        onClick: onHandleClick,
-        label: currentSearchScopeType === searchScopes.ALL_PROGRAMS && programName
-            ? i18n.t('View {{programName}} dashboard', {
-                programName,
-                interpolation: { escapeValue: false },
-            })
-            : i18n.t('View dashboard'),
-    },
-    {
-        dataTest: 'view-active-enrollment-button',
-        onClick: onHandleClick,
-        label: i18n.t('View active enrollment'),
-        hide: navigationButtonsState !== availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON,
-    },
-    {
-        dataTest: 're-enrollment-button',
-        onClick: onHandleClick,
-        label: programName
-            ? i18n.t('Re-enroll in {{programName}}', {
-                programName,
-                interpolation: { escapeValue: false },
-            })
-            : i18n.t('Re-enroll'),
-        hide: navigationButtonsState !== availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON,
-    },
-    ];
-    return <ActionButtons buttonProps={buttonLists} />;
+    const buttons: ButtonProp[] = [];
+
+    if (showViewDashboard) {
+        buttons.push({
+            dataTest: 'view-dashboard-button',
+            onClick: onViewDashboardClick,
+            label: getViewDashboardLabel(currentSearchScopeType, programName),
+        });
+    }
+
+    if (showViewActiveEnrollment) {
+        buttons.push({
+            dataTest: 'view-active-enrollment-button',
+            onClick: onViewDashboardClick,
+            label: i18n.t('View active enrollment'),
+        });
+    }
+
+    if (showReEnroll && program) {
+        buttons.push({
+            dataTest: 're-enrollment-button',
+            onClick: onReEnrollClick,
+            label: getReEnrollLabel(program.name),
+        });
+    }
+
+    return <ActionButtons buttonProps={buttons} />;
 };
 
 export { CardListButtons };

@@ -152,6 +152,7 @@ const SearchResultsIndex = ({
                         id={item.id}
                         orgUnitId={orgUnitId}
                         enrollmentType={enrollmentType}
+                        inactive={item.tei?.inactive}
                     />
                 )}
             />
@@ -191,6 +192,7 @@ const SearchResultsIndex = ({
                         id={item.id}
                         orgUnitId={orgUnitId}
                         enrollmentType={enrollmentType}
+                        inactive={item.tei?.inactive}
                     />)}
                 />
             )}
