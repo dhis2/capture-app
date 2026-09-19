@@ -1,13 +1,17 @@
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useNavigate, buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
+import { resetProgramIdBase } from '../QuickSelector/actions/QuickSelector.actions';
 import type { PageContext } from './types';
 
 export const useResetProgramId = () => {
+    const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { pathname } = useLocation();
 
     const resetProgramId = (pageToPush: string = pathname) => {
         const { programId, ...restOfQueries } = getLocationQuery();
+        dispatch(resetProgramIdBase());
         navigate(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
     };
 
@@ -20,6 +24,7 @@ export const useResetProgramId = () => {
             teiId,
             ...restOfQueries
         } = getLocationQuery();
+        dispatch(resetProgramIdBase());
         navigate(`${pageToPush}?${buildUrlQueryString({
             ...restOfQueries,
             teiId: teiId ?? pageContext?.teiId,
@@ -29,11 +34,13 @@ export const useResetProgramId = () => {
 
     const resetProgramIdAndTeiId = (pageToPush: string = pathname) => {
         const { programId, teiId, ...restOfQueries } = getLocationQuery();
+        dispatch(resetProgramIdBase());
         navigate(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
     };
 
     const resetProgramIdAndSelectedTemplateId = (pageToPush: string = pathname) => {
         const { programId, selectedTemplateId, ...restOfQueries } = getLocationQuery();
+        dispatch(resetProgramIdBase());
         navigate(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
     };
 

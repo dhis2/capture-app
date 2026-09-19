@@ -45,7 +45,7 @@ export const enrollmentPageDesc = createReducerDescription({
     [PAGE_OPEN]:
         () => initialReducerValue,
     [PAGE_CLOSE]:
-        state => ({
+        ({ programId, ...state }) => ({
             ...state,
             pageOpen: false,
         }),
