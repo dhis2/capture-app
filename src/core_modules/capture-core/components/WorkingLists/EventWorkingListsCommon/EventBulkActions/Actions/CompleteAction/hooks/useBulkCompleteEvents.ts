@@ -26,7 +26,7 @@ export const useBulkCompleteEvents = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { programId });
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural]);
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

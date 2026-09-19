@@ -146,7 +146,7 @@ const Index = ({
         getInitialSearchScopeType(preselectedProgramId),
     );
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
-    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: selectedSearchScopeId });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural]);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
         searchOption: availableSearchOption,

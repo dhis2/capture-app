@@ -95,7 +95,7 @@ export const useCompleteBulkEnrollments = ({
         ({ message }) => message,
         { critical: true },
     );
-    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
 
     const removeQueries = () => {
         queryClient.removeQueries(

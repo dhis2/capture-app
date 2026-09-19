@@ -16,7 +16,7 @@ type Props = {
 export const useWorkingListLabel = ({ programId }: Props) => {
     const workingListTemplate = useSelector((state: any) => state.workingListsTemplates?.eventList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.eventList?.programIdView);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
 
     const {
         selectedTemplateId,

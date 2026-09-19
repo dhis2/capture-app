@@ -23,17 +23,15 @@ const ReadOnlyBadgePlain = ({
     trackedEntityName,
     trackedEntityInactive = false,
     inlineLabel = false,
-    programId,
     stageId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const { enrollmentLabel, programStagesLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.programStagePlural],
-        { programId },
     );
     const { programStageLabel, eventLabel } = useTermLabel(
         [LabelKeys.programStageSingular, LabelKeys.eventSingular],
-        { programId, stageId },
+        { stageId },
     );
     const access: Access = {
         program: programWriteAccess,

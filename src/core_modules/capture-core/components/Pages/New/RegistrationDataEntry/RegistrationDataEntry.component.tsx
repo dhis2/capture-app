@@ -126,7 +126,7 @@ const RegistrationDataEntryPlain = ({
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
     const currentOrgUnitId = useCurrentOrgUnitId();
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId: selectedScopeId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
 
     const onCancel = useCallback(() => {
         let url;

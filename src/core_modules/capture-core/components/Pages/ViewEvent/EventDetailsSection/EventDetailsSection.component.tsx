@@ -90,7 +90,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
         completedAtClient: loadedValues?.eventContainer?.event?.completedAt,
         scheduledAtClient: loadedValues?.eventContainer?.event?.scheduledAt,
     });
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: programStage.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStage.id });
     const onSaveExternal = useCallback(() => {
         removeEventChangelogQueries(queryClient, eventId);
         onBackToAllEvents();

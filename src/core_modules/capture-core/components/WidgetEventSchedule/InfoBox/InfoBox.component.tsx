@@ -25,13 +25,12 @@ const InfoBoxPlain = ({
     hideDueDate,
     eventCountInOrgUnit,
     orgUnitName,
-    programId,
     stageId,
     classes,
 }: Props) => {
     const { eventLabel, eventsLabel } = useTermLabel(
         [LabelKeys.eventSingular, LabelKeys.eventPlural],
-        { programId, stageId },
+        { stageId },
     );
     if (!scheduleDate || !suggestedScheduleDate) {
         return null;

@@ -49,7 +49,7 @@ const CompleteActionPlain = ({
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
-    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { programId });
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural]);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive, eventsLabel);
     const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {

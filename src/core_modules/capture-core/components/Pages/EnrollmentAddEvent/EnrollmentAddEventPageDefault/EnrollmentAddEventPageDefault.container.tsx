@@ -38,7 +38,7 @@ export const EnrollmentAddEventPageDefault = ({
     ownerOrgUnitId,
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { programId, stageId });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { stageId });
 
     const { navigate } = useNavigate();
     const dispatch = useDispatch();

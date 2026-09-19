@@ -142,8 +142,8 @@ export const useDefaultColumnConfig = (
     orgUnitId: string | null | undefined,
     programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs => {
-    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: program.id, stageId: programStageId });
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStageId });
     return useMemo(() => {
         const { attributes, stages } = program;
         const searchFilterMetaById = buildSearchFilterMetaById(program);

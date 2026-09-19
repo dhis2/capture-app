@@ -34,7 +34,7 @@ export const useDeleteEnrollments = ({
         ({ message }) => message,
         { critical: true },
     );
-    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
 
     const updateStatusToDelete = useCallback((status: string) => {
         setStatusToDelete(prevStatus => ({

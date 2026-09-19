@@ -26,7 +26,7 @@ const ActionButtonsPlain = ({
     openConfirmDialog,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: selectedProgramId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
     const [openSearch, setOpenSearch] = useState(false);
 
     useEffect(() => {

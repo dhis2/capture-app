@@ -31,7 +31,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: programId as string | undefined });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
 
     const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
 

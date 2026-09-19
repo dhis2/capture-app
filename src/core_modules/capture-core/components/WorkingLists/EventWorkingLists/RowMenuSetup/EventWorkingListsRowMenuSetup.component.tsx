@@ -11,7 +11,7 @@ import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...passOnProps }: Props) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [eventIdToDelete, setEventIdToDelete] = useState<string | null>(null);
 
@@ -68,7 +68,6 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
             {deleteModalOpen && eventIdToDelete && (
                 <DeleteEventModal
                     eventId={eventIdToDelete}
-                    programId={programId}
                     onClose={handleCloseDeleteModal}
                     onConfirmDelete={handleConfirmDelete}
                 />

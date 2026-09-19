@@ -27,7 +27,7 @@ export const useWorkingListLabel = ({
     programId,
     displayFrontPageList,
 }: Props) => {
-    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
     const workingListTemplates = useSelector((state: any) => state.workingListsTemplates?.teiList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.teiList?.programIdView);
 

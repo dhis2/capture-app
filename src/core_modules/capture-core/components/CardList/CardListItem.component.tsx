@@ -157,7 +157,6 @@ const CardListItemIndex = ({
     const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId ?? null);
     const { enrollmentLabel, orgUnitLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular],
-        { programId: currentProgramId },
     );
     const program: TrackerProgram | undefined = enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)

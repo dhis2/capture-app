@@ -4,8 +4,8 @@ import { InfoIconText } from '../../InfoIconText';
 import type { Props } from './scheduleText.types';
 import { LabelKeys, useTermLabel } from '../../../metaData';
 
-export const ScheduleText = ({ orgUnitName, stageName, programName, programId, stageId }: Props) => {
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId });
+export const ScheduleText = ({ orgUnitName, stageName, programName, stageId }: Props) => {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     return (
         <InfoIconText>
             <span>

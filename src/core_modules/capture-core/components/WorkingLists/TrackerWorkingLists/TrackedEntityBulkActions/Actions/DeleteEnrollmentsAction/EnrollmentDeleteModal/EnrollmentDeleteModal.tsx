@@ -29,7 +29,6 @@ const EnrollmentDeleteModalPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const { enrollmentLabel, enrollmentsLabel, eventsLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
-        { programId },
     );
     const {
         deleteEnrollments,

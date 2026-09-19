@@ -33,12 +33,11 @@ type Props = {
     onEdit: () => void;
     readOnly?: boolean;
     avatarId?: string;
-    programId?: string;
     stageId?: string;
 } & WithStyles<typeof styles>;
 
-const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, programId, stageId, classes }: Props) => {
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId });
+const DisplayModePlain = ({ assignee, onEdit, readOnly = false, avatarId, stageId, classes }: Props) => {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     if (assignee) {
         return (
             <div className={classes.wrapper}>

@@ -63,7 +63,6 @@ export const DeleteMenuItemModal = ({
     onRollbackDeleteEvent,
 }: DeleteMenuItemModalProps) => {
     const { eventLabel } = useTermLabel([LabelKeys.eventSingular], {
-        programId: eventDetails.program,
         stageId: eventDetails.programStage,
     });
     const { show: showError } = useAlert(

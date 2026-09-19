@@ -121,7 +121,7 @@ const WidgetHeaderPlain = ({
     }, [dispatch]);
 
     const { icon, name } = stage;
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: stage.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: stage.id });
     const pendingApiResponse = !!storedEvent?.pendingApiResponse;
 
     const renderDeleteMenuItemModal = () => {
@@ -195,7 +195,6 @@ const WidgetHeaderPlain = ({
                                     <EventOverflowMenu
                                         eventId={eventId}
                                         eventStatus={eventStatus}
-                                        programId={programId}
                                         stageId={stage.id}
                                         maxWidth="250px"
                                         dataTest="tracker-program-event-overflow-menu"

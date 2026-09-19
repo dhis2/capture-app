@@ -75,7 +75,7 @@ const EventRowPlain = ({
             LabelKeys.programStagePlural,
             LabelKeys.eventSingular,
         ],
-        { programId, stageId: programStage?.id },
+        { stageId: programStage?.id },
     );
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: canEditProgramStage },
@@ -188,7 +188,6 @@ const EventRowPlain = ({
                                 <EventOverflowMenu
                                     eventId={id}
                                     eventStatus={eventDetails.status}
-                                    programId={programId}
                                     stageId={programStage?.id}
                                     onOpenChangelog={() => setChangelogOpen(true)}
                                     onClose={() => setActionsOpen(false)}

@@ -38,7 +38,6 @@ const WidgetStagesAndEventsPlain = ({
     } = useEnrollmentAccessContext();
     const { programStagesLabel, eventsLabel } = useTermLabel(
         [LabelKeys.programStagePlural, LabelKeys.eventPlural],
-        { programId },
     );
 
     return (
@@ -60,7 +59,6 @@ const WidgetStagesAndEventsPlain = ({
                                 <ReadOnlyBadge
                                     programStageWriteAccess={!anyStageReadAccess || anyStageWriteAccess}
                                     multipleStages={multipleStages}
-                                    programId={programId}
                                 />
                             </div>
                         )}

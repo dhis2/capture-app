@@ -186,7 +186,6 @@ const MissingMessagePlain = ({
     const { programId, teiId, enrollmentId } = useLocationQuery();
     const { enrollmentLabel, enrollmentsLabel, orgUnitLabel, eventLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.orgUnitSingular, LabelKeys.eventSingular],
-        { programId },
     );
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);

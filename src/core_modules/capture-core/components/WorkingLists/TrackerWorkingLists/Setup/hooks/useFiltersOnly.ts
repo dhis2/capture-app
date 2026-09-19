@@ -6,12 +6,11 @@ import { dataElementTypes, LabelKeys, type TrackerProgram, useTermLabel } from '
 import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = (
-    { id: programId, enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
+    { enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
     programStageId?: string,
 ) => {
     const { enrollmentLabel, followUpLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.followUpSingular],
-        { programId },
     );
     return useMemo(() => {
         const enableUserAssignment =

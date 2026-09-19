@@ -51,8 +51,8 @@ const RelatedStagesActionsPlain = ({
     });
     const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId });
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: constraint?.programStage?.id });
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: constraint?.programStage?.id });
 
     useEffect(() => {
         if (!orgUnitLoading && (data as any)?.length === 1) {

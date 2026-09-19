@@ -30,7 +30,7 @@ export const DeleteEnrollmentsAction = ({
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority(Authorities.ENROLLMENT_CASCADE_DELETE);
-    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive, enrollmentsLabel);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 

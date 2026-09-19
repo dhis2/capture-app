@@ -87,15 +87,13 @@ const expandTheFirstForm = (searchGroupsForSelectedScope, expandedFormId, setExp
 type FormInformativeMessageProps = {
     minAttributesRequiredToSearch: number;
     className: string;
-    programId?: string;
 };
 
 const FormInformativeMessage = ({
     minAttributesRequiredToSearch,
     className,
-    programId,
 }: FormInformativeMessageProps) => {
-    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular], { programId });
+    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular]);
     return (
         <div className={className}>
             {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
@@ -137,7 +135,7 @@ const SearchFormIndex = ({
 
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState<string | null>(null);
-    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: selectedSearchScopeId });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural]);
 
     useEffect(() => {
         setExpandedFormId(null);
@@ -353,7 +351,6 @@ const SearchFormIndex = ({
                                             <FormInformativeMessage
                                                 minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                                 className={error ? classes.textError : classes.textInfo}
-                                                programId={selectedSearchScopeId}
                                             />
                                         </div>
                                         {!!unsupportedAttributes?.length && (

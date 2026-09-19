@@ -130,7 +130,7 @@ const WidgetEventEditPlain = ({
             LabelKeys.programStagePlural,
             LabelKeys.eventSingular,
         ],
-        { programId, stageId },
+        { stageId },
     );
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: true },

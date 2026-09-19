@@ -7,6 +7,5 @@ export type Props = {
     icon?: Icon;
     description?: string | null;
     stageWriteAccess?: boolean;
-    programId?: string;
     stageId: string;
 };

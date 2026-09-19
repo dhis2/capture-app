@@ -31,7 +31,6 @@ const styles = (theme: any) => ({
 
 const WidgetEventSchedulePlain = ({
     stageId,
-    programId,
     programName,
     stageName,
     displayDueDateLabel,
@@ -76,7 +75,7 @@ const WidgetEventSchedulePlain = ({
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
     const { eventLabel, noteLabel, notesLabel } = useTermLabel(
         [LabelKeys.eventSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
-        { programId, stageId },
+        { stageId },
     );
 
     return (
@@ -90,7 +89,6 @@ const WidgetEventSchedulePlain = ({
                     sectionName={i18n.t('Schedule info')}
                 >
                     <ScheduleDate
-                        programId={programId}
                         stageId={stageId}
                         orgUnit={orgUnit}
                         scheduleDate={scheduleDate}
@@ -157,7 +155,6 @@ const WidgetEventSchedulePlain = ({
                     programName={programName}
                     stageName={stageName}
                     orgUnitName={orgUnit?.name || ''}
-                    programId={programId}
                     stageId={stageId}
                 />
             </div>

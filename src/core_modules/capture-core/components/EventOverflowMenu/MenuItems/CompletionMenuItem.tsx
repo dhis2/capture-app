@@ -48,7 +48,6 @@ const updateEventStatus = async (
 type MenuItemProps = {
     eventId: string;
     eventStatus?: string;
-    programId: string;
     stageId?: string;
     onMutate?: (newStatus: string) => void;
     onSuccess?: (newStatus: string) => void;
@@ -63,7 +62,6 @@ type MenuItemProps = {
 export const CompletionMenuItem = ({
     eventId,
     eventStatus,
-    programId,
     stageId,
     onMutate,
     onSuccess,
@@ -76,7 +74,7 @@ export const CompletionMenuItem = ({
 }: MenuItemProps) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const isCompleted = eventStatus === eventStatuses.COMPLETED;
@@ -142,7 +140,7 @@ export const CompleteMenuItemModal = ({
     const dataEngine = useDataEngine();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: enrollment.program });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const handleError = (error: unknown) => {

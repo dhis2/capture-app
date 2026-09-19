@@ -26,7 +26,6 @@ const styles: Readonly<any> = {
 
 const WidgetTwoEventWorkspacePlain = ({ linkedEvent, dataValues, formFoundation, classes }: Props) => {
     const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], {
-        programId: linkedEvent?.program,
         stageId: linkedEvent?.programStage,
     });
     const orgUnitLabel = capitalizeFirstLetter(rawOrgUnitLabel);

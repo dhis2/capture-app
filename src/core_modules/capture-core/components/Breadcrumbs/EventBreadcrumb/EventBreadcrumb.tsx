@@ -44,7 +44,7 @@ const EventBreadcrumbPlain = ({
 }: Props) => {
     const [openWarning, setOpenWarning] = useState<PageKeys | null>(null);
     const { label } = useWorkingListLabel({ programId });
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
 
     const handleNavigation = useCallback((callback?: () => void, warningType?: PageKeys) => {
         if (userInteractionInProgress && warningType) {

@@ -28,7 +28,7 @@ export const WidgetTrackedEntityRelationship = ({
 }: WidgetTrackedEntityRelationshipProps) => {
     const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const { data: trackedEntityTypeName, isLoading: isLoadingTEType } = useTrackedEntityTypeName(trackedEntityTypeId);
-    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular], { programId });
+    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular]);
     const {
         data: relationships,
         isError,

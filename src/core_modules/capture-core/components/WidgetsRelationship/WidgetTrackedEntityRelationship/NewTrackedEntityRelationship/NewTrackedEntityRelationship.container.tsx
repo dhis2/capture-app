@@ -30,7 +30,7 @@ const NewTrackedEntityRelationshipPlain = ({
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
-    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular], { programId });
+    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular]);
 
     const closeAddWizard = useCallback(() => {
         setAddWizardVisible(false);

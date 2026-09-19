@@ -51,7 +51,7 @@ const NewTrackedEntityRelationshipPlain = ({
     onSelectFindMode,
     classes,
 }: ComponentProps & WithStyles<typeof styles>) => {
-    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular], { programId });
+    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular]);
     const [currentStep, setCurrentStep] =
         useState<WizardStep>(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
     const [selectedLinkedEntityMetadata, setSelectedLinkedEntityMetadata] =

@@ -53,7 +53,7 @@ export const EnrollmentPageDefault = () => {
     const queryClient = useQueryClient();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     const { onLinkedRecordClick } = useLinkedRecordClick();
     const {
         pageLayout,

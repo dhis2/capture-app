@@ -38,7 +38,7 @@ export const WidgetEventSchedule = ({
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { programId, stageId });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { stageId });
     const dispatch = useDispatch();
     const { programStageScheduleConfig }: {programStageScheduleConfig?: any} = useScheduleConfigFromProgramStage(stageId);
     const { programConfig }: {programConfig?: any} = useScheduleConfigFromProgram(programId);
@@ -192,7 +192,6 @@ export const WidgetEventSchedule = ({
             assignee={assignee}
             stageId={stageId}
             stageName={stage.name}
-            programId={programId}
             programCategory={programCategory}
             programName={program.name}
             enableUserAssignment={enableUserAssignment && stage?.enableUserAssignment}

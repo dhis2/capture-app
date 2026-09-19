@@ -22,7 +22,6 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     const { navigate } = useNavigate();
     const { programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
         [LabelKeys.programStageSingular, LabelKeys.programStagePlural, LabelKeys.eventSingular],
-        { programId },
     );
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues, ownerOrgUnitId } = useCommonEnrollmentDomainData(

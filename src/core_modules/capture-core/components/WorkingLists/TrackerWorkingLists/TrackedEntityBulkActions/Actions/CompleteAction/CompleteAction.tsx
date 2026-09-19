@@ -66,7 +66,6 @@ const CompleteActionPlain = ({
     const [openAccordion, setOpenAccordion] = useState(false);
     const { enrollmentLabel, enrollmentsLabel, eventsLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
-        { programId },
     );
     const {
         completeEnrollments,

@@ -19,7 +19,6 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
     } = useEnrollmentAccessContext();
     const { eventLabel, noteLabel, notesLabel } = useTermLabel(
         [LabelKeys.eventSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
-        { programId },
     );
 
     const onAddNote = (newNoteValue: string) => {

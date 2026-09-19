@@ -25,7 +25,6 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     } = useMetadataForProgramStage({ programId, stageId });
     const { enrollmentLabel, orgUnitLabel, eventLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular, LabelKeys.eventSingular],
-        { programId },
     );
 
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {

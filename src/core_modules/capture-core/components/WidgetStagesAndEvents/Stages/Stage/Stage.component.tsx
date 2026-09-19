@@ -52,7 +52,6 @@ export const StagePlain = ({
                     description={description}
                     events={events}
                     stageWriteAccess={effectiveStageWriteAccess}
-                    programId={passOnProps.programId}
                     stageId={id}
                 />}
                 onOpen={handleOpen}

@@ -124,7 +124,7 @@ const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
 
     const { trackedEntityName } = useScopeInfo(currentSearchScopeId);
-    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: currentProgramId });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural]);
 
     return (<>
         <Widget

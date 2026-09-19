@@ -62,7 +62,6 @@ const BreadcrumbsPlain = ({
     const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
     const { enrollmentLabel, eventLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.eventSingular],
-        { programId },
     );
 
     const { label } = useWorkingListLabel({

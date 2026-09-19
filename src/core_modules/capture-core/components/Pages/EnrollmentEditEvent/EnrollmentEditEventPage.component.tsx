@@ -66,7 +66,7 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateEnrollmentEventsError,
     userInteractionInProgress,
 }: PlainProps) => {
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: program?.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <TopBar

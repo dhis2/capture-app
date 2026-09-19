@@ -49,7 +49,7 @@ export const WidgetRelatedStagesPlain = ({
     classes,
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: programStageId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStageId });
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus, constraint } = useRelatedStages({ programStageId, programId });
     const { stageWriteAccessById } = useEnrollmentAccessContext();

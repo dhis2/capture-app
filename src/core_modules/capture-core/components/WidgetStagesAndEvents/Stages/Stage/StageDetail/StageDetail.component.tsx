@@ -108,12 +108,12 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
     const { stage } = getProgramAndStageForProgram(programId, stageId);
     const { eventsLabel } = useTermLabel(
         [LabelKeys.eventPlural],
-        { programId, stageId },
+        { stageId },
     );
     const { stageWriteAccessById } = useEnrollmentAccessContext();
     const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;
     const headerColumns = useComputeHeaderColumn(
-        dataElements, hideDueDate, enableUserAssignment, stage?.stageForm, programId, stageId,
+        dataElements, hideDueDate, enableUserAssignment, stage?.stageForm, stageId,
     );
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);

@@ -118,10 +118,9 @@ const useComputeHeaderColumn = (
     hideDueDate: boolean,
     enableUserAssignment: boolean,
     formFoundation?: { getLabel: (key: string) => string },
-    programId?: string,
     stageId?: string,
 ) => {
-    const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId, stageId });
+    const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { stageId });
     const orgUnitLabel = capitalizeFirstLetter(rawOrgUnitLabel);
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {

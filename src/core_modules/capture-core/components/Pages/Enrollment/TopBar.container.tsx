@@ -32,7 +32,7 @@ export const TopBar = ({
     teiDisplayName,
     enrollmentsAsOptions,
 }: TopBarProps) => {
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     const { setProgramIdAndResetEnrollmentContext } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();

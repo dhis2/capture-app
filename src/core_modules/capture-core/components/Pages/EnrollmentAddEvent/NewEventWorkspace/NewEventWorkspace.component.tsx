@@ -50,7 +50,7 @@ const NewEventWorkspacePlain = ({
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const { programStageLabel, eventLabel } = useTermLabel(
         [LabelKeys.programStageSingular, LabelKeys.eventSingular],
-        { programId, stageId },
+        { stageId },
     );
 
     const onHandleSwitchTab = (newMode: string) => {
