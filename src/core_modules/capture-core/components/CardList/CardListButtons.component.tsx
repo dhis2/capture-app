@@ -19,6 +19,7 @@ type Props = {
     orgUnitId: string,
     enrollmentType: string,
     programName?: string,
+    inactive?: boolean,
 };
 
 const buttonStyles = (theme: any) => ({
@@ -73,6 +74,31 @@ const getReEnrollLabel = (programName: string): string =>
         interpolation: { escapeValue: false },
     });
 
+const computeButtonVisibility = (
+    enrollmentType: string,
+    program: TrackerProgram | undefined,
+    inactive: boolean | undefined,
+) => {
+    const hasActiveEnrollment = enrollmentType === enrollmentTypes.ACTIVE;
+    const hasPreviousEnrollment =
+        enrollmentType === enrollmentTypes.COMPLETED
+        || enrollmentType === enrollmentTypes.CANCELLED;
+
+    const canReEnroll = Boolean(
+        program
+        && !inactive
+        && !program.onlyEnrollOnce
+        && program.access?.data?.write
+        && program.trackedEntityType?.access?.data?.write,
+    );
+
+    return {
+        showViewActiveEnrollment: hasActiveEnrollment,
+        showViewDashboard: !hasActiveEnrollment,
+        showReEnroll: hasPreviousEnrollment && canReEnroll,
+    };
+};
+
 const CardListButtons: FC<Props> = ({
     currentSearchScopeId,
     currentSearchScopeType,
@@ -80,6 +106,7 @@ const CardListButtons: FC<Props> = ({
     orgUnitId,
     enrollmentType,
     programName,
+    inactive,
 }) => {
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
@@ -87,19 +114,9 @@ const CardListButtons: FC<Props> = ({
     const program = currentSearchScopeId
         ? programCollection.get(currentSearchScopeId) as TrackerProgram | undefined
         : undefined;
-    const onlyEnrollOnce = Boolean(program?.onlyEnrollOnce);
-    const programWriteAccess = Boolean(program?.access?.data?.write);
-    const trackedEntityTypeWriteAccess = Boolean(program?.trackedEntityType?.access?.data?.write);
 
-    const hasActiveEnrollment = enrollmentType === enrollmentTypes.ACTIVE;
-    const hasPreviousEnrollment =
-        enrollmentType === enrollmentTypes.COMPLETED
-        || enrollmentType === enrollmentTypes.CANCELLED;
-
-    const showViewActiveEnrollment = hasActiveEnrollment;
-    const showReEnroll =
-        hasPreviousEnrollment && !onlyEnrollOnce && programWriteAccess && trackedEntityTypeWriteAccess;
-    const showViewDashboard = !showViewActiveEnrollment;
+    const { showViewActiveEnrollment, showViewDashboard, showReEnroll } =
+        computeButtonVisibility(enrollmentType, program, inactive);
 
     const onViewDashboardClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
         event.stopPropagation();
