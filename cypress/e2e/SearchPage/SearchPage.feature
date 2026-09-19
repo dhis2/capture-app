@@ -227,3 +227,12 @@ Feature: User interacts with Search page
         When the user selects the "Routine visit" BulkDataEntry
         When the user navigates to "Search" using the breadcrumb
         And the BulkDataEntry widget in active mode is displayed
+
+    Scenario: Re-enroll from search results navigates to the registration page
+        Given you are in the search page with the Child Programme and org unit being preselected from the url
+        When you expand the attributes search area
+        And you fill in the first and last name with values that will return results
+        And you click search
+        And you can see the first page of the results
+        When you click the re-enroll button
+        Then you are navigated to the registration page
