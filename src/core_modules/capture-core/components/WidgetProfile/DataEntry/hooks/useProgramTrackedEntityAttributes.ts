@@ -4,7 +4,10 @@ const processProgramTrackedEntityAttributes = (programAPI: any) =>
     programAPI?.programTrackedEntityAttributes?.reduce(
         (acc: any, currentValue: any) => ({
             ...acc,
-            [currentValue.trackedEntityAttribute.id]: currentValue.trackedEntityAttribute,
+            [currentValue.trackedEntityAttribute.id]: {
+                ...currentValue.trackedEntityAttribute,
+                optionSetId: currentValue.trackedEntityAttribute?.optionSet?.id,
+            },
         }),
         {},
     );
