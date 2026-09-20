@@ -55,7 +55,7 @@ const renderComponent = (
 };
 
 const getPropsForPlugin = ({ program, enrollmentId, teiId, ownerOrgUnitId, programStage, eventId, stageId }: any) => ({
-    programId: program.id,
+    programId: program?.id,
     enrollmentId,
     teiId,
     orgUnitId: ownerOrgUnitId,

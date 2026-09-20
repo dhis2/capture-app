@@ -26,18 +26,16 @@ type ReduxStateSlice = {
 type OrgUnitSources = {
     formOrgUnitId?: string;
     eventOrgUnitId?: string;
-    urlOrgUnitId?: string;
     ownerOrgUnitId?: string;
 };
 
 const resolveOrgUnitId = (isEventContext: boolean, sources: OrgUnitSources) => {
-    if (sources.ownerOrgUnitId && !isEventContext) return sources.ownerOrgUnitId;
-    return sources.formOrgUnitId ?? sources.eventOrgUnitId ?? sources.urlOrgUnitId;
+    if (!isEventContext) return sources.ownerOrgUnitId;
+    return sources.formOrgUnitId ?? sources.eventOrgUnitId;
 };
 
 export const useFormFieldPluginContext = (pluginContext: PluginContext = {}): PluginContextIds => {
     const {
-        orgUnitId: urlOrgUnitId,
         programId: urlProgramId,
         stageId: urlStageId,
         enrollmentId: urlEnrollmentId,
@@ -66,7 +64,6 @@ export const useFormFieldPluginContext = (pluginContext: PluginContext = {}): Pl
         orgUnitId: resolveOrgUnitId(Boolean(programStageId || eventId), {
             formOrgUnitId: (pluginContext.orgUnit?.value as { id?: string } | undefined)?.id,
             eventOrgUnitId: eventFromRedux?.orgUnit,
-            urlOrgUnitId,
             ownerOrgUnitId,
         }),
         programId: urlProgramId ?? eventFromRedux?.program ?? currentSelectionsProgramId,
