@@ -354,11 +354,12 @@ Then('you stay in the same page with results from all programs being displayed',
     cy.contains('Results found in all programs').should('exist');
 });
 
-Given('you are in the search page with Malaria focus investigation and org unit being preselected from the url', () => {
-    cy.visit('/#/search?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
-});
-
-When('you fill in the last name with Fjordsen', () => {
+When('you fill in Frank Fjordsen first and last name', () => {
+    cy.get('[data-test="form-attributes"]')
+        .find('input[type="text"]')
+        .eq(0)
+        .type('Frank')
+        .blur();
     cy.get('[data-test="form-attributes"]')
         .find('input[type="text"]')
         .eq(1)

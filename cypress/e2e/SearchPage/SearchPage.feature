@@ -229,9 +229,9 @@ Feature: User interacts with Search page
         And the BulkDataEntry widget in active mode is displayed
 
     Scenario: Re-enroll from search results navigates to the registration page
-        Given you are in the search page with Malaria focus investigation and org unit being preselected from the url
+        Given you are in the search page with the Child Programme and org unit being preselected from the url
         When you expand the attributes search area
-        And you fill in the last name with Fjordsen
+        And you fill in Frank Fjordsen first and last name
         And you click search
         And you can see the first page of the results
         When you click the re-enroll button
