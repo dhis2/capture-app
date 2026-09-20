@@ -79,7 +79,12 @@ export type ComponentProps = {
     fieldsMetadata: FormattedMetadataByPluginId;
     formSubmitted: boolean;
     values: { [id: string]: any };
-    orgUnitId: string;
+    orgUnitId: string | undefined;
+    programId: string | undefined;
+    stageId: string | undefined;
+    enrollmentId: string | undefined;
+    eventId: string | undefined;
+    teiId: string | undefined;
     setFieldValue: (props: SetFieldValueProps) => void;
     errors: { [id: string]: string[] };
     warnings: { [id: string]: string[] };

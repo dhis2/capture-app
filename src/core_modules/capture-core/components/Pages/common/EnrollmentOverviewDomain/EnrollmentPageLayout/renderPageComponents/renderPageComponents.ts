@@ -54,11 +54,11 @@ const renderComponent = (
     });
 };
 
-const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId, programStage, eventId, stageId }: any) => ({
+const getPropsForPlugin = ({ program, enrollmentId, teiId, ownerOrgUnitId, programStage, eventId, stageId }: any) => ({
     programId: program.id,
     enrollmentId,
     teiId,
-    orgUnitId,
+    orgUnitId: ownerOrgUnitId,
     programStageId: stageId ?? programStage?.id,
     eventId,
 });

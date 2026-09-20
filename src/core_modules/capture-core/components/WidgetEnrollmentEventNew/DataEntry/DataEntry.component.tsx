@@ -169,6 +169,7 @@ const buildReportDateSettingsFn = () => {
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
         }),
+        getPassOnFieldData: () => true,
     };
 
     return reportDateSettings;
@@ -207,6 +208,7 @@ const buildOrgUnitSettingsFn = () => {
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
         }),
+        getPassOnFieldData: () => true,
     };
 
     return orgUnitSettings;
@@ -290,6 +292,7 @@ const buildGeometrySettingsFn = () => ({
         placement: placements.TOP,
         section: dataEntrySectionNames.BASICINFO,
     }),
+    getPassOnFieldData: () => true,
 });
 
 const buildNotesSettingsFn = () => {
