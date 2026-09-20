@@ -354,16 +354,16 @@ Then('you stay in the same page with results from all programs being displayed',
     cy.contains('Results found in all programs').should('exist');
 });
 
-When('you fill in Frank Fjordsen first and last name', () => {
+When('you fill in Sara Jorgensen first and last name', () => {
     cy.get('[data-test="form-attributes"]')
         .find('input[type="text"]')
         .eq(0)
-        .type('Frank')
+        .type('Sara')
         .blur();
     cy.get('[data-test="form-attributes"]')
         .find('input[type="text"]')
         .eq(1)
-        .type('Fjordsen')
+        .type('Jørgensen')
         .blur();
 });
 
