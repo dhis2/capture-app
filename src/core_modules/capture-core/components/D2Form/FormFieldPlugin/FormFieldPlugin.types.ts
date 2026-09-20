@@ -81,7 +81,7 @@ export type ComponentProps = {
     values: { [id: string]: any };
     orgUnitId: string | undefined;
     programId: string | undefined;
-    stageId: string | undefined;
+    programStageId: string | undefined;
     enrollmentId: string | undefined;
     eventId: string | undefined;
     teiId: string | undefined;
