@@ -11,11 +11,12 @@ import { LabelKeys, useTermLabel } from '../../../metaData';
 type Props = {
     dataEntryKey?: string;
     programRules?: Array<any>;
+    stageId?: string;
 };
 
 const FeedbackOutputWrapper = (props: Props) => {
-    const { dataEntryKey, programRules } = props;
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { dataEntryKey, programRules, stageId } = props;
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 

@@ -5,12 +5,13 @@ import { LabelKeys, useTermLabel } from '../../../../metaData';
 
 type Props = {
     eventId: string;
+    stageId?: string;
     onClose: () => void;
     onConfirmDelete: (eventId: string) => void;
 };
 
-export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) => {
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+export const DeleteEventModal = ({ eventId, stageId, onClose, onConfirmDelete }: Props) => {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const handleConfirm = () => {
         onConfirmDelete(eventId);
         onClose();

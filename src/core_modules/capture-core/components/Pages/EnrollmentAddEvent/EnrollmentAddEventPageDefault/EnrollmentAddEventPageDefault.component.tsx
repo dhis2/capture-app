@@ -58,7 +58,7 @@ const EnrollmentAddEventPagePain = ({
     classes,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     if (pageFailure) {
         return (
             <div>

@@ -145,6 +145,7 @@ const EventRowPlain = ({
                 eventId={id}
                 enrollment={enrollment}
                 programStageName={programStage?.name}
+                stageId={programStage?.id}
                 onClose={() => setCompleteModalOpen(false)}
                 onMutate={onCompletionStatusMutate}
                 onSuccess={onCompletionStatusSuccess}

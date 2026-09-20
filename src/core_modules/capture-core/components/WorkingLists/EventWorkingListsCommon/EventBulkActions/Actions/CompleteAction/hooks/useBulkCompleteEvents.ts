@@ -14,6 +14,7 @@ type Props = {
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     programId?: string;
+    stageId?: string;
 };
 
 export const useBulkCompleteEvents = ({
@@ -23,10 +24,11 @@ export const useBulkCompleteEvents = ({
     removeRowsFromSelection,
     onUpdateList,
     programId,
+    stageId,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural]);
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { stageId });
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

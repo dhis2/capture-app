@@ -21,6 +21,7 @@ type OwnProps = {
     onBackToViewEvent?: () => void;
     displayFrontPageList: boolean;
     programId: string;
+    stageId?: string;
     userInteractionInProgress?: boolean;
     eventStatus?: StatusType;
     page: 'mainPage' | EnrollmentPageKeyTypes;
@@ -54,6 +55,7 @@ const BreadcrumbsPlain = ({
     onBackToViewEvent,
     eventStatus,
     programId,
+    stageId,
     displayFrontPageList,
     userInteractionInProgress = false,
     page,
@@ -62,6 +64,7 @@ const BreadcrumbsPlain = ({
     const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
     const { enrollmentLabel, eventLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.eventSingular],
+        { stageId },
     );
 
     const { label } = useWorkingListLabel({

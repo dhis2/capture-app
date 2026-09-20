@@ -70,6 +70,7 @@ export const EventWorkingListsViewMenuSetup = ({
                 customUpdateTrigger={customUpdateTrigger}
                 dataSource={dataSource}
                 programId={program.id}
+                stageId={program.stage?.id}
                 customListViewMenuContents={customListViewMenuContents}
                 selectedRows={selectedRows}
                 onSelectAll={selectAllRows}

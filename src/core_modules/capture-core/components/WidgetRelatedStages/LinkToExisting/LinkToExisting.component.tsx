@@ -28,9 +28,10 @@ export const LinkToExisting = ({
     linkableStageLabel,
     errorMessages,
     saveAttempted,
+    stageId,
 }: LinkToExistingProps) => {
     const [touched, setTouched] = useState(false);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     const handleChange = (value: string | null) => {
         setTouched(true);

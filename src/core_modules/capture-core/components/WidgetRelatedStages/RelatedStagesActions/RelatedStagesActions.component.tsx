@@ -326,6 +326,7 @@ const RelatedStagesActionsPlain = ({
                         linkableStageLabel={programStage.stageForm.name}
                         errorMessages={errorMessages}
                         saveAttempted={saveAttempted}
+                        stageId={programStage?.id}
                     />
                     <LinkButton
                         onLink={onLink}

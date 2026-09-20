@@ -122,6 +122,7 @@ type ModalProps = {
     eventId: string;
     enrollment: any;
     programStageName?: string;
+    stageId?: string;
     onClose: () => void;
     onMutate?: (newStatus: string) => void;
     onSuccess?: (newStatus: string) => void;
@@ -132,6 +133,7 @@ export const CompleteMenuItemModal = ({
     eventId,
     enrollment,
     programStageName,
+    stageId,
     onClose,
     onMutate,
     onSuccess,
@@ -140,7 +142,7 @@ export const CompleteMenuItemModal = ({
     const dataEngine = useDataEngine();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const handleError = (error: unknown) => {

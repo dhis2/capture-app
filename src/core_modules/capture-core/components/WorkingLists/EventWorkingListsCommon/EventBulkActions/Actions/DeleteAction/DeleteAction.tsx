@@ -29,12 +29,13 @@ const getTooltipContent = (
 export const DeleteAction = ({
     selectedRows,
     stageDataWriteAccess,
+    stageId,
     bulkDataEntryIsActive,
     onUpdateList,
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dataEngine = useDataEngine();
-    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural]);
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { stageId });
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

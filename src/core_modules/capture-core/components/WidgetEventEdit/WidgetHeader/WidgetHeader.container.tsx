@@ -144,6 +144,7 @@ const WidgetHeaderPlain = ({
                 eventId={eventId}
                 enrollment={enrollment}
                 programStageName={name}
+                stageId={stage.id}
                 onClose={() => setCompleteModalOpen(false)}
                 onMutate={onCompletionStatusMutate}
                 onSuccess={onCompletionStatusSuccess}
