@@ -74,17 +74,36 @@ export type UsePluginCallbacksProps = {
     pluginContext: PluginContext;
 };
 
-export type ComponentProps = {
+/**
+ * IDs identifying the domain context a plugin is rendered in. Undefined where
+ * not applicable (e.g. `teiId`/`enrollmentId` on an event-program form).
+ * Shared between form-field plugins and widget plugins so both surfaces expose
+ * the same names.
+ */
+export type PluginContextIds = {
+    /** The entity's own org unit: TEI ownerOrgUnit on enrollment forms, event's own org unit on event forms. Not the top-bar selector. */
+    orgUnitId: string | undefined;
+    programId: string | undefined;
+    /** Program stage — only meaningful in event contexts. */
+    programStageId: string | undefined;
+    /** Enrollment id — only for tracker (enrollment + tracker-event) contexts. */
+    enrollmentId: string | undefined;
+    /** Event id — only when editing an existing event. */
+    eventId: string | undefined;
+    /** TEI id — only for tracker contexts. */
+    teiId: string | undefined;
+};
+
+export type ComponentProps = PluginContextIds & {
     pluginSource: string;
     fieldsMetadata: FormattedMetadataByPluginId;
     formSubmitted: boolean;
-    values: { [id: string]: any };
-    orgUnitId: string | undefined;
-    programId: string | undefined;
-    programStageId: string | undefined;
-    enrollmentId: string | undefined;
-    eventId: string | undefined;
-    teiId: string | undefined;
+    /**
+     * Field values keyed by the plugin's own field id or one of the context
+     * keys (occurredAt, scheduledAt, enrolledAt, geometry, orgUnit) on forms
+     * where those fields exist.
+     */
+    values: { [id: string]: unknown };
     setFieldValue: (props: SetFieldValueProps) => void;
     errors: { [id: string]: string[] };
     warnings: { [id: string]: string[] };

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useLocationQuery } from '../../../../utils/routing';
-import type { PluginContext } from '../FormFieldPlugin.types';
+import type { PluginContext, PluginContextIds } from '../FormFieldPlugin.types';
 
 type EnrollmentEvent = {
     event: string;
@@ -21,15 +21,6 @@ type ReduxStateSlice = {
     };
     viewEventPage?: { eventId?: string };
     currentSelections?: { programId?: string };
-};
-
-type PluginContextIds = {
-    orgUnitId: string | undefined;
-    programId: string | undefined;
-    programStageId: string | undefined;
-    enrollmentId: string | undefined;
-    eventId: string | undefined;
-    teiId: string | undefined;
 };
 
 type OrgUnitSources = {

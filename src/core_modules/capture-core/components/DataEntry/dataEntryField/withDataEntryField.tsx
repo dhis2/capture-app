@@ -114,22 +114,21 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
     return DataEntryFieldBuilder;
 };
 
+// Default is to always pass the field's redux value through so it lands in
+// `pluginContext.<propName>.value` for plugins. Settings may opt out with
+// `getPassOnFieldData: () => false`.
 const getMapStateToProps = (settings: Settings) => (state: any, props: Props) => {
-    let passOnFieldDataProp;
     const { getPassOnFieldData, getPropName } = settings;
-    if (getPassOnFieldData && getPassOnFieldData(props)) {
-        const propName = getPropName(props);
-        const itemId = state.dataEntries[props.id].itemId;
-        const key = getDataEntryKey(props.id, itemId);
-        const value = state.dataEntriesFieldsValue[key][propName];
-        passOnFieldDataProp = {
-            [`${propName}DataEntryFieldValue`]: value,
-        };
-    }
+    const shouldPass = getPassOnFieldData ? getPassOnFieldData(props) : true;
+    if (!shouldPass) return {};
 
-    return {
-        ...passOnFieldDataProp,
-    };
+    const dataEntry = state.dataEntries[props.id];
+    if (!dataEntry) return {};
+
+    const propName = getPropName(props);
+    const key = getDataEntryKey(props.id, dataEntry.itemId);
+    const value = state.dataEntriesFieldsValue[key]?.[propName];
+    return { [`${propName}DataEntryFieldValue`]: value };
 };
 
 
