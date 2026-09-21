@@ -26,10 +26,6 @@ const InfoBoxPlain = ({
     orgUnitName,
     classes,
 }: Props) => {
-    if (!scheduleDate || !suggestedScheduleDate) {
-        return null;
-    }
-
     const dayDifference = getDayDifference(scheduleDate, suggestedScheduleDate);
     const absoluteDifference = Math.abs(dayDifference);
     const position = dayDifference > 0 ? i18n.t('after') : i18n.t('before');

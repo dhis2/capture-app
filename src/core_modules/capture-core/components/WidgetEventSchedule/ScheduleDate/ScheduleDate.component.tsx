@@ -115,9 +115,12 @@ const ScheduleDatePlain = ({
         };
     };
 
-    let errorMessage: string | undefined;
-    if (validation?.error) errorMessage = validation.validationText;
-    else if (saveAttempted && !hasValue(scheduleDate)) errorMessage = i18n.t('A value is required');
+    const getErrorMessage = () => {
+        if (validation?.error) return validation.validationText;
+        if (saveAttempted && !hasValue(scheduleDate)) return i18n.t('A value is required');
+        return undefined;
+    };
+    const errorMessage = getErrorMessage();
 
     return (
         <div className={hideDueDate ? classes.autoScheduledWrapper : classes.fieldWrapper}>
