@@ -125,6 +125,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
                     programId,
+                    stageId: programStage?.id,
                 })}
             </ViewEventSection>
         );

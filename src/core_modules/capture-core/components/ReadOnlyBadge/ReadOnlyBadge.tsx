@@ -26,11 +26,13 @@ const ReadOnlyBadgePlain = ({
     stageId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const { enrollmentLabel, programStagesLabel } = useTermLabel(
-        [LabelKeys.enrollmentSingular, LabelKeys.programStagePlural],
-    );
-    const { programStageLabel, eventLabel } = useTermLabel(
-        [LabelKeys.programStageSingular, LabelKeys.eventSingular],
+    const { enrollmentLabel, programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
+        [
+            LabelKeys.enrollmentSingular,
+            LabelKeys.programStageSingular,
+            LabelKeys.programStagePlural,
+            LabelKeys.eventSingular,
+        ],
         { stageId },
     );
     const access: Access = {

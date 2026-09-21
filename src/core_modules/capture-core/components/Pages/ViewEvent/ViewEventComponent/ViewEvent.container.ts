@@ -31,9 +31,10 @@ const makeMapStateToProps = () => {
             : getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW);
         const isUserInteractionInProgress = dataEntryHasChanges(state, currentDataEntryKey);
         const programId = state.currentSelections.programId;
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+        const programStage = programStageSelector(state);
+        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId: programStage?.id });
         return {
-            programStage: programStageSelector(state),
+            programStage,
             eventAccess: eventAccessSelector(state),
             error: state.viewEventPage.loadError,
             currentDataEntryKey,

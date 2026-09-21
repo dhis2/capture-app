@@ -26,8 +26,10 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentsAsOptions,
 }: Props) => {
     const { reset } = useReset();
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { stageId });
+    const { enrollmentLabel, programStageLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.programStageSingular],
+        { stageId },
+    );
     return (
         <ScopeSelector
             selectedProgramId={programId}

@@ -47,10 +47,10 @@ export const TopBar = ({
     isUserInteractionInProgress,
 }: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], {
-        stageId: programStage?.id,
-    });
+    const { enrollmentLabel, programStageLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.programStageSingular],
+        { stageId: programStage?.id },
+    );
 
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();

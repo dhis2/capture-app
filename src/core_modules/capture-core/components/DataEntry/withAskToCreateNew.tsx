@@ -15,6 +15,7 @@ type Props = {
     isCompleted?: boolean;
     itemId: string;
     programId: string;
+    stageId?: string;
 };
 
 type State = {
@@ -53,7 +54,10 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
             if (!this.state.isOpen) {
                 return null;
             }
-            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: this.props.programId });
+            const { eventLabel } = getTermLabel(
+                [LabelKeys.eventSingular],
+                { programId: this.props.programId, stageId: this.props.stageId },
+            );
             return (
                 <Modal
                     hide={!this.state.isOpen}

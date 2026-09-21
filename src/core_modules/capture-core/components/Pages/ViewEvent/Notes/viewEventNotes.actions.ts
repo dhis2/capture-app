@@ -31,6 +31,7 @@ export const startSaveEventNote = (
     selections: any,
     clientId: string,
     programId: string,
+    stageId?: string,
 ) =>
     actionCreator(actionTypes.START_SAVE_EVENT_NOTE)({ selections, clientId }, {
         offline: {
@@ -44,7 +45,7 @@ export const startSaveEventNote = (
             commit: { type: actionTypes.EVENT_NOTE_SAVED, meta: { selections, clientId } },
             rollback: {
                 type: actionTypes.SAVE_EVENT_NOTE_FAILED,
-                meta: { selections, clientId, programId },
+                meta: { selections, clientId, programId, stageId },
             },
         },
     });
