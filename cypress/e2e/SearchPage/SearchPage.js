@@ -354,22 +354,22 @@ Then('you stay in the same page with results from all programs being displayed',
     cy.contains('Results found in all programs').should('exist');
 });
 
-When('you fill in Sara Jorgensen first and last name', () => {
+When('you fill in Neftalem Efrem first and last name', () => {
     cy.get('[data-test="form-attributes"]')
         .find('input[type="text"]')
         .eq(0)
-        .type('Sara')
+        .type('Neftalem')
         .blur();
     cy.get('[data-test="form-attributes"]')
         .find('input[type="text"]')
         .eq(1)
-        .type('Jørgensen')
+        .type('Efrem')
         .blur();
 });
 
-When('you click the re-enroll button', () => {
-    cy.get('[data-test="re-enrollment-button"]')
-        .first()
+When('you click the re-enroll button on Neftalem Efrem card', () => {
+    cy.contains('[data-test="card-list-item"]', 'Efrem')
+        .find('[data-test="re-enrollment-button"]')
         .click();
 });
 

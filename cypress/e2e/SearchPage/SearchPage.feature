@@ -229,11 +229,10 @@ Feature: User interacts with Search page
         And the BulkDataEntry widget in active mode is displayed
 
     Scenario: Re-enroll from search results navigates to the registration page
-        Given you are on the default search page
-        When you select the search domain WHO RMNCH Tracker
-        And you expand the attributes search area
-        And you fill in Sara Jorgensen first and last name
+        Given you are in the search page with the TB program being preselected from the url
+        When you expand the attributes search area
+        And you fill in Neftalem Efrem first and last name
         And you click search
         And you can see the first page of the results
-        When you click the re-enroll button
+        When you click the re-enroll button on Neftalem Efrem card
         Then you are navigated to the registration page
