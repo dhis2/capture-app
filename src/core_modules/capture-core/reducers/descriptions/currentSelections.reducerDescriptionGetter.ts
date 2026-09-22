@@ -22,9 +22,6 @@ import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewE
 import {
     trackedEntityTypeSelectorActionTypes,
 } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
-import {
-    enrollmentPageActionTypes,
-} from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const setCategoryOption = (
     state: any,
@@ -241,18 +238,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categoriesMeta: undefined,
         complete: false,
         trackedEntityTypeId,
-    }),
-    [enrollmentPageActionTypes.COMMIT_TRACKER_PROGRAM_ID]: (state, { payload: { programId } }) => ({
-        ...state,
-        programId,
-    }),
-    [enrollmentPageActionTypes.COMMIT_NON_TRACKER_PROGRAM_ID]: (state, { payload: { programId } }) => ({
-        ...state,
-        programId,
-    }),
-    [enrollmentPageActionTypes.PROGRAM_ID_ERROR]: (state, { payload: { programId } }) => ({
-        ...state,
-        programId,
     }),
 }, 'currentSelections', {
     complete: false,

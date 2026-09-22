@@ -1,5 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useContext } from 'react';
 import { programCollection } from '../../metaDataMemoryStores';
+import { useLocationQuery } from '../../utils/routing';
+import { ProgramIdContext } from '../../contexts';
 import { LABELS, type LabelConfig } from './constants/customLabels.const';
 
 export type CustomLabelKey = keyof typeof LABELS;
@@ -94,13 +96,12 @@ export const getTermLabelFromProgram = (
 ): CustomLabels =>
     buildLabels(requests, (key, plural) => resolveLabel([program], key, plural));
 
-/** Use inside React components; reads programId from `currentSelections`, which the ScopeSelector keeps in sync with the top-bar. */
+/** Use inside React components; resolves programId from URL, falling back to `ProgramIdContext` for routes whose URL lacks it. */
 export const useTermLabel = (
     requests: ReadonlyArray<TermRequest>,
     { stageId }: StageScope = {},
 ): CustomLabels => {
-    const programId = useSelector((state: { currentSelections: { programId?: string } }) =>
-        state.currentSelections.programId);
-    return buildLabels(requests, (key, plural) =>
-        resolveFromCollection(programId, stageId, key, plural));
+    const { programId: urlProgramId } = useLocationQuery();
+    const contextProgramId = useContext(ProgramIdContext);
+    return getTermLabel(requests, { programId: urlProgramId ?? contextProgramId, stageId });
 };
