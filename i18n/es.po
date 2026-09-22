@@ -1,7 +1,6 @@
 # Translators:
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
-# Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
 # Christian Atavillos, 2023
 # Marta Vila <marta@dhis2.org>, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
@@ -10,20 +9,21 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Alison Andrade <aandrade@ippfwhr.org>, 2025
 # Andres Miguel Rubio, 2026
-# Viktor Varland <viktor@dhis2.org>, 2026
 # Prabhjot Singh, 2026
 # Carlos Tejo Alonso, 2026
-# Pablo Del Médico, 2026
 # Janeth Cruz, 2026
 # Philip Larsen Donnelly, 2026
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Nancy Espinoza, 2026
+# Pablo Del Médico, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-08-04T13:01:31.955Z\n"
+"POT-Creation-Date: 2026-09-17T10:17:48.262Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2026\n"
+"Last-Translator: Pablo Del Médico, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -452,11 +452,11 @@ msgstr ""
 msgid "Operations running"
 msgstr "Operaciones en ejecución"
 
-msgid "No feedback for this enrollment yet"
-msgstr "Aún no hay comentarios para esta inscripción"
+msgid "No feedback for this {{enrollmentLabel}} yet"
+msgstr ""
 
-msgid "No indicator output for this enrollment yet"
-msgstr "Aún no hay resultados de indicadores para esta inscripción"
+msgid "No indicator output for this {{enrollmentLabel}} yet"
+msgstr ""
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -465,6 +465,42 @@ msgstr ""
 "Este evento tiene cambios no guardados. Si abandona esta página sin guardar,"
 " se perderán estos cambios. ¿Está seguro de que desea descartar los cambios "
 "no guardados?"
+
+msgid "View changelog"
+msgstr "Ver registro de cambios"
+
+msgid "An error occurred when updating event status"
+msgstr "Ocurrió un error al actualizar el estado del evento"
+
+msgid "Mark incomplete"
+msgstr "Marca como incompleto"
+
+msgid "Mark complete"
+msgstr "Marcar como completado"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "An error occurred while deleting the event"
+msgstr "Se produjo un error eliminando el evento"
+
+msgid "Delete event"
+msgstr "Eliminar evento"
+
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr "La eliminación de un evento es permanente y no se puede deshacer."
+
+msgid "Are you sure you want to delete this event?"
+msgstr ""
+
+msgid "Yes, delete event"
+msgstr "Sí, eliminar evento"
+
+msgid "Unskip"
+msgstr "des omitir"
+
+msgid "Skip"
+msgstr "Omitir"
 
 msgid "No events to display"
 msgstr "No hay eventos para mostrar"
@@ -600,9 +636,6 @@ msgstr "Subiendo archivo"
 
 msgid "selected"
 msgstr "seleccionado"
-
-msgid "Delete"
-msgstr "Borrar"
 
 msgid "Select file"
 msgstr "Seleccionar archivos"
@@ -752,6 +785,12 @@ msgstr "Aviso"
 
 msgid "Close the notice"
 msgstr "cerrar el aviso"
+
+msgid "No feedback for this enrollment yet"
+msgstr "Aún no hay comentarios para esta inscripción"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Aún no hay resultados de indicadores para esta inscripción"
 
 msgid "Quick actions"
 msgstr "Acciones rápidas"
@@ -1020,9 +1059,6 @@ msgstr "Eventos"
 msgid "event"
 msgstr "evento"
 
-msgid "View changelog"
-msgstr "Ver registro de cambios"
-
 msgid "Event details"
 msgstr "Detalles del evento"
 
@@ -1127,6 +1163,12 @@ msgstr "Posibles duplicados encontrados"
 msgid "An error occurred loading possible duplicates"
 msgstr "Se produjo un error al cargar posibles duplicados"
 
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "Solo lectura"
+
 msgid "You only have view access to this enrollment"
 msgstr ""
 
@@ -1151,17 +1193,14 @@ msgstr ""
 msgid "This event has been completed"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "This {{trackedEntityName}} is deactivated"
 msgstr ""
 
 msgid "This tracked entity is deactivated"
 msgstr ""
-
-msgid "View only - {{message}}"
-msgstr ""
-
-msgid "View only"
-msgstr "Solo lectura"
 
 msgid "Add relationship"
 msgstr "Añadir relación"
@@ -1407,9 +1446,6 @@ msgstr "Reactiva"
 msgid "Mark as cancelled"
 msgstr "Marca como cancelado"
 
-msgid "Mark incomplete"
-msgstr "Marca como incompleto"
-
 msgid "You do not have access to delete this enrollment"
 msgstr "No tiene acceso para borrar esta inscripción"
 
@@ -1501,9 +1537,6 @@ msgstr ""
 "No se pudo cargar el widget de inscripción. Por favor, inténtelo de nuevo "
 "más tarde"
 
-msgid "Follow-up"
-msgstr "Seguimiento"
-
 msgid "Started at{{escape}}"
 msgstr "Comenzó en {{escape}}"
 
@@ -1554,17 +1587,8 @@ msgstr "Advertencia"
 msgid "stage not found in rules execution"
 msgstr "etapa no encontrada en la ejecución de reglas"
 
-msgid "Delete event"
-msgstr "Eliminar evento"
-
-msgid "Deleting an event is permanent and cannot be undone."
-msgstr "La eliminación de un evento es permanente y no se puede deshacer."
-
 msgid "Are you sure you want to delete this event? "
 msgstr "¿Está seguro de querer eliminar este evento?"
-
-msgid "Yes, delete event"
-msgstr "Sí, eliminar evento"
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Vaya a la pestaña \"Programar\" para reprogramar este evento"
@@ -1572,9 +1596,6 @@ msgstr "Vaya a la pestaña \"Programar\" para reprogramar este evento"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 "La fecha programada no se puede cambiar para eventos {{ eventStatus }} "
-
-msgid "You do not have access to uncomplete this event"
-msgstr ""
 
 msgid "Geometry (Area)"
 msgstr "Geometría (Área)"
@@ -1588,8 +1609,8 @@ msgstr "Polígono capturado"
 msgid "No polygon captured"
 msgstr "Ningún poligono capturado"
 
-msgid "Event completed"
-msgstr "Evento completado"
+msgid "{{eventLabel}} completed"
+msgstr ""
 
 msgid "Notes about this event"
 msgstr "Notas sobre este acto"
@@ -1763,10 +1784,10 @@ msgstr ""
 "No se pudo cargar el widget de perfil. Por favor, inténtelo de nuevo más "
 "tarde"
 
-msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgid "No attributes configured"
 msgstr ""
 
-msgid "No attributes configured"
+msgid "No attributes configured to display"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
@@ -1827,30 +1848,6 @@ msgstr "Esta etapa solo puede tener un evento"
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-msgstr ""
-
-msgid "This event is outside the edit period"
-msgstr ""
-
-msgid "An error occurred while deleting the event"
-msgstr "Se produjo un error eliminando el evento"
-
-msgid "Are you sure you want to delete this event?"
-msgstr ""
-
-msgid "An error occurred when updating event status"
-msgstr "Ocurrió un error al actualizar el estado del evento"
-
-msgid "Unskip"
-msgstr "des omitir"
-
-msgid "Skip"
-msgstr "Omitir"
-
-msgid "To open this event, please wait until saving is complete"
-msgstr "Para abrir este evento, espere hasta que se complete el guardado."
-
 msgid "Show {{ rest }} more"
 msgstr "Mostrar más {{ rest }} "
 
@@ -1877,8 +1874,8 @@ msgstr "{{ scheduledEvents }} programado(s)"
 msgid "No stages found in this program"
 msgstr ""
 
-msgid "Stages and Events"
-msgstr "Etapas y eventos"
+msgid "{{programStagesLabel}} and {{eventsLabel}}"
+msgstr ""
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr ""
@@ -2032,6 +2029,9 @@ msgstr "Nombre de la etapa del programa"
 
 msgid "Working list could not be loaded"
 msgstr "No se pudo cargar la lista de trabajo"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "Download data..."
 msgstr "Descargar datos"
@@ -2337,11 +2337,41 @@ msgstr "Atrasado"
 msgid "Skipped"
 msgstr "Omitido"
 
-msgid "Visited"
-msgstr "Visitado"
-
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} en el programa {{escape}} {{programName}}"
+
+msgid "enrollments"
+msgstr "Registros"
+
+msgid "program stage"
+msgstr ""
+
+msgid "program stages"
+msgstr ""
+
+msgid "note"
+msgstr ""
+
+msgid "notes"
+msgstr ""
+
+msgid "relationship"
+msgstr ""
+
+msgid "relationships"
+msgstr "relaciones"
+
+msgid "attribute"
+msgstr ""
+
+msgid "attributes"
+msgstr ""
+
+msgid "organisation unit"
+msgstr ""
+
+msgid "follow-up"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Programa no encontrado"
