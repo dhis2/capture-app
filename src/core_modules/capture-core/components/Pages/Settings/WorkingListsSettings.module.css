@@ -1,0 +1,83 @@
+/* Uses the DHIS2 --colors-* / --spacers-* custom properties injected at :root by
+   <CssVariables colors spacers /> in SettingsPage. */
+
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacers-dp24);
+}
+
+.header {
+    margin-bottom: var(--spacers-dp16);
+}
+
+.section {
+    margin-top: var(--spacers-dp32);
+    padding-top: var(--spacers-dp24);
+    border-top: 1px solid var(--colors-grey300);
+}
+
+.checkboxList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+    margin-bottom: var(--spacers-dp24);
+}
+
+.field {
+    max-width: 640px;
+    margin-bottom: 0;
+}
+
+.gated {
+    padding-inline-start: var(--spacers-dp32);
+    padding-top: var(--spacers-dp12);
+    padding-bottom: var(--spacers-dp24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp24);
+    
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--colors-grey900);
+    margin-bottom: var(--spacers-dp8);
+}
+
+.hint {
+    font-size: 13px;
+    color: var(--colors-grey600);
+    margin-top: var(--spacers-dp4);
+    margin-bottom: 0;
+    padding-inline-start: 24px;
+}
+
+.radioRow {
+    display: flex;
+    gap: var(--spacers-dp24);
+    margin-bottom: var(--spacers-dp12);
+}
+
+.rangeRow {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+    margin-bottom: var(--spacers-dp8);
+}
+
+.rangeLead {
+    width: 44px;
+    font-size: 14px;
+    color: var(--colors-grey900);
+}
+
+.rangeNumber {
+    width: 96px;
+}
+
+.rangeDirection {
+    width: 160px;
+}

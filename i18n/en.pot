@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-14T12:18:16.706Z\n"
-"PO-Revision-Date: 2026-09-14T12:18:16.707Z\n"
+"POT-Creation-Date: 2026-09-22T10:03:56.155Z\n"
+"PO-Revision-Date: 2026-09-22T10:03:56.156Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -963,6 +963,103 @@ msgstr "Register"
 msgid "Back"
 msgstr "Back"
 
+msgid "Working lists"
+msgstr "Working lists"
+
+msgid "Configure the bulk entry widgets available per program."
+msgstr "Configure the bulk entry widgets available per program."
+
+msgid "Data entry forms"
+msgstr "Data entry forms"
+
+msgid "Customize form layouts and field plugins per context."
+msgstr "Customize form layouts and field plugins per context."
+
+msgid "Enrollment layout"
+msgstr "Enrollment layout"
+
+msgid "Arrange the widgets shown on the enrollment overview and event pages."
+msgstr "Arrange the widgets shown on the enrollment overview and event pages."
+
+msgid "Program rules"
+msgstr "Program rules"
+
+msgid "Select the program-rule engine implementation."
+msgstr "Select the program-rule engine implementation."
+
+msgid "Exit configure mode"
+msgstr "Exit configure mode"
+
+msgid "Discard changes"
+msgstr "Discard changes"
+
+msgid "Saving..."
+msgstr "Saving..."
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "{{section}} configuration is not built yet — this is a placeholder."
+msgstr "{{section}} configuration is not built yet — this is a placeholder."
+
+msgid "Your changes to {{section}} will be lost."
+msgstr "Your changes to {{section}} will be lost."
+
+msgid "Keep editing"
+msgstr "Keep editing"
+
+msgid "Show placeholder content"
+msgstr "Show placeholder content"
+
+msgid "Could not load settings"
+msgstr "Could not load settings"
+
+msgid "The working list configuration could not be read from the DataStore."
+msgstr "The working list configuration could not be read from the DataStore."
+
+msgid "Global filters"
+msgstr "Global filters"
+
+msgid ""
+"Set the default filters that apply to working lists for all users and "
+"programs"
+msgstr ""
+"Set the default filters that apply to working lists for all users and "
+"programs"
+
+msgid "Filter by"
+msgstr "Filter by"
+
+msgid "Preset period"
+msgstr "Preset period"
+
+msgid "Relative date range"
+msgstr "Relative date range"
+
+msgid "days ago"
+msgstr "days ago"
+
+msgid "days ahead"
+msgstr "days ahead"
+
+msgid "Always apply this filter"
+msgstr "Always apply this filter"
+
+msgid "Users cannot remove this filter from the working list view"
+msgstr "Users cannot remove this filter from the working list view"
+
+msgid "Per-program filters"
+msgstr "Per-program filters"
+
+msgid "Add program"
+msgstr "Add program"
+
+msgid "Working list settings saved"
+msgstr "Working list settings saved"
+
+msgid "Could not save working list settings"
+msgstr "Could not save working list settings"
+
 msgid "events"
 msgstr "events"
 
@@ -1112,6 +1209,9 @@ msgstr "View only"
 
 msgid "Add relationship"
 msgstr "Add relationship"
+
+msgid "Configure"
+msgstr "Configure"
 
 msgid "No results found for "
 msgstr "No results found for "
@@ -1607,9 +1707,6 @@ msgstr "Save note"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
-
-msgid "Save changes"
-msgstr "Save changes"
 
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr "Change information about this {{trackedEntityName}} here."

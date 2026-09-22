@@ -2,6 +2,7 @@ import React from 'react';
 import { SelectorBar } from '@dhis2/ui';
 import { ProgramSelector } from './Program/ProgramSelector.component';
 import { OrgUnitSelector } from './OrgUnitSelector.component';
+import { ConfigureButton } from './ConfigureButton.component';
 import type { Props } from './QuickSelector.types';
 
 export const QuickSelector = ({
@@ -26,6 +27,7 @@ export const QuickSelector = ({
     <SelectorBar
         disableClearSelections={!selectedProgramId && !selectedOrgUnitId}
         onClearSelectionClick={() => onStartAgain()}
+        additionalContent={<ConfigureButton />}
     >
         <ProgramSelector
             selectedProgramId={selectedProgramId}

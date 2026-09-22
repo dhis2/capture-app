@@ -1,0 +1,197 @@
+/* Uses the DHIS2 --colors-* / --spacers-* custom properties. These are injected
+   at :root by <CssVariables colors spacers /> rendered in SettingsPage. */
+
+/* Mimics the context selector bar (@dhis2/ui SelectorBar container). */
+.contextBar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Match the SelectorBar: 40px content row + 1px bottom line. */
+    height: 41px;
+    padding-inline-start: var(--spacers-dp8);
+    background: var(--colors-white);
+    box-shadow: inset 0 -1px 0 0 var(--colors-grey400);
+}
+
+.layout {
+    display: flex;
+    align-items: stretch;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    max-width: 900px;
+    margin-inline-start: 240px;
+    padding: var(--spacers-dp24) var(--spacers-dp24) var(--spacers-dp32);
+}
+
+/* Pinned under the DHIS2 header (48px) and the 41px context bar. */
+.nav {
+    box-sizing: border-box;
+    position: fixed;
+    top: 89px;
+    inset-inline-start: 0;
+    z-index: 80;
+    width: 240px;
+    height: calc(100vh - 89px);
+    padding: var(--spacers-dp24) var(--spacers-dp8) var(--spacers-dp24);
+    background: var(--colors-white);
+    border-inline-end: 1px solid var(--colors-grey300);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--colors-grey800);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: start;
+    cursor: pointer;
+}
+
+.navItem:hover {
+    background: var(--colors-grey200);
+    color: var(--colors-grey900);
+}
+
+.navItemActive,
+.navItemActive:hover {
+    background: var(--colors-grey300);
+    color: var(--colors-grey900);
+    font-weight: 500;
+}
+
+.content {
+    flex: 1;
+    min-height: 320px;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacers-dp8);
+    padding: var(--spacers-dp12) var(--spacers-dp16);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 4px 4px 0 0;
+    background: var(--colors-white);
+    /* Sit 4px under the 41px context bar while the page scrolls. */
+    position: sticky;
+    top: 45px;
+    z-index: 90;
+}
+
+/* Covers the page gap above the stuck header, including the side borders
+   that would otherwise run past the top edge. */
+.cardHeader::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    bottom: calc(100% + 1px);
+    height: 4px;
+    background: #f8f9fa;
+}
+
+.cardHeaderActions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+}
+
+.cardBody {
+    padding: var(--spacers-dp24);
+    background: var(--colors-white);
+    border: 1px solid var(--colors-grey300);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+/* In-card section heading. Use for each block of settings content. */
+.contentHeading {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.375;
+    margin: 0;
+    color: var(--colors-grey900);
+}
+
+.contentSubheading {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.375;
+    margin: var(--spacers-dp4) 0 0;
+    color: var(--colors-grey700);
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--colors-grey900);
+}
+
+.sectionHint {
+    color: var(--colors-grey600);
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: var(--spacers-dp16);
+}
+
+.placeholder {
+    border: 1px dashed var(--colors-grey400);
+    border-radius: 4px;
+    padding: var(--spacers-dp24);
+    color: var(--colors-grey600);
+    font-size: 14px;
+    background: var(--colors-grey050);
+}
+
+.placeholderToggle {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 200;
+}
+
+.modalText {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--colors-grey900);
+}
+
+.wireframe {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 40px;
+    min-height: 2000px;
+}
+
+.wireframeBlock {
+    box-sizing: border-box;
+    height: 104px;
+    padding: 16px;
+    border: 1px dashed var(--colors-grey300);
+    border-radius: 4px;
+    background: var(--colors-grey050);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--colors-grey400);
+}

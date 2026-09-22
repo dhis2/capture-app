@@ -8,6 +8,7 @@ import { EnrollmentPage } from 'capture-core/components/Pages/Enrollment';
 import { StageEventListPage } from 'capture-core/components/Pages/StageEvent';
 import { EnrollmentEditEventPage } from 'capture-core/components/Pages/EnrollmentEditEvent';
 import { EnrollmentAddEventPage } from 'capture-core/components/Pages/EnrollmentAddEvent';
+import { SettingsPage } from 'capture-core/components/Pages/Settings';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const AppPages = () => (
@@ -21,6 +22,7 @@ export const AppPages = () => (
             <Route path="/enrollmentEventEdit" component={EnrollmentEditEventPage} />
             <Route path="/enrollmentEventNew" component={EnrollmentAddEventPage} />
             <Route path="/enrollment" component={EnrollmentPage} />
+            <Route path="/settings" component={SettingsPage} />
             <Route path="/:keys" component={MainPage} />
             <Route path="/" component={MainPage} />
         </Switch>
