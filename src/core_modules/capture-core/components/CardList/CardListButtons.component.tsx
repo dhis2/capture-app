@@ -9,8 +9,7 @@ import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString } from '../../utils/routing';
-import { programCollection } from '../../metaDataMemoryStores';
-import { TrackerProgram } from '../../metaData';
+import { getScopeFromScopeId, TrackerProgram } from '../../metaData';
 
 type Props = {
     currentSearchScopeId?: string,
@@ -111,9 +110,8 @@ const CardListButtons: FC<Props> = ({
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
 
-    const program = currentSearchScopeId
-        ? programCollection.get(currentSearchScopeId) as TrackerProgram | undefined
-        : undefined;
+    const scope = getScopeFromScopeId(currentSearchScopeId);
+    const program = scope instanceof TrackerProgram ? scope : undefined;
 
     const { showViewActiveEnrollment, showViewDashboard, showReEnroll } =
         computeButtonVisibility(enrollmentType, program, inactive);
