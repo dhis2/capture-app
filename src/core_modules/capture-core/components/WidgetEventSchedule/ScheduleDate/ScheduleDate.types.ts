@@ -1,8 +1,10 @@
+import type { OrgUnitValue, Validation } from '../widgetEventSchedule.types';
+
 export type PlainProps = {
     stageId: string;
     programId: string;
     enrolledAt: string;
-    displayDueDateLabel: string;
+    displayDueDateLabel?: string | null;
     scheduleDate?: string | null;
     serverScheduleDate?: string | null;
     setScheduleDate: (date: string) => void;
@@ -11,26 +13,12 @@ export type PlainProps = {
     eventCountInOrgUnit: number;
     serverSuggestedScheduleDate?: string | null;
     hideDueDate?: boolean;
-    orgUnit?: {
-        checked: boolean;
-        id: string;
-        children: number;
-        name: string;
-        displayName: string;
-        path: string;
-        selected: string[];
-    } | null;
+    orgUnit?: OrgUnitValue | null;
     expiryPeriod?: {
         expiryPeriodType?: string | null;
         expiryDays?: number | null;
     };
-    validation?: {
-        error: boolean;
-        validationText: string;
-    };
-    setValidation: (validation: {
-        error: boolean;
-        validationText: string;
-    }) => void;
-    saveAttempted?: boolean;
+    validation?: Validation;
+    setValidation: (validation: Validation) => void;
+    saveAttempted: boolean;
 };

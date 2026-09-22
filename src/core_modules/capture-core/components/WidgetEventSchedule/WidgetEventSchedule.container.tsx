@@ -9,7 +9,7 @@ import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
 import { generateUID } from '../../utils/uid/generateUID';
-import type { ContainerProps } from './widgetEventSchedule.types';
+import type { ContainerProps, OrgUnitValue, Validation } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
 import {
     useScheduleConfigFromProgramStage,
@@ -53,9 +53,9 @@ export const WidgetEventSchedule = ({
     const { fromClientDate } = useTimeZoneConversion();
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
     const [scheduleDate, setScheduleDate] = useState('');
-    const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState<OrgUnitValue | null | undefined>();
     const [saveAttempted, setSaveAttempted] = useState(false);
-    const [validation, setValidation] = useState<any>();
+    const [validation, setValidation] = useState<Validation | undefined>();
     const isFirstRender = useRef(true);
     useEffect(() => {
         if (initialOrgUnitId && orgUnitName) {

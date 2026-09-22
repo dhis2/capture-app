@@ -14,10 +14,14 @@ import { hasValue } from 'capture-core-utils/validators/form';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
-import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 import type { PlainProps } from './ScheduleDate.types';
 import { convertFormToClient } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
+
+const baseInputStyles = {
+    inputContainerStyle: { flexBasis: 150 },
+    labelContainerStyle: { flexBasis: 200 },
+};
 
 const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
@@ -72,6 +76,7 @@ const ScheduleDatePlain = ({
     expiryPeriod,
     saveAttempted,
 }: Props) => {
+    const scheduleDateLabel = i18n.t('Schedule date / Due date');
     const validateDate = (dateString: string, internalComponentError: any) => {
         if (!hasValue(dateString)) {
             return {
@@ -88,25 +93,19 @@ const ScheduleDatePlain = ({
             };
         }
 
-        if (!expiryPeriod) {
-            return {
-                error: false,
-                validationText: '',
-            };
-        }
-
-        const occurredAtClient = convertFormToClient(dateString, dataElementTypes.DATE) as string;
-        const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
-
-        if (!isWithinValidPeriod) {
-            return {
-                error: true,
-                // eslint-disable-next-line max-len
-                validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
-                    firstValidDate,
-                    interpolation: { escapeValue: false },
-                }),
-            };
+        if (expiryPeriod) {
+            const occurredAtClient = convertFormToClient(dateString, dataElementTypes.DATE) as string;
+            const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
+            if (!isWithinValidPeriod) {
+                return {
+                    error: true,
+                    // eslint-disable-next-line max-len
+                    validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
+                        firstValidDate,
+                        interpolation: { escapeValue: false },
+                    }),
+                };
+            }
         }
 
         return {
@@ -115,18 +114,16 @@ const ScheduleDatePlain = ({
         };
     };
 
-    const getErrorMessage = () => {
-        if (validation?.error) return validation.validationText;
-        if (saveAttempted && !hasValue(scheduleDate)) return i18n.t('A value is required');
-        return undefined;
-    };
-    const errorMessage = getErrorMessage();
+    const currentValidation = saveAttempted
+        ? validateDate(scheduleDate ?? '', undefined)
+        : validation;
+    const errorMessage = currentValidation?.error ? currentValidation.validationText : undefined;
 
     return (
         <div className={hideDueDate ? classes.autoScheduledWrapper : classes.fieldWrapper}>
             {!hideDueDate ?
                 <ScheduleDateField
-                    label={i18n.t('Schedule date / Due date')}
+                    label={scheduleDateLabel}
                     required
                     value={scheduleDate}
                     width="100%"
@@ -142,10 +139,7 @@ const ScheduleDatePlain = ({
                 />
                 :
                 <div className={classes.fieldLabel}>
-                    {displayDueDateLabel ?? i18n.t('Schedule date / Due date', {
-                        interpolation: { escapeValue: false },
-                    },
-                    )}
+                    {displayDueDateLabel ?? scheduleDateLabel}
                 </div>
             }
             {serverScheduleDate && serverSuggestedScheduleDate && (
