@@ -45,6 +45,7 @@ export {
     getTermLabelFromProgram,
     LabelKeys,
     useTermLabel,
+    ProgramIdContext,
     type CustomLabelKey,
     type CustomLabels,
     type TermRequest,
