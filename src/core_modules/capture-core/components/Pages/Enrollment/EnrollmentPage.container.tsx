@@ -103,8 +103,7 @@ export const EnrollmentPage: ComponentType<Record<string, never>> = () => {
 
     const dispatch = useDispatch();
     const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
-    const { tetId, enrollments, teiDisplayName, programId: enrollmentProgramId } = useSelector(
-        ({ enrollmentPage }: any) => enrollmentPage);
+    const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }: any) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
@@ -120,7 +119,7 @@ export const EnrollmentPage: ComponentType<Record<string, never>> = () => {
       useSelector(({ activePage }: any) => activePage.selectionsError && activePage.selectionsError.error);
 
     return (
-        <ProgramIdContext.Provider value={programId ?? enrollmentProgramId}>
+        <ProgramIdContext.Provider value={programId}>
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}

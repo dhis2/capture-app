@@ -103,7 +103,5 @@ export const useTermLabel = (
 ): CustomLabels => {
     const { programId: urlProgramId } = useLocationQuery();
     const contextProgramId = useContext(ProgramIdContext);
-    const activeProgramId = urlProgramId ?? contextProgramId;
-    return buildLabels(requests, (key, plural) =>
-        resolveFromCollection(activeProgramId, stageId, key, plural));
+    return getTermLabel(requests, { programId: urlProgramId ?? contextProgramId, stageId });
 };
