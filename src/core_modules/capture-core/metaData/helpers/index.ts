@@ -26,6 +26,5 @@ export {
     type CustomLabels,
     type TermRequest,
 } from './customLabels';
-export { ProgramIdContext } from './programIdContext';
 export { LabelKeys } from './constants/customLabels.const';
 

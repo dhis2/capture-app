@@ -6,7 +6,7 @@ import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRela
 import { TopBar } from './TopBar.container';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { useLocationQuery } from '../../../utils/routing';
-import { ProgramIdContext } from '../../../metaData';
+import { ProgramIdContext } from '../../../contexts';
 
 type Props = {
     isUserInteractionInProgress: boolean,

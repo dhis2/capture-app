@@ -17,7 +17,8 @@ import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
-import { getScopeInfo, ProgramIdContext } from '../../../metaData';
+import { getScopeInfo } from '../../../metaData';
+import { ProgramIdContext } from '../../../contexts';
 import {
     buildEnrollmentsAsOptions,
     useSetEnrollmentId,

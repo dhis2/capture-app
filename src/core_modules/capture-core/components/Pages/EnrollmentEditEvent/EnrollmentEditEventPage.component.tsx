@@ -11,7 +11,7 @@ import {
     EnrollmentPageKeys,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { actionTypes } from './EnrollmentEditEventPage.actions';
-import { ProgramIdContext } from '../../../metaData';
+import { ProgramIdContext } from '../../../contexts';
 
 export const EnrollmentEditEventPageComponent = ({
     pageLayout,

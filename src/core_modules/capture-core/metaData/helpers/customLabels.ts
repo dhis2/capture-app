@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { programCollection } from '../../metaDataMemoryStores';
 import { useLocationQuery } from '../../utils/routing';
-import { ProgramIdContext } from './programIdContext';
+import { ProgramIdContext } from '../../contexts';
 import { LABELS, type LabelConfig } from './constants/customLabels.const';
 
 export type CustomLabelKey = keyof typeof LABELS;
