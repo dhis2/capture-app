@@ -77,7 +77,10 @@ const ScheduleDatePlain = ({
     saveAttempted,
 }: Props) => {
     const scheduleDateLabel = i18n.t('Schedule date / Due date');
-    const validateDate = (dateString: string, internalComponentError: any) => {
+    const validateDate = (
+        dateString: string,
+        internalComponentError?: { error?: string; errorCode?: string },
+    ) => {
         if (!hasValue(dateString)) {
             return {
                 error: true,
@@ -115,7 +118,7 @@ const ScheduleDatePlain = ({
     };
 
     const currentValidation = saveAttempted
-        ? validateDate(scheduleDate ?? '', undefined)
+        ? validateDate(scheduleDate ?? '')
         : validation;
     const errorMessage = currentValidation?.error ? currentValidation.validationText : undefined;
 
