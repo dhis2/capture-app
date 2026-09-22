@@ -1,6 +1,6 @@
 import isDefined from 'd2-utilizr/lib/isDefined';
 import log from 'loglevel';
-import { featureAvailable, FEATURES, errorCreator } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
@@ -16,9 +16,7 @@ const subValueGetterByElementType = {
         absoluteApiPath: string;
         programId?: string | null;
     }) => {
-        const url = featureAvailable(FEATURES.trackerImageEndpoint)
-            ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`
-            : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/image?dimension=SMALL`;
+        const url = `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`;
         const previewUrl = programId ? `${url}&program=${programId}` : url;
 
         return {
@@ -43,9 +41,7 @@ const subValueGetterByElementType = {
     }) =>
         querySingleResource({ resource: `fileResources/${value}` })
             .then((res: any) => {
-                const fileUrl = featureAvailable(FEATURES.trackerFileEndpoint)
-                    ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file`
-                    : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/file`;
+                const fileUrl = `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file`;
                 const url = programId ? `${fileUrl}?program=${programId}` : fileUrl;
 
                 return {

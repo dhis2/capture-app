@@ -7,9 +7,6 @@ function compareIndicatorFieldToString(a, str: string) {
 }
 
 export const sortIndicatorsFn = (a, b): number => {
-    if (typeof b === 'string') {
-        return compareIndicatorFieldToString(a, b);
-    }
     if (b.message) {
         return compareIndicatorFieldToString(a, b.message);
     }

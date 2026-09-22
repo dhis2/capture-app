@@ -1,15 +1,15 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Pablo Del Médico, 2024
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2026
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2026
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2026
+# Pablo Del Médico, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-05-02T14:22:08.016Z\n"
+"POT-Creation-Date: 2026-08-12T11:21:02.033Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2026\n"
+"Last-Translator: Pablo Del Médico, 2026\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -324,9 +324,6 @@ msgstr "No, cancelar"
 msgid "You don't have access to create an event in the current selections"
 msgstr "No tienes acceso para crear un evento en las selecciones actuales"
 
-msgid "Save"
-msgstr "Guardar"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Guardando un {{trackedEntityName}}"
 
@@ -613,6 +610,9 @@ msgstr "Escriba para filtrar opciones"
 msgid "No match found"
 msgstr "No se han encontraron resultados"
 
+msgid "Search for an organisation unit"
+msgstr ""
+
 msgid "Clear"
 msgstr "Limpiar"
 
@@ -637,11 +637,17 @@ msgstr "no se pudieron cargar las sugerencias"
 msgid "No items to display"
 msgstr "No hay elementos para mostrar"
 
+msgid "Tracked entity is deactivated"
+msgstr ""
+
 msgid "Select columns"
 msgstr "Seleccionar columnas"
 
 msgid "Columns to show in table"
 msgstr "Columns to show in table"
+
+msgid "Save"
+msgstr "Guardar"
 
 msgid "Column"
 msgstr "Columna"
@@ -718,9 +724,6 @@ msgstr ""
 
 msgid "Add note"
 msgstr "Añadir nota"
-
-msgid "You don't have access to write notes"
-msgstr ""
 
 msgid "Write note"
 msgstr ""
@@ -824,9 +827,6 @@ msgstr ""
 msgid "Page is missing required values from URL"
 msgstr "A la página le faltan los valores obligatorios de la URL"
 
-msgid "Org unit is not valid with current program"
-msgstr "La unidad organizativa no es válida con el programa actual"
-
 msgid "There was an error opening the Page"
 msgstr "Hubo un error al abrir la página"
 
@@ -835,6 +835,9 @@ msgstr "Hubo un error al cargar la página"
 
 msgid "Program stage is invalid"
 msgstr "La etapa del programa no es válida"
+
+msgid "Stage not found"
+msgstr ""
 
 msgid "Report"
 msgstr "Informe"
@@ -990,12 +993,6 @@ msgstr "Eventos"
 msgid "event"
 msgstr "evento"
 
-msgid "You don't have access to edit this event"
-msgstr "No tienes acceso para editar este evento."
-
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr ""
-
 msgid "View changelog"
 msgstr ""
 
@@ -1011,6 +1008,12 @@ msgstr ""
 
 msgid "Errors"
 msgstr "Errores"
+
+msgid "This event doesn't have any notes"
+msgstr ""
+
+msgid "This event doesn't have any relationships"
+msgstr ""
 
 msgid "Warnings"
 msgstr "Advertencias"
@@ -1049,7 +1052,7 @@ msgid "Search by attributes"
 msgstr "Buscar por atributos"
 
 msgid "Search {{attributeName}}"
-msgstr ""
+msgstr "Buscar {{attributeName}}"
 
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
@@ -1097,11 +1100,41 @@ msgstr "Posibles duplicados encontrados."
 msgid "An error occurred loading possible duplicates"
 msgstr "Se produjo un error al cargar posibles duplicados"
 
-msgid "You don't have access to delete this relationship"
-msgstr "No tiene acceso para eliminar esta relación."
+msgid "You only have view access to this enrollment"
+msgstr ""
 
-msgid "You don't have access to create any relationships"
-msgstr "No tiene acceso para crear ninguna relación."
+msgid "You only have view access to this program"
+msgstr ""
+
+msgid "You only have view access to this {{trackedEntityName}}"
+msgstr ""
+
+msgid "You only have view access to this tracked entity type"
+msgstr ""
+
+msgid "You only have view access to these program stages"
+msgstr ""
+
+msgid "You only have view access to this program stage"
+msgstr ""
+
+msgid "This event is outside the editing period"
+msgstr ""
+
+msgid "This event has been completed"
+msgstr ""
+
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
+msgstr ""
+
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "Añadir relación"
@@ -1210,7 +1243,7 @@ msgid ""
 msgstr ""
 
 msgid "Create new {{trackedEntityName}}"
-msgstr ""
+msgstr "Crear nuevo {{trackedEntityName}}"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -1278,17 +1311,11 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
-
 msgid "Edit"
 msgstr ""
 
 msgid "No one is assigned to this event"
 msgstr "No hay nadie asignado a este evento."
-
-msgid "You don't have access to assign a user to this event"
-msgstr ""
 
 msgid "Assign"
 msgstr "Asignar"
@@ -1319,9 +1346,6 @@ msgid "Unsaved changes"
 msgstr "Cambios no guardados"
 
 msgid "Continue data entry"
-msgstr ""
-
-msgid "You do not have access to modify this enrollment"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1497,6 +1521,8 @@ msgstr ""
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
+"No se puede modificar la fecha programda para los eventos con estado « {{ "
+"eventStatus }} »"
 
 msgid "You do not have access to uncomplete this event"
 msgstr ""
@@ -1516,25 +1542,16 @@ msgstr ""
 msgid "Event completed"
 msgstr "Evento completado"
 
-msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
 msgid "Notes about this event"
 msgstr ""
 
 msgid "Write a note about this event"
 msgstr ""
 
-msgid "This event doesn't have any notes"
-msgstr ""
-
 msgid "after"
 msgstr ""
 
 msgid "before"
-msgstr ""
-
-msgid "Schedule date info"
 msgstr ""
 
 msgid "Scheduled automatically for {{suggestedScheduleDate}}"
@@ -1558,8 +1575,14 @@ msgid_plural ""
 "There are {{count}} scheduled event in this program in {{orgUnitName}} on "
 "this day."
 msgstr[0] ""
+"Hay un evento programado en este programa en {{count}}, que tendrá lugar en "
+"{{orgUnitName}} este día. "
 msgstr[1] ""
+"Hay {{count}} eventos programados en este programa, en {{orgUnitName}}, para"
+" este día."
 msgstr[2] ""
+"Hay {{count}} eventos programados en este programa, en {{orgUnitName}}, para"
+" este día."
 
 msgid "Schedule date / Due date"
 msgstr ""
@@ -1598,6 +1621,9 @@ msgstr ""
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
 
+msgid "Save changes"
+msgstr ""
+
 msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
@@ -1605,8 +1631,8 @@ msgid ""
 "Information about this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
-msgid "Save changes"
-msgstr ""
+msgid "{{trackedEntityName}} profile"
+msgstr "Perfil de {{trackedEntityName}} "
 
 msgid "Profile"
 msgstr ""
@@ -1626,6 +1652,34 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr ""
 
+msgid "Activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to activate this {{trackedEntityTypeName}}? This will "
+"change its status to active and write operations will be allowed."
+msgstr ""
+
+msgid ""
+"Are you sure you want to deactivate this {{trackedEntityTypeName}}? This "
+"will change its status to inactive and only read operations will be allowed."
+msgstr ""
+
+msgid "Yes, activate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, deactivate {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem activating the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "There was a problem deactivating the {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr ""
 
@@ -1642,6 +1696,9 @@ msgid "There was a problem deleting the {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "View profile"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -1704,9 +1761,6 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-
 msgid "This stage can only have one event"
 msgstr ""
 
@@ -1714,6 +1768,9 @@ msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
 msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
+
+msgid "This event is outside the edit period"
 msgstr ""
 
 msgid "An error occurred while deleting the event"
@@ -1753,6 +1810,9 @@ msgid "{{ overdueEvents }} overdue"
 msgstr ""
 
 msgid "{{ scheduledEvents }} scheduled"
+msgstr "{{ scheduledEvents }} programado(s)"
+
+msgid "No stages found in this program"
 msgstr ""
 
 msgid "Stages and Events"
@@ -1892,6 +1952,9 @@ msgstr ""
 msgid "To open this relationship, please wait until saving is complete"
 msgstr ""
 
+msgid "This enrollment doesn't have any relationships"
+msgstr ""
+
 msgid "Type"
 msgstr ""
 
@@ -1959,9 +2022,6 @@ msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
 msgstr ""
 
 msgid "Enrollment status"
@@ -2241,6 +2301,12 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
+msgid "Could not save enrollment note"
+msgstr ""
+
+msgid "Could not save event note"
+msgstr ""
+
 msgid "There was an error fetching metadata"
 msgstr ""
 
@@ -2326,4 +2392,12 @@ msgid ""
 "This app is currently running in compatibility mode due to browser "
 "restrictions. For better performance, use another browser or exit private "
 "mode if this is currently in use."
+msgstr ""
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr ""
+
+msgctxt "Title for shortcut used by command palette"
+msgid "__MANIFEST_SHORTCUT_Search TEI"
 msgstr ""

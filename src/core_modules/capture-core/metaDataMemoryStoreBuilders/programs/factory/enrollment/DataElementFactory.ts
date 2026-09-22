@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
-import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
+import { pipe, errorCreator } from 'capture-core-utils';
 
 import type {
     CachedAttributeTranslation,
@@ -22,8 +22,8 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import type { ConstructorInput } from './dataElementFactory.types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import {
-    handleUnsupportedMultiText,
-} from '../../../common/helpers/dataElement/unsupportedMultiText';
+    isMultiTextWithoutOptionset,
+} from '../../../common/helpers/dataElement/multiTextValidation';
 import { escapeString } from '../../../../utils/escapeString';
 
 export class DataElementFactory {
@@ -51,26 +51,20 @@ export class DataElementFactory {
         let requestPromise;
         if (dataElementUnique.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
             const orgUnitId = contextProps.orgUnitId;
-            const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-                ? 'orgUnits'
-                : 'orgUnit';
             requestPromise = querySingleResource({
                 resource: 'tracker/trackedEntities',
                 params: {
                     trackedEntityType: contextProps.trackedEntityTypeId,
-                    [orgUnitQueryParam]: orgUnitId,
+                    orgUnits: orgUnitId,
                     filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                 },
             });
         } else {
-            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                ? 'orgUnitMode'
-                : 'ouMode';
             requestPromise = querySingleResource({
                 resource: 'tracker/trackedEntities',
                 params: {
                     trackedEntityType: contextProps.trackedEntityTypeId,
-                    [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                    orgUnitMode: 'ACCESSIBLE',
                     filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                 },
             });
@@ -150,26 +144,20 @@ export class DataElementFactory {
                 let requestPromise;
                 if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                     const orgUnitId = contextProps.orgUnitId;
-                    const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-                        ? 'orgUnits'
-                        : 'orgUnit';
                     requestPromise = querySingleResource({
                         resource: 'tracker/trackedEntities',
                         params: {
                             program: contextProps.programId,
-                            [orgUnitQueryParam]: orgUnitId,
+                            orgUnits: orgUnitId,
                             filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                         },
                     });
                 } else {
-                    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                        ? 'orgUnitMode'
-                        : 'ouMode';
                     requestPromise = querySingleResource({
                         resource: 'tracker/trackedEntities',
                         params: {
                             program: contextProps.programId,
-                            [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                            orgUnitMode: 'ACCESSIBLE',
                             filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                         },
                     });
@@ -212,12 +200,10 @@ export class DataElementFactory {
     locale: string | null;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    minorServerVersion: number;
     constructor({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
-        minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
@@ -225,7 +211,6 @@ export class DataElementFactory {
             cachedOptionSets,
             locale,
         );
-        this.minorServerVersion = minorServerVersion;
     }
 
     _getAttributeTranslation(
@@ -305,7 +290,11 @@ export class DataElementFactory {
             cachedProgramTrackedEntityAttribute,
             cachedTrackedEntityAttribute,
         );
-        return handleUnsupportedMultiText(dataElement, this.minorServerVersion);
+        if (isMultiTextWithoutOptionset(dataElement.type, dataElement.optionSet)) {
+            log.error(errorCreator('MULTI_TEXT without optionset is not supported')({ dataElement }));
+            return null;
+        }
+        return dataElement;
     }
 
     async _buildDateDataElement(

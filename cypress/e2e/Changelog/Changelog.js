@@ -3,6 +3,17 @@ import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 const getChangelogTableBody = () =>
     cy.get('[data-test="changelog-data-table-body"]');
 
+const textCollator = new Intl.Collator(undefined, { sensitivity: 'base', numeric: true });
+
+const assertColumnSortedAscending = (columnSelector, toComparable, compare) =>
+    getChangelogTableBody()
+        .find(`tr ${columnSelector}`)
+        .should(($cells) => {
+            const values = [...$cells].map(cell => toComparable(cell));
+            const sorted = [...values].sort(compare);
+            expect(values).to.deep.equal(sorted);
+        });
+
 Given(/^you land on the enrollment edit event page by having typed (.*)$/, (url) => {
     cy.visit(url);
 });
@@ -76,16 +87,13 @@ When('you select {string} from the data item filter flyout menu', (dataItem) => 
 });
 
 Then('only rows with Data item {string} should be displayed', (dataItem) => {
-    cy.get('[data-test="changelog-data-table-body"] tr')
-        .first()
-        .should('contain.text', dataItem);
-
-    cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
-        cy.wrap($row)
-            .find('td')
-            .eq(2)
-            .should('contain.text', dataItem);
-    });
+    getChangelogTableBody()
+        .find('tr td:nth-child(3)')
+        .should(($cells) => {
+            [...$cells].forEach((cell) => {
+                expect(cell.textContent).to.contain(dataItem);
+            });
+        });
 });
 
 Then('the filter pill should be visible with label {string}', (filterLabel) => {
@@ -108,20 +116,11 @@ When('you click the sort Date icon', () => {
 });
 
 Then('the changelog data is sorted on Date in ascending order', () => {
-    const parseDate = text => new Date(text).getTime();
-    let previous = 0;
-
-    cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
-        cy.wrap($row)
-            .find('td')
-            .eq(0)
-            .invoke('text')
-            .then((text) => {
-                const current = parseDate(text.trim());
-                expect(current).to.be.at.least(previous);
-                previous = current;
-            });
-    });
+    assertColumnSortedAscending(
+        'td:first-child',
+        cell => new Date(cell.textContent.trim().replace(' ', 'T')).getTime(),
+        (a, b) => a - b,
+    );
 });
 
 When('you click the sort User icon', () => {
@@ -131,17 +130,11 @@ When('you click the sort User icon', () => {
 });
 
 Then('the changelog data is sorted on User in ascending order', () => {
-    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(2)').then(($cells) => {
-        const values = [...$cells].map(cell => cell.textContent.trim().toLowerCase());
-
-        const collator = new Intl.Collator(undefined, {
-            sensitivity: 'base',
-            numeric: true,
-        });
-
-        const sorted = [...values].sort((a, b) => collator.compare(a, b));
-        expect(values).to.deep.equal(sorted);
-    });
+    assertColumnSortedAscending(
+        'td:nth-child(2)',
+        cell => cell.textContent.trim().toLowerCase(),
+        (a, b) => textCollator.compare(a, b),
+    );
 });
 
 When('you click the sort Data item icon', () => {
@@ -151,15 +144,9 @@ When('you click the sort Data item icon', () => {
 });
 
 Then('the changelog data is sorted on Data item in ascending order', () => {
-    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(3)').then(($cells) => {
-        const values = [...$cells].map(cell => cell.textContent.trim().toLowerCase());
-
-        const collator = new Intl.Collator(undefined, {
-            sensitivity: 'base',
-            numeric: true,
-        });
-
-        const sorted = [...values].sort((a, b) => collator.compare(a, b));
-        expect(values).to.deep.equal(sorted);
-    });
+    assertColumnSortedAscending(
+        'td:nth-child(3)',
+        cell => cell.textContent.trim().toLowerCase(),
+        (a, b) => textCollator.compare(a, b),
+    );
 });

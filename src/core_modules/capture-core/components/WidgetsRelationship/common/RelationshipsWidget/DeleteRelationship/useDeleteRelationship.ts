@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
@@ -26,7 +26,6 @@ const deleteRelationshipMutation = {
 
 export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationship: OnDeleteRelationship } => {
     const dataEngine = useDataEngine();
-    const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
     const queryClient = useQueryClient();
     const { show: showError } = useAlert(
         i18n.t('An error occurred while deleting the relationship.'),
@@ -49,7 +48,7 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', sourceId],
-                    { [queryKey]: newRelationships });
+                    { relationships: newRelationships });
 
                 return { prevRelationships };
             },

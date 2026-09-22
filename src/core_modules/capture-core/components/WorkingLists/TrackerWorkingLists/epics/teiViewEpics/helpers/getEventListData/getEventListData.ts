@@ -1,4 +1,3 @@
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { convertToClientEvents } from './convertToClientEvents';
 import {
@@ -39,9 +38,6 @@ const createApiEventQueryArgs = (
     filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [key: string]: any } => {
     const rawSplitFilters = splitFilters(filters, columnsMetaForDataFetching);
-    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-        ? 'orgUnitMode'
-        : 'ouMode';
     const queryArgs = {
         ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
         ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
@@ -50,7 +46,7 @@ const createApiEventQueryArgs = (
         page,
         pageSize,
         orgUnit,
-        [orgUnitModeQueryParam]: orgUnit ? 'SELECTED' : 'CAPTURE',
+        orgUnitMode: orgUnit ? 'SELECTED' : 'CAPTURE',
         program,
         programStage,
         fields: LISTING_FIELDS,
@@ -60,20 +56,14 @@ const createApiEventQueryArgs = (
 };
 
 const createApiTEIsQueryArgs =
-    ({ pageSize, programId: program }, trackedEntityIds): { [key: string]: any } => {
-        const filterQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-            ? 'trackedEntities'
-            : 'trackedEntity';
-
-        return {
-            program,
-            pageSize,
-            [filterQueryParam]: trackedEntityIds,
-            fields:
+    ({ pageSize, programId: program }, trackedEntityIds): { [key: string]: any } => ({
+        program,
+        pageSize,
+        trackedEntities: trackedEntityIds,
+        fields:
                 'trackedEntity,createdAt,attributes[attribute,value],' +
                 'programOwners[orgUnit],enrollments[enrollment]',
-        };
-    };
+    });
 
 export const getEventListData = async (
     rawQueryArgs: RawQueryArgs,
@@ -99,12 +89,10 @@ export const getEventListData = async (
         };
     }
 
-    const useNewSeparator = featureAvailable(FEATURES.newUIDsSeparator);
-
     const trackedEntityIds = apiEvents
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
         .filter(trackedEntityId => trackedEntityId)
-        .join(useNewSeparator ? ',' : ';');
+        .join(',');
 
     const { url: urlTEIs, queryParams: queryParamsTEIs } = {
         url: 'tracker/trackedEntities',

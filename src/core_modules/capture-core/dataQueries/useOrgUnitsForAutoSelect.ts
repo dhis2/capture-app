@@ -1,5 +1,15 @@
 import { useApiMetadataQuery } from '../utils/reactQueryHelpers';
 
+export type AutoSelectOrgUnit = {
+    id: string;
+    name: string;
+    path: string;
+};
+
+type AutoSelectOrgUnitsResponse = {
+    organisationUnits: Array<AutoSelectOrgUnit>;
+};
+
 export const useOrgUnitAutoSelect = (customQueryOptions: any = {}) => {
     const queryKey = ['organisationUnits'];
     const queryFn = {
@@ -11,12 +21,16 @@ export const useOrgUnitAutoSelect = (customQueryOptions: any = {}) => {
         },
     };
     const defaultQueryOptions = {
-        select: ({ organisationUnits }) => organisationUnits,
+        select: ({ organisationUnits }: AutoSelectOrgUnitsResponse) => organisationUnits,
     };
 
     const queryOptions = { ...defaultQueryOptions, ...customQueryOptions };
 
-    const { data, isInitialLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+    const { data, isInitialLoading } = useApiMetadataQuery<AutoSelectOrgUnitsResponse, Array<AutoSelectOrgUnit>>(
+        queryKey,
+        queryFn,
+        queryOptions,
+    );
 
     return {
         isLoading: isInitialLoading,

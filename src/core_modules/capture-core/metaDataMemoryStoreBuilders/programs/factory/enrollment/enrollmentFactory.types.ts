@@ -15,5 +15,4 @@ export type ConstructorInput = {
     locale: string | null;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     dataEntryFormConfig?: any;
-    minorServerVersion: number;
 };

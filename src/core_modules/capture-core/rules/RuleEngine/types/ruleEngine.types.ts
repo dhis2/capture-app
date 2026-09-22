@@ -165,6 +165,8 @@ export type ProgramRuleEffect = {
     data: any,
     field: string | null,
     attributeType: string | null,
+    priority?: number,
+    legendSetId?: string,
 } & ProgramRuleData;
 
 export type ProgramRuleAction = {
@@ -174,6 +176,7 @@ export type ProgramRuleAction = {
     data: string | null,
     programRuleActionType: string,
     priority?: number,
+    legendSetId?: string | null,
 } & ProgramRuleData;
 
 export type ProgramRule = {
@@ -251,6 +254,7 @@ export type RulesEngineInput = {
     selectedOrgUnit: OrgUnit | null,
     selectedUserRoles?: Array<string> | null,
     optionSets: OptionSets,
+    isEnrollmentFormWithEvent?: boolean,
 };
 
 export type Translator = (value: string) => string;

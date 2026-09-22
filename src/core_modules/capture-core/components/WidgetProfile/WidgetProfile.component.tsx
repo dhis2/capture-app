@@ -6,7 +6,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from '@tanstack/react-query';
-import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -19,13 +19,13 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
-import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
-import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
+import { removeTrackedEntityChangelogQueries } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
 import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { selectEnrollmentHiddenAttributeIds } from '../Pages/common/EnrollmentOverviewDomain';
 
 const styles: Readonly<any> = {
     header: {
@@ -59,7 +59,8 @@ const computeLoadingState = (
     trackedEntityInstancesLoading: boolean,
     userRolesLoading: boolean,
     configIsFetched: boolean,
-) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
+    ruleEffectsPending: boolean,
+) => programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched || ruleEffectsPending;
 
 const computeError = (
     programsError: any,
@@ -70,14 +71,14 @@ const computeError = (
 const WidgetProfilePlain = ({
     teiId,
     programId,
+    enrollmentId,
     readOnlyMode = false,
-    orgUnitId = '',
+    ownerOrgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
     classes,
 }: Props & WithStyles<typeof styles>) => {
-    const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
@@ -87,6 +88,9 @@ const WidgetProfilePlain = ({
         storedGeometry: trackedEntityInstance?.geometry,
         hasError: trackedEntityInstance?.hasError,
     }));
+    const hiddenAttributeIds = useSelector(selectEnrollmentHiddenAttributeIds);
+    const ruleEffectsPending = useSelector(({ enrollmentDomain }: any) =>
+        Boolean(enrollmentId) && (enrollmentDomain?.enrollmentId !== enrollmentId || enrollmentDomain?.ruleEffects == null));
     const { configIsFetched, dataEntryFormConfig } = useDataEntryFormConfig({ selectedScopeId: programId });
     const {
         loading: trackedEntityInstancesLoading,
@@ -122,7 +126,9 @@ const WidgetProfilePlain = ({
         return null;
     }, [isEditable, readOnlyMode, hasNoAttributes]);
 
-    const loading = computeLoadingState(programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched);
+    const loading = computeLoadingState(
+        programsLoading, trackedEntityInstancesLoading, userRolesLoading, configIsFetched, ruleEffectsPending,
+    );
     const error = computeError(programsError, trackedEntityInstancesError, userRolesError);
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
         teiId,
@@ -130,20 +136,25 @@ const WidgetProfilePlain = ({
         trackedEntityInstanceAttributes,
     );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
-    const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
+    const displayChangelog = program?.trackedEntityType?.changelogEnabled;
+
+    const hiddenFieldIds = useMemo(
+        () => new Set(hiddenAttributeIds ? Object.keys(hiddenAttributeIds) : []),
+        [hiddenAttributeIds],
+    );
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
-        .filter((item: any) => item.displayInList)
+        .filter((item: any) => item.displayInList && !hiddenFieldIds.has(item.attribute))
         .map((clientAttribute: any) => {
             const { attribute, key, valueType } = clientAttribute;
             const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };
-        }), [clientAttributesWithSubvalues]);
+        }), [clientAttributesWithSubvalues, hiddenFieldIds]);
 
     const onSaveExternal = useCallback(() => {
-        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
+        removeTrackedEntityChangelogQueries(queryClient, teiId);
     }, [queryClient, teiId]);
 
     useEffect(() => {
@@ -176,12 +187,17 @@ const WidgetProfilePlain = ({
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {trackedEntityTypeName
-                            ? i18n.t('No attributes configured for {{trackedEntityTypeName}}', {
-                                trackedEntityTypeName,
-                                interpolation: { escapeValue: false },
-                            })
-                            : i18n.t('No attributes configured')}
+                        {i18n.t('No attributes configured')}
+                    </p>
+                </div>
+            );
+        }
+
+        if (displayInListAttributes.length === 0) {
+            return (
+                <div className={classes.container}>
+                    <p className={classes.emptyText}>
+                        {i18n.t('No attributes configured to display')}
                     </p>
                 </div>
             );
@@ -199,7 +215,7 @@ const WidgetProfilePlain = ({
     const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
     const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
 
-    const isEmptyList = !loading && !error && !hasNoAttributes && displayInListAttributes.length === 0;
+    const isEmptyList = !loading && !error && (hasNoAttributes || displayInListAttributes.length === 0);
 
     const { trackedEntityProp, trackedEntityForToggle } = useMemo(() => {
         const resolvedId = (trackedEntity && trackedEntity.trackedEntity) || teiId;
@@ -271,7 +287,7 @@ const WidgetProfilePlain = ({
                         onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
-                        orgUnitId={orgUnitId}
+                        ownerOrgUnitId={ownerOrgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
                         trackedEntityInstanceId={teiId}

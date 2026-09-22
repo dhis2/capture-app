@@ -1,5 +1,4 @@
 import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
-import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
@@ -352,79 +351,6 @@ Then('the list should display data ordered descendingly by report date', () => {
         });
 });
 
-When('you select the working list called Events today', () => {
-    cy.get('[data-test="workinglists-template-selector-chips-container"]')
-        .contains('Events today')
-        .click();
-});
-
-When('you create a copy of the working list', () => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Save current view as')
-        .click();
-
-    const id = uuid();
-
-    cy.get('[data-test="view-name-content"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .type(id)
-                .blur();
-        });
-
-    cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
-
-    cy.get('button')
-        .contains('Save')
-        .click();
-
-    cy.wait('@newEventFilter', { timeout: 30000 });
-
-    cy.reload();
-
-    cy.contains(id.substring(0, 26))
-        .click();
-});
-
-When('you update the working list', () => {
-    cy.get('[data-test="dhis2-uicore-tableheadercellaction"]')
-        .eq(0)
-        .click()
-        .click();
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Update view')
-        .click();
-});
-
-Then('your newly defined sharing settings should still be present', () => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Share view')
-        .click();
-
-    cy.get('[data-test="sharing-dialog"]').within(() => {
-        cy.contains('Kevin Boateng')
-            .should('exist');
-
-        cy.contains('Close')
-            .click();
-    });
-
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Delete view')
-        .click();
-
-    cy.contains('Confirm')
-        .click();
-});
 When('you set the date of admission filter', () => {
     cy.get('[data-test="event-working-lists"]')
         .within(() => {
@@ -521,8 +447,9 @@ When('you set the date filter', () => {
 When('you set the organisation unit filter', () => {
     cy.get('[data-test="event-working-lists"]').within(() => cy.contains('More filters').click());
     cy.get('[data-test="more-filters-menu"]').within(() => cy.contains('Place of Infection').click());
-    cy.get('[data-test="list-view-filter-contents"]').within(() => {
-        cy.get('input[placeholder="Search"]').type('Ngelehun');
+    cy.get('[data-test="org-unit-selector-trigger"]').click();
+    cy.get('input[placeholder="Search for an organisation unit"]').type('Ngelehun', { force: true });
+    cy.get('[data-test="dhis2-uicore-popover"]').last().within(() => {
         cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
         cy.contains('Ngelehun').click();
     });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
+import { FlyoutMenu, IconClockHistory16, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps, MenuFlyoutProps, ModalsProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
@@ -23,6 +23,8 @@ const MenuFlyout = ({
     <FlyoutMenu dense maxWidth="250px" dataTest="tracked-entity-profile-overflow-menu">
         {displayChangelog && (
             <MenuItem
+                dense
+                icon={<IconClockHistory16 />}
                 label={i18n.t('View changelog')}
                 onClick={() => {
                     setChangelogIsOpen(true);

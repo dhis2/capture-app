@@ -120,9 +120,9 @@ async function setLocaleDataAsync(uiLocale: string) {
     initI18n(locale);
 }
 
-async function initializeMetaDataAsync(dbLocale: string, onQueryApi: any, minorServerVersion: number) {
+async function initializeMetaDataAsync(dbLocale: string, onQueryApi: any) {
     await loadMetaData(onQueryApi);
-    await buildMetaDataAsync(dbLocale, minorServerVersion);
+    await buildMetaDataAsync(dbLocale);
 }
 
 async function initializeSystemSettingsAsync(
@@ -210,5 +210,5 @@ export async function initializeAsync({
     await setLocaleDataAsync(uiLocale);
     await initializeSystemSettingsAsync({ ...systemSettings, baseUrl }, { uiLocale, captureScope, searchScope });
 
-    await initializeMetaDataAsync(dbLocale, querySingleResource, serverVersion.minor);
+    await initializeMetaDataAsync(dbLocale, querySingleResource);
 }

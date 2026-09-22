@@ -46,6 +46,8 @@ type OrgUnitFieldProps = {
     disabled?: boolean;
     previousOrgUnitId?: string;
     dataTest?: string;
+    hideSearchField?: boolean;
+    searchText?: string;
 };
 
 type Props = OrgUnitFieldProps & WithStyles<typeof getStyles>;
@@ -60,8 +62,11 @@ const OrgUnitFieldPlain = (props: Props) => {
         disabled,
         previousOrgUnitId,
         dataTest,
+        hideSearchField,
+        searchText: externalSearchText,
     } = props;
-    const [searchText, setSearchText] = React.useState<string | undefined>(undefined);
+    const [internalSearchText, setInternalSearchText] = React.useState<string | undefined>(undefined);
+    const searchText = hideSearchField ? externalSearchText : internalSearchText;
     const [key, setKey] = React.useState<string | undefined>(undefined);
 
     const initialRoots = React.useMemo(() => CurrentUser.get().organisationUnits, []);
@@ -117,7 +122,7 @@ const OrgUnitFieldPlain = (props: Props) => {
     };
 
     const handleFilterChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
-        setSearchText(event.currentTarget.value);
+        setInternalSearchText(event.currentTarget.value);
     };
 
     const handleBlur = () => {
@@ -131,6 +136,7 @@ const OrgUnitFieldPlain = (props: Props) => {
             className={classes.container}
             onBlur={handleBlur}
         >
+            {!hideSearchField &&
             <div className={classes.debounceFieldContainer}>
                 <DebounceField
                     onDebounced={handleFilterChange}
@@ -141,6 +147,7 @@ const OrgUnitFieldPlain = (props: Props) => {
                     dataTest={dataTest}
                 />
             </div>
+            }
             {!disabled &&
             <div className={classes.orgUnitTreeContainer} style={styles}>
                 {renderOrgUnitTree()}

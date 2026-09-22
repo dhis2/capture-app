@@ -29,6 +29,19 @@ type FieldValueOptions = {
 
 export type MetadataByPluginId = { [id: string]: PluginFormFieldMetadata };
 
+export type FormattedPluginFormFieldMetadata =
+    Omit<PluginFormFieldMetadata, 'id' | 'optionSet' | 'attributeValues'> & {
+        disabled: boolean;
+        displayInForms: boolean;
+        displayInReports: boolean;
+        optionSet?: any;
+        icon?: any;
+        unique?: any;
+        attributes?: { [pluginSideName: string]: any };
+    };
+
+export type FormattedMetadataByPluginId = { [pluginId: string]: FormattedPluginFormFieldMetadata };
+
 export type SetFieldValueProps = {
     fieldId: string;
     value: any;
@@ -63,7 +76,7 @@ export type UsePluginCallbacksProps = {
 
 export type ComponentProps = {
     pluginSource: string;
-    fieldsMetadata: MetadataByPluginId;
+    fieldsMetadata: FormattedMetadataByPluginId;
     formSubmitted: boolean;
     values: { [id: string]: any };
     orgUnitId: string;

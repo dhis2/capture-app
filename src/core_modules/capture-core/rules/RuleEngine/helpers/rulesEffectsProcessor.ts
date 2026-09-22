@@ -176,6 +176,7 @@ export function getRulesEffectsProcessor(
                 id: effect.id,
                 message: `${message} ${sanitiseFalsy(effect.data)}`,
                 ...effect.style,
+                legendSetId: effect.legendSetId,
             },
         };
     }
@@ -191,6 +192,7 @@ export function getRulesEffectsProcessor(
                 key: effect.displayContent,
                 value: typeof data === 'number' ? numberToString(data) : String(data),
                 ...effect.style,
+                legendSetId: effect.legendSetId,
             },
         };
     }

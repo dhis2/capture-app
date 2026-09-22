@@ -1,8 +1,9 @@
 import React from 'react';
 import { IconCheckmark16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import type { Props } from './complete.types';
-import { plainStatus, eventStatuses } from '../../constants/status.const';
+import { plainStatus } from '../../constants/status.const';
 
 export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }: Props) => {
     const hasActiveEvents = events?.some(event => event.status === eventStatuses.ACTIVE);

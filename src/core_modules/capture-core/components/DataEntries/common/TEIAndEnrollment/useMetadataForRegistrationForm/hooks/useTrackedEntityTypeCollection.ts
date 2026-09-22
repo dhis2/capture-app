@@ -1,4 +1,3 @@
-import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildTrackedEntityTypeCollection } from '../buildFunctions/buildTrackedEntityTypeCollection';
 import type { TrackedEntityType } from '../../../../../../metaData';
@@ -39,9 +38,6 @@ export const useTrackedEntityTypeCollection = ({
         { enabled: !!trackedEntityType },
     );
 
-    const { serverVersion } = useConfig();
-    const minorServerVersion = serverVersion?.minor || 0;
-
     const { data: trackedEntityTypeCollection } = useIndexedDBQuery(
         ['trackedEntityTypeCollection', trackedEntityType?.id],
         () => buildTrackedEntityTypeCollection({
@@ -53,7 +49,6 @@ export const useTrackedEntityTypeCollection = ({
             cachedOptionSets: new Map(optionSets?.map(optionSet => [optionSet.id, optionSet])),
             dataEntryFormConfig,
             locale,
-            minorServerVersion,
         }),
         {
             enabled:

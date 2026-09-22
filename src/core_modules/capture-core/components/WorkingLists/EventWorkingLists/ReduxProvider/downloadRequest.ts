@@ -1,4 +1,3 @@
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import type { Program } from '../../../../metaData';
 import { buildFilterQueryArgs } from '../../WorkingListsCommon';
 import { createApiQueryArgs, getMainColumns } from '../epics/getEventListData';
@@ -27,9 +26,7 @@ export const computeDownloadRequest = ({
     meta: { columnsMetaForDataFetching: ColumnsMetaForDataFetching };
 }) => {
     const categoryCombinationId = program.categoryCombination && program.categoryCombination.id;
-    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-        ? 'orgUnitMode'
-        : 'ouMode';
+
     const rawQueryArgs = {
         currentPage,
         rowsPerPage,
@@ -41,7 +38,7 @@ export const computeDownloadRequest = ({
         orgUnitId,
         categories,
         programStageId,
-        [orgUnitModeQueryParam]: orgUnitId ? 'SELECTED' : 'CAPTURE',
+        orgUnitMode: orgUnitId ? 'SELECTED' : 'CAPTURE',
     };
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
     const queryParams = createApiQueryArgs(rawQueryArgs, mainColumns, categoryCombinationId);

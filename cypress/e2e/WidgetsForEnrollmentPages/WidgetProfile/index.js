@@ -157,7 +157,7 @@ Then('the tracked entity profile is read-only', () => {
     cy.get('[data-test="profile-widget"]').within(() => {
         cy.contains('View profile').should('exist');
     });
-    cy.contains('View only - You only have view access to this enrollment').should('exist');
+    cy.contains('View only - This Person is deactivated').should('exist');
 });
 
 Then('the tracked entity profile is editable', () => {

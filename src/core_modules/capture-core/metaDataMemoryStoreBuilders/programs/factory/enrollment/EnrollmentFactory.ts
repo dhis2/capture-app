@@ -66,7 +66,6 @@ export class EnrollmentFactory {
         trackedEntityTypeCollection,
         locale,
         dataEntryFormConfig,
-        minorServerVersion,
     }: ConstructorInput) {
         this.locale = locale;
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
@@ -77,7 +76,6 @@ export class EnrollmentFactory {
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-            minorServerVersion,
         });
     }
 

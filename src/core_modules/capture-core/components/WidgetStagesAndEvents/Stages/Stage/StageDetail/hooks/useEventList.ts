@@ -18,7 +18,7 @@ import {
 import { SORT_DIRECTION, MULIT_TEXT_WITH_NO_OPTIONS_SET } from './constants';
 import {
     isMultiTextWithoutOptionset,
-} from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
+} from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/multiTextValidation';
 import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
 const baseKeys = [

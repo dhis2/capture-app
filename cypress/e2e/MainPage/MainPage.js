@@ -33,12 +33,6 @@ Then('the icon is rendered as a custom icon', () => {
         .should('match', /\/icons\/child_program_positive\/icon$/);
 });
 
-Then('the icon is rendered as an svg', () => {
-    cy.get('[title="child_program_positive"]')
-        .invoke('attr', 'src')
-        .should('match', /\/icons\/child_program_positive\/icon.svg$/);
-});
-
 Then('the TEI working list is displayed', () => {
     cy.get('[data-test="tracker-working-lists"]').within(() => {
         cy.contains('Rows per page').should('exist');

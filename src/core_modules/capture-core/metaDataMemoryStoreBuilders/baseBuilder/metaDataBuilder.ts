@@ -5,7 +5,7 @@ import { buildTrackedEntityTypes } from '../trackedEntityTypes/trackedEntityType
 import { getCommonPrerequisitesAsync } from './commonPrerequisitesGetter';
 import { USER_METADATA_STORES as stores } from '../../storageControllers';
 
-export async function buildMetaDataAsync(locale: string, minorServerVersion: number) {
+export async function buildMetaDataAsync(locale: string) {
     const {
         [stores.TRACKED_ENTITY_TYPES]: cachedTrackedEntityTypes,
         [stores.TRACKED_ENTITY_ATTRIBUTES]: cachedTrackedEntityAttributes,
@@ -18,7 +18,6 @@ export async function buildMetaDataAsync(locale: string, minorServerVersion: num
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-            minorServerVersion,
         });
 
     const programsBuilderPromise =
@@ -28,7 +27,6 @@ export async function buildMetaDataAsync(locale: string, minorServerVersion: num
         cachedOptionSets,
         trackedEntityTypeCollection,
         locale,
-        minorServerVersion,
     });
 
     const constantsBuilderPromise = buildConstants(stores.CONSTANTS);

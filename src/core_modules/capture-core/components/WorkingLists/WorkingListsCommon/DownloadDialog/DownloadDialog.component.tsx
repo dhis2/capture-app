@@ -1,7 +1,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import type { PlainProps } from './DownloadDialog.types';
 
@@ -42,9 +41,7 @@ const DownloadDialogPlain = ({ open, onClose, request, absoluteApiPath, classes 
         const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
-            ...(featureAvailable(FEATURES.newPagingQueryParam)
-                ? { paging: false }
-                : { skipPaging: true }),
+            paging: false,
         };
         const searchParamsString = getUrlEncodedParamsString(paramsObject);
 
