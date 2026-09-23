@@ -20,7 +20,6 @@ type ReduxStateSlice = {
         };
     };
     viewEventPage?: { eventId?: string };
-    currentSelections?: { programId?: string };
 };
 
 type OrgUnitSources = {
@@ -52,9 +51,6 @@ export const useFormFieldPluginContext = (pluginContext: PluginContext = {}): Pl
     const eventIdFromRedux = useSelector(
         ({ viewEventPage }: ReduxStateSlice) => viewEventPage?.eventId,
     );
-    const currentSelectionsProgramId = useSelector(
-        ({ currentSelections }: ReduxStateSlice) => currentSelections?.programId,
-    );
 
     const eventId = urlEventId ?? eventIdFromRedux;
     const eventFromRedux = enrollmentFromRedux?.events?.find(e => e.event === eventId);
@@ -66,7 +62,7 @@ export const useFormFieldPluginContext = (pluginContext: PluginContext = {}): Pl
             eventOrgUnitId: eventFromRedux?.orgUnit,
             ownerOrgUnitId,
         }),
-        programId: urlProgramId ?? eventFromRedux?.program ?? currentSelectionsProgramId,
+        programId: urlProgramId ?? eventFromRedux?.program,
         programStageId,
         enrollmentId: urlEnrollmentId ?? eventFromRedux?.enrollment,
         eventId,
