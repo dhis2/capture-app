@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { useDataEngine } from '@dhis2/app-runtime';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -23,12 +25,14 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
-    buildEnrollmentAttributeCategoryOptions,
+    buildEnrollmentCategoryOptionUids,
 } from '../helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
 import { getRedirectIds } from './getRedirectIds';
+import { makeQuerySingleResource } from '../../../../utils/api';
+import { makeResolveAttributeOptionCombo } from '../../../../utils/AOC';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -82,15 +86,20 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
+    const dataEngine = useDataEngine();
+    const resolveAttributeOptionCombo = useMemo(
+        () => makeResolveAttributeOptionCombo(makeQuerySingleResource(dataEngine.query.bind(dataEngine))),
+        [dataEngine],
+    );
 
-    const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
+    const buildTeiWithEnrollment = async (relatedStageRef?: {current: RelatedStageRefPayload | null}): Promise<{
         teiWithEnrollment: EnrollmentPayload;
         formHasError: boolean;
         redirect: {
             programStageId?: string;
             eventId?: string;
         };
-    } => {
+    }> => {
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
@@ -113,8 +122,10 @@ export const useBuildEnrollmentPayload = ({
                 return acc;
             }, {});
 
-        const enrollmentAttributeCategoryOptions =
-            buildEnrollmentAttributeCategoryOptions(serverValuesForMainValues);
+        const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(serverValuesForMainValues);
+        const enrollmentAttributeOptionCombo = enrollmentCategoryOptionUids.length > 0
+            ? await resolveAttributeOptionCombo(enrollmentCategoryOptionUids)
+            : undefined;
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
@@ -171,7 +182,7 @@ export const useBuildEnrollmentPayload = ({
             attributes,
             events: allEventsToBeCreated,
             geometry: enrollmentGeometry,
-            attributeCategoryOptions: enrollmentAttributeCategoryOptions,
+            attributeOptionCombo: enrollmentAttributeOptionCombo,
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);

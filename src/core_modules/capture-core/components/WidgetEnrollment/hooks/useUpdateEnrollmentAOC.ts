@@ -1,6 +1,8 @@
-import { useCallback } from 'react';
-import { useDataMutation } from '@dhis2/app-runtime';
+import { useCallback, useMemo } from 'react';
+import { useDataEngine, useDataMutation } from '@dhis2/app-runtime';
 import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
+import { makeQuerySingleResource } from '../../../utils/api';
+import { makeResolveAttributeOptionCombo } from '../../../utils/AOC';
 import { processErrorReports } from '../processErrorReports';
 
 const enrollmentUpdate: Mutation = {
@@ -24,6 +26,12 @@ export const useUpdateEnrollmentAOC = ({
     onError,
     onSuccess,
 }: UseUpdateEnrollmentAOCProps) => {
+    const dataEngine = useDataEngine();
+    const resolveAttributeOptionCombo = useMemo(
+        () => makeResolveAttributeOptionCombo(makeQuerySingleResource(dataEngine.query.bind(dataEngine))),
+        [dataEngine],
+    );
+
     const [updateEnrollmentMutation] = useDataMutation(enrollmentUpdate, {
         onComplete: () => {
             refetchEnrollment();
@@ -34,11 +42,16 @@ export const useUpdateEnrollmentAOC = ({
         },
     });
 
-    return useCallback((attributeCategoryOptions: string) => {
+    return useCallback(async (categoryOptionUids: ReadonlyArray<string>) => {
         if (!enrollment) return;
+        const attributeOptionCombo = await resolveAttributeOptionCombo(categoryOptionUids);
+        if (!attributeOptionCombo) {
+            onError?.('Could not resolve the selected category options to an attribute option combo.');
+            return;
+        }
         updateEnrollmentMutation({
             ...enrollment,
-            attributeCategoryOptions,
+            attributeOptionCombo,
         });
-    }, [enrollment, updateEnrollmentMutation]);
+    }, [enrollment, resolveAttributeOptionCombo, updateEnrollmentMutation, onError]);
 };

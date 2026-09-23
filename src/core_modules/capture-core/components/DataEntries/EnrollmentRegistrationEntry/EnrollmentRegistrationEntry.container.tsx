@@ -60,9 +60,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         return error.errorComponent;
     }
 
-    const onSaveWithEnrollment = () => {
+    const onSaveWithEnrollment = async () => {
         const { teiWithEnrollment, formHasError, redirect } =
-            buildTeiWithEnrollment(relatedStageRef);
+            await buildTeiWithEnrollment(relatedStageRef);
         !formHasError && onSave(teiWithEnrollment, redirect);
     };
 

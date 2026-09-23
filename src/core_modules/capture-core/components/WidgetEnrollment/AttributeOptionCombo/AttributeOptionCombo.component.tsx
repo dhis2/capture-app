@@ -68,7 +68,7 @@ type Props = {
     attributeOptionComboDetails?: AttributeOptionComboDetails;
     orgUnitId?: string;
     readOnly?: boolean;
-    onSave?: (attributeCategoryOptions: string) => void;
+    onSave?: (categoryOptionUids: ReadonlyArray<string>) => void;
 };
 
 const derivedCategories = (details: AttributeOptionComboDetails) =>
@@ -115,7 +115,7 @@ const AttributeOptionComboPlain = ({
     const saveEdit = useCallback(() => {
         const values = editableCategories.map(({ id }) => selection[id]).filter(Boolean);
         if (values.length === editableCategories.length && onSave) {
-            onSave(values.join(','));
+            onSave(values);
         }
         setEditMode(false);
     }, [editableCategories, selection, onSave]);
