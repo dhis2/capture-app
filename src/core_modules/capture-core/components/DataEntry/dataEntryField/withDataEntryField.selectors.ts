@@ -1,4 +1,4 @@
-import { createSelectorCreator, defaultMemoize } from 'reselect';
+import { createSelectorCreator, lruMemoize } from 'reselect';
 
 const onIsEqual = (prevValues: Record<string, any>, currentValues: Record<string, any>) => {
     const currentValuesIsEqual = Object
@@ -18,7 +18,7 @@ const onIsEqual = (prevValues: Record<string, any>, currentValues: Record<string
 
 
 const createDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
+    lruMemoize,
     onIsEqual,
 );
 

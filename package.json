@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "107.3.0",
+    "version": "107.3.1",
     "cacheVersion": "2",
     "license": "BSD-3-Clause",
     "private": true,
@@ -15,7 +15,7 @@
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/data-engine": "^3.17.3",
         "@dhis2/rule-engine": "^3.8.2",
-        "@dhis2/rules-engine-javascript": "107.3.0",
+        "@dhis2/rules-engine-javascript": "107.3.1",
         "@dhis2/ui": "^10.17.0",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
@@ -59,7 +59,7 @@
         "redux-observable": "^2.0.0",
         "regenerator-runtime": "^0.14.1",
         "remark-gfm": "^4.0.1",
-        "reselect": "^4.1.7",
+        "reselect": "^5.2.0",
         "rxjs": "^7.8.2",
         "typeface-roboto": "^1.1.13",
         "uuid": "^14.0.1",
@@ -107,7 +107,7 @@
         "@typescript-eslint/parser": "^4.0.0",
         "babel-eslint": "^10.0.0",
         "babel-plugin-module-resolver": "^5.0.3",
-        "concurrently": "^10.0.3",
+        "concurrently": "^10.0.5",
         "cypress": "12",
         "docdash": "^2.0.2",
         "dotenv": "^17.4.2",
@@ -134,7 +134,7 @@
         "redux-devtools-extension": "^2.13.9",
         "serve": "^14.2.6",
         "typescript": "^5.8.2",
-        "wait-on": "^8.0.1"
+        "wait-on": "^9.1.0"
     },
     "resolutions": {
         "@babel/preset-react": "7.29.7",
