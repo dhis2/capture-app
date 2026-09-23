@@ -33,13 +33,25 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
+import {
+    type Enrollment,
+    ProgramStage,
+    RenderFoundation,
+    getProgramThrowIfNotFound,
+    LabelKeys,
+    useTermLabel,
+    type CustomLabels,
+} from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
+    getEnrollmentCategoryOptionsValidatorContainers,
     attributeOptionsKey,
+    enrollmentAttributeOptionsKey,
     AOCsectionKey,
+    enrollmentAOCsectionKey,
     withAOCFieldBuilder,
+    withEnrollmentAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
@@ -273,50 +285,53 @@ const getGeometrySettings = () => ({
     }),
 });
 
-const getCategoryOptionsSettingsFn = () => {
-    const categoryOptionsComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withLabel({
-                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                        onGetCustomFieldLabeClass: (props: any) =>
-                            `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
-                    })(
-                        withDisplayMessages()(
-                            withInternalChangeHandler()(
-                                withFilterProps(defaultFilterProps)(SingleSelectField),
-                            ),
+const categoryOptionsComponent =
+    withCalculateMessages(overrideMessagePropNames)(
+        withFocusSaver()(
+            withDefaultFieldContainer()(
+                withLabel({
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) =>
+                        `${props.fieldOptions &&
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                })(
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(SingleSelectField),
                         ),
                     ),
                 ),
             ),
-        );
-    const categoryOptionsSettings = {
-        getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
-            ...props.categories?.find((category: any) => category.id === fieldId) ?? {},
-            required: true,
-        }),
-        getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
-        getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
-        getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
-        getMeta: (props: any) => {
-            const { firstStageMetaData, programCategory } = props;
+        ),
+    );
 
-            return {
-                section: AOCsectionKey,
-                placement: placements.BOTTOM,
-                sectionName: firstStageMetaData
-                    ? `${firstStageMetaData.stage.name} - ${programCategory?.displayName}`
-                    : programCategory?.displayName,
-            };
-        },
-    };
+const getEventCategoryOptionsSettingsFn = () => ({
+    getComponent: () => categoryOptionsComponent,
+    getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
+        ...props.categories?.find((category: any) => category.id === fieldId) ?? {},
+        required: true,
+    }),
+    getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+    getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
+    getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+    getMeta: (props: any) => {
+        const { firstStageMetaData, programCategory, termLabels } = props;
+        const eventLabel = termLabels?.eventLabel;
+        const categoryDisplayName = programCategory?.displayName;
 
-    return categoryOptionsSettings;
-};
+        return {
+            section: AOCsectionKey,
+            placement: placements.BOTTOM,
+            sectionName: firstStageMetaData
+                ? i18n.t('{{eventLabel}} - {{stageName}} - {{categoryDisplayName}}', {
+                    eventLabel,
+                    stageName: firstStageMetaData.stage.name,
+                    categoryDisplayName,
+                })
+                : i18n.t('{{eventLabel}} - {{categoryDisplayName}}', { eventLabel, categoryDisplayName }),
+        };
+    },
+});
 
 const getAOCSettingsFn = () => ({
     hideAOC: ({ programId }: { programId: string }) => {
@@ -335,6 +350,33 @@ const getAOCSettingsFn = () => ({
         return !shouldShowAOC;
     },
 });
+
+const getEnrollmentCategoryOptionsSettingsFn = () => ({
+    getComponent: () => categoryOptionsComponent,
+    getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
+        ...props.enrollmentCategories?.find((category: any) => category.id === fieldId) ?? {},
+        required: true,
+    }),
+    getPropName: (props: any, fieldId?: string) =>
+        (fieldId ? `${enrollmentAttributeOptionsKey}-${fieldId}` : enrollmentAttributeOptionsKey),
+    getFieldIds: (props: any) => props.enrollmentCategories?.map((category: any) => category.id),
+    getValidatorContainers: (props: any, fieldId?: string) =>
+        getEnrollmentCategoryOptionsValidatorContainers(props, fieldId),
+    getMeta: (props: any) => {
+        const { enrollmentProgramCategory, termLabels } = props;
+
+        return {
+            section: enrollmentAOCsectionKey,
+            placement: placements.TOP,
+            sectionName: i18n.t('{{enrollmentLabel}} - {{categoryDisplayName}}', {
+                enrollmentLabel: termLabels?.enrollmentLabel,
+                categoryDisplayName: enrollmentProgramCategory?.displayName,
+            }),
+        };
+    },
+});
+
+const getEnrollmentAOCSettingsFn = () => ({});
 
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment;
@@ -367,6 +409,9 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },
+        [enrollmentAOCsectionKey]: {
+            placement: placements.TOP,
+        },
         [AOCsectionKey]: {
             placement: placements.BOTTOM,
         },
@@ -392,10 +437,13 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
-    withDataEntryFields(
-        getCategoryOptionsSettingsFn(),
-    )(FinalEnrollmentDataEntry));
+const AOCFieldBuilderHOC = withEnrollmentAOCFieldBuilder(getEnrollmentAOCSettingsFn())(
+    withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
+        withAOCFieldBuilder(getAOCSettingsFn())(
+            withDataEntryFields(getEventCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),
+        ),
+    ),
+);
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
@@ -414,6 +462,7 @@ type PreEnrollmentDataEntryProps = {
     enrollmentMetadata: Enrollment;
     id: string;
     onPostProcessErrorMessage: (message: string) => string;
+    termLabels: CustomLabels;
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
@@ -426,7 +475,7 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
     }
 }
 
-export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
+class EnrollmentDataEntryComponentClass extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
         const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
@@ -497,3 +546,11 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
         );
     }
 }
+
+export const EnrollmentDataEntryComponent = (props: Omit<PreEnrollmentDataEntryProps, 'termLabels'>) => {
+    const termLabels = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.enrollmentSingular],
+        { programId: props.programId },
+    );
+    return <EnrollmentDataEntryComponentClass {...props} termLabels={termLabels} />;
+};
