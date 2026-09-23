@@ -29,15 +29,16 @@ export const useAvailableProgramStages = (
         () =>
             programStage.allowGenerateNextVisit &&
             !programLoading &&
+            enrollment &&
             program?.programStages?.map((currentStage) => {
-                const eventCount = countNonSkippedEvents(enrollment?.events, currentStage.id);
+                const eventCount = countNonSkippedEvents(enrollment.events, currentStage.id);
                 const isAvailableStage = currentStage.repeatable ||
                     (programStage.id !== currentStage.id && eventCount === 0);
 
                 return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
             }).filter(stage => stage.isAvailableStage) || [],
         [
-            enrollment?.events,
+            enrollment,
             program?.programStages,
             programLoading,
             programStage.allowGenerateNextVisit,
