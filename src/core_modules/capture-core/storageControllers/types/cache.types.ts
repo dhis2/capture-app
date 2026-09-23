@@ -201,6 +201,7 @@ export type CachedProgram = {
     programStages: Array<CachedProgramStage>,
     programType: string,
     categoryCombo: ProgramCachedCategoryCombo | null,
+    enrollmentCategoryCombo?: ProgramCachedCategoryCombo | null,
     style?: CachedStyle | null,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,

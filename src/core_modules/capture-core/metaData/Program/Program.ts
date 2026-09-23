@@ -22,6 +22,7 @@ export class Program {
     _stages!: Map<string, ProgramStage>;
     _organisationUnits!: any;
     _categoryCombination!: CategoryCombination | null;
+    _enrollmentCategoryCombination!: CategoryCombination | null;
     _programRules!: Array<ProgramRule>;
     _programRuleVariables!: Array<ProgramRuleVariable>;
     _icon!: Icon | undefined;
@@ -86,6 +87,13 @@ export class Program {
     }
     get categoryCombination(): CategoryCombination | null {
         return this._categoryCombination;
+    }
+
+    set enrollmentCategoryCombination(enrollmentCategoryCombination: CategoryCombination | null) {
+        this._enrollmentCategoryCombination = enrollmentCategoryCombination;
+    }
+    get enrollmentCategoryCombination(): CategoryCombination | null {
+        return this._enrollmentCategoryCombination;
     }
 
     set programRules(programRules: Array<ProgramRule>) {

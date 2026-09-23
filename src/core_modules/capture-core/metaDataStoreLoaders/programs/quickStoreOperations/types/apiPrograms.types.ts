@@ -166,6 +166,7 @@ type apiProgram = {
     access: apiAccess,
     trackedEntityType?: { id: string } | null,
     categoryCombo: apiProgramCategoryCombo,
+    enrollmentCategoryCombo?: apiProgramCategoryCombo | null,
     organisationUnits?: Array<apiProgramOrganisationUnit> | null,
     userRoles?: Array<apiProgramUserRoles> | null,
     programStages?: Array<apiProgramStage> | null,

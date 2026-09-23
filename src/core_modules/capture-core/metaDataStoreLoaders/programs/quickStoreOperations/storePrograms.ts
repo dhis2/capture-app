@@ -164,6 +164,7 @@ const baseProgramFields = [
     'access[data[read,write]]',
     'trackedEntityType[id]',
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]]',
+    'enrollmentCategoryCombo[id,displayName,isDefault,categories[id,displayName]]',
     'programSections[id, displayDescription, displayFormName, sortOrder, trackedEntityAttributes]',
     `programTrackedEntityAttributes[${programTrackedEntityAttributeFields}]`,
 ];

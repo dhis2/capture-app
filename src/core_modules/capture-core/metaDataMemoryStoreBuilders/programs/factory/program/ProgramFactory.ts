@@ -153,6 +153,8 @@ export class ProgramFactory {
                 o.trackedEntityType = this.trackedEntityTypeCollection.get(
                     cachedProgram.trackedEntityTypeId!,
                 ) as TrackedEntityType;
+                o.enrollmentCategoryCombination =
+                    this._buildCategoryCombination(cachedProgram.enrollmentCategoryCombo ?? null);
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {
