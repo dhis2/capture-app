@@ -89,7 +89,8 @@ const ScheduleDatePlain = ({
         }
 
         const dateValidation = isValidDate(dateString, internalComponentError);
-        if (!dateValidation.valid) {
+        const occurredAtClient = convertFormToClient(dateString, dataElementTypes.DATE) as string;
+        if (!dateValidation.valid || !occurredAtClient) {
             return {
                 error: true,
                 validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
@@ -97,7 +98,6 @@ const ScheduleDatePlain = ({
         }
 
         if (expiryPeriod) {
-            const occurredAtClient = convertFormToClient(dateString, dataElementTypes.DATE) as string;
             const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
             if (!isWithinValidPeriod) {
                 return {
