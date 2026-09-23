@@ -48,11 +48,14 @@ export type SetFieldValueProps = {
     options?: FieldValueOptions;
 };
 
+type PluginContextEntry<TValue = unknown> = {
+    setDataEntryFieldValue: (fieldValueProps: SetFieldValueProps) => void;
+    value: TValue;
+};
+
 export type PluginContext = {
-    [key: string]: {
-        setDataEntryFieldValue: (fieldValueProps: SetFieldValueProps) => void;
-        value: any;
-    };
+    orgUnit?: PluginContextEntry<{ id: string } | undefined>;
+    [key: string]: PluginContextEntry<any> | undefined;
 };
 
 export type ContainerProps = {

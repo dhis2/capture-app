@@ -62,7 +62,7 @@ export const useFormFieldPluginContext = (pluginContext: PluginContext = {}): Pl
 
     return {
         orgUnitId: resolveOrgUnitId(Boolean(programStageId || eventId), {
-            formOrgUnitId: (pluginContext.orgUnit?.value as { id?: string } | undefined)?.id,
+            formOrgUnitId: pluginContext.orgUnit?.value?.id,
             eventOrgUnitId: eventFromRedux?.orgUnit,
             ownerOrgUnitId,
         }),
