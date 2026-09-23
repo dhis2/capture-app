@@ -23,6 +23,7 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
+    buildEnrollmentAttributeCategoryOptions,
 } from '../helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
@@ -112,6 +113,9 @@ export const useBuildEnrollmentPayload = ({
                 return acc;
             }, {});
 
+        const enrollmentAttributeCategoryOptions =
+            buildEnrollmentAttributeCategoryOptions(serverValuesForMainValues);
+
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
 
@@ -167,6 +171,7 @@ export const useBuildEnrollmentPayload = ({
             attributes,
             events: allEventsToBeCreated,
             geometry: enrollmentGeometry,
+            attributeCategoryOptions: enrollmentAttributeCategoryOptions,
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
