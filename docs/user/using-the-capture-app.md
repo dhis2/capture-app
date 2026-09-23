@@ -1316,10 +1316,10 @@ In the **Schedule** tab, the similar information about scheduling an event as in
 If an active event has a scheduled date before becoming active or a completed event has scheduled date, this date should still be shown in the workspace. 
 It’ll be locked with an icon next to it and a tooltip saying “Scheduled date cannot be changed for active/completed events”. 
 
-#### Scheduled date with Hide due date enabled
-If the flag “Hide due date” in the Metadata Management app configuration is enabled, scheduled date will not be shown in the form. 
+#### Scheduled date with Hide scheduled date enabled { #scheduled-date-with-hide-due-date-enabled }
+If the flag “Hide scheduled date” in the Metadata Management app configuration is enabled, scheduled date will not be shown in the form. 
 
-However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in the Metadata Management app, and this can not be changed. 
+However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from reference date" that has been configured in the Metadata Management app, and this can not be changed. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
 ### Ask user to complete program when stage is complete
@@ -1445,11 +1445,11 @@ After clicking **Schedule** button, user will be navigated back to enrollment ov
 
 #### 3. **If no value is found on either, the suggested date will be defined by enrollment date and incident date.** 
 
-1. In case the option **Generate events based on enrollment date** is checked in the Metadata Management app, the next suggested event date is calculated by the enrollment date plus the value of scheduled days from start. 
+1. In case **Enrollment date** is selected under **Reference date for scheduling** in the Metadata Management app, the next suggested event date is calculated by the enrollment date plus the value of scheduled days from reference date. 
 
 ![](resources/images/schedule_event_from_enrollmentdate_01.png)
 
-2. In case the option **Show incident date** is checked, the next suggested event date is calculated by the incident date plus the value of scheduled days from start.
+2. In case **Incident date** is selected under **Reference date for scheduling**, the next suggested event date is calculated by the incident date plus the value of scheduled days from reference date.
 
 ![](resources/images/schedule_event_from_incidentdate_01.png)
 
