@@ -62,7 +62,7 @@
         "reselect": "^5.2.0",
         "rxjs": "^7.8.2",
         "typeface-roboto": "^1.1.13",
-        "uuid": "^14.0.1",
+        "uuid": "^14.0.2",
         "zod": "^4.4.3"
     },
     "scripts": {
