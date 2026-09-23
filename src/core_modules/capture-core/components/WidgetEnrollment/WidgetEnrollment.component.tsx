@@ -63,6 +63,7 @@ const WidgetEnrollmentPlain = ({
     events,
     enrollment,
     attributeOptionComboDetails,
+    updateEnrollmentAOC,
     program,
     ownerOrgUnit,
     locale,
@@ -186,7 +187,12 @@ const WidgetEnrollmentPlain = ({
                             {convertValue(ownerOrgUnitClientValue, dataElementTypes.ORGANISATION_UNIT)}
                         </div>
 
-                        <AttributeOptionCombo attributeOptionComboDetails={attributeOptionComboDetails} />
+                        <AttributeOptionCombo
+                            attributeOptionComboDetails={attributeOptionComboDetails}
+                            orgUnitId={ownerOrgUnit?.id}
+                            readOnly={enrollmentReadOnly}
+                            onSave={updateEnrollmentAOC}
+                        />
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">
                             <span data-test="widget-enrollment-icon-clock">

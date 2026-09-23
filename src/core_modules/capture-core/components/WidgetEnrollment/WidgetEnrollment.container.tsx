@@ -7,6 +7,7 @@ import { useTrackedEntities } from './hooks/useTrackedEntities';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
 import { useAttributeOptionComboDetails } from './hooks/useAttributeOptionComboDetails';
+import { useUpdateEnrollmentAOC } from './hooks/useUpdateEnrollmentAOC';
 import { useUserLocale } from '../../utils/localeData/useUserLocale';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
@@ -66,6 +67,12 @@ export const WidgetEnrollment = ({
     });
     const { error: errorProgram, program } = useProgram(programId);
     const { attributeOptionComboDetails } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
+    const updateEnrollmentAOC = useUpdateEnrollmentAOC({
+        enrollment,
+        refetchEnrollment,
+        onError,
+        onSuccess,
+    });
     const {
         error: errorOwnerOrgUnit,
         ownerOrgUnit,
@@ -89,6 +96,7 @@ export const WidgetEnrollment = ({
         <WidgetEnrollmentNote
             enrollment={enrollment}
             attributeOptionComboDetails={attributeOptionComboDetails}
+            updateEnrollmentAOC={updateEnrollmentAOC}
             events={events}
             canAddNew={canAddNew}
             readOnlyMode={readOnlyMode}
