@@ -190,11 +190,11 @@ const AttributeOptionComboPlain = ({
                         <span data-test="widget-enrollment-icon-attribute-option-combo">
                             <IconLegend16 color={colors.grey600} />
                         </span>
-                        {i18n.t('{{categoryName}}{{escape}}', {
+                        {i18n.t('{{categoryName}}{{escape}} {{optionName}}', {
                             categoryName: category?.displayName,
+                            optionName: option.displayName,
                             escape: ':',
                         })}
-                        {option.displayName}
                         {isFirst && !readOnly && !saving && onSave && (
                             <button
                                 type="button"
