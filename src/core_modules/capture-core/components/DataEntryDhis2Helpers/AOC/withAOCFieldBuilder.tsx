@@ -28,20 +28,17 @@ export const withAOCFieldBuilder = (settings: Settings) =>
     (InnerComponent: ComponentType<any>) =>
         getAOCFieldBuilder(settings, InnerComponent);
 
-const getEnrollmentAOCFieldBuilder = (settings: Settings | undefined, InnerComponent: ComponentType<any>) =>
+const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { programId, selectedOrgUnitId } = props;
-        const hideAOC = settings?.hideAOC?.(props);
-        const { enrollmentProgramCategory, isLoading } = useEnrollmentCategoryCombinations(programId, hideAOC);
+        const { enrollmentProgramCategory, isLoading } = useEnrollmentCategoryCombinations(programId);
         const enrollmentProgramCategories = useMemo(() => (
             !isLoading && enrollmentProgramCategory ? enrollmentProgramCategory.categories : []),
         [isLoading, enrollmentProgramCategory]);
-        const skipLoad = Boolean(hideAOC) || (!isLoading && !enrollmentProgramCategory);
-        const enrollmentCategories = useCategoryOptionsLoader(enrollmentProgramCategories, selectedOrgUnitId, skipLoad);
+        const missingCombo = !isLoading && !enrollmentProgramCategory;
+        const enrollmentCategories = useCategoryOptionsLoader(enrollmentProgramCategories, selectedOrgUnitId, missingCombo);
 
-        if (hideAOC || (!isLoading && !enrollmentProgramCategory)) {
-            return <InnerComponent {...props} />;
-        }
+        if (missingCombo) return <InnerComponent {...props} />;
         return (
             (!isLoading && enrollmentCategories) ? <InnerComponent
                 {...props}
@@ -51,6 +48,6 @@ const getEnrollmentAOCFieldBuilder = (settings: Settings | undefined, InnerCompo
         );
     };
 
-export const withEnrollmentAOCFieldBuilder = (settings?: Settings) =>
+export const withEnrollmentAOCFieldBuilder = () =>
     (InnerComponent: ComponentType<any>) =>
-        getEnrollmentAOCFieldBuilder(settings, InnerComponent);
+        getEnrollmentAOCFieldBuilder(InnerComponent);

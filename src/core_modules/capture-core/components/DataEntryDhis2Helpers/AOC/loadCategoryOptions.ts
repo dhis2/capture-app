@@ -3,19 +3,19 @@ import log from 'loglevel';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 
-export type CategoryOptionEntry = {
+type CategoryOptionEntry = {
     label: string;
     value: string;
     writeAccess: boolean;
 };
 
-export type LoadedCategory = {
+type LoadedCategory = {
     id: string;
     label: string;
     options: Array<CategoryOptionEntry>;
 };
 
-export const getOptionsAsync = async (
+const getOptionsAsync = async (
     category: { id: string; displayName: string },
     orgUnitId: string | null | undefined,
     onIsAborted: () => boolean,

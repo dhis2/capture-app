@@ -10,4 +10,3 @@ export {
     getEnrollmentCategoryOptionsValidatorContainers,
     useCategoryOptionsLoader,
 } from './AOC';
-export type { LoadedCategory, CategoryOptionEntry } from './AOC';
