@@ -11,6 +11,10 @@ import {
     getIncidentDateValidatorContainer,
     getCategoryOptionsValidatorContainers,
 } from '../fieldValidators';
+import {
+    enrollmentAttributeOptionsKey,
+    getEnrollmentCategoryOptionsValidatorContainers,
+} from '../../../DataEntryDhis2Helpers';
 import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
@@ -54,6 +58,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     clientValues,
     firstStage,
     programCategory,
+    enrollmentProgramCategory,
     formFoundation,
 }: {
     program: TrackerProgram;
@@ -65,6 +70,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     clientValues: { [key: string]: any };
     firstStage?: ProgramStage;
     programCategory?: ProgramCategory;
+    enrollmentProgramCategory?: ProgramCategory;
     formFoundation: RenderFoundation;
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
@@ -87,6 +93,15 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
                 type: 'TEXT',
                 validatorContainers:
                 getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+            })) : []),
+        ...(enrollmentProgramCategory && enrollmentProgramCategory.categories ?
+            enrollmentProgramCategory.categories.map(category => ({
+                id: `${enrollmentAttributeOptionsKey}-${category.id}`,
+                type: 'TEXT',
+                validatorContainers: getEnrollmentCategoryOptionsValidatorContainers(
+                    { enrollmentCategories: enrollmentProgramCategory.categories },
+                    category.id,
+                ),
             })) : []),
     ];
 

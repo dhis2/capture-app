@@ -8,7 +8,10 @@ import { useFormValues } from './index';
 import type { InputAttribute } from './useFormValues';
 import { useBuildFirstStageRegistration } from './useBuildFirstStageRegistration';
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
-import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import {
+    useCategoryCombinations,
+    useEnrollmentCategoryCombinations,
+} from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMergeFormFoundationsIfApplicable } from './useMergeFormFoundationsIfApplicable';
 
 export const useLifecycle = (
@@ -34,6 +37,8 @@ export const useLifecycle = (
 
     const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
     const { programCategory } = useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { enrollmentProgramCategory } =
+        useEnrollmentCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
@@ -63,6 +68,7 @@ export const useLifecycle = (
                     formValues,
                     clientValues,
                     programCategory,
+                    enrollmentProgramCategory,
                     firstStage: firstStageMetaData?.stage,
                     formFoundation,
                 }),
@@ -78,6 +84,7 @@ export const useLifecycle = (
         formValues,
         clientValues,
         programCategory,
+        enrollmentProgramCategory,
         firstStageMetaData,
         dispatch,
     ]);
