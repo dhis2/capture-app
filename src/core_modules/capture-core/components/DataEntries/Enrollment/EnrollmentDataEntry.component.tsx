@@ -308,7 +308,7 @@ const categoryOptionsComponent =
 const getEventCategoryOptionsSettingsFn = () => ({
     getComponent: () => categoryOptionsComponent,
     getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
-        ...props.categories?.find((category: any) => category.id === fieldId) ?? {},
+        ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
@@ -354,7 +354,7 @@ const getAOCSettingsFn = () => ({
 const getEnrollmentCategoryOptionsSettingsFn = () => ({
     getComponent: () => categoryOptionsComponent,
     getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
-        ...props.enrollmentCategories?.find((category: any) => category.id === fieldId) ?? {},
+        ...props.enrollmentCategories?.find((category: any) => category.id === fieldId),
         required: true,
     }),
     getPropName: (props: any, fieldId?: string) =>
