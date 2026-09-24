@@ -42,11 +42,14 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         }
     }, [refetch, attributeOptionCombo]);
 
-    return {
-        error,
-        loading,
-        attributeOptionComboDetails: attributeOptionCombo
-            ? (data?.attributeOptionCombo as AttributeOptionComboDetails | undefined)
-            : undefined,
-    };
+    // Memoize so consumers using [attributeOptionComboDetails] deps aren't
+    // invalidated on unrelated parent re-renders that leave data unchanged.
+    const attributeOptionComboDetails = useMemo(
+        () => (attributeOptionCombo
+            ? ((data as any)?.attributeOptionCombo as AttributeOptionComboDetails | undefined)
+            : undefined),
+        [attributeOptionCombo, data],
+    );
+
+    return { error, loading, attributeOptionComboDetails };
 };

@@ -150,8 +150,8 @@ const getSideEffects = (() => {
         pipe(
             () => stalePrograms
                 .flatMap(program => [
-                    ...((program.categoryCombo && program.categoryCombo.categories) || []),
-                    ...((program.enrollmentCategoryCombo && program.enrollmentCategoryCombo.categories) || []),
+                    ...(program.categoryCombo?.categories ?? []),
+                    ...(program.enrollmentCategoryCombo?.categories ?? []),
                 ]),
             categories => [
                 ...new Map(

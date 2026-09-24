@@ -69,7 +69,7 @@ type Props = {
     orgUnitId?: string;
     readOnly?: boolean;
     saving?: boolean;
-    onSave?: (categoryOptionUids: ReadonlyArray<string>) => void;
+    onSave?: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
 };
 
 const derivedCategories = (details: AttributeOptionComboDetails) =>
@@ -85,27 +85,6 @@ const derivedInitialSelection = (details: AttributeOptionComboDetails) =>
         }
         return acc;
     }, {});
-
-// If the currently-selected option isn't in the loaded (writable) options
-// — e.g. its org unit scope changed, or read access was revoked — prepend a
-// synthetic entry so the SingleSelectField shows its display name instead of
-// the raw UID.
-const buildOptionsForCategory = (
-    categoryId: string,
-    loadedOptions: Array<{ label: string; value: string; writeAccess: boolean }>,
-    currentSelectionId: string | undefined,
-    details: AttributeOptionComboDetails,
-) => {
-    const filtered = loadedOptions.filter(o => o.writeAccess || o.value === currentSelectionId);
-    if (!currentSelectionId || filtered.some(o => o.value === currentSelectionId)) {
-        return filtered;
-    }
-    const currentOption = details.categoryOptions.find(o => o.categories?.[0]?.id === categoryId);
-    if (!currentOption) {
-        return filtered;
-    }
-    return [{ label: currentOption.displayName, value: currentOption.id, writeAccess: false }, ...filtered];
-};
 
 const AttributeOptionComboPlain = ({
     classes,
@@ -124,25 +103,24 @@ const AttributeOptionComboPlain = ({
     );
     const loadedCategories = useCategoryOptionsLoader(editableCategories, orgUnitId, !editMode);
 
+    const exitEdit = useCallback(() => {
+        setEditMode(false);
+        setSelection({});
+    }, []);
+
     const openEdit = useCallback(() => {
         if (!attributeOptionComboDetails) return;
         setSelection(derivedInitialSelection(attributeOptionComboDetails));
         setEditMode(true);
     }, [attributeOptionComboDetails]);
 
-    const cancelEdit = useCallback(() => {
-        setEditMode(false);
-        setSelection({});
-    }, []);
-
-    const saveEdit = useCallback(() => {
-        if (saving) return;
+    const saveEdit = useCallback(async () => {
+        if (saving || !onSave) return;
         const values = editableCategories.map(({ id }) => selection[id]).filter(Boolean);
-        if (values.length === editableCategories.length && onSave) {
-            onSave(values);
-        }
-        setEditMode(false);
-    }, [saving, editableCategories, selection, onSave]);
+        if (values.length !== editableCategories.length) return;
+        const success = await onSave(values);
+        if (success) exitEdit();
+    }, [saving, editableCategories, selection, onSave, exitEdit]);
 
     if (!attributeOptionComboDetails || attributeOptionComboDetails.categoryCombo?.isDefault) {
         return null;
@@ -154,12 +132,8 @@ const AttributeOptionComboPlain = ({
             <div className={classes.editContainer} data-test="widget-enrollment-attribute-option-combo-edit">
                 {editableCategories.map((category) => {
                     const loaded = loadedCategories?.find(c => c.id === category.id);
-                    const options = buildOptionsForCategory(
-                        category.id,
-                        loaded?.options ?? [],
-                        selection[category.id],
-                        attributeOptionComboDetails,
-                    );
+                    const options = (loaded?.options ?? [])
+                        .filter(o => o.writeAccess || o.value === selection[category.id]);
                     return (
                         <div key={category.id} className={classes.fieldRow}>
                             <span className={classes.fieldLabel}>{category.displayName}</span>
@@ -192,7 +166,7 @@ const AttributeOptionComboPlain = ({
                     <Button
                         secondary
                         small
-                        onClick={cancelEdit}
+                        onClick={exitEdit}
                         disabled={saving}
                     >
                         {i18n.t('Cancel')}

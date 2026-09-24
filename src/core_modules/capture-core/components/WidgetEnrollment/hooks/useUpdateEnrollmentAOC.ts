@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDataEngine, useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { makeQuerySingleResource } from '../../../utils/api';
@@ -28,13 +28,13 @@ export const useUpdateEnrollmentAOC = ({
 }: UseUpdateEnrollmentAOCProps) => {
     const dataEngine = useDataEngine();
     const { fromClientDate } = useTimeZoneConversion();
-    const [resolving, setResolving] = useState(false);
+
     const resolveAttributeOptionCombo = useMemo(
         () => makeResolveAttributeOptionCombo(makeQuerySingleResource(dataEngine.query.bind(dataEngine))),
         [dataEngine],
     );
 
-    const [updateEnrollmentMutation, { loading: updating }] = useDataMutation(enrollmentUpdate, {
+    const [updateEnrollmentMutation, { loading: saving }] = useDataMutation(enrollmentUpdate, {
         onComplete: () => {
             refetchEnrollment();
             onSuccess?.();
@@ -44,25 +44,24 @@ export const useUpdateEnrollmentAOC = ({
         },
     });
 
-    const update = useCallback(async (categoryOptionUids: ReadonlyArray<string>) => {
-        if (!enrollment || resolving || updating) return;
-        setResolving(true);
+    const update = useCallback(async (categoryOptionUids: ReadonlyArray<string>): Promise<boolean> => {
+        if (!enrollment || saving) return false;
+        const attributeOptionCombo = await resolveAttributeOptionCombo(categoryOptionUids);
+        if (!attributeOptionCombo) {
+            onError?.('Could not resolve the selected category options to an attribute option combo.');
+            return false;
+        }
         try {
-            const attributeOptionCombo = await resolveAttributeOptionCombo(categoryOptionUids);
-            if (!attributeOptionCombo) {
-                onError?.('Could not resolve the selected category options to an attribute option combo.');
-                return;
-            }
-            updateEnrollmentMutation({
+            await updateEnrollmentMutation({
                 ...enrollment,
                 attributeOptionCombo,
                 updatedAt: fromClientDate(new Date()).getServerZonedISOString(),
             });
-        } finally {
-            setResolving(false);
+            return true;
+        } catch {
+            return false;
         }
-    }, [enrollment, resolving, updating, resolveAttributeOptionCombo, updateEnrollmentMutation,
-        onError, fromClientDate]);
+    }, [enrollment, saving, resolveAttributeOptionCombo, updateEnrollmentMutation, onError, fromClientDate]);
 
-    return { update, saving: resolving || updating };
+    return { update, saving };
 };

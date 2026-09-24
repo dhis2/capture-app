@@ -28,7 +28,7 @@ export const withAOCFieldBuilder = (settings: Settings) =>
     (InnerComponent: ComponentType<any>) =>
         getAOCFieldBuilder(settings, InnerComponent);
 
-const getEnrollmentAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<any>) =>
+const getEnrollmentAOCFieldBuilder = (settings: Settings | undefined, InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { programId, selectedOrgUnitId } = props;
         const hideAOC = settings?.hideAOC?.(props);
@@ -51,6 +51,6 @@ const getEnrollmentAOCFieldBuilder = (settings: Settings, InnerComponent: Compon
         );
     };
 
-export const withEnrollmentAOCFieldBuilder = (settings: Settings) =>
+export const withEnrollmentAOCFieldBuilder = (settings?: Settings) =>
     (InnerComponent: ComponentType<any>) =>
         getEnrollmentAOCFieldBuilder(settings, InnerComponent);

@@ -376,8 +376,6 @@ const getEnrollmentCategoryOptionsSettingsFn = () => ({
     },
 });
 
-const getEnrollmentAOCSettingsFn = () => ({});
-
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment;
     programId: string;
@@ -437,7 +435,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const AOCFieldBuilderHOC = withEnrollmentAOCFieldBuilder(getEnrollmentAOCSettingsFn())(
+const AOCFieldBuilderHOC = withEnrollmentAOCFieldBuilder()(
     withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
         withAOCFieldBuilder(getAOCSettingsFn())(
             withDataEntryFields(getEventCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),

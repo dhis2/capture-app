@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { useSelector } from 'react-redux';
-import { useDataEngine } from '@dhis2/app-runtime';
+import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -76,10 +77,9 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
 const resolveEnrollmentAOC = async (
     optionUids: Array<string>,
     resolve: (uids: ReadonlyArray<string>) => Promise<string | undefined>,
-): Promise<{ attributeOptionCombo?: string; resolveFailed: boolean }> => {
-    if (optionUids.length === 0) {
-        return { attributeOptionCombo: undefined, resolveFailed: false };
-    }
+    onFailure: () => void,
+): Promise<string | undefined> => {
+    if (optionUids.length === 0) return undefined;
     const attributeOptionCombo = await resolve(optionUids);
     if (!attributeOptionCombo) {
         log.error(
@@ -87,9 +87,9 @@ const resolveEnrollmentAOC = async (
                 'Could not resolve the selected enrollment category options to an attribute option combo',
             )({ optionUids }),
         );
-        return { attributeOptionCombo: undefined, resolveFailed: true };
+        onFailure();
     }
-    return { attributeOptionCombo, resolveFailed: false };
+    return attributeOptionCombo;
 };
 
 export const useBuildEnrollmentPayload = ({
@@ -111,6 +111,10 @@ export const useBuildEnrollmentPayload = ({
     const resolveAttributeOptionCombo = useMemo(
         () => makeResolveAttributeOptionCombo(makeQuerySingleResource(dataEngine.query.bind(dataEngine))),
         [dataEngine],
+    );
+    const { show: showResolveFailureAlert } = useAlert(
+        () => i18n.t('Could not save: selected category options are not a valid combination.'),
+        { critical: true },
     );
 
     const buildTeiWithEnrollment = async (relatedStageRef?: {current: RelatedStageRefPayload | null}): Promise<{
@@ -143,13 +147,14 @@ export const useBuildEnrollmentPayload = ({
                 return acc;
             }, {});
 
-        const {
-            attributeOptionCombo: enrollmentAttributeOptionCombo,
-            resolveFailed: enrollmentAOCResolveFailed,
-        } = await resolveEnrollmentAOC(
-            buildEnrollmentCategoryOptionUids(serverValuesForMainValues),
+        const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(serverValuesForMainValues);
+        const enrollmentAttributeOptionCombo = await resolveEnrollmentAOC(
+            enrollmentCategoryOptionUids,
             resolveAttributeOptionCombo,
+            showResolveFailureAlert,
         );
+        const enrollmentAOCResolveFailed =
+            enrollmentCategoryOptionUids.length > 0 && !enrollmentAttributeOptionCombo;
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
