@@ -67,7 +67,7 @@ export const WidgetEnrollment = ({
     });
     const { error: errorProgram, program } = useProgram(programId);
     const { attributeOptionComboDetails } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
-    const updateEnrollmentAOC = useUpdateEnrollmentAOC({
+    const { update: updateEnrollmentAOC, saving: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
         refetchEnrollment,
         onError,
@@ -97,6 +97,7 @@ export const WidgetEnrollment = ({
             enrollment={enrollment}
             attributeOptionComboDetails={attributeOptionComboDetails}
             updateEnrollmentAOC={updateEnrollmentAOC}
+            savingEnrollmentAOC={savingEnrollmentAOC}
             events={events}
             canAddNew={canAddNew}
             readOnlyMode={readOnlyMode}

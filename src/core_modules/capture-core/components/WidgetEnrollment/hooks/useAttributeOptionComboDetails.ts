@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export type AttributeOptionComboCategoryOption = {
@@ -32,8 +32,12 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         { lazy: true },
     );
 
+    // The parent's enrollment refetches cheaply and often; skip when the AOC
+    // UID hasn't actually changed to avoid a wasted metadata round-trip.
+    const lastFetchedRef = useRef<string | undefined>();
     useEffect(() => {
-        if (attributeOptionCombo) {
+        if (attributeOptionCombo && attributeOptionCombo !== lastFetchedRef.current) {
+            lastFetchedRef.current = attributeOptionCombo;
             refetch({ variables: { attributeOptionCombo } });
         }
     }, [refetch, attributeOptionCombo]);

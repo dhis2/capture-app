@@ -1,3 +1,5 @@
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type { ResourceQuery, QueryVariables } from 'capture-core-utils/types/app-runtime';
 
 type QuerySingleResource = (resourceQuery: ResourceQuery, variables?: QueryVariables) => Promise<any>;
@@ -32,8 +34,19 @@ export const makeResolveAttributeOptionCombo = (querySingleResource: QuerySingle
             (response as any)?.categoryOptionCombos ?? [];
         const target = new Set(categoryOptionUids);
 
-        return candidates.find(coc =>
+        const matches = candidates.filter(coc =>
             coc.categoryOptions.length === target.size &&
             coc.categoryOptions.every(({ id }) => target.has(id)),
-        )?.id;
+        );
+
+        if (matches.length > 1) {
+            log.warn(
+                errorCreator('Multiple category option combos match the same option set')({
+                    matches: matches.map(({ id }) => id),
+                    categoryOptionUids,
+                }),
+            );
+        }
+
+        return matches[0]?.id;
     };

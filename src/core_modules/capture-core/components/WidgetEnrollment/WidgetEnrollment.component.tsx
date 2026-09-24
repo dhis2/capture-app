@@ -64,6 +64,7 @@ const WidgetEnrollmentPlain = ({
     enrollment,
     attributeOptionComboDetails,
     updateEnrollmentAOC,
+    savingEnrollmentAOC,
     program,
     ownerOrgUnit,
     locale,
@@ -191,6 +192,7 @@ const WidgetEnrollmentPlain = ({
                             attributeOptionComboDetails={attributeOptionComboDetails}
                             orgUnitId={ownerOrgUnit?.id}
                             readOnly={enrollmentReadOnly}
+                            saving={savingEnrollmentAOC}
                             onSave={updateEnrollmentAOC}
                         />
 

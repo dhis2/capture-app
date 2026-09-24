@@ -1,4 +1,6 @@
 import { useMemo } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
@@ -71,6 +73,25 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
         .filter(key => !geometryType(key))
         .map(key => ({ attribute: key, value: formValues[key] }));
 
+const resolveEnrollmentAOC = async (
+    optionUids: Array<string>,
+    resolve: (uids: ReadonlyArray<string>) => Promise<string | undefined>,
+): Promise<{ attributeOptionCombo?: string; resolveFailed: boolean }> => {
+    if (optionUids.length === 0) {
+        return { attributeOptionCombo: undefined, resolveFailed: false };
+    }
+    const attributeOptionCombo = await resolve(optionUids);
+    if (!attributeOptionCombo) {
+        log.error(
+            errorCreator(
+                'Could not resolve the selected enrollment category options to an attribute option combo',
+            )({ optionUids }),
+        );
+        return { attributeOptionCombo: undefined, resolveFailed: true };
+    }
+    return { attributeOptionCombo, resolveFailed: false };
+};
+
 export const useBuildEnrollmentPayload = ({
     programId,
     dataEntryId,
@@ -122,10 +143,13 @@ export const useBuildEnrollmentPayload = ({
                 return acc;
             }, {});
 
-        const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(serverValuesForMainValues);
-        const enrollmentAttributeOptionCombo = enrollmentCategoryOptionUids.length > 0
-            ? await resolveAttributeOptionCombo(enrollmentCategoryOptionUids)
-            : undefined;
+        const {
+            attributeOptionCombo: enrollmentAttributeOptionCombo,
+            resolveFailed: enrollmentAOCResolveFailed,
+        } = await resolveEnrollmentAOC(
+            buildEnrollmentCategoryOptionUids(serverValuesForMainValues),
+            resolveAttributeOptionCombo,
+        );
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
@@ -198,7 +222,7 @@ export const useBuildEnrollmentPayload = ({
                 enrollments: [enrollment],
                 relationships: relationship ? [relationship] : undefined,
             },
-            formHasError,
+            formHasError: formHasError || enrollmentAOCResolveFailed,
             redirect,
         };
     };
