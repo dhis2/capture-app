@@ -1,5 +1,6 @@
 import { useMemo, useEffect, useRef } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 
 export type AttributeOptionComboCategoryOption = {
     id: string;
@@ -15,6 +16,9 @@ export type AttributeOptionComboDetails = {
 };
 
 export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) => {
+    const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
+    const effectiveAttributeOptionCombo = enrollmentAOCSupported ? attributeOptionCombo : undefined;
+
     const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
@@ -36,19 +40,19 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
     // UID hasn't actually changed to avoid a wasted metadata round-trip.
     const lastFetchedRef = useRef<string | undefined>();
     useEffect(() => {
-        if (attributeOptionCombo && attributeOptionCombo !== lastFetchedRef.current) {
-            lastFetchedRef.current = attributeOptionCombo;
-            refetch({ variables: { attributeOptionCombo } });
+        if (effectiveAttributeOptionCombo && effectiveAttributeOptionCombo !== lastFetchedRef.current) {
+            lastFetchedRef.current = effectiveAttributeOptionCombo;
+            refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
         }
-    }, [refetch, attributeOptionCombo]);
+    }, [refetch, effectiveAttributeOptionCombo]);
 
     // Memoize so consumers using [attributeOptionComboDetails] deps aren't
     // invalidated on unrelated parent re-renders that leave data unchanged.
     const attributeOptionComboDetails = useMemo(
-        () => (attributeOptionCombo
+        () => (effectiveAttributeOptionCombo
             ? ((data as any)?.attributeOptionCombo as AttributeOptionComboDetails | undefined)
             : undefined),
-        [attributeOptionCombo, data],
+        [effectiveAttributeOptionCombo, data],
     );
 
     return { error, loading, attributeOptionComboDetails };
