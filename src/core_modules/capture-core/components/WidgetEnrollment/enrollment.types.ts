@@ -1,6 +1,5 @@
 import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import type { AttributeOptionComboDetails } from './hooks/useAttributeOptionComboDetails';
 
 export type EventReducerProps = {
     enrollments?: Array<any> | null;
@@ -34,11 +33,8 @@ export type PlainProps = {
         orgUnit: string;
         followUp: boolean;
         geometry: any;
-        attributeOptionCombo?: string;
+
     };
-    attributeOptionComboDetails?: AttributeOptionComboDetails;
-    updateEnrollmentAOC: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
-    savingEnrollmentAOC: boolean;
     events: Array<{ status: string; event: string; programStage: string }>;
     program: {
         programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
