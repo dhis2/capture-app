@@ -6,8 +6,6 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { useTrackedEntities } from './hooks/useTrackedEntities';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
-import { useAttributeOptionComboDetails } from './hooks/useAttributeOptionComboDetails';
-import { useUpdateEnrollmentAOC } from './hooks/useUpdateEnrollmentAOC';
 import { useUserLocale } from '../../utils/localeData/useUserLocale';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
@@ -66,13 +64,6 @@ export const WidgetEnrollment = ({
         externalData,
     });
     const { error: errorProgram, program } = useProgram(programId);
-    const { attributeOptionComboDetails } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
-    const { update: updateEnrollmentAOC, saving: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
-        enrollment,
-        refetchEnrollment,
-        onError,
-        onSuccess,
-    });
     const {
         error: errorOwnerOrgUnit,
         ownerOrgUnit,
@@ -95,9 +86,6 @@ export const WidgetEnrollment = ({
     return (
         <WidgetEnrollmentNote
             enrollment={enrollment}
-            attributeOptionComboDetails={attributeOptionComboDetails}
-            updateEnrollmentAOC={updateEnrollmentAOC}
-            savingEnrollmentAOC={savingEnrollmentAOC}
             events={events}
             canAddNew={canAddNew}
             readOnlyMode={readOnlyMode}
