@@ -1443,7 +1443,7 @@ If a program stage has a default next scheduled date configured, the suggested d
 >
 1. A data element with value type date needs to be created and assigned to the particular program stage with access to future dates. The name of the data element could for example be: Next suggested follow up date. The program stage is configured to use the data element as default when scheduling a new event by assigning the data element to default next scheduled date.
 
-![](resources/images/schedule_event_01.png)
+![](resources/images/default-next-scheduled-date-mm.png)
 
 2. A program rule based on the data entered in the program stage, will determine how many days until the next suggested follow up will be. For example: A program rule with the following condition: #{penta_dose} == '1' (The program rule will trigger when the tracked entity has received Penta Dose 1), Assign value to the data element: next suggested follow up date with expression: d2:addDays(V{event_date}, '30') **The number suggest how many days from event date the next scheduled event should be.** 
 
@@ -1465,7 +1465,7 @@ After clicking **Schedule** button, user will be navigated back to enrollment ov
 
 1. If the program stage has standard interval days configured, the suggested date is calculated by the most recent event date plus the standard interval days value. 
 
-![](resources/images/standard_interval_days_01.png)
+![](resources/images/standard-interval-days-mm.png)
 
 2. If the program stage do not have a default next scheduled date configured, the system will use the standard interval days to calculate the next scheduled event date. 
 
