@@ -192,7 +192,7 @@ To configure it, you must follow the steps described in the [Enrollment with aut
 
 ### Enrollment with first stage on registration page
 
-For tracker programs enable the "First stage appears on registration page" flag in the Metadata Management app. The enrollment registration page will now display the first program stage the user has access to.
+For tracker programs enable the "Show first program stage during enrollment" flag in the Metadata Management app. The enrollment registration page will now display the first program stage the user has access to.
 
 ![](resources/images/first-stage-during-registration.png)
 
@@ -202,9 +202,11 @@ If the stage has "Open data entry form after enrollment" checked, then the event
 The generation happens based on either the enrollment date or the incident date. You can choose the reporting date from the "Date to use for created event report date" options.
 ![](resources/images/auto-generated-mm-04.png)
 
-As shown in the image you have three options, a) Enrollment date b) Incident date or c) None (report date will be empty). 
-Choosing "Incident date" indicates that both the event execution date and due date will be the same as the incident date.
-Choosing either "Enrollment date" or "None" indicates that both the event execution date and due date will be the same as the enrollment date.
+As shown in the image you have three options: **Enrollment date**, **Incident date** or **None**.
+Choosing **Enrollment date** sets the event's execution date (report date) to the enrollment date.
+Choosing **Incident date** sets the execution date to the incident date (or the enrollment date, if the program does not have an incident date).
+Choosing **None** leaves the execution date empty.
+The due date is calculated independently of this setting, based on the **Reference date for scheduling** option described under [Schedule type of event](#schedule-type-of-event) below.
 
 #### Schedule type of event
 
@@ -1349,7 +1351,7 @@ If the flag “Hide scheduled date” in the Metadata Management app configurati
 However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from reference date" that has been configured in the Metadata Management app, and this can not be changed. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
-### Ask user to complete program when stage is complete
+### Ask user to complete enrollment after completion { #ask-user-to-complete-program-when-stage-is-complete }
 If this flag has been enabled for the stage in Stage details in the Metadata Management app, a modal will show up after the user checks the **Complete** event checkbox and clicks save.
 
 ![](resources/images/ask-user-to-complete-enrollment-edit-event.png)
@@ -1413,12 +1415,12 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
-### Ask user to complete program when stage is complete { #capture_ask_complete_enrollment_new_event }
+### Ask user to complete enrollment after completion { #capture_ask_complete_enrollment_new_event }
 If this flag has been enabled for the stage in Stage details in the Metadata Management app, a modal will show up after the user clicks the **Complete** button.
 
 ![](resources/images/ask-user-to-complete-enrollment-new-event.png)
 
-### Ask user to create new event when stage is complete
+### Ask user to create a new event after completion { #ask-user-to-create-new-event-when-stage-is-complete }
 If this flag has been enabled for the stage in Stage details in the Metadata Management app, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
 
 
@@ -1434,7 +1436,7 @@ You will find the assignee section near the bottom of the data entry page. Searc
 ### Schedule event widget form
 Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
-The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to compute the suggested date.
+The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from reference date" will be added to the base date to compute the suggested date.
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
@@ -1580,7 +1582,7 @@ Additionally, by clicking the Menu in the top-right corner, users can:
 ![](resources/images/related-stages-linked-event-actions-menu.png)
 
 ## Enrolling a tracked entity { #related-stages-enrolling }
-Enable the "First stage appears on registration page" flag in the Metadata Management app for the Tracker program. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
+Enable the "Show first program stage during enrollment" flag in the Metadata Management app for the Tracker program. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
 
