@@ -30,6 +30,7 @@ export type EnrollmentPayload = {
             }>;
             attributes: TrackedEntityAttributes;
             geometry: any;
+            attributeOptionCombo?: string;
         }
     ];
     relationships?: [

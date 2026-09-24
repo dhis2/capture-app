@@ -2,3 +2,4 @@ export { deriveFirstStageDuringRegistrationEvent } from './deriveFirstStageDurin
 export { deriveRelatedStageEvent } from './deriveRelatedStageEvent';
 export { deriveAutoGenerateEvents } from './deriveAutoGenerateEvents';
 export { standardGeoJson } from './standardGeoJson';
+export { buildEnrollmentCategoryOptionUids } from './buildEnrollmentCategoryOptionUids';
