@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-24T12:33:05.293Z\n"
-"PO-Revision-Date: 2026-09-24T12:33:05.293Z\n"
+"POT-Creation-Date: 2026-09-24T15:45:28.084Z\n"
+"PO-Revision-Date: 2026-09-24T15:45:28.084Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -1430,6 +1430,12 @@ msgstr "Transfer"
 
 msgid "An error occurred while transferring ownership"
 msgstr "An error occurred while transferring ownership"
+
+msgid "Saving…"
+msgstr "Saving…"
+
+msgid "{{categoryName}}{{escape}} {{optionName}}"
+msgstr "{{categoryName}}{{escape}} {{optionName}}"
 
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
