@@ -55,8 +55,8 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
-            if (metadataContainer.error) {
-                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
+            if (metadataContainer.error || !metadataContainer.program) {
+                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error ?? '');
             }
 
             const program = metadataContainer.program;
@@ -208,15 +208,16 @@ export const saveEditedEventFailedEpic = (action$: any, store: any) =>
             return batchActions(actions, batchActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED);
         }));
 
-export const requestDeleteEventDataEntryEpic = (action$: any, store: ReduxStore, dependencies: any) =>
+export const requestDeleteEventDataEntryEpic = (action$: any, store: any, dependencies: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
         map((action: any) => {
             const { eventId, enrollmentId } = action.payload;
             const params = { enrollmentId };
             const serverData = { events: [{ event: eventId }] };
+            const { programId } = store.value.enrollmentPage;
             dependencies.navigate(`/enrollment?${buildUrlQueryString(params)}`);
-            return startDeleteEventDataEntry(serverData, eventId, params);
+            return startDeleteEventDataEntry(serverData, eventId, params, programId);
         }));
 
 export const startCreateNewAfterCompletingEpic = (

@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
+import { LabelKeys, useTermLabel } from '../../../../../../../customLabels';
 
 type Props = {
     selectedRows: { [key: string]: boolean };
@@ -13,6 +14,7 @@ type Props = {
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     programId?: string;
+    stageId?: string;
 };
 
 export const useBulkCompleteEvents = ({
@@ -22,9 +24,11 @@ export const useBulkCompleteEvents = ({
     removeRowsFromSelection,
     onUpdateList,
     programId,
+    stageId,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { stageId });
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -78,7 +82,12 @@ export const useBulkCompleteEvents = ({
         }),
         {
             onError: () => {
-                showAlert({ message: i18n.t('An error occurred while completing events') });
+                showAlert({
+                    message: i18n.t(
+                        'An error occurred while completing {{eventsLabel}}',
+                        { eventsLabel },
+                    ),
+                });
             },
             onSuccess: (response, { payload }: any) => {
                 const errorReports = response?.validationReport?.errorReports;

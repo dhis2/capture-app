@@ -1,5 +1,6 @@
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import { ScopeSelector, SingleLockedSelect, useReset } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
 import type { Props } from './topBar.types';
@@ -10,6 +11,7 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentId,
     teiDisplayName,
     trackedEntityName,
+    stageId,
     stageName,
     stageIcon,
     eventDateLabel,
@@ -24,6 +26,10 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentsAsOptions,
 }: Props) => {
     const { reset } = useReset();
+    const { enrollmentLabel, programStageLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.programStageSingular],
+        { stageId },
+    );
     return (
         <ScopeSelector
             selectedProgramId={programId}
@@ -55,7 +61,7 @@ export const EnrollmentAddEventTopBar = ({
                 onClear={() => onResetEnrollmentId()}
                 options={enrollmentsAsOptions || []}
                 selectedValue={enrollmentId}
-                title={i18n.t('Enrollment')}
+                title={capitalizeFirstLetter(enrollmentLabel)}
                 isUserInteractionInProgress={userInteractionInProgress}
             />
             {stageName && (
@@ -72,7 +78,7 @@ export const EnrollmentAddEventTopBar = ({
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={i18n.t('Stage')}
+                        title={capitalizeFirstLetter(programStageLabel)}
                         isUserInteractionInProgress={userInteractionInProgress}
                     />
 

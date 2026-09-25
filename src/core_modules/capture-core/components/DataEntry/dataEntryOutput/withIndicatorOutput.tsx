@@ -1,19 +1,22 @@
+import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
 import { useHideWidgetByRuleLocations } from '../../../hooks';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type Props = {
     dataEntryKey?: string;
     programRules?: Array<any>;
+    stageId?: string;
 };
 
 const IndicatorOutputWrapper = (props: Props) => {
-    const { dataEntryKey, programRules } = props;
+    const { dataEntryKey, programRules, stageId } = props;
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 
@@ -24,7 +27,7 @@ const IndicatorOutputWrapper = (props: Props) => {
     return (
         <WidgetIndicator
             dataEntryKey={dataEntryKey}
-            indicatorEmptyText={i18n.t('No indicator output for this event yet')}
+            indicatorEmptyText={i18n.t('No indicator output for this {{eventLabel}} yet', { eventLabel })}
         />
     );
 };

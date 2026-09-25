@@ -8,6 +8,7 @@ export type Props = {
     trackedEntityName?: string;
     trackedEntityInactive?: boolean;
     inlineLabel?: boolean;
+    stageId?: string;
 };
 
 export type Access = {
@@ -25,4 +26,8 @@ export type ReadOnlyMessageInput = {
     isEventCompleted?: boolean;
     canToggleCompletion?: boolean;
     trackedEntityInactive: boolean;
+    enrollmentLabel: string;
+    programStageLabel: string;
+    programStagesLabel: string;
+    eventLabel: string;
 };

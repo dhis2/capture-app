@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { CardImage } from 'capture-ui/CardImage/CardImage.component';
@@ -18,6 +19,7 @@ import {
     OptionSet,
     type TrackerProgram,
 } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../customLabels';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
@@ -152,6 +154,9 @@ const CardListItemIndex = ({
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitId, enrolledAt } = deriveEnrollmentOrgUnitIdAndDate(enrollments, enrollmentType, currentProgramId);
     const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId ?? null);
+    const { enrollmentLabel, orgUnitLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular],
+    );
     const program: TrackerProgram | undefined = enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
@@ -217,11 +222,14 @@ const CardListItemIndex = ({
 
         return (<>
             <ListEntry
-                name={i18n.t('Organisation unit')}
+                name={capitalizeFirstLetter(orgUnitLabel)}
                 value={orgUnitName}
             />
             <ListEntry
-                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
+                name={
+                    program?.enrollment?.enrollmentDateLabel
+                    ?? i18n.t('Date of {{enrollmentLabel}}', { enrollmentLabel })
+                }
                 value={enrolledAt}
                 type={dataElementTypes.DATE}
             />

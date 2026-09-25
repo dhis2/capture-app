@@ -1,6 +1,5 @@
 export type PlainProps = {
     stageId: string;
-    programId: string;
     enrolledAt: string;
     displayDueDateLabel: string;
     scheduleDate?: string | null;

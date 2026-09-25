@@ -168,6 +168,7 @@ export const Validated = ({
         <ValidatedComponentWrapper
             {...passOnProps}
             stage={stage}
+            stageId={stage.id}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
             availableProgramStages={availableProgramStages}

@@ -9,10 +9,12 @@ import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { DirectionalArrow } from '../../../utils/rtl';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type Props = {
     eventId: string;
     eventStatus?: string;
+    stageId?: string;
     onMutate?: (newStatus: string) => void;
     onSuccess?: (newStatus: string) => void;
     onError?: () => void;
@@ -24,6 +26,7 @@ type Props = {
 export const SkipMenuItem = ({
     eventId,
     eventStatus,
+    stageId,
     onMutate,
     onSuccess,
     onError,
@@ -33,6 +36,7 @@ export const SkipMenuItem = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -70,7 +74,7 @@ export const SkipMenuItem = ({
                 onMutate?.(newStatus);
             },
             onError: (error: unknown) => {
-                showError({ message: i18n.t('An error occurred when updating event status') });
+                showError({ message: i18n.t('An error occurred when updating {{eventLabel}} status', { eventLabel }) });
                 log.error(errorCreator('An error occurred when updating event status')({ error, eventId, newStatus }));
                 onError?.();
             },

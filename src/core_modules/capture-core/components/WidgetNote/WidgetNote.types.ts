@@ -6,6 +6,7 @@ export type Props = {
     emptyNoteMessage: string;
     readOnly: boolean;
     badge?: ReactNode;
+    noteLabel: string;
     notes: Array<{
         value: string;
         storedAt: string;

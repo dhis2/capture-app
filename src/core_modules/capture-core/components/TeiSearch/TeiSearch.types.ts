@@ -4,6 +4,7 @@ type PropsFromRedux = {
     searchGroups?: Array<SearchGroup>;
     showResults?: boolean;
     selectedProgramId?: string;
+    programId?: string;
     selectedTrackedEntityTypeId?: string;
     openSearchGroupSection?: string;
 };

@@ -11,6 +11,7 @@ const makeMapStateToProps = () => {
 
         return {
             relationshipTypes,
+            programId: state.currentSelections.programId,
         };
     };
 

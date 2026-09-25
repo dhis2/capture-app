@@ -10,6 +10,7 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
 import { getProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { convertValue } from '../../../../converters/serverToClient';
 import {
     getCurrentClientValues,
@@ -56,7 +57,10 @@ const runRulesForEditSingleEvent = async ({
         : getStageFromEvent(event)?.stage;
 
     if (!stage) {
-        throw Error(i18n.t('stage not found in rules execution'));
+        const { programStageLabel } = getTermLabel([LabelKeys.programStageSingular], { programId });
+        throw new Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+            programStageLabel,
+        }));
     }
 
     const foundation = stage.stageForm;

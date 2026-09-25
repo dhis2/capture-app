@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -166,9 +167,17 @@ const buildScheduleDateSettingsFn = () => {
                             [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(innerProps.eventStatus);
 
                             return isScheduleableStatus ?
-                                i18n.t('Go to “Schedule” tab to reschedule this event') :
-                                i18n.t('Scheduled date cannot be changed for {{ eventStatus }} events',
-                                    { eventStatus: translatedStatusTypes()[innerProps.eventStatus] });
+                                i18n.t(
+                                    'Go to “Schedule” tab to reschedule this {{eventLabel}}',
+                                    { eventLabel: innerProps.eventLabel },
+                                ) :
+                                i18n.t(
+                                    'Scheduled date cannot be changed for {{ eventStatus }} {{eventsLabel}}',
+                                    {
+                                        eventStatus: translatedStatusTypes()[innerProps.eventStatus],
+                                        eventsLabel: innerProps.eventsLabel,
+                                    },
+                                );
                         },
                     })(
                         withDisplayMessages()(
@@ -224,11 +233,11 @@ const buildOrgUnitSettingsFn = () => {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: i18n.t('Organisation unit'),
+            label: capitalizeFirstLetter(props.orgUnitLabel),
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -325,7 +334,10 @@ const buildCompleteFieldSettingsFn = () => {
                                 withConditionalTooltip((props: any) => {
                                     const shouldDisable = !props.canToggleCompletion;
                                     return shouldDisable
-                                        ? i18n.t('You do not have access to uncomplete this event')
+                                        ? i18n.t(
+                                            'You do not have access to uncomplete this {{eventLabel}}',
+                                            { eventLabel: props.eventLabel },
+                                        )
                                         : undefined;
                                 })(TrueOnlyField),
                             ),
@@ -341,7 +353,7 @@ const buildCompleteFieldSettingsFn = () => {
             const shouldDisable = !props.canToggleCompletion;
 
             return createComponentProps(props, {
-                label: i18n.t('Complete event'),
+                label: i18n.t('Complete {{eventLabel}}', { eventLabel: props.eventLabel }),
                 id: 'complete',
                 disabled: shouldDisable,
                 eventStatus: props.eventStatus,
