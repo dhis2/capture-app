@@ -1,6 +1,6 @@
 import React from 'react';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import {
     ScopeSelector,
     useSetProgramId,
@@ -32,7 +32,7 @@ export const TopBar = ({
     teiDisplayName,
     enrollmentsAsOptions,
 }: TopBarProps) => {
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     const { setProgramIdAndResetEnrollmentContext } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
     const { setEnrollmentId } = useSetEnrollmentId();

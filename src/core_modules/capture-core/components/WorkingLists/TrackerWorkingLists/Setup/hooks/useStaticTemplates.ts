@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import type { WorkingListTemplate } from '../../../WorkingListsBase';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 export const useStaticTemplates = (defaultAlteredTemplate: WorkingListTemplate | undefined, defaultTemplateId: string) => {
     const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);

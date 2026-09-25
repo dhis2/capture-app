@@ -10,7 +10,7 @@ import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 const styles = {
     header: {},

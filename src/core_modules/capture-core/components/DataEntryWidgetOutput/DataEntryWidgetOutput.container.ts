@@ -4,7 +4,7 @@ import React, { type ComponentType } from 'react';
 import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { makeProgramRulesSelector } from './DataEntryWidgetOutput.selectors';
-import { getTermLabel, LabelKeys } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../customLabels';
 
 type OwnProps = {
     dataEntryId: string;

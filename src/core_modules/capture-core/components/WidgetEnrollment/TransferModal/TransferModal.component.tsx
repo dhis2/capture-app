@@ -12,7 +12,7 @@ import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField';
 import { useTransferValidation } from './hooks/useTransferValidation';
 import { InfoBoxes } from './InfoBoxes';
-import { getTermLabelFromProgram, LabelKeys } from '../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../customLabels';
 
 export const TransferModal = ({
     enrollment,

@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
 import type { Props } from './followup.types';
-import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../customLabels';
 
 export const Followup = ({ enrollment, program, onUpdate }: Props) => {
     const { followUpLabel } = getTermLabelFromProgram([LabelKeys.followUpSingular], { program });

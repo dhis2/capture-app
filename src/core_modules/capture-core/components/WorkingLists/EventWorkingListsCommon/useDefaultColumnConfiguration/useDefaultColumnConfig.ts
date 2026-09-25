@@ -3,7 +3,8 @@ import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ProgramStage } from '../../../../metaData';
-import { dataElementTypes as elementTypeKeys, LabelKeys, useTermLabel } from '../../../../metaData';
+import { dataElementTypes as elementTypeKeys } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import { mainPropertyNames } from '../../../../events/mainPropertyNames.const';
 import type {
     MainColumnConfig,

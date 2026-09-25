@@ -7,7 +7,7 @@ import { NewRelationship } from '../../NewRelationship/NewRelationship.container
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { PlainProps } from './ViewEventNewRelationshipWrapper.types';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 const getStyles = (theme: any) => ({
     container: {

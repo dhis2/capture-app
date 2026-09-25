@@ -5,7 +5,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../customLabels';
 
 type Props = {
     selectedRows: { [key: string]: boolean };
@@ -14,6 +14,7 @@ type Props = {
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     programId?: string;
+    stageId?: string;
 };
 
 export const useBulkCompleteEvents = ({
@@ -23,10 +24,11 @@ export const useBulkCompleteEvents = ({
     removeRowsFromSelection,
     onUpdateList,
     programId,
+    stageId,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { programId });
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { stageId });
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },

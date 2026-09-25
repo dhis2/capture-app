@@ -6,11 +6,10 @@ import { debounce } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { Chip, Popover, IconChevronDown16, colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
+import { withCustomLabels, LabelKeys } from '../../../../../customLabels';
 import { OrgUnitField } from './OrgUnitField.component';
 import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 import { useOrgUnitAutoSelect, type AutoSelectOrgUnit } from '../../../../../dataQueries';
-import { LabelKeys } from '../../../../../metaData';
 
 const customLabels = [LabelKeys.orgUnitSingular] as const;
 

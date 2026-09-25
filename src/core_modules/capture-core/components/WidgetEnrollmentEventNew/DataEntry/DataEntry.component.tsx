@@ -15,6 +15,7 @@ import {
     getNoteValidatorContainers,
 } from './fieldValidators';
 import { type RenderFoundation, type ProgramStage } from '../../../metaData';
+import { LabelKeys, withCustomLabels } from '../../../customLabels';
 import {
     placements,
     withCleanUp,
@@ -49,6 +50,14 @@ import {
     getCategoryOptionsValidatorContainers,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
+
+const customLabels = [
+    LabelKeys.orgUnitSingular,
+    LabelKeys.eventSingular,
+    LabelKeys.noteSingular,
+    LabelKeys.notePlural,
+    LabelKeys.relationshipPlural,
+] as const;
 
 const getStyles = (theme: any) => ({
     savingContextContainer: {
@@ -557,4 +566,4 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 
 
 export const DataEntryComponent =
-    withStyles(getStyles)(withTheme()(DataEntryPlain));
+    withStyles(getStyles)(withTheme()(withCustomLabels(customLabels)(DataEntryPlain)));

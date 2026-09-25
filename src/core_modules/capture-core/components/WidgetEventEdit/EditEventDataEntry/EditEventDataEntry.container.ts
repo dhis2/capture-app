@@ -7,13 +7,13 @@ import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { withCustomLabels, LabelKeys } from '../../../customLabels';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
     batchActionTypes,
 } from '../DataEntry/editEventDataEntry.actions';
-import { LabelKeys, type RenderFoundation } from '../../../metaData';
+import { type RenderFoundation } from '../../../metaData';
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,
 } from '../../DataEntry/actions/dataEntry.actions';

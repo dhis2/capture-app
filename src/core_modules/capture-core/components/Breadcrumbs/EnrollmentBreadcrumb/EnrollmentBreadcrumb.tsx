@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import { statusTypes, type StatusType } from '../../../events/statusTypes';
 import { DirectionalChevron } from '../../../utils/rtl';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
@@ -21,6 +21,7 @@ type OwnProps = {
     onBackToViewEvent?: () => void;
     displayFrontPageList: boolean;
     programId: string;
+    stageId?: string;
     userInteractionInProgress?: boolean;
     eventStatus?: StatusType;
     page: 'mainPage' | EnrollmentPageKeyTypes;
@@ -54,6 +55,7 @@ const BreadcrumbsPlain = ({
     onBackToViewEvent,
     eventStatus,
     programId,
+    stageId,
     displayFrontPageList,
     userInteractionInProgress = false,
     page,
@@ -62,7 +64,7 @@ const BreadcrumbsPlain = ({
     const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
     const { enrollmentLabel, eventLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.eventSingular],
-        { programId },
+        { stageId },
     );
 
     const { label } = useWorkingListLabel({

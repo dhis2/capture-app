@@ -12,7 +12,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
 import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip/';
-import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../customLabels';
 
 export const Delete = ({ canCascadeDeleteEnrollment, enrollment, program, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);

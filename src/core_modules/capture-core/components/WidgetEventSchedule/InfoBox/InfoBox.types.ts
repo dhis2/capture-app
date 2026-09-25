@@ -4,6 +4,5 @@ export type PlainProps = {
     eventCountInOrgUnit: number;
     orgUnitName?: string | null;
     hideDueDate?: boolean;
-    programId: string;
     stageId: string;
 };

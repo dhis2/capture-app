@@ -17,7 +17,7 @@ import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
-import { useTermLabel, LabelKeys } from '../../../metaData';
+import { useTermLabel, LabelKeys } from '../../../customLabels';
 
 const getStyles = (theme: any) => ({
     informativeMessage: {

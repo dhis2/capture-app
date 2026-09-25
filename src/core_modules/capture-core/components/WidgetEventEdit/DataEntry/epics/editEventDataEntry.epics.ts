@@ -9,7 +9,8 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramThrowIfNotFound, dataElementTypes, getTermLabel, LabelKeys } from '../../../../metaData';
+import { getProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { convertValue } from '../../../../converters/serverToClient';
 import {
     getCurrentClientValues,

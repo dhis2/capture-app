@@ -6,7 +6,7 @@ import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
 import type { Props } from './CompleteAction.types';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 const styles: Readonly<any> = {
     container: {
@@ -45,11 +45,12 @@ const CompleteActionPlain = ({
     removeRowsFromSelection,
     onUpdateList,
     programId,
+    stageId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
-    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { programId });
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { stageId });
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive, eventsLabel);
     const disabled = Boolean(!stageDataWriteAccess || bulkDataEntryIsActive);
     const {
@@ -65,6 +66,7 @@ const CompleteActionPlain = ({
         removeRowsFromSelection,
         onUpdateList,
         programId,
+        stageId,
     });
 
     return (

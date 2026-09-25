@@ -1735,9 +1735,6 @@ msgstr "This {{programStageLabel}} can only have one {{eventLabel}}"
 msgid "New {{ eventName }} {{eventLabel}}"
 msgstr "New {{ eventName }} {{eventLabel}}"
 
-msgid "To open this {{eventLabel}}, please wait until saving is complete"
-msgstr "To open this {{eventLabel}}, please wait until saving is complete"
-
 msgid "Show {{ rest }} more"
 msgstr "Show {{ rest }} more"
 
@@ -2195,21 +2192,6 @@ msgstr "Must match the start of the value"
 msgid "Must match the end of the value"
 msgstr "Must match the end of the value"
 
-msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr "Scheduled{{ escape }} due {{ time }}"
-
-msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "Overdue{{ escape }} due {{ time }}"
-
-msgid "Overdue"
-msgstr "Overdue"
-
-msgid "Skipped"
-msgstr "Skipped"
-
-msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
-
 msgid "enrollments"
 msgstr "enrollments"
 
@@ -2248,6 +2230,21 @@ msgstr "organisation unit"
 
 msgid "follow-up"
 msgstr "follow-up"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr "Scheduled{{ escape }} due {{ time }}"
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr "Overdue{{ escape }} due {{ time }}"
+
+msgid "Overdue"
+msgstr "Overdue"
+
+msgid "Skipped"
+msgstr "Skipped"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Program not found"

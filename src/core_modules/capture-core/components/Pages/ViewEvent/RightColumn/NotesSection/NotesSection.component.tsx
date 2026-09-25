@@ -8,9 +8,8 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Notes } from '../../../../Notes/Notes.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
+import { withCustomLabels, LabelKeys } from '../../../../../customLabels';
 import type { PlainProps } from './NotesSection.types';
-import { LabelKeys } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 

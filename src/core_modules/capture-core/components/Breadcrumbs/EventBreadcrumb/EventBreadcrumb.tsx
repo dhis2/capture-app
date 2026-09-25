@@ -7,7 +7,7 @@ import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 export const pageKeys = {
     MAIN_PAGE: 'mainPage',
@@ -20,6 +20,7 @@ type PageKeys = typeof pageKeys[keyof typeof pageKeys];
 type OwnProps = {
     page: PageKeys;
     programId: string;
+    stageId?: string;
     userInteractionInProgress?: boolean;
     onBackToMainPage?: () => void;
     onBackToViewEvent?: () => void;
@@ -37,6 +38,7 @@ const styles = {
 const EventBreadcrumbPlain = ({
     page,
     programId,
+    stageId,
     userInteractionInProgress,
     onBackToViewEvent,
     onBackToMainPage,
@@ -44,7 +46,7 @@ const EventBreadcrumbPlain = ({
 }: Props) => {
     const [openWarning, setOpenWarning] = useState<PageKeys | null>(null);
     const { label } = useWorkingListLabel({ programId });
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     const handleNavigation = useCallback((callback?: () => void, warningType?: PageKeys) => {
         if (userInteractionInProgress && warningType) {

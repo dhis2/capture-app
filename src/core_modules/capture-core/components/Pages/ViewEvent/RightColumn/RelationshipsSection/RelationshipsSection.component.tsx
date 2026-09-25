@@ -9,11 +9,10 @@ import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { withCustomLabels } from '../../../../../HOC/withCustomLabels';
+import { withCustomLabels, LabelKeys } from '../../../../../customLabels';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 import type { PlainProps } from './RelationshipsSection.types';
-import { LabelKeys } from '../../../../../metaData';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
@@ -125,6 +124,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
                     smallMainButton: true,
                     onRenderConnectedEntity: this.renderConnectedEntity,
                     programId,
+                    stageId: programStage?.id,
                 })}
             </ViewEventSection>
         );

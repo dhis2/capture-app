@@ -1,7 +1,8 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { SearchGroup, useTermLabel, LabelKeys } from '../../metaData';
+import { SearchGroup } from '../../metaData';
+import { LabelKeys, withCustomLabels } from '../../customLabels';
 import { UnsupportedAttributesNotification } from '../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
@@ -9,6 +10,8 @@ import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSele
 import { Section, SectionHeaderSimple } from '../Section';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import type { Props } from './TeiSearch.types';
+
+const customLabels = [LabelKeys.attributePlural] as const;
 
 const styles: Readonly<any> = (theme: any) => ({
     container: {
@@ -179,12 +182,5 @@ class TeiSearchPlain extends React.Component<Props & LabelProps & WithStyles<typ
     }
 }
 
-const TeiSearchWithStyles = withStyles(styles)(TeiSearchPlain);
-
-// Hand-rolled wrapper (not withCustomLabels HOC): the HOC reads programId from props,
-// but this component's program source is `selectedProgramId` — passing it explicitly to
-// useTermLabel keeps the correct program's custom labels when Redux currentSelections differs.
-export const TeiSearchComponent = (props: Props) => {
-    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: props.selectedProgramId });
-    return <TeiSearchWithStyles {...props} attributesLabel={attributesLabel} />;
-};
+export const TeiSearchComponent =
+    withCustomLabels(customLabels)(withStyles(styles)(TeiSearchPlain));

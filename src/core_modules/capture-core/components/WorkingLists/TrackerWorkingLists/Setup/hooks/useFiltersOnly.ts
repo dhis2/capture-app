@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { dataElementTypes, LabelKeys, type TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = (
-    { id: programId, enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
+    { enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
     programStageId?: string,
 ) => {
     const { enrollmentLabel, followUpLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.followUpSingular],
-        { programId },
     );
     return useMemo(() => {
         const enableUserAssignment =

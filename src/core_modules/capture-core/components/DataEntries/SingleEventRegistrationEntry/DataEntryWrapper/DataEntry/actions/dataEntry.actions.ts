@@ -59,6 +59,7 @@ export const newEventSavedAfterReturnedToMainPage = (selections: any) =>
 export const startSaveNewEventAfterReturnedToMainPage = (serverData: any, relationshipData: any, selections: any) => {
     const actionType = actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE;
     const programId = serverData?.events?.[0]?.program;
+    const stageId = serverData?.events?.[0]?.programStage;
     return actionCreator(actionType)({ selections }, {
         offline: {
             effect: {
@@ -72,7 +73,7 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: any, relati
             },
             rollback: {
                 type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE,
-                meta: { selections, programId },
+                meta: { selections, programId, stageId },
             },
         },
     });
@@ -161,6 +162,7 @@ export const startSaveNewEventAddAnother =
 ) => {
     const actionType = actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER;
     const programId = serverData?.events?.[0]?.program;
+    const stageId = serverData?.events?.[0]?.programStage;
     return actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
         offline: {
             effect: {
@@ -175,7 +177,7 @@ export const startSaveNewEventAddAnother =
             },
             rollback: {
                 type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER,
-                meta: { selections, clientId, programId },
+                meta: { selections, clientId, programId, stageId },
             },
         },
     });

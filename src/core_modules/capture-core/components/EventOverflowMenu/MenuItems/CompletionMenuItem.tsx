@@ -17,7 +17,7 @@ import {
     rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const updateEventStatus = async (
     dataEngine: any,
@@ -48,7 +48,6 @@ const updateEventStatus = async (
 type MenuItemProps = {
     eventId: string;
     eventStatus?: string;
-    programId: string;
     stageId?: string;
     onMutate?: (newStatus: string) => void;
     onSuccess?: (newStatus: string) => void;
@@ -63,7 +62,6 @@ type MenuItemProps = {
 export const CompletionMenuItem = ({
     eventId,
     eventStatus,
-    programId,
     stageId,
     onMutate,
     onSuccess,
@@ -76,7 +74,7 @@ export const CompletionMenuItem = ({
 }: MenuItemProps) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const isCompleted = eventStatus === eventStatuses.COMPLETED;
@@ -124,6 +122,7 @@ type ModalProps = {
     eventId: string;
     enrollment: any;
     programStageName?: string;
+    stageId?: string;
     onClose: () => void;
     onMutate?: (newStatus: string) => void;
     onSuccess?: (newStatus: string) => void;
@@ -134,6 +133,7 @@ export const CompleteMenuItemModal = ({
     eventId,
     enrollment,
     programStageName,
+    stageId,
     onClose,
     onMutate,
     onSuccess,
@@ -142,7 +142,7 @@ export const CompleteMenuItemModal = ({
     const dataEngine = useDataEngine();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: enrollment.program });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const { show: showError } = useAlert(({ message }) => message, { critical: true });
 
     const handleError = (error: unknown) => {

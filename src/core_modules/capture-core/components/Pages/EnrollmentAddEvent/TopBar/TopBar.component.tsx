@@ -1,6 +1,6 @@
 import React from 'react';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import { ScopeSelector, SingleLockedSelect, useReset } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
 import type { Props } from './topBar.types';
@@ -26,8 +26,10 @@ export const EnrollmentAddEventTopBar = ({
     enrollmentsAsOptions,
 }: Props) => {
     const { reset } = useReset();
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { programId, stageId });
+    const { enrollmentLabel, programStageLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.programStageSingular],
+        { stageId },
+    );
     return (
         <ScopeSelector
             selectedProgramId={programId}

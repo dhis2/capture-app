@@ -4,7 +4,7 @@ import { colors, spacersNum, IconLink16 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 export const styles: Readonly<any> = {
     container: {

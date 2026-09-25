@@ -14,7 +14,6 @@ import {
     DataTableCell,
     DataTableColumnHeader,
     Button,
-    Tooltip,
 } from '@dhis2/ui';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -23,7 +22,7 @@ import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';
@@ -107,14 +106,14 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const { eventLabel, eventsLabel } = useTermLabel(
-        [LabelKeys.eventSingular, LabelKeys.eventPlural],
-        { programId, stageId },
+    const { eventsLabel } = useTermLabel(
+        [LabelKeys.eventPlural],
+        { stageId },
     );
     const { stageWriteAccessById } = useEnrollmentAccessContext();
     const stageWriteAccess = stageWriteAccessById[stageId] ?? stage?.access?.data?.write;
     const headerColumns = useComputeHeaderColumn(
-        dataElements, hideDueDate, enableUserAssignment, stage?.stageForm, programId, stageId,
+        dataElements, hideDueDate, enableUserAssignment, stage?.stageForm, stageId,
     );
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);
@@ -184,38 +183,14 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             .map(row => formatRowForView(row, dataElementsClient))
             .map((row: any) => {
                 const cells = headerColumns.map(({ id }) => (
-                    <Tooltip
-                        key={`${id}-${row.id}`}
-                        content={i18n.t(
-                            'To open this {{eventLabel}}, please wait until saving is complete',
-                            { eventLabel },
-                        )}
-                        closeDelay={50}
+                    <DataTableCell
+                        key={id}
+                        onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
                     >
-                        {({ onMouseOver, onMouseOut, ref }) => (
-                            <DataTableCell
-                                key={id}
-                                onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
-                                // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
-                                ref={(tableCell) => {
-                                    if (tableCell) {
-                                        if (row.pendingApiResponse) {
-                                            tableCell.onmouseover = onMouseOver;
-                                            tableCell.onmouseout = onMouseOut;
-                                            ref.current = tableCell;
-                                        } else {
-                                            tableCell.onmouseover = null;
-                                            tableCell.onmouseout = null;
-                                        }
-                                    }
-                                }}
-                            >
-                                <div>
-                                    {row[id] as React.ReactNode}
-                                </div>
-                            </DataTableCell>
-                        )}
-                    </Tooltip>
+                        <div>
+                            {row[id] as React.ReactNode}
+                        </div>
+                    </DataTableCell>
                 ));
                 const eventDetails = events.find(event => event.event === row.id);
 

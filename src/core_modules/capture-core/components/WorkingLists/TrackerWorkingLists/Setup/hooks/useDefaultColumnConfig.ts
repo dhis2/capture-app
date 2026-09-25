@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
-import { dataElementTypes, LabelKeys, type TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 import type { MainColumnConfig, MetadataColumnConfig, TrackerWorkingListsColumnConfigs } from '../../types';
 
 const getMainConfig = (hasDisplayInReportsAttributes: boolean, orgUnitLabel: string): Array<MainColumnConfig> =>
@@ -142,8 +143,10 @@ export const useDefaultColumnConfig = (
     orgUnitId: string | null | undefined,
     programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs => {
-    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: program.id, stageId: programStageId });
+    const { orgUnitLabel, eventLabel } = useTermLabel(
+        [LabelKeys.orgUnitSingular, LabelKeys.eventSingular],
+        { stageId: programStageId },
+    );
     return useMemo(() => {
         const { attributes, stages } = program;
         const searchFilterMetaById = buildSearchFilterMetaById(program);

@@ -15,7 +15,8 @@ import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentO
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
-import { dataElementTypes, LabelKeys, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const styles: Readonly<any> = {
     container: {
@@ -93,7 +94,7 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
 };
 
 export const StageOverviewPlain = ({
-    title, icon, description, events, stageWriteAccess = true, programId, stageId, classes,
+    title, icon, description, events, stageWriteAccess = true, stageId, classes,
 }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const { anyStageWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
@@ -103,7 +104,7 @@ export const StageOverviewPlain = ({
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
     const { eventLabel, eventsLabel } = useTermLabel(
         [LabelKeys.eventSingular, LabelKeys.eventPlural],
-        { programId, stageId },
+        { stageId },
     );
 
     return (
@@ -169,7 +170,6 @@ export const StageOverviewPlain = ({
                 {showStageBadge && (
                     <ReadOnlyBadge
                         programStageWriteAccess={stageWriteAccess}
-                        programId={programId}
                         stageId={stageId}
                     />
                 )}

@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { isLangRtl } from '../../../../utils/rtl';
-import { LabelKeys } from '../../../../metaData';
-import { withCustomLabels } from '../../../../HOC/withCustomLabels';
+import { LabelKeys, withCustomLabels } from '../../../../customLabels';
 import { DataEntry } from '../../../DataEntry';
 import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
 import {

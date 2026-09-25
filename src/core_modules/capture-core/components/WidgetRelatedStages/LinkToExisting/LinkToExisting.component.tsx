@@ -9,7 +9,7 @@ import {
 import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css';
 import { baseInputStyles } from '../FormComponents/commonProps';
 import type { LinkToExistingProps } from './LinkToExisting.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const SingleSelectForForm = withDefaultFieldContainer()(
     withLabel({
@@ -28,9 +28,10 @@ export const LinkToExisting = ({
     linkableStageLabel,
     errorMessages,
     saveAttempted,
+    stageId,
 }: LinkToExistingProps) => {
     const [touched, setTouched] = useState(false);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     const handleChange = (value: string | null) => {
         setTouched(true);

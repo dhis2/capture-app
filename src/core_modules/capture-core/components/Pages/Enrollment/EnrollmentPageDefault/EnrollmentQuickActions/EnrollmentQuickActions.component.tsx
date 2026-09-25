@@ -10,7 +10,7 @@ import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { selectEnrollmentHiddenProgramStageIds } from '../../../common/EnrollmentOverviewDomain';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const styles = {
     contentContainer: {
@@ -31,7 +31,7 @@ const EnrollmentQuickActionsComponentPlain = ({
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { anyStageWriteAccess } = useEnrollmentAccessContext();
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId: programId as string | undefined });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
 
     const hiddenProgramStageIds = useSelector(selectEnrollmentHiddenProgramStageIds);
 

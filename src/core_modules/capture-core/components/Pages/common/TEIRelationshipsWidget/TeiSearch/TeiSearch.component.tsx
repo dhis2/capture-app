@@ -8,7 +8,7 @@ import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSele
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { Props } from './TeiSearch.types';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const getStyles = (theme: any) => ({
     container: {
@@ -27,7 +27,7 @@ const getStyles = (theme: any) => ({
 
 const TeiSearchPlain = (props: Props & WithStyles<typeof getStyles>) => {
     const [programSectionOpen, setProgramSectionOpen] = useState(true);
-    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural], { programId: props.selectedProgramId });
+    const { attributesLabel } = useTermLabel([LabelKeys.attributePlural]);
 
     const getFormId = useCallback((searchGroupId) => {
         const contextId = props.selectedProgramId || props.selectedTrackedEntityTypeId || '';

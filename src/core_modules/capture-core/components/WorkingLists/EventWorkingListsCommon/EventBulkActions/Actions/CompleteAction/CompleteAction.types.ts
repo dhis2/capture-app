@@ -5,4 +5,5 @@ export type Props = {
     onUpdateList: (disableClearSelections?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
     programId: string;
+    stageId?: string;
 };

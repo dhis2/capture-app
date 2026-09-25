@@ -6,16 +6,17 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetFeedback } from '../../WidgetFeedback';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type Props = {
     dataEntryKey?: string;
     programRules?: Array<any>;
+    stageId?: string;
 };
 
 const FeedbackOutputWrapper = (props: Props) => {
-    const { dataEntryKey, programRules } = props;
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { dataEntryKey, programRules, stageId } = props;
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     const hideWidgets = useHideWidgetByRuleLocations(programRules || []);
 

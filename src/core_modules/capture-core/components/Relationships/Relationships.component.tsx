@@ -6,7 +6,7 @@ import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
-import { getTermLabel, LabelKeys } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../customLabels';
 import type { Relationship, Entity } from './relationships.types';
 
 const styles: Readonly<any> = (theme: any) => ({
@@ -64,8 +64,8 @@ const styles: Readonly<any> = (theme: any) => ({
     },
 });
 
-const getFromNames = (programId: string) => {
-    const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+const getFromNames = (programId: string, stageId?: string) => {
+    const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId });
     return {
         PROGRAM_STAGE_INSTANCE: i18n.t('This {{eventLabel}}', { eventLabel }),
     };
@@ -83,6 +83,7 @@ type PlainProps = {
     smallMainButton: boolean;
     relationshipsRef: (instance: any) => void;
     programId: string;
+    stageId?: string;
 };
 
 type Props = PlainProps & WithStyles<typeof styles>;
@@ -110,7 +111,7 @@ class RelationshipsPlain extends React.Component<Props> {
         const { onRenderConnectedEntity } = this.props;
 
         if (entity.id === this.props.currentEntityId) {
-            return getFromNames(this.props.programId)[entity.type];
+            return getFromNames(this.props.programId, this.props.stageId)[entity.type];
         }
 
         return onRenderConnectedEntity ? onRenderConnectedEntity(entity) : entity.name;

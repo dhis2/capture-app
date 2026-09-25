@@ -5,7 +5,7 @@ import { useAuthority, Authorities } from '../../../../../../utils/authority';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { PlainProps } from './DeleteEnrollmentsAction.types';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 const getTooltipContent = (
     programDataWriteAccess: boolean,
@@ -30,7 +30,7 @@ export const DeleteEnrollmentsAction = ({
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority(Authorities.ENROLLMENT_CASCADE_DELETE);
-    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
     const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive, enrollmentsLabel);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 

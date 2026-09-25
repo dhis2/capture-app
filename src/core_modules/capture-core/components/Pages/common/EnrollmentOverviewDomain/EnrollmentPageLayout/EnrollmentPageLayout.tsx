@@ -59,7 +59,9 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
-type OwnProps = EnrollmentPageProps;
+type OwnProps = EnrollmentPageProps & {
+    stageId?: string;
+};
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
 
 const EnrollmentPageLayoutPlain = ({
@@ -128,6 +130,7 @@ const EnrollmentPageLayoutPlain = ({
                         onBackToDashboard={onBackToDashboard}
                         onBackToViewEvent={onBackToViewEvent}
                         programId={program.id}
+                        stageId={passOnProps.stageId}
                         displayFrontPageList={program.displayFrontPageList}
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}

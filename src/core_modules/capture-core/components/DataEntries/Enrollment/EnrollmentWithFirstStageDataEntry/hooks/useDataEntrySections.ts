@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirst
 import { placements } from '../../../../DataEntry/constants/placements.const';
 import { sectionKeysForFirstStageDataEntry } from '../EnrollmentWithFirstStageDataEntry.constants';
 import { AOCsectionKey } from '../../../../DataEntryDhis2Helpers';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 export const useDataEntrySections = (stageName: string, beforeSectionId: string) => {
     const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);

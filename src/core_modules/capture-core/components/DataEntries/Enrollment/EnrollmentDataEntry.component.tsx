@@ -39,9 +39,8 @@ import {
     ProgramStage,
     RenderFoundation,
     getProgramThrowIfNotFound,
-    LabelKeys,
 } from '../../../metaData';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { LabelKeys, withCustomLabels } from '../../../customLabels';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,

@@ -6,7 +6,8 @@ import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { dataElementTypes, DataElement, LabelKeys, OptionSet, Option, useTermLabel } from '../../../../../../metaData';
+import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
@@ -118,10 +119,9 @@ const useComputeHeaderColumn = (
     hideDueDate: boolean,
     enableUserAssignment: boolean,
     formFoundation?: { getLabel: (key: string) => string },
-    programId?: string,
     stageId?: string,
 ) => {
-    const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { programId, stageId });
+    const { orgUnitLabel: rawOrgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular], { stageId });
     const orgUnitLabel = capitalizeFirstLetter(rawOrgUnitLabel);
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {

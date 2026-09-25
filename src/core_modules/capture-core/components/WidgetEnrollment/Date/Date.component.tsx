@@ -17,7 +17,8 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
 import { convertValue as convertValueFormToClient } from '../../../converters/formToClient';
 import { convertValue as convertValueClientToServer } from '../../../converters/clientToServer';
-import { dataElementTypes, getTermLabelFromProgram, LabelKeys } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../customLabels';
 
 type OwnProps = {
     date: string;

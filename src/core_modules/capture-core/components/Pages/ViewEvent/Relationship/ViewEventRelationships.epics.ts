@@ -3,7 +3,7 @@ import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import {
     addRelationship,
     removeRelationship,
@@ -81,7 +81,8 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
 
             const relationshipClientId = uuid();
             const programId = state.currentSelections.programId;
-            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+            const stageId = state.viewEventPage?.loadedValues?.eventContainer?.event?.programStage;
+            const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId });
             const clientRelationship = {
                 clientId: relationshipClientId,
                 from: {

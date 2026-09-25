@@ -6,7 +6,7 @@ import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
 import { relatedStageActions } from '../../../../../WidgetRelatedStages';
-import { getTermLabel, LabelKeys } from '../../../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../../../customLabels';
 
 const NewEnrollmentRelationshipPlain =
     ({

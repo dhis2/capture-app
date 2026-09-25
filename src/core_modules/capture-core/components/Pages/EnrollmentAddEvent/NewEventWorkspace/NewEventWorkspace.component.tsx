@@ -4,7 +4,8 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { tabMode } from './newEventWorkspace.constants';
-import { getProgramAndStageForProgram, getProgramEventAccess, LabelKeys, useTermLabel } from '../../../../metaData';
+import { getProgramAndStageForProgram, getProgramEventAccess } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
@@ -50,7 +51,7 @@ const NewEventWorkspacePlain = ({
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const { programStageLabel, eventLabel } = useTermLabel(
         [LabelKeys.programStageSingular, LabelKeys.eventSingular],
-        { programId, stageId },
+        { stageId },
     );
 
     const onHandleSwitchTab = (newMode: string) => {

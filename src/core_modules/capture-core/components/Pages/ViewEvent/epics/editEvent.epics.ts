@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,

@@ -16,7 +16,7 @@ import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
 import type { PlainProps } from './CompleteAction.types';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 const styles: Readonly<any> = {
     container: {
@@ -66,7 +66,6 @@ const CompleteActionPlain = ({
     const [openAccordion, setOpenAccordion] = useState(false);
     const { enrollmentLabel, enrollmentsLabel, eventsLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
-        { programId },
     );
     const {
         completeEnrollments,

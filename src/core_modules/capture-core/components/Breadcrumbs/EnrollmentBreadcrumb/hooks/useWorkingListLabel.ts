@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 type Template = {
     id: string;
@@ -27,7 +27,7 @@ export const useWorkingListLabel = ({
     programId,
     displayFrontPageList,
 }: Props) => {
-    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural], { programId });
+    const { enrollmentsLabel } = useTermLabel([LabelKeys.enrollmentPlural]);
     const workingListTemplates = useSelector((state: any) => state.workingListsTemplates?.teiList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.teiList?.programIdView);
 

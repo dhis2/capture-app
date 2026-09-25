@@ -18,8 +18,8 @@ import {
     ProgramStage,
     RenderFoundation,
     CustomForm,
-    extractCustomLabels,
 } from '../../../../metaData';
+import { extractCustomLabels } from '../../../../customLabels';
 import { buildIcon } from '../../../common/helpers';
 import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
 import { DataElementFactory } from './DataElementFactory';

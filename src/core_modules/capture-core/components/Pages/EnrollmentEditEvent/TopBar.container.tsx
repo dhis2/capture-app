@@ -1,7 +1,8 @@
 import React from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { LabelKeys, useTermLabel, type ProgramStage } from '../../../metaData';
+import { type ProgramStage } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import {
     ScopeSelector,
@@ -47,11 +48,10 @@ export const TopBar = ({
     isUserInteractionInProgress,
 }: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular], { programId });
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], {
-        programId,
-        stageId: programStage?.id,
-    });
+    const { enrollmentLabel, programStageLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.programStageSingular],
+        { stageId: programStage?.id },
+    );
 
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();

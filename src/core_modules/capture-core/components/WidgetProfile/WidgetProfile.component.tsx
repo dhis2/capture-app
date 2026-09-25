@@ -11,7 +11,7 @@ import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
 import type { Props } from './widgetProfile.types';
-import { getTermLabelFromProgram, LabelKeys } from '../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../customLabels';
 import {
     useProgram,
     useTrackedEntityInstances,

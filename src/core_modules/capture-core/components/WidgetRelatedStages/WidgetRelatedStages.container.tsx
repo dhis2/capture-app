@@ -16,7 +16,7 @@ import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { RequestEvent } from '../DataEntries';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 const styles = {
     header: {
@@ -49,7 +49,7 @@ export const WidgetRelatedStagesPlain = ({
     classes,
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: programStageId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStageId });
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus, constraint } = useRelatedStages({ programStageId, programId });
     const { stageWriteAccessById } = useEnrollmentAccessContext();
@@ -64,6 +64,7 @@ export const WidgetRelatedStagesPlain = ({
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
+        stageId: constraint?.programStage?.id,
         onUpdateOrAddEnrollmentEvents,
         onUpdateEnrollmentEventsSuccess,
         onUpdateEnrollmentEventsError,

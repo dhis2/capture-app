@@ -7,11 +7,11 @@ import type { Props } from './eventWorkingListsRowMenuSetup.types';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { isValidPeriod } from '../../../../utils/validation/validators/form';
 import { DeleteEventModal } from './DeleteEventModal';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
-export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...passOnProps }: Props) => {
+export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, stageId, ...passOnProps }: Props) => {
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [eventIdToDelete, setEventIdToDelete] = useState<string | null>(null);
 
@@ -68,7 +68,7 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
             {deleteModalOpen && eventIdToDelete && (
                 <DeleteEventModal
                     eventId={eventIdToDelete}
-                    programId={programId}
+                    stageId={stageId}
                     onClose={handleCloseDeleteModal}
                     onConfirmDelete={handleConfirmDelete}
                 />

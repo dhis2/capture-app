@@ -13,7 +13,6 @@ export type Props = {
     getSaveContext: () => { event: Record<string, unknown> };
     onSave: (newAssignee: Assignee) => void;
     onSaveError: (prevAssignee: Assignee | null) => void;
-    programId?: string;
     stageId?: string;
 };
 
@@ -22,6 +21,5 @@ export type PlainProps = {
     readOnly: boolean;
     onSet: (user: Assignee | null) => void;
     avatarId?: string;
-    programId?: string;
     stageId?: string;
 };

@@ -12,7 +12,7 @@ import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
 import type { Props } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 const styles: Readonly<any> = {
     row: {

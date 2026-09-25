@@ -10,7 +10,8 @@ import {
 } from '@dhis2/ui';
 import { useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
 import { convertServerToClient } from 'capture-core/converters';
-import { dataElementTypes, LabelKeys, useTermLabel } from 'capture-core/metaData';
+import { dataElementTypes } from 'capture-core/metaData';
+import { LabelKeys, useTermLabel } from 'capture-core/customLabels';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { EventOverflowMenu, DeleteMenuItemModal, CompleteMenuItemModal } from '../../../../../EventOverflowMenu';
@@ -75,7 +76,7 @@ const EventRowPlain = ({
             LabelKeys.programStagePlural,
             LabelKeys.eventSingular,
         ],
-        { programId, stageId: programStage?.id },
+        { stageId: programStage?.id },
     );
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: canEditProgramStage },
@@ -145,6 +146,7 @@ const EventRowPlain = ({
                 eventId={id}
                 enrollment={enrollment}
                 programStageName={programStage?.name}
+                stageId={programStage?.id}
                 onClose={() => setCompleteModalOpen(false)}
                 onMutate={onCompletionStatusMutate}
                 onSuccess={onCompletionStatusSuccess}
@@ -188,7 +190,6 @@ const EventRowPlain = ({
                                 <EventOverflowMenu
                                     eventId={id}
                                     eventStatus={eventDetails.status}
-                                    programId={programId}
                                     stageId={programStage?.id}
                                     onOpenChangelog={() => setChangelogOpen(true)}
                                     onClose={() => setActionsOpen(false)}

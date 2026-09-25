@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
-import { getTermLabelFromProgram, LabelKeys } from '../../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../../customLabels';
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './hooks';
 import type { ErrorReport } from '../../processErrorReports';

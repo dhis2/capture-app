@@ -6,7 +6,7 @@ import type { PlainProps } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
 import { DataEntryModalWrapper } from './DataEntryModalWrapper.component';
 import { TEI_MODAL_STATE } from './dataEntry.actions';
-import { getTermLabelFromProgram, LabelKeys } from '../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../customLabels';
 
 export const DataEntryComponent = ({
     dataEntryId,

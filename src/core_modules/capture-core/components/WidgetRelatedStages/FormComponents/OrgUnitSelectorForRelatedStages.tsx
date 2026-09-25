@@ -11,7 +11,7 @@ import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type OrgUnitValue = {
     checked: boolean;

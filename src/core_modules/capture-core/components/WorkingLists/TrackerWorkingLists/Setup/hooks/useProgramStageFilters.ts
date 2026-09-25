@@ -6,9 +6,8 @@ import {
     type ProgramStage,
     dataElementTypes,
     getProgramEventAccess,
-    LabelKeys,
-    useTermLabel,
 } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
 const useProgramStageData = (programStageId, stages) =>
@@ -51,7 +50,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
         program.stages,
     );
     const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(program.stages, program.id);
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { programId: program.id });
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular]);
 
     return useMemo(() => {
         const translatedStatus = translatedStatusTypes();

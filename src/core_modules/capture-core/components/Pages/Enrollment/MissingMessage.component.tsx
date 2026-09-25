@@ -5,7 +5,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -186,7 +186,6 @@ const MissingMessagePlain = ({
     const { programId, teiId, enrollmentId } = useLocationQuery();
     const { enrollmentLabel, enrollmentsLabel, orgUnitLabel, eventLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.orgUnitSingular, LabelKeys.eventSingular],
-        { programId },
     );
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);

@@ -3,7 +3,7 @@ import { colors, spacers } from '@dhis2/ui';
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { type Props } from './eventWorkingListsInitHeader.types';
-import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../customLabels';
 
 export const styles = () => ({
     container: {

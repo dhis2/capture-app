@@ -23,7 +23,7 @@ import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/vie
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { PlainProps } from './WidgetHeader.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const styles: Readonly<any> = {
     icon: {
@@ -121,7 +121,7 @@ const WidgetHeaderPlain = ({
     }, [dispatch]);
 
     const { icon, name } = stage;
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { programId, stageId: stage.id });
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: stage.id });
     const pendingApiResponse = !!storedEvent?.pendingApiResponse;
 
     const renderDeleteMenuItemModal = () => {
@@ -144,6 +144,7 @@ const WidgetHeaderPlain = ({
                 eventId={eventId}
                 enrollment={enrollment}
                 programStageName={name}
+                stageId={stage.id}
                 onClose={() => setCompleteModalOpen(false)}
                 onMutate={onCompletionStatusMutate}
                 onSuccess={onCompletionStatusSuccess}
@@ -195,7 +196,6 @@ const WidgetHeaderPlain = ({
                                     <EventOverflowMenu
                                         eventId={eventId}
                                         eventStatus={eventStatus}
-                                        programId={programId}
                                         stageId={stage.id}
                                         maxWidth="250px"
                                         dataTest="tracker-program-event-overflow-menu"

@@ -1,17 +1,17 @@
 # Translators:
 # channara rin, 2025
 # Em Le <em.hispvietnam@gmail.com>, 2026
-# Viktor Varland <viktor@dhis2.org>, 2026
 # Sokna, 2026
 # Philip Larsen Donnelly, 2026
 # Kiry Heng, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-08-21T07:54:23.258Z\n"
+"POT-Creation-Date: 2026-09-17T10:17:48.262Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Kiry Heng, 2026\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Khmer (https://app.transifex.com/hisp-uio/teams/100509/km/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -420,15 +420,51 @@ msgstr ""
 msgid "Operations running"
 msgstr "កំពុងដំណើរការ"
 
-msgid "No feedback for this enrollment yet"
+msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
 
-msgid "No indicator output for this enrollment yet"
+msgid "No indicator output for this {{enrollmentLabel}} yet"
 msgstr ""
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
+msgstr ""
+
+msgid "View changelog"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Mark incomplete"
+msgstr ""
+
+msgid "Mark complete"
+msgstr ""
+
+msgid "Delete"
+msgstr "​លុប​"
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid "Delete event"
+msgstr "លុបចោលព្រឹត្តិការណ៏"
+
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this event?"
+msgstr ""
+
+msgid "Yes, delete event"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
 msgstr ""
 
 msgid "No events to display"
@@ -565,9 +601,6 @@ msgstr ""
 
 msgid "selected"
 msgstr ""
-
-msgid "Delete"
-msgstr "​លុប​"
 
 msgid "Select file"
 msgstr ""
@@ -710,6 +743,12 @@ msgid "Notice"
 msgstr ""
 
 msgid "Close the notice"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "Quick actions"
@@ -956,9 +995,6 @@ msgstr "ព្រឹត្តិការណ៏"
 msgid "event"
 msgstr ""
 
-msgid "View changelog"
-msgstr ""
-
 msgid "Event details"
 msgstr ""
 
@@ -1058,6 +1094,12 @@ msgstr ""
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr ""
+
 msgid "You only have view access to this enrollment"
 msgstr ""
 
@@ -1082,16 +1124,13 @@ msgstr ""
 msgid "This event has been completed"
 msgstr ""
 
+msgid "You do not have access to uncomplete this event"
+msgstr ""
+
 msgid "This {{trackedEntityName}} is deactivated"
 msgstr ""
 
 msgid "This tracked entity is deactivated"
-msgstr ""
-
-msgid "View only - {{message}}"
-msgstr ""
-
-msgid "View only"
 msgstr ""
 
 msgid "Add relationship"
@@ -1324,9 +1363,6 @@ msgstr ""
 msgid "Mark as cancelled"
 msgstr ""
 
-msgid "Mark incomplete"
-msgstr ""
-
 msgid "You do not have access to delete this enrollment"
 msgstr ""
 
@@ -1411,9 +1447,6 @@ msgstr "ថ្ងៃខែឆ្នាំ ធ្វើរោគវិនិច�
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Follow-up"
-msgstr "តាមដាន"
-
 msgid "Started at{{escape}}"
 msgstr ""
 
@@ -1462,25 +1495,13 @@ msgstr "ព្រមាន"
 msgid "stage not found in rules execution"
 msgstr ""
 
-msgid "Delete event"
-msgstr "លុបចោលព្រឹត្តិការណ៏"
-
-msgid "Deleting an event is permanent and cannot be undone."
-msgstr ""
-
 msgid "Are you sure you want to delete this event? "
-msgstr ""
-
-msgid "Yes, delete event"
 msgstr ""
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr ""
-
-msgid "You do not have access to uncomplete this event"
 msgstr ""
 
 msgid "Geometry (Area)"
@@ -1495,7 +1516,7 @@ msgstr ""
 msgid "No polygon captured"
 msgstr ""
 
-msgid "Event completed"
+msgid "{{eventLabel}} completed"
 msgstr ""
 
 msgid "Notes about this event"
@@ -1650,10 +1671,10 @@ msgstr "មើល​ជីវប្រវត្តិ"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgid "No attributes configured"
 msgstr ""
 
-msgid "No attributes configured"
+msgid "No attributes configured to display"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
@@ -1713,30 +1734,6 @@ msgstr ""
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-msgstr ""
-
-msgid "This event is outside the edit period"
-msgstr ""
-
-msgid "An error occurred while deleting the event"
-msgstr ""
-
-msgid "Are you sure you want to delete this event?"
-msgstr ""
-
-msgid "An error occurred when updating event status"
-msgstr ""
-
-msgid "Unskip"
-msgstr ""
-
-msgid "Skip"
-msgstr ""
-
-msgid "To open this event, please wait until saving is complete"
-msgstr ""
-
 msgid "Show {{ rest }} more"
 msgstr ""
 
@@ -1759,7 +1756,7 @@ msgstr ""
 msgid "No stages found in this program"
 msgstr ""
 
-msgid "Stages and Events"
+msgid "{{programStagesLabel}} and {{eventsLabel}}"
 msgstr ""
 
 msgid "An error occurred while unlinking and deleting the event."
@@ -1909,6 +1906,9 @@ msgid "Program stage name"
 msgstr ""
 
 msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
 msgstr ""
 
 msgid "Download data..."
@@ -2179,10 +2179,40 @@ msgstr ""
 msgid "Skipped"
 msgstr ""
 
-msgid "Visited"
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
-msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgid "enrollments"
+msgstr ""
+
+msgid "program stage"
+msgstr ""
+
+msgid "program stages"
+msgstr ""
+
+msgid "note"
+msgstr ""
+
+msgid "notes"
+msgstr ""
+
+msgid "relationship"
+msgstr ""
+
+msgid "relationships"
+msgstr "ទំនាក់ទំនង"
+
+msgid "attribute"
+msgstr ""
+
+msgid "attributes"
+msgstr ""
+
+msgid "organisation unit"
+msgstr ""
+
+msgid "follow-up"
 msgstr ""
 
 msgid "Program not found"

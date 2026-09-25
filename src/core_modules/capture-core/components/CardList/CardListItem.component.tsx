@@ -18,9 +18,8 @@ import {
     getTrackerProgramThrowIfNotFound,
     OptionSet,
     type TrackerProgram,
-    useTermLabel,
-    LabelKeys,
 } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../customLabels';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
@@ -157,7 +156,6 @@ const CardListItemIndex = ({
     const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId ?? null);
     const { enrollmentLabel, orgUnitLabel } = useTermLabel(
         [LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular],
-        { programId: currentProgramId },
     );
     const program: TrackerProgram | undefined = enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)

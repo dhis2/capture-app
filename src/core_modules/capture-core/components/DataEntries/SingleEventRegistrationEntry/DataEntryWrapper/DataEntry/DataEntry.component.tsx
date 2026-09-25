@@ -473,6 +473,7 @@ const buildRelationshipsSettingsFn = () => {
             writableRelationshipTypes: writableRelationshipTypesSelector(props),
             fromEntity: 'PROGRAM_STAGE_INSTANCE',
             currentEntityId: 'newEvent',
+            stageId: props.stage?.id,
         }),
         getValidatorContainers: () => [],
         getPropName: () => 'relationship',

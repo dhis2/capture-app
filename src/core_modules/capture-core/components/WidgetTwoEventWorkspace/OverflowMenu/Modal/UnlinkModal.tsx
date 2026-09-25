@@ -13,7 +13,7 @@ import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkModal.types';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 export const UnlinkModal = ({
     setOpenModal,

@@ -5,7 +5,7 @@ import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
 import uuid from 'd2-utilizr/lib/uuid';
 import { errorCreator } from 'capture-core-utils';
-import { getTermLabel, LabelKeys } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../customLabels';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
@@ -81,13 +81,19 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
         log.error(errorCreator(errorMessage || 'Error saving event')(errorObject));
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.meta.programId });
+        const { eventLabel } = getTermLabel(
+            [LabelKeys.eventSingular],
+            { programId: action.meta.programId, stageId: action.meta.stageId },
+        );
         return addErrorFeedback({ message: i18n.t('Could not save {{eventLabel}}', { eventLabel }) });
     },
     [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (_state, action) =>
         addErrorFeedback({ message: action.payload.errorMessage }),
     [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: (_state, action) => {
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.payload.programId });
+        const { eventLabel } = getTermLabel(
+            [LabelKeys.eventSingular],
+            { programId: action.payload.programId, stageId: action.payload.stageId },
+        );
         return addErrorFeedback({ message: i18n.t('Could not delete {{eventLabel}}', { eventLabel }) });
     },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: () =>
@@ -103,7 +109,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
         log.error(errorCreator(errorMessage || 'Error saving event')(errorObject));
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.meta.programId });
+        const { eventLabel } = getTermLabel(
+            [LabelKeys.eventSingular],
+            { programId: action.meta.programId, stageId: action.meta.stageId },
+        );
         return addErrorFeedback({ message: i18n.t('Could not save {{eventLabel}}', { eventLabel }) });
     },
     [dataEntryActionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS]: (_state, action) =>
@@ -147,6 +156,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         });
     },
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
+        // stageId not in scope here — action.meta only carries { eventId, triggerAction }
         const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.meta.programId });
         return addErrorFeedback({
             message: i18n.t('Error editing the {{eventLabel}}, the changes made were not saved', { eventLabel }),
@@ -180,7 +190,8 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     },
     [viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED]: (_state, action) => {
         const programId = action.meta.programId;
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId });
+        const stageId = action.meta.stageId;
+        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId });
         const { noteLabel } = getTermLabel([LabelKeys.noteSingular], { programId });
         return addErrorFeedback({
             message: i18n.t('Could not save {{eventLabel}} {{noteLabel}}', { eventLabel, noteLabel }),

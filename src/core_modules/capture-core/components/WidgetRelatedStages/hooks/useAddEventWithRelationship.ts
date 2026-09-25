@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { relatedStageActions } from '../constants';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const ReactQueryAppNamespace = 'capture';
 
@@ -14,6 +14,7 @@ const addEventWithRelationshipMutation = {
 
 export const useAddEventWithRelationship = ({
     eventId,
+    stageId,
     onUpdateOrAddEnrollmentEvents,
     onUpdateEnrollmentEventsSuccess,
     onUpdateEnrollmentEventsError,
@@ -21,6 +22,7 @@ export const useAddEventWithRelationship = ({
     setIsLinking,
 }: {
     eventId: string;
+    stageId?: string;
     onUpdateOrAddEnrollmentEvents: (events: Array<any>) => void;
     onUpdateEnrollmentEventsSuccess: (events: Array<any>) => void;
     onUpdateEnrollmentEventsError: (events: Array<any>) => void;
@@ -31,7 +33,7 @@ export const useAddEventWithRelationship = ({
     const queryClient = useQueryClient();
     const { show: showSuccess } = useAlert(({ message }) => message, { success: true });
     const { show: showAlert } = useAlert(({ message }) => message, { critical: true });
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     const { mutate } = useMutation(
         ({ serverData }: { serverData: any }) =>

@@ -24,7 +24,8 @@ import {
     useProgramExpiryForUser,
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
-import { dataElementTypes, LabelKeys, useTermLabel } from '../../metaData';
+import { dataElementTypes } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 const styles: Readonly<any> = {
     container: {
@@ -130,7 +131,7 @@ const WidgetEventEditPlain = ({
             LabelKeys.programStagePlural,
             LabelKeys.eventSingular,
         ],
-        { programId, stageId },
+        { stageId },
     );
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: true },

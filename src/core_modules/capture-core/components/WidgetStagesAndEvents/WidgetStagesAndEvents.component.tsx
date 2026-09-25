@@ -6,7 +6,7 @@ import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useTermLabel, LabelKeys } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../customLabels';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
@@ -38,7 +38,6 @@ const WidgetStagesAndEventsPlain = ({
     } = useEnrollmentAccessContext();
     const { programStagesLabel, eventsLabel } = useTermLabel(
         [LabelKeys.programStagePlural, LabelKeys.eventPlural],
-        { programId },
     );
 
     return (
@@ -60,7 +59,6 @@ const WidgetStagesAndEventsPlain = ({
                                 <ReadOnlyBadge
                                     programStageWriteAccess={!anyStageReadAccess || anyStageWriteAccess}
                                     multipleStages={multipleStages}
-                                    programId={programId}
                                 />
                             </div>
                         )}

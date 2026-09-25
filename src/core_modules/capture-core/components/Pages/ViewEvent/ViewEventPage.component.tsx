@@ -6,6 +6,7 @@ import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRela
 import { TopBar } from './TopBar.container';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { useLocationQuery } from '../../../utils/routing';
+import { CustomLabelsContext } from '../../../customLabels';
 
 type Props = {
     isUserInteractionInProgress: boolean,
@@ -22,22 +23,24 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetai
     }));
 
     return (
-        <OrgUnitFetcher orgUnitId={orgUnitId}>
-            <TopBar
-                programId={programId}
-                orgUnitId={orgUnitId}
-                selectedCategories={selectedCategories}
-                isUserInteractionInProgress={isUserInteractionInProgress}
-                editEventMode={eventDetailsSection.showEditEvent}
-                formIsOpen
-            />
-            {
-                showAddRelationship ?
-                    <ViewEventNewRelationshipWrapper /> :
-                    <ViewEvent
-                        programId={programId}
-                    />
-            }
-        </OrgUnitFetcher>
+        <CustomLabelsContext.Provider value={programId}>
+            <OrgUnitFetcher orgUnitId={orgUnitId}>
+                <TopBar
+                    programId={programId}
+                    orgUnitId={orgUnitId}
+                    selectedCategories={selectedCategories}
+                    isUserInteractionInProgress={isUserInteractionInProgress}
+                    editEventMode={eventDetailsSection.showEditEvent}
+                    formIsOpen
+                />
+                {
+                    showAddRelationship ?
+                        <ViewEventNewRelationshipWrapper /> :
+                        <ViewEvent
+                            programId={programId}
+                        />
+                }
+            </OrgUnitFetcher>
+        </CustomLabelsContext.Provider>
     );
 };

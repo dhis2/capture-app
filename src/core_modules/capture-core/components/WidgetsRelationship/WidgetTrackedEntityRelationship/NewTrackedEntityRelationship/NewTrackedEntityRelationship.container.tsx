@@ -4,7 +4,7 @@ import { Button, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
 import type { ContainerProps } from './NewTrackedEntityRelationship.types';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 const styles = {
     container: {
@@ -30,7 +30,7 @@ const NewTrackedEntityRelationshipPlain = ({
     classes,
 }: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
-    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular], { programId });
+    const { relationshipLabel } = useTermLabel([LabelKeys.relationshipSingular]);
 
     const closeAddWizard = useCallback(() => {
         setAddWizardVisible(false);

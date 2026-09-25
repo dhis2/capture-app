@@ -7,7 +7,7 @@ import {
 } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelector as SearchOrgUnitSelectorComponent } from './SearchOrgUnitSelector.component';
-import { getTermLabel, LabelKeys } from '../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../customLabels';
 
 const mapStateToProps = (state: any, props: any) => {
     const searchId = props.searchId;

@@ -10,7 +10,7 @@ import {
     useEnrollmentScopeRuleEffects,
     selectEnrollmentHiddenProgramStageIds,
 } from '../../common/EnrollmentOverviewDomain';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
@@ -22,7 +22,6 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     const { navigate } = useNavigate();
     const { programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
         [LabelKeys.programStageSingular, LabelKeys.programStagePlural, LabelKeys.eventSingular],
-        { programId },
     );
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues, ownerOrgUnitId } = useCommonEnrollmentDomainData(

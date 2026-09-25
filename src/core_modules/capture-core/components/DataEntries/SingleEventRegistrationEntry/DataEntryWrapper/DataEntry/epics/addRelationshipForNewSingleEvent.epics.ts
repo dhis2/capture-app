@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
-import { getTermLabel, LabelKeys } from '../../../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../../../customLabels';
 import {
     initializeNewRelationship,
 } from '../../../../../Pages/NewRelationship/newRelationship.actions';
