@@ -5,10 +5,10 @@ import {
     EventProgram,
     TrackerProgram,
     CategoryCombination,
-    extractCustomLabels,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
+import { extractCustomLabels } from '../../../../customLabels';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import { SearchGroupFactory } from '../../../common/factory';
 import { buildIcon } from '../../../common/helpers';

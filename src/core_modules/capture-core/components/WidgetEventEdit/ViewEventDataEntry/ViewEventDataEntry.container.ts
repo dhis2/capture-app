@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import { ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
-import { LabelKeys } from '../../../metaData';
+import { withCustomLabels, LabelKeys } from '../../../customLabels';
 
 // Example use of withCustomLabels.
 const customLabels = [LabelKeys.orgUnitSingular, LabelKeys.eventSingular] as const;
