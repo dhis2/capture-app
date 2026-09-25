@@ -10,7 +10,7 @@ import { ScheduleButtons } from './ScheduleButtons';
 import { ScheduleDate } from './ScheduleDate';
 import { ScheduleText } from './ScheduleText';
 import { NoteSection } from '../WidgetNote';
-import type { Props } from './widgetEventSchedule.types';
+import type { OrgUnitValue, Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
@@ -55,9 +55,10 @@ const WidgetEventSchedulePlain = ({
     categoryOptionsError,
     validation,
     setValidation,
+    saveAttempted,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
-    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
+    const onSelectOrgUnit = (e: OrgUnitValue) => {
         setScheduledOrgUnit({
             id: e.id,
             name: e.displayName,
@@ -93,6 +94,7 @@ const WidgetEventSchedulePlain = ({
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
                         validation={validation}
                         setValidation={setValidation}
+                        saveAttempted={saveAttempted}
                         {...passOnProps}
                     />
                     <Divider className={classes.divider} />
@@ -101,6 +103,7 @@ const WidgetEventSchedulePlain = ({
                             orgUnit={orgUnit}
                             onSelectOrgUnit={onSelectOrgUnit}
                             onDeselectOrgUnit={onDeselectOrgUnit}
+                            saveAttempted={saveAttempted}
                             {...passOnProps}
                         />
                     </div>
@@ -139,12 +142,11 @@ const WidgetEventSchedulePlain = ({
                     hasChanges={scheduleDate !== suggestedScheduleDate}
                     onCancel={onCancel}
                     onSchedule={onSchedule}
-                    validation={validation}
                 />
                 <ScheduleText
                     programName={programName}
                     stageName={stageName}
-                    orgUnitName={orgUnit?.name || ''}
+                    orgUnitName={orgUnit?.name ?? ''}
                 />
             </div>
         </Widget>

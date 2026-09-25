@@ -14,10 +14,14 @@ import { hasValue } from 'capture-core-utils/validators/form';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
-import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 import type { PlainProps } from './ScheduleDate.types';
 import { convertFormToClient } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
+
+const baseInputStyles = {
+    inputContainerStyle: { flexBasis: 150 },
+    labelContainerStyle: { flexBasis: 200 },
+};
 
 const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
@@ -70,8 +74,13 @@ const ScheduleDatePlain = ({
     classes,
     hideDueDate,
     expiryPeriod,
+    saveAttempted,
 }: Props) => {
-    const validateDate = (dateString: string, internalComponentError: any) => {
+    const scheduleDateLabel = i18n.t('Schedule date / Due date');
+    const validateDate = (
+        dateString: string,
+        internalComponentError?: { error?: string; errorCode?: string },
+    ) => {
         if (!hasValue(dateString)) {
             return {
                 error: true,
@@ -80,32 +89,26 @@ const ScheduleDatePlain = ({
         }
 
         const dateValidation = isValidDate(dateString, internalComponentError);
-        if (!dateValidation.valid) {
+        const occurredAtClient = convertFormToClient(dateString, dataElementTypes.DATE) as string;
+        if (!dateValidation.valid || !occurredAtClient) {
             return {
                 error: true,
                 validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
             };
         }
 
-        if (!expiryPeriod) {
-            return {
-                error: false,
-                validationText: '',
-            };
-        }
-
-        const occurredAtClient = convertFormToClient(dateString, dataElementTypes.DATE) as string;
-        const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
-
-        if (!isWithinValidPeriod) {
-            return {
-                error: true,
-                // eslint-disable-next-line max-len
-                validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
-                    firstValidDate,
-                    interpolation: { escapeValue: false },
-                }),
-            };
+        if (expiryPeriod) {
+            const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
+            if (!isWithinValidPeriod) {
+                return {
+                    error: true,
+                    // eslint-disable-next-line max-len
+                    validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
+                        firstValidDate,
+                        interpolation: { escapeValue: false },
+                    }),
+                };
+            }
         }
 
         return {
@@ -113,11 +116,17 @@ const ScheduleDatePlain = ({
             validationText: '',
         };
     };
+
+    const currentValidation = saveAttempted
+        ? validateDate(scheduleDate ?? '')
+        : validation;
+    const errorMessage = currentValidation?.error ? currentValidation.validationText : undefined;
+
     return (
         <div className={hideDueDate ? classes.autoScheduledWrapper : classes.fieldWrapper}>
             {!hideDueDate ?
                 <ScheduleDateField
-                    label={i18n.t('Schedule date / Due date')}
+                    label={scheduleDateLabel}
                     required
                     value={scheduleDate}
                     width="100%"
@@ -129,25 +138,24 @@ const ScheduleDatePlain = ({
                     }}
                     calendarType={systemSettingsStore.get().calendar}
                     dateFormat={systemSettingsStore.get().dateFormat}
-                    validation={validation}
+                    errorMessage={errorMessage}
                 />
                 :
                 <div className={classes.fieldLabel}>
-                    {displayDueDateLabel ?? i18n.t('Schedule date / Due date', {
-                        interpolation: { escapeValue: false },
-                    },
-                    )}
+                    {displayDueDateLabel ?? scheduleDateLabel}
                 </div>
             }
-            <div className={classes.infoBox}>
-                <InfoBox
-                    scheduleDate={serverScheduleDate}
-                    suggestedScheduleDate={serverSuggestedScheduleDate}
-                    eventCountInOrgUnit={eventCountInOrgUnit}
-                    orgUnitName={orgUnit?.name}
-                    hideDueDate={hideDueDate}
-                />
-            </div>
+            {serverScheduleDate && serverSuggestedScheduleDate && (
+                <div className={classes.infoBox}>
+                    <InfoBox
+                        scheduleDate={serverScheduleDate}
+                        suggestedScheduleDate={serverSuggestedScheduleDate}
+                        eventCountInOrgUnit={eventCountInOrgUnit}
+                        orgUnitName={orgUnit?.name}
+                        hideDueDate={hideDueDate}
+                    />
+                </div>
+            )}
         </div>
     );
 };
