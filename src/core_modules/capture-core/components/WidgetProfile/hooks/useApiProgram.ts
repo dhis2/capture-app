@@ -21,7 +21,8 @@ const fields =
             'options[id,displayName,code,style, translations]]]]],' +
     'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,displayShortName,displayFormName,' +
         'displayDescription,valueType,optionSetValue,unique,orgunitScope,pattern,translations[property,locale,value],' +
-        'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]]],' +
+        'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]],' +
+        'access[read]],' +
         'displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
     'trackedEntityType[id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,' +
         'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
