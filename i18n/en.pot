@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-17T10:17:48.262Z\n"
-"PO-Revision-Date: 2026-09-17T10:17:48.262Z\n"
+"POT-Creation-Date: 2026-09-25T12:12:48.586Z\n"
+"PO-Revision-Date: 2026-09-25T12:12:48.586Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -2230,21 +2230,6 @@ msgstr "Must match the start of the value"
 msgid "Must match the end of the value"
 msgstr "Must match the end of the value"
 
-msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr "Scheduled{{ escape }} due {{ time }}"
-
-msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "Overdue{{ escape }} due {{ time }}"
-
-msgid "Overdue"
-msgstr "Overdue"
-
-msgid "Skipped"
-msgstr "Skipped"
-
-msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
-
 msgid "enrollments"
 msgstr "enrollments"
 
@@ -2277,6 +2262,21 @@ msgstr "organisation unit"
 
 msgid "follow-up"
 msgstr "follow-up"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr "Scheduled{{ escape }} due {{ time }}"
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr "Overdue{{ escape }} due {{ time }}"
+
+msgid "Overdue"
+msgstr "Overdue"
+
+msgid "Skipped"
+msgstr "Skipped"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr "{{trackedEntityName}} in program{{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Program not found"

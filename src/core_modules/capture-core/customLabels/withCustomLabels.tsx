@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTermLabel, type TermRequest } from '../metaData';
+import { useTermLabel, type TermRequest } from './labelResolvers';
 
 export const withCustomLabels =
     (requests: ReadonlyArray<TermRequest>) =>

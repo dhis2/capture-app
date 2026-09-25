@@ -6,7 +6,7 @@ import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRela
 import { TopBar } from './TopBar.container';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { useLocationQuery } from '../../../utils/routing';
-import { ProgramIdContext } from '../../../contexts';
+import { CustomLabelsContext } from '../../../customLabels';
 
 type Props = {
     isUserInteractionInProgress: boolean,
@@ -23,7 +23,7 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetai
     }));
 
     return (
-        <ProgramIdContext.Provider value={programId}>
+        <CustomLabelsContext.Provider value={programId}>
             <OrgUnitFetcher orgUnitId={orgUnitId}>
                 <TopBar
                     programId={programId}
@@ -41,6 +41,6 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetai
                         />
                 }
             </OrgUnitFetcher>
-        </ProgramIdContext.Provider>
+        </CustomLabelsContext.Provider>
     );
 };

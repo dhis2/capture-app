@@ -7,7 +7,7 @@ import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type { ProgramStage } from './ProgramStage';
-import type { CustomLabels } from '../helpers/customLabels';
+import type { CustomLabels } from '../../customLabels';
 
 export class Program {
     static errorMessages = {

@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { programCollection } from '../../metaDataMemoryStores';
-import { useLocationQuery } from '../../utils/routing';
-import { ProgramIdContext } from '../../contexts';
-import { LABELS, type LabelConfig } from './constants/customLabels.const';
+import { programCollection } from '../metaDataMemoryStores';
+import { useLocationQuery } from '../utils/routing';
+import { CustomLabelsContext } from './CustomLabelsContext';
+import { LABELS, type LabelConfig } from './constants';
 
 export type CustomLabelKey = keyof typeof LABELS;
 export type CustomLabels = Record<string, string>;
@@ -96,12 +96,12 @@ export const getTermLabelFromProgram = (
 ): CustomLabels =>
     buildLabels(requests, (key, plural) => resolveLabel([program], key, plural));
 
-/** Use inside React components; resolves programId from URL, falling back to `ProgramIdContext` for routes whose URL lacks it. */
+/** Use inside React components; resolves programId from URL, falling back to `CustomLabelsContext` for routes whose URL lacks it. */
 export const useTermLabel = (
     requests: ReadonlyArray<TermRequest>,
     { stageId }: StageScope = {},
 ): CustomLabels => {
     const { programId: urlProgramId } = useLocationQuery();
-    const contextProgramId = useContext(ProgramIdContext);
+    const contextProgramId = useContext(CustomLabelsContext);
     return getTermLabel(requests, { programId: urlProgramId ?? contextProgramId, stageId });
 };

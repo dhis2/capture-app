@@ -6,7 +6,7 @@ import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { Stages } from './Stages';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { useTermLabel, LabelKeys } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../customLabels';
 import type { Props } from './stagesAndEvents.types';
 
 const styles = {
