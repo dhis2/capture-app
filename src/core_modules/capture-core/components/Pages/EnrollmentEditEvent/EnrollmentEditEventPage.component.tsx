@@ -12,7 +12,7 @@ import {
     EnrollmentPageKeys,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { actionTypes } from './EnrollmentEditEventPage.actions';
-import { ProgramIdContext } from '../../../contexts';
+import { CustomLabelsContext } from '../../../customLabels';
 
 export const EnrollmentEditEventPageComponent = ({
     pageLayout,
@@ -69,7 +69,7 @@ export const EnrollmentEditEventPageComponent = ({
 }: PlainProps) => {
     const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     return (
-        <ProgramIdContext.Provider value={program?.id}>
+        <CustomLabelsContext.Provider value={program?.id}>
             <OrgUnitFetcher orgUnitId={orgUnitId}>
                 <TopBar
                     mode={mode}
@@ -147,6 +147,6 @@ export const EnrollmentEditEventPageComponent = ({
                 />
                 <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
             </OrgUnitFetcher>
-        </ProgramIdContext.Provider>
+        </CustomLabelsContext.Provider>
     );
 };
