@@ -172,23 +172,15 @@ The second option, is to register a tracked entity with program and enroll it.
 
 Events can automatically be created when enrolling in a program.
 
-To automatically generate events, you can do the necessary configuration in the maintenance app.
-1. Open the maintenance app
+To automatically generate events, you can do the necessary configuration in the Metadata Management app.
+1. Open the Metadata Management app, go to **Programs** and select your program. We select Child Programme for this example.
+![](resources/images/auto-generated-mm-01.png)
 
-2. Select the Program tab
-![](resources/images/auto-generated-01.png)
+2. Select the **Program Stages** section and click on the program stage you would like to generate an event for.
+![](resources/images/auto-generated-mm-02.png)
 
-3. Select a Tracker program
-![](resources/images/auto-generated-02.png)
-
-4. Select the Program stages tab
-![](resources/images/auto-generated-03.png)
-
-5. Click on the program stage you would like to generate an event for
-![](resources/images/auto-generated-04.png)
-
-6. Select "Auto-generate event"
-![](resources/images/auto-generated-05.png)
+3. In the stage editor, open the **Creation and scheduling** tab and check **Create an event in this stage on enrollment**.
+![](resources/images/auto-generated-mm-03.png)
 
 You can set multiple program stages within a program to be auto-generating (this will create an event for each program stage configured this way)
 
@@ -200,55 +192,51 @@ To configure it, you must follow the steps described in the [Enrollment with aut
 
 ### Enrollment with first stage on registration page
 
-For tracker programs enable the "First stage appears on registration page" flag in the Maintenance. The enrollment registration page will now display the first program stage the user has access to.
+For tracker programs enable the "Show first program stage during enrollment" flag in the Metadata Management app. The enrollment registration page will now display the first program stage the user has access to.
 
 ![](resources/images/first-stage-during-registration.png)
 
 #### Active type of event
 
-If the stage has the "Open data entry form after enrollment" selected, then the event will be generated into the ACTIVE status. Also its execution date will be calculated for the event, in addition to a due date.
-The generation happens based on either the enrollment date or the incident date. You can choose the reporting date from the dropdown menu "Report date to use".
-![](resources/images/auto-generated-06.png)
+If the stage has "Open data entry form after enrollment" checked, then the event will be generated into the ACTIVE status. Also its execution date will be calculated for the event, in addition to a due date.
+The generation happens based on either the enrollment date or the incident date. You can choose the reporting date from the "Date to use for created event report date" options.
+![](resources/images/auto-generated-mm-04.png)
 
-As shown in the image you have three options, a) Incident date b) Enrollment date or c) No value. 
-Choosing reporting date as "Incident date" indicates that both the event execution date and due date will be the same as the incident date.
-Choosing reporting date as either "Enrollment date" or "No value" indicates that both the event execution date and due date will be the same as the enrollment date.
+As shown in the image you have three options: **Enrollment date**, **Incident date** or **None**.
+Choosing **Enrollment date** sets the event's execution date (report date) to the enrollment date.
+Choosing **Incident date** sets the execution date to the incident date (or the enrollment date, if the program does not have an incident date).
+Choosing **None** leaves the execution date empty.
+The due date is calculated independently of this setting, based on the **Reference date for scheduling** option described under [Schedule type of event](#schedule-type-of-event) below.
 
 #### Schedule type of event
 
-When the "Open data entry after enrollment" is not checked, it means that the event generated will be a SCHEDULE event. 
-The scheduled event does not have an execution date, but only a due date. The due date for these future events are calculated based on either enrollment date or incident date. If the flag below is checked, the reference date is the enrollment date, if the flag is not checked, the incident date is used.
-![](resources/images/auto-generated-07.png)
+When "Open data entry form after enrollment" is not checked, it means that the event generated will be a SCHEDULE event. 
+The scheduled event does not have an execution date, but only a due date. The due date for these future events are calculated based on either enrollment date or incident date, as set under "Reference date for scheduling". If "Enrollment date" is selected, the reference date is the enrollment date; if "Incident date" is selected, the incident date is used.
+![](resources/images/auto-generated-mm-05.png)
 
-When there is no incident date, the reference date will fall back on the enrollment date regardless of whether the flag above is checked.
+When there is no incident date, the reference date will fall back on the enrollment date regardless of which option is selected above.
 
-On SCHEDULE type of events the user can also configure the "Scheduled days from start". Which means if a stage has a number in "Scheduled days from start" the reference date will increased by that number. 
+On SCHEDULE type of events the user can also configure the "Scheduled days from reference date". Which means if a stage has a number in "Scheduled days from reference date" the reference date will increased by that number. 
 In the example below we increase the due date by 30 days.
 
-![](resources/images/auto-generated-08.png)
+![](resources/images/auto-generated-mm-06.png)
 
-When the "Scheduled days from start" does not contain a number or contains 0 the reference date is used without adding any days to it.
+When the "Scheduled days from reference date" contains 0 the reference date is used without adding any days to it.
 
 
 ### Possible duplicates detection
 
 In both cases of registering a tracked entity, (with enrollment or without enrollment) the system will start looking for possible duplicates.
-Note that programs need to be correctly configured through the maintenance app for the system to start detecting duplicates when enrolling a new person in a program. 
+Note that programs need to be correctly configured through the Metadata Management app for the system to start detecting duplicates when enrolling a new person in a program. 
 
-To configure a program through the maintenance app you will have to: 
+To configure a program through the Metadata Management app you will have to: 
 
 
-1. Open the maintenance app.
-![](resources/images/duplicates-maintenance-config-00.png)
+1. Open the Metadata Management app, go to **Programs** and select your program. We select Child Programme for this example.
+![](resources/images/duplicates-mm-config-00.png)
 
-2. In the program section select your program. We select Child Programme for this example.
-![](resources/images/duplicates-maintenance-config-01.png)
-
-3. Select the Attributes tab.
-![](resources/images/duplicates-maintenance-config-02.png)
-
-4. Enable duplicates search by checking program attributes as searchable
-![](resources/images/duplicates-maintenance-config-03.png)
+2. Select the **Enrollment: Data** section and enable duplicates search by checking program attributes as **Searchable** in the "Manage attributes" table.
+![](resources/images/duplicates-mm-config-01.png)
 
 
 The attributes you have selected as "Searchable" will be the ones which the system will use to detect possible duplicates against.  
@@ -263,7 +251,7 @@ Let us explain this with an example that demonstrates the detection of possible 
 3. Click **Create new person**
 ![](resources/images/duplicates-on-creation-02.png)
 
-4. Fill in the first name in the form. **Remember, the first name we have checked as "Searchable" in the maintenance app.** 
+4. Fill in the first name in the form. **Remember, the first name we have checked as "Searchable" in the Metadata Management app.** 
 Click **Save person**. The system will start looking for possible duplicates that match the name Sarah.
 ![](resources/images/duplicates-on-creation-03.png)
 
@@ -281,11 +269,11 @@ Click **Save person**. The system will start looking for possible duplicates tha
 ### Program rules execution
 
 In both cases of registering a tracked entity (with enrollment or without enrollment), the system will run program rules you have configured.
-Note that rules can be configured in the maintenance app.
+Note that rules can be configured in the Metadata Management app.
 
 To see a rule being executed while enrolling a tracked entity you will have to take the following steps. 
 
-1. Configure a rule in the maintenance app. For the example below we configured a rule that throws a warning when a tracked entity's age is outside the expected range for the program.
+1. Configure a rule in the Metadata Management app. For the example below we configured a rule that throws a warning when a tracked entity's age is outside the expected range for the program.
 
 2. Open the **Capture** app.
 ![](resources/images/duplicates-on-creation-00.png)
@@ -605,7 +593,7 @@ You can perform bulk actions on events in the event list.
 
 ## User assignment in events programs { #capture_user_assignment } 
 
-Events can be assigned to users. This feature must be enabled per program by checking **Enable user assignment of events** in the program settings in the Maintenance app.
+Events can be assigned to users. This feature must be enabled per program by checking **Enable user assignment of events** in the program settings in the Metadata Management app.
 
 ### Assigning user to new events { #capture_user_assignment_new } 
 
@@ -789,7 +777,7 @@ The results page shows up to five results at a time. You should try to use speci
 
 Every enrollment of a tracked entity in a program has an **owning organisation unit**. Ownership starts out as the organisation unit that first enrolled the tracked entity into that program, and changes if the enrollment is later [transferred to another organisation unit](#transfer-the-enrollment-to-another-organisation-unit). Ownership is tracked per tracked entity/program combination: the same tracked entity can be owned by different organisation units for different programs (for example, one facility could own a person's HIV program enrollment, while a different facility owns the same person's MCH program enrollment).
 
-Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Maintenance app, together with which organisation units you have been assigned data capture or search access to:
+Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Metadata Management app, together with which organisation units you have been assigned data capture or search access to:
 
 - **Open** or **Audited**: you can open the enrollment as long as you have at least search access to the owning organisation unit. (Audited additionally logs the access.)
 - **Protected**: you can open the enrollment if you have data capture access to the owning organisation unit. If you only have search access to it, you'll first have to provide a reason (see [Breaking the glass](#capture_break_glass) below).
@@ -1190,7 +1178,7 @@ The number next to the title signifies the total number of relationships
 
 ![](resources/images/enrollment-dash-relationship-widget.png)
 
-For tracked entity relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed on the relationship type page in Maintenance.
+For tracked entity relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed on the relationship type page in the Metadata Management app.
 
 If no attributes are selected, it will just show a row per record with tracked entity type name and relationship creation date.
 
@@ -1357,14 +1345,14 @@ In the **Schedule** tab, the similar information about scheduling an event as in
 If an active event has a scheduled date before becoming active or a completed event has scheduled date, this date should still be shown in the workspace. 
 It’ll be locked with an icon next to it and a tooltip saying “Scheduled date cannot be changed for active/completed events”. 
 
-#### Scheduled date with Hide due date enabled
-If the flag “Hide due date” in the Maintenance configuration is enabled, scheduled date will not be shown in the form. 
+#### Scheduled date with Hide scheduled date enabled { #scheduled-date-with-hide-due-date-enabled }
+If the flag “Hide scheduled date” in the Metadata Management app configuration is enabled, scheduled date will not be shown in the form. 
 
-However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in Maintenance, and this can not be changed. 
+However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from reference date" that has been configured in the Metadata Management app, and this can not be changed. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
-### Ask user to complete program when stage is complete
-If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user checks the **Complete** event checkbox and clicks save.
+### Ask user to complete enrollment after completion { #ask-user-to-complete-program-when-stage-is-complete }
+If this flag has been enabled for the stage in Stage details in the Metadata Management app, a modal will show up after the user checks the **Complete** event checkbox and clicks save.
 
 ![](resources/images/ask-user-to-complete-enrollment-edit-event.png)
 
@@ -1427,13 +1415,13 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
-### Ask user to complete program when stage is complete { #capture_ask_complete_enrollment_new_event }
-If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button.
+### Ask user to complete enrollment after completion { #capture_ask_complete_enrollment_new_event }
+If this flag has been enabled for the stage in Stage details in the Metadata Management app, a modal will show up after the user clicks the **Complete** button.
 
 ![](resources/images/ask-user-to-complete-enrollment-new-event.png)
 
-### Ask user to create new event when stage is complete
-If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
+### Ask user to create a new event after completion { #ask-user-to-create-new-event-when-stage-is-complete }
+If this flag has been enabled for the stage in Stage details in the Metadata Management app, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
 
 
 ### Assigning user to new events
@@ -1448,14 +1436,14 @@ You will find the assignee section near the bottom of the data entry page. Searc
 ### Schedule event widget form
 Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
-The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to compute the suggested date.
+The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from reference date" will be added to the base date to compute the suggested date.
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
 >
 1. A data element with value type date needs to be created and assigned to the particular program stage with access to future dates. The name of the data element could for example be: Next suggested follow up date. The program stage is configured to use the data element as default when scheduling a new event by assigning the data element to default next scheduled date.
 
-![](resources/images/schedule_event_01.png)
+![](resources/images/default-next-scheduled-date-mm.png)
 
 2. A program rule based on the data entered in the program stage, will determine how many days until the next suggested follow up will be. For example: A program rule with the following condition: #{penta_dose} == '1' (The program rule will trigger when the tracked entity has received Penta Dose 1), Assign value to the data element: next suggested follow up date with expression: d2:addDays(V{event_date}, '30') **The number suggest how many days from event date the next scheduled event should be.** 
 
@@ -1477,7 +1465,7 @@ After clicking **Schedule** button, user will be navigated back to enrollment ov
 
 1. If the program stage has standard interval days configured, the suggested date is calculated by the most recent event date plus the standard interval days value. 
 
-![](resources/images/standard_interval_days_01.png)
+![](resources/images/standard-interval-days-mm.png)
 
 2. If the program stage do not have a default next scheduled date configured, the system will use the standard interval days to calculate the next scheduled event date. 
 
@@ -1486,11 +1474,11 @@ After clicking **Schedule** button, user will be navigated back to enrollment ov
 
 #### 3. **If no value is found on either, the suggested date will be defined by enrollment date and incident date.** 
 
-1. In case the option **Generate events based on enrollment date** is checked in the Maintenance app, the next suggested event date is calculated by the enrollment date plus the value of scheduled days from start. 
+1. In case **Enrollment date** is selected under **Reference date for scheduling** in the Metadata Management app, the next suggested event date is calculated by the enrollment date plus the value of scheduled days from reference date. 
 
 ![](resources/images/schedule_event_from_enrollmentdate_01.png)
 
-2. In case the option **Show incident date** is checked, the next suggested event date is calculated by the incident date plus the value of scheduled days from start.
+2. In case **Incident date** is selected under **Reference date for scheduling**, the next suggested event date is calculated by the incident date plus the value of scheduled days from reference date.
 
 ![](resources/images/schedule_event_from_incidentdate_01.png)
 
@@ -1553,8 +1541,8 @@ The **Event Changelog** tracks changes to data items within an event. These data
 The **tracked entity changelog** tracks changes to attributes of a tracked entity within an enrollment.
 
 #### How to open the tracked entity changelog
-1. **Go to the Maintenance app** and **enable** the **Tracked entity instance audit log**.
-   ![](resources/images/enable-tracked-entity-instance-audit-log.png)
+1. **Go to the Metadata Management app**, open the relevant **Tracked entity type** and **enable** the **Enable tracked entity instance audit log** checkbox.
+   ![](resources/images/enable-tracked-entity-instance-audit-log-mm.png)
 
 2. **Open** the enrollment dashboard in the Capture app.  
 
@@ -1562,8 +1550,8 @@ The **tracked entity changelog** tracks changes to attributes of a tracked entit
    ![](resources/images/open-tracked-entity-changelog.png)
 
 # Related stages and linked events for Tracker programs { #related-stages-and-linked-events }
-You can connect any two program stages via a relationship. This is useful for workflows where completing one stage should trigger or be linked to another, for example linking a lab request stage to a lab result stage, or linking a referral stage to a follow-up consultation stage. To enable this feature, you can set up two program stages in the same program and link them with an event-event relationship in the Maintenance app.
-![](resources/images/related-stages-maintenance.png)
+You can connect any two program stages via a relationship. This is useful for workflows where completing one stage should trigger or be linked to another, for example linking a lab request stage to a lab result stage, or linking a referral stage to a follow-up consultation stage. To enable this feature, you can set up two program stages in the same program and link them with an event-event relationship in the Metadata Management app, choosing the relevant program stage on both the initiating and receiving side.
+![](resources/images/related-stages-mm.png)
 
 ## Adding a new tracker event { #related-stages-adding-new-event }
 When opening the new event form, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
@@ -1594,7 +1582,7 @@ Additionally, by clicking the Menu in the top-right corner, users can:
 ![](resources/images/related-stages-linked-event-actions-menu.png)
 
 ## Enrolling a tracked entity { #related-stages-enrolling }
-Enable the "First stage appears on registration page" flag in the Maintenance for the Tracker program. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
+Enable the "Show first program stage during enrollment" flag in the Metadata Management app for the Tracker program. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
 
