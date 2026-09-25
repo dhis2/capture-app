@@ -1,4 +1,4 @@
-import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
+import { createSelectorCreator, createSelector, lruMemoize } from 'reselect';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {
@@ -20,7 +20,7 @@ type CaptureClientEvent = {
     trackedEntityInstanceId?: string;
     enrollmentId?: string;
     enrollmentStatus?: string;
-    status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
     occurredAt: string;
     scheduledAt: string;
     completedAt: string;
@@ -128,7 +128,7 @@ const onIsEventsEqual = (
     );
 
 const createDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
+    lruMemoize,
     onIsEventsEqual,
 );
 

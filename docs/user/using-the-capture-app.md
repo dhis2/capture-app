@@ -285,7 +285,7 @@ Note that rules can be configured in the maintenance app.
 
 To see a rule being executed while enrolling a tracked entity you will have to take the following steps. 
 
-1. Configure a rule in the maintenance app. For the example below we configured a rule that throws a warning when the date of birth is less than a year.
+1. Configure a rule in the maintenance app. For the example below we configured a rule that throws a warning when a tracked entity's age is outside the expected range for the program.
 
 2. Open the **Capture** app.
 ![](resources/images/duplicates-on-creation-00.png)
@@ -293,7 +293,7 @@ To see a rule being executed while enrolling a tracked entity you will have to t
 3. Select your organisation unit and program from the menu on the top.
 ![](resources/images/program-rules-on-creation-00.png)
 
-4. Fill in the date of birth with a value which is less than a year. In our case this is 27th of January 2021. 
+4. Fill in the birth date with a value that falls outside the expected age range. In our case this is 18th of August 2026.
 ![](resources/images/program-rules-on-creation-01.png)
 
 5. You will now be able to see the warning produced by the program rule underneath the birth date field. 
@@ -318,9 +318,9 @@ You now have two options:
 
 - **Link to an existing _[tracked entity type]_** or 
 
-- **Create new _[tracked entity type]_**.
+- **Create new**.
 
-> The button labels reflect your program's tracked entity type, for example **Link to an existing Person** or **Create new Building**.
+> The **Link to an existing** button label reflects your program's tracked entity type, for example **Link to an existing Person**. The **Create new** button does not.
 
 ![relationship options](resources/images/relationship_options.png)
 
@@ -395,6 +395,8 @@ You now have two options:
 > - The event is completed and the program stage has **Block entry form after completed** enabled.
 >
 > Users with the **Edit expired data** authority can still edit events affected by the last two cases.
+>
+> Reopening a completed event also requires the **Uncomplete events** authority (`F_UNCOMPLETE_EVENT`). Without it, the **Complete event** checkbox is disabled on completed events and shows the tooltip *You do not have access to uncomplete this event*.
 
 
 ## Delete an event { #capture_delete_event } 
@@ -651,7 +653,7 @@ In the event list you will be able to view the assignee per event. Moreover, you
 
 ## Tracker programs { #capture_tracker_programs } 
 
-The Capture app supports the workinglists in tracker programs, but when you open a tracked entity, you will be redirected to the enrollment dashboard in the Tracker Capture app.
+The Capture app supports the working lists in tracker programs, and opening a tracked entity takes you to its enrollment dashboard within the Capture app.
 
 ![](resources/images/tracker_program.png)
 
@@ -676,9 +678,15 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-0.png)
 
-    To enhance search performance, you can configure the **preferredSearchOperator** or **blockedSearchOperators** metadata in Maintenance. Tracked entity attributes with the following value types apply these settings: TEXT, LONG_TEXT, EMAIL, PHONE_NUMBER and PERCENTAGE. If preferredSearchOperator is not defined, the search falls back to the first available operator in [LIKE, SW, EQ] that is not listed in blockedSearchOperators. Attributes with other value types ignore the preferredSearchOperator. Helper text messages are displayed below the attribute search fields to guide the user.
+    To improve search performance, an administrator can control which operators an attribute is searched with. In the Metadata Management app, open the tracked entity attribute and go to the **Search performance** section, which requires DHIS2 server version 2.43 or higher. **Preferred search operator** is the operator the app tries first, and can be set to *EQ | Equals*, *SW | Starts with*, *EW | Ends with* or *LIKE | Contains*. **Blocked search operators** are the operators that must not be used, and a search that would use a blocked operator returns no results.
+
+    These settings only apply to attributes with the value types text, long text, email and phone number. Attributes with other value types are searched with a fixed operator and ignore the preferred search operator. Unique attributes and attributes with an option set are always matched with *equals*. If no preferred operator is set, the search uses the first of *contains*, *starts with* and *equals* that is not blocked. Helper text below each attribute search field tells the user how that field will be matched.
 
     ![](resources/images/search-by-attributes-on-scope-program-preferredSearchOperator.png)
+
+    The same section has **Minimum characters required to search**, the number of characters the user must enter before the app searches on that attribute, where 0 means no minimum. The minimum applies to the attribute's filter in working lists as well, which shows *Please enter at least N characters to filter* until enough characters have been entered.
+
+    Set a minimum with care for attributes that are not text. Filters for some value types can only ever hold as many characters as the value type allows - 10 for a date (2026-09-04), 5 for a time (14:30) and 3 for a percentage (100) - so a minimum higher than that can never be reached, and the filter shows *Minimum characters to search is too high for this filter* instead.
 
     To execute a search now:
 
@@ -692,9 +700,9 @@ The Capture app supports the workinglists in tracker programs, but when you open
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-2.png)
 
-    In this list you can see the entries that match your search. The actions available for each entry depend on the **tracked entity**'s enrollment status in the program you are searching within.
+    In this list you can see the entries that match your search. The actions available for each entry depend on the **tracked entity**'s enrollment status in the program you are searching within. Whether an entry's enrollment actually opens once you click into it depends on who owns it and your access to that organisation unit; see [Tracked entity ownership](#capture_tei_ownership) below.
 
-    a. **View dashboard** is always available. It opens the enrollment dashboard for the **tracked entity** in the program you are searching within. The enrollment shown is selected automatically: if there is a single enrollment in the program that one is opened, and if there are several, the active enrollment is opened.
+    a. **View dashboard** is always shown as an option. It opens the enrollment dashboard for the **tracked entity** in the program you are searching within. The enrollment shown is selected automatically: if there is a single enrollment in the program that one is opened, and if there are several, the active enrollment is opened.
 
     ![](resources/images/search-by-attributes-on-scope-program-overview-5.png)
 
@@ -722,7 +730,7 @@ If the fallback can not be done, you will be presented with a modal to go **Back
 
 ![](resources/images/search-by-attributes-fallback-overview-0.png)
 
-#### Create new **tracked entity**
+#### Create new **tracked entity** { #capture_search_create_new_tracked_entity }
 
 When none of the results match, you can create a new user by clicking **Create new** button on the bottom of the search page. 
 
@@ -777,6 +785,35 @@ The results page shows up to five results at a time. You should try to use speci
 
 ![](resources/images/search-by-attributes-on-scope-program-overview-pagination.png)
 
+### Tracked entity ownership { #capture_tei_ownership }
+
+Every enrollment of a tracked entity in a program has an **owning organisation unit**. Ownership starts out as the organisation unit that first enrolled the tracked entity into that program, and changes if the enrollment is later [transferred to another organisation unit](#transfer-the-enrollment-to-another-organisation-unit). Ownership is tracked per tracked entity/program combination: the same tracked entity can be owned by different organisation units for different programs (for example, one facility could own a person's HIV program enrollment, while a different facility owns the same person's MCH program enrollment).
+
+Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Maintenance app, together with which organisation units you have been assigned data capture or search access to:
+
+- **Open** or **Audited**: you can open the enrollment as long as you have at least search access to the owning organisation unit. (Audited additionally logs the access.)
+- **Protected**: you can open the enrollment if you have data capture access to the owning organisation unit. If you only have search access to it, you'll first have to provide a reason (see [Breaking the glass](#capture_break_glass) below).
+- **Closed**: you can open the enrollment only if you have data capture access to the owning organisation unit. If you only have search access to it, you cannot open it at all, and there is no option to request access.
+
+In practice, clicking **View dashboard** or **View active enrollment** from a search result doesn't always show the enrollment's content. For a Closed program you'll see an access-denied message if you don't have data capture access to the owning organisation unit. For a Protected program you'll see the breaking the glass prompt if you only have search access, or the same access-denied message if you have neither.
+
+Being able to open an enrollment doesn't necessarily mean you can edit it: edit access depends separately on the program's sharing settings, and you may still see a **View only** label if you don't have write access.
+
+### Breaking the glass { #capture_break_glass }
+
+If a program is configured with the **Protected** access level and you open a tracked entity whose enrollment is owned by an organisation unit you only have search access to (not data capture access), you'll be prompted to provide a reason before you can view the enrollment. This is informally known as "breaking the glass."
+
+1. Search for and open the tracked entity as normal.
+2. A **Check for enrollments** panel appears, explaining that the program is protected and that you must provide a reason to check for enrollments. All activity is logged.
+3. Enter a reason in the **Reason to check for enrollments** field. This is required; you cannot submit without one.
+4. Click **Check for enrollments** to proceed, or **Cancel** to go back to search.
+
+![](resources/images/break-the-glass.png)
+
+Once submitted, you get access to the enrollment for about 3 hours. This is tied to your user account rather than the organisation unit. So only the user gains access for 3 hours. Once the 3 hours pass, you'll need to provide a reason again. Every request is logged for audit purposes.
+
+Whether you can edit the enrollment once you have access still depends on the program's sharing settings, the same as for any enrollment you own. Breaking the glass only grants visibility, not special edit rights.
+
 ## List tracked entities enrolled in program
 
 1. Open the **Capture** app.
@@ -812,7 +849,7 @@ As an example, you could filter the list to show only tracked entities where the
 Each filter adapts to the attribute's value type, for example, **numeric** attributes provide a range selector, **text** attributes a search input, and **date** attributes a date picker. Filtering is available for all value types except **MULTI_TEXT** (multi-select option sets).
 
 
-#### Filter on empty or non-empty values
+#### Filter on empty or non-empty values { #capture_filter_tracked_entity_list_empty_values }
 
 Data element filters show two checkboxes at the top:
 
@@ -904,6 +941,25 @@ You can show data elements from a single stage in a working list. Select the "Pr
 
 The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists. Additionally, the program stage list can be [filtered by assignee](#assignee-in-the-event-list), just like an event program list.
 
+## Dates and calendars { #capture_dates_and_calendars }
+
+The Capture app displays and accepts dates in the calendar configured for your DHIS2 server. If the server uses a non-Gregorian calendar, such as the Ethiopian or Nepali calendar, all date fields, date pickers, date ranges, age fields and the dates shown in lists and widgets follow that calendar. The order of day, month and year follows the server's date format setting.
+
+The example below shows the report date picker on a server configured to use the Nepali calendar, with the Nepali month and year and the Nepali weekday names.
+
+![](resources/images/nepali-calendar-date-picker.png)
+
+This affects, among others:
+
+- Enrollment, incident, report and scheduled dates in forms and widgets.
+- Date and date range filters in working lists, and the dates shown in list columns.
+- Age fields, where entering a date of birth calculates the age in the configured calendar, and entering an age calculates the date of birth.
+- Validation that depends on dates, such as a program's expiry days and complete events expiry days.
+
+Dates are always stored on the server in the ISO 8601 (Gregorian) calendar and converted for display. A date entered as 2017-04-13 in the Ethiopian calendar is stored as the corresponding Gregorian date, so downloaded lists, the API and other DHIS2 apps that do not apply the calendar setting may show a different, equivalent date.
+
+The calendar is a server-wide setting and cannot be changed per user or per program. Contact your system administrator if dates appear in an unexpected calendar.
+
 ## Implementer / administrator info { #implementer_info } 
 
 ### Metadata caching { #metadata_caching } 
@@ -915,7 +971,6 @@ For performance reasons the Capture app caches metadata in the client browser. W
 2. If the change is NOT bound to a program you will need to increase ANY program version for the change to be propagated to the clients. Examples here are changes to constants, organisation unit levels or organisation unit groups.
 
 3. The exception to the two rules above is option sets. Option sets have their own version property, i.e. increasing the option set version should ensure the option set metadata are propagated to the clients.
-
 
 ## Enrollment dashboard
 
@@ -1018,6 +1073,19 @@ When you deselect the enrollment you see the following
 
 In addition to deselecting individual boxes, the top bar provides an action to clear all current selections at once. This resets the organisation unit, program, tracked entity and enrollment and returns you to an empty scope. If you have unsaved changes in an open form, you are first asked to confirm before the selections are discarded.
 
+### Read-only mode { #capture_enrollment_dashboard_read_only }
+
+The enrollment dashboard becomes read-only when you don't have full write access, or when the tracked entity is [deactivated](#capture_deactivate_activate_tei). In read-only mode you can still view all data, but actions that would create, edit, delete, or complete data are hidden rather than just disabled.
+
+- If you have no write access at all (to the program, the tracked entity type, and every program stage), a single **View only** badge is shown next to the context bar at the top of the dashboard, explaining why.
+
+  ![](resources/images/enrollment-dash-read-only-full.png)
+
+- If you have write access to some parts but not others (for example, write access to some program stages but not others, or to the program but not the tracked entity type), the page-level badge is not shown. Instead, each affected widget shows its own **View only** badge and hides only the actions it doesn't allow.
+
+  ![](resources/images/enrollment-dash-read-only-partial.png)
+
+In both cases the action buttons in the affected widgets are hidden, while all existing data stays visible.
 
 ### Quick actions
 
@@ -1090,7 +1158,7 @@ If the program only allows one enrollment per tracked entity, the **Add new** bu
 
 In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
 
-Transferring changes the **owning organisation unit** of the enrollment, which affects data visibility and access. After the transfer, the tracked entity will be owned by the new organisation unit, meaning users without access to that organisation unit may no longer be able to view or edit the enrollment. The transfer does not move historical event data; it only changes the ownership going forward.
+Transferring changes the **owning organisation unit** of the enrollment, which affects data visibility and access. After the transfer, the tracked entity will be owned by the new organisation unit, meaning users without access to that organisation unit may no longer be able to view or edit the enrollment. The transfer does not move historical event data; it only changes the ownership going forward. See [Tracked entity ownership](#capture_tei_ownership) for how ownership determines who can view and edit an enrollment.
 
 ![](resources/images/enrollment-dash-enrollment-widget-transfer.png)
 
@@ -1128,7 +1196,7 @@ If no attributes are selected, it will just show a row per record with tracked e
 
 When clicking a tracked entity you should be taken to the Enrollment Dashboard. If the relationship type includes a program, you should be taken to the latest enrollment for that program. If no program is specified, you should still be sent to the enrollment dashboard, but without a program.
 
-Click the **Add new** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
+Click the **New Relationship** button to add a new relationship. Adding a new relationship opens a dialog where you can select the applicable relationship type.
 
 ![](resources/images/enrollment-dash-relationship-widget-add.png)
 
@@ -1158,9 +1226,36 @@ Click the **Edit** button to make changes to the tracked entity profile. Editing
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
 
-Click the **Delete _[tracked entity type]_** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
+The **⋯** (more) icon next to the **Edit** button opens an overflow menu with further actions on the tracked entity: **View changelog** (if enabled for the tracked entity type), **Deactivate**/**Activate**, and **Delete**.
+
+![](resources/images/enrollment-dash-tei-profile-widget-overflow-menu.png)
+
+Select **Delete _[tracked entity type]_** from the overflow menu to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, the tracked entity and all its associated enrollments and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-delete.png)
+
+#### Deactivate or activate a tracked entity { #capture_deactivate_activate_tei }
+
+Deactivating a tracked entity marks it read-only: its profile can no longer be edited, and no new enrollments or events can be created for it in any program. This is useful for records that should be preserved for historical or reporting purposes but should no longer receive new data, for example a person who is deceased or has permanently left the catchment area.
+
+To deactivate a tracked entity:
+
+1. Open the enrollment dashboard for the tracked entity.
+2. In the tracked entity profile widget, click the **⋯** (more) icon and select **Deactivate _[tracked entity type]_**.
+
+   ![](resources/images/enrollment-dash-tei-profile-widget-deactivate-menu-item.png)
+
+3. Confirm by clicking **Yes, deactivate _[tracked entity type]_** in the dialog.
+
+   ![](resources/images/enrollment-dash-tei-profile-widget-deactivate-modal.png)
+
+This option is only shown to users with write access to the tracked entity type.
+
+Once deactivated, the tracked entity shows a **View only** badge wherever it's opened, and appears dimmed with its checkbox disabled in tracked entity working lists, so it can't be picked up for bulk actions.
+
+![](resources/images/enrollment-dash-tei-profile-widget-deactivated-badge.png)
+
+To reverse this, open the overflow menu again and select **Activate _[tracked entity type]_**, then confirm. This restores normal write access according to the user's existing data access permissions.
 
 ### Feedback widget
 
@@ -1186,7 +1281,7 @@ If there aren't any program rules that could show feedback for the current dashb
 On the enrollment dashboard, the indicator widget displays indicator text and values output related to the current dashboard.
 The indicators will be sorted alphabetically.
 
-#### Empty state
+#### Empty state { #capture_indicator_widget_empty_state }
 
 If there aren't any related indicators or indicator output for the current dashboard, the widget shows a short _empty_ message.
 If the current dashboard can't show any indicator output (because it has no related indicators) then the widget is hidden.
@@ -1211,6 +1306,14 @@ If there aren't any warnings to show for the current dashboard then the widget i
 
 On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
 If there aren't any errors to show for the current dashboard then the widget is hidden.
+
+### Customize the dashboard layout { #capture_dashboard_layout }
+
+The widgets described above, and their left/right column order, form the *default* dashboard layout. Individual users cannot rearrange these widgets from within the Capture app itself.
+
+A user with access to the Datastore Management app or the Tracker Configurator App can instead define a custom layout per tracker program, by adding a configuration entry to the `capture` datastore namespace. This lets you choose which widgets appear, in which column, and in what order, and even embed custom plugins alongside the built-in widgets. The same mechanism also applies to the **Add event** and **Edit event** pages.
+
+See [Manual setup (Advanced)](https://developers.dhis2.org/docs/capture-plugins/developer/enrollment-plugins/manual-setup) for the full configuration reference, including the list of supported widgets and how to embed plugins.
 
 ## Enrollment event view and edit page
 
@@ -1324,7 +1427,7 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
-### Ask user to complete program when stage is complete
+### Ask user to complete program when stage is complete { #capture_ask_complete_enrollment_new_event }
 If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button.
 
 ![](resources/images/ask-user-to-complete-enrollment-new-event.png)

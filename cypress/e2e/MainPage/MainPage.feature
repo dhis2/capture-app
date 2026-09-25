@@ -35,13 +35,6 @@ Feature: User interacts with Main page
         Then the current url is /#/?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF&selectedTemplateId=uy2gU8kT1jF-default
         And the TEI working list is displayed
 
-    @v<41
-    Scenario: The icon is rendered as an svg
-        Given you are in the main page with no selections made
-        When you select Child Programme
-        Then the icon is rendered as an svg
-
-    @v>=41
     Scenario: The icon is rendered as a custom icon
         Given you are in the main page with no selections made
         When you select Child Programme

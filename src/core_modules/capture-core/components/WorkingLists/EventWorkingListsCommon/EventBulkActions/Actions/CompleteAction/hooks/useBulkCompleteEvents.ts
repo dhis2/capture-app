@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
+import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 
 type Props = {
@@ -24,6 +24,7 @@ export const useBulkCompleteEvents = ({
     programId,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -33,17 +34,13 @@ export const useBulkCompleteEvents = ({
         ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'Events', selectedRows, programId],
         {
             resource: 'tracker/events',
-            params: () => {
-                const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
-                const filterQueryParam: string = supportForFeature ? 'events' : 'event';
-
-                return {
-                    fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
-                    pageSize: 100,
-                    program: programId,
-                    [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
-                };
-            },
+            params: () => ({
+                fields: 'event,status,program,programStage,orgUnit,occurredAt,scheduledAt,' +
+                    'enrollment,trackedEntity,attributeOptionCombo,notes,assignedUser,geometry,followUp',
+                pageSize: 100,
+                program: programId,
+                events: Object.keys(selectedRows).join(','),
+            }),
         },
         {
             enabled: Object.keys(selectedRows).length > 0 && isCompleteDialogOpen && !!programId,
@@ -92,9 +89,11 @@ export const useBulkCompleteEvents = ({
                             .find(errorReport => errorReport.uid === eventId),
                         );
 
+                    removeEventChangelogQueries(queryClient);
                     removeRowsFromSelection(validEventIds);
                     onUpdateList(true);
                 } else {
+                    removeEventChangelogQueries(queryClient);
                     onUpdateList();
                     setIsCompleteDialogOpen(false);
                 }

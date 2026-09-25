@@ -9,5 +9,4 @@ export type BuildTrackedEntityTypesInput = {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedOptionSets: Map<string, CachedOptionSet>;
     locale: string | null;
-    minorServerVersion: number;
 };

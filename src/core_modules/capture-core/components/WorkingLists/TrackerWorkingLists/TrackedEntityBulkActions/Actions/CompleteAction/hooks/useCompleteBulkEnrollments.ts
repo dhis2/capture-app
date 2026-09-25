@@ -3,10 +3,11 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import type { ProgramStage } from '../../../../../../../metaData';
+import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 
 type Props = {
     selectedRows: Record<string, any>;
@@ -114,18 +115,13 @@ export const useCompleteBulkEnrollments = ({
         ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities', selectedRows],
         {
             resource: 'tracker/trackedEntities',
-            params: () => {
-                const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
-                const filterQueryParam = supportForFeature ? 'trackedEntities' : 'trackedEntity';
-
-                return ({
-                    program: programId,
-                    fields: 'trackedEntity,enrollments[*,!attributes,!completedBy,!completedAt,!relationships,' +
+            params: () => ({
+                program: programId,
+                fields: 'trackedEntity,enrollments[*,!attributes,!completedBy,!completedAt,!relationships,' +
                         'events[*,!dataValues,!completedAt,!completedBy,!relationships]]',
-                    [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
-                    pageSize: 100,
-                });
-            },
+                trackedEntities: Object.keys(selectedRows).join(','),
+                pageSize: 100,
+            }),
         },
         {
             enabled: modalIsOpen && Object.keys(selectedRows).length > 0,
@@ -159,7 +155,10 @@ export const useCompleteBulkEnrollments = ({
     } = useMutation<any>(
         ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
         {
-            onSuccess: () => {
+            onSuccess: (_, { enrollments }: any) => {
+                if (enrollments.some(e => e.events?.length > 0)) {
+                    removeEventChangelogQueries(queryClient);
+                }
                 onUpdateList();
                 removeQueries();
             },
@@ -183,7 +182,10 @@ export const useCompleteBulkEnrollments = ({
     } = useMutation(
         ({ enrollments }: any) => importValidEnrollments({ dataEngine, enrollments }),
         {
-            onSuccess: (serverResponse, { enrollments }) => {
+            onSuccess: (_, { enrollments }) => {
+                if (enrollments.some(e => e.events?.length > 0)) {
+                    removeEventChangelogQueries(queryClient);
+                }
                 const enrollmentIds = enrollments.map(enrollment => enrollment.trackedEntity);
                 removeRowsFromSelection(enrollmentIds);
                 removeQueries();

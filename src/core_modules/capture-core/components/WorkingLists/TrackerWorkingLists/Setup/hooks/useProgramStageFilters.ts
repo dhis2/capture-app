@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { type TrackerProgram, type ProgramStage, dataElementTypes, getProgramEventAccess } from '../../../../../metaData';
@@ -135,13 +134,10 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
                         header: ADDITIONAL_FILTERS_LABELS.assignee,
                         transformRecordsFilter: (rawFilter: any) => {
                             const { assignedUserMode } = rawFilter;
-                            const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-                                ? 'assignedUsers'
-                                : 'assignedUser';
-                            const assignedUser = rawFilter[assignedUsersQueryParam];
+                            const assignedUsers = rawFilter.assignedUsers;
                             return {
                                 assignedUserMode,
-                                ...(assignedUser && { [assignedUsersQueryParam]: assignedUser }),
+                                ...(assignedUsers && { assignedUsers }),
                             };
                         },
                     },

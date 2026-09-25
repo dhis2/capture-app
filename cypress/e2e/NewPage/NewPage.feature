@@ -4,7 +4,6 @@ Feature: User creates a new entries from the registration page
     Given you are on the default registration page
     Then there should be informative message explaining you need to select an organisation unit
 
-  @v>=41
   Scenario: New person in Tracker Program > Filling the Allergies with multiple options
     Given you are in the WHO RMNCH program registration page
     When you fill in multiple Allergies options
@@ -183,13 +182,12 @@ Feature: User creates a new entries from the registration page
     And you click the save person submit button
     Then you see validation errors on the WHO RMNCH program registration page
 
+  @with-malaria-entity-cleanup
   Scenario: Go to enrollment event when Open data entry form after enrollment is checked
     Given you are in the Malaria case diagnosis, treatment and investigation program registration page
     And you fill the Malaria case diagnosis registration form with values
     And you click the save malaria entity submit button
     Then you see the enrollment event Edit page
-    # Cleanup
-    And you delete the recently added malaria entity
 
   Scenario: New person in Tracker Program > Enter non-unique value in a unique data element shows validation error
     Given you are on the TB program registration page

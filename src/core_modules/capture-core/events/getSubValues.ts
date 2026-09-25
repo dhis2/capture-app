@@ -1,6 +1,6 @@
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
+import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../metaData';
 import type { RenderFoundation } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
@@ -27,9 +27,7 @@ const subValueGetterByElementType = {
                 ({
                     name: res.name,
                     value: res.id,
-                    url: featureAvailable(FEATURES.trackerFileEndpoint)
-                        ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/file`
-                        : `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                    url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/file`,
                 }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
@@ -46,18 +44,11 @@ const subValueGetterByElementType = {
         metaElementId: string,
         absoluteApiPath: string,
     }) =>
-        (featureAvailable(FEATURES.trackerImageEndpoint) ?
-            {
-                value,
-                url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`,
-                previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`,
-            } : {
-                value,
-                url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}` +
-                    `&eventUid=${eventId}&dimension=SMALL`,
-            }
-        ),
+        ({
+            value,
+            url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`,
+            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`,
+        }),
     [dataElementTypes.ORGANISATION_UNIT]: ({
         value,
         eventId,

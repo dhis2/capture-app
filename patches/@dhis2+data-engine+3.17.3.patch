@@ -1,0 +1,27 @@
+diff --git a/node_modules/@dhis2/data-engine/build/es/links/RestAPILink.js b/node_modules/@dhis2/data-engine/build/es/links/RestAPILink.js
+index 07cc7ff..705916c 100644
+--- a/node_modules/@dhis2/data-engine/build/es/links/RestAPILink.js
++++ b/node_modules/@dhis2/data-engine/build/es/links/RestAPILink.js
+@@ -1,11 +1,13 @@
+ function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+ function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
+ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
++import plimit from 'p-limit';
+ import { LRUCache } from '../helpers/LRUCache';
+ import { fetchData } from './RestAPILink/fetchData';
+ import { joinPath } from './RestAPILink/path';
+ import { queryToRequestOptions } from './RestAPILink/queryToRequestOptions';
+ import { queryToResourcePath } from './RestAPILink/queryToResourcePath';
++const limit = plimit(100);
+ export class RestAPILink {
+   constructor(config) {
+     _defineProperty(this, "config", void 0);
+@@ -17,7 +19,7 @@ export class RestAPILink {
+     this.unversionedApiPath = joinPath('api');
+   }
+   fetch(path, options) {
+-    return fetchData(joinPath(this.config.baseUrl, path), options, this);
++    return limit(() => fetchData(joinPath(this.config.baseUrl, path), options, this));
+   }
+   executeResourceQuery(type, query, {
+     signal

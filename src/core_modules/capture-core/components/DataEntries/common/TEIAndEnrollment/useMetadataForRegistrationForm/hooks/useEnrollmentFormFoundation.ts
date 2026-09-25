@@ -1,4 +1,3 @@
-import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
 import type { TrackedEntityType } from '../../../../../../metaData';
@@ -34,8 +33,6 @@ export const useEnrollmentFormFoundation = ({
     program,
     locale,
 }: Props) => {
-    const { serverVersion } = useConfig();
-    const minorServerVersion = serverVersion?.minor || 0;
     const { data: enrollment, isInitialLoading, error } = useIndexedDBQuery(
         ['enrollmentForm', program?.id],
         () => buildEnrollmentForm({
@@ -47,7 +44,6 @@ export const useEnrollmentFormFoundation = ({
             cachedOptionSets: optionSets,
             dataEntryFormConfig,
             locale,
-            minorServerVersion,
         }),
         {
             enabled: (

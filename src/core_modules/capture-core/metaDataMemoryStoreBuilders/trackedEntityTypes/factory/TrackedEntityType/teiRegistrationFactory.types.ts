@@ -9,5 +9,4 @@ export type ConstructorInput = {
     cachedOptionSets: Map<string, CachedOptionSet>;
     locale: string | null;
     dataEntryFormConfig?: DataEntryFormConfig | null;
-    minorServerVersion: number;
 };
