@@ -10,7 +10,8 @@ import {
 } from '@dhis2/ui';
 import { useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
 import { convertServerToClient } from 'capture-core/converters';
-import { dataElementTypes, LabelKeys, useTermLabel } from 'capture-core/metaData';
+import { dataElementTypes } from 'capture-core/metaData';
+import { LabelKeys, useTermLabel } from 'capture-core/customLabels';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { EventOverflowMenu, DeleteMenuItemModal, CompleteMenuItemModal } from '../../../../../EventOverflowMenu';

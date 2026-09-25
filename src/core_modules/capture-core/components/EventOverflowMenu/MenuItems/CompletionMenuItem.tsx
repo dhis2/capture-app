@@ -17,7 +17,7 @@ import {
     rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const updateEventStatus = async (
     dataEngine: any,

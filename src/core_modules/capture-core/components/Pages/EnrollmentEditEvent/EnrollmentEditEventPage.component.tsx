@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { dataEntryIds } from 'capture-core/constants';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel, CustomLabelsContext } from '../../../customLabels';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
 import { NoticeBox } from '../../NoticeBox';
@@ -12,7 +12,6 @@ import {
     EnrollmentPageKeys,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { actionTypes } from './EnrollmentEditEventPage.actions';
-import { CustomLabelsContext } from '../../../customLabels';
 
 export const EnrollmentEditEventPageComponent = ({
     pageLayout,

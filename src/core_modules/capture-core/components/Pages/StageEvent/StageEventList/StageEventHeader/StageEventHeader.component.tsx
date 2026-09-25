@@ -4,7 +4,7 @@ import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { PlainProps } from './StageEventHeader.types';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const getStyles = () => ({
     wrapper: {

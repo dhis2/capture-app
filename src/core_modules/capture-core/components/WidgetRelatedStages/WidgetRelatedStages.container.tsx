@@ -16,7 +16,7 @@ import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { RequestEvent } from '../DataEntries';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 const styles = {
     header: {

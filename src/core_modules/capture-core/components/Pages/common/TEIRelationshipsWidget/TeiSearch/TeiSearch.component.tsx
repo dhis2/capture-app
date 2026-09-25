@@ -8,7 +8,7 @@ import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSele
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { Props } from './TeiSearch.types';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const getStyles = (theme: any) => ({
     container: {

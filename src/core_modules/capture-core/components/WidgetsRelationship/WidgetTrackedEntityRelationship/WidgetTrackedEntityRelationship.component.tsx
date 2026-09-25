@@ -6,7 +6,7 @@ import { RelationshipSearchEntities, useRelationships } from '../common/useRelat
 import { NewTrackedEntityRelationship } from './NewTrackedEntityRelationship';
 import { useTrackedEntityTypeName } from './hooks/useTrackedEntityTypeName';
 import { useRelationshipTypes } from '../common/RelationshipsWidget/useRelationshipTypes';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 export const WidgetTrackedEntityRelationship = ({
     relationshipTypes: cachedRelationshipTypes,

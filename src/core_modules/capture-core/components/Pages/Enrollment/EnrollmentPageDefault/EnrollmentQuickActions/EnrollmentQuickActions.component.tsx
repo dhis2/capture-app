@@ -10,7 +10,7 @@ import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../
 import { useEnrollmentAccessContext } from '../../../common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { selectEnrollmentHiddenProgramStageIds } from '../../../common/EnrollmentOverviewDomain';
 import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const styles = {
     contentContainer: {

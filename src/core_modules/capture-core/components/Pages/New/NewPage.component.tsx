@@ -14,7 +14,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const styles: Readonly<any> = {
     container: {

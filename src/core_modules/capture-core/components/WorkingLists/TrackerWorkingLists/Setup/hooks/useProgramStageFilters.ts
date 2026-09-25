@@ -6,9 +6,8 @@ import {
     type ProgramStage,
     dataElementTypes,
     getProgramEventAccess,
-    LabelKeys,
-    useTermLabel,
 } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
 const useProgramStageData = (programStageId, stages) =>

@@ -4,7 +4,7 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import { useAuthority, Authorities } from '../../../../../../utils/authority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 import type { PlainProps } from './DeleteTeiAction.types';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 // TODO - Add program and TEType access checks before adding action to prod
 export const DeleteTeiAction = ({

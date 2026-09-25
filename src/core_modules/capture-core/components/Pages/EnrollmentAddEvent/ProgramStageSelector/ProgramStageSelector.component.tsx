@@ -4,7 +4,7 @@ import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 const styles: Readonly<any> = {
     container: {

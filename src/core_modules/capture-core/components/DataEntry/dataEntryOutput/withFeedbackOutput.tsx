@@ -6,7 +6,7 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetFeedback } from '../../WidgetFeedback';
 import { makeProgramRulesSelector } from './dataEntryOutput.selectors';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type Props = {
     dataEntryKey?: string;

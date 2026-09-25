@@ -4,7 +4,8 @@ import { map, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import { ReduxStore, ApiUtils } from 'capture-core-utils/types/global';
-import { getTrackerProgramThrowIfNotFound, getTermLabel, LabelKeys } from '../../../../metaData/helpers';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     newEventWidgetDataEntryActionTypes,

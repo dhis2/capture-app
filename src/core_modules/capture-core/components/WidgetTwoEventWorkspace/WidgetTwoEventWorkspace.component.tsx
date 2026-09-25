@@ -4,7 +4,7 @@ import { FlatList } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type { RenderFoundation } from '../../metaData';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 import { getDataEntryDetails, Placements } from './utils/getDataEntryDetails';
 
 type OwnProps = {

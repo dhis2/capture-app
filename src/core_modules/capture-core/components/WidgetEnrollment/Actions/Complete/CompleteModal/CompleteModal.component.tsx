@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './completeModal.types';
-import { getTermLabelFromProgram, LabelKeys } from '../../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../../customLabels';
 
 export const CompleteModalComponent = ({
     programStagesWithActiveEvents,

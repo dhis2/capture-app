@@ -9,7 +9,7 @@ import { Section, SectionHeaderSimple } from '../../Section';
 import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
-import { useTermLabel, LabelKeys } from '../../../metaData';
+import { useTermLabel, LabelKeys } from '../../../customLabels';
 
 const styles: Readonly<any> = (theme: any) => ({
     searchDomainsContainer: {

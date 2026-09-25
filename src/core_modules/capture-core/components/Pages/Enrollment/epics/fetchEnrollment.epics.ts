@@ -4,7 +4,7 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 import {
     enrollmentPageActionTypes,

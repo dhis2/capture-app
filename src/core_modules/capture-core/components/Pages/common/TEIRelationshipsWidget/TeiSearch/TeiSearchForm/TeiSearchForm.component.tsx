@@ -16,9 +16,8 @@ import {
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { withGotoInterface } from '../../../../../FormFields/New';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel, withCustomLabels } from '../../../../../../customLabels';
 import type { SearchGroup } from '../../../../../../metaData';
-import { withCustomLabels } from '../../../../../../HOC/withCustomLabels';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 

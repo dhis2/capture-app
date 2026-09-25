@@ -5,7 +5,7 @@ import { colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const styles: Readonly<any> = {
     wrapper: {

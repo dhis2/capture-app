@@ -15,7 +15,8 @@ import { useEnrollmentAccessContext } from '../../../../Pages/common/EnrollmentO
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
-import { dataElementTypes, LabelKeys, useTermLabel } from '../../../../../metaData';
+import { dataElementTypes } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const styles: Readonly<any> = {
     container: {

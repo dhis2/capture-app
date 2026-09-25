@@ -5,7 +5,7 @@ import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { useOrganisationUnit } from '../../dataQueries';
 import { orgUnitFetched } from './coreOrgUnit.actions';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 export function useCoreOrgUnit(orgUnitId: string | undefined): {
     orgUnit?: CoreOrgUnit,

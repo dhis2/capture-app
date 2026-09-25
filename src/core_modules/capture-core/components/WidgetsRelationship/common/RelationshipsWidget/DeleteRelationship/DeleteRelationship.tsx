@@ -14,7 +14,7 @@ import {
 import { IconButton } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Props } from './DeleteRelationship.types';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const styles: Readonly<any> = {
     tableCell: {

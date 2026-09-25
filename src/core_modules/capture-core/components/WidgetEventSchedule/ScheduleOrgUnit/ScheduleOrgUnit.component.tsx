@@ -11,7 +11,7 @@ import {
     withInternalChangeHandler,
     withLabel,
 } from '../../FormFields/New';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type OrgUnitValue = {
     checked: boolean;

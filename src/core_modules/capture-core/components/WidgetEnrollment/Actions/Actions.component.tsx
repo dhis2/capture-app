@@ -2,7 +2,7 @@ import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum, colors } from '@dh
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import React, { type ComponentType, useState } from 'react';
-import { getTermLabelFromProgram, LabelKeys } from '../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../customLabels';
 import { Cancel } from './Cancel';
 import { Complete, CompleteModal } from './Complete';
 import { Delete } from './Delete';

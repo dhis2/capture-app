@@ -2,7 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { RenderFoundation } from '../../metaData';
-import { getTermLabel, LabelKeys } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../customLabels';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {

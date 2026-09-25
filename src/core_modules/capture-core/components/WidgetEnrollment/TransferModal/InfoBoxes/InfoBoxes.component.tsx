@@ -4,7 +4,7 @@ import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
-import { getTermLabelFromProgram, LabelKeys } from '../../../../metaData';
+import { getTermLabelFromProgram, LabelKeys } from '../../../../customLabels';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 

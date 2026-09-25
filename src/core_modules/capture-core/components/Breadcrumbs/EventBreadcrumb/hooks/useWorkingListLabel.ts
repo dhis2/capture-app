@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 type Template = {
     id: string;

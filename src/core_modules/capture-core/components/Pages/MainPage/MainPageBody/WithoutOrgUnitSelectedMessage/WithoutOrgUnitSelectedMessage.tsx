@@ -3,7 +3,8 @@ import { colors } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../../IncompleteSelectionsMessage';
-import { LabelKeys, programTypes, TrackerProgram, useTermLabel } from '../../../../../metaData';
+import { programTypes, TrackerProgram } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 import { useProgramInfo } from '../../../../../hooks/useProgramInfo';
 
 const styles: Readonly<any> = {

@@ -5,7 +5,7 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { NewRelationship } from '../../../Pages/NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 const getStyles = (theme: any) => ({
     headerContainer: {

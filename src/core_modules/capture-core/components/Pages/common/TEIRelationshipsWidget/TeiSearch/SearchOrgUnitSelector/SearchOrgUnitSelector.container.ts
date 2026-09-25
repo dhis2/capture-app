@@ -8,7 +8,7 @@ import {
 import { get as getOrgUnitRoots } from '../../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelector as SearchOrgUnitSelectorComponent } from './SearchOrgUnitSelector.component';
 import type { ReduxState, ReduxDispatch } from '../../../../../App/withAppUrlSync.types';
-import { getTermLabel, LabelKeys } from '../../../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../../../customLabels';
 
 const mapStateToProps = (state: ReduxState, props: { searchId: string }) => {
     const searchId = props.searchId;

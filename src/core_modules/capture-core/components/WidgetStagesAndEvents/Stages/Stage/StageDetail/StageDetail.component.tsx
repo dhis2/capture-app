@@ -22,7 +22,7 @@ import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { useClientDataElements } from './hooks/useClientDataElements';

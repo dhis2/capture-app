@@ -2,7 +2,8 @@ import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
-import { getTermLabel, LabelKeys, RenderFoundation, Program } from '../../../metaData';
+import { RenderFoundation, Program } from '../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../customLabels';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     getApplicableRuleEffectsForEventProgram,

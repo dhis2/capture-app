@@ -5,8 +5,8 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirst
 
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
-import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../../../metaData';
-import { withCustomLabels } from '../../../../../../HOC/withCustomLabels';
+import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
+import { LabelKeys, withCustomLabels } from '../../../../../../customLabels';
 
 const customLabels = [LabelKeys.orgUnitSingular] as const;
 

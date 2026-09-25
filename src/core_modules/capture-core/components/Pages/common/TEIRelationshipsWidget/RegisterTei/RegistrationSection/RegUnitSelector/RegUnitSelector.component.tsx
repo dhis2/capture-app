@@ -2,9 +2,9 @@ import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
-import { getProgramFromProgramIdThrowIfNotFound, LabelKeys } from '../../../../../../../metaData';
+import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
+import { LabelKeys, withCustomLabels } from '../../../../../../../customLabels';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
-import { withCustomLabels } from '../../../../../../../HOC/withCustomLabels';
 
 const customLabels = [LabelKeys.orgUnitSingular] as const;
 

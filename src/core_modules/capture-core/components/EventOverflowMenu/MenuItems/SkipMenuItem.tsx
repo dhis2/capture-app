@@ -9,7 +9,7 @@ import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { removeEventChangelogQueries } from '../../WidgetsChangelog';
 import { DirectionalArrow } from '../../../utils/rtl';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type Props = {
     eventId: string;

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers, spacersNum, UserAvatar } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { Assignee } from './WidgetAssignee.types';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 const styles = () => ({
     wrapper: {

@@ -2,7 +2,7 @@ import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } fr
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps, PlainPropsWithEvents } from './completeModal.types';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 export const CompleteEnrollmentAndEventsModalComponent = ({
     programStageName,

@@ -5,7 +5,7 @@ import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from '../../../../../utils/reactQueryHelpers';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 type Props = {
     sourceId: string;

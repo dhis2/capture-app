@@ -11,7 +11,7 @@ import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollec
 import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const styles: Readonly<any> = {
     wrapper: {

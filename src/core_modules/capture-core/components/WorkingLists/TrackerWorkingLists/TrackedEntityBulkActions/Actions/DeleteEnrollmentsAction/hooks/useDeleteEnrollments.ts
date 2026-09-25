@@ -6,7 +6,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../customLabels';
 
 type Props = {
     selectedRows: Record<string, boolean>;

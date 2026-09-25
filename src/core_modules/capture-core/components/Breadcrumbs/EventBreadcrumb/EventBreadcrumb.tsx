@@ -7,7 +7,7 @@ import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 export const pageKeys = {
     MAIN_PAGE: 'mainPage',

@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
 import type { PlainProps } from './InfoBox.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const styles = {
     infoBox: {

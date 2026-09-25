@@ -3,7 +3,7 @@ import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import {
     addRelationship,
     removeRelationship,

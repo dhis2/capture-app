@@ -2,7 +2,8 @@ import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
-import { LabelKeys, scopeTypes, useTermLabel } from '../../metaData';
+import { scopeTypes } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 

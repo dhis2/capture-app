@@ -15,7 +15,7 @@ import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Props } from './OverflowMenu.types';
 import { useRelationshipTypeAccess } from '../hooks';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 export const OverflowMenuComponent = ({
     linkedEvent,

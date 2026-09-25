@@ -6,8 +6,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { OrgUnitField } from '../../FormFields/New';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
-import { LabelKeys } from '../../../metaData';
+import { withCustomLabels, LabelKeys } from '../../../customLabels';
 
 const customLabels = [LabelKeys.orgUnitSingular] as const;
 

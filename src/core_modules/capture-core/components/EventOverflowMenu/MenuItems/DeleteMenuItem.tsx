@@ -16,7 +16,7 @@ import { useMutation } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type DeleteMenuItemProps = {
     onDeleteRequest: () => void;

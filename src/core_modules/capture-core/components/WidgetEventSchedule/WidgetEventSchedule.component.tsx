@@ -14,7 +14,7 @@ import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 const styles = (theme: any) => ({
     wrapper: {

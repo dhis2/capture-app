@@ -18,7 +18,8 @@ import { SearchResultsHeader } from '../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Widget } from '../../Widget';
-import { getTrackerProgramThrowIfNotFound, useTermLabel, LabelKeys } from '../../../metaData';
+import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
+import { useTermLabel, LabelKeys } from '../../../customLabels';
 
 const SearchPagination = withNavigation()(Pagination);
 

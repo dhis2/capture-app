@@ -7,7 +7,7 @@ import type { Props } from './eventWorkingListsRowMenuSetup.types';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { isValidPeriod } from '../../../../utils/validation/validators/form';
 import { DeleteEventModal } from './DeleteEventModal';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, stageId, ...passOnProps }: Props) => {
     const expiryPeriod = useProgramExpiryForUser(programId);

@@ -5,7 +5,7 @@ import { useAuthority, Authorities } from '../../../../../../utils/authority';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { PlainProps } from './DeleteEnrollmentsAction.types';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 const getTooltipContent = (
     programDataWriteAccess: boolean,

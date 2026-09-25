@@ -5,7 +5,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { removeEventChangelogQueries } from '../../../../../../WidgetsChangelog';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../customLabels';
 
 type Props = {
     selectedRows: { [key: string]: boolean };

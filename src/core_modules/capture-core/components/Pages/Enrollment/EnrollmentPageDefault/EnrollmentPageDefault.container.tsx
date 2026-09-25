@@ -5,7 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQueryClient } from '@tanstack/react-query';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import {
     commitEnrollmentAndEvents,

@@ -5,7 +5,7 @@ import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessag
 import { WidgetEventEdit } from '../../../WidgetEventEdit';
 import type { Props } from '../../../WidgetEventEdit/widgetEventEdit.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 type WidgetProps = {
     pageStatus: string;

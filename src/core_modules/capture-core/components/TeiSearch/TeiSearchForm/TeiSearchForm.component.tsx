@@ -17,8 +17,7 @@ import { D2Form } from '../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import type { Props } from './TeiSearchForm.types';
 import { withGotoInterface } from '../../FormFields/New';
-import { useTermLabel, LabelKeys } from '../../../metaData';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { useTermLabel, LabelKeys, withCustomLabels } from '../../../customLabels';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 

@@ -9,7 +9,7 @@ import {
 import labelTypeClasses from '../FormComponents/dataEntryFieldLabels.module.css';
 import { baseInputStyles } from '../FormComponents/commonProps';
 import type { LinkToExistingProps } from './LinkToExisting.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const SingleSelectForForm = withDefaultFieldContainer()(
     withLabel({

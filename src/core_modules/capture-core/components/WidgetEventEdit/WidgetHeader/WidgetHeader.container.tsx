@@ -23,7 +23,7 @@ import { changeEventFromUrl } from '../../Pages/ViewEvent/ViewEventComponent/vie
 import { pageKeys } from '../../App/withAppUrlSync';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { PlainProps } from './WidgetHeader.types';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const styles: Readonly<any> = {
     icon: {

@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { colors } from '@dhis2/ui';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import { statusTypes, type StatusType } from '../../../events/statusTypes';
 import { DirectionalChevron } from '../../../utils/rtl';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';

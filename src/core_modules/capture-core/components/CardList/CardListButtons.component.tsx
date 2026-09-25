@@ -8,7 +8,7 @@ import { availableCardListButtonState, enrollmentTypes } from './CardList.consta
 import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { useTermLabel, LabelKeys } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../customLabels';
 
 type Props = {
     currentSearchScopeId?: string,

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { Filters } from './Filters.component';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import type {
     Column,
     FiltersOnly,

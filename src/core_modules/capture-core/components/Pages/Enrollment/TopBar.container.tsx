@@ -1,6 +1,6 @@
 import React from 'react';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import {
     ScopeSelector,
     useSetProgramId,

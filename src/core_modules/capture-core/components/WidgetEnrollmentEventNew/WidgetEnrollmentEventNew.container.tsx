@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { getProgramAndStageForProgram, LabelKeys, TrackerProgram, useTermLabel } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 import { OrgUnitFetcher } from './OrgUnitFetcher/OrgUnitFetcher.container';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';

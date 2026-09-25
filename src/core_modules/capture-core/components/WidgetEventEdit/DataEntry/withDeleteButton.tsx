@@ -2,8 +2,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { Props, State } from './withDeleteButton.types';
-import { LabelKeys } from '../../../metaData';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { LabelKeys, withCustomLabels } from '../../../customLabels';
 
 const customLabels = [LabelKeys.eventSingular] as const;
 

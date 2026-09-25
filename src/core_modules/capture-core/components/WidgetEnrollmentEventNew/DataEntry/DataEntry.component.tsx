@@ -14,8 +14,8 @@ import {
     getOrgUnitValidatorContainers,
     getNoteValidatorContainers,
 } from './fieldValidators';
-import { type RenderFoundation, type ProgramStage, LabelKeys } from '../../../metaData';
-import { withCustomLabels } from '../../../HOC/withCustomLabels';
+import { type RenderFoundation, type ProgramStage } from '../../../metaData';
+import { LabelKeys, withCustomLabels } from '../../../customLabels';
 import {
     placements,
     withCleanUp,

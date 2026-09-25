@@ -8,7 +8,8 @@ import { EnrollmentAccessProvider } from '../../common/EnrollmentOverviewDomain'
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
-import { LabelKeys, TrackerProgram, useTermLabel } from '../../../../metaData';
+import { TrackerProgram } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 const styles: Readonly<any> = ({ typography }: any) => ({
     container: {

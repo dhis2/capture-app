@@ -5,7 +5,7 @@ import { getNoteValidatorContainers } from '../fieldValidators/note.validatorCon
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
 import type { DataEntryPropToInclude } from '../../../DataEntry/actions/dataEntryLoad.utils';
-import { getTermLabel, LabelKeys } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 const buildDataEntryPropsToInclude = (
     orgUnitLabel: string,

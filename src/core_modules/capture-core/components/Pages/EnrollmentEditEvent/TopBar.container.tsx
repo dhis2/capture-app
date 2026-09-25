@@ -1,7 +1,8 @@
 import React from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import { LabelKeys, useTermLabel, type ProgramStage } from '../../../metaData';
+import { type ProgramStage } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import {
     ScopeSelector,

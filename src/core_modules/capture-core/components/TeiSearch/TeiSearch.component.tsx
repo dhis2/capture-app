@@ -1,8 +1,8 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import { SearchGroup, LabelKeys } from '../../metaData';
-import { withCustomLabels } from '../../HOC/withCustomLabels';
+import { SearchGroup } from '../../metaData';
+import { LabelKeys, withCustomLabels } from '../../customLabels';
 import { UnsupportedAttributesNotification } from '../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';

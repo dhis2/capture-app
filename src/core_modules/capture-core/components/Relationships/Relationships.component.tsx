@@ -6,7 +6,7 @@ import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';
 import { DirectionalArrow } from '../../utils/rtl';
 import type { RelationshipType } from '../../metaData';
-import { getTermLabel, LabelKeys } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../customLabels';
 import type { Relationship, Entity } from './relationships.types';
 
 const styles: Readonly<any> = (theme: any) => ({

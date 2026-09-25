@@ -7,7 +7,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import type { Props } from './DeleteAction.types';
-import { LabelKeys, useTermLabel } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 const getTooltipContent = (
     stageDataWriteAccess: boolean | undefined,

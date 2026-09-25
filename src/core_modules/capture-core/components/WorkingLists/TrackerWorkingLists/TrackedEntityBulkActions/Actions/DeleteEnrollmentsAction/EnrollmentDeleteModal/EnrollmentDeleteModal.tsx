@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
 import type { PlainProps } from './EnrollmentDeleteModal.types';
-import { LabelKeys, useTermLabel } from '../../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../../customLabels';
 
 const styles: Readonly<any> = {
     modalContent: {

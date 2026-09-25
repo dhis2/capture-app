@@ -6,7 +6,7 @@ import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props) => {
     const dispatch = useDispatch();

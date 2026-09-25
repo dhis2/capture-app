@@ -5,7 +5,7 @@ import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
 import uuid from 'd2-utilizr/lib/uuid';
 import { errorCreator } from 'capture-core-utils';
-import { getTermLabel, LabelKeys } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../customLabels';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';

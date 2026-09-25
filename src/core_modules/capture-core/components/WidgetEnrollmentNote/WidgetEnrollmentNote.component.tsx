@@ -6,7 +6,7 @@ import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
-import { LabelKeys, useTermLabel } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();

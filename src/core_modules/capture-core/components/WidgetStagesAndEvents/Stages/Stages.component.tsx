@@ -6,7 +6,7 @@ import { Stage } from './Stage';
 import type { PlainProps, InputProps } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 import { useEnrollmentAccessContext } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const emptyStateStyle = {
     padding: `0 ${spacersNum.dp12}px`,

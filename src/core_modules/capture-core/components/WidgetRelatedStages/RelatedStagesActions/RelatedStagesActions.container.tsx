@@ -7,7 +7,7 @@ import { relatedStageStatus, relatedStageActions } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 import { useProgramExpiryForUser } from '../../../hooks';
-import { LabelKeys, useTermLabel } from '../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type RefHandle = {
     eventHasLinkableStageRelationship: () => boolean;

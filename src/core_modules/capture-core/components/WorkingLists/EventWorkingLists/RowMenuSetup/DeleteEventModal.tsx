@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { LabelKeys, useTermLabel } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 type Props = {
     eventId: string;

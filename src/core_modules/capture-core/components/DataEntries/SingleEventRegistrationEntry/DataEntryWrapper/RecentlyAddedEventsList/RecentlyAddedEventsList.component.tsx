@@ -6,7 +6,7 @@ import { Card } from '@dhis2/ui';
 import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
 import { listId } from './RecentlyAddedEventsList.const';
 import type { Props } from './RecentlyAddedEventsList.types';
-import { LabelKeys, useTermLabel } from '../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 const styles = (theme: any) => ({
     container: {

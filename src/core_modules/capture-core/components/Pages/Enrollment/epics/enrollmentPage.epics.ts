@@ -2,7 +2,8 @@ import { ofType } from 'redux-observable';
 import { concatMap, map, filter } from 'rxjs/operators';
 import { from } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
-import { getTermLabel, getScopeInfo, LabelKeys } from '../../../../metaData';
+import { getScopeInfo } from '../../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import {
     enrollmentPageActionTypes,
     resetEnrollmentId,

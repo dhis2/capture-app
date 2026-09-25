@@ -25,7 +25,8 @@ import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useC
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
 import { convertFormToClient } from '../../../../converters';
-import { dataElementTypes, LabelKeys, useTermLabel } from '../../../../metaData';
+import { dataElementTypes } from '../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import type { PlainProps } from './EventDetailsSection.types';
 
 const getStyles: any = () => ({
