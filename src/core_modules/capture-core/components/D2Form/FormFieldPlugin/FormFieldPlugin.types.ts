@@ -48,11 +48,14 @@ export type SetFieldValueProps = {
     options?: FieldValueOptions;
 };
 
+type PluginContextEntry<TValue = unknown> = {
+    setDataEntryFieldValue: (fieldValueProps: SetFieldValueProps) => void;
+    value: TValue;
+};
+
 export type PluginContext = {
-    [key: string]: {
-        setDataEntryFieldValue: (fieldValueProps: SetFieldValueProps) => void;
-        value: any;
-    };
+    orgUnit?: PluginContextEntry<{ id: string } | undefined>;
+    [key: string]: PluginContextEntry<any> | undefined;
 };
 
 export type ContainerProps = {
@@ -74,12 +77,20 @@ export type UsePluginCallbacksProps = {
     pluginContext: PluginContext;
 };
 
-export type ComponentProps = {
+export type PluginContextIds = {
+    orgUnitId: string | undefined;
+    programId: string | undefined;
+    programStageId: string | undefined;
+    enrollmentId: string | undefined;
+    eventId: string | undefined;
+    teiId: string | undefined;
+};
+
+export type ComponentProps = PluginContextIds & {
     pluginSource: string;
     fieldsMetadata: FormattedMetadataByPluginId;
     formSubmitted: boolean;
-    values: { [id: string]: any };
-    orgUnitId: string;
+    values: { [id: string]: unknown };
     setFieldValue: (props: SetFieldValueProps) => void;
     errors: { [id: string]: string[] };
     warnings: { [id: string]: string[] };

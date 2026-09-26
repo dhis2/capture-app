@@ -4,8 +4,8 @@ import type { ContainerProps } from './FormFieldPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
+import { useFormFieldPluginContext } from './hooks/useFormFieldPluginContext';
 import { formatPluginConfig } from './formatPluginConfig';
-import { useLocationQuery } from '../../../utils/routing';
 
 export const FormFieldPlugin = (props: ContainerProps) => {
     const {
@@ -19,7 +19,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
-    const { orgUnitId } = useLocationQuery();
+    const { orgUnitId, programId, programStageId, enrollmentId, eventId, teiId } = useFormFieldPluginContext(pluginContext);
 
     // Plugin related functionality and feedback
     const { pluginValues, formValuesRedux } = usePluginValues(formId, metadataByPluginId, pluginContext);
@@ -54,6 +54,11 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     return (
         <FormFieldPluginComponent
             orgUnitId={orgUnitId}
+            programId={programId}
+            programStageId={programStageId}
+            enrollmentId={enrollmentId}
+            eventId={eventId}
+            teiId={teiId}
             pluginSource={pluginSource}
             fieldsMetadata={formattedMetadata}
             values={pluginValues}

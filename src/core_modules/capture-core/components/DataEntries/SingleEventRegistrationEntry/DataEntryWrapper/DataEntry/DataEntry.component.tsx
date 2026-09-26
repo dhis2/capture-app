@@ -338,7 +338,6 @@ const buildCompleteFieldSettingsFn = () => {
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.STATUS,
         }),
-        getPassOnFieldData: () => true,
     };
 
     return completeSettings;
