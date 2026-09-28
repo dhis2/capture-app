@@ -47,15 +47,21 @@ export class RuleEngine {
         isEnrollmentFormWithEvent,
     }: RulesEngineInput): OutputEffects {
         if (!programRulesContainer.programRules ||
-            !selectedOrgUnit ||
             (!currentEvent && !selectedEnrollment)) return [];
+
+        const orgUnit = selectedOrgUnit || {
+            id: 'unspecified',
+            name: '',
+            code: '',
+            groups: [],
+        };
 
         const inputBuilder = new InputBuilder(
             this.inputConverter,
             dataElements,
             trackedEntityAttributes,
             optionSets,
-            selectedOrgUnit,
+            orgUnit,
         );
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,
