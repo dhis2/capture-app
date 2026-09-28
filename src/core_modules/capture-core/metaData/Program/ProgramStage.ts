@@ -6,7 +6,7 @@ import type { ProgramRule } from '@dhis2/rules-engine-javascript';
 import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
-import type { CustomLabels } from '../helpers/customLabels';
+import type { CustomLabels } from '../../customLabels';
 
 export class ProgramStage {
     _id!: string;

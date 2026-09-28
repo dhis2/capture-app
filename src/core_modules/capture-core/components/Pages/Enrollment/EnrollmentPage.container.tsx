@@ -18,6 +18,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
+import { CustomLabelsContext } from '../../../customLabels';
 import {
     buildEnrollmentsAsOptions,
     useSetEnrollmentId,
@@ -118,7 +119,7 @@ export const EnrollmentPage: ComponentType<Record<string, never>> = () => {
       useSelector(({ activePage }: any) => activePage.selectionsError && activePage.selectionsError.error);
 
     return (
-        <>
+        <CustomLabelsContext.Provider value={programId}>
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}
@@ -137,7 +138,7 @@ export const EnrollmentPage: ComponentType<Record<string, never>> = () => {
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 enrollmentPageStatus={useComputedEnrollmentPageStatus()}
             />
-        </>
+        </CustomLabelsContext.Provider>
 
     );
 };
