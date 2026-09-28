@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-24T12:33:05.293Z\n"
-"PO-Revision-Date: 2026-09-24T12:33:05.293Z\n"
+"POT-Creation-Date: 2026-09-28T14:08:20.871Z\n"
+"PO-Revision-Date: 2026-09-28T14:08:20.871Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -177,9 +177,6 @@ msgstr "{{ stageName }} - Assignee"
 
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Status"
-
-msgid "Please select {{categoryName}}"
-msgstr "Please select {{categoryName}}"
 
 msgid "A date in the future is not allowed"
 msgstr "A date in the future is not allowed"
@@ -432,6 +429,9 @@ msgstr "Some operations are still running. Please wait."
 
 msgid "Operations running"
 msgstr "Operations running"
+
+msgid "Please select {{categoryName}}"
+msgstr "Please select {{categoryName}}"
 
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr "No feedback for this {{enrollmentLabel}} yet"
