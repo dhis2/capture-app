@@ -50,7 +50,7 @@ export const useProgramStageFilters = (program: TrackerProgram, programStageId?:
         program.stages,
     );
     const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(program.stages, program.id);
-    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular]);
+    const { programStageLabel } = useTermLabel([LabelKeys.programStageSingular], { stageId: programStageId });
 
     return useMemo(() => {
         const translatedStatus = translatedStatusTypes();
