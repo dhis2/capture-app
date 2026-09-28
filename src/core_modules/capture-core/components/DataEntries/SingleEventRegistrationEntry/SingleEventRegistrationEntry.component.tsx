@@ -7,10 +7,12 @@ import { NewRelationshipWrapper } from './NewRelationshipWrapper/NewEventNewRela
 import { cancelNewEventAndReturnToMainPage } from './DataEntryWrapper/DataEntry/actions/dataEntry.actions';
 import type { Props } from './SingleEventRegistrationEntry.types';
 import { LabelKeys, useTermLabel } from '../../../customLabels';
+import { useLocationQuery } from '../../../utils/routing';
 
 export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eventAccess }: Props) => {
     const dispatch = useDispatch();
     const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { programId } = useLocationQuery();
 
     if (!eventAccess.write) {
         return (
@@ -28,7 +30,7 @@ export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eve
         <>
             {
                 showAddRelationship ?
-                    <NewRelationshipWrapper /> :
+                    <NewRelationshipWrapper programId={programId} /> :
                     <NewEventDataEntryWrapper />
             }
         </>

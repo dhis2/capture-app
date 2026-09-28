@@ -35,6 +35,7 @@ type AddRelationshipPayload = {
     entity: any;
     entityType: string;
     relationshipType: any;
+    programId?: string | null;
 };
 
 type SaveRelationshipsPayload = {
@@ -74,10 +75,9 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
             const toEntity = payload.entity;
-            const programId = state.currentSelections.programId;
             const { eventLabel, relationshipLabel } = getTermLabel(
                 [LabelKeys.eventSingular, LabelKeys.relationshipSingular],
-                { programId },
+                { programId: payload.programId },
             );
 
             const newRelationship = {
