@@ -1,8 +1,8 @@
-import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';

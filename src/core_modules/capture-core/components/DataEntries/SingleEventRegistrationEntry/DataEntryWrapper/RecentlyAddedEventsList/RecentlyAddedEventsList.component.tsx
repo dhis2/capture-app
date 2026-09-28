@@ -1,8 +1,8 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import { Card } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
 import { listId } from './RecentlyAddedEventsList.const';
 import type { Props } from './RecentlyAddedEventsList.types';

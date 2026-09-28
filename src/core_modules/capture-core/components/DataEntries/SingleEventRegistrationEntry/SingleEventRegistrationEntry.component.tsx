@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { NewEventDataEntryWrapper } from './DataEntryWrapper/NewEventDataEntryWrapper.container';
 import { NewRelationshipWrapper } from './NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';

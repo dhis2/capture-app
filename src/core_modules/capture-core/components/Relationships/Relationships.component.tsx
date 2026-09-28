@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { cx } from '@emotion/css';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { IconButton } from 'capture-ui';
 import { IconDelete16, Button, colors } from '@dhis2/ui';

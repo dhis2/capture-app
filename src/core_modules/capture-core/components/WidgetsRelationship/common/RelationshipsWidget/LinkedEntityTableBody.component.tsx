@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
 import { withStyles } from 'capture-core-utils/styles';
 import type { WithStyles } from 'capture-core-utils/styles';
@@ -8,6 +7,7 @@ import {
     DataTableCell,
     Tooltip,
 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
 import type { Props } from './linkedEntityTableBody.types';

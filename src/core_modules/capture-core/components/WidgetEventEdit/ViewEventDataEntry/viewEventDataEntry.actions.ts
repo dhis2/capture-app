@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
-import { dataElementTypes } from '../../../metaData';
 import { getTermLabel, LabelKeys } from '../../../customLabels';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
@@ -13,6 +12,7 @@ import {
     updateRulesEffects,
     filterApplicableRuleEffects,
 } from '../../../rules';
+import { dataElementTypes } from '../../../metaData';
 import { convertClientToForm } from '../../../converters';
 import type { ClientEventContainer } from '../../../events/eventRequests';
 import { TrackerProgram, EventProgram } from '../../../metaData/Program';

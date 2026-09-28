@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import {
     Divider,
@@ -9,6 +8,7 @@ import {
     IconView16,
     MenuItem,
 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { OverflowButton } from '../../Buttons';
 import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';

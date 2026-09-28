@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
 import { getTermLabelFromProgram, LabelKeys } from '../../../../customLabels';
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
+import i18n from '@dhis2/d2-i18n';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { rollbackAssignee, setAssignee } from './viewEvent.actions';

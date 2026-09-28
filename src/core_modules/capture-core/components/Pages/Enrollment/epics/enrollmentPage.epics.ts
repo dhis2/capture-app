@@ -2,7 +2,6 @@ import { ofType } from 'redux-observable';
 import { concatMap, map, filter } from 'rxjs/operators';
 import { from } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
-import { getScopeInfo } from '../../../../metaData';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import {
     enrollmentPageActionTypes,
@@ -26,6 +25,7 @@ import {
 import { enrollmentAccessLevels, selectionStatus } from '../EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../../utils/routing';
 import { deriveTeiName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { getScopeInfo } from '../../../../metaData';
 import { scopeTypes } from '../../../../metaData/helpers/constants';
 
 const teiQuery = id => ({

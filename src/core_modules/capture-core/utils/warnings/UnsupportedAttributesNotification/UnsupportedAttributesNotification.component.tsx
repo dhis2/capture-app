@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacers } from '@dhis2/ui';
 import { LabelKeys, useTermLabel } from '../../../customLabels';
 import type { SearchAttribute } from '../../../metaDataMemoryStoreBuilders/common/factory/searchGroup';

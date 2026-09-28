@@ -1,8 +1,8 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { cx } from '@emotion/css';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
 import { getTermLabelFromProgram, LabelKeys } from '../../../../customLabels';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';

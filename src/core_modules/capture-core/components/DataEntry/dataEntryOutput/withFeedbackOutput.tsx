@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import { useHideWidgetByRuleLocations } from 'capture-core/hooks';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';

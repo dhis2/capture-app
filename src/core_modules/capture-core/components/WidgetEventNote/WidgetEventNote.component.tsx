@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import type { Props } from './WidgetEventNote.types';
 import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';

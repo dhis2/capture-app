@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from 'capture-core-utils';
