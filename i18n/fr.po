@@ -7,18 +7,18 @@
 # Jason Pickering <jason@dhis2.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Philip Larsen Donnelly, 2026
-# Esther Tokouli, 2026
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # Cyrille Kabrane, 2026
 # Bram Piot <bram.piot@gmail.com>, 2026
 # Elise Desailly, 2026
+# Esther Tokouli, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-17T10:17:48.262Z\n"
+"POT-Creation-Date: 2026-09-25T07:38:17.502Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Elise Desailly, 2026\n"
+"Last-Translator: Esther Tokouli, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -459,10 +459,10 @@ msgid "Operations running"
 msgstr "Opérations en cours"
 
 msgid "No feedback for this {{enrollmentLabel}} yet"
-msgstr ""
+msgstr "Aucun commentaire pour{{enrollmentLabel}}  l'instant"
 
 msgid "No indicator output for this {{enrollmentLabel}} yet"
-msgstr ""
+msgstr "Aucune sortie d'indicateur {{enrollmentLabel}} pour le moment"
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
@@ -1650,7 +1650,7 @@ msgid "No polygon captured"
 msgstr "Aucun polygone défini"
 
 msgid "{{eventLabel}} completed"
-msgstr ""
+msgstr "{{eventLabel}} terminé"
 
 msgid "Notes about this event"
 msgstr "Notes sur cet événement"
@@ -1840,7 +1840,7 @@ msgid "No attributes configured"
 msgstr "Aucun attribut configuré"
 
 msgid "No attributes configured to display"
-msgstr ""
+msgstr "Aucun attribut configuré à afficher"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "Profil de {{trackedEntityTypeName}}"
@@ -1925,7 +1925,7 @@ msgid "No stages found in this program"
 msgstr "Aucun stade trouvé dans ce programme"
 
 msgid "{{programStagesLabel}} and {{eventsLabel}}"
-msgstr ""
+msgstr "{{programStagesLabel}} et  {{eventsLabel}}"
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr ""
@@ -2412,37 +2412,37 @@ msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} dans le programme {{escape}} {{programName}}"
 
 msgid "enrollments"
-msgstr ""
+msgstr "inscriptions"
 
 msgid "program stage"
-msgstr ""
+msgstr "stade de programme"
 
 msgid "program stages"
-msgstr ""
+msgstr "stades de programme"
 
 msgid "note"
-msgstr ""
+msgstr "remarque"
 
 msgid "notes"
-msgstr ""
+msgstr "remarques"
 
 msgid "relationship"
-msgstr ""
+msgstr "relation"
 
 msgid "relationships"
 msgstr "Relations"
 
 msgid "attribute"
-msgstr ""
+msgstr "attribut"
 
 msgid "attributes"
-msgstr ""
+msgstr "attributs"
 
 msgid "organisation unit"
-msgstr ""
+msgstr "unité d'organisation"
 
 msgid "follow-up"
-msgstr ""
+msgstr "suivi"
 
 msgid "Program not found"
 msgstr "Programme introuvable"

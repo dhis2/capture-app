@@ -38,9 +38,6 @@ import {
     ProgramStage,
     RenderFoundation,
     getProgramThrowIfNotFound,
-    LabelKeys,
-    useTermLabel,
-    type CustomLabels,
 } from '../../../metaData';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
@@ -57,6 +54,7 @@ import {
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
+import { useTermLabel, LabelKeys, type CustomLabels } from '../../../customLabels';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -546,9 +544,6 @@ class EnrollmentDataEntryComponentClass extends React.Component<PreEnrollmentDat
 }
 
 export const EnrollmentDataEntryComponent = (props: Omit<PreEnrollmentDataEntryProps, 'termLabels'>) => {
-    const termLabels = useTermLabel(
-        [LabelKeys.eventSingular, LabelKeys.enrollmentSingular],
-        { programId: props.programId },
-    );
+    const termLabels = useTermLabel([LabelKeys.eventSingular, LabelKeys.enrollmentSingular]);
     return <EnrollmentDataEntryComponentClass {...props} termLabels={termLabels} />;
 };

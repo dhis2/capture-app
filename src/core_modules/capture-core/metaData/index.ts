@@ -40,12 +40,4 @@ export {
     getProgramThrowIfNotFound,
     getProgramAndStageForEventProgram,
     getEventProgramEventAccess,
-    extractCustomLabels,
-    getTermLabel,
-    getTermLabelFromProgram,
-    LabelKeys,
-    useTermLabel,
-    type CustomLabelKey,
-    type CustomLabels,
-    type TermRequest,
 } from './helpers';
