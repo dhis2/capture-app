@@ -37,6 +37,8 @@ export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: strin
 export const startSaveEditEventDataEntry = (
     eventId: string,
     serverData: any,
+    programId?: string | null,
+    stageId?: string | null,
     triggerActionCommit?: string | null,
     triggerActionRollback?: string | null,
 ) =>
@@ -51,11 +53,11 @@ export const startSaveEditEventDataEntry = (
                 },
                 commit: {
                     type: actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED,
-                    meta: { eventId, triggerAction: triggerActionCommit },
+                    meta: { eventId, programId, stageId, triggerAction: triggerActionCommit },
                 },
                 rollback: {
                     type: actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED,
-                    meta: { eventId, triggerAction: triggerActionRollback },
+                    meta: { eventId, programId, stageId, triggerAction: triggerActionRollback },
                 },
             },
         },

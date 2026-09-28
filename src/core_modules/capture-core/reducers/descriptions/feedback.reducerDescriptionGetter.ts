@@ -156,8 +156,8 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         });
     },
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
-        // stageId not in scope here — action.meta only carries { eventId, triggerAction }
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.meta.programId });
+        const { programId, stageId } = action.meta;
+        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId });
         return addErrorFeedback({
             message: i18n.t('Error editing the {{eventLabel}}, the changes made were not saved', { eventLabel }),
         });

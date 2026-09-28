@@ -149,13 +149,20 @@ export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
                     startSaveEditEventDataEntry(
                         eventId,
                         serverData,
+                        prevEventMainData?.programId,
+                        prevEventMainData?.programStageId,
                         enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT,
                         enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT,
                     ),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
             return batchActions([
-                startSaveEditEventDataEntry(eventId, serverData),
+                startSaveEditEventDataEntry(
+                    eventId,
+                    serverData,
+                    prevEventMainData?.programId,
+                    prevEventMainData?.programStageId,
+                ),
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
         }));
 
@@ -301,6 +308,8 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: ReduxSto
                 startSaveEditEventDataEntry(
                     eventId,
                     serverData,
+                    prevEventMainData?.programId,
+                    prevEventMainData?.programStageId,
                     onSaveAndCompleteEnrollmentSuccessActionType,
                     onSaveAndCompleteEnrollmentErrorActionType,
                 ),
