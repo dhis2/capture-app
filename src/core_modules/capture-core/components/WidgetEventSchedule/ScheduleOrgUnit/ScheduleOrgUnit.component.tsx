@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';

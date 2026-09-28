@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import type { ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { cx } from '@emotion/css';
 import { debounce } from 'lodash';
 import { v4 as uuid } from 'uuid';

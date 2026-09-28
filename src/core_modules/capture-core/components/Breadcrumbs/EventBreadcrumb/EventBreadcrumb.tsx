@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { ComponentType, useCallback, useMemo, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { DirectionalChevron } from '../../../utils/rtl';

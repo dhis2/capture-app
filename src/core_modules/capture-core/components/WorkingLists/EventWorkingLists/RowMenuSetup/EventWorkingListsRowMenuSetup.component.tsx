@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useMemo, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { IconDelete24, colors } from '@dhis2/ui';
 import { EventWorkingListsUpdateTrigger } from '../UpdateTrigger';
 import type { CustomRowMenuContents } from '../../WorkingListsBase';

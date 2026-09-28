@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { dataEntryIds } from 'capture-core/constants';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
 import { LabelKeys, useTermLabel, CustomLabelsContext } from '../../../customLabels';
