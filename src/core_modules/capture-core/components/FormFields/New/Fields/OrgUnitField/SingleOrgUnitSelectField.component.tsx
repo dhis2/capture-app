@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { cx } from '@emotion/css';
 import { debounce } from 'lodash';
@@ -332,4 +331,4 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, SingleOrgUnit
 }
 export const SingleOrgUnitSelectField = withCustomLabels(customLabels)(
     withStyles(getStyles)(SingleOrgUnitSelectFieldPlain),
-) as ComponentType<SingleOrgUnitSelectFieldProps>;
+) as React.ComponentType<SingleOrgUnitSelectFieldProps>;
