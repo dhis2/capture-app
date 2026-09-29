@@ -17,7 +17,8 @@ export const getTextFieldConfig = (
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
-        multiLine: extraProps && extraProps.multiLine,
+        multiLine: extraProps?.multiLine,
+        placeholder: extraProps?.placeholder,
         ...(isLtrInputType(metaData.type) ? { dir: 'ltr' as const } : {}),
     }, options, metaData);
 
