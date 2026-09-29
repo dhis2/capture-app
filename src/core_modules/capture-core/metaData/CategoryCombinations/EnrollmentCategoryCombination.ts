@@ -42,7 +42,7 @@ export class EnrollmentCategoryCombination {
 
         const target = new Set(categoryOptionUids);
         const matches = this._categoryOptionCombos.filter(coc =>
-            coc.categoryOptions.length === target.size &&
+            coc.categoryOptions.length === categoryOptionUids.length &&
             coc.categoryOptions.every(({ id }) => target.has(id)),
         );
 

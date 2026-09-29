@@ -52,10 +52,10 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action: any) => {
             const { enrollmentPayload, uid, redirect } = action.payload;
-            const enrollment = enrollmentPayload.enrollments[0];
-            const optionUids = enrollment.enrollmentCategoryOptionUids ?? [];
-            delete enrollment.enrollmentCategoryOptionUids;
+            const [enrollment] = enrollmentPayload.enrollments;
+            const { enrollmentCategoryOptionUids: optionUids = [], ...enrollmentRest } = enrollment;
 
+            let resolvedEnrollment = enrollmentRest;
             if (optionUids.length > 0) {
                 const { enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(enrollment.program);
                 const attributeOptionCombo = enrollmentCategoryCombination?.resolveAttributeOptionCombo(optionUids);
@@ -67,14 +67,12 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                     );
                     return failAOCResolveForNewTrackedEntityInstanceWithEnrollment();
                 }
-                enrollment.attributeOptionCombo = attributeOptionCombo;
+                resolvedEnrollment = { ...enrollmentRest, attributeOptionCombo };
             }
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
-                    trackedEntities: [
-                        enrollmentPayload,
-                    ],
+                    trackedEntities: [{ ...enrollmentPayload, enrollments: [resolvedEnrollment] }],
                 },
                 redirect,
                 uid,
