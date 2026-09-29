@@ -8,7 +8,10 @@ export type ProgramStage = {
     repeatable: boolean;
 };
 
-export type Event = { programStage: string };
+export type Event = {
+    programStage: string;
+    status: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+};
 
 export type OwnProps = {
     stages: Array<ProgramStage & EventCount>;
