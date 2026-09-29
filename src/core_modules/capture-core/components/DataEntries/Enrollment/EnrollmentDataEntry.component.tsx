@@ -311,19 +311,19 @@ const getCategoryOptionsSettingsFn = () => ({
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
     getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
     getMeta: (props: any) => {
-        const { firstStageMetaData, programCategory, termLabels } = props;
+        const { firstStageMetaData, programCategory, eventLabel } = props;
 
         return {
             section: AOCsectionKey,
             placement: placements.BOTTOM,
             sectionName: firstStageMetaData
                 ? i18n.t('{{eventLabel}} - {{stageName}} - {{categoryDisplayName}}', {
-                    eventLabel: termLabels?.eventLabel,
+                    eventLabel,
                     stageName: firstStageMetaData.stage.name,
                     categoryDisplayName: programCategory?.displayName,
                 })
                 : i18n.t('{{eventLabel}} - {{categoryDisplayName}}', {
-                    eventLabel: termLabels?.eventLabel,
+                    eventLabel,
                     categoryDisplayName: programCategory?.displayName,
                 }),
         };
@@ -360,13 +360,13 @@ const getEnrollmentCategoryOptionsSettingsFn = () => ({
     getValidatorContainers: (props: any, fieldId?: string) =>
         getEnrollmentCategoryOptionsValidatorContainers(props, fieldId),
     getMeta: (props: any) => {
-        const { enrollmentProgramCategory, termLabels } = props;
+        const { enrollmentProgramCategory, enrollmentLabel } = props;
 
         return {
             section: enrollmentAOCsectionKey,
             placement: placements.TOP,
             sectionName: i18n.t('{{enrollmentLabel}} - {{categoryDisplayName}}', {
-                enrollmentLabel: termLabels?.enrollmentLabel,
+                enrollmentLabel,
                 categoryDisplayName: enrollmentProgramCategory?.displayName,
             }),
         };
