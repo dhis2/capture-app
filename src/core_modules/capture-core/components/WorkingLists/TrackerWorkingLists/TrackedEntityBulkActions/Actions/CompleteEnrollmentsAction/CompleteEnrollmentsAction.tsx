@@ -151,8 +151,10 @@ const CompleteEnrollmentsActionPlain = ({
                         count: enrollmentCounts.active,
                         enrollmentLabel,
                         enrollmentsLabel,
-                        defaultValue: 'This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
-                        defaultValue_plural: 'This action will complete {{count}} active {{enrollmentsLabel}} in your selection.',
+                        defaultValue:
+                            'This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
+                        defaultValue_plural:
+                            'This action will complete {{count}} active {{enrollmentsLabel}} in your selection.',
                     })
                 }
 
@@ -163,8 +165,10 @@ const CompleteEnrollmentsActionPlain = ({
                         count: enrollmentCounts.completed,
                         enrollmentLabel,
                         enrollmentsLabel,
-                        defaultValue: '{{count}} {{enrollmentLabel}} already marked as completed will not be changed.',
-                        defaultValue_plural: '{{count}} {{enrollmentsLabel}} already marked as completed will not be changed.',
+                        defaultValue:
+                            '{{count}} {{enrollmentLabel}} already marked as completed will not be changed.',
+                        defaultValue_plural:
+                            '{{count}} {{enrollmentsLabel}} already marked as completed will not be changed.',
                     })
                 }
 
