@@ -1,5 +1,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import {
     SelectionBoxes,
     withDefaultFieldContainer,
@@ -65,11 +66,11 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);
     }
     renderOrgUnitScopeSelector = () => {
-        const { selectedOrgUnitScope } = this.props;
+        const { selectedOrgUnitScope, orgUnitLabel } = this.props;
         return (
             <TeiSearchSelectionBoxes
                 options={options}
-                label={i18n.t('Organisation unit scope')}
+                label={i18n.t('{{orgUnitLabel}} scope', { orgUnitLabel })}
                 styles={selectionBoxesStyles}
                 onSelect={this.onSelectOrgUnitScope}
                 value={selectedOrgUnitScope}
@@ -101,7 +102,7 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
 
     getErrorMessage = () => {
         if (!this.isValid() && this.props.searchAttempted) {
-            return i18n.t('Please select an organisation unit.');
+            return i18n.t('Please select an {{orgUnitLabel}}.', { orgUnitLabel: this.props.orgUnitLabel });
         }
         return null;
     }
@@ -111,10 +112,10 @@ export class SearchOrgUnitSelector extends React.Component<SearchOrgUnitSelector
     }
 
     renderOrgUnitField = () => {
-        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText } = this.props;
+        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, orgUnitLabel } = this.props;
         return (
             <TeiSearchOrgUnitField
-                label={i18n.t('Organisation unit')}
+                label={capitalizeFirstLetter(orgUnitLabel)}
                 styles={orgUnitFieldStyles}
                 searchText={treeSearchText}
                 roots={treeRoots}

@@ -53,6 +53,7 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { fromClientDa
             const state = store.value;
             const payload = action.payload;
             const eventId = state.viewEventPage.eventId;
+            const stageId = state.viewEventPage?.loadedValues?.eventContainer?.event?.programStage;
             const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
             const { firstName, surname } = CurrentUser.get();
             const clientId = uuid();
@@ -69,7 +70,14 @@ export const addNoteForViewEventEpic = (action$: any, store: any, { fromClientDa
                 clientId,
             };
             return batchActions([
-                startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
+                startSaveEventNote(
+                    eventId,
+                    serverData,
+                    state.currentSelections,
+                    clientNote.clientId,
+                    payload.programId,
+                    stageId,
+                ),
                 addNote(noteKey, clientNote),
             ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
         }));

@@ -6,6 +6,7 @@ import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { useLocationQuery } from '../../utils/routing';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
@@ -17,6 +18,9 @@ export const WidgetEnrollmentNote = () => {
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
+    const { enrollmentLabel, noteLabel, notesLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
+    );
 
     const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
@@ -25,9 +29,16 @@ export const WidgetEnrollmentNote = () => {
     return (
         <div data-test="enrollment-note-widget">
             <WidgetNote
-                title={i18n.t('Notes about this enrollment')}
-                placeholder={i18n.t('Write a note about this enrollment')}
-                emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
+                title={i18n.t('{{notesLabel}} about this {{enrollmentLabel}}', { notesLabel, enrollmentLabel })}
+                placeholder={i18n.t(
+                    'Write a {{noteLabel}} about this {{enrollmentLabel}}',
+                    { enrollmentLabel, noteLabel },
+                )}
+                emptyNoteMessage={i18n.t(
+                    "This {{enrollmentLabel}} doesn't have any {{notesLabel}}",
+                    { enrollmentLabel, notesLabel },
+                )}
+                noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!programWriteAccess}
                 badge={showWidgetBadge ? (

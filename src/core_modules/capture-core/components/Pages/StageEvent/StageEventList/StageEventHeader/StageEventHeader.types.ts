@@ -5,4 +5,5 @@ export type PlainProps = {
   title?: string;
   events: Array<ApiEnrollmentEvent>;
   icon?: Icon;
+  stageId?: string;
 };

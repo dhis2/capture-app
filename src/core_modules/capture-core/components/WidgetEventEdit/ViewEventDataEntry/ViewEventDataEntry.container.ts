@@ -3,7 +3,6 @@ import { ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withCustomLabels, LabelKeys } from '../../../customLabels';
 
-// Example use of withCustomLabels.
 const customLabels = [LabelKeys.orgUnitSingular, LabelKeys.eventSingular] as const;
 
 const mapStateToProps = (state: any, props: any) => {

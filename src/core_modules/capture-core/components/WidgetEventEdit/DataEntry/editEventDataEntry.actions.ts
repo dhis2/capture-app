@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
+import { getTermLabel, LabelKeys } from '../../../customLabels';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     getApplicableRuleEffectsForEventProgram,
@@ -106,6 +107,7 @@ export const openEventForEditInDataEntry = ({
     attributeValues?: Array<AttributeValue>,
     programCategory?: ProgramCategory
 }) => {
+    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program?.id });
     const dataEntryPropsToInclude = [
         {
             id: 'occurredAt',
@@ -119,7 +121,7 @@ export const openEventForEditInDataEntry = ({
         {
             id: 'orgUnit',
             type: 'ORGANISATION_UNIT',
-            validatorContainers: getOrgUnitValidatorContainers(),
+            validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
         },
         {
             clientId: 'geometry',
@@ -165,7 +167,10 @@ export const openEventForEditInDataEntry = ({
     if (program instanceof TrackerProgram) {
         const stage = getStageFromEvent(eventContainer.event)?.stage;
         if (!stage) {
-            throw Error(i18n.t('stage not found in rules execution'));
+            const { programStageLabel } = getTermLabel([LabelKeys.programStageSingular], { programId: program.id });
+            throw new Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+                programStageLabel,
+            }));
         }
         // TODO: Add attributeValues & enrollmentData
         effects = getApplicableRuleEffectsForTrackerProgram({
