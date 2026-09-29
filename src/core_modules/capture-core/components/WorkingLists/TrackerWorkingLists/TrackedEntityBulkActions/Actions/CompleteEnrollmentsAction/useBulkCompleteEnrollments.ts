@@ -23,6 +23,7 @@ type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
     stages: Map<string, ProgramStage>;
+    enrollmentsLabel: string;
     isModalOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
@@ -119,6 +120,7 @@ export const useBulkCompleteEnrollments = ({
     selectedRows,
     programId,
     stages,
+    enrollmentsLabel,
     isModalOpen,
     removeRowsFromSelection,
     onUpdateList,
@@ -177,7 +179,12 @@ export const useBulkCompleteEnrollments = ({
             },
             onError: (serverResponse, variables) => {
                 removeQueries();
-                showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
+                showAlert({
+                    message: i18n.t(
+                        'An error occurred when completing the {{enrollmentsLabel}}',
+                        { enrollmentsLabel },
+                    ),
+                });
                 log.error(errorCreator('An error occurred when completing enrollments')({
                     serverResponse, variables,
                 }));
@@ -203,7 +210,12 @@ export const useBulkCompleteEnrollments = ({
                 onUpdateList(true);
             },
             onError: (serverResponse, variables) => {
-                showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
+                showAlert({
+                    message: i18n.t(
+                        'An error occurred when completing the {{enrollmentsLabel}}',
+                        { enrollmentsLabel },
+                    ),
+                });
                 log.error(errorCreator('An error occurred when completing enrollments')({
                     serverResponse, variables,
                 }));
@@ -249,7 +261,12 @@ export const useBulkCompleteEnrollments = ({
             log.error(errorCreator('An unknown error occurred when completing enrollments')({
                 error, enrollments,
             }));
-            showAlert({ message: i18n.t('An unknown error occurred when completing enrollments') });
+            showAlert({
+                message: i18n.t(
+                    'An unknown error occurred when completing {{enrollmentsLabel}}',
+                    { enrollmentsLabel },
+                ),
+            });
         },
     });
 

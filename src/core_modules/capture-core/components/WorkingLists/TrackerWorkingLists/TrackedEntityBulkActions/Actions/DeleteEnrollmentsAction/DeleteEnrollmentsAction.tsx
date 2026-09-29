@@ -71,6 +71,7 @@ const DeleteEnrollmentsActionPlain = ({
     } = useBulkDeleteEnrollments({
         selectedRows,
         programId,
+        enrollmentsLabel,
         isModalOpen,
         onUpdateList,
         removeRowsFromSelection,

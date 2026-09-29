@@ -10,6 +10,7 @@ import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionB
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import type { EventBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 import { useLocationQuery } from '../../../../../../utils/routing';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 type Props = EventBulkActionProps;
 
@@ -24,9 +25,13 @@ const styles: Readonly<any> = {
     },
 };
 
-const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
+const getTooltipContent = (
+    stageDataWriteAccess?: boolean,
+    bulkDataEntryIsActive?: boolean,
+    eventsLabel?: string,
+) => {
     if (!stageDataWriteAccess) {
-        return i18n.t('You do not have access to complete events');
+        return i18n.t('You do not have access to complete {{eventsLabel}}', { eventsLabel });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -41,12 +46,14 @@ const CompleteEventsActionPlain = ({
     removeRowsFromSelection,
     onUpdateList,
     programId,
+    stageId,
     classes,
 }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { orgUnitId } = useLocationQuery();
     const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
-    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { stageId });
+    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive, eventsLabel);
     const {
         completeEvents,
         eventCounts,
@@ -60,6 +67,7 @@ const CompleteEventsActionPlain = ({
         removeRowsFromSelection,
         onUpdateList,
         programId,
+        eventsLabel,
     });
 
     const getRecordHref = useMemo(
@@ -93,12 +101,18 @@ const CompleteEventsActionPlain = ({
                     onClose={() => setIsModalOpen(false)}
                     dataTest="bulk-complete-events-dialog"
                 >
-                    <ModalTitle>{i18n.t('Complete events')}</ModalTitle>
+                    <ModalTitle>{i18n.t('Complete {{eventsLabel}}', { eventsLabel })}</ModalTitle>
                     <ModalContent>
                         <span className={classes.container}>
                             {eventCounts.active > 0
-                                ? i18n.t('Are you sure you want to complete all active events in selection?')
-                                : i18n.t('There are no active events to complete in the current selection.')
+                                ? i18n.t(
+                                    'Are you sure you want to complete all active {{eventsLabel}} in selection?',
+                                    { eventsLabel },
+                                )
+                                : i18n.t(
+                                    'There are no active {{eventsLabel}} to complete in the current selection.',
+                                    { eventsLabel },
+                                )
                             }
                         </span>
                     </ModalContent>
@@ -125,8 +139,11 @@ const CompleteEventsActionPlain = ({
 
             {isModalOpen && validationError && (
                 <BulkActionErrorModal
-                    title={i18n.t('Error completing events')}
-                    introText={i18n.t('There was an error completing the events.')}
+                    title={i18n.t('Error completing {{eventsLabel}}', { eventsLabel })}
+                    introText={i18n.t(
+                        'There was an error completing the {{eventsLabel}}.',
+                        { eventsLabel },
+                    )}
                     errorReports={validationError.validationReport.errorReports}
                     getRecordHref={getRecordHref}
                     onClose={closeModal}

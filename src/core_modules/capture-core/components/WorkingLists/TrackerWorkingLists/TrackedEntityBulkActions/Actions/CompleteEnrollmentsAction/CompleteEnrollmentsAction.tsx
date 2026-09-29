@@ -88,6 +88,7 @@ const CompleteEnrollmentsActionPlain = ({
         programId,
         isModalOpen,
         stages,
+        enrollmentsLabel,
         onUpdateList,
         removeRowsFromSelection,
         setIsModalOpen,

@@ -20,6 +20,7 @@ type StatusToDelete = { active: boolean; completed: boolean; cancelled: boolean 
 type Props = {
     selectedRows: Record<string, boolean>;
     programId: string;
+    enrollmentsLabel: string;
     isModalOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
@@ -75,6 +76,7 @@ const findFullyDeletedTeiIds = (
 export const useBulkDeleteEnrollments = ({
     selectedRows,
     programId,
+    enrollmentsLabel,
     isModalOpen,
     onUpdateList,
     removeRowsFromSelection,
@@ -169,7 +171,12 @@ export const useBulkDeleteEnrollments = ({
         },
         onFatalError: (serverResponse) => {
             log.error(errorCreator('An error occurred when deleting enrollments')({ serverResponse }));
-            showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
+            showAlert({
+                message: i18n.t(
+                    'An error occurred when deleting {{enrollmentsLabel}}',
+                    { enrollmentsLabel },
+                ),
+            });
         },
     });
 

@@ -7,6 +7,7 @@ import { useBulkMutationWithValidation } from '../../../../WorkingListsCommon/Bu
 
 type Props = {
     selectedRows: Record<string, boolean>;
+    eventsLabel: string;
     isModalOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
@@ -15,6 +16,7 @@ type Props = {
 
 export const useBulkDeleteEvents = ({
     selectedRows,
+    eventsLabel,
     isModalOpen,
     onUpdateList,
     removeRowsFromSelection,
@@ -59,7 +61,9 @@ export const useBulkDeleteEvents = ({
         },
         onFatalError: (serverResponse) => {
             log.error(errorCreator('An error occurred while deleting the events')({ serverResponse }));
-            showAlert({ message: i18n.t('An error occurred while deleting the events') });
+            showAlert({
+                message: i18n.t('An error occurred while deleting the {{eventsLabel}}', { eventsLabel }),
+            });
         },
     });
 

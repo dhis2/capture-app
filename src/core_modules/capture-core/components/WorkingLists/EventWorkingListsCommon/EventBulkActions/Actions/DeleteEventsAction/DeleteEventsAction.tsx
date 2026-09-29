@@ -48,6 +48,7 @@ export const DeleteEventsAction = ({
         validationError,
     } = useBulkDeleteEvents({
         selectedRows,
+        eventsLabel,
         isModalOpen,
         onUpdateList,
         removeRowsFromSelection,

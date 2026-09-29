@@ -33,6 +33,7 @@ const buildCompleteEventsPayload = (activeEvents: Event[], fallbackProgramId?: s
 type Props = {
     selectedRows: Record<string, boolean>;
     programId?: string;
+    eventsLabel: string;
     isModalOpen: boolean;
     onUpdateList: (disableClearSelection?: boolean) => void;
     removeRowsFromSelection: (rows: Array<string>) => void;
@@ -42,6 +43,7 @@ type Props = {
 export const useBulkCompleteEvents = ({
     selectedRows,
     programId,
+    eventsLabel,
     isModalOpen,
     onUpdateList,
     removeRowsFromSelection,
@@ -108,7 +110,9 @@ export const useBulkCompleteEvents = ({
         },
         onFatalError: (serverResponse) => {
             log.error(errorCreator('An error occurred while completing events')({ serverResponse }));
-            showAlert({ message: i18n.t('An error occurred while completing events') });
+            showAlert({
+                message: i18n.t('An error occurred while completing {{eventsLabel}}', { eventsLabel }),
+            });
         },
     });
 
