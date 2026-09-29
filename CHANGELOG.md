@@ -1,3 +1,10 @@
+## [107.5.2](https://github.com/dhis2/capture-app/compare/v107.5.1...v107.5.2) (2026-09-29)
+
+
+### Bug Fixes
+
+* [DHIS2-21942] Re-enroll button navigates to registration ([#4739](https://github.com/dhis2/capture-app/issues/4739)) ([7d6d7ee](https://github.com/dhis2/capture-app/commit/7d6d7eee3536f904b3c4567f71f472978c11d8f3))
+
 ## [107.5.1](https://github.com/dhis2/capture-app/compare/v107.5.0...v107.5.1) (2026-09-29)
 
 
