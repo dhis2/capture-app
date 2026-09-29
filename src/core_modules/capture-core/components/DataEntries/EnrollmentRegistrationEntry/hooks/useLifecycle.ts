@@ -36,8 +36,9 @@ export const useLifecycle = (
     } = useMetadataForRegistrationForm({ selectedScopeId });
 
     const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
-    const { programCategory } = useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
-    const { enrollmentProgramCategory } =
+    const { programCategory, isLoading: programCategoryLoading } =
+        useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { enrollmentProgramCategory, isLoading: enrollmentProgramCategoryLoading } =
         useEnrollmentCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
@@ -57,7 +58,9 @@ export const useLifecycle = (
             formValuesReadyRef.current === true &&
             orgUnit &&
             scopeType === scopeTypes.TRACKER_PROGRAM &&
-            formFoundation
+            formFoundation &&
+            !programCategoryLoading &&
+            !enrollmentProgramCategoryLoading
         ) {
             dataEntryReadyRef.current = true;
             dispatch(
@@ -84,7 +87,9 @@ export const useLifecycle = (
         formValues,
         clientValues,
         programCategory,
+        programCategoryLoading,
         enrollmentProgramCategory,
+        enrollmentProgramCategoryLoading,
         firstStageMetaData,
         dispatch,
     ]);
