@@ -4,6 +4,8 @@ import { NewRelationshipWrapperComponent } from './NewEventNewRelationshipWrappe
 import { makeRelationshipTypesSelector } from './NewEventNewRelationshipWrapper.selectors';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
+type OwnProps = { programId?: string | null };
+
 const makeMapStateToProps = () => {
     const relationshipTypesSelector = makeRelationshipTypesSelector();
 
@@ -22,7 +24,7 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: any, ownProps: OwnProps) => ({
     onCancel: (dataEntryId: string) => {
         dispatch(newEventCancelNewRelationship(dataEntryId));
     },
@@ -31,7 +33,7 @@ const mapDispatchToProps = (dispatch: any) => ({
         entity: Record<string, unknown>,
         entityType: string,
     ) => {
-        dispatch(addNewEventRelationship(relationshipType, entity, entityType));
+        dispatch(addNewEventRelationship(relationshipType, entity, entityType, ownProps.programId));
     },
 });
 

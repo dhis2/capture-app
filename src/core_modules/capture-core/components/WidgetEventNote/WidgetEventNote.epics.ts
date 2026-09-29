@@ -18,6 +18,8 @@ type AddNoteActionPayload = {
     itemId: string;
     dataEntryId: string;
     note: string;
+    programId: string;
+    stageId?: string | null;
 };
 
 type RemoveNoteActionMeta = {
@@ -66,7 +68,9 @@ export const addNoteForEventEpic = (
             };
 
             return batchActions([
-                startAddNoteForEvent(eventId, serverData, state.currentSelections, saveContext),
+                startAddNoteForEvent(
+                    eventId, serverData, state.currentSelections, saveContext, payload.programId, payload.stageId,
+                ),
                 addNote(payload.dataEntryId, payload.itemId, formNote),
             ], batchActionTypes.ADD_NOTE_BATCH_FOR_EVENT);
         }));

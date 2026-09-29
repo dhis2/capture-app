@@ -5,6 +5,7 @@ import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { useOrganisationUnit } from '../../dataQueries';
 import { orgUnitFetched } from './coreOrgUnit.actions';
 import type { CoreOrgUnit } from './coreOrgUnit.types';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 export function useCoreOrgUnit(orgUnitId: string | undefined): {
     orgUnit?: CoreOrgUnit,
@@ -16,6 +17,13 @@ export function useCoreOrgUnit(orgUnitId: string | undefined): {
     const fetchId = reduxOrgUnit ? undefined : orgUnitId;
     const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,code,path');
     const { orgUnitGroups, error: groupError } = useOrgUnitGroups(fetchId);
+    const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
+
+    const errorComponent = (
+        <div>
+            {i18n.t('{{orgUnitLabel}} could not be retrieved. Please try again later.', { orgUnitLabel })}
+        </div>
+    );
 
     if (reduxOrgUnit) {
         return { orgUnit: reduxOrgUnit };
@@ -40,9 +48,3 @@ export function useCoreOrgUnit(orgUnitId: string | undefined): {
 
     return {};
 }
-
-const errorComponent = (
-    <div>
-        {i18n.t('organisation unit could not be retrieved. Please try again later.')}
-    </div>
-);

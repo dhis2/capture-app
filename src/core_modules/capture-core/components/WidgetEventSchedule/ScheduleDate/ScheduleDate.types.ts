@@ -2,7 +2,6 @@ import type { OrgUnitValue, Validation } from '../widgetEventSchedule.types';
 
 export type PlainProps = {
     stageId: string;
-    programId: string;
     enrolledAt: string;
     displayDueDateLabel?: string | null;
     scheduleDate?: string | null;

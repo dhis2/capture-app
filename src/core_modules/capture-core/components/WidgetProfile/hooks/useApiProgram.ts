@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 
-const fields =
+const baseFields =
     'id,version,displayName,displayShortName,description,programType,style,minAttributesRequiredToSearch,' +
     'enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,' +
     'displayIncidentDate,access[*],' +
+    'displayEnrollmentLabel,' +
     'dataEntryForm[id,htmlCode],' +
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
     'programSections[id,displayFormName,displayDescription,sortOrder,trackedEntityAttributes],' +
@@ -21,12 +23,16 @@ const fields =
             'options[id,displayName,code,style, translations]]]]],' +
     'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,displayShortName,displayFormName,' +
         'displayDescription,valueType,optionSetValue,unique,orgunitScope,pattern,translations[property,locale,value],' +
-        'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]]],' +
+        'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]],' +
+        'access[read]],' +
         'displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
     'trackedEntityType[id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,' +
         'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
         'translations[property,locale,value]],' +
     'userRoles[id,displayName]';
+
+const pluralLabelFields =
+    'displayEnrollmentsLabel,displayEventsLabel,displayTrackedEntityAttributesLabel';
 
 export const useApiProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
@@ -36,7 +42,9 @@ export const useApiProgram = (programId: string) => {
                     resource: 'programs',
                     id: programId,
                     params: {
-                        fields,
+                        fields: featureAvailable(FEATURES.customTerminologyPlurals)
+                            ? `${baseFields},${pluralLabelFields}`
+                            : baseFields,
                     },
                 },
             }),
