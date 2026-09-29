@@ -535,7 +535,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
                 orgUnit={orgUnit}
-                orgUnitId={orgUnit?.id}
+                orgUnitId={orgUnit.id}
                 {...passOnProps}
             />
         );

@@ -572,7 +572,6 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
                 orgUnit={orgUnit}
                 orgUnitId={orgUnit?.id}
                 programId={programId}
-                selectedOrgUnitId={orgUnit?.id}
                 {...passOnProps}
             />
         );

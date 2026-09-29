@@ -1,6 +1,6 @@
 export type Props = {
     programId: string;
-    selectedOrgUnitId: string;
+    orgUnitId: string;
 };
 
 export type Settings = {

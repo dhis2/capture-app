@@ -55,7 +55,7 @@ const sortOptionsByLabel = (a: CategoryOptionEntry, b: CategoryOptionEntry) => {
 
 export const useCategoryOptionsLoader = (
     programCategories: Array<{ id: string; displayName: string }>,
-    selectedOrgUnitId: string | null | undefined,
+    orgUnitId: string | null | undefined,
     skip: boolean,
 ): Array<LoadedCategory> | null | undefined => {
     const [categories, setCategories] = useState<Array<LoadedCategory> | null | undefined>(null);
@@ -72,7 +72,7 @@ export const useCategoryOptionsLoader = (
 
         currentRequestCancelablePromises = makeCancelablePromise(
             Promise.all(programCategories.map(category =>
-                getOptionsAsync(category, selectedOrgUnitId, isRequestAborted))),
+                getOptionsAsync(category, orgUnitId, isRequestAborted))),
         );
         currentRequestCancelablePromises
             .promise
@@ -94,7 +94,7 @@ export const useCategoryOptionsLoader = (
             });
 
         cancelablePromiseRef.current = currentRequestCancelablePromises;
-    }, [programCategories, selectedOrgUnitId]);
+    }, [programCategories, orgUnitId]);
 
     useEffect(() => {
         if (!skip) {
