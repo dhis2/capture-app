@@ -30,7 +30,7 @@ const makeMapStateToProps = () => {
             ? getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.EDIT)
             : getDataEntryKey(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW);
         const isUserInteractionInProgress = dataEntryHasChanges(state, currentDataEntryKey);
-        const programId = state.currentSelections.programId;
+        const programId = state.viewEventPage?.loadedValues?.eventContainer?.event?.programId;
         const programStage = programStageSelector(state);
         const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId: programStage?.id });
         return {

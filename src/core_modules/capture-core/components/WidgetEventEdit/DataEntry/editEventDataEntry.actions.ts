@@ -100,14 +100,14 @@ export const openEventForEditInDataEntry = ({
     },
     orgUnit: OrgUnit,
     foundation?: RenderFoundation,
-    program: Program | EventProgram | TrackerProgram,
+    program: Program | EventProgram | TrackerProgram | null,
     dataEntryId: string,
     dataEntryKey: string,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
     programCategory?: ProgramCategory
 }) => {
-    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
+    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program?.id });
     const dataEntryPropsToInclude = [
         {
             id: 'occurredAt',

@@ -69,7 +69,13 @@ export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
 export const requestDeleteEventDataEntry = ({ eventId, enrollmentId }: { eventId: string; enrollmentId: string }) =>
     actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)({ eventId, enrollmentId });
 
-export const startDeleteEventDataEntry = (serverData: any, eventId: string, params: any, programId: string) =>
+export const startDeleteEventDataEntry = (
+    serverData: any,
+    eventId: string,
+    params: any,
+    programId: string,
+    stageId?: string | null,
+) =>
     actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
         offline: {
             effect: {
@@ -83,7 +89,7 @@ export const startDeleteEventDataEntry = (serverData: any, eventId: string, para
             },
             rollback: {
                 type: actionTypes.DELETE_EVENT_DATA_ENTRY_FAILED,
-                meta: { eventId, params, programId },
+                meta: { eventId, params, programId, stageId },
             },
         },
     });

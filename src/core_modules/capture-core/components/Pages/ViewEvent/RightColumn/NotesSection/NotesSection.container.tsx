@@ -8,7 +8,7 @@ const mapStateToProps = (state: any) => {
         notes: state.notes.viewEvent || [],
         ready: !notesSection.isLoading,
         fieldValue: notesSection.fieldValue,
-        programId: state.currentSelections.programId,
+        programId: state.viewEventPage?.loadedValues?.eventContainer?.event?.programId,
     };
 };
 

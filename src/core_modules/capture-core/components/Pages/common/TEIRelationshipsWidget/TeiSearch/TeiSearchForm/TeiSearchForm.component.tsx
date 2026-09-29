@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { ComponentType } from 'react';
 import log from 'loglevel';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -264,4 +263,4 @@ class SearchFormPlain extends React.Component<Props, State> {
 }
 
 export const TeiSearchFormComponent =
-    withCustomLabels(customLabels)(withStyles(getStyles)(SearchFormPlain)) as ComponentType<OwnProps>;
+    withCustomLabels(customLabels)(withStyles(getStyles)(SearchFormPlain)) as React.ComponentType<OwnProps>;

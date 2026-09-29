@@ -55,8 +55,8 @@ export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
-            if (metadataContainer.error || !metadataContainer.program) {
-                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error ?? '');
+            if (metadataContainer.error) {
+                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
             }
 
             const program = metadataContainer.program;
@@ -223,8 +223,9 @@ export const requestDeleteEventDataEntryEpic = (action$: any, store: any, depend
             const params = { enrollmentId };
             const serverData = { events: [{ event: eventId }] };
             const { programId } = store.value.enrollmentPage;
+            const stageId = store.value.viewEventPage?.loadedValues?.eventContainer?.event?.programStageId;
             dependencies.navigate(`/enrollment?${buildUrlQueryString(params)}`);
-            return startDeleteEventDataEntry(serverData, eventId, params, programId);
+            return startDeleteEventDataEntry(serverData, eventId, params, programId, stageId);
         }));
 
 export const startCreateNewAfterCompletingEpic = (

@@ -3,8 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { IconLink24, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-
-import type { ComponentType } from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Relationships } from '../../../../Relationships/Relationships.component';
@@ -132,4 +130,4 @@ class RelationshipsSectionPlain extends React.Component<Props> {
 }
 
 export const RelationshipsSectionComponent =
-    withCustomLabels(customLabels)(withStyles(getStyles)(RelationshipsSectionPlain)) as ComponentType<PlainProps>;
+    withCustomLabels(customLabels)(withStyles(getStyles)(RelationshipsSectionPlain)) as React.ComponentType<PlainProps>;

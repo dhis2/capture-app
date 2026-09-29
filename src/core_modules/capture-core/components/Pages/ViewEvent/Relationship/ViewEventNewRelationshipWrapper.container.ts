@@ -11,7 +11,7 @@ const makeMapStateToProps = () => {
 
         return {
             relationshipTypes,
-            programId: state.currentSelections.programId,
+            programId: state.viewEventPage?.loadedValues?.eventContainer?.event?.programId,
         };
     };
 

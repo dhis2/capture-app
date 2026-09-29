@@ -8,7 +8,7 @@ import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import { LabelKeys, useTermLabel } from '../../customLabels';
 
-export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props) => {
+export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId, stageId }: Props) => {
     const dispatch = useDispatch();
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
@@ -19,10 +19,11 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId }: Props)
     } = useEnrollmentAccessContext();
     const { eventLabel, noteLabel, notesLabel } = useTermLabel(
         [LabelKeys.eventSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
+        { stageId },
     );
 
     const onAddNote = (newNoteValue: string) => {
-        dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId));
+        dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId, stageId));
     };
 
     return (

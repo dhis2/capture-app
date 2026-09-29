@@ -80,7 +80,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
             const toEntity = payload.entity;
 
             const relationshipClientId = uuid();
-            const programId = state.currentSelections.programId;
+            const programId = state.viewEventPage?.loadedValues?.eventContainer?.event?.programId;
             const stageId = state.viewEventPage?.loadedValues?.eventContainer?.event?.programStage;
             const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId });
             const clientRelationship = {

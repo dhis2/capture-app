@@ -7,7 +7,7 @@ const mapStateToProps = (state: any) => {
     const relationshipsSection = state.viewEventPage.relationshipsSection || {};
     return {
         eventId: state.viewEventPage.eventId,
-        programId: state.currentSelections.programId,
+        programId: state.viewEventPage?.loadedValues?.eventContainer?.event?.programId,
         ready: !relationshipsSection.isLoading,
         relationships: state.relationships.viewEvent || [],
         orgUnitId: state.currentSelections.orgUnitId,
