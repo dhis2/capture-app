@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import moment from 'moment';

@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { useCallback } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';

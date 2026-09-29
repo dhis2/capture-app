@@ -1,8 +1,8 @@
-import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { map, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
+import i18n from '@dhis2/d2-i18n';
 import { ReduxStore, ApiUtils } from 'capture-core-utils/types/global';
 import { getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';

@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import { useCallback, useEffect, useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';

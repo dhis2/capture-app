@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { OrgUnitSelectorForRelatedStages } from '../FormComponents';

@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useSelector, useDispatch } from 'react-redux';
 import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { useOrganisationUnit } from '../../dataQueries';

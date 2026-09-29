@@ -1,5 +1,5 @@
-import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from 'capture-core-utils/styles';
 import type { WithStyles } from 'capture-core-utils/styles';
