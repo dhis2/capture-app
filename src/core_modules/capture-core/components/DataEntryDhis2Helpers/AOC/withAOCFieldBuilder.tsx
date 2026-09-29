@@ -7,13 +7,17 @@ import type { Props, Settings } from './withAOCFieldBuilder.types';
 
 const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<any>) =>
     (props: Props) => {
-        const { programId, orgUnitId } = props;
+        const { programId, orgUnitId, orgUnitIdFieldValue } = props;
         const hideAOC = settings?.hideAOC?.(props);
         const { programCategory, isLoading } = useCategoryCombinations(programId, hideAOC);
         const programCategories = useMemo(() => (
             !isLoading && programCategory ? programCategory.categories : []),
         [isLoading, programCategory]);
-        const categories = useCategoryOptionsLoader(programCategories, orgUnitId, Boolean(hideAOC));
+        const categories = useCategoryOptionsLoader(
+            programCategories,
+            orgUnitIdFieldValue ?? orgUnitId,
+            Boolean(hideAOC),
+        );
 
         if (hideAOC) { return <InnerComponent{...props} />; }
         return (
@@ -31,7 +35,7 @@ export const withAOCFieldBuilder = (settings: Settings) =>
 
 const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
-        const { programId, orgUnitId } = props;
+        const { programId, orgUnitId, orgUnitIdFieldValue } = props;
         const featureSupported = featureAvailable(FEATURES.enrollmentAOC);
         const { enrollmentProgramCategory, isLoading } =
             useEnrollmentCategoryCombinations(programId, !featureSupported);
@@ -39,7 +43,11 @@ const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
             !isLoading && enrollmentProgramCategory ? enrollmentProgramCategory.categories : []),
         [isLoading, enrollmentProgramCategory]);
         const missingCombo = !isLoading && !enrollmentProgramCategory;
-        const enrollmentCategories = useCategoryOptionsLoader(enrollmentProgramCategories, orgUnitId, missingCombo);
+        const enrollmentCategories = useCategoryOptionsLoader(
+            enrollmentProgramCategories,
+            orgUnitIdFieldValue ?? orgUnitId,
+            missingCombo,
+        );
 
         if (missingCombo) return <InnerComponent {...props} />;
         return (
