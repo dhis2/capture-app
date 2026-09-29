@@ -17,11 +17,17 @@ type apiProgramCategory = {
     displayName: string,
 };
 
+type apiProgramCategoryOptionCombo = {
+    id: string,
+    categoryOptions: Array<{ id: string }>,
+};
+
 type apiProgramCategoryCombo = {
     id: string,
     displayName: string,
     isDefault: boolean,
     categories?: Array<apiProgramCategory> | null,
+    categoryOptionCombos?: Array<apiProgramCategoryOptionCombo> | null,
 };
 
 type apiStyle = {

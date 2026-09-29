@@ -1,22 +1,18 @@
 import { ofType } from 'redux-observable';
-import { flatMap, map, mergeMap } from 'rxjs/operators';
+import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import { dataEntryKeys } from 'capture-core/constants';
 import type { ReduxStore, EpicAction, ApiUtils } from 'capture-core-utils/types/global';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
-    failAOCResolveForNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { cleanUpUid } from '../NewPage.actions';
-import { makeResolveAttributeOptionCombo } from '../../../../utils/AOC';
 
 export const startSavingNewTrackedEntityInstanceEpic = (action$: EpicAction<any>) =>
     action$.pipe(
@@ -47,32 +43,11 @@ export const completeSavingNewTrackedEntityInstanceEpic = (action$: EpicAction<a
 
 export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     action$: EpicAction<any>,
-    _store: ReduxStore,
-    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
-        mergeMap(async (action: any) => {
+        map((action: any) => {
             const { enrollmentPayload, uid, redirect } = action.payload;
-            const enrollment = enrollmentPayload.enrollments[0];
-            const categoryComboId = enrollment.enrollmentCategoryComboId;
-            const optionUids = enrollment.enrollmentCategoryOptionUids ?? [];
-            delete enrollment.enrollmentCategoryComboId;
-            delete enrollment.enrollmentCategoryOptionUids;
-
-            if (categoryComboId && optionUids.length > 0) {
-                const resolveAOC = makeResolveAttributeOptionCombo(querySingleResource);
-                const attributeOptionCombo = await resolveAOC(categoryComboId, optionUids);
-                if (!attributeOptionCombo) {
-                    log.error(
-                        errorCreator(
-                            'Could not resolve the selected enrollment category options to an attribute option combo',
-                        )({ categoryComboId, optionUids }),
-                    );
-                    return failAOCResolveForNewTrackedEntityInstanceWithEnrollment();
-                }
-                enrollment.attributeOptionCombo = attributeOptionCombo;
-            }
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
@@ -148,9 +123,6 @@ export const failedSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     action$: EpicAction<any>,
 ) =>
     action$.pipe(
-        ofType(
-            registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,
-            registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_AOC_RESOLVE_FAILED,
-        ),
+        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED),
         map(() => cleanUpUid()),
     );

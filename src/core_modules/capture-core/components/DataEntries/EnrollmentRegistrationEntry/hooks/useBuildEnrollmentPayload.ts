@@ -1,4 +1,8 @@
+import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
+import { errorCreator } from 'capture-core-utils';
 import { useSelector } from 'react-redux';
+import { useAlert } from '@dhis2/app-runtime';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -26,6 +30,7 @@ import {
     buildEnrollmentCategoryOptionUids,
 } from '../helpers';
 import { useEnrollmentCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { resolveAttributeOptionCombo } from '../../../../utils/AOC';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
@@ -84,6 +89,10 @@ export const useBuildEnrollmentPayload = ({
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
     const { enrollmentProgramCategory } = useEnrollmentCategoryCombinations(programId);
+    const { show: showAOCResolveFailedAlert } = useAlert(
+        () => i18n.t('Could not save: selected category options are not a valid combination.'),
+        { critical: true },
+    );
 
     const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
         teiWithEnrollment: EnrollmentPayload;
@@ -116,6 +125,21 @@ export const useBuildEnrollmentPayload = ({
             }, {});
 
         const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(serverValuesForMainValues);
+        const attributeOptionCombo = resolveAttributeOptionCombo(
+            enrollmentProgramCategory?.categoryOptionCombos ?? [],
+            enrollmentCategoryOptionUids,
+        );
+        const aocResolveFailed =
+            enrollmentCategoryOptionUids.length > 0 && !attributeOptionCombo;
+
+        if (aocResolveFailed) {
+            log.error(
+                errorCreator('Could not resolve the selected enrollment category options to an attribute option combo')(
+                    { enrollmentCategoryOptionUids, enrollmentCategoryComboId: enrollmentProgramCategory?.id },
+                ),
+            );
+            showAOCResolveFailedAlert();
+        }
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
@@ -172,8 +196,7 @@ export const useBuildEnrollmentPayload = ({
             attributes,
             events: allEventsToBeCreated,
             geometry: enrollmentGeometry,
-            enrollmentCategoryComboId: enrollmentProgramCategory?.id,
-            enrollmentCategoryOptionUids,
+            attributeOptionCombo,
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
@@ -189,7 +212,7 @@ export const useBuildEnrollmentPayload = ({
                 enrollments: [enrollment],
                 relationships: relationship ? [relationship] : undefined,
             },
-            formHasError,
+            formHasError: formHasError || aocResolveFailed,
             redirect,
         };
     };

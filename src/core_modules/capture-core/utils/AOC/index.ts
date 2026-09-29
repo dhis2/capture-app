@@ -1,1 +1,1 @@
-export { makeResolveAttributeOptionCombo } from './resolveAttributeOptionCombo';
+export { resolveAttributeOptionCombo } from './resolveAttributeOptionCombo';

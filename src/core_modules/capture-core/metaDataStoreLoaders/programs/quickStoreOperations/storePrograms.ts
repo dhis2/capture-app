@@ -178,7 +178,7 @@ const pluralProgramFields = [
 ];
 
 const enrollmentAOCProgramFields = [
-    'enrollmentCategoryCombo[id,displayName,isDefault,categories[id,displayName]]',
+    'enrollmentCategoryCombo[id,displayName,isDefault,categories[id,displayName],categoryOptionCombos[id,categoryOptions[id]]]',
 ];
 
 const buildFieldsParam = (includePluralLabels: boolean, includeEnrollmentAOC: boolean): string => {
