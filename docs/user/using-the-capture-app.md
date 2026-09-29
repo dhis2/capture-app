@@ -759,9 +759,9 @@ The results page shows up to five results at a time. You should try to use speci
 
 Every enrollment of a tracked entity in a program has an **owning organisation unit**. Ownership starts out as the organisation unit that first enrolled the tracked entity into that program, and changes if the enrollment is later [transferred to another organisation unit](#transfer-the-enrollment-to-another-organisation-unit). Ownership is tracked per tracked entity/program combination: the same tracked entity can be owned by different organisation units for different programs (for example, one facility could own a person's HIV program enrollment, while a different facility owns the same person's MCH program enrollment).
 
-Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the Metadata Management app, together with which organisation units you have been assigned data capture or search access to:
+Whether you can open an enrollment you don't own depends on the program's **access level**, which is configured in the program's **Access and Sharing** section in the Metadata Management app, together with which organisation units you have been assigned data capture or search access to:
 
-- **Open** or **Audited**: you can open the enrollment as long as you have at least search access to the owning organisation unit. (Audited additionally logs the access.)
+- **Open** or **Audited**: you can open the enrollment as long as you have at least search access to the owning organisation unit. (Audited also logs access when you open an enrollment outside your capture scope.)
 - **Protected**: you can open the enrollment if you have data capture access to the owning organisation unit. If you only have search access to it, you'll first have to provide a reason (see [Breaking the glass](#capture_break_glass) below).
 - **Closed**: you can open the enrollment only if you have data capture access to the owning organisation unit. If you only have search access to it, you cannot open it at all, and there is no option to request access.
 
@@ -1160,7 +1160,7 @@ The number next to the title signifies the total number of relationships
 
 ![](resources/images/enrollment-dash-relationship-widget.png)
 
-For tracked entity relationships, the key attributes shown in the widget are the attributes that have been selected to be displayed on the relationship type page in the Metadata Management app.
+For tracked entity relationships, the key attributes shown in the widget are the tracked entity attributes selected for that side under **Relationship sides** on the relationship type in the Metadata Management app.
 
 If no attributes are selected, it will just show a row per record with tracked entity type name and relationship creation date.
 
@@ -1328,26 +1328,32 @@ If an active event has a scheduled date before becoming active or a completed ev
 It’ll be locked with an icon next to it and a tooltip saying “Scheduled date cannot be changed for active/completed events”. 
 
 #### Scheduled date with Hide scheduled date enabled { #scheduled-date-with-hide-due-date-enabled }
-If the flag “Hide scheduled date” in the Metadata Management app configuration is enabled, scheduled date will not be shown in the form. 
+If **Hide scheduled date** is checked in the **Creation and scheduling** section of the program stage in the Metadata Management app, scheduled date will not be shown in the form. 
 
-However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from reference date" that has been configured in the Metadata Management app, and this can not be changed. 
+However, you can still schedule an event, but the date is chosen automatically and can not be changed: it is always the date selected under **Reference date for scheduling** plus **Scheduled days from reference date**. **Default next scheduled date** and **Standard interval days** are not used. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
 ### Ask user to complete enrollment after completion { #ask-user-to-complete-program-when-stage-is-complete }
-If this flag has been enabled for the stage in the **Data entry options** section in the Metadata Management app, a modal will show up after the user checks the **Complete** event checkbox and clicks save.
+If this flag has been enabled for the stage under **Completion options** in the **Data entry options** section in the Metadata Management app, a modal will show up after the user checks the **Complete** event checkbox and clicks save.
 
 ![](resources/images/ask-user-to-complete-enrollment-edit-event.png)
 
 #### View mode
 
-When the form is in the view mode the top of the page shows a breadcrumb trail: `{{working list name}} > Enrollment dashboard > View event`, where `{{working list name}}` is the name of the currently selected tracked entity working list view, or `Program overview` if none is selected. Clicking the first item takes you back to that working list, and clicking `Enrollment dashboard` takes you back to the enrollment dashboard. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
+When the form is in the view mode the top of the page shows a breadcrumb trail: `{{first item}} > Enrollment dashboard > View event`. The first item depends on where you came from:
+
+- the name of the working list view you had selected in this program, or `Active enrollments`, `Completed enrollments` or `Cancelled enrollments` if you had selected one of those predefined views;
+- `Program overview` if you came from this program's working list without selecting a view, or if the program has "Display front page list" enabled;
+- `Search` if you did not come from this program's working list (for example from a search) and the program has "Display front page list" disabled.
+
+Clicking the first item takes you back to the program's front page, and clicking `Enrollment dashboard` takes you back to the enrollment dashboard. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
 This mode is bypassed for events that are scheduled.
 
 ![](resources/images/enrollment-event-view-edit-view.png)
 
 #### Edit mode
 
-When the form is in the edit mode the breadcrumb trail gains a further item: `{{working list name}} > Enrollment dashboard > View event > Edit event`. Clicking `View event` switches back to the view mode. You can modify the event and click the `Save` button. Click the `Cancel` button to switch to the view mode without saving the changes.
+When the form is in the edit mode the breadcrumb trail gains a further item: `{{first item}} > Enrollment dashboard > View event > Edit event`. Clicking `View event` switches back to the view mode. You can modify the event and click the `Save` button. Click the `Cancel` button to switch to the view mode without saving the changes.
 Scheduled events are are the exception and they are opened in edit mode directly, without the user having to click `Edit event`. Click the `Cancel` button to go back to the enrollment dashboard page without saving the changes.
 
 ![](resources/images/enrollment-event-view-edit-edit.png)
@@ -1398,16 +1404,16 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
 ### Ask user to complete enrollment after completion { #capture_ask_complete_enrollment_new_event }
-If this flag has been enabled for the stage in the **Data entry options** section in the Metadata Management app, a modal will show up after the user clicks the **Complete** button.
+If this flag has been enabled for the stage under **Completion options** in the **Data entry options** section in the Metadata Management app, a modal will show up after the user clicks the **Complete** button.
 
 ![](resources/images/ask-user-to-complete-enrollment-new-event.png)
 
 ### Ask user to create a new event after completion { #ask-user-to-create-new-event-when-stage-is-complete }
-If this flag has been enabled for the stage in the **Data entry options** section in the Metadata Management app, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
+If this flag has been enabled for the stage under **Completion options** in the **Data entry options** section in the Metadata Management app, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
 
 
 ### Assigning user to new events
-When reporting or scheduling an event, you can assign a user to it. This feature must be enabled per program stage in a tracker program by clicking the "Allow events to be assigned to users" check box.
+When reporting or scheduling an event, you can assign a user to it. This feature must be enabled per program stage in a tracker program by checking **Allow events to be assigned to users** in the stage's **Data entry options** section in the Metadata Management app.
 
 You will find the assignee section near the bottom of the data entry page. Search for and select the user you would like to assign the event to. The assignee will be preserved when you save the event.
 
@@ -1423,7 +1429,7 @@ The suggested date for the first event of a program stage in an enrollment is al
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
 >
-1. A data element with value type date needs to be created and assigned to the particular program stage with access to future dates. The name of the data element could for example be: Next suggested follow up date. The program stage is configured to use the data element as default when scheduling a new event by assigning the data element to **Default next scheduled date** in the stage's **Data entry options** section. This setting is only shown when **Allow multiple events in this stage** is checked.
+1. A data element with value type date needs to be created and added to the particular program stage in its **Data** section, with **Allow future dates** checked. The name of the data element could for example be: Next suggested follow up date. The program stage is configured to use the data element as default when scheduling a new event by assigning the data element to **Default next scheduled date** in the stage's **Data entry options** section. This setting is only shown when **Allow multiple events in this stage** is checked.
 
 ![](resources/images/default-next-scheduled-date-mm.png)
 
