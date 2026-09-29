@@ -94,6 +94,24 @@ export const useBuildEnrollmentPayload = ({
         { critical: true },
     );
 
+    const resolveEnrollmentAOC = (mainSectionServerValues: Record<string, unknown>) => {
+        const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(mainSectionServerValues);
+        const attributeOptionCombo = resolveAttributeOptionCombo(
+            enrollmentProgramCategory?.categoryOptionCombos ?? [],
+            enrollmentCategoryOptionUids,
+        );
+        const failed = enrollmentCategoryOptionUids.length > 0 && !attributeOptionCombo;
+        if (failed) {
+            log.error(
+                errorCreator('Could not resolve the selected enrollment category options to an attribute option combo')(
+                    { enrollmentCategoryOptionUids, enrollmentCategoryComboId: enrollmentProgramCategory?.id },
+                ),
+            );
+            showAOCResolveFailedAlert();
+        }
+        return { attributeOptionCombo, failed };
+    };
+
     const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
         teiWithEnrollment: EnrollmentPayload;
         formHasError: boolean;
@@ -124,22 +142,7 @@ export const useBuildEnrollmentPayload = ({
                 return acc;
             }, {});
 
-        const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(serverValuesForMainValues);
-        const attributeOptionCombo = resolveAttributeOptionCombo(
-            enrollmentProgramCategory?.categoryOptionCombos ?? [],
-            enrollmentCategoryOptionUids,
-        );
-        const aocResolveFailed =
-            enrollmentCategoryOptionUids.length > 0 && !attributeOptionCombo;
-
-        if (aocResolveFailed) {
-            log.error(
-                errorCreator('Could not resolve the selected enrollment category options to an attribute option combo')(
-                    { enrollmentCategoryOptionUids, enrollmentCategoryComboId: enrollmentProgramCategory?.id },
-                ),
-            );
-            showAOCResolveFailedAlert();
-        }
+        const { attributeOptionCombo, failed: aocResolveFailed } = resolveEnrollmentAOC(serverValuesForMainValues);
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
