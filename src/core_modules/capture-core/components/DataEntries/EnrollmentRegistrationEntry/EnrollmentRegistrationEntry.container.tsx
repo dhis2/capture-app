@@ -23,7 +23,6 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     ...passOnProps
 }) => {
     const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
-    const savingRef = useRef(false);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const {
         ready,
@@ -61,16 +60,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         return error.errorComponent;
     }
 
-    const onSaveWithEnrollment = async () => {
-        if (savingRef.current) return;
-        savingRef.current = true;
-        try {
-            const { teiWithEnrollment, formHasError, redirect } =
-                await buildTeiWithEnrollment(relatedStageRef);
-            if (!formHasError) onSave(teiWithEnrollment, redirect);
-        } finally {
-            savingRef.current = false;
-        }
+    const onSaveWithEnrollment = () => {
+        const { teiWithEnrollment, formHasError, redirect } = buildTeiWithEnrollment(relatedStageRef);
+        if (!formHasError) onSave(teiWithEnrollment, redirect);
     };
 
     return (

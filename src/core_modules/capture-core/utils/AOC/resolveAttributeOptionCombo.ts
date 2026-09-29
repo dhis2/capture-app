@@ -9,17 +9,9 @@ type CategoryOptionCombo = {
     categoryOptions: Array<{ id: string }>;
 };
 
-// Backend team keeps AOC resolution off the server for enrollments (see memory
-// project_enrollment_aoc_client_resolves_coc); the tracker enrollment import
-// accepts only a resolved attributeOptionCombo UID. This helper does that
-// resolution: /api/categoryOptionCombos with a filter on the picked options
-// returns every COC that shares any of those options, and we pick the one
-// whose option set matches exactly.
 export const makeResolveAttributeOptionCombo = (querySingleResource: QuerySingleResource) =>
     async (categoryOptionUids: ReadonlyArray<string>): Promise<string | undefined> => {
-        if (!categoryOptionUids || categoryOptionUids.length === 0) {
-            return undefined;
-        }
+        if (categoryOptionUids.length === 0) return undefined;
 
         const response = await querySingleResource({
             resource: 'categoryOptionCombos',
@@ -30,22 +22,23 @@ export const makeResolveAttributeOptionCombo = (querySingleResource: QuerySingle
             },
         });
 
-        const candidates: Array<CategoryOptionCombo> =
-            (response as any)?.categoryOptionCombos ?? [];
+        const { categoryOptionCombos = [] } =
+            response as { categoryOptionCombos?: Array<CategoryOptionCombo> };
         const target = new Set(categoryOptionUids);
 
-        const matches = candidates.filter(coc =>
+        const matches = categoryOptionCombos.filter(coc =>
             coc.categoryOptions.length === target.size &&
             coc.categoryOptions.every(({ id }) => target.has(id)),
         );
 
         if (matches.length > 1) {
-            log.warn(
+            log.error(
                 errorCreator('Multiple category option combos match the same option set')({
                     matches: matches.map(({ id }) => id),
                     categoryOptionUids,
                 }),
             );
+            return undefined;
         }
 
         return matches[0]?.id;

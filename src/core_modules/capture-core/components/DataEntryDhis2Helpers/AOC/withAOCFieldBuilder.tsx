@@ -1,6 +1,6 @@
 import React, { type ComponentType, useMemo } from 'react';
 import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
-import { useCategoryOptionsLoader } from './loadCategoryOptions';
+import { useCategoryOptionsLoader } from './useCategoryOptionsLoader';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 

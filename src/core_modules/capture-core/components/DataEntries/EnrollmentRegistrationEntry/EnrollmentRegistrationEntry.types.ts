@@ -31,6 +31,7 @@ export type EnrollmentPayload = {
             attributes: TrackedEntityAttributes;
             geometry: any;
             attributeOptionCombo?: string;
+            enrollmentCategoryOptionUids?: ReadonlyArray<string>;
         }
     ];
     relationships?: [
