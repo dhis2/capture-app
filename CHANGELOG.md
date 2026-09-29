@@ -1,3 +1,11 @@
+## [107.5.1](https://github.com/dhis2/capture-app/compare/v107.5.0...v107.5.1) (2026-09-29)
+
+
+### Bug Fixes
+
+* [DHIS2-20459] Align Date, DateTime and Time value type fields ([#4737](https://github.com/dhis2/capture-app/issues/4737)) ([af0ce8a](https://github.com/dhis2/capture-app/commit/af0ce8af0446d5616033d1155a8ab0776e2e9797))
+* [DHIS2-21902] Not count SKIPPED events against non-repeatable stage limit ([#4744](https://github.com/dhis2/capture-app/issues/4744)) ([0de6437](https://github.com/dhis2/capture-app/commit/0de643747191615a1b20c0e7192a223a852a63f1))
+
 # [107.5.0](https://github.com/dhis2/capture-app/compare/v107.4.1...v107.5.0) (2026-09-29)
 
 
