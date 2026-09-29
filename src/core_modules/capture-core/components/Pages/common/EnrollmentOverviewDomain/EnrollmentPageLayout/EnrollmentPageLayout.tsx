@@ -75,6 +75,7 @@ const EnrollmentPageLayoutPlain = ({
     onBackToDashboard,
     onBackToViewEvent,
     classes,
+    stageId,
     ...passOnProps
 }: Props) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
@@ -87,6 +88,7 @@ const EnrollmentPageLayoutPlain = ({
         program,
         currentPage,
         eventStatus,
+        stageId,
         toggleVisibility,
         addRelationShipContainerElement,
     }), [
@@ -95,6 +97,7 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         passOnProps,
         program,
+        stageId,
         toggleVisibility,
     ]);
 
@@ -130,7 +133,7 @@ const EnrollmentPageLayoutPlain = ({
                         onBackToDashboard={onBackToDashboard}
                         onBackToViewEvent={onBackToViewEvent}
                         programId={program.id}
-                        stageId={passOnProps.stageId}
+                        stageId={stageId}
                         displayFrontPageList={program.displayFrontPageList}
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}
