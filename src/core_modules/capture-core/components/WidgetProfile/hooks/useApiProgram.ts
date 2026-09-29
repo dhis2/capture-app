@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 
-const fields =
+const baseFields =
     'id,version,displayName,displayShortName,description,programType,style,minAttributesRequiredToSearch,' +
     'enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,' +
     'displayIncidentDate,access[*],' +
+    'displayEnrollmentLabel,' +
     'dataEntryForm[id,htmlCode],' +
     'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
     'programSections[id,displayFormName,displayDescription,sortOrder,trackedEntityAttributes],' +
@@ -29,6 +31,9 @@ const fields =
         'translations[property,locale,value]],' +
     'userRoles[id,displayName]';
 
+const pluralLabelFields =
+    'displayEnrollmentsLabel,displayEventsLabel,displayTrackedEntityAttributesLabel';
+
 export const useApiProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -37,7 +42,9 @@ export const useApiProgram = (programId: string) => {
                     resource: 'programs',
                     id: programId,
                     params: {
-                        fields,
+                        fields: featureAvailable(FEATURES.customTerminologyPlurals)
+                            ? `${baseFields},${pluralLabelFields}`
+                            : baseFields,
                     },
                 },
             }),

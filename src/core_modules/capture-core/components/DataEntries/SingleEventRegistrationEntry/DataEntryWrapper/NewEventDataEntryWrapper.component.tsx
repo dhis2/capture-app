@@ -106,6 +106,7 @@ const NewEventDataEntryWrapperPlain = ({
                 <DataEntry
                     programId={programId}
                     stage={stage}
+                    stageId={stage?.id}
                     orgUnit={orgUnitContext}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}

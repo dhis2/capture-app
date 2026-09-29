@@ -57,6 +57,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 },
                 redirect,
                 uid,
+                programId: enrollmentPayload.enrollments[0].program,
             });
         }),
     );
