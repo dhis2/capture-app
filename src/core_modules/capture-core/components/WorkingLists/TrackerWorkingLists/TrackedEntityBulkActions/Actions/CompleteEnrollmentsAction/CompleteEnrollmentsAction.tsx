@@ -18,6 +18,7 @@ import { BulkActionErrorModal } from '../../../../WorkingListsCommon/BulkActionB
 import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import type { ProgramStage } from '../../../../../../metaData';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 import type { EnrollmentBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
 type Props = EnrollmentBulkActionProps & {
@@ -40,9 +41,16 @@ const styles: Readonly<any> = {
     },
 };
 
-const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
+const getTooltipContent = (
+    programDataWriteAccess: boolean,
+    bulkDataEntryIsActive: boolean,
+    enrollmentsLabel: string,
+) => {
     if (!programDataWriteAccess) {
-        return i18n.t('You do not have access to bulk complete enrollments');
+        return i18n.t(
+            'You do not have access to bulk complete {{enrollmentsLabel}}',
+            { enrollmentsLabel },
+        );
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -63,6 +71,9 @@ const CompleteEnrollmentsActionPlain = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const { orgUnitId } = useLocationQuery();
+    const { enrollmentLabel, enrollmentsLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
+    );
     const {
         completeEnrollments,
         enrollmentCounts,
@@ -81,7 +92,7 @@ const CompleteEnrollmentsActionPlain = ({
         removeRowsFromSelection,
         setIsModalOpen,
     });
-    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
+    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive, enrollmentsLabel);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
     const getRecordHref = useMemo(
@@ -108,7 +119,10 @@ const CompleteEnrollmentsActionPlain = ({
         if (errorFetchingTrackedEntities) {
             return (
                 <div className={classes.container}>
-                    {i18n.t('An unexpected error occurred while fetching the enrollments. Please try again.')}
+                    {i18n.t(
+                        'An unexpected error occurred while fetching the {{enrollmentsLabel}}. Please try again.',
+                        { enrollmentsLabel },
+                    )}
                 </div>
             );
         }
@@ -117,35 +131,48 @@ const CompleteEnrollmentsActionPlain = ({
         if (enrollmentCounts.active === 0) {
             return (
                 <div className={classes.container}>
-                    {i18n.t('There are currently no active enrollments in the selection.')}
+                    {i18n.t(
+                        'There are currently no active {{enrollmentsLabel}} in the selection.',
+                        { enrollmentsLabel },
+                    )}
                     {' '}
-                    {i18n.t('All enrollments are already completed or cancelled.')}
+                    {i18n.t(
+                        'All {{enrollmentsLabel}} are already completed or cancelled.',
+                        { enrollmentsLabel },
+                    )}
                 </div>
             );
         }
 
         return (
             <div className={classes.container}>
-                {i18n.t('This action will complete {{count}} active enrollment in your selection.',
+                {i18n.t('This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
                     {
                         count: enrollmentCounts.active,
-                        defaultValue: 'This action will complete {{count}} active enrollment in your selection.',
-                        defaultValue_plural: 'This action will complete {{count}} active enrollments in your selection.',
+                        enrollmentLabel,
+                        enrollmentsLabel,
+                        defaultValue: 'This action will complete {{count}} active {{enrollmentLabel}} in your selection.',
+                        defaultValue_plural: 'This action will complete {{count}} active {{enrollmentsLabel}} in your selection.',
                     })
                 }
 
                 {' '}
 
                 {enrollmentCounts.completed > 0 &&
-                    i18n.t('{{count}} enrollment already marked as completed will not be changed.', {
+                    i18n.t('{{count}} {{enrollmentLabel}} already marked as completed will not be changed.', {
                         count: enrollmentCounts.completed,
-                        defaultValue: '{{count}} enrollment already marked as completed will not be changed.',
-                        defaultValue_plural: '{{count}} enrollments already marked as completed will not be changed.',
+                        enrollmentLabel,
+                        enrollmentsLabel,
+                        defaultValue: '{{count}} {{enrollmentLabel}} already marked as completed will not be changed.',
+                        defaultValue_plural: '{{count}} {{enrollmentsLabel}} already marked as completed will not be changed.',
                     })
                 }
 
                 <Checkbox
-                    label={i18n.t('Mark all events within enrollments as complete')}
+                    label={i18n.t(
+                        'Mark all {{eventsLabel}} within {{enrollmentsLabel}} as complete',
+                        { eventsLabel, enrollmentsLabel },
+                    )}
                     checked={completeEvents}
                     onChange={() => setCompleteEvents(prevState => !prevState)}
                 />
@@ -165,7 +192,7 @@ const CompleteEnrollmentsActionPlain = ({
                     disabled={disabled}
                     onClick={() => setIsModalOpen(true)}
                 >
-                    {i18n.t('Complete enrollments')}
+                    {i18n.t('Complete {{enrollmentsLabel}}', { enrollmentsLabel })}
                 </Button>
             </ConditionalTooltip>
 
@@ -174,7 +201,9 @@ const CompleteEnrollmentsActionPlain = ({
                     onClose={closeModal}
                     dataTest={'bulk-complete-enrollments-dialog'}
                 >
-                    <ModalTitle>{i18n.t('Complete enrollments')}</ModalTitle>
+                    <ModalTitle>
+                        {i18n.t('Complete {{enrollmentsLabel}}', { enrollmentsLabel })}
+                    </ModalTitle>
                     <ModalContent>
                         {renderContent()}
                     </ModalContent>
@@ -190,7 +219,10 @@ const CompleteEnrollmentsActionPlain = ({
 
                             <ConditionalTooltip
                                 enabled={enrollmentCounts?.active === 0}
-                                content={i18n.t('No active enrollments to complete')}
+                                content={i18n.t(
+                                    'No active {{enrollmentsLabel}} to complete',
+                                    { enrollmentsLabel },
+                                )}
                             >
                                 <Button
                                     primary
@@ -199,10 +231,12 @@ const CompleteEnrollmentsActionPlain = ({
                                     loading={isPending}
                                     dataTest={'bulk-complete-enrollments-confirm-button'}
                                 >
-                                    {i18n.t('Complete {{count}} enrollment', {
+                                    {i18n.t('Complete {{count}} {{enrollmentLabel}}', {
                                         count: enrollmentCounts.active,
-                                        defaultValue: 'Complete {{count}} enrollment',
-                                        defaultValue_plural: 'Complete {{count}} enrollments',
+                                        enrollmentLabel,
+                                        enrollmentsLabel,
+                                        defaultValue: 'Complete {{count}} {{enrollmentLabel}}',
+                                        defaultValue_plural: 'Complete {{count}} {{enrollmentsLabel}}',
                                     })}
                                 </Button>
                             </ConditionalTooltip>
@@ -213,15 +247,18 @@ const CompleteEnrollmentsActionPlain = ({
 
             {isModalOpen && validationError && (
                 <BulkActionErrorModal
-                    title={i18n.t('Error completing enrollments')}
+                    title={i18n.t('Error completing {{enrollmentsLabel}}', { enrollmentsLabel })}
                     introText={
                         hasPartiallyUploadedEnrollments
                             ? i18n.t(
-                                'Some enrollments were completed successfully, but there was an error while ' +
-                                'completing the rest. Please see the details below.',
+                                'Some {{enrollmentsLabel}} were completed successfully, but there was an error while '
+                                + 'completing the rest. Please see the details below.',
+                                { enrollmentsLabel },
                             )
                             : i18n.t(
-                                'There was an error while completing the enrollments. Please see the details below.',
+                                'There was an error while completing the {{enrollmentsLabel}}. '
+                                + 'Please see the details below.',
+                                { enrollmentsLabel },
                             )
                     }
                     errorReports={validationError.validationReport.errorReports}

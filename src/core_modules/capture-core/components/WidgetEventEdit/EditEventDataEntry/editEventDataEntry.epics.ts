@@ -149,13 +149,20 @@ export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
                     startSaveEditEventDataEntry(
                         eventId,
                         serverData,
+                        prevEventMainData?.programId,
+                        prevEventMainData?.programStageId,
                         enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT,
                         enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT,
                     ),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
             return batchActions([
-                startSaveEditEventDataEntry(eventId, serverData),
+                startSaveEditEventDataEntry(
+                    eventId,
+                    serverData,
+                    prevEventMainData?.programId,
+                    prevEventMainData?.programStageId,
+                ),
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
         }));
 
@@ -208,15 +215,17 @@ export const saveEditedEventFailedEpic = (action$: any, store: any) =>
             return batchActions(actions, batchActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED);
         }));
 
-export const requestDeleteEventDataEntryEpic = (action$: any, store: ReduxStore, dependencies: any) =>
+export const requestDeleteEventDataEntryEpic = (action$: any, store: any, dependencies: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
         map((action: any) => {
             const { eventId, enrollmentId } = action.payload;
             const params = { enrollmentId };
             const serverData = { events: [{ event: eventId }] };
+            const { programId } = store.value.enrollmentPage;
+            const stageId = store.value.viewEventPage?.loadedValues?.eventContainer?.event?.programStageId;
             dependencies.navigate(`/enrollment?${buildUrlQueryString(params)}`);
-            return startDeleteEventDataEntry(serverData, eventId, params);
+            return startDeleteEventDataEntry(serverData, eventId, params, programId, stageId);
         }));
 
 export const startCreateNewAfterCompletingEpic = (
@@ -300,6 +309,8 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: ReduxSto
                 startSaveEditEventDataEntry(
                     eventId,
                     serverData,
+                    prevEventMainData?.programId,
+                    prevEventMainData?.programStageId,
                     onSaveAndCompleteEnrollmentSuccessActionType,
                     onSaveAndCompleteEnrollmentErrorActionType,
                 ),

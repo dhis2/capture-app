@@ -9,6 +9,7 @@ import { createEnrollmentErrorHrefResolver } from '../../../../WorkingListsCommo
 import { useLocationQuery } from '../../../../../../utils/routing';
 import { useBulkDeleteEnrollments } from './useBulkDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 import type { EnrollmentBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
 const styles: Readonly<any> = {
@@ -24,9 +25,13 @@ const styles: Readonly<any> = {
     },
 };
 
-const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
+const getTooltipContent = (
+    programDataWriteAccess: boolean,
+    bulkDataEntryIsActive: boolean,
+    enrollmentsLabel: string,
+) => {
     if (!programDataWriteAccess) {
-        return i18n.t('You do not have access to delete enrollments');
+        return i18n.t('You do not have access to delete {{enrollmentsLabel}}', { enrollmentsLabel });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -46,7 +51,10 @@ const DeleteEnrollmentsActionPlain = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { hasAuthority } = useAuthority(Authorities.ENROLLMENT_CASCADE_DELETE);
     const { orgUnitId } = useLocationQuery();
-    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
+    const { enrollmentLabel, enrollmentsLabel } = useTermLabel(
+        [LabelKeys.enrollmentSingular, LabelKeys.enrollmentPlural],
+    );
+    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive, enrollmentsLabel);
     const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
     const {
@@ -90,7 +98,10 @@ const DeleteEnrollmentsActionPlain = ({
         if (isError) {
             return (
                 <div className={classes.modalContent}>
-                    {i18n.t('An error occurred while loading the selected enrollments. Please try again.')}
+                    {i18n.t(
+                        'An error occurred while loading the selected {{enrollmentsLabel}}. Please try again.',
+                        { enrollmentsLabel },
+                    )}
                 </div>
             );
         }
@@ -106,14 +117,25 @@ const DeleteEnrollmentsActionPlain = ({
         return (
             <div className={classes.modalContent}>
                 <div>
-                    {i18n.t('This action will permanently delete the selected enrollments, ' +
-                        'including all associated data and events.')}
+                    {i18n.t(
+                        'This action will permanently delete the selected {{enrollmentsLabel}}, '
+                        + 'including all associated data and events.',
+                        { enrollmentsLabel },
+                    )}
                 </div>
-                <div>{i18n.t('Please select which enrollment statuses you want to delete:')}</div>
+                <div>
+                    {i18n.t(
+                        'Please select which {{enrollmentLabel}} statuses you want to delete:',
+                        { enrollmentLabel },
+                    )}
+                </div>
                 <div>
                     <CustomCheckbox
                         disabled={enrollmentCounts.active === 0}
-                        label={i18n.t('Active enrollments ({{count}})', { count: enrollmentCounts.active })}
+                        label={i18n.t(
+                            'Active {{enrollmentsLabel}} ({{count}})',
+                            { count: enrollmentCounts.active, enrollmentsLabel },
+                        )}
                         id="active"
                         checked={enrollmentCounts.active === 0 ? false : statusToDelete.active}
                         onChange={updateStatusToDelete}
@@ -121,7 +143,10 @@ const DeleteEnrollmentsActionPlain = ({
                     />
                     <CustomCheckbox
                         disabled={enrollmentCounts.completed === 0}
-                        label={i18n.t('Completed enrollments ({{count}})', { count: enrollmentCounts.completed })}
+                        label={i18n.t(
+                            'Completed {{enrollmentsLabel}} ({{count}})',
+                            { count: enrollmentCounts.completed, enrollmentsLabel },
+                        )}
                         id="completed"
                         checked={enrollmentCounts.completed === 0 ? false : statusToDelete.completed}
                         onChange={updateStatusToDelete}
@@ -129,7 +154,10 @@ const DeleteEnrollmentsActionPlain = ({
                     />
                     <CustomCheckbox
                         disabled={enrollmentCounts.cancelled === 0}
-                        label={i18n.t('Cancelled enrollments ({{count}})', { count: enrollmentCounts.cancelled })}
+                        label={i18n.t(
+                            'Cancelled {{enrollmentsLabel}} ({{count}})',
+                            { count: enrollmentCounts.cancelled, enrollmentsLabel },
+                        )}
                         id="cancelled"
                         onChange={updateStatusToDelete}
                         checked={enrollmentCounts.cancelled === 0 ? false : statusToDelete.cancelled}
@@ -144,9 +172,10 @@ const DeleteEnrollmentsActionPlain = ({
         if (validationError) {
             return (
                 <BulkActionErrorModal
-                    title={i18n.t('Error deleting enrollments')}
+                    title={i18n.t('Error deleting {{enrollmentsLabel}}', { enrollmentsLabel })}
                     introText={i18n.t(
-                        'There was an error while deleting the enrollments. Please see the details below.',
+                        'There was an error while deleting the {{enrollmentsLabel}}. Please see the details below.',
+                        { enrollmentsLabel },
                     )}
                     errorReports={validationError.validationReport.errorReports}
                     getRecordHref={getRecordHref}
@@ -161,7 +190,9 @@ const DeleteEnrollmentsActionPlain = ({
                 onClose={closeModal}
                 dataTest="bulk-delete-enrollments-dialog"
             >
-                <ModalTitle>{i18n.t('Delete selected enrollments')}</ModalTitle>
+                <ModalTitle>
+                    {i18n.t('Delete selected {{enrollmentsLabel}}', { enrollmentsLabel })}
+                </ModalTitle>
                 <ModalContent>{renderContent()}</ModalContent>
                 <ModalActions>
                     <ButtonStrip>
@@ -174,10 +205,12 @@ const DeleteEnrollmentsActionPlain = ({
                                 onClick={() => deleteEnrollments()}
                                 disabled={isPending || numberOfEnrollmentsToDelete === 0}
                             >
-                                {i18n.t('Delete {{count}} enrollment', {
+                                {i18n.t('Delete {{count}} {{enrollmentLabel}}', {
                                     count: numberOfEnrollmentsToDelete,
-                                    defaultValue: 'Delete {{count}} enrollment',
-                                    defaultValue_plural: 'Delete {{count}} enrollments',
+                                    enrollmentLabel,
+                                    enrollmentsLabel,
+                                    defaultValue: 'Delete {{count}} {{enrollmentLabel}}',
+                                    defaultValue_plural: 'Delete {{count}} {{enrollmentsLabel}}',
                                 })}
                             </Button>
                         )}
@@ -191,7 +224,7 @@ const DeleteEnrollmentsActionPlain = ({
         <>
             <ConditionalTooltip enabled={disabled} content={tooltipContent}>
                 <Button small disabled={disabled} onClick={() => setIsModalOpen(true)}>
-                    {i18n.t('Delete enrollments')}
+                    {i18n.t('Delete {{enrollmentsLabel}}', { enrollmentsLabel })}
                 </Button>
             </ConditionalTooltip>
 

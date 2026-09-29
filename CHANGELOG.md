@@ -1,3 +1,31 @@
+# [107.5.0](https://github.com/dhis2/capture-app/compare/v107.4.1...v107.5.0) (2026-09-29)
+
+
+### Features
+
+* [DHIS2-21635] Display custom terminology labels across UI ([#4727](https://github.com/dhis2/capture-app/issues/4727)) ([2cde565](https://github.com/dhis2/capture-app/commit/2cde565ff7a0baaaf84bfc849c5f7defd5e9cfa3))
+
+## [107.4.1](https://github.com/dhis2/capture-app/compare/v107.4.0...v107.4.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4754](https://github.com/dhis2/capture-app/issues/4754)) ([4b6a02f](https://github.com/dhis2/capture-app/commit/4b6a02fa91c6d786d1adfeacfd3f2ca9baa9fdbd))
+
+# [107.4.0](https://github.com/dhis2/capture-app/compare/v107.3.1...v107.4.0) (2026-09-25)
+
+
+### Features
+
+* [DHIS2-21913] filter out non-accessible TEAs ([#4675](https://github.com/dhis2/capture-app/issues/4675)) ([7c8fcdf](https://github.com/dhis2/capture-app/commit/7c8fcdf2f6f7b5a923a10bfcb9b5b4cd0ab81b54))
+
+## [107.3.1](https://github.com/dhis2/capture-app/compare/v107.3.0...v107.3.1) (2026-09-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4741](https://github.com/dhis2/capture-app/issues/4741)) ([7f81d9d](https://github.com/dhis2/capture-app/commit/7f81d9d4570c4d30c6d7558d3f95fcc27cf477ba))
+
 # [107.3.0](https://github.com/dhis2/capture-app/compare/v107.2.0...v107.3.0) (2026-09-16)
 
 

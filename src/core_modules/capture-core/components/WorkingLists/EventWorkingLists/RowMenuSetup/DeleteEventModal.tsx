@@ -1,14 +1,17 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 
 type Props = {
     eventId: string;
+    stageId?: string;
     onClose: () => void;
     onConfirmDelete: (eventId: string) => void;
 };
 
-export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) => {
+export const DeleteEventModal = ({ eventId, stageId, onClose, onConfirmDelete }: Props) => {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
     const handleConfirm = () => {
         onConfirmDelete(eventId);
         onClose();
@@ -20,13 +23,13 @@ export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) =
             small
         >
             <ModalTitle>
-                {i18n.t('Delete event')}
+                {i18n.t('Delete {{eventLabel}}', { eventLabel })}
             </ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t('Deleting an event is permanent and cannot be undone.')}
+                    {i18n.t('Deleting an {{eventLabel}} is permanent and cannot be undone.', { eventLabel })}
                     {' '}
-                    {i18n.t('Are you sure you want to delete this event?')}
+                    {i18n.t('Are you sure you want to delete this {{eventLabel}}?', { eventLabel })}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -40,7 +43,7 @@ export const DeleteEventModal = ({ eventId, onClose, onConfirmDelete }: Props) =
                         destructive
                         onClick={handleConfirm}
                     >
-                        {i18n.t('Yes, delete event')}
+                        {i18n.t('Yes, delete {{eventLabel}}', { eventLabel })}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

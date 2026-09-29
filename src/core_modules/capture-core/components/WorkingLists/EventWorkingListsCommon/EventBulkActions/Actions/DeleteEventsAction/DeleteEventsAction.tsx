@@ -8,13 +8,18 @@ import {
 import { createEventErrorHrefResolver } from '../../../../WorkingListsCommon/BulkActionBar/utils';
 import { useLocationQuery } from '../../../../../../utils/routing';
 import { useBulkDeleteEvents } from './useBulkDeleteEvents';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 import type { EventBulkActionProps } from '../../../../WorkingListsCommon/BulkActionBar/types';
 
 type Props = EventBulkActionProps;
 
-const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
+const getTooltipContent = (
+    stageDataWriteAccess?: boolean,
+    bulkDataEntryIsActive?: boolean,
+    eventsLabel?: string,
+) => {
     if (!stageDataWriteAccess) {
-        return i18n.t('You do not have access to delete events');
+        return i18n.t('You do not have access to delete {{eventsLabel}}', { eventsLabel });
     }
     if (bulkDataEntryIsActive) {
         return i18n.t('There is a bulk data entry with unsaved changes');
@@ -29,10 +34,12 @@ export const DeleteEventsAction = ({
     onUpdateList,
     removeRowsFromSelection,
     programId,
+    stageId,
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { orgUnitId } = useLocationQuery();
-    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
+    const { eventsLabel } = useTermLabel([LabelKeys.eventPlural], { stageId });
+    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive, eventsLabel);
     const disabled = !stageDataWriteAccess || Boolean(bulkDataEntryIsActive);
 
     const {
@@ -78,11 +85,14 @@ export const DeleteEventsAction = ({
                     onClose={closeModal}
                     dataTest="bulk-delete-events-dialog"
                 >
-                    <ModalTitle>{i18n.t('Delete events')}</ModalTitle>
+                    <ModalTitle>{i18n.t('Delete {{eventsLabel}}', { eventsLabel })}</ModalTitle>
                     <ModalContent>
                         {i18n.t('This cannot be undone.')}
                         {' '}
-                        {i18n.t('Are you sure you want to delete the selected events?')}
+                        {i18n.t(
+                            'Are you sure you want to delete the selected {{eventsLabel}}?',
+                            { eventsLabel },
+                        )}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip>
@@ -106,9 +116,10 @@ export const DeleteEventsAction = ({
 
             {isModalOpen && validationError && (
                 <BulkActionErrorModal
-                    title={i18n.t('Error deleting events')}
+                    title={i18n.t('Error deleting {{eventsLabel}}', { eventsLabel })}
                     introText={i18n.t(
-                        'There was an error while deleting the events. Please see the details below.',
+                        'There was an error while deleting the {{eventsLabel}}. Please see the details below.',
+                        { eventsLabel },
                     )}
                     errorReports={validationError.validationReport.errorReports}
                     getRecordHref={getRecordHref}

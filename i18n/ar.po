@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-07-21T13:35:51.419Z\n"
+"POT-Creation-Date: 2026-09-17T10:17:48.262Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza <7amza.it@gmail.com>, 2026\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -438,16 +438,52 @@ msgstr ""
 msgid "Operations running"
 msgstr "العمليات الجارية"
 
-msgid "No feedback for this enrollment yet"
+msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
 
-msgid "No indicator output for this enrollment yet"
+msgid "No indicator output for this {{enrollmentLabel}} yet"
 msgstr ""
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 msgstr ""
+
+msgid "View changelog"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Mark incomplete"
+msgstr "تعيين كـ غير مكتمل"
+
+msgid "Mark complete"
+msgstr "تعيين كـ مكتمل"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid "Delete event"
+msgstr "حذف الحدث"
+
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this event?"
+msgstr ""
+
+msgid "Yes, delete event"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "تخطى"
 
 msgid "No events to display"
 msgstr "لايوجد احداث للعرض"
@@ -584,9 +620,6 @@ msgstr "تحميل ملف"
 msgid "selected"
 msgstr "محدد"
 
-msgid "Delete"
-msgstr "حذف"
-
 msgid "Select file"
 msgstr "اختيار ملف"
 
@@ -603,6 +636,9 @@ msgid "Type to filter options"
 msgstr "اكتب لتصفية الخيارات"
 
 msgid "No match found"
+msgstr ""
+
+msgid "Search for an organisation unit"
 msgstr ""
 
 msgid "Clear"
@@ -730,6 +766,12 @@ msgid "Notice"
 msgstr ""
 
 msgid "Close the notice"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "Quick actions"
@@ -976,9 +1018,6 @@ msgstr "الأحداث"
 msgid "event"
 msgstr "حدث"
 
-msgid "View changelog"
-msgstr ""
-
 msgid "Event details"
 msgstr "تفاصيل الحدث"
 
@@ -1083,6 +1122,12 @@ msgstr "إحتمال وجود تكرار"
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
+msgid "View only - {{message}}"
+msgstr ""
+
+msgid "View only"
+msgstr "العرض فقط"
+
 msgid "You only have view access to this enrollment"
 msgstr ""
 
@@ -1107,11 +1152,14 @@ msgstr ""
 msgid "This event has been completed"
 msgstr ""
 
-msgid "View only - {{message}}"
+msgid "You do not have access to uncomplete this event"
 msgstr ""
 
-msgid "View only"
-msgstr "العرض فقط"
+msgid "This {{trackedEntityName}} is deactivated"
+msgstr ""
+
+msgid "This tracked entity is deactivated"
+msgstr ""
 
 msgid "Add relationship"
 msgstr "اضف علاقة"
@@ -1343,9 +1391,6 @@ msgstr ""
 msgid "Mark as cancelled"
 msgstr ""
 
-msgid "Mark incomplete"
-msgstr "تعيين كـ غير مكتمل"
-
 msgid "You do not have access to delete this enrollment"
 msgstr ""
 
@@ -1430,9 +1475,6 @@ msgstr "تاريخ وقوع الحدث"
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "Follow-up"
-msgstr "متابعة"
-
 msgid "Started at{{escape}}"
 msgstr ""
 
@@ -1481,25 +1523,13 @@ msgstr "تحذير"
 msgid "stage not found in rules execution"
 msgstr ""
 
-msgid "Delete event"
-msgstr "حذف الحدث"
-
-msgid "Deleting an event is permanent and cannot be undone."
-msgstr ""
-
 msgid "Are you sure you want to delete this event? "
-msgstr ""
-
-msgid "Yes, delete event"
 msgstr ""
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
-msgstr ""
-
-msgid "You do not have access to uncomplete this event"
 msgstr ""
 
 msgid "Geometry (Area)"
@@ -1514,8 +1544,8 @@ msgstr "تم التقاط المضلع"
 msgid "No polygon captured"
 msgstr "لم يتم التقاط المضلع"
 
-msgid "Event completed"
-msgstr "الحدث مكتمل"
+msgid "{{eventLabel}} completed"
+msgstr ""
 
 msgid "Notes about this event"
 msgstr ""
@@ -1679,10 +1709,10 @@ msgstr "عرض ملف التعريف"
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "No attributes configured for {{trackedEntityTypeName}}"
+msgid "No attributes configured"
 msgstr ""
 
-msgid "No attributes configured"
+msgid "No attributes configured to display"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
@@ -1742,30 +1772,6 @@ msgstr ""
 msgid "New {{ eventName }} event"
 msgstr ""
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-msgstr ""
-
-msgid "This event is outside the edit period"
-msgstr ""
-
-msgid "An error occurred while deleting the event"
-msgstr ""
-
-msgid "Are you sure you want to delete this event?"
-msgstr ""
-
-msgid "An error occurred when updating event status"
-msgstr ""
-
-msgid "Unskip"
-msgstr ""
-
-msgid "Skip"
-msgstr "تخطى"
-
-msgid "To open this event, please wait until saving is complete"
-msgstr ""
-
 msgid "Show {{ rest }} more"
 msgstr ""
 
@@ -1793,7 +1799,7 @@ msgstr ""
 msgid "No stages found in this program"
 msgstr ""
 
-msgid "Stages and Events"
+msgid "{{programStagesLabel}} and {{eventsLabel}}"
 msgstr ""
 
 msgid "An error occurred while unlinking and deleting the event."
@@ -1944,6 +1950,9 @@ msgstr "اسم مرحلة البرنامج"
 
 msgid "Working list could not be loaded"
 msgstr "تعذر تحميل قائمة العمل"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr ""
 
 msgid "Download data..."
 msgstr "تنزيل البيانات"
@@ -2258,10 +2267,40 @@ msgstr "المتأخرة"
 msgid "Skipped"
 msgstr "التي تم تخطيها"
 
-msgid "Visited"
-msgstr "تم زيارته"
-
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "enrollments"
+msgstr ""
+
+msgid "program stage"
+msgstr ""
+
+msgid "program stages"
+msgstr ""
+
+msgid "note"
+msgstr ""
+
+msgid "notes"
+msgstr ""
+
+msgid "relationship"
+msgstr ""
+
+msgid "relationships"
+msgstr "العلاقات"
+
+msgid "attribute"
+msgstr ""
+
+msgid "attributes"
+msgstr ""
+
+msgid "organisation unit"
+msgstr ""
+
+msgid "follow-up"
 msgstr ""
 
 msgid "Program not found"

@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
+import { withCustomLabels, LabelKeys } from '../../../customLabels';
 
+const customLabels = [LabelKeys.orgUnitSingular, LabelKeys.eventSingular] as const;
 
 const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -20,5 +22,5 @@ const mapStateToProps = (state: any, props: any) => {
 const mapDispatchToProps = (): any => ({});
 
 export const ViewEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(ViewEventDataEntryComponent),
+    withLoadingIndicator()(withCustomLabels(customLabels)(ViewEventDataEntryComponent)),
 );

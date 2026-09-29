@@ -9,6 +9,7 @@ export type PlainProps = {
     trackedEntityName: string;
     saveAttempted: boolean;
     formFoundation: any;
+    program: Record<string, unknown>;
     onCancel: () => void;
     onSave: () => void;
     onUpdateFormField: (innerAction: any) => void;

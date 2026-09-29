@@ -1,4 +1,4 @@
-import { createSelectorCreator, defaultMemoize } from 'reselect';
+import { createSelectorCreator, lruMemoize } from 'reselect';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
 const onIsEqual = (prevValues, currentValues) =>
@@ -6,7 +6,7 @@ const onIsEqual = (prevValues, currentValues) =>
 
 
 const createDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
+    lruMemoize,
     onIsEqual,
 );
 
@@ -75,7 +75,7 @@ export const makeGetHiddenFieldsValues = () => createDeepEqualSelector(
 );
 
 const createMessagesDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
+    lruMemoize,
     (prevValues, currentValues) =>
         Object.keys(currentValues).every((key) => {
             const currentMessagesForId = currentValues[key] || {};

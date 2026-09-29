@@ -16,6 +16,7 @@ import { useMutation } from '@tanstack/react-query';
 import { errorCreator } from 'capture-core-utils';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 type DeleteMenuItemProps = {
     onDeleteRequest: () => void;
@@ -61,6 +62,9 @@ export const DeleteMenuItemModal = ({
     onDeleteEvent,
     onRollbackDeleteEvent,
 }: DeleteMenuItemModalProps) => {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], {
+        stageId: eventDetails.programStage,
+    });
     const { show: showError } = useAlert(
         ({ message }) => message,
         { critical: true },
@@ -80,7 +84,12 @@ export const DeleteMenuItemModal = ({
                 return eventToRollbackOnFail;
             },
             onError: (apiError: unknown, payload: unknown, eventToRollbackOnFail?: ApiEnrollmentEvent) => {
-                showError({ message: i18n.t('An error occurred while deleting the event') });
+                showError({
+                    message: i18n.t(
+                        'An error occurred while deleting the {{eventLabel}}',
+                        { eventLabel },
+                    ),
+                });
                 log.error(errorCreator('An error occurred while deleting the event')({ apiError, payload }));
                 if (eventToRollbackOnFail) {
                     onRollbackDeleteEvent(eventToRollbackOnFail);
@@ -91,12 +100,12 @@ export const DeleteMenuItemModal = ({
 
     return (
         <Modal onClose={() => setDeleteModalOpen(false)} small>
-            <ModalTitle>{i18n.t('Delete event')}</ModalTitle>
+            <ModalTitle>{i18n.t('Delete {{eventLabel}}', { eventLabel })}</ModalTitle>
             <ModalContent>
                 <p>
-                    {i18n.t('Deleting an event is permanent and cannot be undone.')}
+                    {i18n.t('Deleting an {{eventLabel}} is permanent and cannot be undone.', { eventLabel })}
                     {' '}
-                    {i18n.t('Are you sure you want to delete this event?')}
+                    {i18n.t('Are you sure you want to delete this {{eventLabel}}?', { eventLabel })}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -105,7 +114,7 @@ export const DeleteMenuItemModal = ({
                         {i18n.t('No, cancel')}
                     </Button>
                     <Button destructive disabled={isLoading} onClick={() => mutate(undefined)}>
-                        {i18n.t('Yes, delete event')}
+                        {i18n.t('Yes, delete {{eventLabel}}', { eventLabel })}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

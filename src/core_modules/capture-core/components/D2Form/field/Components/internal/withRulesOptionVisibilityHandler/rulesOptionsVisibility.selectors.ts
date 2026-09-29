@@ -1,8 +1,8 @@
-import { defaultMemoize, createSelectorCreator } from 'reselect';
+import { lruMemoize, createSelectorCreator } from 'reselect';
 
 
 const createDeepEqualOptionsVisibilitySelector = createSelectorCreator(
-    defaultMemoize,
+    lruMemoize,
     (prevValues, currentValues) =>
         Object.keys(currentValues).every(key => currentValues[key] === prevValues[key]),
 );

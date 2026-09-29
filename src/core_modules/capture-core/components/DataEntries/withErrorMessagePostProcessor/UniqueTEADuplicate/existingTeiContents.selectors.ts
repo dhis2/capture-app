@@ -44,7 +44,6 @@ export const makeDataElementsSelector = () => createSelector(
     },
 );
 
-// @ts-expect-error - keeping original functionality as before ts rewrite
 export const makeGetClientValuesSelector = () => createSelector(
     (props, dataElements) => dataElements,
     props => props.attributeValues,

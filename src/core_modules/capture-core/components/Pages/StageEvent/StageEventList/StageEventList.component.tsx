@@ -25,6 +25,7 @@ const StageEventListPlain = ({ stage, programId, ...passOnProps }: PlainProps) =
                     title={stage?.name}
                     icon={stage?.icon}
                     events={[]}
+                    stageId={stage?.id}
                 />}
             >
                 {programType === programTypes.EVENT_PROGRAM && <EventWorkingLists

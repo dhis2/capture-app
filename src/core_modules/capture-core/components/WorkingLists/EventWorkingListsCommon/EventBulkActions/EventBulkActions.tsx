@@ -35,7 +35,7 @@ export const EventBulkActions = ({
             selectedRowsCount={selectedRowsCount}
             onClearSelection={onClearSelection}
         >
-            {programId && onOpenBulkDataEntryPlugin && (
+            {onOpenBulkDataEntryPlugin && (
                 <BulkDataEntryAction
                     programId={programId}
                     onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
@@ -49,6 +49,7 @@ export const EventBulkActions = ({
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
                 programId={programId}
+                stageId={stage.id}
             />
 
             <DeleteEventsAction
@@ -58,6 +59,7 @@ export const EventBulkActions = ({
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
                 programId={programId}
+                stageId={stage.id}
             />
         </BulkActionBar>
     );

@@ -26,6 +26,7 @@ export type BulkActionProps = {
 
 export type EventBulkActionProps = BulkActionProps & {
     programId?: string;
+    stageId?: string;
     stageDataWriteAccess?: boolean;
 };
 

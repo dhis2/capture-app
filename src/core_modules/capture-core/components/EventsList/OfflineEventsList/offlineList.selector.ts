@@ -1,4 +1,4 @@
-import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
+import { createSelectorCreator, createSelector, lruMemoize } from 'reselect';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {
@@ -128,7 +128,7 @@ const onIsEventsEqual = (
     );
 
 const createDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
+    lruMemoize,
     onIsEventsEqual,
 );
 
