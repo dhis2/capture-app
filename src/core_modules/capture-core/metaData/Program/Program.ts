@@ -3,7 +3,7 @@
 
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
-import type{ CategoryCombination } from '../CategoryCombinations';
+import type { CategoryCombination, EnrollmentCategoryCombo } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type { ProgramStage } from './ProgramStage';
@@ -22,6 +22,7 @@ export class Program {
     _stages!: Map<string, ProgramStage>;
     _organisationUnits!: any;
     _categoryCombination!: CategoryCombination | null;
+    _enrollmentCategoryCombo!: EnrollmentCategoryCombo | null;
     _programRules!: Array<ProgramRule>;
     _programRuleVariables!: Array<ProgramRuleVariable>;
     _icon!: Icon | undefined;
@@ -86,6 +87,13 @@ export class Program {
     }
     get categoryCombination(): CategoryCombination | null {
         return this._categoryCombination;
+    }
+
+    set enrollmentCategoryCombo(enrollmentCategoryCombo: EnrollmentCategoryCombo | null) {
+        this._enrollmentCategoryCombo = enrollmentCategoryCombo;
+    }
+    get enrollmentCategoryCombo(): EnrollmentCategoryCombo | null {
+        return this._enrollmentCategoryCombo;
     }
 
     set programRules(programRules: Array<ProgramRule>) {

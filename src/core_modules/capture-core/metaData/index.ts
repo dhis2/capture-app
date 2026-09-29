@@ -1,5 +1,5 @@
 export type { Access } from './Access';
-export { Category, CategoryCombination } from './CategoryCombinations';
+export { Category, CategoryCombination, EnrollmentCategoryCombo } from './CategoryCombinations';
 export {
     DataElement,
     DateDataElement,

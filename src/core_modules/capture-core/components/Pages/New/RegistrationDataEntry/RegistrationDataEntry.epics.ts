@@ -1,18 +1,23 @@
 import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { dataEntryKeys } from 'capture-core/constants';
 import type { ReduxStore, EpicAction, ApiUtils } from 'capture-core-utils/types/global';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
+    failAOCResolveForNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { cleanUpUid } from '../NewPage.actions';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
+import { resolveAttributeOptionCombo } from '../../../../utils/AOC';
 
 export const startSavingNewTrackedEntityInstanceEpic = (action$: EpicAction<any>) =>
     action$.pipe(
@@ -48,6 +53,26 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action: any) => {
             const { enrollmentPayload, uid, redirect } = action.payload;
+            const enrollment = enrollmentPayload.enrollments[0];
+            const optionUids = enrollment.enrollmentCategoryOptionUids ?? [];
+            delete enrollment.enrollmentCategoryOptionUids;
+
+            if (optionUids.length > 0) {
+                const { enrollmentCategoryCombo } = getTrackerProgramThrowIfNotFound(enrollment.program);
+                const attributeOptionCombo = resolveAttributeOptionCombo(
+                    enrollmentCategoryCombo?.categoryOptionCombos ?? [],
+                    optionUids,
+                );
+                if (!attributeOptionCombo) {
+                    log.error(
+                        errorCreator(
+                            'Could not resolve the selected enrollment category options to an attribute option combo',
+                        )({ optionUids, enrollmentCategoryComboId: enrollmentCategoryCombo?.id }),
+                    );
+                    return failAOCResolveForNewTrackedEntityInstanceWithEnrollment();
+                }
+                enrollment.attributeOptionCombo = attributeOptionCombo;
+            }
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
@@ -57,7 +82,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 },
                 redirect,
                 uid,
-                programId: enrollmentPayload.enrollments[0].program,
+                programId: enrollment.program,
             });
         }),
     );
@@ -124,6 +149,9 @@ export const failedSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     action$: EpicAction<any>,
 ) =>
     action$.pipe(
-        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED),
+        ofType(
+            registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,
+            registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_AOC_RESOLVE_FAILED,
+        ),
         map(() => cleanUpUid()),
     );
