@@ -9,14 +9,24 @@ type CategoryOptionCombo = {
     categoryOptions: Array<{ id: string }>;
 };
 
+// Enrollment import requires a resolved attributeOptionCombo UID. Scoping by
+// categoryCombo prevents cross-combo option-set collisions: the API returns
+// every COC in the given combo that shares any of the picked options, and we
+// pick the one whose option set is identical.
 export const makeResolveAttributeOptionCombo = (querySingleResource: QuerySingleResource) =>
-    async (categoryOptionUids: ReadonlyArray<string>): Promise<string | undefined> => {
+    async (
+        categoryComboId: string,
+        categoryOptionUids: ReadonlyArray<string>,
+    ): Promise<string | undefined> => {
         if (categoryOptionUids.length === 0) return undefined;
 
         const response = await querySingleResource({
             resource: 'categoryOptionCombos',
             params: {
-                filter: `categoryOptions.id:in:[${categoryOptionUids.join(',')}]`,
+                filter: [
+                    `categoryCombo.id:eq:${categoryComboId}`,
+                    `categoryOptions.id:in:[${categoryOptionUids.join(',')}]`,
+                ],
                 fields: 'id,categoryOptions[id]',
                 paging: false,
             },
@@ -34,6 +44,7 @@ export const makeResolveAttributeOptionCombo = (querySingleResource: QuerySingle
         if (matches.length > 1) {
             log.error(
                 errorCreator('Multiple category option combos match the same option set')({
+                    categoryComboId,
                     matches: matches.map(({ id }) => id),
                     categoryOptionUids,
                 }),

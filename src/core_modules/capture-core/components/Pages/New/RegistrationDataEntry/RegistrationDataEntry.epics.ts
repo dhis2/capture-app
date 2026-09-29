@@ -55,17 +55,19 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
         mergeMap(async (action: any) => {
             const { enrollmentPayload, uid, redirect } = action.payload;
             const enrollment = enrollmentPayload.enrollments[0];
+            const categoryComboId = enrollment.enrollmentCategoryComboId;
             const optionUids = enrollment.enrollmentCategoryOptionUids ?? [];
+            delete enrollment.enrollmentCategoryComboId;
             delete enrollment.enrollmentCategoryOptionUids;
 
-            if (optionUids.length > 0) {
+            if (categoryComboId && optionUids.length > 0) {
                 const resolveAOC = makeResolveAttributeOptionCombo(querySingleResource);
-                const attributeOptionCombo = await resolveAOC(optionUids);
+                const attributeOptionCombo = await resolveAOC(categoryComboId, optionUids);
                 if (!attributeOptionCombo) {
                     log.error(
                         errorCreator(
                             'Could not resolve the selected enrollment category options to an attribute option combo',
-                        )({ optionUids }),
+                        )({ categoryComboId, optionUids }),
                     );
                     return failAOCResolveForNewTrackedEntityInstanceWithEnrollment();
                 }

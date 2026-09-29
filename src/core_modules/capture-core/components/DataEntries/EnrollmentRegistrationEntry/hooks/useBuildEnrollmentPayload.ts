@@ -25,6 +25,7 @@ import {
     deriveRelatedStageEvent,
     buildEnrollmentCategoryOptionUids,
 } from '../helpers';
+import { useEnrollmentCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
@@ -82,6 +83,7 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
+    const { enrollmentProgramCategory } = useEnrollmentCategoryCombinations(programId);
 
     const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
         teiWithEnrollment: EnrollmentPayload;
@@ -170,6 +172,7 @@ export const useBuildEnrollmentPayload = ({
             attributes,
             events: allEventsToBeCreated,
             geometry: enrollmentGeometry,
+            enrollmentCategoryComboId: enrollmentProgramCategory?.id,
             enrollmentCategoryOptionUids,
         };
 
