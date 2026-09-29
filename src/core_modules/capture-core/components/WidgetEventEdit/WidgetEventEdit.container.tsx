@@ -25,6 +25,7 @@ import {
 } from '../../hooks';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
 const styles: Readonly<any> = {
     container: {
@@ -123,6 +124,15 @@ const WidgetEventEditPlain = ({
         completedAtClient: completedAt,
         scheduledAtClient: scheduledAt,
     });
+    const { enrollmentLabel, programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
+        [
+            LabelKeys.enrollmentSingular,
+            LabelKeys.programStageSingular,
+            LabelKeys.programStagePlural,
+            LabelKeys.eventSingular,
+        ],
+        { stageId },
+    );
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: true },
         trackedEntityName: undefined,
@@ -132,6 +142,10 @@ const WidgetEventEditPlain = ({
         isEventCompleted,
         canToggleCompletion,
         trackedEntityInactive: false,
+        enrollmentLabel,
+        programStageLabel,
+        programStagesLabel,
+        eventLabel,
     });
 
     return orgUnit && loadedValues ? (

@@ -4,6 +4,7 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import { useAuthority, Authorities } from '../../../../../../utils/authority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 import type { PlainProps } from './DeleteTeiAction.types';
+import { LabelKeys, useTermLabel } from '../../../../../../customLabels';
 
 // TODO - Add program and TEType access checks before adding action to prod
 export const DeleteTeiAction = ({
@@ -14,6 +15,9 @@ export const DeleteTeiAction = ({
 }: PlainProps) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority(Authorities.TEI_CASCADE_DELETE);
+    const { enrollmentsLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.enrollmentPlural, LabelKeys.eventPlural],
+    );
     const { deleteTeis, isLoading } = useCascadeDeleteTei({
         selectedRows,
         setIsDeleteDialogOpen,
@@ -30,8 +34,9 @@ export const DeleteTeiAction = ({
                 small
                 onClick={() => setIsDeleteDialogOpen(true)}
             >
-                {i18n.t('Delete {{ trackedEntityName }} with all enrollments', {
+                {i18n.t('Delete {{ trackedEntityName }} with all {{enrollmentsLabel}}', {
                     trackedEntityName: trackedEntityName.toLowerCase(),
+                    enrollmentsLabel,
                 })}
             </Button>
 
@@ -50,7 +55,10 @@ export const DeleteTeiAction = ({
                     </ModalTitle>
                     <ModalContent>
                         <span>
-                            {i18n.t('Deleting records will also delete any associated enrollments and events.')}
+                            {i18n.t(
+                                'Deleting records will also delete any associated {{enrollmentsLabel}} and {{eventsLabel}}.',
+                                { enrollmentsLabel, eventsLabel },
+                            )}
                             {' '}
                             {i18n.t('This cannot be undone.')}
                             {' '}

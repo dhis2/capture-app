@@ -11,6 +11,7 @@ import {
 import { useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
 import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
+import { LabelKeys, useTermLabel } from 'capture-core/customLabels';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
 import { EventOverflowMenu, DeleteMenuItemModal, CompleteMenuItemModal } from '../../../../../EventOverflowMenu';
@@ -68,6 +69,15 @@ const EventRowPlain = ({
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
         scheduledAtClient: convertServerToClient(eventDetails.scheduledAt, dataElementTypes.DATE) as string,
     });
+    const { enrollmentLabel, programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
+        [
+            LabelKeys.enrollmentSingular,
+            LabelKeys.programStageSingular,
+            LabelKeys.programStagePlural,
+            LabelKeys.eventSingular,
+        ],
+        { stageId: programStage?.id },
+    );
     const readOnlyMessage = getReadOnlyMessage({
         access: { program: true, trackedEntityType: true, programStage: canEditProgramStage },
         trackedEntityName: undefined,
@@ -77,6 +87,10 @@ const EventRowPlain = ({
         isEventCompleted,
         canToggleCompletion,
         trackedEntityInactive: false,
+        enrollmentLabel,
+        programStageLabel,
+        programStagesLabel,
+        eventLabel,
     });
 
     const onCompletionStatusMutate = useCallback((newStatus: string) => {
@@ -132,6 +146,7 @@ const EventRowPlain = ({
                 eventId={id}
                 enrollment={enrollment}
                 programStageName={programStage?.name}
+                stageId={programStage?.id}
                 onClose={() => setCompleteModalOpen(false)}
                 onMutate={onCompletionStatusMutate}
                 onSuccess={onCompletionStatusSuccess}
@@ -175,6 +190,7 @@ const EventRowPlain = ({
                                 <EventOverflowMenu
                                     eventId={id}
                                     eventStatus={eventDetails.status}
+                                    stageId={programStage?.id}
                                     onOpenChangelog={() => setChangelogOpen(true)}
                                     onClose={() => setActionsOpen(false)}
                                     hideMutationActions={!canEditProgramStage}

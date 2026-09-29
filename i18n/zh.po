@@ -1,14 +1,14 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
-# 晓东 林 <13981924470@126.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# 晓东 林 <13981924470@126.com>, 2026
 # Transifex Bot <>, 2026
 # easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-11T15:38:29.603Z\n"
+"POT-Creation-Date: 2026-09-25T07:38:17.502Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -419,16 +419,52 @@ msgstr "某些操作仍在进行中。请稍候。"
 msgid "Operations running"
 msgstr "运作中"
 
-msgid "No feedback for this enrollment yet"
-msgstr "此报名尚无反馈"
+msgid "No feedback for this {{enrollmentLabel}} yet"
+msgstr ""
 
-msgid "No indicator output for this enrollment yet"
-msgstr "此报名尚无指标输出"
+msgid "No indicator output for this {{enrollmentLabel}} yet"
+msgstr ""
 
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 msgstr "此事件有未保存的更改。离开此页面而不保存将丢失这些更改。您确定要放弃未保存的更改吗？"
+
+msgid "View changelog"
+msgstr "查看变更日志"
+
+msgid "An error occurred when updating event status"
+msgstr "更新事件状态时发生错误"
+
+msgid "Mark incomplete"
+msgstr "标记不完整"
+
+msgid "Mark complete"
+msgstr ""
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "An error occurred while deleting the event"
+msgstr "删除事件时发生错误"
+
+msgid "Delete event"
+msgstr "删除事件"
+
+msgid "Deleting an event is permanent and cannot be undone."
+msgstr "删除事件是永久性的，无法撤销。"
+
+msgid "Are you sure you want to delete this event?"
+msgstr "您确定要删除此事件吗？"
+
+msgid "Yes, delete event"
+msgstr "是的，删除事件"
+
+msgid "Unskip"
+msgstr "不跳过"
+
+msgid "Skip"
+msgstr "跳过"
 
 msgid "No events to display"
 msgstr "无事件可显示"
@@ -564,9 +600,6 @@ msgstr "上传文件"
 
 msgid "selected"
 msgstr "选择的"
-
-msgid "Delete"
-msgstr "删除"
 
 msgid "Select file"
 msgstr "选择文件"
@@ -710,6 +743,12 @@ msgstr "注意"
 
 msgid "Close the notice"
 msgstr "关闭通知"
+
+msgid "No feedback for this enrollment yet"
+msgstr "此报名尚无反馈"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "此报名尚无指标输出"
 
 msgid "Quick actions"
 msgstr "快速行动"
@@ -956,9 +995,6 @@ msgstr "事件"
 msgid "event"
 msgstr "事件"
 
-msgid "View changelog"
-msgstr "查看变更日志"
-
 msgid "Event details"
 msgstr "事件详情"
 
@@ -1058,6 +1094,12 @@ msgstr "发现可能的重复"
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
+msgid "View only - {{message}}"
+msgstr "仅限查看 -{{message}}"
+
+msgid "View only"
+msgstr "只读"
+
 msgid "You only have view access to this enrollment"
 msgstr "您对此仅具有查看权限注册"
 
@@ -1082,17 +1124,14 @@ msgstr "该事件 已超出编辑期限"
 msgid "This event has been completed"
 msgstr "该事件 项目已完工"
 
+msgid "You do not have access to uncomplete this event"
+msgstr "您没有权限未完成此事件"
+
 msgid "This {{trackedEntityName}} is deactivated"
 msgstr "该{{trackedEntityName}} 已停用"
 
 msgid "This tracked entity is deactivated"
 msgstr "该跟踪实体 已停用"
-
-msgid "View only - {{message}}"
-msgstr "仅限查看 -{{message}}"
-
-msgid "View only"
-msgstr "只读"
 
 msgid "Add relationship"
 msgstr "添加关系"
@@ -1326,9 +1365,6 @@ msgstr "重新激活"
 msgid "Mark as cancelled"
 msgstr "标记为已取消"
 
-msgid "Mark incomplete"
-msgstr "标记不完整"
-
 msgid "You do not have access to delete this enrollment"
 msgstr "您没有删除此登记的权限"
 
@@ -1413,9 +1449,6 @@ msgstr "事件发生日期"
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "无法加载报名的小部件。请稍后再试"
 
-msgid "Follow-up"
-msgstr "后续"
-
 msgid "Started at{{escape}}"
 msgstr "开始于{{escape}}"
 
@@ -1464,26 +1497,14 @@ msgstr "警告"
 msgid "stage not found in rules execution"
 msgstr "在规则执行中找不到阶段"
 
-msgid "Delete event"
-msgstr "删除事件"
-
-msgid "Deleting an event is permanent and cannot be undone."
-msgstr "删除事件是永久性的，无法撤销。"
-
 msgid "Are you sure you want to delete this event? "
 msgstr "您确定要删除此事件吗？ "
-
-msgid "Yes, delete event"
-msgstr "是的，删除事件"
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "转到`调度`选项卡以重新安排调度此事件"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
-
-msgid "You do not have access to uncomplete this event"
-msgstr "您没有权限未完成此事件"
 
 msgid "Geometry (Area)"
 msgstr "几何（面积）"
@@ -1497,8 +1518,8 @@ msgstr "采集的多边形。"
 msgid "No polygon captured"
 msgstr "没有采集到多边形"
 
-msgid "Event completed"
-msgstr "事件完成"
+msgid "{{eventLabel}} completed"
+msgstr ""
 
 msgid "Notes about this event"
 msgstr "事件注意事项"
@@ -1658,7 +1679,7 @@ msgid "No attributes configured"
 msgstr "未配置属性"
 
 msgid "No attributes configured to display"
-msgstr ""
+msgstr "未配置要显示的属性"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} 个人资料"
@@ -1717,30 +1738,6 @@ msgstr "这个阶段只能有一个事件"
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
-msgstr "{{occurredAt}} 属于过期时段。事件无法删除"
-
-msgid "This event is outside the edit period"
-msgstr "该事件 已超出编辑时段"
-
-msgid "An error occurred while deleting the event"
-msgstr "删除事件时发生错误"
-
-msgid "Are you sure you want to delete this event?"
-msgstr "您确定要删除此事件吗？"
-
-msgid "An error occurred when updating event status"
-msgstr "更新事件状态时发生错误"
-
-msgid "Unskip"
-msgstr "不跳过"
-
-msgid "Skip"
-msgstr "跳过"
-
-msgid "To open this event, please wait until saving is complete"
-msgstr "要打开此活动，请等待保存完成"
-
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest }} 更多"
 
@@ -1763,8 +1760,8 @@ msgstr "{{ scheduledEvents }} 已安排"
 msgid "No stages found in this program"
 msgstr "未在此节目中找到任何环节"
 
-msgid "Stages and Events"
-msgstr "阶段与活动"
+msgid "{{programStagesLabel}} and {{eventsLabel}}"
+msgstr ""
 
 msgid "An error occurred while unlinking and deleting the event."
 msgstr "在取消链接和删除事件时发生错误。"
@@ -1914,6 +1911,9 @@ msgstr "项目阶段名称"
 
 msgid "Working list could not be loaded"
 msgstr "工作列表不能载入"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgstr "{{occurredAt}} 属于过期时段。事件无法删除"
 
 msgid "Download data..."
 msgstr "下载数据"
@@ -2183,11 +2183,41 @@ msgstr "逾期"
 msgid "Skipped"
 msgstr "跳过"
 
-msgid "Visited"
-msgstr "已随访"
-
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
+
+msgid "enrollments"
+msgstr "注册人数"
+
+msgid "program stage"
+msgstr ""
+
+msgid "program stages"
+msgstr ""
+
+msgid "note"
+msgstr ""
+
+msgid "notes"
+msgstr ""
+
+msgid "relationship"
+msgstr ""
+
+msgid "relationships"
+msgstr "关系"
+
+msgid "attribute"
+msgstr ""
+
+msgid "attributes"
+msgstr ""
+
+msgid "organisation unit"
+msgstr ""
+
+msgid "follow-up"
+msgstr "后续"
 
 msgid "Program not found"
 msgstr "没有发现项目"
