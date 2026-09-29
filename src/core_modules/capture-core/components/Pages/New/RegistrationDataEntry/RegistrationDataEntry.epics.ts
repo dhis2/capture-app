@@ -17,7 +17,6 @@ import {
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { cleanUpUid } from '../NewPage.actions';
 import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
-import { resolveAttributeOptionCombo } from '../../../../utils/AOC';
 
 export const startSavingNewTrackedEntityInstanceEpic = (action$: EpicAction<any>) =>
     action$.pipe(
@@ -58,16 +57,13 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             delete enrollment.enrollmentCategoryOptionUids;
 
             if (optionUids.length > 0) {
-                const { enrollmentCategoryCombo } = getTrackerProgramThrowIfNotFound(enrollment.program);
-                const attributeOptionCombo = resolveAttributeOptionCombo(
-                    enrollmentCategoryCombo?.categoryOptionCombos ?? [],
-                    optionUids,
-                );
+                const { enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(enrollment.program);
+                const attributeOptionCombo = enrollmentCategoryCombination?.resolveAttributeOptionCombo(optionUids);
                 if (!attributeOptionCombo) {
                     log.error(
                         errorCreator(
                             'Could not resolve the selected enrollment category options to an attribute option combo',
-                        )({ optionUids, enrollmentCategoryComboId: enrollmentCategoryCombo?.id }),
+                        )({ optionUids, enrollmentCategoryCombinationId: enrollmentCategoryCombination?.id }),
                     );
                     return failAOCResolveForNewTrackedEntityInstanceWithEnrollment();
                 }

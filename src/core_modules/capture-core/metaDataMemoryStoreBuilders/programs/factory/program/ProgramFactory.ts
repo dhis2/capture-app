@@ -5,7 +5,7 @@ import {
     EventProgram,
     TrackerProgram,
     CategoryCombination,
-    EnrollmentCategoryCombo,
+    EnrollmentCategoryCombination,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
@@ -91,14 +91,14 @@ export class ProgramFactory {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    _buildEnrollmentCategoryCombo(
+    _buildEnrollmentCategoryCombination(
         cachedEnrollmentCategoryCombo: ProgramCachedCategoryCombo | null | undefined,
     ) {
         if (!cachedEnrollmentCategoryCombo || cachedEnrollmentCategoryCombo.isDefault) {
             return null;
         }
 
-        return new EnrollmentCategoryCombo((o) => {
+        return new EnrollmentCategoryCombination((o) => {
             o.id = cachedEnrollmentCategoryCombo.id;
             o.categoryOptionCombos = cachedEnrollmentCategoryCombo.categoryOptionCombos ?? [];
         });
@@ -169,7 +169,8 @@ export class ProgramFactory {
                 o.trackedEntityType = this.trackedEntityTypeCollection.get(
                     cachedProgram.trackedEntityTypeId!,
                 ) as TrackedEntityType;
-                o.enrollmentCategoryCombo = this._buildEnrollmentCategoryCombo(cachedProgram.enrollmentCategoryCombo);
+                o.enrollmentCategoryCombination =
+                    this._buildEnrollmentCategoryCombination(cachedProgram.enrollmentCategoryCombo);
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {
