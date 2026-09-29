@@ -87,9 +87,6 @@ msgstr "View active {{enrollmentLabel}}"
 msgid "Re-enroll in {{programName}}"
 msgstr "Re-enroll in {{programName}}"
 
-msgid "Re-enroll"
-msgstr "Re-enroll"
-
 msgid "Enrolled"
 msgstr "Enrolled"
 
@@ -2360,18 +2357,6 @@ msgstr "Some {{attributesLabel}} are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "From date"
-msgstr "From date"
-
-msgid "From time"
-msgstr "From time"
-
-msgid "To date"
-msgstr "To date"
-
-msgid "To time"
-msgstr "To time"
 
 msgid "Page {{currentPage}}"
 msgstr "Page {{currentPage}}"
