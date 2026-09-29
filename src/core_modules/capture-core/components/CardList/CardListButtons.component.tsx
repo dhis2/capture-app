@@ -68,12 +68,6 @@ const getViewDashboardLabel = (searchScopeType?: string, programName?: string): 
     return i18n.t('View dashboard');
 };
 
-const getReEnrollLabel = (programName: string): string =>
-    i18n.t('Re-enroll in {{programName}}', {
-        programName,
-        interpolation: { escapeValue: false },
-    });
-
 const computeButtonVisibility = (
     enrollmentType: string,
     program: TrackerProgram | undefined,
@@ -116,7 +110,7 @@ const CardListButtons: FC<Props> = ({
 
     const { showViewActiveEnrollment, showViewDashboard, showReEnroll } =
         computeButtonVisibility(enrollmentType, program, inactive);
-  
+
     const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
 
     const onViewDashboardClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
@@ -147,14 +141,18 @@ const CardListButtons: FC<Props> = ({
         buttons.push({
             dataTest: 'view-active-enrollment-button',
             onClick: onViewDashboardClick,
-            i18n.t('View active {{enrollmentLabel}}', { enrollmentLabel }),
+            label: i18n.t('View active {{enrollmentLabel}}', { enrollmentLabel }),
+        });
     }
 
     if (showReEnroll && program) {
         buttons.push({
             dataTest: 're-enrollment-button',
             onClick: onReEnrollClick,
-            label: getReEnrollLabel(program.name),
+            label: i18n.t('Re-enroll in {{programName}}', {
+                programName: program.name,
+                interpolation: { escapeValue: false },
+            }),
         });
     }
 
