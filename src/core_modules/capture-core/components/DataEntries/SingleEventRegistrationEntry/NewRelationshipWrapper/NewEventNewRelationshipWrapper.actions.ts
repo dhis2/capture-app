@@ -17,8 +17,9 @@ export const addNewEventRelationship = (
     relationshipType: { id: string; name: string },
     entity: Record<string, unknown>,
     entityType: string,
+    programId?: string | null,
 ) =>
-    actionCreator(actionTypes.ADD_NEW_EVENT_RELATIONSHIP)({ relationshipType, entity, entityType });
+    actionCreator(actionTypes.ADD_NEW_EVENT_RELATIONSHIP)({ relationshipType, entity, entityType, programId });
 
 export const recentlyAddedRelationship = (relationshipId: string) =>
     actionCreator(actionTypes.RECENTLY_ADDED_RELATIONSHIP)({ relationshipId });

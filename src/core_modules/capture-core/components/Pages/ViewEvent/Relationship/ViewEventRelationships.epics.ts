@@ -1,7 +1,7 @@
-import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
+import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import {
@@ -80,7 +80,7 @@ export const addRelationshipForViewEventEpic = (action$: any, store: any) =>
             const toEntity = payload.entity;
 
             const relationshipClientId = uuid();
-            const programId = state.currentSelections.programId;
+            const programId = state.viewEventPage?.loadedValues?.eventContainer?.event?.programId;
             const stageId = state.viewEventPage?.loadedValues?.eventContainer?.event?.programStage;
             const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId });
             const clientRelationship = {

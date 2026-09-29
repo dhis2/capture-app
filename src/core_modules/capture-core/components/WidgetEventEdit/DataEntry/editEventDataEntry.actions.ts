@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
-import { RenderFoundation, Program } from '../../../metaData';
 import { getTermLabel, LabelKeys } from '../../../customLabels';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
@@ -10,6 +9,7 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
 } from '../../../rules';
+import { RenderFoundation, Program } from '../../../metaData';
 import {
     getEventDateValidatorContainers,
     getOrgUnitValidatorContainers,
@@ -100,14 +100,14 @@ export const openEventForEditInDataEntry = ({
     },
     orgUnit: OrgUnit,
     foundation?: RenderFoundation,
-    program: Program | EventProgram | TrackerProgram,
+    program: Program | EventProgram | TrackerProgram | null,
     dataEntryId: string,
     dataEntryKey: string,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
     programCategory?: ProgramCategory
 }) => {
-    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
+    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program?.id });
     const dataEntryPropsToInclude = [
         {
             id: 'occurredAt',

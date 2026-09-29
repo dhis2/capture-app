@@ -1,6 +1,6 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacers } from '@dhis2/ui';
 import { LabelKeys, useTermLabel } from '../../../customLabels';
 import type { SearchAttribute } from '../../../metaDataMemoryStoreBuilders/common/factory/searchGroup';
@@ -23,20 +23,24 @@ const UnsupportedAttributesNotificationPlain = ({
     unsupportedAttributes,
     classes,
 }: Props) => {
-    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular]);
+    const { attributeLabel, attributesLabel } = useTermLabel([
+        LabelKeys.attributeSingular,
+        LabelKeys.attributePlural,
+    ]);
     const message =
         i18n.t('The following {{attributeLabel}} type is not supported for searching and has been hidden', {
             count: unsupportedAttributes.length,
             attributeLabel,
+            attributesLabel,
             defaultValue:
                 'The following {{attributeLabel}} type is not supported for searching and has been hidden',
             defaultValue_plural:
-                'The following {{attributeLabel}} types are not supported for searching and have been hidden',
+                'The following {{attributesLabel}} types are not supported for searching and have been hidden',
         });
 
     return (
         <div className={classes.container}>
-            <NoticeBox title={i18n.t('Some {{attributeLabel}} are hidden', { attributeLabel })} warning>
+            <NoticeBox title={i18n.t('Some {{attributesLabel}} are hidden', { attributesLabel })} warning>
                 {message}{': '}
                 {unsupportedAttributes.map((attr, index) => (
                     <span key={attr.trackedEntityAttribute.id} className={classes.attributeName}>

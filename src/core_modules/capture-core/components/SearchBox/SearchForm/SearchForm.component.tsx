@@ -93,14 +93,18 @@ const FormInformativeMessage = ({
     minAttributesRequiredToSearch,
     className,
 }: FormInformativeMessageProps) => {
-    const { attributeLabel } = useTermLabel([LabelKeys.attributeSingular]);
+    const { attributeLabel, attributesLabel } = useTermLabel([
+        LabelKeys.attributeSingular,
+        LabelKeys.attributePlural,
+    ]);
     return (
         <div className={className}>
             {i18n.t('Fill in at least {{count}} {{attributeLabel}} to search', {
                 count: minAttributesRequiredToSearch,
                 attributeLabel,
+                attributesLabel,
                 defaultValue: 'Fill in at least {{count}} {{attributeLabel}} to search',
-                defaultValue_plural: 'Fill in at least {{count}} attributes to search',
+                defaultValue_plural: 'Fill in at least {{count}} {{attributesLabel}} to search',
             })}
         </div>
     );

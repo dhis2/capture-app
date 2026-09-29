@@ -2,6 +2,7 @@ export type Props = {
     dataEntryKey: string;
     dataEntryId: string;
     programId: string;
+    stageId?: string | null;
 };
 
 export type FormNote = {

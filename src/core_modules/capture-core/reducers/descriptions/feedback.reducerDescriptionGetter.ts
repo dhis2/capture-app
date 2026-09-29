@@ -143,10 +143,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         });
     },
     [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
-        const programId = action.meta.programId;
+        const { programId, stageId } = action.meta;
         const { enrollmentLabel, eventLabel } = getTermLabel(
             [LabelKeys.enrollmentSingular, LabelKeys.eventSingular],
-            { programId },
+            { programId, stageId },
         );
         return addErrorFeedback({
             message: i18n.t(
@@ -156,8 +156,8 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         });
     },
     [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: (_state, action) => {
-        // stageId not in scope here — action.meta only carries { eventId, triggerAction }
-        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: action.meta.programId });
+        const { programId, stageId } = action.meta;
+        const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId, stageId });
         return addErrorFeedback({
             message: i18n.t('Error editing the {{eventLabel}}, the changes made were not saved', { eventLabel }),
         });
@@ -179,10 +179,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         });
     },
     [eventNoteActionTypes.ADD_NOTE_FAILED_FOR_EVENT]: (_state, action) => {
-        const programId = action.meta.programId;
+        const { programId, stageId } = action.meta;
         const { eventLabel, noteLabel } = getTermLabel(
             [LabelKeys.eventSingular, LabelKeys.noteSingular],
-            { programId },
+            { programId, stageId },
         );
         return addErrorFeedback({
             message: i18n.t('Could not save {{eventLabel}} {{noteLabel}}', { eventLabel, noteLabel }),

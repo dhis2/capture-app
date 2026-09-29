@@ -22,7 +22,7 @@ import {
 import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
-import { type RenderFoundation } from '../../../../../metaData';
+import type { RenderFoundation } from '../../../../../metaData';
 import { LabelKeys, withCustomLabels } from '../../../../../customLabels';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { newEventSaveTypes } from './newEventSaveTypes';

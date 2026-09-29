@@ -1,8 +1,6 @@
 import * as React from 'react';
-import type { ComponentType } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
@@ -76,4 +74,4 @@ class RegUnitSelectorPlain extends React.Component<Props> {
     }
 }
 export const RegUnitSelectorComponent =
-    withCustomLabels(customLabels)(withStyles(getStyles)(RegUnitSelectorPlain)) as ComponentType<OwnProps>;
+    withCustomLabels(customLabels)(withStyles(getStyles)(RegUnitSelectorPlain)) as React.ComponentType<OwnProps>;

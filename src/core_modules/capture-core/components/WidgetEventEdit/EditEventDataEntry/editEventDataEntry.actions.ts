@@ -37,6 +37,8 @@ export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: strin
 export const startSaveEditEventDataEntry = (
     eventId: string,
     serverData: any,
+    programId?: string | null,
+    stageId?: string | null,
     triggerActionCommit?: string | null,
     triggerActionRollback?: string | null,
 ) =>
@@ -51,11 +53,11 @@ export const startSaveEditEventDataEntry = (
                 },
                 commit: {
                     type: actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED,
-                    meta: { eventId, triggerAction: triggerActionCommit },
+                    meta: { eventId, programId, stageId, triggerAction: triggerActionCommit },
                 },
                 rollback: {
                     type: actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED,
-                    meta: { eventId, triggerAction: triggerActionRollback },
+                    meta: { eventId, programId, stageId, triggerAction: triggerActionRollback },
                 },
             },
         },
@@ -67,7 +69,13 @@ export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
 export const requestDeleteEventDataEntry = ({ eventId, enrollmentId }: { eventId: string; enrollmentId: string }) =>
     actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)({ eventId, enrollmentId });
 
-export const startDeleteEventDataEntry = (serverData: any, eventId: string, params: any, programId: string) =>
+export const startDeleteEventDataEntry = (
+    serverData: any,
+    eventId: string,
+    params: any,
+    programId: string,
+    stageId?: string | null,
+) =>
     actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
         offline: {
             effect: {
@@ -81,7 +89,7 @@ export const startDeleteEventDataEntry = (serverData: any, eventId: string, para
             },
             rollback: {
                 type: actionTypes.DELETE_EVENT_DATA_ENTRY_FAILED,
-                meta: { eventId, params, programId },
+                meta: { eventId, params, programId, stageId },
             },
         },
     });

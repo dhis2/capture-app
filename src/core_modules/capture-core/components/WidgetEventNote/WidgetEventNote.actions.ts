@@ -13,8 +13,14 @@ export const batchActionTypes = {
     ADD_NOTE_BATCH_FOR_EVENT: 'AddNoteBatchForEvent',
 };
 
-export const requestAddNoteForEvent = (itemId: string, dataEntryId: string, note: string, programId: string) =>
-    actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT)({ itemId, dataEntryId, note, programId });
+export const requestAddNoteForEvent = (
+    itemId: string,
+    dataEntryId: string,
+    note: string,
+    programId: string,
+    stageId?: string | null,
+) =>
+    actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT)({ itemId, dataEntryId, note, programId, stageId });
 
 export const startAddNoteForEvent = (
     eventUid: string,
@@ -22,6 +28,7 @@ export const startAddNoteForEvent = (
     selections: Record<string, unknown>,
     context: Record<string, unknown>,
     programId: string,
+    stageId?: string | null,
 ) =>
     actionCreator(actionTypes.START_ADD_NOTE_FOR_EVENT)({ selections, context }, {
         offline: {
@@ -35,7 +42,7 @@ export const startAddNoteForEvent = (
             commit: { type: actionTypes.NOTE_ADDED_FOR_EVENT, meta: { selections, context } },
             rollback: {
                 type: actionTypes.ADD_NOTE_FAILED_FOR_EVENT,
-                meta: { selections, context, programId },
+                meta: { selections, context, programId, stageId },
             },
         },
     });

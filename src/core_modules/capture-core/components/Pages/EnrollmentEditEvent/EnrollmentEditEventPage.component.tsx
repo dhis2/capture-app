@@ -1,8 +1,8 @@
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { dataEntryIds } from 'capture-core/constants';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
-import { LabelKeys, useTermLabel, CustomLabelsContext } from '../../../customLabels';
+import { LabelKeys, getTermLabel, CustomLabelsContext } from '../../../customLabels';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { TopBar } from './TopBar.container';
 import { NoticeBox } from '../../NoticeBox';
@@ -66,7 +66,7 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateEnrollmentEventsError,
     userInteractionInProgress,
 }: PlainProps) => {
-    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
+    const { eventLabel } = getTermLabel([LabelKeys.eventSingular], { programId: program?.id, stageId });
     return (
         <CustomLabelsContext.Provider value={program?.id}>
             <OrgUnitFetcher orgUnitId={orgUnitId}>

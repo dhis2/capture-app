@@ -1,7 +1,7 @@
-import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import type { EpicAction, ReduxStore } from 'capture-core-utils/types';
 import { getTermLabel, LabelKeys } from '../../../../../../customLabels';
@@ -35,6 +35,7 @@ type AddRelationshipPayload = {
     entity: any;
     entityType: string;
     relationshipType: any;
+    programId?: string | null;
 };
 
 type SaveRelationshipsPayload = {
@@ -74,10 +75,9 @@ export const addRelationshipForNewSingleEventEpic = (action$: EpicAction<AddRela
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
             const toEntity = payload.entity;
-            const programId = state.currentSelections.programId;
             const { eventLabel, relationshipLabel } = getTermLabel(
                 [LabelKeys.eventSingular, LabelKeys.relationshipSingular],
-                { programId },
+                { programId: payload.programId },
             );
 
             const newRelationship = {
