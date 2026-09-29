@@ -171,7 +171,8 @@ export const loadViewEventDataEntry =
                 currentEvent,
             });
         }
-        const filteredEffects = filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
+        const filteredEffects = currentEvent.status === 'SCHEDULE' ?
+            effects : filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
         return [
             ...dataEntryActions,
             updateRulesEffects(filteredEffects, formId),
