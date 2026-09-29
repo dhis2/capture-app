@@ -1,4 +1,5 @@
 import React, { type ComponentType, useMemo } from 'react';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
 import { useCategoryOptionsLoader } from './useCategoryOptionsLoader';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
@@ -31,7 +32,9 @@ export const withAOCFieldBuilder = (settings: Settings) =>
 const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { programId, orgUnitId } = props;
-        const { enrollmentProgramCategory, isLoading } = useEnrollmentCategoryCombinations(programId);
+        const featureSupported = featureAvailable(FEATURES.enrollmentAOC);
+        const { enrollmentProgramCategory, isLoading } =
+            useEnrollmentCategoryCombinations(programId, !featureSupported);
         const enrollmentProgramCategories = useMemo(() => (
             !isLoading && enrollmentProgramCategory ? enrollmentProgramCategory.categories : []),
         [isLoading, enrollmentProgramCategory]);
