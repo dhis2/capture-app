@@ -10,6 +10,7 @@ import {
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString } from '../../utils/routing';
 import { getScopeFromScopeId, TrackerProgram } from '../../metaData';
+import { useTermLabel, LabelKeys } from '../../customLabels';
 
 type Props = {
     currentSearchScopeId?: string,
@@ -115,6 +116,8 @@ const CardListButtons: FC<Props> = ({
 
     const { showViewActiveEnrollment, showViewDashboard, showReEnroll } =
         computeButtonVisibility(enrollmentType, program, inactive);
+  
+    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
 
     const onViewDashboardClick: ButtonEventHandler<React.MouseEvent<HTMLButtonElement>> = useCallback((_, event) => {
         event.stopPropagation();
@@ -144,8 +147,7 @@ const CardListButtons: FC<Props> = ({
         buttons.push({
             dataTest: 'view-active-enrollment-button',
             onClick: onViewDashboardClick,
-            label: i18n.t('View active enrollment'),
-        });
+            i18n.t('View active {{enrollmentLabel}}', { enrollmentLabel }),
     }
 
     if (showReEnroll && program) {

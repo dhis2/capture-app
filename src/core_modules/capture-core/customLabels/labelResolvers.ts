@@ -1,6 +1,8 @@
-import { useSelector } from 'react-redux';
-import { programCollection } from '../../metaDataMemoryStores';
-import { LABELS, type LabelConfig } from './constants/customLabels.const';
+import { useContext } from 'react';
+import { programCollection } from '../metaDataMemoryStores';
+import { useLocationQuery } from '../utils/routing';
+import { CustomLabelsContext } from './CustomLabelsContext';
+import { LABELS, type LabelConfig } from './constants';
 
 export type CustomLabelKey = keyof typeof LABELS;
 export type CustomLabels = Record<string, string>;
@@ -9,7 +11,7 @@ export type TermRequest = CustomLabelKey | { key: CustomLabelKey; plural?: boole
 type LabelSource = Record<string, unknown> | undefined | null;
 
 type ProgramScope = { programId: string | null | undefined; stageId?: string | null };
-type OptionalProgramScope = { programId?: string | null; stageId?: string | null };
+type StageScope = { stageId?: string | null };
 type ProgramContainer = { program: LabelSource };
 
 const getLabel = (key: CustomLabelKey): LabelConfig => LABELS[key];
@@ -94,13 +96,12 @@ export const getTermLabelFromProgram = (
 ): CustomLabels =>
     buildLabels(requests, (key, plural) => resolveLabel([program], key, plural));
 
-/** Use inside React components; `programId` falls back to `currentSelections.programId`. */
+/** Use inside React components; resolves programId from URL, falling back to `CustomLabelsContext` for routes whose URL lacks it. */
 export const useTermLabel = (
     requests: ReadonlyArray<TermRequest>,
-    { programId, stageId }: OptionalProgramScope = {},
+    { stageId }: StageScope = {},
 ): CustomLabels => {
-    const activeProgramId = useSelector(({ currentSelections }: any) =>
-        programId ?? currentSelections.programId);
-    return buildLabels(requests, (key, plural) =>
-        resolveFromCollection(activeProgramId, stageId, key, plural));
+    const { programId: urlProgramId } = useLocationQuery();
+    const contextProgramId = useContext(CustomLabelsContext);
+    return getTermLabel(requests, { programId: urlProgramId ?? contextProgramId, stageId });
 };

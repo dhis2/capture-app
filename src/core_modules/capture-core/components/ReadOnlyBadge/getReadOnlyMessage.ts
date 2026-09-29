@@ -1,7 +1,8 @@
 import i18n from '@dhis2/d2-i18n';
 import type { ReadOnlyMessageInput } from './ReadOnlyBadge.types';
 
-const getEnrollmentMessage = (): string => i18n.t('You only have view access to this enrollment');
+const getEnrollmentMessage = (enrollmentLabel: string): string =>
+    i18n.t('You only have view access to this {{enrollmentLabel}}', { enrollmentLabel });
 
 const getProgramMessage = (): string => i18n.t('You only have view access to this program');
 
@@ -9,15 +10,22 @@ const getTrackedEntityMessage = (trackedEntityName: string | undefined): string 
     ? i18n.t('You only have view access to this {{trackedEntityName}}', { trackedEntityName, escapeValue: false })
     : i18n.t('You only have view access to this tracked entity type'));
 
-const getProgramStageMessage = (multipleStages: boolean): string => (multipleStages
-    ? i18n.t('You only have view access to these program stages')
-    : i18n.t('You only have view access to this program stage'));
+const getProgramStageMessage = (
+    multipleStages: boolean,
+    programStageLabel: string,
+    programStagesLabel: string,
+): string => (multipleStages
+    ? i18n.t('You only have view access to these {{programStagesLabel}}', { programStagesLabel })
+    : i18n.t('You only have view access to this {{programStageLabel}}', { programStageLabel }));
 
-const getExpiredMessage = (): string => i18n.t('This event is outside the editing period');
+const getExpiredMessage = (eventLabel: string): string =>
+    i18n.t('This {{eventLabel}} is outside the editing period', { eventLabel });
 
-const getCompletedEventMessage = (): string => i18n.t('This event has been completed');
+const getCompletedEventMessage = (eventLabel: string): string =>
+    i18n.t('This {{eventLabel}} has been completed', { eventLabel });
 
-const getUncompleteAuthorityMessage = (): string => i18n.t('You do not have access to uncomplete this event');
+const getUncompleteAuthorityMessage = (eventLabel: string): string =>
+    i18n.t('You do not have access to uncomplete this {{eventLabel}}', { eventLabel });
 
 const getDeactivatedMessage = (trackedEntityName: string | undefined): string => (trackedEntityName
     ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
@@ -33,14 +41,18 @@ export const getReadOnlyMessage = ({
     isEventCompleted,
     canToggleCompletion,
     trackedEntityInactive,
+    enrollmentLabel,
+    programStageLabel,
+    programStagesLabel,
+    eventLabel,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
-    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage();
+    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage(enrollmentLabel);
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
-    if (!access.programStage) return getProgramStageMessage(multipleStages);
-    if (isEventBlockedByExpiry) return getExpiredMessage();
-    if (isEventBlockedByCompletion) return getCompletedEventMessage();
-    if (isEventCompleted && !canToggleCompletion) return getUncompleteAuthorityMessage();
+    if (!access.programStage) return getProgramStageMessage(multipleStages, programStageLabel, programStagesLabel);
+    if (isEventBlockedByExpiry) return getExpiredMessage(eventLabel);
+    if (isEventBlockedByCompletion) return getCompletedEventMessage(eventLabel);
+    if (isEventCompleted && !canToggleCompletion) return getUncompleteAuthorityMessage(eventLabel);
     return '';
 };

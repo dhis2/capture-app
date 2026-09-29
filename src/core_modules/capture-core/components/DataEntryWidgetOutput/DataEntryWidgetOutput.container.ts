@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { makeProgramRulesSelector } from './DataEntryWidgetOutput.selectors';
-import { getTermLabel, LabelKeys } from '../../metaData';
+import { getTermLabel, LabelKeys } from '../../customLabels';
 
 type OwnProps = {
     dataEntryId: string;
@@ -18,7 +18,6 @@ const makeMapStateToProps = () => {
         const { dataEntries } = state;
         const ready = !!dataEntries[dataEntryId];
         const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
-        // Example use of getTermLabel.
         const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId: selectedScopeId });
 
         return {

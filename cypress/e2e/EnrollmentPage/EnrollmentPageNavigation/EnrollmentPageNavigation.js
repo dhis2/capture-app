@@ -25,7 +25,7 @@ And('you see the registration form for the Inpatient morbidity program', () => {
 
 And('you see the registration form for the Malaria case diagnosis', () => {
     cy.get('[data-test="registration-page-content"]')
-        .contains('New Enrollment in program: Malaria case diagnosis, treatment and investigation')
+        .contains('New enrollment in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
         .contains('Saving a new enrollment in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
@@ -34,7 +34,7 @@ And('you see the registration form for the Malaria case diagnosis', () => {
 
 And('you see the registration form for the MNCH PNC program', () => {
     cy.get('[data-test="registration-page-content"]')
-        .contains('New Enrollment in program: MNCH / PNC (Adult Woman)')
+        .contains('New enrollment in program: MNCH / PNC (Adult Woman)')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
         .contains('Saving a new enrollment in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')

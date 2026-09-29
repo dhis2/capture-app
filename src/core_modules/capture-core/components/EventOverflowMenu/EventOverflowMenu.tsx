@@ -14,6 +14,7 @@ const isCompletableStatus = (status?: string) =>
 type Props = {
     eventId: string;
     eventStatus?: string;
+    stageId?: string;
     maxWidth?: string;
     dataTest?: string;
 
@@ -42,6 +43,7 @@ type Props = {
 export const EventOverflowMenu = ({
     eventId,
     eventStatus,
+    stageId,
     maxWidth,
     dataTest = 'overflow-menu',
     onOpenChangelog,
@@ -71,6 +73,7 @@ export const EventOverflowMenu = ({
                     <SkipMenuItem
                         eventId={eventId}
                         eventStatus={eventStatus}
+                        stageId={stageId}
                         onMutate={onSkipMutate}
                         onSuccess={onSkipSuccess}
                         onError={onSkipError}
@@ -84,6 +87,7 @@ export const EventOverflowMenu = ({
                     <CompletionMenuItem
                         eventId={eventId}
                         eventStatus={eventStatus}
+                        stageId={stageId}
                         onMutate={onCompletionMutate}
                         onSuccess={onCompletionSuccess}
                         onError={onCompletionError}

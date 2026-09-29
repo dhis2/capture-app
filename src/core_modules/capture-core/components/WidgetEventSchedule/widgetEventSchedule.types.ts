@@ -23,7 +23,6 @@ export type ContainerProps = {
 };
 
 export type Props = {
-   programId: string;
    stageId: string;
    eventData: any;
    enrolledAt: string;

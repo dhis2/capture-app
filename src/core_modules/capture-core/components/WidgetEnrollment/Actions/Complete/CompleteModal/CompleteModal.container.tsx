@@ -5,7 +5,14 @@ import { CompleteModalComponent } from './CompleteModal.component';
 import { plainStatus } from '../../../constants/status.const';
 import type { Props } from './completeModal.types';
 
-export const CompleteModal = ({ enrollment, events, programStages, setOpenCompleteModal, onUpdateStatus }: Props) => {
+export const CompleteModal = ({
+    enrollment,
+    events,
+    programStages,
+    program,
+    setOpenCompleteModal,
+    onUpdateStatus,
+}: Props) => {
     const getUpdatedAt = useServerFormattedNow();
     const { programStagesWithActiveEvents, programStagesWithoutAccess } = useMemo(
         () =>
@@ -62,6 +69,7 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
         <CompleteModalComponent
             programStagesWithActiveEvents={programStagesWithActiveEvents}
             programStagesWithoutAccess={programStagesWithoutAccess}
+            program={program}
             setOpenCompleteModal={setOpenCompleteModal}
             onCompleteEnrollment={onHandleCompleteEnrollment}
             onCompleteEnrollmentAndEvents={onHandleCompleteEnrollmentAndEvents}
