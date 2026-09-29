@@ -1,1 +1,1 @@
-yarn linter:check && yarn tsc:check
+yarn linter:check && yarn tsc:check && yarn i18n:verify

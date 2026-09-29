@@ -63,7 +63,11 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.DATE_RANGE]: getDateRangeFieldConfig,
     [dataElementTypes.DATETIME]: getDateTimeFieldConfig,
     [dataElementTypes.DATETIME_RANGE]: getDateTimeRangeFieldConfig,
-    [dataElementTypes.TIME]: getTextFieldConfig,
+    [dataElementTypes.TIME]:
+    (metaData: DataElement, options: any, querySingleResource: QuerySingleResource) => {
+        const fieldConfig = getTextFieldConfig(metaData, options, querySingleResource, { placeholder: 'hh:mm' });
+        return fieldConfig;
+    },
     [dataElementTypes.TIME_RANGE]: getTextRangeFieldConfig,
     [dataElementTypes.PERCENTAGE]: getTextFieldConfig,
     [dataElementTypes.PERCENTAGE_RANGE]: getTextRangeFieldConfig,

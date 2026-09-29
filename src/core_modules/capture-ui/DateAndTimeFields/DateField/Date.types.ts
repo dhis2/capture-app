@@ -11,7 +11,7 @@ export type ValidationProps = {
 
 export type Props = {
     value?: any | null;
-    width: number;
+    width?: number | string;
     maxWidth?: string | number | null;
     calendarWidth?: string | null;
     inputWidth?: string | null;

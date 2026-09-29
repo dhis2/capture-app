@@ -16,7 +16,7 @@ import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/usePr
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-
+import { countNonSkippedEvents } from '../../../../events/countNonSkippedEvents';
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
@@ -61,10 +61,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
             accStage.push({
                 id: currentStage.id,
                 dataAccess: currentStage.access.data,
-                eventCount: (enrollment?.events
-                    ?.filter((event: any) => event.programStage === currentStage.id)
-                    ?.length
-                ),
+                eventCount: countNonSkippedEvents(enrollment?.events, currentStage.id),
                 displayName: currentStage.displayName,
                 style: currentStage.style,
                 repeatable: currentStage.repeatable,

@@ -2359,18 +2359,6 @@ msgstr "Some {{attributesLabel}} are hidden"
 msgid "Set coordinate"
 msgstr "Set coordinate"
 
-msgid "From date"
-msgstr "From date"
-
-msgid "From time"
-msgstr "From time"
-
-msgid "To date"
-msgstr "To date"
-
-msgid "To time"
-msgstr "To time"
-
 msgid "Page {{currentPage}}"
 msgstr "Page {{currentPage}}"
 
