@@ -1,3 +1,10 @@
+# [107.6.0](https://github.com/dhis2/capture-app/compare/v107.5.2...v107.6.0) (2026-09-29)
+
+
+### Features
+
+* [DHIS2-18573] add UID header link to bulk operation error messages ([#4665](https://github.com/dhis2/capture-app/issues/4665)) ([18bfed4](https://github.com/dhis2/capture-app/commit/18bfed49afdf2f612bed8b7a1773d3c20605a169))
+
 ## [107.5.2](https://github.com/dhis2/capture-app/compare/v107.5.1...v107.5.2) (2026-09-29)
 
 
