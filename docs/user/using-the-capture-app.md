@@ -188,7 +188,7 @@ As shown in the image you have three options: **Enrollment date**, **Incident da
 Choosing **Enrollment date** sets the event's report date to the enrollment date.
 Choosing **Incident date** sets the report date to the incident date (or the enrollment date, if the program does not have an incident date).
 Choosing **None (report date will be empty)** leaves the report date empty, and the user has to fill it in when the event opens.
-The scheduled date is calculated independently of this setting: it is the date selected under **Reference date for scheduling**, described under [Schedule type of event](#schedule-type-of-event) below. **Scheduled days from reference date** is not added to the scheduled date of these events.
+The scheduled date is calculated independently of this setting, based on the **Reference date for scheduling** option described under [Schedule type of event](#schedule-type-of-event) below.
 
 #### Schedule type of event
 
