@@ -1,3 +1,32 @@
+## [107.6.1](https://github.com/dhis2/capture-app/compare/v107.6.0...v107.6.1) (2026-09-30)
+
+
+### Bug Fixes
+
+* [DHIS2-21630] program rule assignment in scheduled events ([#4758](https://github.com/dhis2/capture-app/issues/4758)) ([2adfa6b](https://github.com/dhis2/capture-app/commit/2adfa6bd52df7b36fff1a490429c04a5251e8aea))
+
+# [107.6.0](https://github.com/dhis2/capture-app/compare/v107.5.2...v107.6.0) (2026-09-29)
+
+
+### Features
+
+* [DHIS2-18573] add UID header link to bulk operation error messages ([#4665](https://github.com/dhis2/capture-app/issues/4665)) ([18bfed4](https://github.com/dhis2/capture-app/commit/18bfed49afdf2f612bed8b7a1773d3c20605a169))
+
+## [107.5.2](https://github.com/dhis2/capture-app/compare/v107.5.1...v107.5.2) (2026-09-29)
+
+
+### Bug Fixes
+
+* [DHIS2-21942] Re-enroll button navigates to registration ([#4739](https://github.com/dhis2/capture-app/issues/4739)) ([7d6d7ee](https://github.com/dhis2/capture-app/commit/7d6d7eee3536f904b3c4567f71f472978c11d8f3))
+
+## [107.5.1](https://github.com/dhis2/capture-app/compare/v107.5.0...v107.5.1) (2026-09-29)
+
+
+### Bug Fixes
+
+* [DHIS2-20459] Align Date, DateTime and Time value type fields ([#4737](https://github.com/dhis2/capture-app/issues/4737)) ([af0ce8a](https://github.com/dhis2/capture-app/commit/af0ce8af0446d5616033d1155a8ab0776e2e9797))
+* [DHIS2-21902] Not count SKIPPED events against non-repeatable stage limit ([#4744](https://github.com/dhis2/capture-app/issues/4744)) ([0de6437](https://github.com/dhis2/capture-app/commit/0de643747191615a1b20c0e7192a223a852a63f1))
+
 # [107.5.0](https://github.com/dhis2/capture-app/compare/v107.4.1...v107.5.0) (2026-09-29)
 
 

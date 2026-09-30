@@ -1,2 +1,2 @@
-export { DeleteAction } from './DeleteAction/DeleteAction';
-export { CompleteAction } from './CompleteAction/CompleteAction';
+export { CompleteEventsAction } from './CompleteEventsAction';
+export { DeleteEventsAction } from './DeleteEventsAction';

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
 import { cx } from '@emotion/css';
@@ -17,15 +16,17 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
         value,
         orientation,
         classes,
-        dateLabel = i18n.t('Date'),
-        timeLabel = i18n.t('Time'),
         innerMessage,
         disabled,
         ...passOnProps
     } = props;
 
+    const dateLabel = passOnProps.dateFormat?.toLowerCase() || 'yyyy-mm-dd';
+    const timeLabel = 'hh:mm';
+
     const [dateError, setDateError] = useState({ error: null, errorCode: null });
-    const touchedFields = useRef(new Set());
+    const dateTouched = useRef(false);
+    const timeTouched = useRef(false);
 
     const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         onBlur(null, {}, {});
@@ -48,8 +49,8 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
         });
     }, [onChange, value]);
 
-    const handleBlur = (newValue: Value, otherFieldHasValue: any) => {
-        const touched = touchedFields.current.size === 2;
+    const handleBlur = (newValue: Value, extraErrorInfo?: { error?: any; errorCode?: any }) => {
+        const touched = dateTouched.current && timeTouched.current;
 
         if (!newValue.date && !newValue.time) {
             onBlur(undefined, { touched }, {});
@@ -59,29 +60,25 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
         onBlur(
             newValue,
             {
-                touched: touched || otherFieldHasValue.touched,
-                error: otherFieldHasValue?.error,
-                errorCode: otherFieldHasValue?.errorCode,
+                touched,
+                error: extraErrorInfo?.error,
+                errorCode: extraErrorInfo?.errorCode,
             },
             {},
         );
     };
 
     const handleTimeBlur = (timeValue: string) => {
-        touchedFields.current.add('timeTouched');
+        timeTouched.current = true;
         const currentValue = value || {};
         handleBlur(
             { time: timeValue, date: currentValue.date },
-            {
-                touched: !!currentValue.date,
-                error: dateError.error,
-                errorCode: dateError.errorCode,
-            },
+            { error: dateError.error, errorCode: dateError.errorCode },
         );
     };
 
     const handleDateBlur = (dateValue: string, options?: any) => {
-        touchedFields.current.add('dateTouched');
+        dateTouched.current = true;
         setDateError({
             error: options?.error,
             errorCode: options?.errorCode,
@@ -90,11 +87,7 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
         const currentValue = value || {};
         handleBlur(
             { time: currentValue.time, date: dateValue },
-            {
-                touched: !!currentValue.time,
-                error: options?.error,
-                errorCode: options?.errorCode,
-            },
+            { error: options?.error, errorCode: options?.errorCode },
         );
     };
 

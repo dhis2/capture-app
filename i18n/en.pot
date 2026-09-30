@@ -87,9 +87,6 @@ msgstr "View active {{enrollmentLabel}}"
 msgid "Re-enroll in {{programName}}"
 msgstr "Re-enroll in {{programName}}"
 
-msgid "Re-enroll"
-msgstr "Re-enroll"
-
 msgid "Enrolled"
 msgstr "Enrolled"
 
@@ -1957,20 +1954,11 @@ msgstr "Error completing {{eventsLabel}}"
 msgid "There was an error completing the {{eventsLabel}}."
 msgstr "There was an error completing the {{eventsLabel}}."
 
-msgid "Details (Advanced)"
-msgstr "Details (Advanced)"
-
-msgid "An unknown error occurred."
-msgstr "An unknown error occurred."
-
 msgid "An error occurred while completing {{eventsLabel}}"
 msgstr "An error occurred while completing {{eventsLabel}}"
 
 msgid "You do not have access to delete {{eventsLabel}}"
 msgstr "You do not have access to delete {{eventsLabel}}"
-
-msgid "An error occurred while deleting the {{eventsLabel}}"
-msgstr "An error occurred while deleting the {{eventsLabel}}"
 
 msgid "Delete {{eventsLabel}}"
 msgstr "Delete {{eventsLabel}}"
@@ -1980,6 +1968,19 @@ msgstr "This cannot be undone."
 
 msgid "Are you sure you want to delete the selected {{eventsLabel}}?"
 msgstr "Are you sure you want to delete the selected {{eventsLabel}}?"
+
+msgid "Error deleting {{eventsLabel}}"
+msgstr "Error deleting {{eventsLabel}}"
+
+msgid ""
+"There was an error while deleting the {{eventsLabel}}. Please see the "
+"details below."
+msgstr ""
+"There was an error while deleting the {{eventsLabel}}. Please see the "
+"details below."
+
+msgid "An error occurred while deleting the {{eventsLabel}}"
+msgstr "An error occurred while deleting the {{eventsLabel}}"
 
 msgid "Owner {{orgUnitLabel}}"
 msgstr "Owner {{orgUnitLabel}}"
@@ -2044,9 +2045,6 @@ msgstr "Mark all {{eventsLabel}} within {{enrollmentsLabel}} as complete"
 msgid "Complete {{enrollmentsLabel}}"
 msgstr "Complete {{enrollmentsLabel}}"
 
-msgid "Error completing {{enrollmentsLabel}}"
-msgstr "Error completing {{enrollmentsLabel}}"
-
 msgid "No active {{enrollmentsLabel}} to complete"
 msgstr "No active {{enrollmentsLabel}} to complete"
 
@@ -2054,6 +2052,9 @@ msgid "Complete {{count}} {{enrollmentLabel}}"
 msgid_plural "Complete {{count}} {{enrollmentLabel}}"
 msgstr[0] "Complete {{count}} {{enrollmentLabel}}"
 msgstr[1] "Complete {{count}} {{enrollmentsLabel}}"
+
+msgid "Error completing {{enrollmentsLabel}}"
+msgstr "Error completing {{enrollmentsLabel}}"
 
 msgid "An error occurred when completing the {{enrollmentsLabel}}"
 msgstr "An error occurred when completing the {{enrollmentsLabel}}"
@@ -2063,12 +2064,6 @@ msgstr "An unknown error occurred when completing {{enrollmentsLabel}}"
 
 msgid "You do not have access to delete {{enrollmentsLabel}}"
 msgstr "You do not have access to delete {{enrollmentsLabel}}"
-
-msgid "Delete {{enrollmentsLabel}}"
-msgstr "Delete {{enrollmentsLabel}}"
-
-msgid "Delete selected {{enrollmentsLabel}}"
-msgstr "Delete selected {{enrollmentsLabel}}"
 
 msgid ""
 "An error occurred while loading the selected {{enrollmentsLabel}}. Please "
@@ -2092,34 +2087,29 @@ msgid_plural "Cancelled {{enrollmentsLabel}} ({{count}})"
 msgstr[0] "Cancelled {{enrollmentsLabel}} ({{count}})"
 msgstr[1] "Cancelled {{enrollmentsLabel}} ({{count}})"
 
+msgid "Error deleting {{enrollmentsLabel}}"
+msgstr "Error deleting {{enrollmentsLabel}}"
+
+msgid ""
+"There was an error while deleting the {{enrollmentsLabel}}. Please see the "
+"details below."
+msgstr ""
+"There was an error while deleting the {{enrollmentsLabel}}. Please see the "
+"details below."
+
+msgid "Delete selected {{enrollmentsLabel}}"
+msgstr "Delete selected {{enrollmentsLabel}}"
+
 msgid "Delete {{count}} {{enrollmentLabel}}"
 msgid_plural "Delete {{count}} {{enrollmentLabel}}"
 msgstr[0] "Delete {{count}} {{enrollmentLabel}}"
 msgstr[1] "Delete {{count}} {{enrollmentsLabel}}"
 
+msgid "Delete {{enrollmentsLabel}}"
+msgstr "Delete {{enrollmentsLabel}}"
+
 msgid "An error occurred when deleting {{enrollmentsLabel}}"
 msgstr "An error occurred when deleting {{enrollmentsLabel}}"
-
-msgid "Delete {{ trackedEntityName }} with all {{enrollmentsLabel}}"
-msgstr "Delete {{ trackedEntityName }} with all {{enrollmentsLabel}}"
-
-msgid "Delete {{count}} {{ trackedEntityName }}"
-msgid_plural "Delete {{count}} {{ trackedEntityName }}"
-msgstr[0] "Delete {{count}} {{ trackedEntityName }}"
-msgstr[1] "Delete {{count}} {{ trackedEntityName }}"
-
-msgid ""
-"Deleting records will also delete any associated {{enrollmentsLabel}} and "
-"{{eventsLabel}}."
-msgstr ""
-"Deleting records will also delete any associated {{enrollmentsLabel}} and "
-"{{eventsLabel}}."
-
-msgid "Are you sure you want to delete?"
-msgstr "Are you sure you want to delete?"
-
-msgid "An error occurred while deleting the records"
-msgstr "An error occurred while deleting the records"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
@@ -2182,6 +2172,12 @@ msgstr[1] "{{count}} selected"
 
 msgid "Deselect all"
 msgstr "Deselect all"
+
+msgid "Details (Advanced)"
+msgstr "Details (Advanced)"
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
 
 msgid "Download as JSON"
 msgstr "Download as JSON"
@@ -2370,18 +2366,6 @@ msgstr "Some {{attributesLabel}} are hidden"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "From date"
-msgstr "From date"
-
-msgid "From time"
-msgstr "From time"
-
-msgid "To date"
-msgstr "To date"
-
-msgid "To time"
-msgstr "To time"
 
 msgid "Page {{currentPage}}"
 msgstr "Page {{currentPage}}"
