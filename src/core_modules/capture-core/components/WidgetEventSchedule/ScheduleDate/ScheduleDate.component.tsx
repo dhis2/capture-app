@@ -64,6 +64,7 @@ const ScheduleDatePlain = ({
     serverScheduleDate,
     setScheduleDate,
     setValidation,
+    setInternalComponentError,
     orgUnit,
     serverSuggestedScheduleDate,
     displayDueDateLabel,
@@ -88,6 +89,7 @@ const ScheduleDatePlain = ({
                     styles={baseInputStyles}
                     onBlur={(date: string, internalComponentError: any) => {
                         setScheduleDate(date);
+                        setInternalComponentError(internalComponentError);
                         setValidation(validateScheduleDate(date, expiryPeriod, internalComponentError));
                     }}
                     calendarType={systemSettingsStore.get().calendar}

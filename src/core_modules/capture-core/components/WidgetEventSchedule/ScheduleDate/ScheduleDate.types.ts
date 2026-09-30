@@ -1,4 +1,4 @@
-import type { OrgUnitValue, Validation } from '../widgetEventSchedule.types';
+import type { InternalComponentError, OrgUnitValue, Validation } from '../widgetEventSchedule.types';
 
 export type PlainProps = {
     stageId: string;
@@ -19,4 +19,5 @@ export type PlainProps = {
     };
     validation?: Validation;
     setValidation: (validation: Validation) => void;
+    setInternalComponentError: (error: InternalComponentError | undefined) => void;
 };

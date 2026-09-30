@@ -6,6 +6,11 @@ export type Validation = {
     validationText: string;
 };
 
+export type InternalComponentError = {
+    error?: string;
+    errorCode?: string;
+};
+
 export type OrgUnitValue = {
     id: string;
     name?: string;
@@ -79,4 +84,5 @@ export type Props = {
    onClickCategoryOption: (optionId: string, categoryId: string) => void;
    validation?: Validation;
    setValidation: (validation: Validation) => void;
+   setInternalComponentError: (error: InternalComponentError | undefined) => void;
 };

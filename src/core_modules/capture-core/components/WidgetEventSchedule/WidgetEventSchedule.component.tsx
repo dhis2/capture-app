@@ -55,6 +55,7 @@ const WidgetEventSchedulePlain = ({
     categoryOptionsError,
     validation,
     setValidation,
+    setInternalComponentError,
     saveAttempted,
     ...passOnProps
 }: Props & WithStyles<typeof styles>) => {
@@ -97,6 +98,7 @@ const WidgetEventSchedulePlain = ({
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
                         validation={validation}
                         setValidation={setValidation}
+                        setInternalComponentError={setInternalComponentError}
                         {...passOnProps}
                     />
                     <Divider className={classes.divider} />
