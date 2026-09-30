@@ -188,7 +188,7 @@ As shown in the image you have three options: **Enrollment date**, **Incident da
 Choosing **Enrollment date** sets the event's report date to the enrollment date.
 Choosing **Incident date** sets the report date to the incident date (or the enrollment date, if the program does not have an incident date).
 Choosing **None (report date will be empty)** leaves the report date empty, and the user has to fill it in when the event opens.
-The scheduled date is calculated independently of this setting, based on the **Reference date for scheduling** option described under [Schedule type of event](#schedule-type-of-event) below.
+The scheduled date is not affected by this setting; see [Schedule type of event](#schedule-type-of-event) below for how it is calculated.
 
 #### Schedule type of event
 
@@ -1330,7 +1330,7 @@ It’ll be locked with an icon next to it and a tooltip saying “Scheduled date
 #### Scheduled date with Hide scheduled date enabled { #scheduled-date-with-hide-due-date-enabled }
 If **Hide scheduled date** is checked in the **Creation and scheduling** section of the program stage in the Metadata Management app, scheduled date will not be shown in the form. 
 
-However, you can still schedule an event, but the date is chosen automatically and can not be changed: it is always the date selected under **Reference date for scheduling** plus **Scheduled days from reference date**. **Default next scheduled date** and **Standard interval days** are not used. 
+However, you can still schedule an event, but the date is chosen automatically from the program stage's scheduling settings and can not be changed. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
 ### Ask user to complete enrollment after completion { #ask-user-to-complete-program-when-stage-is-complete }
