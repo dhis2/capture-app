@@ -53,7 +53,7 @@ export const useUpdateEnrollmentAOC = ({
         const attributeOptionCombo = resolveAttributeOptionCombo(
             enrollmentCategoryCombo?.categoryOptionCombos ?? [],
             categoryOptionUids,
-            { enrollmentCategoryComboId: enrollmentCategoryCombo?.id },
+            enrollmentCategoryCombo?.id,
         );
         if (!attributeOptionCombo) {
             onError?.('Could not resolve the selected category options to an attribute option combo.');
