@@ -1,9 +1,8 @@
-import { useCallback, useMemo } from 'react';
-import { useDataEngine, useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
+import { useCallback } from 'react';
+import { useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
-import { makeQuerySingleResource } from '../../../utils/api';
-import { makeResolveAttributeOptionCombo } from '../../../utils/AOC';
+import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
 import { processErrorReports } from '../processErrorReports';
 
 const enrollmentUpdate: Mutation = {
@@ -28,13 +27,7 @@ export const useUpdateEnrollmentAOC = ({
     onSuccess,
 }: UseUpdateEnrollmentAOCProps) => {
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
-    const dataEngine = useDataEngine();
     const { fromClientDate } = useTimeZoneConversion();
-
-    const resolveAttributeOptionCombo = useMemo(
-        () => makeResolveAttributeOptionCombo(makeQuerySingleResource(dataEngine.query.bind(dataEngine))),
-        [dataEngine],
-    );
 
     const [updateEnrollmentMutation, { loading: saving }] = useDataMutation(enrollmentUpdate, {
         onComplete: () => {
@@ -48,11 +41,14 @@ export const useUpdateEnrollmentAOC = ({
 
     const update = useCallback(async (categoryOptionUids: ReadonlyArray<string>): Promise<boolean> => {
         if (!enrollmentAOCSupported || !enrollment || saving) return false;
-        const attributeOptionCombo = await resolveAttributeOptionCombo(categoryOptionUids);
+
+        const { enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(enrollment.program);
+        const attributeOptionCombo = enrollmentCategoryCombination?.resolveAttributeOptionCombo(categoryOptionUids);
         if (!attributeOptionCombo) {
             onError?.('Could not resolve the selected category options to an attribute option combo.');
             return false;
         }
+
         try {
             await updateEnrollmentMutation({
                 ...enrollment,
@@ -63,8 +59,7 @@ export const useUpdateEnrollmentAOC = ({
         } catch {
             return false;
         }
-    }, [enrollmentAOCSupported, enrollment, saving, resolveAttributeOptionCombo,
-        updateEnrollmentMutation, onError, fromClientDate]);
+    }, [enrollmentAOCSupported, enrollment, saving, updateEnrollmentMutation, onError, fromClientDate]);
 
     return { update, saving };
 };
