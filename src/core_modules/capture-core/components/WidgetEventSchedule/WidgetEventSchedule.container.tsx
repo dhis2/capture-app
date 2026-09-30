@@ -104,7 +104,7 @@ export const WidgetEventSchedule = ({
 
     const onHandleSchedule = useCallback(() => {
         setSaveAttempted(true);
-        const dateValidation = validateScheduleDate(scheduleDate, expiryPeriod);
+        const dateValidation = validation ?? validateScheduleDate(scheduleDate, expiryPeriod);
         setValidation(dateValidation);
         if (dateValidation.error) { return; }
         if (!isFormValid) { return; }
@@ -139,6 +139,7 @@ export const WidgetEventSchedule = ({
         dispatch,
         scheduleDate,
         expiryPeriod,
+        validation,
         notes,
         programId,
         selectedOrgUnitId,
