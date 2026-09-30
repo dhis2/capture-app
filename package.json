@@ -129,7 +129,7 @@
         "jsdoc": "^4.0.5",
         "jsdoc-babel": "^0.5.0",
         "jsdoc-export-default-interop": "^0.3.1",
-        "p-limit": "^7.3.1",
+        "p-limit": "^7.3.3",
         "patch-package": "^8.0.1",
         "postinstall-postinstall": "^2.1.0",
         "redux-devtools-extension": "^2.13.9",
