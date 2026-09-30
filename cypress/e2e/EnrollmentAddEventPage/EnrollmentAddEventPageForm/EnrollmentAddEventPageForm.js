@@ -53,7 +53,12 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) => {
+    cy.intercept('POST', '**/tracker?async=false').as('postNewEvent');
     cy.visit(url);
+});
+
+And('the new event request has completed', () => {
+    cy.wait('@postNewEvent', { timeout: 30000 });
 });
 
 Given('you select the schedule tab', () => {
