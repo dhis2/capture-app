@@ -160,6 +160,11 @@ export const WidgetEventSchedule = ({
         setNotes([...notes, newNote]);
     };
 
+    const onHandleCancel = useCallback(() => {
+        setSaveAttempted(false);
+        onCancel();
+    }, [onCancel]);
+
     const onSetAssignee = useCallback((user: any) => setAssignee(user), []);
     const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
         setSelectedCategories((prevCategoryOptions: any) => ({
@@ -204,7 +209,7 @@ export const WidgetEventSchedule = ({
             suggestedScheduleDate={suggestedScheduleDate}
             serverSuggestedScheduleDate={serverSuggestedScheduleDate}
             validation={validation}
-            onCancel={onCancel}
+            onCancel={onHandleCancel}
             setScheduleDate={setScheduleDate}
             setScheduledOrgUnit={setScheduledOrgUnit}
             saveAttempted={saveAttempted}

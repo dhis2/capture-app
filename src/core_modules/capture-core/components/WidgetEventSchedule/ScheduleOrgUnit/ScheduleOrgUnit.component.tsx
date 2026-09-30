@@ -40,9 +40,9 @@ export const ScheduleOrgUnit = ({
     const [touched, setTouched] = useState(false);
     const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
 
-    const handleSelect = (event: OrgUnitValue) => {
+    const handleSelect = (selectedOrgUnit: OrgUnitValue) => {
         setTouched(true);
-        onSelectOrgUnit(event);
+        onSelectOrgUnit(selectedOrgUnit);
     };
 
     const handleDeselect = () => {
