@@ -9,12 +9,10 @@ type CategoryOptionCombo = {
 };
 
 export class EnrollmentCategoryCombination {
-    _id!: string;
-    _categoryOptionCombos!: Array<CategoryOptionCombo>;
+    _id = '';
+    _categoryOptionCombos: Array<CategoryOptionCombo> = [];
 
     constructor(initFn: ((_this: EnrollmentCategoryCombination) => void) | null) {
-        this.id = '';
-        this.categoryOptionCombos = [];
         initFn && isFunction(initFn) && initFn(this);
     }
 
