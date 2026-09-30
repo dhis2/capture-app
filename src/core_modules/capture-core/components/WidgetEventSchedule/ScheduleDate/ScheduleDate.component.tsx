@@ -71,15 +71,10 @@ const ScheduleDatePlain = ({
     classes,
     hideDueDate,
     expiryPeriod,
-    saveAttempted,
     stageId,
 }: Props) => {
     const scheduleDateLabel = i18n.t('Schedule date / Due date');
-
-    const currentValidation = saveAttempted
-        ? validateScheduleDate(scheduleDate, expiryPeriod)
-        : validation;
-    const errorMessage = currentValidation?.error ? currentValidation.validationText : undefined;
+    const errorMessage = validation?.error ? validation.validationText : undefined;
 
     return (
         <div className={hideDueDate ? classes.autoScheduledWrapper : classes.fieldWrapper}>

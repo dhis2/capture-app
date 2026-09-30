@@ -19,5 +19,4 @@ export type PlainProps = {
     };
     validation?: Validation;
     setValidation: (validation: Validation) => void;
-    saveAttempted: boolean;
 };
