@@ -9,14 +9,11 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from 'capture-core/components/FormFields/New';
-import { isValidDate, isValidPeriod } from 'capture-core/utils/validation/validators/form';
-import { hasValue } from 'capture-core-utils/validators/form';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
 import type { PlainProps } from './ScheduleDate.types';
-import { convertFormToClient } from '../../../converters';
-import { dataElementTypes } from '../../../metaData';
+import { validateScheduleDate } from '../validateScheduleDate';
 
 const baseInputStyles = {
     inputContainerStyle: { flexBasis: 150 },
@@ -78,48 +75,9 @@ const ScheduleDatePlain = ({
     stageId,
 }: Props) => {
     const scheduleDateLabel = i18n.t('Schedule date / Due date');
-    const validateDate = (
-        dateString: string,
-        internalComponentError?: { error?: string; errorCode?: string },
-    ) => {
-        if (!hasValue(dateString)) {
-            return {
-                error: true,
-                validationText: i18n.t('A value is required'),
-            };
-        }
-
-        const dateValidation = isValidDate(dateString, internalComponentError);
-        const occurredAtClient = convertFormToClient(dateString, dataElementTypes.DATE) as string;
-        if (!dateValidation.valid || !occurredAtClient) {
-            return {
-                error: true,
-                validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
-            };
-        }
-
-        if (expiryPeriod) {
-            const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
-            if (!isWithinValidPeriod) {
-                return {
-                    error: true,
-                    validationText: i18n.t(
-                        'The date entered belongs to an expired period. '
-                            + 'Enter a date after {{firstValidDate}}.',
-                        { firstValidDate, interpolation: { escapeValue: false } },
-                    ),
-                };
-            }
-        }
-
-        return {
-            error: false,
-            validationText: '',
-        };
-    };
 
     const currentValidation = saveAttempted
-        ? validateDate(scheduleDate ?? '')
+        ? validateScheduleDate(scheduleDate, expiryPeriod)
         : validation;
     const errorMessage = currentValidation?.error ? currentValidation.validationText : undefined;
 
@@ -135,7 +93,7 @@ const ScheduleDatePlain = ({
                     styles={baseInputStyles}
                     onBlur={(date: string, internalComponentError: any) => {
                         setScheduleDate(date);
-                        setValidation(validateDate(date, internalComponentError));
+                        setValidation(validateScheduleDate(date, expiryPeriod, internalComponentError));
                     }}
                     calendarType={systemSettingsStore.get().calendar}
                     dateFormat={systemSettingsStore.get().dateFormat}

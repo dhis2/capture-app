@@ -22,6 +22,7 @@ import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { useProgramExpiryForUser } from '../../hooks';
+import { validateScheduleDate } from './validateScheduleDate';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -103,6 +104,9 @@ export const WidgetEventSchedule = ({
 
     const onHandleSchedule = useCallback(() => {
         setSaveAttempted(true);
+        const dateValidation = validateScheduleDate(scheduleDate, expiryPeriod);
+        setValidation(dateValidation);
+        if (dateValidation.error) { return; }
         if (!isFormValid) { return; }
         if (programCategory?.categories &&
             Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
@@ -115,8 +119,9 @@ export const WidgetEventSchedule = ({
             setCategoryOptionsError(errors);
             return;
         }
+        const dispatchServerScheduleDate = convertScheduleDate(scheduleDate, dateValidation);
         dispatch(requestScheduleEvent({
-            scheduleDate: serverScheduleDate,
+            scheduleDate: dispatchServerScheduleDate,
             orgUnitId: selectedOrgUnitId,
             notes,
             programId,
@@ -132,7 +137,8 @@ export const WidgetEventSchedule = ({
         }));
     }, [
         dispatch,
-        serverScheduleDate,
+        scheduleDate,
+        expiryPeriod,
         notes,
         programId,
         selectedOrgUnitId,
