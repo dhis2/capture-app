@@ -25,6 +25,7 @@ import {
     deriveRelatedStageEvent,
     buildEnrollmentCategoryOptionUids,
 } from '../helpers';
+import { attributeOptionsKey } from '../../../DataEntryDhis2Helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
@@ -104,9 +105,8 @@ export const useBuildEnrollmentPayload = ({
 
         const { stages } = getTrackerProgramThrowIfNotFound(programId);
 
-        const attributeCategoryOptionsId = 'attributeCategoryOptions';
         const attributeCategoryOptions = Object.keys(serverValuesForMainValues)
-            .filter(key => key.startsWith(attributeCategoryOptionsId))
+            .filter(key => key.startsWith(attributeOptionsKey))
             .reduce((acc, key) => {
                 const categoryId = key.split('-')[1];
                 acc[categoryId] = serverValuesForMainValues[key];
