@@ -1,3 +1,10 @@
+## [107.6.1](https://github.com/dhis2/capture-app/compare/v107.6.0...v107.6.1) (2026-09-30)
+
+
+### Bug Fixes
+
+* [DHIS2-21630] program rule assignment in scheduled events ([#4758](https://github.com/dhis2/capture-app/issues/4758)) ([2adfa6b](https://github.com/dhis2/capture-app/commit/2adfa6bd52df7b36fff1a490429c04a5251e8aea))
+
 # [107.6.0](https://github.com/dhis2/capture-app/compare/v107.5.2...v107.6.0) (2026-09-29)
 
 
