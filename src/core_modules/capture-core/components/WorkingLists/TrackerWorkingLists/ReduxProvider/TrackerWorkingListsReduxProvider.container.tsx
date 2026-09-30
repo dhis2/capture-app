@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { TrackerWorkingListsViewMenuSetup } from '../ViewMenuSetup';
@@ -44,6 +44,7 @@ export const TrackerWorkingListsReduxProvider = ({
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TRACKER_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
+    const prevSelectedTemplateId = useRef<string | undefined>(undefined);
     const forceUpdateOnMount = moment().diff(moment(listDataRefreshTimestamp || 0), 'minutes') > 5 ||
         lastTransaction !== lastTransactionOnListDataRefresh;
 
@@ -57,9 +58,16 @@ export const TrackerWorkingListsReduxProvider = ({
     }, [dispatch, programId, storeId, selectedTemplateId]);
 
     useEffect(() => {
-        if (selectedTemplateId &&
+        if (viewPreloaded) {
+            return;
+        }
+
+        const selectedTemplateIdChanged = selectedTemplateId !== prevSelectedTemplateId.current;
+        prevSelectedTemplateId.current = selectedTemplateId;
+
+        if (selectedTemplateIdChanged &&
+            selectedTemplateId &&
             selectedTemplateId !== currentTemplateId &&
-            !viewPreloaded &&
             onSelectTemplate
         ) {
             onSelectTemplate(selectedTemplateId);
