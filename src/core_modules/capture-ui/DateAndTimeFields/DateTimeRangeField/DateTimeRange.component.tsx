@@ -120,9 +120,8 @@ export class DateTimeRangeField extends React.Component<Props, State> {
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.inputContainer}>
+                    <div className={defaultClasses.sectionLabel}>{i18n.t('From')}</div>
                     <RangeInputField
-                        dateLabel={i18n.t('From date')}
-                        timeLabel={i18n.t('From time')}
                         value={fromValue}
                         onBlur={this.handleFromBlur}
                         onChange={this.handleFromChange}
@@ -131,9 +130,8 @@ export class DateTimeRangeField extends React.Component<Props, State> {
                     {this.getInnerMessage(inputKeys.FROM)}
                 </div>
                 <div className={defaultClasses.inputContainer}>
+                    <div className={defaultClasses.sectionLabel}>{i18n.t('To')}</div>
                     <RangeInputField
-                        dateLabel={i18n.t('To date')}
-                        timeLabel={i18n.t('To time')}
                         value={toValue}
                         onBlur={this.handleToBlur}
                         onChange={this.handleToChange}

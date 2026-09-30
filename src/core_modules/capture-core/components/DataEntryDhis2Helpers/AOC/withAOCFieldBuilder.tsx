@@ -1,18 +1,23 @@
 import React, { type ComponentType, useMemo } from 'react';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
-import { useCategoryOptionsLoader } from './loadCategoryOptions';
+import { useCategoryOptionsLoader } from './useCategoryOptionsLoader';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 
 const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<any>) =>
     (props: Props) => {
-        const { programId, selectedOrgUnitId } = props;
+        const { programId, orgUnitId, orgUnitIdFieldValue } = props;
         const hideAOC = settings?.hideAOC?.(props);
         const { programCategory, isLoading } = useCategoryCombinations(programId, hideAOC);
         const programCategories = useMemo(() => (
             !isLoading && programCategory ? programCategory.categories : []),
         [isLoading, programCategory]);
-        const categories = useCategoryOptionsLoader(programCategories, selectedOrgUnitId, Boolean(hideAOC));
+        const categories = useCategoryOptionsLoader(
+            programCategories,
+            orgUnitIdFieldValue ?? orgUnitId,
+            Boolean(hideAOC),
+        );
 
         if (hideAOC) { return <InnerComponent{...props} />; }
         return (
@@ -30,13 +35,19 @@ export const withAOCFieldBuilder = (settings: Settings) =>
 
 const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
-        const { programId, selectedOrgUnitId } = props;
-        const { enrollmentProgramCategory, isLoading } = useEnrollmentCategoryCombinations(programId);
+        const { programId, orgUnitId, orgUnitIdFieldValue } = props;
+        const featureSupported = featureAvailable(FEATURES.enrollmentAOC);
+        const { enrollmentProgramCategory, isLoading } =
+            useEnrollmentCategoryCombinations(programId, !featureSupported);
         const enrollmentProgramCategories = useMemo(() => (
             !isLoading && enrollmentProgramCategory ? enrollmentProgramCategory.categories : []),
         [isLoading, enrollmentProgramCategory]);
         const missingCombo = !isLoading && !enrollmentProgramCategory;
-        const enrollmentCategories = useCategoryOptionsLoader(enrollmentProgramCategories, selectedOrgUnitId, missingCombo);
+        const enrollmentCategories = useCategoryOptionsLoader(
+            enrollmentProgramCategories,
+            orgUnitIdFieldValue ?? orgUnitId,
+            missingCombo,
+        );
 
         if (missingCombo) return <InnerComponent {...props} />;
         return (

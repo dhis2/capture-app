@@ -1,9 +1,4 @@
-import { useMemo } from 'react';
-import log from 'loglevel';
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
 import { useSelector } from 'react-redux';
-import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -34,8 +29,6 @@ import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
 import { getRedirectIds } from './getRedirectIds';
-import { makeQuerySingleResource } from '../../../../utils/api';
-import { makeResolveAttributeOptionCombo } from '../../../../utils/AOC';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -74,24 +67,6 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
         .filter(key => !geometryType(key))
         .map(key => ({ attribute: key, value: formValues[key] }));
 
-const resolveEnrollmentAOC = async (
-    optionUids: Array<string>,
-    resolve: (uids: ReadonlyArray<string>) => Promise<string | undefined>,
-    onFailure: () => void,
-): Promise<string | undefined> => {
-    if (optionUids.length === 0) return undefined;
-    const attributeOptionCombo = await resolve(optionUids);
-    if (!attributeOptionCombo) {
-        log.error(
-            errorCreator(
-                'Could not resolve the selected enrollment category options to an attribute option combo',
-            )({ optionUids }),
-        );
-        onFailure();
-    }
-    return attributeOptionCombo;
-};
-
 export const useBuildEnrollmentPayload = ({
     programId,
     dataEntryId,
@@ -107,24 +82,15 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
-    const dataEngine = useDataEngine();
-    const resolveAttributeOptionCombo = useMemo(
-        () => makeResolveAttributeOptionCombo(makeQuerySingleResource(dataEngine.query.bind(dataEngine))),
-        [dataEngine],
-    );
-    const { show: showResolveFailureAlert } = useAlert(
-        () => i18n.t('Could not save: selected category options are not a valid combination.'),
-        { critical: true },
-    );
 
-    const buildTeiWithEnrollment = async (relatedStageRef?: {current: RelatedStageRefPayload | null}): Promise<{
+    const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
         teiWithEnrollment: EnrollmentPayload;
         formHasError: boolean;
         redirect: {
             programStageId?: string;
             eventId?: string;
         };
-    }> => {
+    } => {
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
@@ -148,13 +114,6 @@ export const useBuildEnrollmentPayload = ({
             }, {});
 
         const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(serverValuesForMainValues);
-        const enrollmentAttributeOptionCombo = await resolveEnrollmentAOC(
-            enrollmentCategoryOptionUids,
-            resolveAttributeOptionCombo,
-            showResolveFailureAlert,
-        );
-        const enrollmentAOCResolveFailed =
-            enrollmentCategoryOptionUids.length > 0 && !enrollmentAttributeOptionCombo;
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
@@ -211,7 +170,7 @@ export const useBuildEnrollmentPayload = ({
             attributes,
             events: allEventsToBeCreated,
             geometry: enrollmentGeometry,
-            attributeOptionCombo: enrollmentAttributeOptionCombo,
+            enrollmentCategoryOptionUids,
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
@@ -227,7 +186,7 @@ export const useBuildEnrollmentPayload = ({
                 enrollments: [enrollment],
                 relationships: relationship ? [relationship] : undefined,
             },
-            formHasError: formHasError || enrollmentAOCResolveFailed,
+            formHasError,
             redirect,
         };
     };

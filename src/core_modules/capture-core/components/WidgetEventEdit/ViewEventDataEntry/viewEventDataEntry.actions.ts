@@ -1,7 +1,9 @@
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
+import { statusTypes } from 'capture-core/events/statusTypes';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../customLabels';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
@@ -60,6 +62,7 @@ export const loadViewEventDataEntry =
         attributeValues?: Array<AttributeValue>;
         onCategoriesQuery?: Promise<any> | null;
     }) => {
+        const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
         const dataEntryPropsToInclude = [
             {
                 id: 'occurredAt',
@@ -73,7 +76,7 @@ export const loadViewEventDataEntry =
             {
                 id: 'orgUnit',
                 type: 'ORGANISATION_UNIT',
-                validatorContainers: getOrgUnitValidatorContainers(),
+                validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
             },
             {
                 clientId: 'geometry',
@@ -145,7 +148,10 @@ export const loadViewEventDataEntry =
         if (program instanceof TrackerProgram) {
             const stage = getStageFromEvent(eventContainer.event)?.stage;
             if (!stage) {
-                throw Error(i18n.t('stage not found in rules execution'));
+                const { programStageLabel } = getTermLabel([LabelKeys.programStageSingular], { programId: program?.id });
+                throw new Error(i18n.t('{{programStageLabel}} not found in rules execution', {
+                    programStageLabel,
+                }));
             }
 
             effects = getApplicableRuleEffectsForTrackerProgram({
@@ -166,7 +172,8 @@ export const loadViewEventDataEntry =
                 currentEvent,
             });
         }
-        const filteredEffects = filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
+        const filteredEffects = currentEvent.status === statusTypes.SCHEDULE ?
+            effects : filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
         return [
             ...dataEntryActions,
             updateRulesEffects(filteredEffects, formId),

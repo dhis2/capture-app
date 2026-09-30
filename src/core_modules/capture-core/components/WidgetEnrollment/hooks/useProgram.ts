@@ -9,18 +9,13 @@ type ProgramData = {
 
 const baseFields = [
     'displayIncidentDate,displayIncidentDateLabel,displayEnrollmentDateLabel,onlyEnrollOnce,' +
-    'displayEnrollmentLabel,displayFollowUpLabel,displayOrgUnitLabel,' +
-    'displayRelationshipLabel,displayNoteLabel,displayTrackedEntityAttributeLabel,' +
-    'displayProgramStageLabel,displayEventLabel,' +
+    'displayEnrollmentLabel,displayEventLabel,displayFollowUpLabel,displayOrgUnitLabel,' +
     'trackedEntityType[displayName,access],' +
     'programStages[autoGenerateEvent,name,access,id],' +
     'access,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture',
 ];
 
-const pluralFields = [
-    'displayEnrollmentsLabel,displayProgramStagesLabel,displayEventsLabel,' +
-    'displayNotesLabel,displayRelationshipsLabel,displayTrackedEntityAttributesLabel',
-];
+const pluralFields = ['displayEventsLabel'];
 
 export const useProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(

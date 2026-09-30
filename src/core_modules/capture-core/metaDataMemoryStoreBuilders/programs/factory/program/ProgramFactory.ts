@@ -5,10 +5,11 @@ import {
     EventProgram,
     TrackerProgram,
     CategoryCombination,
-    extractCustomLabels,
+    EnrollmentCategoryCombination,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
+import { extractCustomLabels } from '../../../../customLabels';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import { SearchGroupFactory } from '../../../common/factory';
 import { buildIcon } from '../../../common/helpers';
@@ -89,6 +90,20 @@ export class ProgramFactory {
         );
     }
 
+    // eslint-disable-next-line class-methods-use-this
+    _buildEnrollmentCategoryCombination(
+        cachedEnrollmentCategoryCombo: ProgramCachedCategoryCombo | null | undefined,
+    ) {
+        if (!cachedEnrollmentCategoryCombo || cachedEnrollmentCategoryCombo.isDefault) {
+            return null;
+        }
+
+        return new EnrollmentCategoryCombination((o) => {
+            o.id = cachedEnrollmentCategoryCombo.id;
+            o.categoryOptionCombos = cachedEnrollmentCategoryCombo.categoryOptionCombos ?? [];
+        });
+    }
+
     _buildCategoryCombination(
         cachedCategoryCombination: ProgramCachedCategoryCombo | null,
     ) {
@@ -108,6 +123,7 @@ export class ProgramFactory {
                 this._buildCategories(cachedCategoryCombination.categories);
         });
     }
+
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
@@ -153,6 +169,8 @@ export class ProgramFactory {
                 o.trackedEntityType = this.trackedEntityTypeCollection.get(
                     cachedProgram.trackedEntityTypeId!,
                 ) as TrackedEntityType;
+                o.enrollmentCategoryCombination =
+                    this._buildEnrollmentCategoryCombination(cachedProgram.enrollmentCategoryCombo);
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {

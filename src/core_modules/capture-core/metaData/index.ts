@@ -1,5 +1,5 @@
 export type { Access } from './Access';
-export { Category, CategoryCombination } from './CategoryCombinations';
+export { Category, CategoryCombination, EnrollmentCategoryCombination } from './CategoryCombinations';
 export {
     DataElement,
     DateDataElement,
@@ -40,12 +40,4 @@ export {
     getProgramThrowIfNotFound,
     getProgramAndStageForEventProgram,
     getEventProgramEventAccess,
-    extractCustomLabels,
-    getTermLabel,
-    getTermLabelFromProgram,
-    LabelKeys,
-    useTermLabel,
-    type CustomLabelKey,
-    type CustomLabels,
-    type TermRequest,
 } from './helpers';

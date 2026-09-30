@@ -6,8 +6,9 @@ import { requestAddNoteForEvent } from './WidgetEventNote.actions';
 import { WidgetNote } from '../WidgetNote';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
+import { LabelKeys, useTermLabel } from '../../customLabels';
 
-export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
+export const WidgetEventNote = ({ dataEntryKey, dataEntryId, programId, stageId }: Props) => {
     const dispatch = useDispatch();
     const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) =>
         dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
@@ -16,17 +17,28 @@ export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
         trackedEntityTypeName,
         showWidgetBadge,
     } = useEnrollmentAccessContext();
+    const { eventLabel, noteLabel, notesLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.noteSingular, LabelKeys.notePlural],
+        { stageId },
+    );
 
     const onAddNote = (newNoteValue: string) => {
-        dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue));
+        dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue, programId, stageId));
     };
 
     return (
         <div data-test="event-note-widget">
             <WidgetNote
-                title={i18n.t('Notes about this event')}
-                placeholder={i18n.t('Write a note about this event')}
-                emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
+                title={i18n.t('{{notesLabel}} about this {{eventLabel}}', { notesLabel, eventLabel })}
+                placeholder={i18n.t(
+                    'Write a {{noteLabel}} about this {{eventLabel}}',
+                    { eventLabel, noteLabel },
+                )}
+                emptyNoteMessage={i18n.t(
+                    "This {{eventLabel}} doesn't have any {{notesLabel}}",
+                    { eventLabel, notesLabel },
+                )}
+                noteLabel={noteLabel}
                 notes={notes}
                 readOnly={!currentStageWriteAccess}
                 badge={showWidgetBadge ? (

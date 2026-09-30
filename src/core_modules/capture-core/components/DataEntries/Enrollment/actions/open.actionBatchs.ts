@@ -9,10 +9,11 @@ import { openDataEntryForNewEnrollment } from './open.actions';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
-    getCategoryOptionsValidatorContainers,
 } from '../fieldValidators';
 import {
+    attributeOptionsKey,
     enrollmentAttributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
     getEnrollmentCategoryOptionsValidatorContainers,
 } from '../../../DataEntryDhis2Helpers';
 import { convertGeometryOut } from '../../converters';
@@ -87,22 +88,20 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ...enrollmentDataEntryPropsToInclude,
         ...extraDataEntryProps,
         ...(firstStageDataEntryPropsToInclude || []),
-        ...(programCategory && programCategory.categories ?
-            programCategory.categories.map(category => ({
-                id: `attributeCategoryOptions-${category.id}`,
-                type: 'TEXT',
-                validatorContainers:
+        ...(programCategory?.categories?.map(category => ({
+            id: `${attributeOptionsKey}-${category.id}`,
+            type: 'TEXT',
+            validatorContainers:
                 getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
-            })) : []),
-        ...(enrollmentProgramCategory && enrollmentProgramCategory.categories ?
-            enrollmentProgramCategory.categories.map(category => ({
-                id: `${enrollmentAttributeOptionsKey}-${category.id}`,
-                type: 'TEXT',
-                validatorContainers: getEnrollmentCategoryOptionsValidatorContainers(
-                    { enrollmentCategories: enrollmentProgramCategory.categories },
-                    category.id,
-                ),
-            })) : []),
+        })) ?? []),
+        ...(enrollmentProgramCategory?.categories?.map(category => ({
+            id: `${enrollmentAttributeOptionsKey}-${category.id}`,
+            type: 'TEXT',
+            validatorContainers: getEnrollmentCategoryOptionsValidatorContainers(
+                { enrollmentCategories: enrollmentProgramCategory.categories },
+                category.id,
+            ),
+        })) ?? []),
     ];
 
     const dataEntryActions =

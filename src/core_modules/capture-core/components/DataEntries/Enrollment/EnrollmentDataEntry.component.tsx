@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { isLangRtl } from '../../../utils/rtl';
 import {
     DataEntry,
@@ -33,15 +34,8 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import {
-    type Enrollment,
-    ProgramStage,
-    RenderFoundation,
-    getProgramThrowIfNotFound,
-    LabelKeys,
-    useTermLabel,
-    type CustomLabels,
-} from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
+import { LabelKeys, withCustomLabels } from '../../../customLabels';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
 import {
     getCategoryOptionsValidatorContainers,
@@ -57,6 +51,8 @@ import {
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
+
+const customLabels = [LabelKeys.eventSingular, LabelKeys.enrollmentSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -111,7 +107,7 @@ const getEnrollmentDateSettings = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -158,7 +154,7 @@ const getIncidentDateSettings = () => {
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
                             `${props.fieldOptions &&
-                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -206,7 +202,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
                 onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                 onGetCustomFieldLabeClass: (props: any) =>
                     `${props.fieldOptions &&
-                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
             })(
                 withDisplayMessages()(
                     withInternalChangeHandler()(
@@ -225,7 +221,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
                 onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                 onGetCustomFieldLabeClass: (props: any) =>
                     `${props.fieldOptions &&
-                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
             })(
                 withDisplayMessages()(
                     withInternalChangeHandler()(
@@ -293,7 +289,7 @@ const categoryOptionsComponent =
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                     onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions &&
-                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                        props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -305,7 +301,7 @@ const categoryOptionsComponent =
         ),
     );
 
-const getEventCategoryOptionsSettingsFn = () => ({
+const getCategoryOptionsSettingsFn = () => ({
     getComponent: () => categoryOptionsComponent,
     getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
         ...props.categories?.find((category: any) => category.id === fieldId),
@@ -315,9 +311,7 @@ const getEventCategoryOptionsSettingsFn = () => ({
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
     getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
     getMeta: (props: any) => {
-        const { firstStageMetaData, programCategory, termLabels } = props;
-        const eventLabel = termLabels?.eventLabel;
-        const categoryDisplayName = programCategory?.displayName;
+        const { firstStageMetaData, programCategory, eventLabel } = props;
 
         return {
             section: AOCsectionKey,
@@ -326,9 +320,12 @@ const getEventCategoryOptionsSettingsFn = () => ({
                 ? i18n.t('{{eventLabel}} - {{stageName}} - {{categoryDisplayName}}', {
                     eventLabel,
                     stageName: firstStageMetaData.stage.name,
-                    categoryDisplayName,
+                    categoryDisplayName: programCategory?.displayName,
                 })
-                : i18n.t('{{eventLabel}} - {{categoryDisplayName}}', { eventLabel, categoryDisplayName }),
+                : i18n.t('{{eventLabel}} - {{categoryDisplayName}}', {
+                    eventLabel,
+                    categoryDisplayName: programCategory?.displayName,
+                }),
         };
     },
 });
@@ -363,13 +360,13 @@ const getEnrollmentCategoryOptionsSettingsFn = () => ({
     getValidatorContainers: (props: any, fieldId?: string) =>
         getEnrollmentCategoryOptionsValidatorContainers(props, fieldId),
     getMeta: (props: any) => {
-        const { enrollmentProgramCategory, termLabels } = props;
+        const { enrollmentProgramCategory, enrollmentLabel } = props;
 
         return {
             section: enrollmentAOCsectionKey,
             placement: placements.TOP,
             sectionName: i18n.t('{{enrollmentLabel}} - {{categoryDisplayName}}', {
-                enrollmentLabel: termLabels?.enrollmentLabel,
+                enrollmentLabel,
                 categoryDisplayName: enrollmentProgramCategory?.displayName,
             }),
         };
@@ -395,6 +392,7 @@ type FinalTeiDataEntryProps = {
         };
     };
     formFoundation: RenderFoundation;
+    enrollmentLabel: string;
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -402,43 +400,53 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         inMemoryFileStore.clear();
     }
 
-    static dataEntrySectionDefinitions = {
-        [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
-            placement: placements.TOP,
-            name: i18n.t('Enrollment'),
-        },
-        [enrollmentAOCsectionKey]: {
-            placement: placements.TOP,
-        },
-        [AOCsectionKey]: {
-            placement: placements.BOTTOM,
-        },
-    };
-
     render() {
-        const { enrollmentMetadata, firstStageMetaData, relatedStageActionsOptions, ...passOnProps } = this.props;
+        const {
+            enrollmentMetadata,
+            firstStageMetaData,
+            relatedStageActionsOptions,
+            programId,
+            enrollmentLabel,
+            ...passOnProps
+        } = this.props;
+
+        const dataEntrySections = {
+            [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
+                placement: placements.TOP,
+                name: capitalizeFirstLetter(enrollmentLabel),
+            },
+            [enrollmentAOCsectionKey]: {
+                placement: placements.TOP,
+            },
+            [AOCsectionKey]: {
+                placement: placements.BOTTOM,
+            },
+        };
 
         return (
             firstStageMetaData ? (
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
+                    programId={programId}
                     firstStageMetaData={firstStageMetaData}
                     relatedStageActionsOptions={relatedStageActionsOptions}
                 />
             ) : (
                 <DataEntry
                     {...passOnProps}
-                    dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                    dataEntrySections={dataEntrySections}
                 />
             )
         );
     }
 }
 
-const AOCFieldBuilderHOC = withEnrollmentAOCFieldBuilder()(
-    withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
-        withAOCFieldBuilder(getAOCSettingsFn())(
-            withDataEntryFields(getEventCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),
+const AOCFieldBuilderHOC = withCustomLabels(customLabels)(
+    withEnrollmentAOCFieldBuilder()(
+        withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
+            withAOCFieldBuilder(getAOCSettingsFn())(
+                withDataEntryFields(getCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),
+            ),
         ),
     ),
 );
@@ -460,7 +468,6 @@ type PreEnrollmentDataEntryProps = {
     enrollmentMetadata: Enrollment;
     id: string;
     onPostProcessErrorMessage: (message: string) => string;
-    termLabels: CustomLabels;
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
@@ -473,7 +480,7 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
     }
 }
 
-class EnrollmentDataEntryComponentClass extends React.Component<PreEnrollmentDataEntryProps> {
+export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
         const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
@@ -538,17 +545,9 @@ class EnrollmentDataEntryComponentClass extends React.Component<PreEnrollmentDat
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
                 orgUnit={orgUnit}
-                orgUnitId={orgUnit?.id}
+                orgUnitId={orgUnit.id}
                 {...passOnProps}
             />
         );
     }
 }
-
-export const EnrollmentDataEntryComponent = (props: Omit<PreEnrollmentDataEntryProps, 'termLabels'>) => {
-    const termLabels = useTermLabel(
-        [LabelKeys.eventSingular, LabelKeys.enrollmentSingular],
-        { programId: props.programId },
-    );
-    return <EnrollmentDataEntryComponentClass {...props} termLabels={termLabels} />;
-};

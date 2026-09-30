@@ -16,7 +16,14 @@ export const registrationFormActionTypes = {
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE: 'SaveNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED: 'FailSavingNewTrackedEntityInstanceWithEnrollment',
+    NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_AOC_RESOLVE_FAILED:
+        'FailResolvingAttributeOptionComboForNewEnrollment',
 } as const;
+
+export const failAOCResolveForNewTrackedEntityInstanceWithEnrollment = () =>
+    actionCreator(
+        registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_AOC_RESOLVE_FAILED,
+    )({});
 
 export const startSavingNewTrackedEntityInstance = (teiPayload: TeiPayload) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START)({ teiPayload });
@@ -60,6 +67,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
     candidateForRegistration,
     uid,
     redirect,
+    programId,
 }: {
     candidateForRegistration: any;
     uid: string;
@@ -67,6 +75,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
         programStageId?: string;
         eventId?: string;
     };
+    programId: string;
 }) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)(
         { ...candidateForRegistration },
@@ -83,6 +92,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
                 },
                 rollback: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,
+                    meta: { programId },
                 },
             },
         },

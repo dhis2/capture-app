@@ -69,6 +69,7 @@ type Props = {
     value: string | null;
     readOnly?: boolean;
     smallMainButton?: boolean;
+    noteLabel: string;
 };
 
 type NotesProps = Props & WithStyles<typeof styles>;
@@ -80,6 +81,7 @@ const NotesPlain = ({
     value: propValue,
     readOnly = false,
     smallMainButton,
+    noteLabel,
     classes,
 }: NotesProps) => {
     const [addIsOpen, setAddIsOpen] = useState(false);
@@ -134,7 +136,7 @@ const NotesPlain = ({
                     className={classes.addNoteContainer}
                     small
                 >
-                    {i18n.t('Add note')}
+                    {i18n.t('Add {{noteLabel}}', { noteLabel })}
                 </Button>
                 <Button
                     onClick={onCancel}
@@ -156,7 +158,7 @@ const NotesPlain = ({
                 small={smallMainButton}
                 dataTest="write-note-btn"
             >
-                {i18n.t('Write note')}
+                {i18n.t('Write {{noteLabel}}', { noteLabel })}
             </Button>
         </div>
     );

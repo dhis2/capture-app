@@ -15,7 +15,8 @@ export const getTextFieldConfigForCustomForm = (
     extraProps?: any | null,
 ) => {
     const props = createProps({
-        multiLine: extraProps && extraProps.multiLine,
+        multiLine: extraProps?.multiLine,
+        placeholder: extraProps?.placeholder,
         ...(isLtrInputType(metaData.type) ? { dir: 'ltr' as const } : {}),
     }, metaData);
 

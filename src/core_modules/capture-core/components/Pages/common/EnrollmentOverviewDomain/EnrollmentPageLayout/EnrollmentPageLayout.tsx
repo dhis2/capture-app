@@ -59,7 +59,9 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
-type OwnProps = EnrollmentPageProps;
+type OwnProps = EnrollmentPageProps & {
+    stageId?: string;
+};
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
 
 const EnrollmentPageLayoutPlain = ({
@@ -73,6 +75,7 @@ const EnrollmentPageLayoutPlain = ({
     onBackToDashboard,
     onBackToViewEvent,
     classes,
+    stageId,
     ...passOnProps
 }: Props) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
@@ -85,6 +88,7 @@ const EnrollmentPageLayoutPlain = ({
         program,
         currentPage,
         eventStatus,
+        stageId,
         toggleVisibility,
         addRelationShipContainerElement,
     }), [
@@ -93,6 +97,7 @@ const EnrollmentPageLayoutPlain = ({
         eventStatus,
         passOnProps,
         program,
+        stageId,
         toggleVisibility,
     ]);
 
@@ -128,6 +133,7 @@ const EnrollmentPageLayoutPlain = ({
                         onBackToDashboard={onBackToDashboard}
                         onBackToViewEvent={onBackToViewEvent}
                         programId={program.id}
+                        stageId={stageId}
                         displayFrontPageList={program.displayFrontPageList}
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}

@@ -14,6 +14,7 @@ type ApiTrackedEntityInstance = {
     trackedEntityType: string;
     orgUnit: string;
     attributes: Array<ApiTeiAttribute>;
+    inactive?: boolean;
 };
 
 function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {

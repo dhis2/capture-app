@@ -11,4 +11,5 @@ export type LinkToExistingProps = {
     errorMessages: ErrorMessagesForRelatedStages;
     saveAttempted: boolean;
     linkableStageLabel: string;
+    stageId?: string;
 };

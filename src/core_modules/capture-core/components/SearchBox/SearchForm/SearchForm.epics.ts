@@ -198,7 +198,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 orgUnitMode: 'ACCESSIBLE',
-                fields: 'trackedEntity,orgUnit,attributes,enrollments',
+                fields: 'trackedEntity,orgUnit,attributes,enrollments,inactive',
             };
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
@@ -231,7 +231,7 @@ export const searchViaAttributesOnScopeProgramEpic = (
                     attributes,
                     availableSearchGroup?.searchForm.getElements(),
                 ),
-                fields: 'attributes,enrollments,trackedEntity,orgUnit',
+                fields: 'attributes,enrollments,trackedEntity,orgUnit,inactive',
                 program: programId,
                 page,
                 pageSize: 5,
@@ -356,7 +356,7 @@ export const fallbackSearchEpic = (
                 page,
                 pageSize,
                 orgUnitMode: 'ACCESSIBLE',
-                fields: 'trackedEntity,orgUnit,attributes,enrollments',
+                fields: 'trackedEntity,orgUnit,attributes,enrollments,inactive',
             };
 
             return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(

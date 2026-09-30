@@ -16,7 +16,7 @@ When('the user clicks the arrow button to see the dropdown', () => {
 
 Then('the user sees the warning popup', () => {
     cy.contains('Discard unsaved changes?');
-    cy.contains('This event has unsaved changes. Leaving this page without saving will lose these changes. Are you sure you want to discard unsaved changes?');
+    cy.contains('This form has unsaved changes. Leaving this page without saving will lose these changes. Are you sure you want to discard unsaved changes?');
 });
 
 When(/^the user set the WHOMCH Diastolic blood pressure to (.*)/, score =>

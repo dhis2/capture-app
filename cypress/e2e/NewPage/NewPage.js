@@ -552,7 +552,7 @@ And('you are in Child programme reenrollment page', () => {
 
 And('you see the form prefield with existing TEI attributes values', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
-        cy.contains('New Enrollment in program: Child Programme').should('exist');
+        cy.contains('New enrollment in program: Child Programme').should('exist');
         cy.contains('First name').should('exist');
         cy.get('input[type="text"]').eq(4).should('have.value', 'Anna');
         cy.contains('Last name').should('exist');

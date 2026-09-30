@@ -2,6 +2,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { SearchGroup } from '../../metaData';
+import { LabelKeys, withCustomLabels } from '../../customLabels';
 import { UnsupportedAttributesNotification } from '../../utils/warnings';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
@@ -9,6 +10,8 @@ import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSele
 import { Section, SectionHeaderSimple } from '../Section';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import type { Props } from './TeiSearch.types';
+
+const customLabels = [LabelKeys.attributePlural] as const;
 
 const styles: Readonly<any> = (theme: any) => ({
     container: {
@@ -29,8 +32,12 @@ type State = {
     programSectionOpen: boolean;
 };
 
-class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, State> {
-    constructor(props: Props & WithStyles<typeof styles>) {
+type LabelProps = {
+    attributesLabel: string;
+};
+
+class TeiSearchPlain extends React.Component<Props & LabelProps & WithStyles<typeof styles>, State> {
+    constructor(props: Props & LabelProps & WithStyles<typeof styles>) {
         super(props);
         this.state = { programSectionOpen: true };
     }
@@ -105,7 +112,7 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
         const isUnique = sg.unique;
         const header = isUnique ?
             i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) :
-            i18n.t('Search by attributes');
+            i18n.t('Search by {{attributesLabel}}', { attributesLabel: this.props.attributesLabel });
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         const unsupportedAttributes = sg.unsupportedAttributes;
         return (
@@ -175,4 +182,5 @@ class TeiSearchPlain extends React.Component<Props & WithStyles<typeof styles>, 
     }
 }
 
-export const TeiSearchComponent = withStyles(styles)(TeiSearchPlain);
+export const TeiSearchComponent =
+    withCustomLabels(customLabels)(withStyles(styles)(TeiSearchPlain));
