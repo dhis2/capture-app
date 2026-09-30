@@ -17,19 +17,24 @@ const baseFields = [
 
 const pluralFields = ['displayEventsLabel'];
 
+const enrollmentAOCFields = [
+    'enrollmentCategoryCombo[id,isDefault,categoryOptionCombos[id,categoryOptions[id]]]',
+];
+
 export const useProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
-            () => ({
-                program: {
-                    resource: `programs/${programId}`,
-                    params: {
-                        fields: featureAvailable(FEATURES.customTerminologyPlurals)
-                            ? [...baseFields, ...pluralFields]
-                            : baseFields,
+            () => {
+                const fields = [...baseFields];
+                if (featureAvailable(FEATURES.customTerminologyPlurals)) fields.push(...pluralFields);
+                if (featureAvailable(FEATURES.enrollmentAOC)) fields.push(...enrollmentAOCFields);
+                return {
+                    program: {
+                        resource: `programs/${programId}`,
+                        params: { fields },
                     },
-                },
-            }),
+                };
+            },
             [programId],
         ),
     );

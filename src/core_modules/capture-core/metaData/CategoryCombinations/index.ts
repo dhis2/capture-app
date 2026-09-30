@@ -1,3 +1,4 @@
 export { Category } from './Category';
 export { CategoryCombination } from './CategoryCombination';
-export { EnrollmentCategoryCombination } from './EnrollmentCategoryCombination';
+export { EnrollmentCategoryCombination, resolveAttributeOptionCombo } from './EnrollmentCategoryCombination';
+export type { CategoryOptionCombo } from './EnrollmentCategoryCombination';

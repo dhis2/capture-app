@@ -69,6 +69,7 @@ export const WidgetEnrollment = ({
     const { attributeOptionComboDetails } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
     const { update: updateEnrollmentAOC, saving: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
+        enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
         refetchEnrollment,
         onError,
         onSuccess,
