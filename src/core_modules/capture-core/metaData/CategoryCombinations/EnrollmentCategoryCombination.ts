@@ -11,7 +11,7 @@ export type CategoryOptionCombo = {
 export const resolveAttributeOptionCombo = (
     categoryOptionCombos: ReadonlyArray<CategoryOptionCombo>,
     categoryOptionUids: ReadonlyArray<string>,
-    context?: { enrollmentCategoryComboId?: string },
+    enrollmentCategoryComboId?: string,
 ): string | undefined => {
     if (categoryOptionUids.length === 0) return undefined;
 
@@ -24,7 +24,7 @@ export const resolveAttributeOptionCombo = (
     if (matches.length > 1) {
         log.error(
             errorCreator('Multiple category option combos match the same option set')({
-                ...context,
+                enrollmentCategoryComboId,
                 matches: matches.map(({ id }) => id),
                 categoryOptionUids,
             }),
@@ -60,10 +60,6 @@ export class EnrollmentCategoryCombination {
     }
 
     resolveAttributeOptionCombo(categoryOptionUids: ReadonlyArray<string>): string | undefined {
-        return resolveAttributeOptionCombo(
-            this._categoryOptionCombos,
-            categoryOptionUids,
-            { enrollmentCategoryComboId: this._id },
-        );
+        return resolveAttributeOptionCombo(this._categoryOptionCombos, categoryOptionUids, this._id);
     }
 }
