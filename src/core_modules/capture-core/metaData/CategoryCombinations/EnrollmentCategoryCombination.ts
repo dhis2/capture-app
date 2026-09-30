@@ -32,9 +32,6 @@ export class EnrollmentCategoryCombination {
         this._categoryOptionCombos = categoryOptionCombos;
     }
 
-    // Enrollment import requires a resolved attributeOptionCombo UID; picks the
-    // COC whose option set is identical to the user's picks. Runs entirely
-    // against the cached metadata — no network, works offline.
     resolveAttributeOptionCombo(categoryOptionUids: ReadonlyArray<string>): string | undefined {
         if (categoryOptionUids.length === 0) return undefined;
 
