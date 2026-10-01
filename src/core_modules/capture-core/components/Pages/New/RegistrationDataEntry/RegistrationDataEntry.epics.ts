@@ -48,8 +48,13 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action: any) => {
             const { enrollmentPayload, uid, redirect } = action.payload;
+
             return saveNewTrackedEntityInstanceWithEnrollment({
-                candidateForRegistration: { trackedEntities: [enrollmentPayload] },
+                candidateForRegistration: {
+                    trackedEntities: [
+                        enrollmentPayload,
+                    ],
+                },
                 redirect,
                 uid,
                 programId: enrollmentPayload.enrollments[0].program,
