@@ -28,7 +28,7 @@ const styles = {
         display: 'flex',
         gap: `${spacersNum.dp4}px`,
         '&::before': {
-            content: '"\\2022"',
+            content: String.raw`"\2022"`,
             color: colors.grey500,
             marginInlineEnd: `${spacersNum.dp4}px`,
         },
@@ -72,7 +72,7 @@ const styles = {
         color: colors.grey900,
         minWidth: 0,
         '&::before': {
-            content: '"\\2022"',
+            content: String.raw`"\2022"`,
             color: colors.grey500,
             marginInlineEnd: `${spacersNum.dp4}px`,
         },
