@@ -18,7 +18,8 @@ const baseFields = [
 const pluralFields = ['displayEventsLabel'];
 
 const enrollmentAOCFields = [
-    'enrollmentCategoryCombo[id,isDefault,categoryOptionCombos[id,categoryOptions[id]]]',
+    'enrollmentCategoryCombo[id,displayName,isDefault,categories[id,displayName],' +
+    'categoryOptionCombos[id,categoryOptions[id]]]',
 ];
 
 export const useProgram = (programId: string) => {

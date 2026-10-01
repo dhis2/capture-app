@@ -7,19 +7,39 @@ import { useCategoryOptionsLoader } from '../../DataEntryDhis2Helpers';
 import type { AttributeOptionComboDetails } from '../hooks/useAttributeOptionComboDetails';
 
 const styles = {
-    row: {
-        display: 'flex',
-        alignItems: 'center',
+    block: {
         margin: `${spacersNum.dp8}px 0`,
         fontSize: '14px',
         color: colors.grey900,
+    },
+    header: {
+        display: 'flex',
+        alignItems: 'center',
         gap: `${spacersNum.dp4}px`,
+    },
+    optionList: {
+        display: 'flex',
+        flexDirection: 'column' as const,
+        gap: `${spacersNum.dp4}px`,
+        marginInlineStart: `${spacersNum.dp16 + spacersNum.dp4}px`,
+        marginTop: `${spacersNum.dp4}px`,
+    },
+    optionRow: {
+        display: 'flex',
+        gap: `${spacersNum.dp4}px`,
+        '&::before': {
+            content: '"\\2022"',
+            color: colors.grey500,
+            marginInlineEnd: `${spacersNum.dp4}px`,
+        },
+    },
+    optionLabel: {
+        color: colors.grey700,
     },
     editButton: {
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'flex-start',
         flexShrink: 0,
         cursor: 'pointer',
         border: 'none',
@@ -39,23 +59,36 @@ const styles = {
         },
     },
     editContainer: {
-        margin: `${spacersNum.dp8}px 0`,
         display: 'flex',
         flexDirection: 'column' as const,
         gap: `${spacersNum.dp4}px`,
+        marginInlineStart: `${spacersNum.dp16 + spacersNum.dp4}px`,
+        marginTop: `${spacersNum.dp4}px`,
     },
     fieldRow: {
         display: 'flex',
-        alignItems: 'center',
-        gap: `${spacersNum.dp8}px`,
+        gap: `${spacersNum.dp4}px`,
         fontSize: '14px',
         color: colors.grey900,
+        minWidth: 0,
+        '&::before': {
+            content: '"\\2022"',
+            color: colors.grey500,
+            marginInlineEnd: `${spacersNum.dp4}px`,
+        },
+    },
+    fieldRowContent: {
+        display: 'flex',
+        flexDirection: 'column' as const,
+        gap: `${spacersNum.dp4}px`,
+        flex: 1,
+        minWidth: 0,
     },
     fieldLabel: {
-        minWidth: '150px',
+        color: colors.grey700,
     },
     inputField: {
-        maxWidth: '260px',
+        minWidth: 0,
     },
     buttonStrip: {
         display: 'flex',
@@ -66,16 +99,15 @@ const styles = {
 
 type Props = {
     attributeOptionComboDetails?: AttributeOptionComboDetails;
+    enrollmentCategoryCombo?: {
+        displayName: string;
+        categories: Array<{ id: string; displayName: string }>;
+    };
     orgUnitId?: string;
     readOnly?: boolean;
     saving?: boolean;
     onSave?: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
 };
-
-const derivedCategories = (details: AttributeOptionComboDetails) =>
-    details.categoryOptions
-        .map(option => option.categories?.[0])
-        .filter((category): category is { id: string; displayName: string } => Boolean(category));
 
 const derivedInitialSelection = (details: AttributeOptionComboDetails) =>
     details.categoryOptions.reduce<Record<string, string>>((acc, option) => {
@@ -89,6 +121,7 @@ const derivedInitialSelection = (details: AttributeOptionComboDetails) =>
 const AttributeOptionComboPlain = ({
     classes,
     attributeOptionComboDetails,
+    enrollmentCategoryCombo,
     orgUnitId,
     readOnly,
     saving,
@@ -97,10 +130,7 @@ const AttributeOptionComboPlain = ({
     const [editMode, setEditMode] = useState(false);
     const [selection, setSelection] = useState<Record<string, string>>({});
 
-    const editableCategories = useMemo(
-        () => (attributeOptionComboDetails ? derivedCategories(attributeOptionComboDetails) : []),
-        [attributeOptionComboDetails],
-    );
+    const editableCategories = useMemo(() => enrollmentCategoryCombo?.categories ?? [], [enrollmentCategoryCombo]);
     const loadedCategories = useCategoryOptionsLoader(editableCategories, orgUnitId, !editMode);
 
     const exitEdit = useCallback(() => {
@@ -122,93 +152,108 @@ const AttributeOptionComboPlain = ({
         if (success) exitEdit();
     }, [saving, editableCategories, selection, onSave, exitEdit]);
 
-    if (!attributeOptionComboDetails || attributeOptionComboDetails.categoryCombo?.isDefault) {
+    if (!attributeOptionComboDetails || !enrollmentCategoryCombo
+        || attributeOptionComboDetails.categoryCombo?.isDefault) {
         return null;
     }
 
     if (editMode) {
         const saveDisabled = editableCategories.some(({ id }) => !selection[id]);
         return (
-            <div className={classes.editContainer} data-test="widget-enrollment-attribute-option-combo-edit">
-                {editableCategories.map((category) => {
-                    const loaded = loadedCategories?.find(c => c.id === category.id);
-                    const options = (loaded?.options ?? [])
-                        .filter(o => o.writeAccess || o.value === selection[category.id]);
-                    return (
-                        <div key={category.id} className={classes.fieldRow}>
-                            <span className={classes.fieldLabel}>{category.displayName}</span>
-                            <div className={classes.inputField}>
-                                <SingleSelectField
-                                    id={`enrollment-aoc-${category.id}`}
-                                    value={selection[category.id] ?? null}
-                                    options={options}
-                                    onChange={value => setSelection(prev => ({
-                                        ...prev,
-                                        [category.id]: value ?? '',
-                                    }))}
-                                    filterable
-                                    clearable={false}
-                                    dataTest={`widget-enrollment-aoc-${category.id}`}
-                                />
+            <div className={classes.block} data-test="widget-enrollment-attribute-option-combo-edit">
+                <div className={classes.header}>
+                    <span>
+                        <IconLegend16 color={colors.grey600} />
+                    </span>
+                    {`${enrollmentCategoryCombo.displayName}:`}
+                </div>
+                <div className={classes.editContainer}>
+                    {editableCategories.map((category) => {
+                        const loaded = loadedCategories?.find(c => c.id === category.id);
+                        const options = (loaded?.options ?? [])
+                            .filter(o => o.writeAccess || o.value === selection[category.id]);
+                        return (
+                            <div key={category.id} className={classes.fieldRow}>
+                                <div className={classes.fieldRowContent}>
+                                    <span className={classes.fieldLabel}>{category.displayName}</span>
+                                    <div className={classes.inputField}>
+                                        <SingleSelectField
+                                            id={`enrollment-aoc-${category.id}`}
+                                            value={selection[category.id] ?? null}
+                                            options={options}
+                                            onChange={value => setSelection(prev => ({
+                                                ...prev,
+                                                [category.id]: value ?? '',
+                                            }))}
+                                            filterable
+                                            clearable={false}
+                                            dense
+                                            dataTest={`widget-enrollment-aoc-${category.id}`}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
-                <div className={classes.buttonStrip}>
-                    <Button
-                        primary
-                        small
-                        onClick={saveEdit}
-                        disabled={saveDisabled || saving}
-                    >
-                        {saving ? i18n.t('Saving…') : i18n.t('Save')}
-                    </Button>
-                    <Button
-                        secondary
-                        small
-                        onClick={exitEdit}
-                        disabled={saving}
-                    >
-                        {i18n.t('Cancel')}
-                    </Button>
+                        );
+                    })}
+                    <div className={classes.buttonStrip}>
+                        <Button
+                            primary
+                            small
+                            onClick={saveEdit}
+                            disabled={saveDisabled || saving}
+                        >
+                            {saving ? i18n.t('Saving…') : i18n.t('Save')}
+                        </Button>
+                        <Button
+                            secondary
+                            small
+                            onClick={exitEdit}
+                            disabled={saving}
+                        >
+                            {i18n.t('Cancel')}
+                        </Button>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <>
-            {attributeOptionComboDetails.categoryOptions.map((option, index) => {
-                const category = option.categories?.[0];
-                const isFirst = index === 0;
-                return (
-                    <div
-                        key={option.id}
-                        className={classes.row}
-                        data-test="widget-enrollment-attribute-option-combo"
+        <div className={classes.block} data-test="widget-enrollment-attribute-option-combo">
+            <div className={classes.header}>
+                <span data-test="widget-enrollment-icon-attribute-option-combo">
+                    <IconLegend16 color={colors.grey600} />
+                </span>
+                {`${enrollmentCategoryCombo.displayName}:`}
+                {!readOnly && !saving && onSave && (
+                    <button
+                        type="button"
+                        className={classes.editButton}
+                        data-test="widget-enrollment-icon-edit-attribute-option-combo"
+                        onClick={openEdit}
                     >
-                        <span data-test="widget-enrollment-icon-attribute-option-combo">
-                            <IconLegend16 color={colors.grey600} />
-                        </span>
-                        {i18n.t('{{categoryName}}{{escape}} {{optionName}}', {
-                            categoryName: category?.displayName,
-                            optionName: option.displayName,
-                            escape: ':',
-                        })}
-                        {isFirst && !readOnly && !saving && onSave && (
-                            <button
-                                type="button"
-                                className={classes.editButton}
-                                data-test="widget-enrollment-icon-edit-attribute-option-combo"
-                                onClick={openEdit}
-                            >
-                                <IconEdit16 />
-                            </button>
-                        )}
-                    </div>
-                );
-            })}
-        </>
+                        <IconEdit16 />
+                    </button>
+                )}
+            </div>
+            <div className={classes.optionList}>
+                {editableCategories.map((category) => {
+                    const option = attributeOptionComboDetails.categoryOptions
+                        .find(o => o.categories?.some(c => c.id === category.id));
+                    if (!option) return null;
+                    return (
+                        <div
+                            key={category.id}
+                            className={classes.optionRow}
+                            data-test="widget-enrollment-attribute-option-combo-row"
+                        >
+                            <span className={classes.optionLabel}>{`${category.displayName}:`}</span>
+                            <span>{option.displayName}</span>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
     );
 };
 

@@ -98,6 +98,7 @@ export const WidgetEnrollment = ({
         <WidgetEnrollmentNote
             enrollment={enrollment}
             attributeOptionComboDetails={attributeOptionComboDetails}
+            enrollmentCategoryCombo={program?.enrollmentCategoryCombo}
             updateEnrollmentAOC={updateEnrollmentAOC}
             savingEnrollmentAOC={savingEnrollmentAOC}
             events={events}

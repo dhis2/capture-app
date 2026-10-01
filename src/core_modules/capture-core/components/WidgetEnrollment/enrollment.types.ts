@@ -37,6 +37,10 @@ export type PlainProps = {
         attributeOptionCombo?: string;
     };
     attributeOptionComboDetails?: AttributeOptionComboDetails;
+    enrollmentCategoryCombo?: {
+        displayName: string;
+        categories: Array<{ id: string; displayName: string }>;
+    };
     updateEnrollmentAOC: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
     savingEnrollmentAOC: boolean;
     events: Array<{ status: string; event: string; programStage: string }>;
