@@ -58,7 +58,9 @@ Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) 
 });
 
 And('the new event request has completed', () => {
-    cy.wait('@postNewEvent', { timeout: 30000 });
+    cy.wait('@postNewEvent', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 200);
 });
 
 Given('you select the schedule tab', () => {
@@ -76,13 +78,11 @@ When('you add a note to the event', () => {
 });
 
 And('the events saves successfully', () => {
-    cy.intercept('POST', '**/tracker?async=false').as('postEvent');
-
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Schedule')
         .click();
 
-    cy.wait('@postEvent')
+    cy.wait('@postNewEvent')
         .its('response.statusCode')
         .should('eq', 200);
 });
