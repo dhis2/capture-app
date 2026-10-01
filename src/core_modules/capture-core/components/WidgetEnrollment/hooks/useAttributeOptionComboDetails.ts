@@ -1,4 +1,6 @@
 import { useMemo, useEffect, useRef } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 
@@ -47,6 +49,17 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
             refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
         }
     }, [refetch, effectiveAttributeOptionCombo]);
+
+    useEffect(() => {
+        if (error) {
+            log.error(
+                errorCreator('Could not load attribute option combo details')({
+                    error,
+                    attributeOptionCombo: effectiveAttributeOptionCombo,
+                }),
+            );
+        }
+    }, [error, effectiveAttributeOptionCombo]);
 
     const attributeOptionComboDetails = useMemo(() => {
         if (!effectiveAttributeOptionCombo) return undefined;

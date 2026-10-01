@@ -109,12 +109,13 @@ type Props = {
     onSave?: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
 };
 
-const derivedInitialSelection = (details: AttributeOptionComboDetails) =>
-    details.categoryOptions.reduce<Record<string, string>>((acc, option) => {
-        const categoryId = option.categories?.[0]?.id;
-        if (categoryId) {
-            acc[categoryId] = option.id;
-        }
+const derivedInitialSelection = (
+    details: AttributeOptionComboDetails,
+    categories: ReadonlyArray<{ id: string }>,
+) =>
+    categories.reduce<Record<string, string>>((acc, category) => {
+        const option = details.categoryOptions.find(o => o.categories?.some(c => c.id === category.id));
+        if (option) acc[category.id] = option.id;
         return acc;
     }, {});
 
@@ -140,9 +141,9 @@ const AttributeOptionComboPlain = ({
 
     const openEdit = useCallback(() => {
         if (!attributeOptionComboDetails) return;
-        setSelection(derivedInitialSelection(attributeOptionComboDetails));
+        setSelection(derivedInitialSelection(attributeOptionComboDetails, editableCategories));
         setEditMode(true);
-    }, [attributeOptionComboDetails]);
+    }, [attributeOptionComboDetails, editableCategories]);
 
     const saveEdit = useCallback(async () => {
         if (saving || !onSave) return;
