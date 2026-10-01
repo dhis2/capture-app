@@ -89,6 +89,7 @@ const styles = {
     },
     inputField: {
         minWidth: 0,
+        maxWidth: '260px',
     },
     buttonStrip: {
         display: 'flex',

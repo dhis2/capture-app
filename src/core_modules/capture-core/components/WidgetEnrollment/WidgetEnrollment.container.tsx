@@ -66,12 +66,22 @@ export const WidgetEnrollment = ({
         externalData,
     });
     const { error: errorProgram, program } = useProgram(programId);
-    const { attributeOptionComboDetails } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
+    const {
+        attributeOptionComboDetails,
+        retry: retryAttributeOptionComboDetails,
+    } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
+    const refetchEnrollmentWithAOC = useMemo(
+        () => (...args: Parameters<typeof refetchEnrollment>) => {
+            retryAttributeOptionComboDetails();
+            return refetchEnrollment(...args);
+        },
+        [refetchEnrollment, retryAttributeOptionComboDetails],
+    );
     const { update: updateEnrollmentAOC, saving: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
         enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
         programId,
-        refetchEnrollment,
+        refetchEnrollment: refetchEnrollmentWithAOC,
         onError,
         onSuccess,
     });
