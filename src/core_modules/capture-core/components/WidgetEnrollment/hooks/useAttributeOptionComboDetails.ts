@@ -36,24 +36,23 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         { lazy: true },
     );
 
-    // The parent's enrollment refetches cheaply and often; skip when the AOC
-    // UID hasn't actually changed to avoid a wasted metadata round-trip.
     const lastFetchedRef = useRef<string | undefined>();
     useEffect(() => {
-        if (effectiveAttributeOptionCombo && effectiveAttributeOptionCombo !== lastFetchedRef.current) {
+        if (!effectiveAttributeOptionCombo) {
+            lastFetchedRef.current = undefined;
+            return;
+        }
+        if (effectiveAttributeOptionCombo !== lastFetchedRef.current) {
             lastFetchedRef.current = effectiveAttributeOptionCombo;
             refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
         }
     }, [refetch, effectiveAttributeOptionCombo]);
 
-    // Memoize so consumers using [attributeOptionComboDetails] deps aren't
-    // invalidated on unrelated parent re-renders that leave data unchanged.
-    const attributeOptionComboDetails = useMemo(
-        () => (effectiveAttributeOptionCombo
-            ? ((data as any)?.attributeOptionCombo as AttributeOptionComboDetails | undefined)
-            : undefined),
-        [effectiveAttributeOptionCombo, data],
-    );
+    const attributeOptionComboDetails = useMemo(() => {
+        if (!effectiveAttributeOptionCombo) return undefined;
+        const value = (data as any)?.attributeOptionCombo as AttributeOptionComboDetails | undefined;
+        return value?.id === effectiveAttributeOptionCombo ? value : undefined;
+    }, [effectiveAttributeOptionCombo, data]);
 
     return { error, loading, attributeOptionComboDetails };
 };

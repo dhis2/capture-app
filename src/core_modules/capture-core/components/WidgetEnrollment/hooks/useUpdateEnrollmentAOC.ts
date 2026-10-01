@@ -1,4 +1,7 @@
 import { useCallback } from 'react';
+import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
+import { errorCreator } from 'capture-core-utils';
 import { useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
@@ -23,7 +26,7 @@ type UseUpdateEnrollmentAOCProps = {
     enrollment: any;
     enrollmentCategoryCombo: EnrollmentCategoryCombo | undefined;
     refetchEnrollment: QueryRefetchFunction;
-    onError?: (error: any) => void;
+    onError?: (message: string) => void;
     onSuccess?: () => void;
 };
 
@@ -56,7 +59,7 @@ export const useUpdateEnrollmentAOC = ({
             enrollmentCategoryCombo?.id,
         );
         if (!attributeOptionCombo) {
-            onError?.('Could not resolve the selected category options to an attribute option combo.');
+            onError?.(i18n.t('Could not save: selected category options are not a valid combination.'));
             return false;
         }
 
@@ -67,7 +70,8 @@ export const useUpdateEnrollmentAOC = ({
                 updatedAt: fromClientDate(new Date()).getServerZonedISOString(),
             });
             return true;
-        } catch {
+        } catch (err) {
+            log.error(errorCreator('Enrollment AOC update failed')({ err }));
             return false;
         }
     }, [enrollmentAOCSupported, enrollment, enrollmentCategoryCombo, saving,
