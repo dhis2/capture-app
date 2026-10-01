@@ -839,6 +839,32 @@ Then(/^the new ?(.*) is created/, (name) => {
         });
 });
 
+When('you delete the name Custom Program stage list but the server rejects the deletion', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Delete view')
+        .click();
+
+    cy.intercept(
+        { method: 'DELETE', url: '**/programStageWorkingLists/**', times: 1 },
+        {
+            statusCode: 403,
+            body: { httpStatus: 'Forbidden', httpStatusCode: 403, status: 'ERROR', message: 'Access denied' },
+        },
+    ).as('rejectedDeleteProgramStageWorkingLists');
+    cy.get('button')
+        .contains('Confirm')
+        .click();
+    cy.wait('@rejectedDeleteProgramStageWorkingLists', { timeout: 30000 });
+});
+
+Then(/^the ?(.*) is selected/, (name) => {
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains(name)
+        .parent()
+        .should('have.class', 'selected');
+});
+
 Then(/^the ?(.*) is deleted/, (name) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {

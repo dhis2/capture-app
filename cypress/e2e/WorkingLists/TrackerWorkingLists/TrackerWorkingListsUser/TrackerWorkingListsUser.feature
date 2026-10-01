@@ -236,6 +236,15 @@ Scenario: The user can create and delete a program stage working list for Foci i
   And you delete the name Custom Program stage list
   Then the Custom Program stage list is deleted
 
+Scenario: A saved program stage working list stays selected when deleting it fails
+  Given you open a clean main page with Ngelehun and Malaria focus investigation context
+  And you filter by assigned Foci investigation & classification events
+  When you save the list with the name Custom Program stage list
+  And you delete the name Custom Program stage list but the server rejects the deletion
+  Then the Custom Program stage list is selected
+  When you delete the name Custom Program stage list
+  Then the Custom Program stage list is deleted
+
 Scenario: The user creates, updates and deletes a Program stage custom working list
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
   And you set the enrollment status filter to completed
