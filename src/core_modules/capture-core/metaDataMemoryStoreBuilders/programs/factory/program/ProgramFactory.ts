@@ -124,7 +124,6 @@ export class ProgramFactory {
         });
     }
 
-
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
             const dataElement = await this.dataElementFactory.build(ptea);
