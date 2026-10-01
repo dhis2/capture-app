@@ -4,6 +4,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 0
+    And the form is finished loading
     When you type 2021-10-15 in the input number 0
     And you click the checkbox number 0
     And you click the checkbox number 2
@@ -16,6 +17,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the form is finished loading
     When you type 2021-10-15 in the input number 0
     And you type 13 in the input number 1
     And the user selects Positive
@@ -38,6 +40,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the form is finished loading
     When you focus and blur a required field
     Then the input should throw an error with error-message A value is required
 
@@ -45,6 +48,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the form is finished loading
     And you type x in the input number 1
     Then the input should throw an error with error-message Please provide a positive integer
 

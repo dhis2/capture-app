@@ -130,6 +130,8 @@ When('the enrollment overview is finished loading', () => {
 When('the form is finished loading', () => {
     cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing')
         .should('exist');
+    cy.contains('[data-test="dataentry-field-orgUnit"]', 'Ngelehun CHC')
+        .should('exist');
 });
 
 
