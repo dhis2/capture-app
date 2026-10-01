@@ -65,7 +65,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                             'Could not resolve the selected enrollment category options to an attribute option combo',
                         )({ optionUids, enrollmentCategoryCombinationId: enrollmentCategoryCombination?.id }),
                     );
-                    return failAOCResolveForNewTrackedEntityInstanceWithEnrollment();
+                    return failAOCResolveForNewTrackedEntityInstanceWithEnrollment(enrollment.program);
                 }
                 resolvedEnrollment = { ...enrollmentRest, attributeOptionCombo };
             }

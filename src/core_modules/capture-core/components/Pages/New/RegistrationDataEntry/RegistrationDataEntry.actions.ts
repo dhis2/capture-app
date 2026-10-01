@@ -20,10 +20,10 @@ export const registrationFormActionTypes = {
         'FailResolvingAttributeOptionComboForNewEnrollment',
 } as const;
 
-export const failAOCResolveForNewTrackedEntityInstanceWithEnrollment = () =>
+export const failAOCResolveForNewTrackedEntityInstanceWithEnrollment = (programId: string) =>
     actionCreator(
         registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_AOC_RESOLVE_FAILED,
-    )({});
+    )({}, { programId });
 
 export const startSavingNewTrackedEntityInstance = (teiPayload: TeiPayload) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START)({ teiPayload });
