@@ -135,11 +135,11 @@ msgstr "Area"
 msgid "Coordinate"
 msgstr "Coordinate"
 
-msgid "{{eventLabel}} - {{stageName}} - {{categoryDisplayName}}"
-msgstr "{{eventLabel}} - {{stageName}} - {{categoryDisplayName}}"
+msgid "{{stageName}} - {{categoryDisplayName}}"
+msgstr "{{stageName}} - {{categoryDisplayName}}"
 
-msgid "{{eventLabel}} - {{categoryDisplayName}}"
-msgstr "{{eventLabel}} - {{categoryDisplayName}}"
+msgid "{{eventsLabel}} - {{categoryDisplayName}}"
+msgstr "{{eventsLabel}} - {{categoryDisplayName}}"
 
 msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
 msgstr "{{enrollmentLabel}} - {{categoryDisplayName}}"
@@ -183,6 +183,13 @@ msgstr "Cancel"
 
 msgid "Metadata error. see log for details"
 msgstr "Metadata error. see log for details"
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - Details"

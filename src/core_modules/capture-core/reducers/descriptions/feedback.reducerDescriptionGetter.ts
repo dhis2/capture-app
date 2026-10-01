@@ -129,10 +129,6 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
             message: i18n.t('Error saving {{enrollmentLabel}}', { enrollmentLabel }),
         });
     },
-    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_AOC_RESOLVE_FAILED]: () =>
-        addErrorFeedback({
-            message: i18n.t('Could not save: selected category options are not a valid combination.'),
-        }),
     [enrollmentSiteActionTypes.SAVE_FAILED]: (_state, action) => {
         const programId = action.payload.programId;
         const { enrollmentLabel, eventLabel } = getTermLabel(
