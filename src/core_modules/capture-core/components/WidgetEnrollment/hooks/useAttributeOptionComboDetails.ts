@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useEffect, useRef } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
@@ -38,26 +38,11 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         { lazy: true },
     );
 
-    const lastAttemptedRef = useRef<string | undefined>();
-    const lastSucceededRef = useRef<string | undefined>();
-
     useEffect(() => {
-        if (!effectiveAttributeOptionCombo) {
-            lastAttemptedRef.current = undefined;
-            lastSucceededRef.current = undefined;
-            return;
+        if (effectiveAttributeOptionCombo) {
+            refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
         }
-        if (effectiveAttributeOptionCombo === lastAttemptedRef.current) return;
-        lastAttemptedRef.current = effectiveAttributeOptionCombo;
-        refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
     }, [refetch, effectiveAttributeOptionCombo]);
-
-    useEffect(() => {
-        const value = (data as any)?.attributeOptionCombo as AttributeOptionComboDetails | undefined;
-        if (value?.id === effectiveAttributeOptionCombo) {
-            lastSucceededRef.current = effectiveAttributeOptionCombo;
-        }
-    }, [data, effectiveAttributeOptionCombo]);
 
     useEffect(() => {
         if (error) {
@@ -70,12 +55,11 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         }
     }, [error, effectiveAttributeOptionCombo]);
 
-    const retry = useCallback(() => {
-        if (!effectiveAttributeOptionCombo || loading) return;
-        if (effectiveAttributeOptionCombo === lastSucceededRef.current) return;
-        lastAttemptedRef.current = effectiveAttributeOptionCombo;
-        refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
-    }, [refetch, effectiveAttributeOptionCombo, loading]);
+    const refetchDetails = useCallback(() => {
+        if (effectiveAttributeOptionCombo) {
+            refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
+        }
+    }, [refetch, effectiveAttributeOptionCombo]);
 
     const attributeOptionComboDetails = useMemo(() => {
         if (!effectiveAttributeOptionCombo) return undefined;
@@ -83,5 +67,5 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         return value?.id === effectiveAttributeOptionCombo ? value : undefined;
     }, [effectiveAttributeOptionCombo, data]);
 
-    return { error, loading, attributeOptionComboDetails, retry };
+    return { error, loading, attributeOptionComboDetails, refetchDetails };
 };

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { WidgetEnrollment as WidgetEnrollmentNote } from './WidgetEnrollment.component';
@@ -68,14 +68,14 @@ export const WidgetEnrollment = ({
     const { error: errorProgram, program } = useProgram(programId);
     const {
         attributeOptionComboDetails,
-        retry: retryAttributeOptionComboDetails,
+        refetchDetails: refetchAttributeOptionComboDetails,
     } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
-    const refetchEnrollmentWithAOC = useMemo(
-        () => (...args: Parameters<typeof refetchEnrollment>) => {
-            retryAttributeOptionComboDetails();
+    const refetchEnrollmentWithAOC = useCallback(
+        (...args: Parameters<typeof refetchEnrollment>) => {
+            refetchAttributeOptionComboDetails();
             return refetchEnrollment(...args);
         },
-        [refetchEnrollment, retryAttributeOptionComboDetails],
+        [refetchEnrollment, refetchAttributeOptionComboDetails],
     );
     const { update: updateEnrollmentAOC, saving: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,

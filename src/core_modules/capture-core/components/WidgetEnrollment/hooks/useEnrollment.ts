@@ -3,6 +3,13 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 import { useUpdateEnrollment } from './useUpdateEnrollment';
 
+const baseFields = [
+    'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,' +
+    'occurredAt,followUp,deleted,updatedAt,geometry',
+];
+
+const enrollmentAOCFields = ['attributeOptionCombo'];
+
 type Props = {
     enrollmentId: string;
     onUpdateEnrollmentDate?: (date: string) => void;
@@ -23,19 +30,17 @@ export const useEnrollment = ({
 
     const { error, loading, data, refetch } = useDataQuery(
         useMemo(
-            () => ({
-                enrollment: {
-                    resource: 'tracker/enrollments/',
-                    id: ({ variables: { enrollmentId: updatedEnrollmentId } }: any) => updatedEnrollmentId,
-                    params: {
-                        fields: [
-                            'enrollment,trackedEntity,program,status,orgUnit,enrolledAt',
-                            'occurredAt,followUp,deleted,updatedAt,geometry',
-                            enrollmentAOCSupported && 'attributeOptionCombo',
-                        ].filter(Boolean).join(','),
+            () => {
+                const fields = [...baseFields];
+                if (enrollmentAOCSupported) fields.push(...enrollmentAOCFields);
+                return {
+                    enrollment: {
+                        resource: 'tracker/enrollments/',
+                        id: ({ variables: { enrollmentId: updatedEnrollmentId } }: any) => updatedEnrollmentId,
+                        params: { fields },
                     },
-                },
-            }),
+                };
+            },
             [enrollmentAOCSupported],
         ),
         { lazy: true },
