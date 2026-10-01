@@ -23,9 +23,8 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
-    buildEnrollmentCategoryOptionUids,
 } from '../helpers';
-import { attributeOptionsKey } from '../../../DataEntryDhis2Helpers';
+import { attributeOptionsKey, enrollmentAttributeOptionsKey } from '../../../DataEntryDhis2Helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
@@ -84,7 +83,7 @@ export const useBuildEnrollmentPayload = ({
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
 
-    const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
+    const buildTeiWithEnrollment = (relatedStageRef?: { current: RelatedStageRefPayload | null }): {
         teiWithEnrollment: EnrollmentPayload;
         formHasError: boolean;
         redirect: {
@@ -113,7 +112,10 @@ export const useBuildEnrollmentPayload = ({
                 return acc;
             }, {});
 
-        const enrollmentCategoryOptionUids = buildEnrollmentCategoryOptionUids(serverValuesForMainValues);
+        const enrollmentCategoryOptionUids = Object.keys(serverValuesForMainValues)
+            .filter(key => key.startsWith(enrollmentAttributeOptionsKey))
+            .map(key => serverValuesForMainValues[key])
+            .filter((value): value is string => typeof value === 'string' && value !== '');
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
