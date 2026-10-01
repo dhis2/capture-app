@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
@@ -17,26 +17,22 @@ export type AttributeOptionComboDetails = {
     categoryOptions: Array<AttributeOptionComboCategoryOption>;
 };
 
+const query = {
+    attributeOptionCombo: {
+        resource: 'categoryOptionCombos',
+        id: ({ variables }: any) => variables.attributeOptionCombo,
+        params: {
+            fields: 'id,displayName,categoryCombo[id,isDefault],' +
+                'categoryOptions[id,displayName,categories[id,displayName]]',
+        },
+    },
+};
+
 export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) => {
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
     const effectiveAttributeOptionCombo = enrollmentAOCSupported ? attributeOptionCombo : undefined;
 
-    const { error, loading, data, refetch } = useDataQuery(
-        useMemo(
-            () => ({
-                attributeOptionCombo: {
-                    resource: 'categoryOptionCombos',
-                    id: ({ variables }: any) => variables.attributeOptionCombo,
-                    params: {
-                        fields: 'id,displayName,categoryCombo[id,isDefault],' +
-                            'categoryOptions[id,displayName,categories[id,displayName]]',
-                    },
-                },
-            }),
-            [],
-        ),
-        { lazy: true },
-    );
+    const { error, loading, data, refetch } = useDataQuery(query, { lazy: true });
 
     useEffect(() => {
         if (effectiveAttributeOptionCombo) {
@@ -55,17 +51,11 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         }
     }, [error, effectiveAttributeOptionCombo]);
 
-    const refetchDetails = useCallback(() => {
-        if (effectiveAttributeOptionCombo) {
-            refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
-        }
-    }, [refetch, effectiveAttributeOptionCombo]);
-
     const attributeOptionComboDetails = useMemo(() => {
         if (!effectiveAttributeOptionCombo) return undefined;
         const value = (data as any)?.attributeOptionCombo as AttributeOptionComboDetails | undefined;
         return value?.id === effectiveAttributeOptionCombo ? value : undefined;
     }, [effectiveAttributeOptionCombo, data]);
 
-    return { error, loading, attributeOptionComboDetails, refetchDetails };
+    return { error, loading, attributeOptionComboDetails };
 };

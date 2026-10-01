@@ -68,12 +68,15 @@ type Props = {
     onSave?: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
 };
 
+const findOptionForCategory = (details: AttributeOptionComboDetails, categoryId: string) =>
+    details.categoryOptions.find(o => o.categories?.some(c => c.id === categoryId));
+
 const derivedInitialSelection = (
     details: AttributeOptionComboDetails,
     categories: ReadonlyArray<{ id: string }>,
 ) =>
     categories.reduce<Record<string, string>>((acc, category) => {
-        const option = details.categoryOptions.find(o => o.categories?.some(c => c.id === category.id));
+        const option = findOptionForCategory(details, category.id);
         if (option) acc[category.id] = option.id;
         return acc;
     }, {});
@@ -142,8 +145,7 @@ const AttributeOptionComboPlain = ({
             </div>
             <div className={classes.optionList}>
                 {categories.map((category) => {
-                    const option = attributeOptionComboDetails.categoryOptions
-                        .find(o => o.categories?.some(c => c.id === category.id));
+                    const option = findOptionForCategory(attributeOptionComboDetails, category.id);
                     if (!option) return null;
                     return (
                         <div

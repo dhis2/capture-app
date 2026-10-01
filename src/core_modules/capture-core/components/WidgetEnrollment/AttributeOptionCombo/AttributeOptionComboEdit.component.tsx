@@ -128,8 +128,8 @@ const AttributeOptionComboEditPlain = ({
                     );
                 })}
                 <div className={classes.buttonStrip}>
-                    <Button primary small onClick={save} disabled={saveDisabled || saving}>
-                        {saving ? i18n.t('Saving…') : i18n.t('Save')}
+                    <Button primary small onClick={save} loading={saving} disabled={saveDisabled}>
+                        {i18n.t('Save')}
                     </Button>
                     <Button secondary small onClick={onCancel} disabled={saving}>
                         {i18n.t('Cancel')}
