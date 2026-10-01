@@ -8,7 +8,7 @@ export type CategoryOptionCombo = {
     categoryOptions: Array<{ id: string }>;
 };
 
-export const resolveAttributeOptionCombo = (
+const resolveAttributeOptionCombo = (
     categoryOptionCombos: ReadonlyArray<CategoryOptionCombo>,
     categoryOptionUids: ReadonlyArray<string>,
     enrollmentCategoryComboId?: string,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-01T09:29:20.053Z\n"
-"PO-Revision-Date: 2026-10-01T09:29:20.053Z\n"
+"POT-Creation-Date: 2026-10-01T11:56:12.192Z\n"
+"PO-Revision-Date: 2026-10-01T11:56:12.192Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -183,6 +183,13 @@ msgstr "Cancel"
 
 msgid "Metadata error. see log for details"
 msgstr "Metadata error. see log for details"
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - Details"
@@ -2280,13 +2287,6 @@ msgstr "Error saving tracked entity instance"
 
 msgid "Error saving {{enrollmentLabel}}"
 msgstr "Error saving {{enrollmentLabel}}"
-
-msgid ""
-"The selected {{enrollmentLabel}} category options are not a valid "
-"combination."
-msgstr ""
-"The selected {{enrollmentLabel}} category options are not a valid "
-"combination."
 
 msgid "Error saving the {{enrollmentLabel}} {{eventLabel}}"
 msgstr "Error saving the {{enrollmentLabel}} {{eventLabel}}"
