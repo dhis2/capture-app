@@ -6,6 +6,7 @@ import { useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 import { resolveAttributeOptionCombo, type CategoryOptionCombo } from '../../../metaData';
+import { getTermLabel, LabelKeys } from '../../../customLabels';
 import { processErrorReports } from '../processErrorReports';
 
 const enrollmentUpdate: Mutation = {
@@ -25,6 +26,7 @@ type EnrollmentCategoryCombo = {
 type UseUpdateEnrollmentAOCProps = {
     enrollment: any;
     enrollmentCategoryCombo: EnrollmentCategoryCombo | undefined;
+    programId: string;
     refetchEnrollment: QueryRefetchFunction;
     onError?: (message: string) => void;
     onSuccess?: () => void;
@@ -33,6 +35,7 @@ type UseUpdateEnrollmentAOCProps = {
 export const useUpdateEnrollmentAOC = ({
     enrollment,
     enrollmentCategoryCombo,
+    programId,
     refetchEnrollment,
     onError,
     onSuccess,
@@ -59,7 +62,19 @@ export const useUpdateEnrollmentAOC = ({
             enrollmentCategoryCombo?.id,
         );
         if (!attributeOptionCombo) {
-            onError?.(i18n.t('Could not save: selected category options are not a valid combination.'));
+            log.error(
+                errorCreator(
+                    'Could not resolve the selected enrollment category options to an attribute option combo',
+                )({
+                    categoryOptionUids,
+                    enrollmentCategoryComboId: enrollmentCategoryCombo?.id,
+                }),
+            );
+            const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
+            onError?.(i18n.t(
+                'The selected {{enrollmentLabel}} category options are not a valid combination.',
+                { enrollmentLabel },
+            ));
             return false;
         }
 
@@ -74,7 +89,7 @@ export const useUpdateEnrollmentAOC = ({
             log.error(errorCreator('Enrollment AOC update failed')({ err }));
             return false;
         }
-    }, [enrollmentAOCSupported, enrollment, enrollmentCategoryCombo, saving,
+    }, [enrollmentAOCSupported, enrollment, enrollmentCategoryCombo, programId, saving,
         updateEnrollmentMutation, onError, fromClientDate]);
 
     return { update, saving };

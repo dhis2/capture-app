@@ -3,7 +3,9 @@ export {
     Category,
     CategoryCombination,
     EnrollmentCategoryCombination,
+    resolveAttributeOptionCombo,
 } from './CategoryCombinations';
+export type { CategoryOptionCombo } from './CategoryCombinations';
 export {
     DataElement,
     DateDataElement,

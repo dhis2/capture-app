@@ -70,6 +70,7 @@ export const WidgetEnrollment = ({
     const { update: updateEnrollmentAOC, saving: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
         enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
+        programId,
         refetchEnrollment,
         onError,
         onSuccess,
