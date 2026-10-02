@@ -109,7 +109,7 @@
         "babel-eslint": "^10.0.0",
         "babel-plugin-module-resolver": "^5.0.3",
         "concurrently": "^10.0.5",
-        "cypress": "12",
+        "cypress": "16",
         "docdash": "^2.0.2",
         "dotenv": "^18.0.3",
         "eslint": "7.32.0",
