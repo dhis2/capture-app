@@ -1,5 +1,6 @@
 import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import type { CategoryOptionCombo } from '../../metaData';
 
 export type EnrollmentCategoryOptionCombo = {
     id: string;
@@ -16,7 +17,7 @@ export type EnrollmentCategoryCombo = {
     displayName: string;
     isDefault?: boolean;
     categories: Array<{ id: string; displayName: string }>;
-    categoryOptionCombos?: Array<EnrollmentCategoryOptionCombo>;
+    categoryOptionCombos?: Array<CategoryOptionCombo>;
 };
 
 export type Enrollment = {
