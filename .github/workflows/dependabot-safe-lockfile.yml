@@ -1,0 +1,94 @@
+name: 'dhis2: regenerate Dependabot lockfile with safe-chain'
+
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}-${{ github.actor }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Reset yarn.lock to base and drop updated packages
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          DEPS: ${{ steps.meta.outputs.dependency-names }}
+        run: |
+          test -n "$DEPS" || { echo "::error::No dependency names from fetch-metadata"; exit 1; }
+          git checkout "$(git merge-base "$BASE_SHA" HEAD)" -- yarn.lock
+          python3 - <<'EOF'
+          import os, re
+          names = {n.strip() for n in os.environ["DEPS"].split(",") if n.strip()}
+          def pkg(block):
+              first = block.split("\n", 1)[0].split(", ")[0].strip('"')
+              m = re.match(r"^(@[^@]+|[^@]+)@", first)
+              return m.group(1) if m else None
+          blocks = [b.strip("\n") for b in re.split(r"\n\s*\n", open("yarn.lock").read()) if b.strip()]
+          kept = [b for b in blocks if b.startswith("#") or pkg(b) not in names]
+          print(f"Dropped {len(blocks) - len(kept)} entries for: {', '.join(sorted(names))}")
+          open("yarn.lock", "w").write("\n\n".join(kept) + "\n")
+          EOF
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: ''
+
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+        with:
+          install-args: --non-interactive --ignore-scripts --ignore-engines --ignore-workspace-root-check
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: yarn-lock
+          path: yarn.lock
+          retention-days: 1
+
+  commit:
+    needs: install
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.DHIS2_BOT_GITHUB_TOKEN }}
+
+      - uses: actions/download-artifact@v7
+        with:
+          name: yarn-lock
+
+      - uses: dhis2/action-commit-signing@v1
+        with:
+          ssh-signing-key: ${{ secrets.DHIS2_BOT_SSH_SIGNING_KEY }}
+          ssh-signing-key-passphrase: ${{ secrets.DHIS2_BOT_SSH_SIGNING_PASSPHRASE }}
+
+      - name: Commit regenerated yarn.lock
+        run: |
+          if git diff --quiet -- yarn.lock; then
+            echo "Dependabot's yarn.lock already matches the safe-chain result"
+            exit 0
+          fi
+          git commit -m "chore(deps): regenerate yarn.lock with safe-chain" -- yarn.lock
+          git push
