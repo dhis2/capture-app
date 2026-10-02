@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
@@ -9,6 +9,8 @@ import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../
 const styles = {
     block: {
         margin: `${spacersNum.dp8}px 0`,
+        fontSize: '14px',
+        color: colors.grey900,
     },
     header: {
         display: 'flex',
@@ -16,22 +18,36 @@ const styles = {
         gap: `${spacersNum.dp4}px`,
     },
     rowList: {
-        listStyle: 'disc',
-        paddingInlineStart: `${spacersNum.dp16 + spacersNum.dp4}px`,
-        margin: `${spacersNum.dp4}px 0 0`,
         display: 'flex',
         flexDirection: 'column' as const,
+        gap: `${spacersNum.dp4}px`,
+        marginInlineStart: `${spacersNum.dp16 + spacersNum.dp4}px`,
+        marginTop: `${spacersNum.dp4}px`,
+    },
+    row: {
+        display: 'flex',
         gap: `${spacersNum.dp4}px`,
     },
     bulletRow: {
         display: 'flex',
         gap: `${spacersNum.dp4}px`,
-        '&::marker': {
+        '&::before': {
+            content: String.raw`"\2022"`,
             color: colors.grey500,
+            marginInlineEnd: `${spacersNum.dp4}px`,
+        },
+    },
+    bulletTextRow: {
+        '&::before': {
+            content: String.raw`"\2022"`,
+            color: colors.grey500,
+            marginInlineEnd: `${spacersNum.dp4}px`,
         },
     },
     label: {
         color: colors.grey700,
+        whiteSpace: 'nowrap' as const,
+        flexShrink: 0,
     },
     editButton: {
         display: 'inline-flex',
@@ -111,6 +127,17 @@ const AttributeOptionComboPlain = ({
 
     const loadedCategories = useCategoryOptionsLoader(categories, orgUnitId, !editMode);
 
+    useEffect(() => {
+        if (!editMode || !loadedCategories) return;
+        setSelection(prev => Object.fromEntries(
+            Object.entries(prev).filter(([catId, selId]) =>
+                loadedCategories.find(c => c.id === catId)
+                    ?.options.find(o => o.value === selId)
+                    ?.writeAccess,
+            ),
+        ));
+    }, [editMode, loadedCategories]);
+
     const save = useCallback(async () => {
         if (saving) return;
         const values = categories.map(({ id }) => selection[id]).filter(Boolean);
@@ -125,6 +152,41 @@ const AttributeOptionComboPlain = ({
         return null;
     }
 
+    const editButtonVisible = !editMode && !readOnly && !saving;
+    const editButton = editButtonVisible ? (
+        <button
+            type="button"
+            className={classes.editButton}
+            data-test="widget-enrollment-icon-edit-attribute-option-combo"
+            aria-label={i18n.t('Edit {{label}}', { label: enrollmentCategoryCombo.displayName })}
+            onClick={openEdit}
+        >
+            <IconEdit16 />
+        </button>
+    ) : null;
+
+
+    const singleCategory = categories.length === 1;
+
+    const renderSingleCategoryView = () => {
+        const option = enrollmentAOCDetails?.categoryOptions
+            .find(o => o.categories?.some(c => c.id === categories[0].id));
+        return (
+            <div className={classes.block} data-test="widget-enrollment-attribute-option-combo">
+                <div className={classes.header}>
+                    <span data-test="widget-enrollment-icon-attribute-option-combo">
+                        <IconLegend16 color={colors.grey600} />
+                    </span>
+                    {`${enrollmentCategoryCombo.displayName}:`}
+                    {option?.displayName && <span>{option.displayName}</span>}
+                    {editButton}
+                </div>
+            </div>
+        );
+    };
+
+    if (singleCategory && !editMode) return renderSingleCategoryView();
+
     return (
         <div className={classes.block} data-test="widget-enrollment-attribute-option-combo">
             <div className={classes.header}>
@@ -132,62 +194,57 @@ const AttributeOptionComboPlain = ({
                     <IconLegend16 color={colors.grey600} />
                 </span>
                 {`${enrollmentCategoryCombo.displayName}:`}
-                {!editMode && !readOnly && !saving && (
-                    <button
-                        type="button"
-                        className={classes.editButton}
-                        data-test="widget-enrollment-icon-edit-attribute-option-combo"
-                        aria-label={i18n.t('Edit {{label}}', { label: enrollmentCategoryCombo.displayName })}
-                        onClick={openEdit}
-                    >
-                        <IconEdit16 />
-                    </button>
-                )}
+                {editButton}
             </div>
-            <ul className={classes.rowList}>
-                {editMode
-                    ? categories.map(category => (
-                        <li
+            <div className={classes.rowList}>
+                {categories.map((category) => {
+                    const option = enrollmentAOCDetails?.categoryOptions
+                        .find(o => o.categories?.some(c => c.id === category.id));
+                    const multiCategory = categories.length > 1;
+                    let rowClass = classes.row;
+                    if (multiCategory) {
+                        rowClass = editMode ? classes.bulletRow : classes.bulletTextRow;
+                    }
+                    return (
+                        <div
                             key={category.id}
-                            className={classes.bulletRow}
+                            className={rowClass}
                             data-test="widget-enrollment-attribute-option-combo-row"
                         >
-                            <div className={classes.fieldRowContent}>
-                                <span className={classes.label}>{category.displayName}</span>
-                                <div className={classes.inputField}>
-                                    <SingleSelectField
-                                        id={`enrollment-aoc-${category.id}`}
-                                        value={selection[category.id] ?? null}
-                                        options={(loadedCategories?.find(c => c.id === category.id)?.options ?? [])
-                                            .filter(o => o.writeAccess || o.value === selection[category.id])}
-                                        onChange={value => setSelection(prev => ({
-                                            ...prev,
-                                            [category.id]: value ?? '',
-                                        }))}
-                                        filterable
-                                        clearable={false}
-                                        dense
-                                        dataTest={`widget-enrollment-aoc-${category.id}`}
-                                    />
+                            {editMode ? (
+                                <div className={classes.fieldRowContent}>
+                                    {multiCategory && (
+                                        <span className={classes.label}>{`${category.displayName}:`}</span>
+                                    )}
+                                    <div className={classes.inputField}>
+                                        <SingleSelectField
+                                            id={`enrollment-aoc-${category.id}`}
+                                            value={selection[category.id] ?? null}
+                                            options={(loadedCategories?.find(c => c.id === category.id)?.options ?? [])
+                                                .filter(o => o.writeAccess)}
+                                            onChange={value => setSelection(prev => ({
+                                                ...prev,
+                                                [category.id]: value ?? '',
+                                            }))}
+                                            filterable
+                                            clearable={false}
+                                            dense
+                                            dataTest={`widget-enrollment-aoc-${category.id}`}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    ))
-                    : enrollmentAOCDetails?.categoryOptions.map((option) => {
-                        const category = option.categories?.[0];
-                        if (!category) return null;
-                        return (
-                            <li
-                                key={option.id}
-                                className={classes.bulletRow}
-                                data-test="widget-enrollment-attribute-option-combo-row"
-                            >
-                                <span className={classes.label}>{`${category.displayName}:`}</span>
-                                <span>{option.displayName}</span>
-                            </li>
-                        );
-                    })}
-            </ul>
+                            ) : (
+                                <>
+                                    {multiCategory && (
+                                        <span className={classes.label}>{`${category.displayName}: `}</span>
+                                    )}
+                                    {option?.displayName && <span>{option.displayName}</span>}
+                                </>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
             {editMode && (
                 <div className={classes.buttonStrip}>
                     <Button primary small onClick={save} loading={saving} disabled={saveDisabled}>
