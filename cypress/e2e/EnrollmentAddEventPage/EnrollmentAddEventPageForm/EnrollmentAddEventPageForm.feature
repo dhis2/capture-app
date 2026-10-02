@@ -4,6 +4,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 0
+    And the form is finished loading
     When you type 2021-10-15 in the input number 0
     And you click the checkbox number 0
     And you click the checkbox number 2
@@ -16,6 +17,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the form is finished loading
     When you type 2021-10-15 in the input number 0
     And you type 13 in the input number 1
     And the user selects Positive
@@ -38,6 +40,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the form is finished loading
     When you focus and blur a required field
     Then the input should throw an error with error-message A value is required
 
@@ -45,6 +48,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the form is finished loading
     And you type x in the input number 1
     Then the input should throw an error with error-message Please provide a positive integer
 
@@ -59,6 +63,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Then there should be a modal popping up
     When you choose option No, cancel in the modal
     Then you will be navigate to page #/enrollment?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&teiId=S3JjTA4QMNe
+    And the new event request has completed
 
   Scenario: User should be asked to create new event after completing a stage and choose to continue
     Given you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=CWaAcQYKVpq&teiId=S3JjTA4QMNe
@@ -71,6 +76,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Then there should be a modal popping up
     When you choose option Yes, create new event in the modal
     Then you will be navigate to page #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&tab=SCHEDULE&teiId=S3JjTA4QMNe
+    And the new event request has completed
 
   Scenario: User is able to schedule an event with a note
     Given you land on the enrollment new event page by having typed /#/enrollmentEventNew?enrollmentId=qcFFRp7DpcX&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&stageId=edqlbukwRfQ&teiId=erqa3phUfpI
