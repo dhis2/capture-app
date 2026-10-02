@@ -6,7 +6,7 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { useTrackedEntities } from './hooks/useTrackedEntities';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
-import { useAttributeOptionComboDetails } from './hooks/useAttributeOptionComboDetails';
+import { useEnrollmentAOCDetails } from './hooks/useEnrollmentAOCDetails';
 import { useUpdateEnrollmentAOC } from './hooks/useUpdateEnrollmentAOC';
 import { useUserLocale } from '../../utils/localeData/useUserLocale';
 import type { Props } from './enrollment.types';
@@ -66,11 +66,12 @@ export const WidgetEnrollment = ({
         externalData,
     });
     const { error: errorProgram, program } = useProgram(programId);
-    const { attributeOptionComboDetails } = useAttributeOptionComboDetails(enrollment?.attributeOptionCombo);
-    const { update: updateEnrollmentAOC, saving: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
+    const { enrollmentAOCDetails } =
+        useEnrollmentAOCDetails(enrollment?.attributeOptionCombo);
+    const { update: updateEnrollmentAOC, loading: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
         enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
-        programId,
+        program,
         refetchEnrollment,
         onError,
         onSuccess,
@@ -97,7 +98,7 @@ export const WidgetEnrollment = ({
     return (
         <WidgetEnrollmentNote
             enrollment={enrollment}
-            attributeOptionComboDetails={attributeOptionComboDetails}
+            enrollmentAOCDetails={enrollmentAOCDetails}
             enrollmentCategoryCombo={program?.enrollmentCategoryCombo}
             updateEnrollmentAOC={updateEnrollmentAOC}
             savingEnrollmentAOC={savingEnrollmentAOC}

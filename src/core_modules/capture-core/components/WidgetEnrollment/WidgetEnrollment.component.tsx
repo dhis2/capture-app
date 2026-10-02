@@ -64,7 +64,7 @@ const WidgetEnrollmentPlain = ({
     classes,
     events,
     enrollment,
-    attributeOptionComboDetails,
+    enrollmentAOCDetails,
     enrollmentCategoryCombo,
     updateEnrollmentAOC,
     savingEnrollmentAOC,
@@ -196,7 +196,7 @@ const WidgetEnrollmentPlain = ({
                         </div>
 
                         <AttributeOptionCombo
-                            attributeOptionComboDetails={attributeOptionComboDetails}
+                            enrollmentAOCDetails={enrollmentAOCDetails}
                             enrollmentCategoryCombo={enrollmentCategoryCombo}
                             orgUnitId={enrollment.orgUnit}
                             readOnly={enrollmentReadOnly}

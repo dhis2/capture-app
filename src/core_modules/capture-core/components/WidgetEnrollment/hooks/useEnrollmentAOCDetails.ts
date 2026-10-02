@@ -3,19 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
-
-export type AttributeOptionComboCategoryOption = {
-    id: string;
-    displayName: string;
-    categories: Array<{ id: string; displayName: string }>;
-};
-
-export type AttributeOptionComboDetails = {
-    id: string;
-    displayName: string;
-    categoryCombo: { id: string; isDefault: boolean };
-    categoryOptions: Array<AttributeOptionComboCategoryOption>;
-};
+import type { EnrollmentAOCDetails } from '../enrollment.types';
 
 const query = {
     attributeOptionCombo: {
@@ -28,7 +16,7 @@ const query = {
     },
 };
 
-export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) => {
+export const useEnrollmentAOCDetails = (attributeOptionCombo?: string) => {
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
     const effectiveAttributeOptionCombo = enrollmentAOCSupported ? attributeOptionCombo : undefined;
 
@@ -51,11 +39,11 @@ export const useAttributeOptionComboDetails = (attributeOptionCombo?: string) =>
         }
     }, [error, effectiveAttributeOptionCombo]);
 
-    const attributeOptionComboDetails = useMemo(() => {
+    const enrollmentAOCDetails = useMemo(() => {
         if (!effectiveAttributeOptionCombo) return undefined;
-        const value = (data as any)?.attributeOptionCombo as AttributeOptionComboDetails | undefined;
+        const value = (data as any)?.attributeOptionCombo as EnrollmentAOCDetails | undefined;
         return value?.id === effectiveAttributeOptionCombo ? value : undefined;
     }, [effectiveAttributeOptionCombo, data]);
 
-    return { error, loading, attributeOptionComboDetails };
+    return { error, loading, enrollmentAOCDetails };
 };

@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import type { AttributeOptionComboDetails } from '../hooks/useAttributeOptionComboDetails';
-import type { EnrollmentCategoryCombo } from '../enrollment.types';
+import type { EnrollmentAOCDetails, EnrollmentCategoryCombo } from '../enrollment.types';
 import { AttributeOptionComboEdit } from './AttributeOptionComboEdit.component';
 
 const styles = {
@@ -60,19 +59,19 @@ const styles = {
 };
 
 type Props = {
-    attributeOptionComboDetails?: AttributeOptionComboDetails;
+    enrollmentAOCDetails?: EnrollmentAOCDetails;
     enrollmentCategoryCombo?: EnrollmentCategoryCombo;
     orgUnitId?: string;
     readOnly?: boolean;
     saving?: boolean;
-    onSave?: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
+    onSave: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
 };
 
-const findOptionForCategory = (details: AttributeOptionComboDetails, categoryId: string) =>
+const findOptionForCategory = (details: EnrollmentAOCDetails, categoryId: string) =>
     details.categoryOptions.find(o => o.categories?.some(c => c.id === categoryId));
 
 const derivedInitialSelection = (
-    details: AttributeOptionComboDetails,
+    details: EnrollmentAOCDetails,
     categories: ReadonlyArray<{ id: string }>,
 ) =>
     categories.reduce<Record<string, string>>((acc, category) => {
@@ -83,7 +82,7 @@ const derivedInitialSelection = (
 
 const AttributeOptionComboPlain = ({
     classes,
-    attributeOptionComboDetails,
+    enrollmentAOCDetails,
     enrollmentCategoryCombo,
     orgUnitId,
     readOnly,
@@ -100,18 +99,18 @@ const AttributeOptionComboPlain = ({
         [enrollmentCategoryCombo],
     );
     const initialSelection = useMemo(
-        () => (attributeOptionComboDetails
-            ? derivedInitialSelection(attributeOptionComboDetails, categories)
+        () => (enrollmentAOCDetails
+            ? derivedInitialSelection(enrollmentAOCDetails, categories)
             : {}),
-        [attributeOptionComboDetails, categories],
+        [enrollmentAOCDetails, categories],
     );
 
-    if (!attributeOptionComboDetails || !enrollmentCategoryCombo
-        || attributeOptionComboDetails.categoryCombo?.isDefault) {
+    if (!enrollmentAOCDetails || !enrollmentCategoryCombo
+        || enrollmentAOCDetails.categoryCombo?.isDefault) {
         return null;
     }
 
-    if (editMode && onSave) {
+    if (editMode) {
         return (
             <AttributeOptionComboEdit
                 comboDisplayName={enrollmentCategoryCombo.displayName}
@@ -132,7 +131,7 @@ const AttributeOptionComboPlain = ({
                     <IconLegend16 color={colors.grey600} />
                 </span>
                 {`${enrollmentCategoryCombo.displayName}:`}
-                {!readOnly && !saving && onSave && (
+                {!readOnly && !saving && (
                     <button
                         type="button"
                         className={classes.editButton}
@@ -145,7 +144,7 @@ const AttributeOptionComboPlain = ({
             </div>
             <div className={classes.optionList}>
                 {categories.map((category) => {
-                    const option = findOptionForCategory(attributeOptionComboDetails, category.id);
+                    const option = findOptionForCategory(enrollmentAOCDetails, category.id);
                     if (!option) return null;
                     return (
                         <div
