@@ -6,7 +6,6 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { useTrackedEntities } from './hooks/useTrackedEntities';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
-import { useEnrollmentAOCDetails } from './hooks/useEnrollmentAOCDetails';
 import { useUpdateEnrollmentAOC } from './hooks/useUpdateEnrollmentAOC';
 import { useUserLocale } from '../../utils/localeData/useUserLocale';
 import type { Props } from './enrollment.types';
@@ -66,8 +65,11 @@ export const WidgetEnrollment = ({
         externalData,
     });
     const { error: errorProgram, program } = useProgram(programId);
-    const { enrollmentAOCDetails } =
-        useEnrollmentAOCDetails(enrollment?.attributeOptionCombo);
+    const enrollmentAOCDetails = useMemo(
+        () => program?.enrollmentCategoryCombo?.categoryOptionCombos
+            ?.find(coc => coc.id === enrollment?.attributeOptionCombo),
+        [program, enrollment?.attributeOptionCombo],
+    );
     const { update: updateEnrollmentAOC, loading: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
         enrollmentCategoryCombo: program?.enrollmentCategoryCombo,

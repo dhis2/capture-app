@@ -7,19 +7,19 @@ import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/ap
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 import { resolveAttributeOptionCombo } from '../../../metaData';
 import { getTermLabelFromProgram, LabelKeys } from '../../../customLabels';
-import type { EnrollmentCategoryCombo } from '../enrollment.types';
+import type { Enrollment, EnrollmentCategoryCombo } from '../enrollment.types';
 import { processErrorReports } from '../processErrorReports';
 
 const enrollmentUpdate: Mutation = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
     type: 'create',
-    data: (enrollment: any) => ({
+    data: (enrollment: Enrollment) => ({
         enrollments: [enrollment],
     }),
 };
 
 type UseUpdateEnrollmentAOCProps = {
-    enrollment: any;
+    enrollment: Enrollment | null | undefined;
     enrollmentCategoryCombo: EnrollmentCategoryCombo | undefined;
     program: Record<string, unknown> | undefined;
     refetchEnrollment: QueryRefetchFunction;
@@ -42,9 +42,6 @@ export const useUpdateEnrollmentAOC = ({
         onComplete: () => {
             refetchEnrollment();
             onSuccess?.();
-        },
-        onError: (e) => {
-            onError?.(processErrorReports(e));
         },
     });
 
@@ -82,6 +79,7 @@ export const useUpdateEnrollmentAOC = ({
             return true;
         } catch (err) {
             log.error(errorCreator('Enrollment AOC update failed')({ err }));
+            onError?.(processErrorReports(err));
             return false;
         }
     }, [enrollmentAOCSupported, enrollment, enrollmentCategoryCombo, program, loading,

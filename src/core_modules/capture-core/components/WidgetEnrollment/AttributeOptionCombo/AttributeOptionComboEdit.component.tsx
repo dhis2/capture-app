@@ -1,64 +1,14 @@
 import React, { useCallback, useState } from 'react';
-import { Button, IconLegend16, colors, spacersNum } from '@dhis2/ui';
+import { Button, IconLegend16, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { SingleSelectField } from 'capture-core/components/FormFields/New';
 import { useCategoryOptionsLoader } from '../../DataEntryDhis2Helpers';
-
-const styles = {
-    block: {
-        margin: `${spacersNum.dp8}px 0`,
-        fontSize: '14px',
-        color: colors.grey900,
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: `${spacersNum.dp4}px`,
-    },
-    editContainer: {
-        display: 'flex',
-        flexDirection: 'column' as const,
-        gap: `${spacersNum.dp4}px`,
-        marginInlineStart: `${spacersNum.dp16 + spacersNum.dp4}px`,
-        marginTop: `${spacersNum.dp4}px`,
-    },
-    fieldRow: {
-        display: 'flex',
-        gap: `${spacersNum.dp4}px`,
-        fontSize: '14px',
-        color: colors.grey900,
-        minWidth: 0,
-        '&::before': {
-            content: String.raw`"\2022"`,
-            color: colors.grey500,
-            marginInlineEnd: `${spacersNum.dp4}px`,
-        },
-    },
-    fieldRowContent: {
-        display: 'flex',
-        flexDirection: 'column' as const,
-        gap: `${spacersNum.dp4}px`,
-        flex: 1,
-        minWidth: 0,
-    },
-    fieldLabel: {
-        color: colors.grey700,
-    },
-    inputField: {
-        minWidth: 0,
-        maxWidth: '260px',
-    },
-    buttonStrip: {
-        display: 'flex',
-        gap: `${spacersNum.dp4}px`,
-        margin: `${spacersNum.dp4}px 0`,
-    },
-};
+import type { SharedClasses } from './AttributeOptionCombo.component';
 
 type Category = { id: string; displayName: string };
 
 type Props = {
+    classes: SharedClasses;
     comboDisplayName: string;
     categories: Array<Category>;
     initialSelection: Record<string, string>;
@@ -68,7 +18,7 @@ type Props = {
     onCancel: () => void;
 };
 
-const AttributeOptionComboEditPlain = ({
+export const AttributeOptionComboEdit = ({
     classes,
     comboDisplayName,
     categories,
@@ -77,7 +27,7 @@ const AttributeOptionComboEditPlain = ({
     saving,
     onSave,
     onCancel,
-}: Props & WithStyles<typeof styles>) => {
+}: Props) => {
     const [selection, setSelection] = useState<Record<string, string>>(initialSelection);
     const loadedCategories = useCategoryOptionsLoader(categories, orgUnitId, false);
 
@@ -99,15 +49,15 @@ const AttributeOptionComboEditPlain = ({
                 </span>
                 {`${comboDisplayName}:`}
             </div>
-            <div className={classes.editContainer}>
+            <div className={classes.rowList}>
                 {categories.map((category) => {
                     const loaded = loadedCategories?.find(c => c.id === category.id);
                     const options = (loaded?.options ?? [])
                         .filter(o => o.writeAccess || o.value === selection[category.id]);
                     return (
-                        <div key={category.id} className={classes.fieldRow}>
+                        <div key={category.id} className={classes.bulletRow}>
                             <div className={classes.fieldRowContent}>
-                                <span className={classes.fieldLabel}>{category.displayName}</span>
+                                <span className={classes.label}>{category.displayName}</span>
                                 <div className={classes.inputField}>
                                     <SingleSelectField
                                         id={`enrollment-aoc-${category.id}`}
@@ -139,5 +89,3 @@ const AttributeOptionComboEditPlain = ({
         </div>
     );
 };
-
-export const AttributeOptionComboEdit = withStyles(styles)(AttributeOptionComboEditPlain);

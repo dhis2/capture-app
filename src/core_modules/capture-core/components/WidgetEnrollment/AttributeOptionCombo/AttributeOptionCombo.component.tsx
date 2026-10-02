@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import type { EnrollmentAOCDetails, EnrollmentCategoryCombo } from '../enrollment.types';
+import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 import { AttributeOptionComboEdit } from './AttributeOptionComboEdit.component';
 
 const styles = {
@@ -15,14 +16,14 @@ const styles = {
         alignItems: 'center',
         gap: `${spacersNum.dp4}px`,
     },
-    optionList: {
+    rowList: {
         display: 'flex',
         flexDirection: 'column' as const,
         gap: `${spacersNum.dp4}px`,
         marginInlineStart: `${spacersNum.dp16 + spacersNum.dp4}px`,
         marginTop: `${spacersNum.dp4}px`,
     },
-    optionRow: {
+    bulletRow: {
         display: 'flex',
         gap: `${spacersNum.dp4}px`,
         '&::before': {
@@ -31,7 +32,7 @@ const styles = {
             marginInlineEnd: `${spacersNum.dp4}px`,
         },
     },
-    optionLabel: {
+    label: {
         color: colors.grey700,
     },
     editButton: {
@@ -56,10 +57,28 @@ const styles = {
             color: colors.grey800,
         },
     },
+    fieldRowContent: {
+        display: 'flex',
+        flexDirection: 'column' as const,
+        gap: `${spacersNum.dp4}px`,
+        flex: 1,
+        minWidth: 0,
+    },
+    inputField: {
+        minWidth: 0,
+        maxWidth: '260px',
+    },
+    buttonStrip: {
+        display: 'flex',
+        gap: `${spacersNum.dp4}px`,
+        margin: `${spacersNum.dp4}px 0`,
+    },
 };
 
+export type SharedClasses = WithStyles<typeof styles>['classes'];
+
 type Props = {
-    enrollmentAOCDetails?: EnrollmentAOCDetails;
+    enrollmentAOCDetails?: EnrollmentCategoryOptionCombo;
     enrollmentCategoryCombo?: EnrollmentCategoryCombo;
     orgUnitId?: string;
     readOnly?: boolean;
@@ -67,18 +86,20 @@ type Props = {
     onSave: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
 };
 
-const findOptionForCategory = (details: EnrollmentAOCDetails, categoryId: string) =>
+const findOptionForCategory = (details: EnrollmentCategoryOptionCombo, categoryId: string) =>
     details.categoryOptions.find(o => o.categories?.some(c => c.id === categoryId));
 
 const derivedInitialSelection = (
-    details: EnrollmentAOCDetails,
+    details: EnrollmentCategoryOptionCombo | undefined,
     categories: ReadonlyArray<{ id: string }>,
-) =>
-    categories.reduce<Record<string, string>>((acc, category) => {
+): Record<string, string> => {
+    if (!details) return {};
+    return categories.reduce<Record<string, string>>((acc, category) => {
         const option = findOptionForCategory(details, category.id);
         if (option) acc[category.id] = option.id;
         return acc;
     }, {});
+};
 
 const AttributeOptionComboPlain = ({
     classes,
@@ -99,20 +120,18 @@ const AttributeOptionComboPlain = ({
         [enrollmentCategoryCombo],
     );
     const initialSelection = useMemo(
-        () => (enrollmentAOCDetails
-            ? derivedInitialSelection(enrollmentAOCDetails, categories)
-            : {}),
+        () => derivedInitialSelection(enrollmentAOCDetails, categories),
         [enrollmentAOCDetails, categories],
     );
 
-    if (!enrollmentAOCDetails || !enrollmentCategoryCombo
-        || enrollmentAOCDetails.categoryCombo?.isDefault) {
+    if (!enrollmentCategoryCombo || enrollmentCategoryCombo.isDefault) {
         return null;
     }
 
     if (editMode) {
         return (
             <AttributeOptionComboEdit
+                classes={classes}
                 comboDisplayName={enrollmentCategoryCombo.displayName}
                 categories={categories}
                 initialSelection={initialSelection}
@@ -136,24 +155,25 @@ const AttributeOptionComboPlain = ({
                         type="button"
                         className={classes.editButton}
                         data-test="widget-enrollment-icon-edit-attribute-option-combo"
+                        aria-label={i18n.t('Edit {{label}}', { label: enrollmentCategoryCombo.displayName })}
                         onClick={openEdit}
                     >
                         <IconEdit16 />
                     </button>
                 )}
             </div>
-            <div className={classes.optionList}>
+            <div className={classes.rowList}>
                 {categories.map((category) => {
-                    const option = findOptionForCategory(enrollmentAOCDetails, category.id);
-                    if (!option) return null;
+                    const option = enrollmentAOCDetails
+                        && findOptionForCategory(enrollmentAOCDetails, category.id);
                     return (
                         <div
                             key={category.id}
-                            className={classes.optionRow}
+                            className={classes.bulletRow}
                             data-test="widget-enrollment-attribute-option-combo-row"
                         >
-                            <span className={classes.optionLabel}>{`${category.displayName}:`}</span>
-                            <span>{option.displayName}</span>
+                            <span className={classes.label}>{`${category.displayName}:`}</span>
+                            <span>{option ? option.displayName : ''}</span>
                         </div>
                     );
                 })}

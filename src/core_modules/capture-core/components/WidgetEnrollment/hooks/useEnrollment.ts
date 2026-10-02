@@ -2,10 +2,20 @@ import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 import { useUpdateEnrollment } from './useUpdateEnrollment';
+import type { Enrollment } from '../enrollment.types';
 
 const baseFields = [
-    'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,' +
-    'occurredAt,followUp,deleted,updatedAt,geometry',
+    'enrollment',
+    'trackedEntity',
+    'program',
+    'status',
+    'orgUnit',
+    'enrolledAt',
+    'occurredAt',
+    'followUp',
+    'deleted',
+    'updatedAt',
+    'geometry',
 ];
 
 const enrollmentAOCFields = ['attributeOptionCombo'];
@@ -25,7 +35,7 @@ export const useEnrollment = ({
     onError,
     externalData,
 }: Props) => {
-    const [enrollment, setEnrollment] = useState<any>();
+    const [enrollment, setEnrollment] = useState<Enrollment | undefined>();
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
 
     const { error, loading, data, refetch } = useDataQuery(
@@ -52,13 +62,13 @@ export const useEnrollment = ({
 
     useEffect(() => {
         if (data) {
-            setEnrollment((data as any).enrollment);
+            setEnrollment((data as { enrollment: Enrollment }).enrollment);
         }
     }, [setEnrollment, data]);
 
     useEffect(() => {
         if (externalData?.status?.value) {
-            setEnrollment((e: any) => ({ ...e, status: externalData?.status?.value }));
+            setEnrollment(e => (e ? { ...e, status: externalData.status.value as string } : e));
         }
     }, [setEnrollment, externalData?.status]);
 
