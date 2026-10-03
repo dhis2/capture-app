@@ -306,6 +306,7 @@ const getCategoryOptionsSettingsFn = () => ({
     getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
+        filterable: true,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
@@ -353,6 +354,7 @@ const getEnrollmentCategoryOptionsSettingsFn = () => ({
     getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
         ...props.enrollmentCategories?.find((category: any) => category.id === fieldId),
         required: true,
+        filterable: true,
     }),
     getPropName: (props: any, fieldId?: string) =>
         (fieldId ? `${enrollmentAttributeOptionsKey}-${fieldId}` : enrollmentAttributeOptionsKey),
