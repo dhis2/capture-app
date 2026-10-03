@@ -130,7 +130,6 @@ const getEnrollmentDateSettings = () => {
         }),
         getPropName: () => 'enrolledAt',
         getValidatorContainers: getEnrollmentDateValidatorContainer,
-        getPassOnFieldData: () => true,
         getMeta: () => ({
             placement: placements.TOP,
             section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
@@ -180,7 +179,6 @@ const getIncidentDateSettings = () => {
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'occurredAt',
-        getPassOnFieldData: () => true,
         getValidatorContainers: getIncidentDateValidatorContainer,
         getMeta: () => ({
             placement: placements.TOP,
@@ -270,7 +268,6 @@ const getGeometrySettings = () => ({
     },
     getPropName: () => 'geometry',
     getValidatorContainers: () => [],
-    getPassOnFieldData: () => true,
     getMeta: () => ({
         placement: placements.TOP,
         section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
