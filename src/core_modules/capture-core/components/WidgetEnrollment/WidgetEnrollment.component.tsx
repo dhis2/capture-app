@@ -25,6 +25,7 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
+import { AttributeOptionCombo } from './AttributeOptionCombo';
 
 const styles = {
     enrollment: {
@@ -63,6 +64,10 @@ const WidgetEnrollmentPlain = ({
     classes,
     events,
     enrollment,
+    enrollmentAOCDetails,
+    enrollmentCategoryCombo,
+    updateEnrollmentAOC,
+    savingEnrollmentAOC,
     program,
     ownerOrgUnit,
     locale,
@@ -189,6 +194,15 @@ const WidgetEnrollmentPlain = ({
                             })}
                             {convertValue(ownerOrgUnitClientValue, dataElementTypes.ORGANISATION_UNIT)}
                         </div>
+
+                        <AttributeOptionCombo
+                            enrollmentAOCDetails={enrollmentAOCDetails}
+                            enrollmentCategoryCombo={enrollmentCategoryCombo}
+                            orgUnitId={enrollment.orgUnit}
+                            readOnly={enrollmentReadOnly}
+                            saving={savingEnrollmentAOC}
+                            onSave={updateEnrollmentAOC}
+                        />
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">
                             <span data-test="widget-enrollment-icon-clock">

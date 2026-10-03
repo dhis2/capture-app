@@ -5,6 +5,7 @@ export {
     enrollmentAttributeOptionsKey,
 } from './AOCFieldBuilder.constants';
 export { withAOCFieldBuilder, withEnrollmentAOCFieldBuilder } from './withAOCFieldBuilder';
+export { useCategoryOptionsLoader } from './useCategoryOptionsLoader';
 export {
     getCategoryOptionsValidatorContainers,
     getEnrollmentCategoryOptionsValidatorContainers,

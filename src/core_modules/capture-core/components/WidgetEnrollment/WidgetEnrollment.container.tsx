@@ -6,6 +6,8 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { useTrackedEntities } from './hooks/useTrackedEntities';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
+import { useEnrollmentAOCDetails } from './hooks/useEnrollmentAOCDetails';
+import { useUpdateEnrollmentAOC } from './hooks/useUpdateEnrollmentAOC';
 import { useUserLocale } from '../../utils/localeData/useUserLocale';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
@@ -64,6 +66,15 @@ export const WidgetEnrollment = ({
         externalData,
     });
     const { error: errorProgram, program } = useProgram(programId);
+    const { enrollmentAOCDetails } = useEnrollmentAOCDetails(enrollment?.attributeOptionCombo);
+    const { update: updateEnrollmentAOC, loading: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
+        enrollment,
+        enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
+        program,
+        refetchEnrollment,
+        onError,
+        onSuccess,
+    });
     const {
         error: errorOwnerOrgUnit,
         ownerOrgUnit,
@@ -86,6 +97,10 @@ export const WidgetEnrollment = ({
     return (
         <WidgetEnrollmentNote
             enrollment={enrollment}
+            enrollmentAOCDetails={enrollmentAOCDetails}
+            enrollmentCategoryCombo={program?.enrollmentCategoryCombo}
+            updateEnrollmentAOC={updateEnrollmentAOC}
+            savingEnrollmentAOC={savingEnrollmentAOC}
             events={events}
             canAddNew={canAddNew}
             readOnlyMode={readOnlyMode}

@@ -1,5 +1,39 @@
 import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+import type { CategoryOptionCombo } from '../../metaData';
+
+export type EnrollmentCategoryOptionCombo = {
+    id: string;
+    displayName: string;
+    categoryOptions: Array<{
+        id: string;
+        displayName: string;
+        categories: Array<{ id: string; displayName: string }>;
+    }>;
+};
+
+export type EnrollmentCategoryCombo = {
+    id: string;
+    displayName: string;
+    isDefault?: boolean;
+    categories: Array<{ id: string; displayName: string }>;
+    categoryOptionCombos?: Array<CategoryOptionCombo>;
+};
+
+export type Enrollment = {
+    enrollment: string;
+    trackedEntity: string;
+    program: string;
+    status: string;
+    orgUnit: string;
+    enrolledAt: string;
+    occurredAt: string;
+    followUp: boolean;
+    deleted: boolean;
+    updatedAt: string;
+    geometry: unknown;
+    attributeOptionCombo?: string;
+};
 
 export type EventReducerProps = {
     enrollments?: Array<any> | null;
@@ -33,8 +67,11 @@ export type PlainProps = {
         orgUnit: string;
         followUp: boolean;
         geometry: any;
-
     };
+    enrollmentAOCDetails?: EnrollmentCategoryOptionCombo;
+    enrollmentCategoryCombo?: EnrollmentCategoryCombo;
+    updateEnrollmentAOC: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;
+    savingEnrollmentAOC: boolean;
     events: Array<{ status: string; event: string; programStage: string }>;
     program: {
         programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
