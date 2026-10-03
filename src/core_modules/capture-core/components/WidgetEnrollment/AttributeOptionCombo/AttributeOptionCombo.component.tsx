@@ -38,10 +38,12 @@ const styles = {
         },
     },
     bulletTextRow: {
+        paddingInlineStart: '1em',
+        textIndent: '-1em',
         '&::before': {
-            content: String.raw`"\2022"`,
+            content: String.raw`"\2022  "`,
             color: colors.grey500,
-            marginInlineEnd: `${spacersNum.dp4}px`,
+            whiteSpace: 'pre' as const,
         },
     },
     label: {
