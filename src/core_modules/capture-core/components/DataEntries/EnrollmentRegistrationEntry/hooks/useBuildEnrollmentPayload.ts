@@ -1,4 +1,8 @@
 import { useSelector } from 'react-redux';
+import { useAlert } from '@dhis2/app-runtime';
+import i18n from '@dhis2/d2-i18n';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -24,10 +28,12 @@ import {
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
 } from '../helpers';
+import { attributeOptionsKey, enrollmentAttributeOptionsKey } from '../../../DataEntryDhis2Helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
 import { getRedirectIds } from './getRedirectIds';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -81,8 +87,9 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
+    const { show: showErrorAlert } = useAlert(({ message }) => message, { critical: true });
 
-    const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
+    const buildTeiWithEnrollment = (relatedStageRef?: { current: RelatedStageRefPayload | null }): {
         teiWithEnrollment: EnrollmentPayload;
         formHasError: boolean;
         redirect: {
@@ -101,16 +108,42 @@ export const useBuildEnrollmentPayload = ({
         );
         const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues as any;
 
-        const { stages } = getTrackerProgramThrowIfNotFound(programId);
+        const { stages, enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(programId);
 
-        const attributeCategoryOptionsId = 'attributeCategoryOptions';
         const attributeCategoryOptions = Object.keys(serverValuesForMainValues)
-            .filter(key => key.startsWith(attributeCategoryOptionsId))
+            .filter(key => key.startsWith(attributeOptionsKey))
             .reduce((acc, key) => {
                 const categoryId = key.split('-')[1];
                 acc[categoryId] = serverValuesForMainValues[key];
                 return acc;
             }, {});
+
+        const enrollmentCategoryOptionUids = Object.keys(serverValuesForMainValues)
+            .filter(key => key.startsWith(enrollmentAttributeOptionsKey))
+            .map(key => serverValuesForMainValues[key])
+            .filter((value): value is string => typeof value === 'string' && value !== '');
+
+        const attributeOptionCombo = enrollmentCategoryCombination
+            ?.resolveAttributeOptionCombo(enrollmentCategoryOptionUids);
+        const aocResolveFailed = enrollmentCategoryOptionUids.length > 0 && !attributeOptionCombo;
+
+        if (aocResolveFailed) {
+            log.error(
+                errorCreator(
+                    'Could not resolve the selected enrollment category options to an attribute option combo',
+                )({
+                    enrollmentCategoryOptionUids,
+                    enrollmentCategoryCombinationId: enrollmentCategoryCombination?.id,
+                }),
+            );
+            const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
+            showErrorAlert({
+                message: i18n.t(
+                    'The selected {{enrollmentLabel}} category options are not a valid combination.',
+                    { enrollmentLabel },
+                ),
+            });
+        }
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
@@ -167,6 +200,7 @@ export const useBuildEnrollmentPayload = ({
             attributes,
             events: allEventsToBeCreated,
             geometry: enrollmentGeometry,
+            attributeOptionCombo,
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
@@ -182,7 +216,7 @@ export const useBuildEnrollmentPayload = ({
                 enrollments: [enrollment],
                 relationships: relationship ? [relationship] : undefined,
             },
-            formHasError,
+            formHasError: formHasError || aocResolveFailed,
             redirect,
         };
     };

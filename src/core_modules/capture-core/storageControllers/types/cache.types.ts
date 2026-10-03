@@ -152,10 +152,16 @@ export type ProgramCachedCategory = {
     id: string,
 };
 
+export type ProgramCachedCategoryOptionCombo = {
+    id: string,
+    categoryOptions: Array<{ id: string }>,
+};
+
 export type ProgramCachedCategoryCombo = {
     id: string,
     displayName: string,
     categories: Array<ProgramCachedCategory> | null,
+    categoryOptionCombos?: Array<ProgramCachedCategoryOptionCombo> | null,
     isDefault: boolean,
 };
 
@@ -200,6 +206,7 @@ export type CachedProgram = {
     programStages: Array<CachedProgramStage>,
     programType: string,
     categoryCombo: ProgramCachedCategoryCombo | null,
+    enrollmentCategoryCombo?: ProgramCachedCategoryCombo | null,
     style?: CachedStyle | null,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,

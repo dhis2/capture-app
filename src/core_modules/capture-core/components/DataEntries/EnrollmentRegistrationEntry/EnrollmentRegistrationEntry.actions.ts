@@ -11,6 +11,7 @@ export const startNewEnrollmentDataEntryInitialisation = ({
     formValues,
     clientValues,
     programCategory,
+    enrollmentProgramCategory,
     firstStage,
     formFoundation,
 }: {
@@ -20,6 +21,7 @@ export const startNewEnrollmentDataEntryInitialisation = ({
     formValues: any;
     clientValues: any;
     programCategory: any;
+    enrollmentProgramCategory: any;
     firstStage: any;
     formFoundation: any;
 }) =>
@@ -30,6 +32,7 @@ export const startNewEnrollmentDataEntryInitialisation = ({
         formValues,
         clientValues,
         programCategory,
+        enrollmentProgramCategory,
         firstStage,
         formFoundation,
     });

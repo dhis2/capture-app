@@ -21,6 +21,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) 
             formValues,
             clientValues,
             programCategory,
+            enrollmentProgramCategory,
             firstStage,
             formFoundation,
         }: any) => {
@@ -47,6 +48,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) 
                     clientValues,
                     firstStage,
                     programCategory,
+                    enrollmentProgramCategory,
                     formFoundation,
                 });
 

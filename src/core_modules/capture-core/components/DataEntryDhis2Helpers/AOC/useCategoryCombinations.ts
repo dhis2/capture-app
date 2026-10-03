@@ -9,3 +9,15 @@ export const useCategoryCombinations = (programId: string, disabled = false) => 
 
     return { isLoading, programCategory };
 };
+
+export const useEnrollmentCategoryCombinations = (programId: string, disabled = false) => {
+    const {
+        program,
+        isLoading,
+    } = useProgramFromIndexedDB(programId, { enabled: !disabled });
+    const enrollmentProgramCategory = !isLoading && !program?.enrollmentCategoryCombo?.isDefault
+        ? program?.enrollmentCategoryCombo
+        : undefined;
+
+    return { isLoading, enrollmentProgramCategory };
+};
