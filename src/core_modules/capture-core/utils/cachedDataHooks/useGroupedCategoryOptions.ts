@@ -36,7 +36,7 @@ export const useGroupedCategoryOptions = (
             id,
             label: displayName,
             options: categoryOptions
-                .filter(o => !!o.access?.data?.write)
+                .filter(o => o.access?.data?.write)
                 .filter(o => o.categories?.includes(id))
                 .filter(o => matchesOrgUnit(o, orgUnitId))
                 .map<CategoryOptionEntry>(o => ({

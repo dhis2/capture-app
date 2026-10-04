@@ -4,12 +4,11 @@ import type { CategoryOptionCombo } from '../../metaData';
 
 export type EnrollmentCategoryOptionCombo = {
     id: string;
-    displayName: string;
     categoryOptions: Array<{
         id: string;
         displayName: string;
         access?: { data?: { write?: boolean } };
-        categories: Array<{ id: string; displayName?: string }>;
+        categories: Array<{ id: string }>;
     }>;
 };
 

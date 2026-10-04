@@ -54,14 +54,13 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
             const includedIds = new Set(matchingCategoryOptionCombo.categoryOptions.map(({ id }) => id));
             return {
                 id: matchingCategoryOptionCombo.id,
-                displayName: '',
                 categoryOptions: categoryOptions
                     .filter(option => includedIds.has(option.id))
                     .map(option => ({
                         id: option.id,
                         displayName: option.displayName,
                         access: option.access,
-                        categories: option.categories.map(categoryId => ({ id: categoryId })),
+                        categories: option.categories.map(id => ({ id })),
                     })),
             };
         }

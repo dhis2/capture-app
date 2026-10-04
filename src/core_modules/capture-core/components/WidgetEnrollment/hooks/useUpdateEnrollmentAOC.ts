@@ -40,7 +40,7 @@ export const useUpdateEnrollmentAOC = ({
 }: UseUpdateEnrollmentAOCProps) => {
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
     const { fromClientDate } = useTimeZoneConversion();
-    const prevAocRef = useRef<{ attributeOptionCombo?: string; updatedAt?: string } | undefined>(undefined);
+    const prevAocRef = useRef<{ attributeOptionCombo?: string; updatedAt?: string }>();
 
     const rollback = useCallback(() => {
         const snapshot = prevAocRef.current;

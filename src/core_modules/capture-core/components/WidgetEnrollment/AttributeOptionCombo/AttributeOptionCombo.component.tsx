@@ -120,7 +120,7 @@ const AttributeOptionComboPlain = ({
     const openEdit = useCallback(() => {
         const sel: Record<string, string> = {};
         enrollmentAOCDetails?.categoryOptions.forEach((option) => {
-            option.categories?.forEach((cat) => { sel[cat.id] = option.id; });
+            option.categories.forEach((cat) => { sel[cat.id] = option.id; });
         });
         setSelection(sel);
         setEditMode(true);
@@ -158,10 +158,11 @@ const AttributeOptionComboPlain = ({
 
 
     const singleCategory = categories.length === 1;
+    const multiCategory = categories.length > 1;
 
     const renderSingleCategoryView = () => {
         const option = enrollmentAOCDetails?.categoryOptions
-            .find(o => o.categories?.some(c => c.id === categories[0].id));
+            .find(o => o.categories.some(c => c.id === categories[0].id));
         return (
             <div className={classes.block} data-test="widget-enrollment-attribute-option-combo">
                 <div className={classes.header}>
@@ -190,8 +191,7 @@ const AttributeOptionComboPlain = ({
             <div className={classes.rowList}>
                 {categories.map((category) => {
                     const option = enrollmentAOCDetails?.categoryOptions
-                        .find(o => o.categories?.some(c => c.id === category.id));
-                    const multiCategory = categories.length > 1;
+                        .find(o => o.categories.some(c => c.id === category.id));
                     let rowClass = classes.row;
                     if (multiCategory) {
                         rowClass = editMode ? classes.bulletRow : classes.bulletTextRow;
