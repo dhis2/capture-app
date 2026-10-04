@@ -52,7 +52,7 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
-const customLabels = [LabelKeys.eventPlural, LabelKeys.enrollmentSingular] as const;
+const customLabels = [LabelKeys.eventSingular, LabelKeys.enrollmentSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -312,21 +312,14 @@ const getCategoryOptionsSettingsFn = () => ({
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
     getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
     getMeta: (props: any) => {
-        const { firstStageMetaData, programCategory, eventsLabel } = props;
-        const categoryDisplayName = programCategory?.displayName;
-
+        const { programCategory, eventLabel } = props;
         return {
             section: AOCsectionKey,
             placement: placements.BOTTOM,
-            sectionName: firstStageMetaData
-                ? i18n.t('{{stageName}} - {{categoryDisplayName}}', {
-                    stageName: firstStageMetaData.stage.name,
-                    categoryDisplayName,
-                })
-                : i18n.t('{{eventsLabel}} - {{categoryDisplayName}}', {
-                    eventsLabel,
-                    categoryDisplayName,
-                }),
+            sectionName: i18n.t('{{eventLabel}} - {{categoryDisplayName}}', {
+                eventLabel,
+                categoryDisplayName: programCategory?.displayName,
+            }),
         };
     },
 });
