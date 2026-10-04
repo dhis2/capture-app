@@ -18,9 +18,12 @@ const enrollmentUpdate: Mutation = {
     }),
 };
 
+type SetEnrollment =
+    (value: Enrollment | ((current: Enrollment | undefined) => Enrollment | undefined) | undefined) => void;
+
 type UseUpdateEnrollmentAOCProps = {
     enrollment: Enrollment | null | undefined;
-    setEnrollment: (enrollment: Enrollment) => void;
+    setEnrollment: SetEnrollment;
     enrollmentCategoryCombo: EnrollmentCategoryCombo | undefined;
     program: Record<string, unknown> | undefined;
     onError?: (message: string) => void;
@@ -37,12 +40,22 @@ export const useUpdateEnrollmentAOC = ({
 }: UseUpdateEnrollmentAOCProps) => {
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
     const { fromClientDate } = useTimeZoneConversion();
-    const prevEnrollmentRef = useRef(enrollment);
+    const prevAocRef = useRef<{ attributeOptionCombo?: string; updatedAt?: string } | undefined>(undefined);
+
+    const rollback = useCallback(() => {
+        const snapshot = prevAocRef.current;
+        if (!snapshot) return;
+        setEnrollment(current => (current ? {
+            ...current,
+            attributeOptionCombo: snapshot.attributeOptionCombo,
+            updatedAt: snapshot.updatedAt ?? current.updatedAt,
+        } : current));
+    }, [setEnrollment]);
 
     const [updateEnrollmentMutation, { loading }] = useDataMutation(enrollmentUpdate, {
         onComplete: () => onSuccess?.(),
         onError: (err: any) => {
-            if (prevEnrollmentRef.current) setEnrollment(prevEnrollmentRef.current);
+            rollback();
             log.error(errorCreator('Enrollment AOC update failed')({ err }));
             onError?.(processErrorReports(err));
         },
@@ -73,15 +86,27 @@ export const useUpdateEnrollmentAOC = ({
             return false;
         }
 
-        prevEnrollmentRef.current = enrollment;
-        const updatedEnrollment: Enrollment = {
-            ...enrollment,
-            attributeOptionCombo,
-            updatedAt: fromClientDate(new Date()).getServerZonedISOString(),
+        prevAocRef.current = {
+            attributeOptionCombo: enrollment.attributeOptionCombo,
+            updatedAt: enrollment.updatedAt,
         };
-        setEnrollment(updatedEnrollment);
-        updateEnrollmentMutation(updatedEnrollment);
-        return true;
+        const nextUpdatedAt = fromClientDate(new Date()).getServerZonedISOString();
+        setEnrollment(current => (current ? {
+            ...current,
+            attributeOptionCombo,
+            updatedAt: nextUpdatedAt,
+        } : current));
+
+        try {
+            await updateEnrollmentMutation({
+                ...enrollment,
+                attributeOptionCombo,
+                updatedAt: nextUpdatedAt,
+            });
+            return true;
+        } catch {
+            return false;
+        }
     }, [enrollmentAOCSupported, enrollment, setEnrollment, enrollmentCategoryCombo, program, loading,
         updateEnrollmentMutation, onError, fromClientDate]);
 
