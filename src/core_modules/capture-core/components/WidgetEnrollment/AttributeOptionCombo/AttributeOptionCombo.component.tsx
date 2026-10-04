@@ -222,8 +222,7 @@ const AttributeOptionComboPlain = ({
                                         <SingleSelectField
                                             id={`enrollment-aoc-${category.id}`}
                                             value={selection[category.id] ?? null}
-                                            options={(loadedCategories?.find(c => c.id === category.id)?.options ?? [])
-                                                .filter(o => o.writeAccess)}
+                                            options={loadedCategories?.find(c => c.id === category.id)?.options ?? []}
                                             onChange={value => setSelection(prev => ({
                                                 ...prev,
                                                 [category.id]: value ?? '',
