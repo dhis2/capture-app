@@ -10,7 +10,7 @@ const query = {
         resource: 'categoryOptionCombos',
         id: ({ variables }: any) => variables.attributeOptionCombo,
         params: {
-            fields: 'id,displayName,categoryOptions[id,displayName,categories[id,displayName]]',
+            fields: 'id,displayName,categoryOptions[id,displayName,access[data[write]],categories[id,displayName]]',
         },
     },
 };

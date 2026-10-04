@@ -134,7 +134,7 @@ const WidgetEventEditPlain = ({
         { stageId },
     );
     const readOnlyMessage = getReadOnlyMessage({
-        access: { program: true, trackedEntityType: true, programStage: true },
+        access: { program: true, trackedEntityType: true, programStage: true, attributeOptionCombo: true },
         trackedEntityName: undefined,
         multipleStages: false,
         isEventBlockedByExpiry,

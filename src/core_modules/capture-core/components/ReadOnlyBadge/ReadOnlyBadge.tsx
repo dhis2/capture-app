@@ -17,6 +17,7 @@ const ReadOnlyBadgePlain = ({
     programWriteAccess = true,
     trackedEntityTypeWriteAccess = true,
     programStageWriteAccess = true,
+    attributeOptionComboWriteAccess = true,
     isEventBlockedByExpiry = false,
     isEventBlockedByCompletion = false,
     multipleStages = false,
@@ -39,6 +40,7 @@ const ReadOnlyBadgePlain = ({
         program: programWriteAccess,
         trackedEntityType: trackedEntityTypeWriteAccess,
         programStage: programStageWriteAccess,
+        attributeOptionCombo: attributeOptionComboWriteAccess,
     };
     const message = getReadOnlyMessage({
         access,

@@ -2,6 +2,7 @@ export type Props = {
     programWriteAccess?: boolean;
     trackedEntityTypeWriteAccess?: boolean;
     programStageWriteAccess?: boolean;
+    attributeOptionComboWriteAccess?: boolean;
     isEventBlockedByExpiry?: boolean;
     isEventBlockedByCompletion?: boolean;
     multipleStages?: boolean;
@@ -15,6 +16,7 @@ export type Access = {
     program: boolean;
     trackedEntityType: boolean;
     programStage: boolean;
+    attributeOptionCombo: boolean;
 };
 
 export type ReadOnlyMessageInput = {

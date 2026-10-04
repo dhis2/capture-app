@@ -31,6 +31,9 @@ const getDeactivatedMessage = (trackedEntityName: string | undefined): string =>
     ? i18n.t('This {{trackedEntityName}} is deactivated', { trackedEntityName, escapeValue: false })
     : i18n.t('This tracked entity is deactivated'));
 
+const getAttributeOptionComboMessage = (): string =>
+    i18n.t('You do not have write access to selected category combination');
+
 // eslint-disable-next-line complexity
 export const getReadOnlyMessage = ({
     access,
@@ -51,6 +54,7 @@ export const getReadOnlyMessage = ({
     if (!access.program) return getProgramMessage();
     if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
     if (!access.programStage) return getProgramStageMessage(multipleStages, programStageLabel, programStagesLabel);
+    if (!access.attributeOptionCombo) return getAttributeOptionComboMessage();
     if (isEventBlockedByExpiry) return getExpiredMessage(eventLabel);
     if (isEventBlockedByCompletion) return getCompletedEventMessage(eventLabel);
     if (isEventCompleted && !canToggleCompletion) return getUncompleteAuthorityMessage(eventLabel);

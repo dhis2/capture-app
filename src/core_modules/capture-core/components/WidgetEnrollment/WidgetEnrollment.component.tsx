@@ -17,6 +17,10 @@ import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
 import type { PlainProps } from './enrollment.types';
+import {
+    hasWriteAccessToAllCategoryOptions,
+    getEnrollmentReadOnly,
+} from './hasWriteAccessToAllCategoryOptions';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
 import { getTermLabelFromProgram, LabelKeys } from '../../customLabels';
@@ -90,7 +94,10 @@ const WidgetEnrollmentPlain = ({
     onAccessLostFromTransfer,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
-    const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
+    const attributeOptionComboWriteAccess = hasWriteAccessToAllCategoryOptions(enrollmentAOCDetails);
+    const enrollmentReadOnly = getEnrollmentReadOnly(
+        readOnlyMode, programWriteAccess, attributeOptionComboWriteAccess,
+    );
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const updatedAtDateTime: string = convertValue(
@@ -117,6 +124,7 @@ const WidgetEnrollmentPlain = ({
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programWriteAccess={programWriteAccess}
+                                    attributeOptionComboWriteAccess={attributeOptionComboWriteAccess}
                                     trackedEntityName={program?.trackedEntityType?.displayName}
                                 />
                             </div>

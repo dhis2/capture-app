@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
@@ -128,17 +128,6 @@ const AttributeOptionComboPlain = ({
     const exitEdit = useCallback(() => setEditMode(false), []);
 
     const loadedCategories = useCategoryOptionsLoader(categories, orgUnitId, !editMode);
-
-    useEffect(() => {
-        if (!editMode || !loadedCategories) return;
-        setSelection(prev => Object.fromEntries(
-            Object.entries(prev).filter(([catId, selId]) =>
-                loadedCategories.find(c => c.id === catId)
-                    ?.options.find(o => o.value === selId)
-                    ?.writeAccess,
-            ),
-        ));
-    }, [editMode, loadedCategories]);
 
     const save = useCallback(async () => {
         if (saving) return;
