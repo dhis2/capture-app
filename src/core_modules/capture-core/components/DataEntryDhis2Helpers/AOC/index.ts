@@ -6,7 +6,6 @@ export {
 } from './AOCFieldBuilder.constants';
 export { withAOCFieldBuilder, withEnrollmentAOCFieldBuilder } from './withAOCFieldBuilder';
 export { useCategoryOptionsLoader } from './useCategoryOptionsLoader';
-export { isCategoryOptionActive } from './isCategoryOptionActive';
 export {
     getCategoryOptionsValidatorContainers,
     getEnrollmentCategoryOptionsValidatorContainers,

@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { SingleSelectField } from 'capture-core/components/FormFields/New';
-import { useCategoryOptionsLoader, isCategoryOptionActive } from '../../DataEntryDhis2Helpers';
+import { useCategoryOptionsLoader } from '../../DataEntryDhis2Helpers';
 import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 
 const styles = {
@@ -94,7 +94,6 @@ const styles = {
 type Props = {
     enrollmentAOCDetails?: EnrollmentCategoryOptionCombo;
     enrollmentCategoryCombo?: EnrollmentCategoryCombo;
-    enrolledAt?: string;
     orgUnitId?: string;
     readOnly?: boolean;
     saving?: boolean;
@@ -105,7 +104,6 @@ const AttributeOptionComboPlain = ({
     classes,
     enrollmentAOCDetails,
     enrollmentCategoryCombo,
-    enrolledAt,
     orgUnitId,
     readOnly,
     saving,
@@ -130,6 +128,17 @@ const AttributeOptionComboPlain = ({
     const exitEdit = useCallback(() => setEditMode(false), []);
 
     const loadedCategories = useCategoryOptionsLoader(categories, orgUnitId, !editMode);
+
+    useEffect(() => {
+        if (!editMode || !loadedCategories) return;
+        setSelection(prev => Object.fromEntries(
+            Object.entries(prev).filter(([catId, selId]) =>
+                loadedCategories.find(c => c.id === catId)
+                    ?.options.find(o => o.value === selId)
+                    ?.writeAccess,
+            ),
+        ));
+    }, [editMode, loadedCategories]);
 
     const save = useCallback(async () => {
         if (saving) return;
@@ -162,8 +171,8 @@ const AttributeOptionComboPlain = ({
     const singleCategory = categories.length === 1;
 
     const renderSingleCategoryView = () => {
-        const savedOption = enrollmentAOCDetails?.categoryOptions
-            .find(option => option.categories?.some(c => c.id === categories[0].id));
+        const option = enrollmentAOCDetails?.categoryOptions
+            .find(o => o.categories?.some(c => c.id === categories[0].id));
         return (
             <div className={classes.block} data-test="widget-enrollment-attribute-option-combo">
                 <div className={classes.header}>
@@ -171,7 +180,7 @@ const AttributeOptionComboPlain = ({
                         <IconLegend16 color={colors.grey600} />
                     </span>
                     {`${enrollmentCategoryCombo.displayName}:`}
-                    {savedOption?.displayName && <span>{savedOption.displayName}</span>}
+                    {option?.displayName && <span>{option.displayName}</span>}
                     {editButton}
                 </div>
             </div>
@@ -191,17 +200,13 @@ const AttributeOptionComboPlain = ({
             </div>
             <div className={classes.rowList}>
                 {categories.map((category) => {
-                    const savedOption = enrollmentAOCDetails?.categoryOptions
-                        .find(option => option.categories?.some(c => c.id === category.id));
+                    const option = enrollmentAOCDetails?.categoryOptions
+                        .find(o => o.categories?.some(c => c.id === category.id));
                     const multiCategory = categories.length > 1;
                     let rowClass = classes.row;
                     if (multiCategory) {
                         rowClass = editMode ? classes.bulletRow : classes.bulletTextRow;
                     }
-                    const categoryOptions = loadedCategories?.find(c => c.id === category.id)?.options ?? [];
-                    const currentOption = categoryOptions.find(option => option.value === selection[category.id]);
-                    const isSelectable = (option: typeof categoryOptions[number]) =>
-                        option.writeAccess && isCategoryOptionActive(enrolledAt, option);
                     return (
                         <div
                             key={category.id}
@@ -217,12 +222,12 @@ const AttributeOptionComboPlain = ({
                                         <SingleSelectField
                                             id={`enrollment-aoc-${category.id}`}
                                             value={selection[category.id] ?? null}
-                                            options={categoryOptions.filter(isSelectable)}
+                                            options={(loadedCategories?.find(c => c.id === category.id)?.options ?? [])
+                                                .filter(o => o.writeAccess)}
                                             onChange={value => setSelection(prev => ({
                                                 ...prev,
                                                 [category.id]: value ?? '',
                                             }))}
-                                            disabled={!!currentOption && !isSelectable(currentOption)}
                                             filterable
                                             clearable={false}
                                             dense
@@ -235,7 +240,7 @@ const AttributeOptionComboPlain = ({
                                     {multiCategory && (
                                         <span className={classes.label}>{`${category.displayName}: `}</span>
                                     )}
-                                    {savedOption?.displayName && <span>{savedOption.displayName}</span>}
+                                    {option?.displayName && <span>{option.displayName}</span>}
                                 </>
                             )}
                         </div>

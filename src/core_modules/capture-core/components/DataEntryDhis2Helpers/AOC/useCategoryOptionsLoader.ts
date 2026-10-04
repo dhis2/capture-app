@@ -7,8 +7,6 @@ type CategoryOptionEntry = {
     label: string;
     value: string;
     writeAccess: boolean;
-    startDate?: string;
-    endDate?: string;
 };
 
 type LoadedCategory = {
@@ -39,8 +37,6 @@ const getOptionsAsync = async (
         label: categoryOption.displayName,
         value: categoryOption.id,
         writeAccess: categoryOption.access.data.write,
-        startDate: categoryOption.startDate,
-        endDate: categoryOption.endDate,
     });
 
     const options = await buildCategoryOptionsAsync(category.id, { predicate, project, onIsAborted });

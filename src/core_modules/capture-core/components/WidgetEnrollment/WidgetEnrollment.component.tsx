@@ -198,7 +198,6 @@ const WidgetEnrollmentPlain = ({
                         <AttributeOptionCombo
                             enrollmentAOCDetails={enrollmentAOCDetails}
                             enrollmentCategoryCombo={enrollmentCategoryCombo}
-                            enrolledAt={enrollment.enrolledAt}
                             orgUnitId={enrollment.orgUnit}
                             readOnly={enrollmentReadOnly}
                             saving={savingEnrollmentAOC}
