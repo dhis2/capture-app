@@ -9,4 +9,5 @@ export {
     getCategoryOptionsValidatorContainers,
     getEnrollmentCategoryOptionsValidatorContainers,
     useCategoryOptionsLoader,
+    isCategoryOptionActive,
 } from './AOC';
