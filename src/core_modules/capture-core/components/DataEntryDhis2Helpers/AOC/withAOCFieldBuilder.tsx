@@ -1,7 +1,7 @@
 import React, { type ComponentType, useMemo } from 'react';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
-import { useCategoryOptionsLoader } from './useCategoryOptionsLoader';
+import { useCategoryOptionsFromServer } from '../../../utils/cachedDataHooks/useCategoryOptionsFromServer';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 
@@ -13,10 +13,10 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         const programCategories = useMemo(() => (
             !isLoading && programCategory ? programCategory.categories : []),
         [isLoading, programCategory]);
-        const categories = useCategoryOptionsLoader(
+        const { categories } = useCategoryOptionsFromServer(
             programCategories,
             orgUnitIdFieldValue ?? orgUnitId,
-            Boolean(hideAOC),
+            { enabled: !hideAOC },
         );
 
         if (hideAOC) { return <InnerComponent{...props} />; }
@@ -43,10 +43,10 @@ const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
             !isLoading && enrollmentProgramCategory ? enrollmentProgramCategory.categories : []),
         [isLoading, enrollmentProgramCategory]);
         const missingCombo = !isLoading && !enrollmentProgramCategory;
-        const enrollmentCategories = useCategoryOptionsLoader(
+        const { categories: enrollmentCategories } = useCategoryOptionsFromServer(
             enrollmentProgramCategories,
             orgUnitIdFieldValue ?? orgUnitId,
-            missingCombo,
+            { enabled: !missingCombo },
         );
 
         if (missingCombo) return <InnerComponent {...props} />;
