@@ -1,8 +1,7 @@
 import React, { type ComponentType, useMemo } from 'react';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
-import { useCategoryOptionsFromIndexedDB } from '../../../utils/cachedDataHooks/useCategoryOptionsFromIndexedDB';
-import type { ApiCategoryOption } from '../../../utils/cachedDataHooks/useCategoryOptionsFromServer';
+import { useCategoryOptionsFromIndexedDB, type CategoryOption } from '../../../utils/cachedDataHooks/useCategoryOptionsFromIndexedDB';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 
@@ -12,7 +11,7 @@ type LoadedCategory = { id: string; label: string; options: Array<CategoryOption
 const sortByLabel = (a: CategoryOptionEntry, b: CategoryOptionEntry) =>
     a.label.localeCompare(b.label);
 
-const matchesOrgUnit = (option: ApiCategoryOption, orgUnitId: string | null | undefined) => {
+const matchesOrgUnit = (option: CategoryOption, orgUnitId: string | null | undefined) => {
     if (!orgUnitId) return true;
     if (!option.organisationUnits || option.organisationUnits.length === 0) return true;
     return option.organisationUnits.includes(orgUnitId);

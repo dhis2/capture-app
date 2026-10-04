@@ -2,9 +2,16 @@ import { useMemo } from 'react';
 import type { UseQueryOptions } from '@tanstack/react-query';
 import { USER_METADATA_STORES, getUserMetadataStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
-import type { ApiCategoryOption } from './useCategoryOptionsFromServer';
 
-type CachedCategoryOption = Omit<ApiCategoryOption, 'organisationUnits'> & {
+export type CategoryOption = {
+    id: string;
+    displayName: string;
+    categories: Array<string>;
+    organisationUnits: Array<string> | null;
+    access: { data: { write: boolean } };
+};
+
+type CachedCategoryOption = Omit<CategoryOption, 'organisationUnits'> & {
     organisationUnits: Record<string, true> | null;
 };
 
@@ -13,7 +20,7 @@ export const useCategoryOptionsFromIndexedDB = (
     categoryIds: Set<string> | null | undefined,
     queryOptions?: UseQueryOptions<any>,
 ): {
-    categoryOptions: Array<ApiCategoryOption> | null | undefined;
+    categoryOptions: Array<CategoryOption> | null | undefined;
     isLoading: boolean;
     isError: boolean;
 } => {
@@ -30,7 +37,7 @@ export const useCategoryOptionsFromIndexedDB = (
         { ...queryOptions, enabled },
     );
 
-    const categoryOptions = useMemo<Array<ApiCategoryOption> | undefined>(() => (data
+    const categoryOptions = useMemo<Array<CategoryOption> | undefined>(() => (data
         ? data.map(option => ({
             ...option,
             organisationUnits: option.organisationUnits ? Object.keys(option.organisationUnits) : null,
