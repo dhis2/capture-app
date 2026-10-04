@@ -30,7 +30,9 @@ export const useGroupedCategoryOptions = (
     const { categoryOptions } = useCategoryOptionsFromIndexedDB(queryKey, categoryIds);
 
     return useMemo(() => {
-        if (!enabled || !categoryOptions) return undefined;
+        if (!enabled) return undefined;
+        if (programCategories.length === 0) return [];
+        if (!categoryOptions) return undefined;
         return programCategories.map(({ id, displayName }) => ({
             id,
             label: displayName,
