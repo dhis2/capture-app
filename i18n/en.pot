@@ -135,11 +135,8 @@ msgstr "Area"
 msgid "Coordinate"
 msgstr "Coordinate"
 
-msgid "{{stageName}} - {{categoryDisplayName}}"
-msgstr "{{stageName}} - {{categoryDisplayName}}"
-
-msgid "{{eventsLabel}} - {{categoryDisplayName}}"
-msgstr "{{eventsLabel}} - {{categoryDisplayName}}"
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr "{{eventLabel}} - {{categoryDisplayName}}"
 
 msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
 msgstr "{{enrollmentLabel}} - {{categoryDisplayName}}"
