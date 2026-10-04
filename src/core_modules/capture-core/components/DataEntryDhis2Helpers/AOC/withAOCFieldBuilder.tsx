@@ -1,7 +1,10 @@
 import React, { type ComponentType, useMemo } from 'react';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
-import { useCategoryOptionsFromIndexedDB, type CategoryOption } from '../../../utils/cachedDataHooks/useCategoryOptionsFromIndexedDB';
+import {
+    useCategoryOptionsFromIndexedDB,
+    type CategoryOption,
+} from '../../../utils/cachedDataHooks/useCategoryOptionsFromIndexedDB';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 
