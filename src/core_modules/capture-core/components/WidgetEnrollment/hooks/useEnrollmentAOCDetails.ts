@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
-import { useCategoryOptionsFromIndexedDB } from '../../../utils/cachedDataHooks/useCategoryOptionsFromIndexedDB';
+import { useCategoryOptionsFromServer } from '../../../utils/cachedDataHooks/useCategoryOptionsFromServer';
 import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 
 type Props = {
@@ -17,27 +17,32 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
             ?.find(coc => coc.id === attributeOptionCombo);
     }, [enrollmentAOCSupported, attributeOptionCombo, enrollmentCategoryCombo]);
 
-    const categoryOptionIds = useMemo(() => (matchingCategoryOptionCombo
-        ? new Set(matchingCategoryOptionCombo.categoryOptions.map(({ id }) => id))
+    const categoryIds = useMemo(() => (enrollmentCategoryCombo
+        ? new Set(enrollmentCategoryCombo.categories.map(({ id }) => id))
         : null),
-    [matchingCategoryOptionCombo]);
+    [enrollmentCategoryCombo]);
 
-    const { categoryOptions, isLoading, isError } = useCategoryOptionsFromIndexedDB(
-        [attributeOptionCombo ?? ''],
-        categoryOptionIds,
+    const queryKey = useMemo(
+        () => (categoryIds ? Array.from(categoryIds).sort() : []),
+        [categoryIds],
     );
+
+    const { categoryOptions, isLoading, isError } = useCategoryOptionsFromServer(queryKey, categoryIds);
 
     const enrollmentAOCDetails = useMemo<EnrollmentCategoryOptionCombo | undefined>(() => {
         if (!matchingCategoryOptionCombo || !categoryOptions) return undefined;
+        const includedIds = new Set(matchingCategoryOptionCombo.categoryOptions.map(({ id }) => id));
         return {
             id: matchingCategoryOptionCombo.id,
             displayName: '',
-            categoryOptions: categoryOptions.map(option => ({
-                id: option.id,
-                displayName: option.displayName,
-                access: option.access,
-                categories: option.categories.map(categoryId => ({ id: categoryId })),
-            })),
+            categoryOptions: categoryOptions
+                .filter(option => includedIds.has(option.id))
+                .map(option => ({
+                    id: option.id,
+                    displayName: option.displayName,
+                    access: option.access,
+                    categories: option.categories.map(categoryId => ({ id: categoryId })),
+                })),
         };
     }, [matchingCategoryOptionCombo, categoryOptions]);
 

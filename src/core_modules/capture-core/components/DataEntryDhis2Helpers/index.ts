@@ -8,5 +8,4 @@ export {
     enrollmentAttributeOptionsKey,
     getCategoryOptionsValidatorContainers,
     getEnrollmentCategoryOptionsValidatorContainers,
-    useCategoryOptionsLoader,
 } from './AOC';

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { SingleSelectField } from 'capture-core/components/FormFields/New';
-import { useCategoryOptionsLoader } from '../../DataEntryDhis2Helpers';
+import { useGroupedCategoryOptions } from '../../../utils/cachedDataHooks/useGroupedCategoryOptions';
 import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 
 const styles = {
@@ -127,7 +127,7 @@ const AttributeOptionComboPlain = ({
     }, [enrollmentAOCDetails]);
     const exitEdit = useCallback(() => setEditMode(false), []);
 
-    const loadedCategories = useCategoryOptionsLoader(categories, orgUnitId, !editMode);
+    const loadedCategories = useGroupedCategoryOptions(categories, orgUnitId, editMode);
 
     const save = useCallback(async () => {
         if (saving) return;
