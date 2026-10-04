@@ -21,10 +21,6 @@ const getOptionsAsync = async (
     onIsAborted: () => boolean,
 ): Promise<LoadedCategory> => {
     const predicate = (categoryOption: any) => {
-        if (!categoryOption.access?.data?.write) {
-            return false;
-        }
-
         if (!orgUnitId) {
             return true;
         }
