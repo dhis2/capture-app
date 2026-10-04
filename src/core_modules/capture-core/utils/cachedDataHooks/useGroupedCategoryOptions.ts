@@ -37,12 +37,13 @@ export const useGroupedCategoryOptions = (
             id,
             label: displayName,
             options: categoryOptions
+                .filter(o => !!o.access?.data?.write)
                 .filter(o => o.categories?.includes(id))
                 .filter(o => matchesOrgUnit(o, orgUnitId))
                 .map<CategoryOptionEntry>(o => ({
                     label: o.displayName,
                     value: o.id,
-                    writeAccess: !!o.access?.data?.write,
+                    writeAccess: true,
                 }))
                 .sort(sortByLabel),
         }));
