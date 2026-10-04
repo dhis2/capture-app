@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
-import { useCategoryOptionsFromServer } from '../../../utils/cachedDataHooks/useCategoryOptionsFromServer';
+import { useCategoryOptionsFromIndexedDB } from '../../../utils/cachedDataHooks/useCategoryOptionsFromIndexedDB';
 import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 
 type Props = {
@@ -27,7 +27,7 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
         [categoryIds],
     );
 
-    const { categoryOptions, isLoading, isError } = useCategoryOptionsFromServer(queryKey, categoryIds);
+    const { categoryOptions, isLoading, isError } = useCategoryOptionsFromIndexedDB(queryKey, categoryIds);
 
     const enrollmentAOCDetails = useMemo<EnrollmentCategoryOptionCombo | undefined>(() => {
         if (!matchingCategoryOptionCombo || !categoryOptions) return undefined;

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { useCategoryOptionsFromServer, type ApiCategoryOption } from './useCategoryOptionsFromServer';
+import type { ApiCategoryOption } from './useCategoryOptionsFromServer';
+import { useCategoryOptionsFromIndexedDB } from './useCategoryOptionsFromIndexedDB';
 
 export type CategoryOptionEntry = { label: string; value: string; writeAccess: boolean };
 export type LoadedCategory = { id: string; label: string; options: Array<CategoryOptionEntry> };
@@ -26,7 +27,7 @@ export const useGroupedCategoryOptions = (
         () => (categoryIds ? Array.from(categoryIds).sort() : []),
         [categoryIds],
     );
-    const { categoryOptions } = useCategoryOptionsFromServer(queryKey, categoryIds);
+    const { categoryOptions } = useCategoryOptionsFromIndexedDB(queryKey, categoryIds);
 
     return useMemo(() => {
         if (!enabled || !categoryOptions) return undefined;

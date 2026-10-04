@@ -1,9 +1,12 @@
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
+import {
+    getCategoryOptionsValidatorContainers,
+    getEventDateValidatorContainers,
+    getOrgUnitValidatorContainers,
+} from '../fieldValidators';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
-import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
 import type { DataEntryPropToInclude } from '../../../DataEntry/actions/dataEntryLoad.utils';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
