@@ -1,19 +1,8 @@
 import { useMemo } from 'react';
+import type { UseQueryOptions } from '@tanstack/react-query';
 import { useApiMetadataQuery } from '../reactQueryHelpers';
 
-type CategoryOptionEntry = {
-    label: string;
-    value: string;
-    writeAccess: boolean;
-};
-
-type LoadedCategory = {
-    id: string;
-    label: string;
-    options: Array<CategoryOptionEntry>;
-};
-
-type ApiCategoryOption = {
+export type ApiCategoryOption = {
     id: string;
     displayName: string;
     categories: Array<string>;
@@ -23,62 +12,38 @@ type ApiCategoryOption = {
 
 type ApiResponse = { categoryOptions: Array<ApiCategoryOption> };
 
-const sortByLabel = (a: CategoryOptionEntry, b: CategoryOptionEntry) =>
-    a.label.localeCompare(b.label);
-
-const matchesOrgUnit = (option: ApiCategoryOption, orgUnitId: string | null | undefined) => {
-    if (!orgUnitId) return true;
-    if (!option.organisationUnits || option.organisationUnits.length === 0) return true;
-    return option.organisationUnits.includes(orgUnitId);
-};
-
 export const useCategoryOptionsFromServer = (
-    programCategories: Array<{ id: string; displayName: string }>,
-    orgUnitId: string | null | undefined,
-    { enabled = true }: { enabled?: boolean } = {},
+    queryKey: Array<string | number>,
+    categoryIds: Set<string> | null | undefined,
+    queryOptions?: UseQueryOptions<any>,
 ): {
-    categories: Array<LoadedCategory> | undefined;
+    categoryOptions: Array<ApiCategoryOption> | null | undefined;
     isLoading: boolean;
     isError: boolean;
 } => {
-    const categoryIds = useMemo(() => programCategories.map(c => c.id).sort(), [programCategories]);
-    const shouldFetch = enabled && categoryIds.length > 0;
+    const { enabled = !!categoryIds && categoryIds.size > 0 } = queryOptions ?? {};
 
-    const query = useMemo(() => (shouldFetch ? {
+    const query = useMemo(() => (enabled && categoryIds ? {
         resource: 'categoryOptions',
         params: {
             fields: 'id,displayName,categories~pluck,organisationUnits~pluck,access[data[write]]',
             filter: [
-                `categories.id:in:[${categoryIds.join(',')}]`,
+                `categories.id:in:[${Array.from(categoryIds).join(',')}]`,
                 'access.data.read:in:[true]',
             ],
             paging: false,
         },
-    } : undefined), [shouldFetch, categoryIds]);
+    } : undefined), [enabled, categoryIds]);
 
-    const { data, isLoading, isError } = useApiMetadataQuery<ApiResponse>(
-        ['categoryOptionsFromServer', ...categoryIds],
+    const { data, isInitialLoading, isError } = useApiMetadataQuery<ApiResponse>(
+        ['categoryOptionsFromServer', ...queryKey],
         query,
-        { enabled: shouldFetch },
+        { ...queryOptions, enabled },
     );
 
-    const categories = useMemo(() => {
-        if (!shouldFetch || !data) return undefined;
-        const options = data.categoryOptions ?? [];
-        return programCategories.map(({ id, displayName }) => ({
-            id,
-            label: displayName,
-            options: options
-                .filter(o => o.categories?.includes(id))
-                .filter(o => matchesOrgUnit(o, orgUnitId))
-                .map<CategoryOptionEntry>(o => ({
-                    label: o.displayName,
-                    value: o.id,
-                    writeAccess: !!o.access?.data?.write,
-                }))
-                .sort(sortByLabel),
-        }));
-    }, [shouldFetch, data, programCategories, orgUnitId]);
-
-    return { categories, isLoading, isError };
+    return {
+        categoryOptions: data?.categoryOptions,
+        isLoading: isInitialLoading,
+        isError,
+    };
 };
