@@ -1,48 +1,45 @@
-import { useMemo, useEffect } from 'react';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
-import { useDataQuery } from '@dhis2/app-runtime';
+import { useMemo } from 'react';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
-import type { EnrollmentCategoryOptionCombo } from '../enrollment.types';
+import { useCategoryOptionsFromIndexedDB } from '../../../utils/cachedDataHooks/useCategoryOptionsFromIndexedDB';
+import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 
-const query = {
-    attributeOptionCombo: {
-        resource: 'categoryOptionCombos',
-        id: ({ variables }: any) => variables.attributeOptionCombo,
-        params: {
-            fields: 'id,displayName,categoryOptions[id,displayName,access[data[write]],categories[id,displayName]]',
-        },
-    },
+type Props = {
+    attributeOptionCombo?: string;
+    enrollmentCategoryCombo?: EnrollmentCategoryCombo;
 };
 
-export const useEnrollmentAOCDetails = (attributeOptionCombo?: string) => {
+export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCategoryCombo }: Props) => {
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
-    const effectiveAttributeOptionCombo = enrollmentAOCSupported ? attributeOptionCombo : undefined;
 
-    const { error, loading, data, refetch } = useDataQuery(query, { lazy: true });
+    const matchingCategoryOptionCombo = useMemo(() => {
+        if (!enrollmentAOCSupported || !attributeOptionCombo || !enrollmentCategoryCombo) return undefined;
+        return enrollmentCategoryCombo.categoryOptionCombos
+            ?.find(coc => coc.id === attributeOptionCombo);
+    }, [enrollmentAOCSupported, attributeOptionCombo, enrollmentCategoryCombo]);
 
-    useEffect(() => {
-        if (effectiveAttributeOptionCombo) {
-            refetch({ variables: { attributeOptionCombo: effectiveAttributeOptionCombo } });
-        }
-    }, [refetch, effectiveAttributeOptionCombo]);
+    const categoryOptionIds = useMemo(() => (matchingCategoryOptionCombo
+        ? new Set(matchingCategoryOptionCombo.categoryOptions.map(({ id }) => id))
+        : null),
+    [matchingCategoryOptionCombo]);
 
-    useEffect(() => {
-        if (error) {
-            log.error(
-                errorCreator('Could not load attribute option combo details')({
-                    error,
-                    attributeOptionCombo: effectiveAttributeOptionCombo,
-                }),
-            );
-        }
-    }, [error, effectiveAttributeOptionCombo]);
+    const { categoryOptions, isLoading, isError } = useCategoryOptionsFromIndexedDB(
+        [attributeOptionCombo ?? ''],
+        categoryOptionIds,
+    );
 
-    const enrollmentAOCDetails = useMemo(() => {
-        if (!effectiveAttributeOptionCombo) return undefined;
-        const value = (data as any)?.attributeOptionCombo as EnrollmentCategoryOptionCombo | undefined;
-        return value?.id === effectiveAttributeOptionCombo ? value : undefined;
-    }, [effectiveAttributeOptionCombo, data]);
+    const enrollmentAOCDetails = useMemo<EnrollmentCategoryOptionCombo | undefined>(() => {
+        if (!matchingCategoryOptionCombo || !categoryOptions) return undefined;
+        return {
+            id: matchingCategoryOptionCombo.id,
+            displayName: '',
+            categoryOptions: categoryOptions.map(option => ({
+                id: option.id,
+                displayName: option.displayName,
+                access: option.access,
+                categories: option.categories.map(categoryId => ({ id: categoryId })),
+            })),
+        };
+    }, [matchingCategoryOptionCombo, categoryOptions]);
 
-    return { error, loading, enrollmentAOCDetails };
+    return { error: isError, loading: isLoading, enrollmentAOCDetails };
 };

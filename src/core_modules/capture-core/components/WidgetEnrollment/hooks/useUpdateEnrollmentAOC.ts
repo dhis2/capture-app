@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { useDataMutation, useTimeZoneConversion } from '@dhis2/app-runtime';
-import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
+import type { Mutation } from 'capture-core-utils/types/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 import { resolveAttributeOptionCombo } from '../../../metaData';
 import { getTermLabelFromProgram, LabelKeys } from '../../../customLabels';
@@ -20,28 +20,31 @@ const enrollmentUpdate: Mutation = {
 
 type UseUpdateEnrollmentAOCProps = {
     enrollment: Enrollment | null | undefined;
+    setEnrollment: (enrollment: Enrollment) => void;
     enrollmentCategoryCombo: EnrollmentCategoryCombo | undefined;
     program: Record<string, unknown> | undefined;
-    refetchEnrollment: QueryRefetchFunction;
     onError?: (message: string) => void;
     onSuccess?: () => void;
 };
 
 export const useUpdateEnrollmentAOC = ({
     enrollment,
+    setEnrollment,
     enrollmentCategoryCombo,
     program,
-    refetchEnrollment,
     onError,
     onSuccess,
 }: UseUpdateEnrollmentAOCProps) => {
     const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
     const { fromClientDate } = useTimeZoneConversion();
+    const prevEnrollmentRef = useRef(enrollment);
 
     const [updateEnrollmentMutation, { loading }] = useDataMutation(enrollmentUpdate, {
-        onComplete: () => {
-            refetchEnrollment();
-            onSuccess?.();
+        onComplete: () => onSuccess?.(),
+        onError: (err: any) => {
+            if (prevEnrollmentRef.current) setEnrollment(prevEnrollmentRef.current);
+            log.error(errorCreator('Enrollment AOC update failed')({ err }));
+            onError?.(processErrorReports(err));
         },
     });
 
@@ -70,19 +73,16 @@ export const useUpdateEnrollmentAOC = ({
             return false;
         }
 
-        try {
-            await updateEnrollmentMutation({
-                ...enrollment,
-                attributeOptionCombo,
-                updatedAt: fromClientDate(new Date()).getServerZonedISOString(),
-            });
-            return true;
-        } catch (err) {
-            log.error(errorCreator('Enrollment AOC update failed')({ err }));
-            onError?.(processErrorReports(err));
-            return false;
-        }
-    }, [enrollmentAOCSupported, enrollment, enrollmentCategoryCombo, program, loading,
+        prevEnrollmentRef.current = enrollment;
+        const updatedEnrollment: Enrollment = {
+            ...enrollment,
+            attributeOptionCombo,
+            updatedAt: fromClientDate(new Date()).getServerZonedISOString(),
+        };
+        setEnrollment(updatedEnrollment);
+        updateEnrollmentMutation(updatedEnrollment);
+        return true;
+    }, [enrollmentAOCSupported, enrollment, setEnrollment, enrollmentCategoryCombo, program, loading,
         updateEnrollmentMutation, onError, fromClientDate]);
 
     return { update, loading };

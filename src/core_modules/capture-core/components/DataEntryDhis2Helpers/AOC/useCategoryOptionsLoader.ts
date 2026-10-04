@@ -40,7 +40,7 @@ const getOptionsAsync = async (
     const project = (categoryOption: any): CategoryOptionEntry => ({
         label: categoryOption.displayName,
         value: categoryOption.id,
-        writeAccess: categoryOption.access.data.write,
+        writeAccess: !!categoryOption.access?.data?.write,
     });
 
     const options = await buildCategoryOptionsAsync(category.id, { predicate, project, onIsAborted });

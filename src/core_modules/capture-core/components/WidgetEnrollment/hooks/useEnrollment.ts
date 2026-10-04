@@ -92,6 +92,7 @@ export const useEnrollment = ({
         error,
         refetch,
         enrollment: !loading ? enrollment : null,
+        setEnrollment,
         updateEnrollmentDate,
         updateIncidentDate,
     };

@@ -54,6 +54,7 @@ export const WidgetEnrollment = ({
 }: Props) => {
     const {
         enrollment,
+        setEnrollment,
         updateEnrollmentDate,
         updateIncidentDate,
         error: errorEnrollment,
@@ -66,12 +67,15 @@ export const WidgetEnrollment = ({
         externalData,
     });
     const { error: errorProgram, program } = useProgram(programId);
-    const { enrollmentAOCDetails } = useEnrollmentAOCDetails(enrollment?.attributeOptionCombo);
+    const { enrollmentAOCDetails } = useEnrollmentAOCDetails({
+        attributeOptionCombo: enrollment?.attributeOptionCombo,
+        enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
+    });
     const { update: updateEnrollmentAOC, loading: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
+        setEnrollment,
         enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
         program,
-        refetchEnrollment,
         onError,
         onSuccess,
     });
