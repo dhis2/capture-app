@@ -67,7 +67,7 @@ export const WidgetEnrollment = ({
         externalData,
     });
     const { error: errorProgram, program } = useProgram(programId);
-    const { enrollmentAOCDetails, loading: loadingEnrollmentAOCDetails } = useEnrollmentAOCDetails({
+    const { enrollmentAOCDetails } = useEnrollmentAOCDetails({
         attributeOptionCombo: enrollment?.attributeOptionCombo,
         enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
     });
