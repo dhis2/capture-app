@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import type { ApiCategoryOption } from './useCategoryOptionsFromServer';
-import { useCategoryOptionsFromIndexedDB } from './useCategoryOptionsFromIndexedDB';
+import { useCategoryOptionsFromIndexedDB, type CategoryOption } from './useCategoryOptionsFromIndexedDB';
 
 export type CategoryOptionEntry = { label: string; value: string; writeAccess: boolean };
 export type LoadedCategory = { id: string; label: string; options: Array<CategoryOptionEntry> };
@@ -8,7 +7,7 @@ export type LoadedCategory = { id: string; label: string; options: Array<Categor
 const sortByLabel = (a: CategoryOptionEntry, b: CategoryOptionEntry) =>
     a.label.localeCompare(b.label);
 
-const matchesOrgUnit = (option: ApiCategoryOption, orgUnitId: string | null | undefined) => {
+const matchesOrgUnit = (option: CategoryOption, orgUnitId: string | null | undefined) => {
     if (!orgUnitId) return true;
     if (!option.organisationUnits || option.organisationUnits.length === 0) return true;
     return option.organisationUnits.includes(orgUnitId);
