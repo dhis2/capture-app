@@ -13,6 +13,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { isValidDate, isValidNonFutureDate } from 'capture-core/utils/validation/validators/form';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import { IconButton } from 'capture-ui';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
 import { convertValue as convertValueFormToClient } from '../../../converters/formToClient';
@@ -38,29 +39,6 @@ const styles = (theme: any) => ({
         gap: `${spacersNum.dp4}px`,
         fontSize: '14px',
         color: colors.grey900,
-    },
-    editButton: {
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'flex-start',
-        flexShrink: 0,
-        cursor: 'pointer',
-        border: 'none',
-        borderRadius: '3px',
-        background: 'transparent',
-        color: colors.grey600,
-        padding: '1px',
-        marginInlineStart: '2px',
-        '&:focus': {
-            outline: 'none',
-            background: colors.grey200,
-            color: colors.grey800,
-        },
-        '&:hover': {
-            background: colors.grey200,
-            color: colors.grey800,
-        },
     },
     dateInputLabel: {
         display: 'flex',
@@ -220,14 +198,13 @@ const DateComponentPlain = ({
                 </span>
             </span>
             {!readOnly && (
-                <button
-                    type="button"
-                    className={classes.editButton}
-                    data-test="widget-enrollment-icon-edit-date"
+                <IconButton
+                    dataTest="widget-enrollment-icon-edit-date"
+                    aria-label={i18n.t('Edit {{label}}', { label: dateLabel })}
                     onClick={onOpenEdit}
                 >
                     <IconEdit16 />
-                </button>
+                </IconButton>
             )}
         </div>
     );

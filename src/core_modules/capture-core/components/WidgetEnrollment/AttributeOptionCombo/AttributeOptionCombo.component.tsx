@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { SingleSelectField } from 'capture-core/components/FormFields/New';
+import { IconButton } from 'capture-ui';
 import { useGroupedCategoryOptions } from '../../DataEntryDhis2Helpers/AOC/useGroupedCategoryOptions';
 import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 
@@ -123,14 +124,13 @@ const AttributeOptionComboPlain = ({
 
     const canEdit = !editMode && !readOnly && !saving;
     const editButton = canEdit && (
-        <Button
-            small
-            secondary
-            icon={<IconEdit16 />}
-            onClick={openEdit}
+        <IconButton
             dataTest="widget-enrollment-icon-edit-attribute-option-combo"
             aria-label={i18n.t('Edit {{label}}', { label: enrollmentCategoryCombo.displayName })}
-        />
+            onClick={openEdit}
+        >
+            <IconEdit16 />
+        </IconButton>
     );
 
     const multiCategory = categories.length > 1;
