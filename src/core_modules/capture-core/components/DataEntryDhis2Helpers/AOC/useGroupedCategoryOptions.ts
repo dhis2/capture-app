@@ -12,8 +12,8 @@ const sortByLabel = (a: CategoryOptionEntry, b: CategoryOptionEntry) =>
 
 const matchesOrgUnit = (option: CategoryOption, orgUnitId: string | null | undefined) => {
     if (!orgUnitId) return true;
-    if (!option.organisationUnits || option.organisationUnits.length === 0) return true;
-    return option.organisationUnits.includes(orgUnitId);
+    if (!option.organisationUnits) return true;
+    return !!option.organisationUnits[orgUnitId];
 };
 
 export const useGroupedCategoryOptions = (
