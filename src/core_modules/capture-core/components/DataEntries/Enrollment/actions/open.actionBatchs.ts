@@ -72,6 +72,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     programCategory?: ProgramCategory;
     formFoundation: RenderFoundation;
 }) => {
+    const enrollmentProgramCategory = program.enrollmentCategoryCombination;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
