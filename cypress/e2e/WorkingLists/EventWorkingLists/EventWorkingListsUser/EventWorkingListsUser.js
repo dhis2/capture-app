@@ -380,6 +380,7 @@ When('you set the date of admission filter', () => {
 });
 
 When(/^you save the view as (.*)$/, (name) => {
+    cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -393,13 +394,15 @@ When(/^you save the view as (.*)$/, (name) => {
                 .blur();
         });
 
-    cy.intercept('POST', '**/eventFilters**').as('newEventFilter');
-
     cy.get('button')
         .contains('Save')
         .click();
 
     cy.wait('@newEventFilter', { timeout: 30000 }).as('newEventResult');
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains(name)
+        .parent()
+        .should('have.class', 'selected');
 });
 
 When(/^you update the view with the name (.+)$/, (_name) => {

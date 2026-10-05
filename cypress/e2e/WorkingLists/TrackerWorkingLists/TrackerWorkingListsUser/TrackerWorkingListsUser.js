@@ -459,6 +459,10 @@ When('you save the list with the name My custom list', () => {
         .contains('Save')
         .click();
     cy.wait('@newTrackedEntityInstanceFilters', { timeout: 30000 });
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains('My custom list')
+        .parent()
+        .should('have.class', 'selected');
 });
 
 When('you save the list with the name Custom Program stage list', () => {
@@ -479,6 +483,10 @@ When('you save the list with the name Custom Program stage list', () => {
         .contains('Save')
         .click();
     cy.wait('@newProgramStageWorkingLists', { timeout: 30000 });
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains('Custom Program stage list')
+        .parent()
+        .should('have.class', 'selected');
 });
 
 When('you update the list with the name My custom list', () => {
@@ -716,6 +724,10 @@ When(/^you save the view as (.*)$/, (name) => {
         .click();
 
     cy.wait('@newTrackerFilterResult', { timeout: 30000 });
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains(name)
+        .parent()
+        .should('have.class', 'selected');
 });
 
 When(/^you save the program stage view as (.*)$/, (name) => {
@@ -738,6 +750,10 @@ When(/^you save the program stage view as (.*)$/, (name) => {
         .click();
 
     cy.wait('@newTrackerFilterResult', { timeout: 30000 });
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains(name)
+        .parent()
+        .should('have.class', 'selected');
 });
 
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
