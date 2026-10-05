@@ -27,10 +27,10 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
     }, [enrollmentAOCSupported, attributeOptionCombo, enrollmentCategoryCombo]);
 
     const { categoryIds, queryKey } = useMemo(() => {
-        if (!enrollmentCategoryCombo) return { categoryIds: null, queryKey: [] };
+        if (!enrollmentAOCSupported || !enrollmentCategoryCombo) return { categoryIds: null, queryKey: [] };
         const ids = enrollmentCategoryCombo.categories.map(({ id }) => id);
         return { categoryIds: new Set(ids), queryKey: ids };
-    }, [enrollmentCategoryCombo]);
+    }, [enrollmentAOCSupported, enrollmentCategoryCombo]);
 
     const { categoryOptions, isLoading, isError } = useCategoryOptionsFromIndexedDB(queryKey, categoryIds);
 

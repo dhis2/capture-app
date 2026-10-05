@@ -33,8 +33,7 @@ export const useLifecycle = (
     } = useMetadataForRegistrationForm({ selectedScopeId });
 
     const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
-    const { programCategory, isLoading: programCategoryLoading } =
-        useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { programCategory } = useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
@@ -53,8 +52,7 @@ export const useLifecycle = (
             formValuesReadyRef.current === true &&
             orgUnit &&
             scopeType === scopeTypes.TRACKER_PROGRAM &&
-            formFoundation &&
-            !programCategoryLoading
+            formFoundation
         ) {
             dataEntryReadyRef.current = true;
             dispatch(
@@ -80,7 +78,6 @@ export const useLifecycle = (
         formValues,
         clientValues,
         programCategory,
-        programCategoryLoading,
         firstStageMetaData,
         dispatch,
     ]);

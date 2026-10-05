@@ -72,7 +72,6 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     programCategory?: ProgramCategory;
     formFoundation: RenderFoundation;
 }) => {
-    const enrollmentProgramCategory = program.enrollmentCategoryCombination;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
@@ -93,11 +92,11 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
             validatorContainers:
                 getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
         })) ?? []),
-        ...(enrollmentProgramCategory?.categories?.map(category => ({
+        ...(program.enrollmentCategoryCombination?.categories?.map(category => ({
             id: `${enrollmentAttributeOptionsKey}-${category.id}`,
             type: 'TEXT',
             validatorContainers: getEnrollmentCategoryOptionsValidatorContainers(
-                { enrollmentCategories: enrollmentProgramCategory.categories },
+                { enrollmentCategories: program.enrollmentCategoryCombination?.categories },
                 category.id,
             ),
         })) ?? []),
