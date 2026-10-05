@@ -19,7 +19,6 @@ module.exports = defineConfig({
     chromeWebSecurity: false,
     defaultCommandTimeout: 25000,
     projectId: '322xnh',
-    experimentalFetchPolyfill: true,
     retries: {
         runMode: 3,
     },
