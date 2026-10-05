@@ -105,7 +105,7 @@ export const addProgramStageTemplateEpic = (action$: EpicAction<any>, store: Red
                     return concat(
                         of(result.batchAction),
                         defer(() => {
-                            onChangeTemplate && onChangeTemplate(result.uid);
+                            onChangeTemplate?.(result.uid);
                             return EMPTY;
                         }),
                     );

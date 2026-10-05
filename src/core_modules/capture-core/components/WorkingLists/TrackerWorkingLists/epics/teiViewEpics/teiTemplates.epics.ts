@@ -94,7 +94,7 @@ export const addTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStore, 
                     return concat(
                         of(result.batchAction),
                         defer(() => {
-                            onChangeTemplate && onChangeTemplate(result.uid);
+                            onChangeTemplate?.(result.uid);
                             return EMPTY;
                         }),
                     );
