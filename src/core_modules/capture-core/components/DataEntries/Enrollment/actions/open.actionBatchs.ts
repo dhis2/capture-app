@@ -93,11 +93,11 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
             validatorContainers:
                 getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
         })) ?? []),
-        ...(program.enrollmentCategoryCombination?.categories?.map(category => ({
+        ...(enrollmentProgramCategory?.categories?.map(category => ({
             id: `${enrollmentAttributeOptionsKey}-${category.id}`,
             type: 'TEXT',
             validatorContainers: getEnrollmentCategoryOptionsValidatorContainers(
-                { enrollmentCategories: program.enrollmentCategoryCombination?.categories },
+                { enrollmentCategories: enrollmentProgramCategory.categories },
                 category.id,
             ),
         })) ?? []),
