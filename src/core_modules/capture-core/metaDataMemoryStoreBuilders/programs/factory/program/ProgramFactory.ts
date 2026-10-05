@@ -100,6 +100,8 @@ export class ProgramFactory {
 
         return new EnrollmentCategoryCombination((o) => {
             o.id = cachedEnrollmentCategoryCombo.id;
+            o.displayName = cachedEnrollmentCategoryCombo.displayName;
+            o.categories = cachedEnrollmentCategoryCombo.categories ?? [];
             o.categoryOptionCombos = cachedEnrollmentCategoryCombo.categoryOptionCombos ?? [];
         });
     }

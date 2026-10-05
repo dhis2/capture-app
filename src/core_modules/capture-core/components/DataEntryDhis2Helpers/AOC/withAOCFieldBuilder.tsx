@@ -1,8 +1,9 @@
 import React, { type ComponentType, useMemo } from 'react';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
-import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
+import { useCategoryCombinations } from './useCategoryCombinations';
 import { useGroupedCategoryOptions } from './useGroupedCategoryOptions';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
+import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 
 const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<any>) =>
@@ -36,22 +37,19 @@ export const withAOCFieldBuilder = (settings: Settings) =>
 const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { programId, orgUnitId, orgUnitIdFieldValue } = props;
-        const featureSupported = featureAvailable(FEATURES.enrollmentAOC);
-        const { enrollmentProgramCategory, isLoading } =
-            useEnrollmentCategoryCombinations(programId, !featureSupported);
-        const enrollmentProgramCategories = useMemo(() => (
-            !isLoading && enrollmentProgramCategory ? enrollmentProgramCategory.categories : []),
-        [isLoading, enrollmentProgramCategory]);
-        const missingCombo = !isLoading && !enrollmentProgramCategory;
+        const enrollmentProgramCategory = useMemo(() => {
+            if (!featureAvailable(FEATURES.enrollmentAOC)) return null;
+            return getTrackerProgramThrowIfNotFound(programId).enrollmentCategoryCombination;
+        }, [programId]);
         const enrollmentCategories = useGroupedCategoryOptions(
-            enrollmentProgramCategories,
+            enrollmentProgramCategory?.categories ?? [],
             orgUnitIdFieldValue ?? orgUnitId,
-            !missingCombo,
+            !!enrollmentProgramCategory,
         );
 
-        if (missingCombo) return <InnerComponent {...props} />;
+        if (!enrollmentProgramCategory) return <InnerComponent {...props} />;
         return (
-            (!isLoading && enrollmentCategories) ? <InnerComponent
+            enrollmentCategories ? <InnerComponent
                 {...props}
                 enrollmentProgramCategory={enrollmentProgramCategory}
                 enrollmentCategories={enrollmentCategories}
