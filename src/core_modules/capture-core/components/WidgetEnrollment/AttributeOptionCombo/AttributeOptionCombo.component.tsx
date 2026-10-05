@@ -51,28 +51,6 @@ const styles = {
         whiteSpace: 'nowrap' as const,
         flexShrink: 0,
     },
-    editButton: {
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-        cursor: 'pointer',
-        border: 'none',
-        borderRadius: '3px',
-        background: 'transparent',
-        color: colors.grey600,
-        padding: '1px',
-        marginInlineStart: '2px',
-        '&:focus': {
-            outline: 'none',
-            background: colors.grey200,
-            color: colors.grey800,
-        },
-        '&:hover': {
-            background: colors.grey200,
-            color: colors.grey800,
-        },
-    },
     fieldRowContent: {
         display: 'flex',
         flexDirection: 'column' as const,
@@ -118,11 +96,11 @@ const AttributeOptionComboPlain = ({
     );
 
     const openEdit = useCallback(() => {
-        const sel: Record<string, string> = {};
+        const newSelection: Record<string, string> = {};
         enrollmentAOCDetails?.categoryOptions.forEach((option) => {
-            option.categories.forEach((cat) => { sel[cat.id] = option.id; });
+            option.categories.forEach((cat) => { newSelection[cat.id] = option.id; });
         });
-        setSelection(sel);
+        setSelection(newSelection);
         setEditMode(true);
     }, [enrollmentAOCDetails]);
     const exitEdit = useCallback(() => setEditMode(false), []);
@@ -130,12 +108,9 @@ const AttributeOptionComboPlain = ({
     const loadedCategories = useGroupedCategoryOptions(categories, orgUnitId, editMode);
 
     const save = useCallback(async () => {
-        if (saving) return;
-        const values = categories.map(({ id }) => selection[id]).filter(Boolean);
-        if (values.length !== categories.length) return;
-        const success = await onSave(values);
-        if (success) exitEdit();
-    }, [saving, categories, selection, onSave, exitEdit]);
+        const values = categories.map(({ id }) => selection[id]);
+        if (await onSave(values)) exitEdit();
+    }, [categories, selection, onSave, exitEdit]);
 
     const saveDisabled = categories.some(({ id }) => !selection[id]);
 
@@ -143,26 +118,25 @@ const AttributeOptionComboPlain = ({
         return null;
     }
 
-    const editButtonVisible = !editMode && !readOnly && !saving;
-    const editButton = editButtonVisible ? (
-        <button
-            type="button"
-            className={classes.editButton}
-            data-test="widget-enrollment-icon-edit-attribute-option-combo"
-            aria-label={i18n.t('Edit {{label}}', { label: enrollmentCategoryCombo.displayName })}
+    const findOptionForCategory = (categoryId: string) => enrollmentAOCDetails?.categoryOptions
+        .find(o => o.categories.some(c => c.id === categoryId));
+
+    const canEdit = !editMode && !readOnly && !saving;
+    const editButton = canEdit && (
+        <Button
+            small
+            secondary
+            icon={<IconEdit16 />}
             onClick={openEdit}
-        >
-            <IconEdit16 />
-        </button>
-    ) : null;
+            dataTest="widget-enrollment-icon-edit-attribute-option-combo"
+            aria-label={i18n.t('Edit {{label}}', { label: enrollmentCategoryCombo.displayName })}
+        />
+    );
 
-
-    const singleCategory = categories.length === 1;
     const multiCategory = categories.length > 1;
 
-    const renderSingleCategoryView = () => {
-        const option = enrollmentAOCDetails?.categoryOptions
-            .find(o => o.categories.some(c => c.id === categories[0].id));
+    if (categories.length === 1 && !editMode) {
+        const option = findOptionForCategory(categories[0].id);
         return (
             <div className={classes.block} data-test="widget-enrollment-attribute-option-combo">
                 <div className={classes.header}>
@@ -175,9 +149,13 @@ const AttributeOptionComboPlain = ({
                 </div>
             </div>
         );
-    };
+    }
 
-    if (singleCategory && !editMode) return renderSingleCategoryView();
+    const getRowClass = () => {
+        if (!multiCategory) return classes.row;
+        return editMode ? classes.bulletRow : classes.bulletTextRow;
+    };
+    const rowClass = getRowClass();
 
     return (
         <div className={classes.block} data-test="widget-enrollment-attribute-option-combo">
@@ -190,12 +168,7 @@ const AttributeOptionComboPlain = ({
             </div>
             <div className={classes.rowList}>
                 {categories.map((category) => {
-                    const option = enrollmentAOCDetails?.categoryOptions
-                        .find(o => o.categories.some(c => c.id === category.id));
-                    let rowClass = classes.row;
-                    if (multiCategory) {
-                        rowClass = editMode ? classes.bulletRow : classes.bulletTextRow;
-                    }
+                    const option = findOptionForCategory(category.id);
                     return (
                         <div
                             key={category.id}

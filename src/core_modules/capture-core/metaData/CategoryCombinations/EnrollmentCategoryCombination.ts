@@ -1,6 +1,4 @@
-/* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import isFunction from 'd2-utilizr/lib/isFunction';
 import { errorCreator } from 'capture-core-utils';
 
 export type CategoryOptionCombo = {
@@ -40,49 +38,21 @@ export const resolveAttributeOptionCombo = (
     return matches[0]?.id;
 };
 
-export class EnrollmentCategoryCombination {
-    _id = '';
-    _displayName = '';
-    _categories: Array<EnrollmentCategory> = [];
-    _categoryOptionCombos: Array<CategoryOptionCombo> = [];
+export type EnrollmentCategoryCombination = {
+    id: string;
+    displayName: string;
+    categories: Array<EnrollmentCategory>;
+    categoryOptionCombos: Array<CategoryOptionCombo>;
+    resolveAttributeOptionCombo: (uids: ReadonlyArray<string>) => string | undefined;
+};
 
-    constructor(initFn: ((_this: EnrollmentCategoryCombination) => void) | null) {
-        initFn && isFunction(initFn) && initFn(this);
-    }
-
-    get id(): string {
-        return this._id;
-    }
-
-    set id(id: string) {
-        this._id = id;
-    }
-
-    get displayName(): string {
-        return this._displayName;
-    }
-
-    set displayName(displayName: string) {
-        this._displayName = displayName;
-    }
-
-    get categories(): Array<EnrollmentCategory> {
-        return this._categories;
-    }
-
-    set categories(categories: Array<EnrollmentCategory>) {
-        this._categories = categories;
-    }
-
-    get categoryOptionCombos(): Array<CategoryOptionCombo> {
-        return this._categoryOptionCombos;
-    }
-
-    set categoryOptionCombos(categoryOptionCombos: Array<CategoryOptionCombo>) {
-        this._categoryOptionCombos = categoryOptionCombos;
-    }
-
-    resolveAttributeOptionCombo(categoryOptionUids: ReadonlyArray<string>): string | undefined {
-        return resolveAttributeOptionCombo(this._categoryOptionCombos, categoryOptionUids, this._id);
-    }
-}
+export const createEnrollmentCategoryCombination = (input: {
+    id: string;
+    displayName: string;
+    categories: Array<EnrollmentCategory>;
+    categoryOptionCombos: Array<CategoryOptionCombo>;
+}): EnrollmentCategoryCombination => ({
+    ...input,
+    resolveAttributeOptionCombo: uids =>
+        resolveAttributeOptionCombo(input.categoryOptionCombos, uids, input.id),
+});

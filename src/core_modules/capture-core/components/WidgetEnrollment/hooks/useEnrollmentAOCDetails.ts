@@ -9,7 +9,7 @@ type Props = {
     enrollmentCategoryCombo?: EnrollmentCategoryCombo;
 };
 
-const directFetchQuery = (attributeOptionCombo: string) => ({
+const categoryOptionComboQuery = (attributeOptionCombo: string) => ({
     resource: 'categoryOptionCombos',
     id: attributeOptionCombo,
     params: {
@@ -34,15 +34,15 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
 
     const { categoryOptions, isLoading, isError } = useCategoryOptionsFromIndexedDB(queryKey, categoryIds);
 
-    const needsDirectFetch = enrollmentAOCSupported
+    const isAocMissingFromCombo = enrollmentAOCSupported
         && !!attributeOptionCombo
         && !!enrollmentCategoryCombo
         && !matchingCategoryOptionCombo;
 
-    const { data: directFetchResult } = useApiMetadataQuery<EnrollmentCategoryOptionCombo | undefined>(
+    const { data: fetchedCategoryOptionCombo } = useApiMetadataQuery<EnrollmentCategoryOptionCombo | undefined>(
         ['enrollmentAttributeOptionCombo', attributeOptionCombo ?? ''],
-        needsDirectFetch && attributeOptionCombo ? directFetchQuery(attributeOptionCombo) : undefined,
-        { enabled: needsDirectFetch },
+        isAocMissingFromCombo && attributeOptionCombo ? categoryOptionComboQuery(attributeOptionCombo) : undefined,
+        { enabled: isAocMissingFromCombo },
     );
 
     const enrollmentAOCDetails = useMemo<EnrollmentCategoryOptionCombo | undefined>(() => {
@@ -60,9 +60,9 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
                     })),
             };
         }
-        if (directFetchResult?.id === attributeOptionCombo) return directFetchResult;
+        if (fetchedCategoryOptionCombo?.id === attributeOptionCombo) return fetchedCategoryOptionCombo;
         return undefined;
-    }, [matchingCategoryOptionCombo, categoryOptions, directFetchResult, attributeOptionCombo]);
+    }, [matchingCategoryOptionCombo, categoryOptions, fetchedCategoryOptionCombo, attributeOptionCombo]);
 
     return { error: isError, loading: isLoading, enrollmentAOCDetails };
 };

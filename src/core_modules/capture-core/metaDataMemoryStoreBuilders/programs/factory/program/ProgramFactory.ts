@@ -5,7 +5,7 @@ import {
     EventProgram,
     TrackerProgram,
     CategoryCombination,
-    EnrollmentCategoryCombination,
+    createEnrollmentCategoryCombination,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
@@ -98,11 +98,11 @@ export class ProgramFactory {
             return null;
         }
 
-        return new EnrollmentCategoryCombination((o) => {
-            o.id = cachedEnrollmentCategoryCombo.id;
-            o.displayName = cachedEnrollmentCategoryCombo.displayName;
-            o.categories = cachedEnrollmentCategoryCombo.categories ?? [];
-            o.categoryOptionCombos = cachedEnrollmentCategoryCombo.categoryOptionCombos ?? [];
+        return createEnrollmentCategoryCombination({
+            id: cachedEnrollmentCategoryCombo.id,
+            displayName: cachedEnrollmentCategoryCombo.displayName,
+            categories: cachedEnrollmentCategoryCombo.categories ?? [],
+            categoryOptionCombos: cachedEnrollmentCategoryCombo.categoryOptionCombos ?? [],
         });
     }
 

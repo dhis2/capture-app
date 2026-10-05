@@ -2,8 +2,9 @@ export type { Access } from './Access';
 export {
     Category,
     CategoryCombination,
-    EnrollmentCategoryCombination,
+    createEnrollmentCategoryCombination,
     resolveAttributeOptionCombo,
+    type EnrollmentCategoryCombination,
     type CategoryOptionCombo,
 } from './CategoryCombinations';
 export {

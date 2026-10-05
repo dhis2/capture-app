@@ -1,7 +1,8 @@
 export { Category } from './Category';
 export { CategoryCombination } from './CategoryCombination';
 export {
-    EnrollmentCategoryCombination,
+    createEnrollmentCategoryCombination,
     resolveAttributeOptionCombo,
+    type EnrollmentCategoryCombination,
     type CategoryOptionCombo,
 } from './EnrollmentCategoryCombination';
