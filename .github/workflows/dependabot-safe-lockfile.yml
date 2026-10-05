@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   install:
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.actor == 'dependabot[bot]' && !github.event.pull_request.head.repo.fork
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -66,7 +66,7 @@ jobs:
 
   commit:
     needs: install
-    if: "!github.event.pull_request.head.repo.fork"
+    if: "github.event.pull_request.user.login == 'dependabot[bot]' && github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository"
     runs-on: ubuntu-latest
     permissions:
       contents: read
