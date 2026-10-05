@@ -1,3 +1,10 @@
+## [107.6.2](https://github.com/dhis2/capture-app/compare/v107.6.1...v107.6.2) (2026-10-05)
+
+
+### Bug Fixes
+
+* [DHIS2-22189] TEI search fails when the first attribute is non-searchable ([#4756](https://github.com/dhis2/capture-app/issues/4756)) ([692b802](https://github.com/dhis2/capture-app/commit/692b8022722969ce615d272cd355d6bdac43fa4f))
+
 ## [107.6.1](https://github.com/dhis2/capture-app/compare/v107.6.0...v107.6.1) (2026-09-30)
 
 
