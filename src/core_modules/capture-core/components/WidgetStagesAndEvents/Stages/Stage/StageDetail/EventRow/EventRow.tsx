@@ -79,12 +79,9 @@ const EventRowPlain = ({
         { stageId: programStage?.id },
     );
     const readOnlyMessage = getReadOnlyMessage({
-        access: {
-            program: true,
-            trackedEntityType: true,
-            programStage: canEditProgramStage,
-            attributeOptionCombo: true,
-        },
+        programWriteAccess: true,
+        trackedEntityTypeWriteAccess: true,
+        programStageWriteAccess: canEditProgramStage,
         trackedEntityName: undefined,
         multipleStages: false,
         isEventBlockedByExpiry,

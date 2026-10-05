@@ -26,15 +26,11 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
             ?.find(coc => coc.id === attributeOptionCombo);
     }, [enrollmentAOCSupported, attributeOptionCombo, enrollmentCategoryCombo]);
 
-    const categoryIds = useMemo(() => (enrollmentCategoryCombo
-        ? new Set(enrollmentCategoryCombo.categories.map(({ id }) => id))
-        : null),
-    [enrollmentCategoryCombo]);
-
-    const queryKey = useMemo(
-        () => (categoryIds ? Array.from(categoryIds) : []),
-        [categoryIds],
-    );
+    const { categoryIds, queryKey } = useMemo(() => {
+        if (!enrollmentCategoryCombo) return { categoryIds: null, queryKey: [] };
+        const ids = enrollmentCategoryCombo.categories.map(({ id }) => id);
+        return { categoryIds: new Set(ids), queryKey: ids };
+    }, [enrollmentCategoryCombo]);
 
     const { categoryOptions, isLoading, isError } = useCategoryOptionsFromIndexedDB(queryKey, categoryIds);
 

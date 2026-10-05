@@ -36,7 +36,10 @@ const getAttributeOptionComboMessage = (): string =>
 
 // eslint-disable-next-line complexity
 export const getReadOnlyMessage = ({
-    access,
+    programWriteAccess,
+    trackedEntityTypeWriteAccess,
+    programStageWriteAccess,
+    attributeOptionComboWriteAccess = true,
     trackedEntityName,
     multipleStages,
     isEventBlockedByExpiry,
@@ -50,11 +53,13 @@ export const getReadOnlyMessage = ({
     eventLabel,
 }: ReadOnlyMessageInput): string => {
     if (trackedEntityInactive) return getDeactivatedMessage(trackedEntityName);
-    if (!access.program && !access.trackedEntityType && !access.programStage) return getEnrollmentMessage(enrollmentLabel);
-    if (!access.program) return getProgramMessage();
-    if (!access.trackedEntityType) return getTrackedEntityMessage(trackedEntityName);
-    if (!access.programStage) return getProgramStageMessage(multipleStages, programStageLabel, programStagesLabel);
-    if (!access.attributeOptionCombo) return getAttributeOptionComboMessage();
+    if (!programWriteAccess && !trackedEntityTypeWriteAccess && !programStageWriteAccess) {
+        return getEnrollmentMessage(enrollmentLabel);
+    }
+    if (!programWriteAccess) return getProgramMessage();
+    if (!trackedEntityTypeWriteAccess) return getTrackedEntityMessage(trackedEntityName);
+    if (!programStageWriteAccess) return getProgramStageMessage(multipleStages, programStageLabel, programStagesLabel);
+    if (!attributeOptionComboWriteAccess) return getAttributeOptionComboMessage();
     if (isEventBlockedByExpiry) return getExpiredMessage(eventLabel);
     if (isEventBlockedByCompletion) return getCompletedEventMessage(eventLabel);
     if (isEventCompleted && !canToggleCompletion) return getUncompleteAuthorityMessage(eventLabel);

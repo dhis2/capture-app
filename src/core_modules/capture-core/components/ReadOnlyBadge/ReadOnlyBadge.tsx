@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from '../Tooltips/ConditionalTooltip';
 import { getReadOnlyMessage } from './getReadOnlyMessage';
-import type { Props, Access } from './ReadOnlyBadge.types';
+import type { Props } from './ReadOnlyBadge.types';
 import { LabelKeys, useTermLabel } from '../../customLabels';
 
 const styles = {
@@ -36,14 +36,11 @@ const ReadOnlyBadgePlain = ({
         ],
         { stageId },
     );
-    const access: Access = {
-        program: programWriteAccess,
-        trackedEntityType: trackedEntityTypeWriteAccess,
-        programStage: programStageWriteAccess,
-        attributeOptionCombo: attributeOptionComboWriteAccess,
-    };
     const message = getReadOnlyMessage({
-        access,
+        programWriteAccess,
+        trackedEntityTypeWriteAccess,
+        programStageWriteAccess,
+        attributeOptionComboWriteAccess,
         trackedEntityName,
         multipleStages,
         isEventBlockedByExpiry,

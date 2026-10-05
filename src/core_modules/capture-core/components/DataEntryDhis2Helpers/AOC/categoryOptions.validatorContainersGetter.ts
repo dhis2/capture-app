@@ -7,9 +7,8 @@ const validateCategories = (
     fieldId: string | undefined,
     categoriesPropName: string,
 ) => {
-    const matchedCategory = props?.[categoriesPropName]
-        ?.find((category: any) => category.id === fieldId);
-    const categoryName = matchedCategory?.label ?? matchedCategory?.displayName;
+    const categoryName = props?.[categoriesPropName]
+        ?.find((category: any) => category.id === fieldId)?.displayName;
 
     return {
         valid: hasValue(value),

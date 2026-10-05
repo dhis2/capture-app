@@ -12,15 +12,11 @@ export type Props = {
     stageId?: string;
 };
 
-export type Access = {
-    program: boolean;
-    trackedEntityType: boolean;
-    programStage: boolean;
-    attributeOptionCombo: boolean;
-};
-
 export type ReadOnlyMessageInput = {
-    access: Access;
+    programWriteAccess: boolean;
+    trackedEntityTypeWriteAccess: boolean;
+    programStageWriteAccess: boolean;
+    attributeOptionComboWriteAccess?: boolean;
     trackedEntityName: string | undefined;
     multipleStages: boolean;
     isEventBlockedByExpiry: boolean;
