@@ -32,7 +32,7 @@ const getDeactivatedMessage = (trackedEntityName: string | undefined): string =>
     : i18n.t('This tracked entity is deactivated'));
 
 const getAttributeOptionComboMessage = (): string =>
-    i18n.t('You do not have write access to selected category combination');
+    i18n.t('You only have view access to the selected category combination');
 
 // eslint-disable-next-line complexity
 export const getReadOnlyMessage = ({

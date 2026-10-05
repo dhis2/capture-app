@@ -1,7 +1,7 @@
 import React, { type ComponentType, useMemo } from 'react';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useCategoryCombinations, useEnrollmentCategoryCombinations } from './useCategoryCombinations';
-import { useGroupedCategoryOptions } from '../../../utils/cachedDataHooks/useGroupedCategoryOptions';
+import { useGroupedCategoryOptions } from './useGroupedCategoryOptions';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 
@@ -59,6 +59,5 @@ const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
         );
     };
 
-export const withEnrollmentAOCFieldBuilder = () =>
-    (InnerComponent: ComponentType<any>) =>
-        getEnrollmentAOCFieldBuilder(InnerComponent);
+export const withEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
+    getEnrollmentAOCFieldBuilder(InnerComponent);

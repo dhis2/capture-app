@@ -16,11 +16,7 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import type { PlainProps } from './enrollment.types';
-import {
-    hasWriteAccessToAllCategoryOptions,
-    getEnrollmentReadOnly,
-} from './hasWriteAccessToAllCategoryOptions';
+import type { EnrollmentCategoryOptionCombo, PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
 import { getTermLabelFromProgram, LabelKeys } from '../../customLabels';
@@ -63,6 +59,15 @@ const getGeometryType = geometryType =>
 const getEnrollmentDateLabel = (program, enrollmentLabel: string) =>
     program.displayEnrollmentDateLabel ?? i18n.t('{{enrollmentLabel}} date', { enrollmentLabel });
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
+
+const hasWriteAccessToAllCategoryOptions = (details?: EnrollmentCategoryOptionCombo) =>
+    !details || details.categoryOptions.every(option => option.access?.data?.write);
+
+const getEnrollmentReadOnly = (
+    readOnlyMode: boolean,
+    programWriteAccess: boolean,
+    attributeOptionComboWriteAccess: boolean,
+) => readOnlyMode || !programWriteAccess || !attributeOptionComboWriteAccess;
 
 const WidgetEnrollmentPlain = ({
     classes,

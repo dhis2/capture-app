@@ -437,7 +437,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 }
 
 const AOCFieldBuilderHOC = withCustomLabels(customLabels)(
-    withEnrollmentAOCFieldBuilder()(
+    withEnrollmentAOCFieldBuilder(
         withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
             withAOCFieldBuilder(getAOCSettingsFn())(
                 withDataEntryFields(getCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),

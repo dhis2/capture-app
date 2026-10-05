@@ -28,7 +28,7 @@ export const useCategoryOptionsFromIndexedDB = (
     const { enabled = !!categoryIds && categoryIds.size > 0 } = queryOptions ?? {};
 
     const { data, isInitialLoading, isError } = useIndexedDBQuery<Array<CachedCategoryOption>>(
-        ['categoryOptionsFromIndexedDB', ...queryKey],
+        ['categoryOptions', ...queryKey],
         () => storageController.getAll(
             USER_METADATA_STORES.CATEGORY_OPTIONS,
             { predicate: (option: CachedCategoryOption) =>

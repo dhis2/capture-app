@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, IconEdit16, IconLegend16, colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { SingleSelectField } from 'capture-core/components/FormFields/New';
-import { useGroupedCategoryOptions } from '../../../utils/cachedDataHooks/useGroupedCategoryOptions';
+import { useGroupedCategoryOptions } from '../../DataEntryDhis2Helpers/AOC/useGroupedCategoryOptions';
 import type { EnrollmentCategoryOptionCombo, EnrollmentCategoryCombo } from '../enrollment.types';
 
 const styles = {
