@@ -527,8 +527,9 @@ When('you delete the name My custom list', () => {
         .click();
     cy.contains('Delete view')
         .click();
-    cy.get('button')
-        .contains('Confirm')
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .should('be.visible')
+        .contains('button', 'Confirm')
         .click();
     cy.wait('@deleteTrackedEntityInstanceFilters', { timeout: 30000 });
 });
@@ -539,8 +540,9 @@ When('you delete the name Custom Program stage list', () => {
         .click();
     cy.contains('Delete view')
         .click();
-    cy.get('button')
-        .contains('Confirm')
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .should('be.visible')
+        .contains('button', 'Confirm')
         .click();
     cy.wait('@deleteProgramStageWorkingLists', { timeout: 30000 });
 });

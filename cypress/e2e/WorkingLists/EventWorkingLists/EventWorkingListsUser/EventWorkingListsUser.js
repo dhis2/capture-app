@@ -560,13 +560,14 @@ Then('the working list should be displayed', () => {
 });
 
 When('you delete the name eventStoredWorkingList', () => {
+    cy.intercept('DELETE', '**/eventFilters/**').as('deleteEventFilters');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
         .click();
-    cy.intercept('DELETE', '**/eventFilters/**').as('deleteEventFilters');
-    cy.get('button')
-        .contains('Confirm')
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .should('be.visible')
+        .contains('button', 'Confirm')
         .click();
     cy.wait('@deleteEventFilters', { timeout: 30000 });
 });

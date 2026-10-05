@@ -1,5 +1,5 @@
 import log from 'loglevel';
-import { from } from 'rxjs';
+import { concat, defer, EMPTY, from, of } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
@@ -80,12 +80,13 @@ export const addProgramStageTemplateEpic = (action$: EpicAction<any>, store: Red
             })
                 .then((result) => {
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                    onChangeTemplate && onChangeTemplate(result.response.uid);
-
-                    return batchActions([
-                        addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate }),
-                        updateDefaultTemplate(getDefaultTemplate(program.id), storeId),
-                    ], workingListsCommonActionTypesBatchActionTypes.TEMPLATE_ADD_SUCCESS);
+                    return {
+                        batchAction: batchActions([
+                            addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate }),
+                            updateDefaultTemplate(getDefaultTemplate(program.id), storeId),
+                        ], workingListsCommonActionTypesBatchActionTypes.TEMPLATE_ADD_SUCCESS),
+                        uid: result.response.uid,
+                    };
                 })
                 .catch((error) => {
                     log.error(
@@ -95,10 +96,20 @@ export const addProgramStageTemplateEpic = (action$: EpicAction<any>, store: Red
                         }),
                     );
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                    return addTemplateError(clientId, { storeId, isActiveTemplate });
+                    return { errorAction: addTemplateError(clientId, { storeId, isActiveTemplate }) };
                 });
 
             return from(requestPromise).pipe(
+                concatMap((result: any) => {
+                    if (result.errorAction) return of(result.errorAction);
+                    return concat(
+                        of(result.batchAction),
+                        defer(() => {
+                            onChangeTemplate && onChangeTemplate(result.uid);
+                            return EMPTY;
+                        }),
+                    );
+                }),
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
@@ -113,8 +124,8 @@ export const deleteProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(
-            ({ payload: { workingListsType, programStageId } }) =>
-                workingListsType === TRACKER_WORKING_LISTS_TYPE && programStageId,
+            ({ payload: { workingListsType, template } }) =>
+                workingListsType === TRACKER_WORKING_LISTS_TYPE && template?.criteria?.programStage,
         ),
         concatMap(
             ({

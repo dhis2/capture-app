@@ -255,7 +255,10 @@ Then('you see the new sharing settings', () => {
     });
     cy.get('[data-test="list-view-menu-button"]').click();
     cy.contains('Delete view').click();
-    cy.contains('Confirm').click();
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .should('be.visible')
+        .contains('button', 'Confirm')
+        .click();
 });
 
 When(/^you open the More filters menu on the (event|tracker) working list$/, (listType) => {
