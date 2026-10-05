@@ -150,6 +150,7 @@ export type CachedCategoryOptionsByCategory = {
 
 export type ProgramCachedCategory = {
     id: string,
+    displayName: string,
 };
 
 export type ProgramCachedCategoryOptionCombo = {

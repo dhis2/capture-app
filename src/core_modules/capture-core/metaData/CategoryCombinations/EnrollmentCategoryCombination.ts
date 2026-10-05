@@ -8,6 +8,11 @@ export type CategoryOptionCombo = {
     categoryOptions: Array<{ id: string }>;
 };
 
+export type EnrollmentCategory = {
+    id: string;
+    displayName: string;
+};
+
 export const resolveAttributeOptionCombo = (
     categoryOptionCombos: ReadonlyArray<CategoryOptionCombo>,
     categoryOptionUids: ReadonlyArray<string>,
@@ -37,6 +42,8 @@ export const resolveAttributeOptionCombo = (
 
 export class EnrollmentCategoryCombination {
     _id = '';
+    _displayName = '';
+    _categories: Array<EnrollmentCategory> = [];
     _categoryOptionCombos: Array<CategoryOptionCombo> = [];
 
     constructor(initFn: ((_this: EnrollmentCategoryCombination) => void) | null) {
@@ -49,6 +56,22 @@ export class EnrollmentCategoryCombination {
 
     set id(id: string) {
         this._id = id;
+    }
+
+    get displayName(): string {
+        return this._displayName;
+    }
+
+    set displayName(displayName: string) {
+        this._displayName = displayName;
+    }
+
+    get categories(): Array<EnrollmentCategory> {
+        return this._categories;
+    }
+
+    set categories(categories: Array<EnrollmentCategory>) {
+        this._categories = categories;
     }
 
     get categoryOptionCombos(): Array<CategoryOptionCombo> {
