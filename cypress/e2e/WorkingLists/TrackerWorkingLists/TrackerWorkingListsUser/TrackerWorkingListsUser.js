@@ -442,6 +442,7 @@ Then('you see the custom TEI working lists', () => {
 });
 
 When('you save the list with the name My custom list', () => {
+    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackedEntityInstanceFilters');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Save current view')
@@ -454,7 +455,6 @@ When('you save the list with the name My custom list', () => {
                 .blur();
         });
 
-    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackedEntityInstanceFilters');
     cy.get('button')
         .contains('Save')
         .click();
@@ -462,6 +462,7 @@ When('you save the list with the name My custom list', () => {
 });
 
 When('you save the list with the name Custom Program stage list', () => {
+    cy.intercept('POST', '**/programStageWorkingLists**').as('newProgramStageWorkingLists');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Save current view')
@@ -474,7 +475,6 @@ When('you save the list with the name Custom Program stage list', () => {
                 .blur();
         });
 
-    cy.intercept('POST', '**/programStageWorkingLists**').as('newProgramStageWorkingLists');
     cy.get('button')
         .contains('Save')
         .click();
@@ -482,46 +482,43 @@ When('you save the list with the name Custom Program stage list', () => {
 });
 
 When('you update the list with the name My custom list', () => {
+    cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFilters');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
-
-    cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFilters');
     cy.contains('Update view')
         .click();
     cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
 });
 
 When(/^you update the tracker tei view with the name (.+)$/, (_name) => {
-    cy.get('[data-test="list-view-menu-button"]').click();
     cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFiltersByName');
+    cy.get('[data-test="list-view-menu-button"]').click();
     cy.contains('Update view').click();
     cy.wait('@editTrackedEntityInstanceFiltersByName', { timeout: 30000 });
 });
 
 When(/^you update the tracker program stage view with the name (.+)$/, (_name) => {
-    cy.get('[data-test="list-view-menu-button"]').click();
     cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingListsByName');
+    cy.get('[data-test="list-view-menu-button"]').click();
     cy.contains('Update view').click();
     cy.wait('@editProgramStageWorkingListsByName', { timeout: 30000 });
 });
 
 When('you update the list with the name Custom Program stage list', () => {
+    cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingLists');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
-
-    cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingLists');
     cy.contains('Update view')
         .click();
     cy.wait('@editProgramStageWorkingLists', { timeout: 30000 });
 });
 
 When('you delete the name My custom list', () => {
+    cy.intercept('DELETE', '**/trackedEntityInstanceFilters/**').as('deleteTrackedEntityInstanceFilters');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
         .click();
-
-    cy.intercept('DELETE', '**/trackedEntityInstanceFilters/**').as('deleteTrackedEntityInstanceFilters');
     cy.get('button')
         .contains('Confirm')
         .click();
@@ -529,12 +526,11 @@ When('you delete the name My custom list', () => {
 });
 
 When('you delete the name Custom Program stage list', () => {
+    cy.intercept('DELETE', '**/programStageWorkingLists/**').as('deleteProgramStageWorkingLists');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
         .click();
-
-    cy.intercept('DELETE', '**/programStageWorkingLists/**').as('deleteProgramStageWorkingLists');
     cy.get('button')
         .contains('Confirm')
         .click();
@@ -701,6 +697,7 @@ When(/^you set the program stage organisation unit filter "([^"]+)" to "([^"]+)"
 });
 
 When(/^you save the view as (.*)$/, (name) => {
+    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackerFilterResult');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -713,8 +710,6 @@ When(/^you save the view as (.*)$/, (name) => {
                 .type(name)
                 .blur();
         });
-
-    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackerFilterResult');
 
     cy.get('button')
         .contains('Save')
@@ -724,6 +719,7 @@ When(/^you save the view as (.*)$/, (name) => {
 });
 
 When(/^you save the program stage view as (.*)$/, (name) => {
+    cy.intercept('POST', '**/programStageWorkingLists**').as('newTrackerFilterResult');
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -736,8 +732,6 @@ When(/^you save the program stage view as (.*)$/, (name) => {
                 .type(name)
                 .blur();
         });
-
-    cy.intercept('POST', '**/programStageWorkingLists**').as('newTrackerFilterResult');
 
     cy.get('button')
         .contains('Save')
