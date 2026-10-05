@@ -3,6 +3,7 @@ import { useAlert } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -27,13 +28,12 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
+    deriveAttributeOptions,
 } from '../helpers';
-import { attributeOptionsKey, enrollmentAttributeOptionsKey } from '../../../DataEntryDhis2Helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
 import { getRedirectIds } from './getRedirectIds';
-import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -98,7 +98,7 @@ export const useBuildEnrollmentPayload = ({
         };
     } => {
         if (!formFoundation) throw Error('form foundation object not found');
-        const firstStage = firstStageMetaData && firstStageMetaData.stage;
+        const firstStage = firstStageMetaData?.stage;
         const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
         const serverValuesForFormValues = formFoundation.convertAndGroupBySection(clientValues, convertClientToServer);
         const serverValuesForMainValues = getServerValuesForMainValues(
@@ -110,22 +110,12 @@ export const useBuildEnrollmentPayload = ({
 
         const { stages, enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(programId);
 
-        const attributeCategoryOptions = Object.keys(serverValuesForMainValues)
-            .filter(key => key.startsWith(attributeOptionsKey))
-            .reduce((acc, key) => {
-                const categoryId = key.split('-')[1];
-                acc[categoryId] = serverValuesForMainValues[key];
-                return acc;
-            }, {});
-
-        const enrollmentCategoryOptionUids = Object.keys(serverValuesForMainValues)
-            .filter(key => key.startsWith(enrollmentAttributeOptionsKey))
-            .map(key => serverValuesForMainValues[key])
-            .filter((value): value is string => typeof value === 'string' && value !== '');
-
-        const attributeOptionCombo = enrollmentCategoryCombination
-            ?.resolveAttributeOptionCombo(enrollmentCategoryOptionUids);
-        const aocResolveFailed = enrollmentCategoryOptionUids.length > 0 && !attributeOptionCombo;
+        const {
+            attributeCategoryOptions,
+            attributeOptionCombo,
+            aocResolveFailed,
+            enrollmentCategoryOptionUids,
+        } = deriveAttributeOptions(serverValuesForMainValues, enrollmentCategoryCombination);
 
         if (aocResolveFailed) {
             log.error(
@@ -159,7 +149,12 @@ export const useBuildEnrollmentPayload = ({
             assignee,
         });
 
-        const { formHasError, linkedEvent: relatedStageLinkedEvent, relationship, linkMode } = deriveRelatedStageEvent({
+        const {
+            formHasError: relatedStageHasError,
+            linkedEvent: relatedStageLinkedEvent,
+            relationship,
+            linkMode,
+        } = deriveRelatedStageEvent({
             serverRequestEvent: firstStageDuringRegistrationEvent,
             relatedStageRef,
             firstStageMetaData,
@@ -216,7 +211,7 @@ export const useBuildEnrollmentPayload = ({
                 enrollments: [enrollment],
                 relationships: relationship ? [relationship] : undefined,
             },
-            formHasError: formHasError || aocResolveFailed,
+            formHasError: relatedStageHasError || aocResolveFailed,
             redirect,
         };
     };
