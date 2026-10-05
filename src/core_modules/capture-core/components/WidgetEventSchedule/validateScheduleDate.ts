@@ -3,16 +3,11 @@ import { hasValue } from 'capture-core-utils/validators/form';
 import { isValidDate, isValidPeriod } from '../../utils/validation/validators/form';
 import { convertFormToClient } from '../../converters';
 import { dataElementTypes } from '../../metaData';
-import type { Validation } from './widgetEventSchedule.types';
+import type { InternalComponentError, Validation } from './widgetEventSchedule.types';
 
 type ExpiryPeriod = {
     expiryPeriodType?: string | null;
     expiryDays?: number | null;
-};
-
-type InternalComponentError = {
-    error?: string;
-    errorCode?: string;
 };
 
 export const validateScheduleDate = (

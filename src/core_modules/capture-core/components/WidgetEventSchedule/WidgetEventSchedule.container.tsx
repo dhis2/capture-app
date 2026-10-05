@@ -170,6 +170,8 @@ export const WidgetEventSchedule = ({
 
     const onHandleCancel = useCallback(() => {
         setSaveAttempted(false);
+        setValidation(undefined);
+        setInternalComponentError(undefined);
         onCancel();
     }, [onCancel]);
 
