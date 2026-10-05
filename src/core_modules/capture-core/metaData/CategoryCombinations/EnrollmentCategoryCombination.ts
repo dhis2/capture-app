@@ -8,7 +8,7 @@ export type CategoryOptionCombo = {
     categoryOptions: Array<{ id: string }>;
 };
 
-export type EnrollmentCategory = {
+type EnrollmentCategory = {
     id: string;
     displayName: string;
 };

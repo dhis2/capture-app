@@ -1,21 +1,12 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useUpdateEnrollment } from './useUpdateEnrollment';
 import type { Enrollment } from '../enrollment.types';
 
 const baseFields = [
-    'enrollment',
-    'trackedEntity',
-    'program',
-    'status',
-    'orgUnit',
-    'enrolledAt',
-    'occurredAt',
-    'followUp',
-    'deleted',
-    'updatedAt',
-    'geometry',
+    'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,' +
+    'occurredAt,followUp,deleted,updatedAt,geometry',
 ];
 
 const enrollmentAOCFields = ['attributeOptionCombo'];
@@ -36,13 +27,12 @@ export const useEnrollment = ({
     externalData,
 }: Props) => {
     const [enrollment, setEnrollment] = useState<Enrollment | undefined>();
-    const enrollmentAOCSupported = useFeature(FEATURES.enrollmentAOC);
 
     const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => {
                 const fields = [...baseFields];
-                if (enrollmentAOCSupported) fields.push(...enrollmentAOCFields);
+                if (featureAvailable(FEATURES.enrollmentAOC)) fields.push(...enrollmentAOCFields);
                 return {
                     enrollment: {
                         resource: 'tracker/enrollments/',
@@ -51,7 +41,7 @@ export const useEnrollment = ({
                     },
                 };
             },
-            [enrollmentAOCSupported],
+            [],
         ),
         { lazy: true },
     );

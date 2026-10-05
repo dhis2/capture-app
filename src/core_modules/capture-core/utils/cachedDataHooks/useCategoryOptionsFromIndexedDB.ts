@@ -13,7 +13,7 @@ export type CategoryOption = {
 export const useCategoryOptionsFromIndexedDB = (
     queryKey: Array<string | number>,
     categoryIds: Set<string> | null | undefined,
-    queryOptions?: UseQueryOptions<any>,
+    queryOptions?: UseQueryOptions<Array<CategoryOption>>,
 ): {
     categoryOptions: Array<CategoryOption> | null | undefined;
     isLoading: boolean;

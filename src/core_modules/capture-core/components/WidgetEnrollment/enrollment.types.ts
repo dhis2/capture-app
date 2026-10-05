@@ -31,7 +31,7 @@ export type Enrollment = {
     followUp: boolean;
     deleted: boolean;
     updatedAt: string;
-    geometry: unknown;
+    geometry: { type: string; coordinates: any } | null;
     attributeOptionCombo?: string;
 };
 
@@ -59,15 +59,7 @@ export type Props = {
 };
 
 export type PlainProps = {
-    enrollment: {
-        enrolledAt: string;
-        occurredAt: string;
-        updatedAt: string;
-        status: string;
-        orgUnit: string;
-        followUp: boolean;
-        geometry: any;
-    };
+    enrollment: Enrollment;
     enrollmentAOCDetails?: EnrollmentCategoryOptionCombo;
     enrollmentCategoryCombo?: EnrollmentCategoryCombo;
     updateEnrollmentAOC: (categoryOptionUids: ReadonlyArray<string>) => Promise<boolean>;

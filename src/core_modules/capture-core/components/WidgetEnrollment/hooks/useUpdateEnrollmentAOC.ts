@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, type Dispatch, type SetStateAction } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -18,12 +18,9 @@ const enrollmentUpdate: Mutation = {
     }),
 };
 
-type SetEnrollment =
-    (value: Enrollment | ((current: Enrollment | undefined) => Enrollment | undefined) | undefined) => void;
-
 type UseUpdateEnrollmentAOCProps = {
     enrollment: Enrollment | null | undefined;
-    setEnrollment: SetEnrollment;
+    setEnrollment: Dispatch<SetStateAction<Enrollment | undefined>>;
     enrollmentCategoryCombo: EnrollmentCategoryCombo | undefined;
     program: Record<string, unknown> | undefined;
     onError?: (message: string) => void;
