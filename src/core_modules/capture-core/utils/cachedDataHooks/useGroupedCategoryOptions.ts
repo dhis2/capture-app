@@ -23,7 +23,7 @@ export const useGroupedCategoryOptions = (
         [enabled, programCategories],
     );
     const queryKey = useMemo(
-        () => (categoryIds ? Array.from(categoryIds).sort() : []),
+        () => (categoryIds ? Array.from(categoryIds) : []),
         [categoryIds],
     );
     const { categoryOptions } = useCategoryOptionsFromIndexedDB(queryKey, categoryIds);

@@ -32,7 +32,7 @@ export const useEnrollmentAOCDetails = ({ attributeOptionCombo, enrollmentCatego
     [enrollmentCategoryCombo]);
 
     const queryKey = useMemo(
-        () => (categoryIds ? Array.from(categoryIds).sort() : []),
+        () => (categoryIds ? Array.from(categoryIds) : []),
         [categoryIds],
     );
 
