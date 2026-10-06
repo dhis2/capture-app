@@ -1,5 +1,5 @@
 import log from 'loglevel';
-import { concat, defer, EMPTY, from, of } from 'rxjs';
+import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
@@ -69,13 +69,12 @@ export const addTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStore, 
             })
                 .then((result) => {
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                    return {
-                        batchAction: batchActions([
-                            addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate }),
-                            updateDefaultTemplate(getDefaultTemplate(program.id), storeId),
-                        ], workingListsCommonActionTypesBatchActionTypes.TEMPLATE_ADD_SUCCESS),
-                        uid: result.response.uid,
-                    };
+                    onChangeTemplate && onChangeTemplate(result.response.uid);
+
+                    return batchActions([
+                        addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate }),
+                        updateDefaultTemplate(getDefaultTemplate(program.id), storeId),
+                    ], workingListsCommonActionTypesBatchActionTypes.TEMPLATE_ADD_SUCCESS);
                 })
                 .catch((error) => {
                     log.error(
@@ -85,20 +84,10 @@ export const addTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStore, 
                         }),
                     );
                     const isActiveTemplate = store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                    return { errorAction: addTemplateError(clientId, { storeId, isActiveTemplate }) };
+                    return addTemplateError(clientId, { storeId, isActiveTemplate });
                 });
 
             return from(requestPromise).pipe(
-                concatMap((result: any) => {
-                    if (result.errorAction) return of(result.errorAction);
-                    return concat(
-                        of(result.batchAction),
-                        defer(() => {
-                            onChangeTemplate?.(result.uid);
-                            return EMPTY;
-                        }),
-                    );
-                }),
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),

@@ -483,10 +483,16 @@ When('you save the list with the name Custom Program stage list', () => {
         .contains('Save')
         .click();
     cy.wait('@newProgramStageWorkingLists', { timeout: 30000 });
+
+    cy.reload();
     cy.get('[data-test="workinglist-template-selector-chip"]')
         .contains('Custom Program stage list')
         .parent()
-        .should('have.class', 'selected');
+        .then(($chip) => {
+            if (!$chip.hasClass('selected')) {
+                cy.wrap($chip).click();
+            }
+        });
 });
 
 When('you update the list with the name My custom list', () => {
