@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
-import { baseInputStyles } from './commonProps';
 import {
     SingleOrgUnitSelectField,
     withDefaultFieldContainer,
@@ -11,22 +10,13 @@ import {
     withInternalChangeHandler,
     withLabel,
 } from '../../FormFields/New';
+import type { PlainProps as Props } from './ScheduleOrgUnit.types';
+import type { OrgUnitValue } from '../widgetEventSchedule.types';
 import { LabelKeys, useTermLabel } from '../../../customLabels';
 
-type OrgUnitValue = {
-    checked: boolean;
-    id: string;
-    children: number;
-    name: string;
-    displayName: string;
-    path: string;
-    selected: string[];
-}
-
-type Props = {
-    onSelectOrgUnit: (orgUnit: OrgUnitValue) => void;
-    onDeselectOrgUnit: () => void;
-    orgUnit?: OrgUnitValue | null;
+const baseInputStyles = {
+    inputContainerStyle: { flexBasis: 150 },
+    labelContainerStyle: { flexBasis: 200 },
 };
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(
@@ -45,13 +35,14 @@ export const ScheduleOrgUnit = ({
     onSelectOrgUnit,
     onDeselectOrgUnit,
     orgUnit,
+    saveAttempted,
 }: Props) => {
     const [touched, setTouched] = useState(false);
     const { orgUnitLabel } = useTermLabel([LabelKeys.orgUnitSingular]);
 
-    const handleSelect = (event: any) => {
+    const handleSelect = (selectedOrgUnit: OrgUnitValue) => {
         setTouched(true);
-        onSelectOrgUnit(event);
+        onSelectOrgUnit(selectedOrgUnit);
     };
 
     const handleDeselect = () => {
@@ -59,8 +50,8 @@ export const ScheduleOrgUnit = ({
         onDeselectOrgUnit();
     };
 
-    const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
-    const errorMessages = i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel });
+    const shouldShowError = !isValidOrgUnit(orgUnit) && (saveAttempted || touched);
+    const errorMessage = shouldShowError ? i18n.t('Please provide a valid {{orgUnitLabel}}', { orgUnitLabel }) : undefined;
 
     return (
         <OrgUnitFieldForForm
@@ -70,7 +61,7 @@ export const ScheduleOrgUnit = ({
             onSelectClick={handleSelect}
             onBlur={handleDeselect}
             styles={baseInputStyles}
-            errorMessage={shouldShowError ? errorMessages : undefined}
+            errorMessage={errorMessage}
         />
     );
 };
