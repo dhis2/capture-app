@@ -6,14 +6,21 @@ import { NewEventDataEntryWrapper } from './DataEntryWrapper/NewEventDataEntryWr
 import { NewRelationshipWrapper } from './NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';
 import { cancelNewEventAndReturnToMainPage } from './DataEntryWrapper/DataEntry/actions/dataEntry.actions';
 import type { Props } from './SingleEventRegistrationEntry.types';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
+import { useLocationQuery } from '../../../utils/routing';
 
 export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eventAccess }: Props) => {
     const dispatch = useDispatch();
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular]);
+    const { programId } = useLocationQuery();
 
     if (!eventAccess.write) {
         return (
             <NoWriteAccessMessage
-                message={i18n.t("You don't have access to create an event in the current selections")}
+                message={i18n.t(
+                    "You don't have access to create an {{eventLabel}} in the current selections",
+                    { eventLabel },
+                )}
                 onCancel={() => dispatch(cancelNewEventAndReturnToMainPage())}
             />
         );
@@ -23,7 +30,7 @@ export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eve
         <>
             {
                 showAddRelationship ?
-                    <NewRelationshipWrapper /> :
+                    <NewRelationshipWrapper programId={programId} /> :
                     <NewEventDataEntryWrapper />
             }
         </>

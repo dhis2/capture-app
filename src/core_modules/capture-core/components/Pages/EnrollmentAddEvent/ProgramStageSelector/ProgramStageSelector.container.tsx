@@ -10,15 +10,19 @@ import {
     useEnrollmentScopeRuleEffects,
     selectEnrollmentHiddenProgramStageIds,
 } from '../../common/EnrollmentOverviewDomain';
+import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-
+import { countNonSkippedEvents } from '../../../../events/countNonSkippedEvents';
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const { navigate } = useNavigate();
+    const { programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
+        [LabelKeys.programStageSingular, LabelKeys.programStagePlural, LabelKeys.eventSingular],
+    );
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues, ownerOrgUnitId } = useCommonEnrollmentDomainData(
         teiId,
@@ -57,10 +61,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
             accStage.push({
                 id: currentStage.id,
                 dataAccess: currentStage.access.data,
-                eventCount: (enrollment?.events
-                    ?.filter((event: any) => event.programStage === currentStage.id)
-                    ?.length
-                ),
+                eventCount: countNonSkippedEvents(enrollment?.events, currentStage.id),
                 displayName: currentStage.displayName,
                 style: currentStage.style,
                 repeatable: currentStage.repeatable,
@@ -108,16 +109,20 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         <>
             {program ?
                 <Widget
-                    header={i18n.t('Choose a stage for a new event')}
+                    header={i18n.t('Choose a {{programStageLabel}} for a new {{eventLabel}}', {
+                        programStageLabel,
+                        eventLabel,
+                    })}
                     noncollapsible
                 >
                     <ProgramStageSelectorComponent
                         programStages={availableStages}
+                        programId={programId}
                         onSelectProgramStage={onSelectProgramStage}
                         onCancel={onCancel}
                     />
                 </Widget>
-                : i18n.t('Program Stages could not be loaded')}
+                : i18n.t('{{programStagesLabel}} could not be loaded', { programStagesLabel })}
         </>
     );
 };

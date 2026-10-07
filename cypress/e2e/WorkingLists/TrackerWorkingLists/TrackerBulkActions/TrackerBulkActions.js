@@ -280,7 +280,7 @@ Then('an error dialog will be displayed to the user', () => {
 When('you close the error dialog', () => {
     cy.get('[data-test="bulk-complete-enrollments-dialog"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .contains('Cancel');
+        .contains('Close');
 });
 
 Then(/^the rows for tracked entities (.*) should still be selected$/, (trackedEntityIds) => {

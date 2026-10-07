@@ -4,6 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { useCommonEnrollmentDomainData } from '../components/Pages/common/EnrollmentOverviewDomain';
 import type { ProgramStage } from '../metaData';
 import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
+import { countNonSkippedEvents } from '../events/countNonSkippedEvents';
 
 export const useAvailableProgramStages = (
     programStage: ProgramStage,
@@ -28,17 +29,16 @@ export const useAvailableProgramStages = (
         () =>
             programStage.allowGenerateNextVisit &&
             !programLoading &&
+            enrollment &&
             program?.programStages?.map((currentStage) => {
-                const eventCount = enrollment?.events
-                    ?.filter(event => event.programStage === currentStage.id)
-                    ?.length;
+                const eventCount = countNonSkippedEvents(enrollment.events, currentStage.id);
                 const isAvailableStage = currentStage.repeatable ||
                     (programStage.id !== currentStage.id && eventCount === 0);
 
                 return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
             }).filter(stage => stage.isAvailableStage) || [],
         [
-            enrollment?.events,
+            enrollment,
             program?.programStages,
             programLoading,
             programStage.allowGenerateNextVisit,

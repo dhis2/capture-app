@@ -11,6 +11,7 @@ import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
 import type { Props } from './widgetProfile.types';
+import { getTermLabelFromProgram, LabelKeys } from '../../customLabels';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -83,6 +84,7 @@ const WidgetProfilePlain = ({
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
+    const { attributesLabel } = getTermLabelFromProgram([LabelKeys.attributePlural], { program });
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
         storedGeometry: trackedEntityInstance?.geometry,
@@ -187,7 +189,12 @@ const WidgetProfilePlain = ({
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {i18n.t('No attributes configured')}
+                        {trackedEntityTypeName
+                            ? i18n.t('No {{attributesLabel}} configured for {{trackedEntityTypeName}}', {
+                                attributesLabel,
+                                trackedEntityTypeName,
+                            })
+                            : i18n.t('No {{attributesLabel}} configured', { attributesLabel })}
                     </p>
                 </div>
             );
@@ -197,7 +204,7 @@ const WidgetProfilePlain = ({
             return (
                 <div className={classes.container}>
                     <p className={classes.emptyText}>
-                        {i18n.t('No attributes configured to display')}
+                        {i18n.t('No {{attributesLabel}} configured to display', { attributesLabel })}
                     </p>
                 </div>
             );

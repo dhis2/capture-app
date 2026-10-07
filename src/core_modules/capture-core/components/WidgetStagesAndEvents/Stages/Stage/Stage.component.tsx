@@ -52,6 +52,7 @@ export const StagePlain = ({
                     description={description}
                     events={events}
                     stageWriteAccess={effectiveStageWriteAccess}
+                    stageId={id}
                 />}
                 onOpen={handleOpen}
                 onClose={handleClose}
@@ -76,6 +77,7 @@ export const StagePlain = ({
                             repeatable={repeatable}
                             preventAddingEventActionInEffect={preventAddingNewEvents}
                             eventName={name}
+                            stageId={id}
                         />
                     </div>
                 )}

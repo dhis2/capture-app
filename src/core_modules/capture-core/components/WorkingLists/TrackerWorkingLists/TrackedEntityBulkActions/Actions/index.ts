@@ -1,3 +1,2 @@
-export { CompleteAction } from './CompleteAction';
-export { DeleteTeiAction } from './DeleteTeiAction';
+export { CompleteEnrollmentsAction } from './CompleteEnrollmentsAction';
 export { DeleteEnrollmentsAction } from './DeleteEnrollmentsAction';

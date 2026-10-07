@@ -19,8 +19,7 @@ export const getDateFieldConfig = (metaData: DateDataElement, options: any, quer
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
-        width: options.formHorizontal ? 150 : '100%',
-        maxWidth: options.formHorizontal ? 150 : 350,
+        width: '100%',
         calendarWidth: options.formHorizontal ? 250 : 350,
         popupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
         calendarMax: !metaData.allowFutureDate ? convertDateObjectToDateFormatString(moment()) : undefined,

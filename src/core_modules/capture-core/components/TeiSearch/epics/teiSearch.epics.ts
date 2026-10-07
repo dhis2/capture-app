@@ -95,10 +95,10 @@ const searchTei = ({
         selectedOrgUnitScope,
     } = currentTeiSearch;
 
-    const { searchGroups, attributes } = selectedProgramId
+    const { attributes } = selectedProgramId
         ? getTrackerProgram(selectedProgramId)
         : getTrackedEntityType(selectedTrackedEntityTypeId);
-
+    const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, selectedProgramId);
 
     const searchGroup = searchGroups[searchGroupId];
     const searchGroupElements = searchGroup?.searchForm?.getElements();
@@ -113,7 +113,8 @@ const searchTei = ({
                 return convertSearchFormToServer(formValues[fieldId], dataElement, searchOperator);
             }
             return null;
-        });
+        })
+        .filter(f => f !== null && f !== undefined);
 
     const queryArgs = {
         filter: filters,

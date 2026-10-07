@@ -120,6 +120,7 @@ export const ViewEventPlain = (props: Props & WithStyles<typeof getStyles>) => {
             <div className={classes.breadcrumbRow}>
                 <EventBreadcrumb
                     programId={programId}
+                    stageId={programStage?.id}
                     page={isEditEventPage ? pageKeys.EDIT_EVENT : pageKeys.VIEW_EVENT}
                     userInteractionInProgress={isUserInteractionInProgress}
                     onBackToViewEvent={onBackToViewEvent}

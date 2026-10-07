@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
+import { relatedStageActions, relatedStageStatus } from '../constants';
 import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
@@ -11,6 +11,7 @@ import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollec
 import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
+import { LabelKeys, useTermLabel } from '../../../customLabels';
 
 const styles: Readonly<any> = {
     wrapper: {
@@ -49,6 +50,7 @@ const Schedule = ({
     programStage,
     canAddNewEventToStage,
 }) => {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
     if (hidden) {
@@ -60,9 +62,9 @@ const Schedule = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
-            interpolation: { escapeValue: false },
+            eventLabel,
         });
     }
 
@@ -77,7 +79,7 @@ const Schedule = ({
                 name={`related-stage-action-${relatedStageActions.SCHEDULE_IN_ORG}`}
                 checked={relatedStageActions.SCHEDULE_IN_ORG === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
+                label={i18n.t('Schedule')}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
                 dataTest="related-stages-actions-schedule"
@@ -93,6 +95,7 @@ const EnterData = ({
     programStage,
     canAddNewEventToStage,
 }) => {
+    const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId: programStage?.id });
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
     if (hidden) {
@@ -104,9 +107,9 @@ const EnterData = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one {{eventLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
-            interpolation: { escapeValue: false },
+            eventLabel,
         });
     }
 
@@ -121,7 +124,7 @@ const EnterData = ({
                 name={`related-stage-action-${relatedStageActions.ENTER_DATA}`}
                 checked={relatedStageActions.ENTER_DATA === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
+                label={i18n.t('Enter details now')}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.ENTER_DATA}
                 dataTest="related-stages-actions-enter-details"
@@ -137,6 +140,10 @@ const LinkExistingResponse = ({
     updateSelectedAction,
     programStage,
 }) => {
+    const { eventLabel, eventsLabel } = useTermLabel(
+        [LabelKeys.eventSingular, LabelKeys.eventPlural],
+        { stageId: programStage?.id },
+    );
     const { hidden, disabled, disabledMessage } =
         actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
     if (hidden) {
@@ -148,9 +155,9 @@ const LinkExistingResponse = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else if (!linkableEvents.length) {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} has no linkable events', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} has no linkable {{eventsLabel}}', {
             linkableStageLabel: programStage.stageForm.name,
-            interpolation: { escapeValue: false },
+            eventsLabel,
         });
     }
 
@@ -165,7 +172,7 @@ const LinkExistingResponse = ({
                 name={`related-stage-action-${relatedStageActions.LINK_EXISTING_RESPONSE}`}
                 checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
+                label={i18n.t('Link to an existing {{eventLabel}}', { eventLabel })}
                 onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
                 dataTest="related-stages-actions-link-existing-response"
@@ -207,6 +214,7 @@ const RelatedStagesActionsPlain = ({
     isLinking,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
+    const { relationshipsLabel } = useTermLabel([LabelKeys.relationshipPlural]);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
@@ -255,7 +263,9 @@ const RelatedStagesActionsPlain = ({
                 )}
 
                 {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
-                    <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
+                    <div>
+                        {i18n.t('Ambiguous {{relationshipsLabel}}, contact system administrator', { relationshipsLabel })}
+                    </div>
                 )}
             </div>
 
@@ -316,6 +326,7 @@ const RelatedStagesActionsPlain = ({
                         linkableStageLabel={programStage.stageForm.name}
                         errorMessages={errorMessages}
                         saveAttempted={saveAttempted}
+                        stageId={programStage?.id}
                     />
                     <LinkButton
                         onLink={onLink}
