@@ -111,7 +111,7 @@
         "concurrently": "^10.0.5",
         "cypress": "12",
         "docdash": "^2.0.2",
-        "dotenv": "^18.0.3",
+        "dotenv": "^18.0.4",
         "eslint": "7.32.0",
         "eslint-config-airbnb": "^15.1.0",
         "eslint-config-react-app": "^6.0.0",
