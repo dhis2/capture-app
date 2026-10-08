@@ -7,6 +7,7 @@ When(/^you set the assginee filter to (.*)$/, (assignedUser) => {
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
+        .scrollIntoView()
         .should('be.visible')
         .contains(assignedUser)
         .click();

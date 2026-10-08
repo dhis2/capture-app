@@ -81,6 +81,7 @@ When('you set the enrollment status filter to active', () => {
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
+        .scrollIntoView()
         .should('be.visible')
         .contains('Active')
         .click();
