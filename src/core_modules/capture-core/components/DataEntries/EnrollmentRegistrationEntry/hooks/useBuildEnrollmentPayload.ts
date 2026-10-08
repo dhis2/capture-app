@@ -1,9 +1,4 @@
 import { useSelector } from 'react-redux';
-import { useAlert } from '@dhis2/app-runtime';
-import i18n from '@dhis2/d2-i18n';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
-import { getTermLabel, LabelKeys } from '../../../../customLabels';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -28,8 +23,8 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
-    deriveAttributeOptions,
 } from '../helpers';
+import { useDeriveAttributeOptions } from './useDeriveAttributeOptions';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
@@ -87,7 +82,7 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
-    const { show: showErrorAlert } = useAlert(({ message }) => message, { critical: true });
+    const deriveAttributeOptions = useDeriveAttributeOptions({ programId });
 
     const buildTeiWithEnrollment = (relatedStageRef?: { current: RelatedStageRefPayload | null }): {
         teiWithEnrollment: EnrollmentPayload;
@@ -114,26 +109,7 @@ export const useBuildEnrollmentPayload = ({
             attributeCategoryOptions,
             attributeOptionCombo,
             aocResolveFailed,
-            enrollmentCategoryOptionUids,
         } = deriveAttributeOptions(serverValuesForMainValues, enrollmentCategoryCombination);
-
-        if (aocResolveFailed) {
-            log.error(
-                errorCreator(
-                    'Could not resolve the selected enrollment category options to an attribute option combo',
-                )({
-                    enrollmentCategoryOptionUids,
-                    enrollmentCategoryCombinationId: enrollmentCategoryCombination?.id,
-                }),
-            );
-            const { enrollmentLabel } = getTermLabel([LabelKeys.enrollmentSingular], { programId });
-            showErrorAlert({
-                message: i18n.t(
-                    'The selected {{enrollmentLabel}} category options are not a valid combination.',
-                    { enrollmentLabel },
-                ),
-            });
-        }
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
