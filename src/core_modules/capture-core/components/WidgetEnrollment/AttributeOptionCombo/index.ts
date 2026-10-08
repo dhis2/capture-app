@@ -1,1 +1,1 @@
-export { AttributeOptionCombo } from './AttributeOptionCombo.component';
+export { AttributeOptionCombo } from './AttributeOptionCombo.container';
