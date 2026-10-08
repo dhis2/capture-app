@@ -2,7 +2,8 @@ import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useUpdateEnrollment } from './useUpdateEnrollment';
-import type { Enrollment } from '../enrollment.types';
+import { useUpdateEnrollmentAOC } from './useUpdateEnrollmentAOC';
+import type { Enrollment, EnrollmentCategoryCombo } from '../enrollment.types';
 
 const baseFields = [
     'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,' +
@@ -13,17 +14,23 @@ const enrollmentAOCFields = ['attributeOptionCombo'];
 
 type Props = {
     enrollmentId: string;
+    enrollmentCategoryCombo?: EnrollmentCategoryCombo;
+    program?: Record<string, unknown>;
     onUpdateEnrollmentDate?: (date: string) => void;
     onUpdateIncidentDate?: (date: string) => void;
     onError?: (error: any) => void;
+    onSuccess?: () => void;
     externalData?: { status: { value: string | null }; events?: Array<Record<string, unknown>> | null };
 };
 
 export const useEnrollment = ({
     enrollmentId,
+    enrollmentCategoryCombo,
+    program,
     onUpdateEnrollmentDate,
     onUpdateIncidentDate,
     onError,
+    onSuccess,
     externalData,
 }: Props) => {
     const [enrollment, setEnrollment] = useState<Enrollment | undefined>();
@@ -78,12 +85,22 @@ export const useEnrollment = ({
         onError,
     });
 
+    const { update: updateEnrollmentAOC, loading: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
+        enrollment,
+        setEnrollment,
+        enrollmentCategoryCombo,
+        program,
+        onError,
+        onSuccess,
+    });
+
     return {
         error,
         refetch,
         enrollment: !loading ? enrollment : null,
-        setEnrollment,
         updateEnrollmentDate,
         updateIncidentDate,
+        updateEnrollmentAOC,
+        savingEnrollmentAOC,
     };
 };
