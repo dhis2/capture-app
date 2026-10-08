@@ -192,21 +192,25 @@ const buildSupplementaryData = ({
     selectedUserRoles,
     selectedUserGroups,
 }: {
-    selectedOrgUnit: OrgUnit;
+    selectedOrgUnit: OrgUnit | null | undefined;
     selectedUserRoles?: Array<string> | null;
     selectedUserGroups?: Array<string> | null;
 }) => {
-    const orgUnitId = selectedOrgUnit.id;
-    const orgUnitGroups = selectedOrgUnit.groups.reduce(
-        (acc, group) => {
-            if (group.code) {
-                acc.set(group.code, [orgUnitId]);
-            }
-            acc.set(group.id, [orgUnitId]);
-            return acc;
-        },
-        new Map<string, Array<string>>(),
-    );
+    const orgUnitGroups = new Map<string, Array<string>>();
+
+    if (selectedOrgUnit) {
+        const orgUnitId = selectedOrgUnit.id;
+        selectedOrgUnit.groups.reduce(
+            (acc, group) => {
+                if (group.code) {
+                    acc.set(group.code, [orgUnitId]);
+                }
+                acc.set(group.id, [orgUnitId]);
+                return acc;
+            },
+            orgUnitGroups,
+        );
+    }
 
     return new RuleSupplementaryDataJs(
         selectedUserGroups || [],
@@ -221,13 +225,13 @@ export class InputBuilder {
     trackedEntityAttributes: TrackedEntityAttributes;
     optionSets: OptionSets;
     kotlinOptionSets: KotlinOptionSets;
-    selectedOrgUnit: OrgUnit;
+    selectedOrgUnit: OrgUnit | null | undefined;
     constructor(
         inputConverter: IConvertInputRulesValue,
         dataElements: DataElements | null,
         trackedEntityAttributes: TrackedEntityAttributes | null | undefined,
         optionSets: OptionSets,
-        selectedOrgUnit: OrgUnit,
+        selectedOrgUnit: OrgUnit | null | undefined,
     ) {
         this.processValue = new ValueProcessor(inputConverter).processValue;
         this.dataElements = dataElements || {};
@@ -285,8 +289,8 @@ export class InputBuilder {
             createdAtClientDate,
             this.toLocalDate(dueDate),
             this.toLocalDate(completedDate),
-            this.selectedOrgUnit.id,
-            this.selectedOrgUnit.code,
+            this.selectedOrgUnit?.id,
+            this.selectedOrgUnit?.code,
             dataValues,
         );
     };
@@ -367,8 +371,8 @@ export class InputBuilder {
             convertDate(incidentDate),
             convertDate(enrollmentDate),
             enrollmentStatus ? RuleEnrollmentStatus[enrollmentStatus] : RuleEnrollmentStatus.ACTIVE,
-            this.selectedOrgUnit.id,
-            this.selectedOrgUnit.code,
+            this.selectedOrgUnit?.id,
+            this.selectedOrgUnit?.code,
             attributeValues,
         );
     };
