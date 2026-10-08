@@ -14,9 +14,6 @@ async function setupNodeEvents(on, config) {
 module.exports = defineConfig({
     video: true,
     dhis2_datatest_prefix: 'dhis2-capture',
-    chromeWebSecurityComment:
-    'chromeWebSecurity should removed once https://github.com/cypress-io/cypress/issues/4220 is fixed',
-    chromeWebSecurity: false,
     defaultCommandTimeout: 25000,
     projectId: '322xnh',
     retries: {

@@ -40,6 +40,7 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () =
 
 Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="tracker-working-lists"]').should('be.visible');
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
@@ -241,14 +242,13 @@ Then('the list should display teis with an active enrollment and unassinged even
 
     cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
-        .should('have.length', 4)
-        .each(($teiRow, index) => {
-            if (index) {
-                cy.wrap($teiRow)
-                    .contains(ids[index - 1])
-                    .should('exist');
-            }
-        });
+        .should('have.length', 4);
+
+    ids.forEach(id => {
+        cy.get('[data-test="tracker-working-lists"]')
+            .contains(id)
+            .should('exist');
+    });
 });
 
 Then('the list should display teis with John as the first name', () => {

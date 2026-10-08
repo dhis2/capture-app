@@ -81,6 +81,7 @@ When('you set the enrollment status filter to active', () => {
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
+        .should('be.visible')
         .contains('Active')
         .click();
 });
@@ -97,8 +98,9 @@ When(/^you set the first name filter to (.*)$/, (name) => {
 });
 
 When('you apply the current filter', () => {
-    cy.get('[data-test="list-view-filter-apply-button"]')
-        .click();
+    cy.intercept('GET', /tracker\/(trackedEntities|events)/).as('listRefresh');
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.wait('@listRefresh');
 });
 
 Then('the first name filter button should show that the filter is in effect', () => {
