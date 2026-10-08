@@ -60,10 +60,12 @@ Given('you add a new tracked entity in the Malaria focus investigation program',
         .eq(2)
         .type(`Local id-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
+    cy.intercept('POST', '**/tracker**').as('saveTrackedEntity');
     cy.contains('Save focus area')
         .scrollIntoView()
         .should('not.be.disabled')
         .click();
+    cy.wait('@saveTrackedEntity', { timeout: 30000 });
     cy.url().should('include', 'enrollmentEventEdit?');
 });
 
@@ -89,10 +91,12 @@ Then('you see the delete tracked entity confirmation modal', () => {
 });
 
 When('you confirm by clicking the "Yes, delete Focus area" button', () => {
+    cy.intercept('POST', '**/tracker**').as('deleteTrackedEntity');
     cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
         cy.contains('Yes, delete Focus area')
             .click();
     });
+    cy.wait('@deleteTrackedEntity', { timeout: 30000 });
 });
 
 Then('you are redirected to the home page', () => {

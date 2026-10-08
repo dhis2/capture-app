@@ -444,6 +444,8 @@ And('you fill in a unique first name', () => {
 
 And(/^you click the save (.*) submit button$/, (TEType) => {
     cy.contains(`Save ${TEType}`)
+        .scrollIntoView()
+        .should('not.be.disabled')
         .click();
 });
 
@@ -454,10 +456,13 @@ Then('you see the possible duplicates modal', () => {
 });
 
 Then('you submit the form again from the duplicates modal', () => {
+    cy.intercept('POST', '**/tracker**').as('createTrackedEntity');
     cy.get('[data-test="create-as-new-person"]')
         .contains('Save as new')
+        .scrollIntoView()
         .should('be.visible')
         .click();
+    cy.wait('@createTrackedEntity', { timeout: 30000 });
 });
 
 // New person in WHO RMNCH Tracker
