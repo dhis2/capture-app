@@ -10,7 +10,7 @@ import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import { CurrentUser } from '../../utils/userInfo/CurrentUser';
 import { generateUID } from '../../utils/uid/generateUID';
-import type { ContainerProps } from './widgetEventSchedule.types';
+import type { ContainerProps, InternalComponentError, OrgUnitValue, Validation } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
 import {
     useScheduleConfigFromProgramStage,
@@ -22,6 +22,7 @@ import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { useProgramExpiryForUser } from '../../hooks';
+import { validateScheduleDate } from './validateScheduleDate';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -55,8 +56,10 @@ export const WidgetEventSchedule = ({
     const { fromClientDate } = useTimeZoneConversion();
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
     const [scheduleDate, setScheduleDate] = useState('');
-    const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
-    const [validation, setValidation] = useState<any>();
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState<OrgUnitValue | null | undefined>();
+    const [saveAttempted, setSaveAttempted] = useState(false);
+    const [validation, setValidation] = useState<Validation | undefined>();
+    const [internalComponentError, setInternalComponentError] = useState<InternalComponentError | undefined>();
     const isFirstRender = useRef(true);
     useEffect(() => {
         if (initialOrgUnitId && orgUnitName) {
@@ -101,6 +104,10 @@ export const WidgetEventSchedule = ({
     }, [storedAssignee]);
 
     const onHandleSchedule = useCallback(() => {
+        setSaveAttempted(true);
+        const dateValidation = validateScheduleDate(scheduleDate, expiryPeriod, internalComponentError);
+        setValidation(dateValidation);
+        if (dateValidation.error) { return; }
         if (!isFormValid) { return; }
         if (programCategory?.categories &&
             Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
@@ -113,8 +120,9 @@ export const WidgetEventSchedule = ({
             setCategoryOptionsError(errors);
             return;
         }
+        const dispatchServerScheduleDate = convertScheduleDate(scheduleDate, dateValidation);
         dispatch(requestScheduleEvent({
-            scheduleDate: serverScheduleDate,
+            scheduleDate: dispatchServerScheduleDate,
             orgUnitId: selectedOrgUnitId,
             notes,
             programId,
@@ -130,7 +138,9 @@ export const WidgetEventSchedule = ({
         }));
     }, [
         dispatch,
-        serverScheduleDate,
+        scheduleDate,
+        expiryPeriod,
+        internalComponentError,
         notes,
         programId,
         selectedOrgUnitId,
@@ -157,6 +167,13 @@ export const WidgetEventSchedule = ({
         };
         setNotes([...notes, newNote]);
     };
+
+    const onHandleCancel = useCallback(() => {
+        setSaveAttempted(false);
+        setValidation(undefined);
+        setInternalComponentError(undefined);
+        onCancel();
+    }, [onCancel]);
 
     const onSetAssignee = useCallback((user: any) => setAssignee(user), []);
     const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
@@ -202,11 +219,13 @@ export const WidgetEventSchedule = ({
             suggestedScheduleDate={suggestedScheduleDate}
             serverSuggestedScheduleDate={serverSuggestedScheduleDate}
             validation={validation}
-            onCancel={onCancel}
+            onCancel={onHandleCancel}
             setScheduleDate={setScheduleDate}
             setScheduledOrgUnit={setScheduledOrgUnit}
+            saveAttempted={saveAttempted}
             setIsFormValid={setIsFormValid}
             setValidation={setValidation}
+            setInternalComponentError={setInternalComponentError}
             onSchedule={onHandleSchedule}
             onAddNote={onAddNote}
             eventCountInOrgUnit={eventCountInOrgUnit}

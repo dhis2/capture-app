@@ -1,6 +1,26 @@
 import type { ProgramCategory, CategoryOption } from './CategoryOptions/CategoryOptions.types';
 import type { UserFormField } from '../FormFields/UserField';
 
+export type Validation = {
+    error: boolean;
+    validationText: string;
+};
+
+export type InternalComponentError = {
+    error?: string;
+    errorCode?: string;
+};
+
+export type OrgUnitValue = {
+    id: string;
+    name?: string;
+    checked?: boolean;
+    children?: number;
+    displayName?: string;
+    path?: string;
+    selected?: string[];
+};
+
 export type ContainerProps = {
    programId: string;
    stageId: string;
@@ -27,16 +47,8 @@ export type Props = {
    eventData: any;
    enrolledAt: string;
    occurredAt: string;
-   displayDueDateLabel: string;
-   orgUnit?: {
-      checked: boolean;
-      id: string;
-      children: number;
-      name: string;
-      displayName: string;
-      path: string;
-      selected: string[];
-   } | null;
+   displayDueDateLabel?: string | null;
+   orgUnit?: OrgUnitValue | null;
    stageName: string;
    programName: string;
    scheduleDate?: string | null;
@@ -46,12 +58,9 @@ export type Props = {
       expiryPeriodType: string | null;
       expiryDays: number | null;
    };
-   setScheduledOrgUnit: (orgUnit: {
-      id: string;
-      name: string;
-      path: string;
-  } | null) => void;
+   setScheduledOrgUnit: (orgUnit: OrgUnitValue | null) => void;
    setIsFormValid: (valid: boolean) => void;
+   saveAttempted: boolean;
    serverSuggestedScheduleDate?: string | null;
    eventCountInOrgUnit: number;
    notes: Array<{
@@ -73,12 +82,7 @@ export type Props = {
    onAddNote: (note: string) => void;
    onResetCategoryOption: (categoryId: string) => void;
    onClickCategoryOption: (optionId: string, categoryId: string) => void;
-   validation?: {
-      error: boolean;
-      validationText: string;
-    };
-    setValidation: (validation: {
-      error: boolean;
-      validationText: string;
-    }) => void;
+   validation?: Validation;
+   setValidation: (validation: Validation) => void;
+   setInternalComponentError: (error: InternalComponentError | undefined) => void;
 };
