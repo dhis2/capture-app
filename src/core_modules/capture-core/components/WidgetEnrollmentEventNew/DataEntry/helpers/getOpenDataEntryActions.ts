@@ -1,7 +1,7 @@
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
+import { getCategoryOptionsValidatorContainers } from '../../../DataEntryDhis2Helpers';
 import {
-    getCategoryOptionsValidatorContainers,
     getEventDateValidatorContainers,
     getOrgUnitValidatorContainers,
 } from '../fieldValidators';
