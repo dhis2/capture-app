@@ -4,94 +4,117 @@ import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import { useLocationQuery } from '../../../../utils/routing';
 import type { PluginContext, PluginContextIds } from '../FormFieldPlugin.types';
 
+type EnrollmentDomain = {
+    enrollmentId?: string;
+    ownerOrgUnitId?: string;
+    enrollment?: { events?: Partial<ApiEnrollmentEvent>[] };
+};
+
 type ReduxState = {
-    enrollmentDomain?: {
-        enrollmentId?: string;
-        ownerOrgUnitId?: string;
-        enrollment?: { events?: Partial<ApiEnrollmentEvent>[] };
-    };
+    enrollmentDomain?: EnrollmentDomain;
     viewEventPage?: {
         eventId?: string;
         loadedValues?: { eventContainer?: { event?: Partial<CaptureClientEvent> } };
     };
 };
 
-// Normalize either event shape (server API vs capture-app client) to a single
-// shape so the merge step doesn't have to care which slice it came from.
-type ResolvedEvent = Partial<PluginContextIds> & { isEventProgram: boolean };
+type Event = {
+    eventId?: string;
+    programId?: string;
+    orgUnitId?: string;
+    programStageId?: string;
+    enrollmentId?: string;
+    teiId?: string;
+    isEventProgram: boolean;
+};
 
-const asTracker = (e: Partial<ApiEnrollmentEvent>): ResolvedEvent => ({
-    eventId: e.event,
-    programId: e.program,
-    programStageId: e.programStage,
-    orgUnitId: e.orgUnit,
-    enrollmentId: e.enrollment,
-    teiId: e.trackedEntity,
-    isEventProgram: false,
-});
+type UrlIds = ReturnType<typeof useLocationQuery>;
 
-const asEventProgram = (e: Partial<CaptureClientEvent>): ResolvedEvent => ({
-    eventId: e.eventId,
-    programId: e.programId,
-    orgUnitId: e.orgUnitId,
-    // Event programs technically have a single implicit stage, but that
-    // detail is not user-facing — don't expose it. Same for enrollment / TEI
-    // which don't exist on event programs at all.
-    programStageId: undefined,
-    enrollmentId: undefined,
-    teiId: undefined,
-    isEventProgram: true,
-});
-
-const pickEvent = (
-    eventId: string | undefined,
-    trackerEvents: Partial<ApiEnrollmentEvent>[] | undefined,
-    viewed: Partial<CaptureClientEvent> | undefined,
-): ResolvedEvent | undefined => {
-    const trackerEvent = trackerEvents?.find(e => e.event === eventId);
-    if (trackerEvent) {
-        return asTracker(trackerEvent);
+// Accept enrollmentDomain only when the URL belongs to it: either anchored by
+// enrollmentId, or (for enrollmentEventEdit which only carries eventId) when
+// the slice owns the URL's event. Keeps us from reading stale enrollment data
+// after the user navigates away.
+const anchorEnrollmentDomain = (
+    state: ReduxState,
+    url: UrlIds,
+): EnrollmentDomain | undefined => {
+    const domain = state.enrollmentDomain;
+    if (!domain) return undefined;
+    if (url.enrollmentId) {
+        return domain.enrollmentId === url.enrollmentId ? domain : undefined;
     }
-    if (viewed && viewed.eventId === eventId) {
-        return asEventProgram(viewed);
+    if (url.eventId && domain.enrollment?.events?.some(e => e.event === url.eventId)) {
+        return domain;
     }
     return undefined;
 };
 
-// Small per-field mergers keep the caller's cyclomatic complexity low.
-const resolveOrgUnitId = (
+// Normalize whichever slice owns the eventId into one shape. Event programs
+// have an implicit single stage and no enrollment/TEI — intentionally left
+// undefined so downstream code treats them as tracker-only misses, not bugs.
+const findEvent = (
+    eventId: string | undefined,
+    trackerEvents: Partial<ApiEnrollmentEvent>[] | undefined,
+    viewedEvent: Partial<CaptureClientEvent> | undefined,
+): Event | undefined => {
+    const tracker = trackerEvents?.find(e => e.event === eventId);
+    if (tracker) {
+        return {
+            eventId: tracker.event,
+            programId: tracker.program,
+            orgUnitId: tracker.orgUnit,
+            programStageId: tracker.programStage,
+            enrollmentId: tracker.enrollment,
+            teiId: tracker.trackedEntity,
+            isEventProgram: false,
+        };
+    }
+    if (viewedEvent && viewedEvent.eventId === eventId) {
+        return {
+            eventId: viewedEvent.eventId,
+            programId: viewedEvent.programId,
+            orgUnitId: viewedEvent.orgUnitId,
+            isEventProgram: true,
+        };
+    }
+    return undefined;
+};
+
+// In an event context the form's own org unit widget wins; outside it we fall
+// back to the enrollment's owner.
+const resolveOrgUnit = (
     inEventContext: boolean,
     formOrgUnitId: string | undefined,
     eventOrgUnitId: string | undefined,
     ownerOrgUnitId: string | undefined,
 ) => (inEventContext ? formOrgUnitId ?? eventOrgUnitId : ownerOrgUnitId);
 
-const resolveTrackerOnly = (
+// Tracker-only ids (enrollment/TEI) are forced to undefined on event programs
+// so plugin code doesn't see stale values.
+const trackerKey = (
     isEventProgram: boolean,
     urlValue: string | undefined,
     eventValue: string | undefined,
 ) => (isEventProgram ? undefined : urlValue ?? eventValue);
 
-type UrlIds = ReturnType<typeof useLocationQuery>;
-
-const merge = (
+const buildIds = (
     url: UrlIds,
-    event: ResolvedEvent | undefined,
-    ownerOrgUnitId: string | undefined,
+    event: Event | undefined,
+    enrollment: EnrollmentDomain | undefined,
     formOrgUnitId: string | undefined,
 ): PluginContextIds => {
     const eventId = url.eventId ?? event?.eventId;
     const programStageId = url.stageId ?? event?.programStageId;
-    const inEventContext = Boolean(programStageId || eventId);
-    const isEventProgram = event?.isEventProgram ?? false;
+    const inEventContext = Boolean(eventId || programStageId);
+    const noTracker = event?.isEventProgram ?? false;
 
     return {
-        orgUnitId: resolveOrgUnitId(inEventContext, formOrgUnitId, event?.orgUnitId, ownerOrgUnitId),
+        orgUnitId: resolveOrgUnit(inEventContext, formOrgUnitId, event?.orgUnitId, enrollment?.ownerOrgUnitId),
         programId: url.programId ?? event?.programId,
         programStageId,
         eventId,
-        enrollmentId: resolveTrackerOnly(isEventProgram, url.enrollmentId, event?.enrollmentId),
-        teiId: resolveTrackerOnly(isEventProgram, url.teiId, event?.teiId),
+        enrollmentId: trackerKey(noTracker, url.enrollmentId, event?.enrollmentId),
+        teiId: trackerKey(noTracker, url.teiId, event?.teiId),
     };
 };
 
@@ -99,19 +122,15 @@ export const useFormFieldPluginContext = (
     pluginContext: PluginContext = {},
 ): PluginContextIds => {
     const url = useLocationQuery();
-    // Gate enrollmentDomain by URL anchor — same pattern as useEnrollmentScopeRuleEffects.
-    const enrollment = useSelector(({ enrollmentDomain }: ReduxState) =>
-        (enrollmentDomain?.enrollmentId === url.enrollmentId ? enrollmentDomain : undefined));
-    const viewedEventId = useSelector(({ viewEventPage }: ReduxState) => viewEventPage?.eventId);
+    const enrollment = useSelector((state: ReduxState) => anchorEnrollmentDomain(state, url));
+    const viewedEventId = useSelector((state: ReduxState) => state.viewEventPage?.eventId);
     const viewedEvent = useSelector(
-        ({ viewEventPage }: ReduxState) => viewEventPage?.loadedValues?.eventContainer?.event,
+        (state: ReduxState) => state.viewEventPage?.loadedValues?.eventContainer?.event,
     );
-
-    const event = pickEvent(
+    const event = findEvent(
         url.eventId ?? viewedEventId,
         enrollment?.enrollment?.events,
         viewedEvent,
     );
-
-    return merge(url, event, enrollment?.ownerOrgUnitId, pluginContext.orgUnit?.value?.id);
+    return buildIds(url, event, enrollment, pluginContext.orgUnit?.value?.id);
 };
