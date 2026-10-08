@@ -1,3 +1,10 @@
+## [107.6.4](https://github.com/dhis2/capture-app/compare/v107.6.3...v107.6.4) (2026-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-22117] Schedule button does not trigger missing org unit validation error ([#4743](https://github.com/dhis2/capture-app/issues/4743)) ([63c6c28](https://github.com/dhis2/capture-app/commit/63c6c28b99c47ac260f578912e67510b25755e14))
+
 ## [107.6.3](https://github.com/dhis2/capture-app/compare/v107.6.2...v107.6.3) (2026-10-05)
 
 
