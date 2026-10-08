@@ -55,21 +55,28 @@ Then(/^the user sees the edit profile modal/, () =>
 
 Given('you add a new tracked entity in the Malaria focus investigation program', () => {
     cy.visit('/#/new?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+    cy.contains('Save focus area').scrollIntoView().should('be.visible');
     cy.get('input[type="text"]')
         .eq(2)
         .type(`Local id-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
     cy.contains('Save focus area')
+        .scrollIntoView()
+        .should('not.be.disabled')
         .click();
     cy.url().should('include', 'enrollmentEventEdit?');
 });
 
 When('you open the overflow menu and click the "Delete Focus area" button', () => {
-    cy.get('[data-test=profile-widget]').contains('Focus area profile');
-
+    cy.get('[data-test="profile-widget"]')
+        .contains('Focus area profile')
+        .scrollIntoView()
+        .should('be.visible');
     cy.get('[data-test="tracked-entity-profile-overflow-button"]')
         .click();
     cy.contains('Delete Focus area')
+        .scrollIntoView()
+        .should('be.visible')
         .click();
 });
 

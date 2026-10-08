@@ -58,6 +58,7 @@ Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) 
 
 Given('you select the schedule tab', () => {
     cy.get('[data-test="new-event-schedule-tab"]')
+        .first()
         .scrollIntoView()
         .should('be.visible')
         .click();
@@ -65,12 +66,14 @@ Given('you select the schedule tab', () => {
 
 When('you add a note to the event', () => {
     cy.get('[data-test="note-textfield"]')
+        .first()
         .scrollIntoView()
         .should('be.visible')
         .type('This is a note')
         .blur();
 
     cy.get('[data-test="add-note-btn"]')
+        .first()
         .scrollIntoView()
         .should('be.visible')
         .click();

@@ -423,6 +423,9 @@ When('you click the cancel button', () => {
 // New person
 And('you are in the Person registration page', () => {
     cy.visit('/#/new?trackedEntityTypeId=nEenWmSyUEp&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="registration-page-content"]')
+        .contains('First name')
+        .should('be.visible');
 });
 
 And('you fill in the first name with value that has duplicates', () => {
@@ -447,12 +450,13 @@ And(/^you click the save (.*) submit button$/, (TEType) => {
 Then('you see the possible duplicates modal', () => {
     cy.get('[data-test="duplicates-modal"]')
         .contains('Possible duplicates found')
-        .should('exist');
+        .should('be.visible');
 });
 
 Then('you submit the form again from the duplicates modal', () => {
     cy.get('[data-test="create-as-new-person"]')
         .contains('Save as new')
+        .should('be.visible')
         .click();
 });
 
