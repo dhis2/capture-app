@@ -1,3 +1,31 @@
+## [107.6.4](https://github.com/dhis2/capture-app/compare/v107.6.3...v107.6.4) (2026-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-22117] Schedule button does not trigger missing org unit validation error ([#4743](https://github.com/dhis2/capture-app/issues/4743)) ([63c6c28](https://github.com/dhis2/capture-app/commit/63c6c28b99c47ac260f578912e67510b25755e14))
+
+## [107.6.3](https://github.com/dhis2/capture-app/compare/v107.6.2...v107.6.3) (2026-10-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4770](https://github.com/dhis2/capture-app/issues/4770)) ([0cb29ad](https://github.com/dhis2/capture-app/commit/0cb29ade83c644a5f21d4af6d0fbbefc4d1a7ff9))
+
+## [107.6.2](https://github.com/dhis2/capture-app/compare/v107.6.1...v107.6.2) (2026-10-05)
+
+
+### Bug Fixes
+
+* [DHIS2-22189] TEI search fails when the first attribute is non-searchable ([#4756](https://github.com/dhis2/capture-app/issues/4756)) ([692b802](https://github.com/dhis2/capture-app/commit/692b8022722969ce615d272cd355d6bdac43fa4f))
+
+## [107.6.1](https://github.com/dhis2/capture-app/compare/v107.6.0...v107.6.1) (2026-09-30)
+
+
+### Bug Fixes
+
+* [DHIS2-21630] program rule assignment in scheduled events ([#4758](https://github.com/dhis2/capture-app/issues/4758)) ([2adfa6b](https://github.com/dhis2/capture-app/commit/2adfa6bd52df7b36fff1a490429c04a5251e8aea))
+
 # [107.6.0](https://github.com/dhis2/capture-app/compare/v107.5.2...v107.6.0) (2026-09-29)
 
 

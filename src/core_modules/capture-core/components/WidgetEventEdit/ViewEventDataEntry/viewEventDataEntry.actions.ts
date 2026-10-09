@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
+import { statusTypes } from 'capture-core/events/statusTypes';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { getTermLabel, LabelKeys } from '../../../customLabels';
@@ -171,7 +172,8 @@ export const loadViewEventDataEntry =
                 currentEvent,
             });
         }
-        const filteredEffects = filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
+        const filteredEffects = currentEvent.status === statusTypes.SCHEDULE ?
+            effects : filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
         return [
             ...dataEntryActions,
             updateRulesEffects(filteredEffects, formId),
