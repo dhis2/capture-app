@@ -71,7 +71,7 @@ const findViewByName = resource =>
 
 const isStaleView = ({ name }) => Number(name.slice(VIEW_NAME_PREFIX.length)) < Date.now() - STALE_VIEW_AGE_MS;
 
-const deleteStaleViews = (resource) =>
+const deleteStaleViews = resource =>
     cy.buildApiUrl(`${resource}?filter=name:like:${VIEW_NAME_PREFIX}&fields=id,name&paging=false`)
         .then(url => cy.request({ url, auth: asAdmin() }))
         .then(({ body }) => {

@@ -295,16 +295,10 @@ export const workingListsTemplatesDesc = createReducerDescription({
             ...template,
             deleted: undefined,
         };
-        const { selectedTemplateId: currentlySelectedTemplateId } = state[storeId];
-        const defaultTemplateId = state[storeId].templates.find(t => t.isDefault)?.id;
-        const selectedTemplateId = currentlySelectedTemplateId === defaultTemplateId ?
-            template.id :
-            currentlySelectedTemplateId;
         return {
             ...state,
             [storeId]: {
                 ...state[storeId],
-                selectedTemplateId,
                 templates: [
                     ...otherTemplates,
                     failedToDeleteTemplate,
