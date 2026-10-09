@@ -21,9 +21,9 @@ type State = {
 };
 
 type Validation = {
-    validationCode: string,
-    validationText: string,
-    error: boolean,
+    validationCode?: string,
+    validationText?: string,
+    error?: boolean,
     valid: boolean,
 };
 
@@ -32,7 +32,7 @@ export class D2Date extends React.Component<Props, State> {
         super(props);
     }
 
-    handleDateSelected = (value: {calendarDateString: string, validation?: Validation} | null) => {
+    handleDateSelected = (value: {calendarDateString: string | null, validation?: Validation} | null) => {
         const { calendarDateString: selectedDate, validation } = value || {};
         if (selectedDate !== undefined) {
             this.props.onBlur({
