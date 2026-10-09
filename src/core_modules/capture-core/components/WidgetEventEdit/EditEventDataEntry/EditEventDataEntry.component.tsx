@@ -397,6 +397,7 @@ const getCategoryOptionsSettingsFn = () => {
         getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
             ...props.categories?.find(category => category.id === fieldId) ?? {},
             required: true,
+            filterable: true,
         }),
         getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
         getFieldIds: (props: any) => props.categories?.map(category => category.id),
@@ -584,7 +585,6 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
                 orgUnit={orgUnit}
                 orgUnitId={orgUnit?.id}
                 programId={programId}
-                selectedOrgUnitId={orgUnit?.id}
                 {...passOnProps}
             />
         );

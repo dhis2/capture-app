@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-29T12:48:58.340Z\n"
-"PO-Revision-Date: 2026-09-29T12:48:58.340Z\n"
+"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
+"PO-Revision-Date: 2026-10-03T19:52:00.618Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -135,6 +135,12 @@ msgstr "Area"
 msgid "Coordinate"
 msgstr "Coordinate"
 
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr "{{eventLabel}} - {{categoryDisplayName}}"
+
+msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
+msgstr "{{enrollmentLabel}} - {{categoryDisplayName}}"
+
 msgid "Complete {{eventLabel}}"
 msgstr "Complete {{eventLabel}}"
 
@@ -160,9 +166,6 @@ msgstr "{{ stageName }} - Assignee"
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Status"
 
-msgid "Please select {{categoryName}}"
-msgstr "Please select {{categoryName}}"
-
 msgid "A date in the future is not allowed"
 msgstr "A date in the future is not allowed"
 
@@ -177,6 +180,13 @@ msgstr "Cancel"
 
 msgid "Metadata error. see log for details"
 msgstr "Metadata error. see log for details"
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - Details"
@@ -412,6 +422,9 @@ msgstr "Some operations are still running. Please wait."
 
 msgid "Operations running"
 msgstr "Operations running"
+
+msgid "Please select {{categoryName}}"
+msgstr "Please select {{categoryName}}"
 
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr "No feedback for this {{enrollmentLabel}} yet"
