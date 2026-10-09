@@ -1539,11 +1539,11 @@ The **tracked entity changelog** tracks changes to attributes of a tracked entit
 3. Click **View Changelog** in the **Tracked Entity Profile** widget to open the changelog.
    ![](resources/images/open-tracked-entity-changelog.png)
 
-# Related stages and linked events for Tracker programs { #related-stages-and-linked-events }
+## Related stages and linked events for Tracker programs { #related-stages-and-linked-events }
 You can connect any two program stages via a relationship. This is useful for workflows where completing one stage should trigger or be linked to another, for example linking a lab request stage to a lab result stage, or linking a referral stage to a follow-up consultation stage. To enable this feature, you can set up two program stages in the same program and link them with an event-event relationship in the Metadata Management app, choosing the relevant program stage on both the initiating and receiving side.
 ![](resources/images/related-stages-mm.png)
 
-## Adding a new tracker event { #related-stages-adding-new-event }
+### Adding a new tracker event { #related-stages-adding-new-event }
 When opening the new event form, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
@@ -1552,8 +1552,8 @@ When opening the new event form, a widget called *Actions - ${Relationship type 
 When clicking Complete or Save without completing, the Capture app will create the current event, schedule the linked event and make sure that there is a relationship between them in the correct context.
 ![](resources/images/related-stages-new-event.png)
 
-## Editing a tracker event { #related-stages-editing-event }
-### When there isn't a linked event 
+### Editing a tracker event { #related-stages-editing-event }
+#### When there isn't a linked event 
 If the event is eligible for related stages but isn’t linked yet, a widget called *Linked event* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
@@ -1562,7 +1562,7 @@ If the event is eligible for related stages but isn’t linked yet, a widget cal
 The label of the action button will change based on the user's selections. When clicking Complete or Save without completing, the Capture app will create the current event, schedule the linked event and make sure that there is a relationship between them in the correct context.
 ![](resources/images/related-stages-edit-event.png)
 
-### When there is a linked event 
+#### When there is a linked event 
 If the event is already linked, a Linked event widget will appear at the top of the page. This widget allows users to view details of the linked event. 
 ![](resources/images/related-stages-linked-event-view.png)
 
@@ -1571,7 +1571,7 @@ Additionally, by clicking the Menu in the top-right corner, users can:
 2. Unlink and delete the linked event.
 ![](resources/images/related-stages-linked-event-actions-menu.png)
 
-## Enrolling a tracked entity { #related-stages-enrolling }
+### Enrolling a tracked entity { #related-stages-enrolling }
 Enable the "Show first program stage during enrollment" flag in the **Enrollment: Settings** section of the Tracker program in the Metadata Management app. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
 1. Schedule a new event by selecting a scheduled date and an organisation unit
 2. Enter data for the linked event directly
