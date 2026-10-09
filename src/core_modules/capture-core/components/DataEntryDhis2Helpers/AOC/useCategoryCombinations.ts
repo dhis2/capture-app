@@ -1,3 +1,4 @@
+// DHIS2-22219: delete this file once event-side AOC reads from `program.categoryCombination`.
 import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const useCategoryCombinations = (programId: string, disabled = false) => {

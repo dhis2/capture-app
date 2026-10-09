@@ -1,109 +1,24 @@
-import React, { type ComponentType, useEffect, useState, useRef, useCallback, useMemo } from 'react';
-import log from 'loglevel';
-import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
-import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
+import React, { type ComponentType, useMemo } from 'react';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useCategoryCombinations } from './useCategoryCombinations';
+import { useGroupedCategoryOptions } from './useGroupedCategoryOptions';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
+import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
 import type { Props, Settings } from './withAOCFieldBuilder.types';
 
 const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<any>) =>
     (props: Props) => {
-        const { programId, selectedOrgUnitId } = props;
+        const { programId, orgUnitId, orgUnitIdFieldValue } = props;
         const hideAOC = settings?.hideAOC?.(props);
-        const [categories, setCategories] = useState<any>(null);
-        const cancelablePromiseRef = useRef<any>(null);
         const { programCategory, isLoading } = useCategoryCombinations(programId, hideAOC);
         const programCategories = useMemo(() => (
             !isLoading && programCategory ? programCategory.categories : []),
         [isLoading, programCategory]);
-
-        const getOptionsAsync = async (
-            category: any,
-            orgUnitId: string | null | undefined,
-            onIsAborted: () => boolean,
-        ) => {
-            const predicate = (categoryOption: any) => {
-                if (!orgUnitId) {
-                    return true;
-                }
-
-                const orgUnits = categoryOption.organisationUnits;
-                if (!orgUnits) {
-                    return true;
-                }
-
-                return !!orgUnits[orgUnitId];
-            };
-
-            const project = (categoryOption: any) => ({
-                label: categoryOption.displayName,
-                value: categoryOption.id,
-                writeAccess: categoryOption.access.data.write,
-            });
-
-            const options = await buildCategoryOptionsAsync(category.id, { predicate, project, onIsAborted });
-            return { id: category.id, label: category.displayName, options };
-        };
-
-        const sortOptionsByLabel = (a: any, b: any) => {
-            if (a.label === b.label) {
-                return 0;
-            }
-            if (a.label < b.label) {
-                return -1;
-            }
-            return 1;
-        };
-
-        const loadCagoryOptions = useCallback(() => {
-            setCategories(undefined);
-            cancelablePromiseRef.current?.cancel();
-
-            let currentRequestCancelablePromises: any;
-
-            const isRequestAborted = () =>
-                (currentRequestCancelablePromises && cancelablePromiseRef.current !== currentRequestCancelablePromises);
-
-            currentRequestCancelablePromises = makeCancelablePromise(
-                Promise.all(programCategories.map((category: any) =>
-                    getOptionsAsync(
-                        category,
-                        selectedOrgUnitId,
-                        isRequestAborted,
-                    ))),
-            );
-            currentRequestCancelablePromises
-                .promise
-                .then((optionResults: any) => {
-                    const newCategories = optionResults.map(({ options, ...rest }: any) => {
-                        options.sort(sortOptionsByLabel);
-                        return { options, ...rest };
-                    });
-                    setCategories(newCategories);
-                    cancelablePromiseRef.current = null;
-                })
-                .catch((error: any) => {
-                    if (!(error && (error.aborted || error.isCanceled))) {
-                        log.error(
-                            errorCreator('An error occurred loading category options')({ error }),
-                        );
-                        setCategories([]);
-                    }
-                });
-
-            cancelablePromiseRef.current = currentRequestCancelablePromises;
-        }, [programCategories, selectedOrgUnitId]);
-
-        useEffect(() => {
-            if (!hideAOC) {
-                loadCagoryOptions();
-            }
-        }, [loadCagoryOptions, hideAOC]);
-
-        useEffect(() => () => {
-            cancelablePromiseRef.current?.cancel();
-            cancelablePromiseRef.current = null;
-        }, []);
+        const categories = useGroupedCategoryOptions(
+            programCategories,
+            orgUnitIdFieldValue ?? orgUnitId,
+            !hideAOC,
+        );
 
         if (hideAOC) { return <InnerComponent{...props} />; }
         return (
@@ -118,3 +33,29 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
 export const withAOCFieldBuilder = (settings: Settings) =>
     (InnerComponent: ComponentType<any>) =>
         getAOCFieldBuilder(settings, InnerComponent);
+
+const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
+    (props: Props) => {
+        const { programId, orgUnitId, orgUnitIdFieldValue } = props;
+        const enrollmentProgramCategory = useMemo(() => {
+            if (!featureAvailable(FEATURES.enrollmentAOC)) return null;
+            return getTrackerProgramThrowIfNotFound(programId).enrollmentCategoryCombination;
+        }, [programId]);
+        const enrollmentCategories = useGroupedCategoryOptions(
+            enrollmentProgramCategory?.categories ?? [],
+            orgUnitIdFieldValue ?? orgUnitId,
+            !!enrollmentProgramCategory,
+        );
+
+        if (!enrollmentProgramCategory) return <InnerComponent {...props} />;
+        return (
+            enrollmentCategories ? <InnerComponent
+                {...props}
+                enrollmentProgramCategory={enrollmentProgramCategory}
+                enrollmentCategories={enrollmentCategories}
+            /> : <LoadingMaskElementCenter />
+        );
+    };
+
+export const withEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
+    getEnrollmentAOCFieldBuilder(InnerComponent);

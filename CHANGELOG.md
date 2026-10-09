@@ -1,3 +1,10 @@
+# [107.7.0](https://github.com/dhis2/capture-app/compare/v107.6.4...v107.7.0) (2026-10-09)
+
+
+### Features
+
+* [DHIS2-21797] Enrollment AOC in the registration form ([#4752](https://github.com/dhis2/capture-app/issues/4752)) ([b66016f](https://github.com/dhis2/capture-app/commit/b66016f54bca4e5afd895f092887b103f222a371))
+
 ## [107.6.4](https://github.com/dhis2/capture-app/compare/v107.6.3...v107.6.4) (2026-10-07)
 
 
