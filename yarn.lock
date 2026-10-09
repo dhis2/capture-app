@@ -1533,15 +1533,15 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
-"@dhis2-ui/alert@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/alert/-/alert-10.17.0.tgz#d856efa437a5829f9e087a2248cfe08a02edd4a4"
-  integrity sha512-088LdXurAz7bFlJLvtrrakWmtHf0RWfNAD6uDh0UR5vTntUCDZTFlACnjwJXlhaZ07mewHhj0v17gRXY+hkHJg==
+"@dhis2-ui/alert@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/alert/-/alert-10.19.0.tgz#3d64bad6e66c7c6819932bcabfdfdfc72ab49e58"
+  integrity sha512-n1FG5MaQa0a5sMXBa3x1BVYjqLoZoyJr8YOEtaLhgZQ3FJxcp+cFhgGx5iJFkD+DgS2aHVlQ1dlMcgwePw7ELg==
   dependencies:
-    "@dhis2-ui/portal" "10.17.0"
+    "@dhis2-ui/portal" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1552,6 +1552,16 @@
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
     "@dhis2/ui-constants" "10.17.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/box@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/box/-/box-10.19.0.tgz#f096c97bee82088ac682b8fde5376690211d76be"
+  integrity sha512-Jzqf1gtse0cSEu2gGc7re9RGlkLFiBS8E/7YXFTOnApRfb2Hhup9WKWnBz98CZeeUpW/6uJDrtZZnCTtg+M7Rg==
+  dependencies:
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1569,7 +1579,21 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/calendar@10.17.0", "@dhis2-ui/calendar@^10.17.0":
+"@dhis2-ui/button@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/button/-/button-10.19.0.tgz#b663bd99c02f782eeed8f197c8168942a86ebe2d"
+  integrity sha512-QkgjEN3Kc+o/+YrtjL3lBZG91t1K3sdYwhs0dkZL2Pq/qcQcH6ycijAs6FHKfLaXWhL+kMkmQHI65jDD+7rDtQ==
+  dependencies:
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/calendar@10.19.0", "@dhis2-ui/calendar@^10.17.0":
   version "10.17.0"
   resolved "https://registry.yarnpkg.com/@dhis2-ui/calendar/-/calendar-10.17.0.tgz#426f32e6eb7a8be9d38cb69d0f1c54863140f159"
   integrity sha512-hMEMr+P0HHsitUFdN8wLFOkXxN8MGN1p5Nyrd5c4WhOOKrgwDNu2bqL1VSpWNVzrNNP314uN/BsfP/WiBAWrcw==
@@ -1596,65 +1620,75 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/center@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/center/-/center-10.17.0.tgz#3dc5787a4050dcf339a135425c71f0953a80d150"
-  integrity sha512-jp8x3mUKBQYAR5rdb6XiCzei7FaIFBmgkl+ky9gwlx842vJTL8Y6ws9cXvHaitwRPSZaek5HRQNeNbFQrksA5A==
+"@dhis2-ui/card@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/card/-/card-10.19.0.tgz#bf4b0debcff3dbce225d5490abce708a989062bb"
+  integrity sha512-f5SWdW5k+hV8e8mI7uq0WiAhE+FcknRhK1KEEBQUBwEFCNPMteY2Ggp8f9VFu+OzFLDzrYaSCAmq7gwYRWnd0g==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/checkbox@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/checkbox/-/checkbox-10.17.0.tgz#52dd8210ac3aaaf6972d5b9c2d0fa862759173ee"
-  integrity sha512-JA8Wlk4rfEexuqqUc7/6+y7LhmzOH8o5OkvAKHJIgtnt/rMFzNIdXCSYZj7WJkty4zXKAFq6+oWcF3RnANLLng==
+"@dhis2-ui/center@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/center/-/center-10.19.0.tgz#7f38e8f5a868b874c30abbd17d50ea33ee072580"
+  integrity sha512-Hu/Y9Y6ld2j/qeeMcV+45C5TbVotBqSqB0toPrnSARTYQjdkrBMi9Z90lLptlgJm3zdJKEMwgGqDzJVDOq5HCw==
   dependencies:
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/required" "10.17.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/chip@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/chip/-/chip-10.17.0.tgz#30525c6d0df5cab56f9092cbe54d12c8798b6e89"
-  integrity sha512-+xcjo0CgSZakBISlx2grXW1PQNhYM+e2WMOOr5+vRT0K6ExyC0FCjPSbH4vvb0FlSFL/P2ph/uWS7zsKAd2GgA==
+"@dhis2-ui/checkbox@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/checkbox/-/checkbox-10.19.0.tgz#3f0f437027d21ee7b82429349dae418598f0b456"
+  integrity sha512-+ERX9pKWhyE+u3yqLzPxpizkBdbcMBCG6iWNCS1VkLjibK9M1wXrLEWN3r19VEbdIciij/SxkscIO/SehFIgCw==
   dependencies:
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/required" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/cover@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/cover/-/cover-10.17.0.tgz#496aafb24e482c0c843e94f4c553f2609cf03d3d"
-  integrity sha512-46vQBF/h3i+Aw8YrsWYe0fMCfd8vTi7LcygFekC4AF91vlp9HwRvn/gGob9vAL9n+WIaN+Iz8ha98o0uQMhWyw==
+"@dhis2-ui/chip@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/chip/-/chip-10.19.0.tgz#7551e701a4ea9929183676bf21c315884b9de841"
+  integrity sha512-QuVHxjPcG/FwuXWhA9By19ZM/DMl2dIjSUKlARQas2eAMB5X9v4XFfeXfBMimBrct4evOvnNdKwnte3NMN8iMA==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/css@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/css/-/css-10.17.0.tgz#aa4d71b233a795417a677fef23a5972adc1a7a6e"
-  integrity sha512-aE7wiqfI2hLBsUPHeFbo9CFBoJVjtRhAkU1UK6KB5XpGkA7f4RUJk6vdZzt/aK7xXextbdDWTC9aZqw1t5v70A==
+"@dhis2-ui/cover@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/cover/-/cover-10.19.0.tgz#08bdd464aea12294404eb946363cea318f032706"
+  integrity sha512-C+kCgyl9Od4v5hz5BcSRJihea2RT3Qiv+nZeuuDC3Pm4ZQcu4aW+vMC/GoZ6UumkQVrEiHlgj9Yn2AH2Iznrlg==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/divider@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/divider/-/divider-10.17.0.tgz#28913b2a56a3fb0e5b62aa041e55d301990c5d03"
-  integrity sha512-4CxA0pO68rGHLrXVXrJx8McnDUOqOlrvbGzYpNpZPZdfRIVH1640eAvhn9OB+0Ly1VfJiZsSwzj9TiN9FhHcTQ==
+"@dhis2-ui/css@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/css/-/css-10.19.0.tgz#75301d85510e8eb2adbecafeb4afd8aef3013c36"
+  integrity sha512-JTiju8B7nXnvr4SW1WKuX7WiQZtJ7H1C/E56zRSTDZ3SgJmmlV2PTYThDQQTt2MxwlcCX1rhvfrN9O23FPXWCw==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/divider@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/divider/-/divider-10.19.0.tgz#037faf25395d995f959cf8b7a7e2a8ec73f3edf7"
+  integrity sha512-N+SrUTd03U25QYLfy9QPWH9AdKwkZ4OqPIRGzMN2OHPDTCCFP+A1t88AY8mVtcvTrMqdkig5Jnp5oLTNdzM2IA==
+  dependencies:
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1671,42 +1705,55 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/file-input@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/file-input/-/file-input-10.17.0.tgz#b335c77caaf9e3f6fa9cc47d71e7e0d69bb6d4dd"
-  integrity sha512-0B1Qi9WPQyeWueW00U2EIfsVM7h8BT5dBoa0kdYPCVoIhMp7YlwN/umJecNxu/LF+2gxH7Zg+5uf004XQlDwQA==
+"@dhis2-ui/field@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/field/-/field-10.19.0.tgz#7ca0446e717e710af49ee443048976f54958660f"
+  integrity sha512-DJhboQYW3OIzRoZ0apr7qfmt0Q+oEOf3mIBkWc1WrhU73LW9mUvS4mLM9052X/9khdbBDXExXYjPOw2U1013Pw==
   dependencies:
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/label" "10.17.0"
-    "@dhis2-ui/loader" "10.17.0"
-    "@dhis2-ui/status-icon" "10.17.0"
+    "@dhis2-ui/box" "10.19.0"
+    "@dhis2-ui/help" "10.19.0"
+    "@dhis2-ui/label" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/header-bar@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/header-bar/-/header-bar-10.17.0.tgz#72c653b3f22cae747de6f6fd235f6a32324596cb"
-  integrity sha512-WAZINFQGrlQ22FbhgvaFne0q/zWZ9GV9vKOQBfHmXXK+1f/javZqsKVwI5w1xzl2GyIsZ5RjlAh6AQ0kXUpAHg==
+"@dhis2-ui/file-input@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/file-input/-/file-input-10.19.0.tgz#f7a50af2acde05759b25650aab616ffc59579708"
+  integrity sha512-7S1rAn4UVSAnLQ0/9GP2qXl6tjPrztbrXH5HaucrcZWcRcB8Psf9Gt2UsAhEWqfWpyLSF4cz+mN9VLWzDJevWQ==
   dependencies:
-    "@dhis2-ui/box" "10.17.0"
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/card" "10.17.0"
-    "@dhis2-ui/center" "10.17.0"
-    "@dhis2-ui/divider" "10.17.0"
-    "@dhis2-ui/input" "10.17.0"
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/loader" "10.17.0"
-    "@dhis2-ui/logo" "10.17.0"
-    "@dhis2-ui/menu" "10.17.0"
-    "@dhis2-ui/modal" "10.17.0"
-    "@dhis2-ui/user-avatar" "10.17.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/label" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/status-icon" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/header-bar@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/header-bar/-/header-bar-10.19.0.tgz#91a745837215b8ca990e26205a3437de8010a869"
+  integrity sha512-EYrOseiddbJv4il3QFI2J0U8dyl7yESF33yaM15lsT1mH/XAmUPwtn5c7DproUblgXO9gGvsijBdIRR3XsKJjg==
+  dependencies:
+    "@dhis2-ui/box" "10.19.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/card" "10.19.0"
+    "@dhis2-ui/center" "10.19.0"
+    "@dhis2-ui/divider" "10.19.0"
+    "@dhis2-ui/input" "10.19.0"
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/logo" "10.19.0"
+    "@dhis2-ui/menu" "10.19.0"
+    "@dhis2-ui/modal" "10.19.0"
+    "@dhis2-ui/user-avatar" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     moment "^2.29.1"
     prop-types "^15.7.2"
@@ -1718,6 +1765,16 @@
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
     "@dhis2/ui-constants" "10.17.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/help@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/help/-/help-10.19.0.tgz#370b2ebd1901a717440a01b82a1c302ea288ea6d"
+  integrity sha512-2Nghl2ajkvUXgTYJvyIqyWvirafulSnmUBQRZkNBBr0qYnAWO6GyEQMpz7LtvdoHZc+7gBLVTx3z6smametYCA==
+  dependencies:
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1737,13 +1794,29 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/intersection-detector@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/intersection-detector/-/intersection-detector-10.17.0.tgz#9cc9d2bfa29df33d642d8f1a01ba7c81fba141be"
-  integrity sha512-RAixR7I1C82WeLhlRbmU0nm4pnxcWniQYI5JhA1DI3GZccqAziz8KMETMlaH3x2lM9CRPvlURzRxg8uG4bxSeQ==
+"@dhis2-ui/input@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/input/-/input-10.19.0.tgz#e59bd77e40f3f3f0086623d507c91c93f27cb62e"
+  integrity sha512-A5iZ/CQARWCdrdsYqQslBgBDshDvnWqT296qpUKvxKaFfkPd5ytOHc8exSPozTtUIZqOfKYiwMnhfSk7V5QE3Q==
+  dependencies:
+    "@dhis2-ui/box" "10.19.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/input" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/status-icon" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/intersection-detector@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/intersection-detector/-/intersection-detector-10.19.0.tgz#5e1686a8d7f9040a0444ecc859a4b74154c8e37e"
+  integrity sha512-tTK61/REVr9Dgxf7UUYT9JZzsRLVgpbmecRs4H2SHWGAvgySHCsu1wBpKNKwlJGqT0ypgxO2ERVQGKZkG7EkoA==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1758,6 +1831,17 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
+"@dhis2-ui/label@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/label/-/label-10.19.0.tgz#d42078b7e5a9cc18dbf1cddefa69a0ce956a8f82"
+  integrity sha512-LcXGzrtKVeARb+89e9H+lOjWwE2zhKCPC7ZIP6WdVGFWNlKES4FD5M9akgLC5X2rl+iH7HOyP0n5cj0HTzysNg==
+  dependencies:
+    "@dhis2-ui/required" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
 "@dhis2-ui/layer@10.17.0":
   version "10.17.0"
   resolved "https://registry.yarnpkg.com/@dhis2-ui/layer/-/layer-10.17.0.tgz#af4a1d3ab4bf00baa2c2caa1dec8878b8e92daca"
@@ -1769,14 +1853,25 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/legend@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/legend/-/legend-10.17.0.tgz#02b2ccfb05c6edc3ae5a1664bd2397cce7eb0b08"
-  integrity sha512-RzsFUdKzfgYNyMez8B+N25JshM3+777QK7qqNHJr+KrNKGXSCI+FvtCBeBnElAis1IL1VPeyYUWI4xaOhCVlrw==
+"@dhis2-ui/layer@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/layer/-/layer-10.19.0.tgz#92c1a99d608ffa21e2d92e7037dc384dcf434359"
+  integrity sha512-0y2f/ir2gD/MJeL7bz3qBYxbEZhiZoEc0TARPz2zucClKXPMucKd0MxbIIqV8l7DzPSLwpDxxkDPb0cJ7ixYDw==
   dependencies:
-    "@dhis2-ui/required" "10.17.0"
+    "@dhis2-ui/portal" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/legend@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/legend/-/legend-10.19.0.tgz#3438a7e08c41472a903da53ee86ad398f601867b"
+  integrity sha512-d2Ri104w8feBynmAqBFT6CFXbQqz79TpraZWJ9qRLCovbqfCjwVtQgl+kksA4c9i9Nxq4codBfDPuhTrvl09Fg==
+  dependencies:
+    "@dhis2-ui/required" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1790,105 +1885,115 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/logo@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/logo/-/logo-10.17.0.tgz#a0c57aadfb104026ad0868da6bdc91614ef014a6"
-  integrity sha512-aWe/7FZw9tRpKozCMwS+XAPb0weM0HRqpn+8pcTsKTFZ7B7HaPUXVtxzwNLp/4rOcuLeOzqJv9cJape9V5ju/g==
+"@dhis2-ui/loader@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/loader/-/loader-10.19.0.tgz#8471561abd7528dd7eb2d1a60cb29f55f5c38bbc"
+  integrity sha512-ImdIET08CIlLBFssVEPXqbVFSsXAanjWenof8jx6nLpAAbcyfpKjtgLB19cdUpbKVC4RuVW/ccmv/9TTPfdXGQ==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/menu@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/menu/-/menu-10.17.0.tgz#cfc0a647ae405731c952f613d518c4ef20c9e819"
-  integrity sha512-p2gR9A9YY5hzGl7uc2GgUNf+duxopJLCwdqAHWXeFG/fMt9U6X+5gE0SUSE70iksWet+l1wkgLBagsk/ZIZu0g==
+"@dhis2-ui/logo@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/logo/-/logo-10.19.0.tgz#5aa74f4623b6b95634274e33eb5bfd1848368bf5"
+  integrity sha512-ZNO8JkRpufHDWa8KsUCn/KeQ0KXzJPMj1g0F2ytqUT6z/2PDANmQsQWEL3NRUVmomn/c5QjPEBsc/NXZPt43SQ==
   dependencies:
-    "@dhis2-ui/card" "10.17.0"
-    "@dhis2-ui/divider" "10.17.0"
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/popper" "10.17.0"
-    "@dhis2-ui/portal" "10.17.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/modal@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/modal/-/modal-10.17.0.tgz#c99208b009f33d725927c24576eadef813360c9a"
-  integrity sha512-BmG/3hz+mv2dv7voN/sOmD8EnQWqazcwllqemTZ/Uix2o6qadUgjJXEfho/IvsRDumiZytKLa74J41vau2+ypQ==
+"@dhis2-ui/menu@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/menu/-/menu-10.19.0.tgz#88e10ee57b57c85b5bbedafa5e17f79ebfe44545"
+  integrity sha512-A3DasaqLscHmoEnlQTn6Hj14q5lwbV9i0/+9md4uwlL/UtnBeIXA6T7VLNdY+Y8NMvf6jRFlJdZpzx7/3feTBw==
   dependencies:
-    "@dhis2-ui/card" "10.17.0"
-    "@dhis2-ui/center" "10.17.0"
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/portal" "10.17.0"
+    "@dhis2-ui/card" "10.19.0"
+    "@dhis2-ui/divider" "10.19.0"
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2-ui/portal" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/node@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/node/-/node-10.17.0.tgz#e8b293e23aaa71efac2ad266903059e580c823fb"
-  integrity sha512-QWcl7zP12l2BDl+9+nsnQ/G5iGpZsBxEzZWfWgYzPijMoG8ZUWv0vCR21iMccorp+Si8yHxFFxel/tix5NQjEg==
+"@dhis2-ui/modal@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/modal/-/modal-10.19.0.tgz#80f0f3b479e2aac8db67877288dd25678709c276"
+  integrity sha512-7wd6/LiLQ14jVZSsGrF3+kGr0vbchEWZ7abJl+/Yx7UXaFxmR8o1WAGEiOLW7sG7qctpw9LofNSav/Pd7cti+g==
   dependencies:
-    "@dhis2-ui/loader" "10.17.0"
+    "@dhis2-ui/card" "10.19.0"
+    "@dhis2-ui/center" "10.19.0"
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/portal" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/notice-box@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/notice-box/-/notice-box-10.17.0.tgz#cd6568e235a3f8ca84185400427267bb271772e6"
-  integrity sha512-fW4pAj6tP7g6ojajEJRUvxlibBXncrHl/BWyhhUyI/SzihZpNXmzH6Ha5+dn7PMNXvpri270jce/LQo80rD8Ug==
+"@dhis2-ui/node@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/node/-/node-10.19.0.tgz#f506f7753de1a7c76bacaeff82a58de58955edce"
+  integrity sha512-12RNUSM3WZsMU2T+30av8hxet9cYQxw7Giyiyph1OFz4L4Li8CdLY6EXVSPFCtICuy7l9T1kZ/bP+xXc8gU4/g==
   dependencies:
+    "@dhis2-ui/loader" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/organisation-unit-tree@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/organisation-unit-tree/-/organisation-unit-tree-10.17.0.tgz#b07b577d7d329d46bc6012d21345c067165073a7"
-  integrity sha512-vQR6k7nH42hnm0MWz/t6slWg0c8FMtPjyiojT63919EOLvcDc7PEmZXXxRHqQU1djyGtwSKOrckc8vz8iSTo0g==
+"@dhis2-ui/notice-box@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/notice-box/-/notice-box-10.19.0.tgz#6fc751f7b58e9d78595511c2ceeab86ccf6ac872"
+  integrity sha512-/z0C7XjCAHRLtq+BdDOU8t+oXHwn4zIpDc3x9hUyC8+sBLKw9JITGW6qxqmsqnuPyAW2XlA51mpuhgErXeaOtQ==
   dependencies:
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/checkbox" "10.17.0"
-    "@dhis2-ui/loader" "10.17.0"
-    "@dhis2-ui/node" "10.17.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/pagination@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/pagination/-/pagination-10.17.0.tgz#da9a92cb8654af161c4f9a36a7113da04f8bd6b1"
-  integrity sha512-i8pw6QIS+Wzgv87lR0MRMTIsDXX1Oj5fzqoFfFgYkuxsqZ1X83Beb0rsXknNiktC2xp+5lNPf9VXo1+yk2MlNQ==
+"@dhis2-ui/organisation-unit-tree@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/organisation-unit-tree/-/organisation-unit-tree-10.19.0.tgz#d15b98b41251b3ef436b2afe46440060c6889f23"
+  integrity sha512-UhWaNHFeJcYwHQt1+bseI2PG4bh/VRe9OU7f0oNJLS5e8M6aOxJSsWUg35RPUPYSGKMgtDM9sIzy0LeisCoi8Q==
   dependencies:
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/select" "10.17.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/checkbox" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/node" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/popover@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/popover/-/popover-10.17.0.tgz#a543f44d7b593650c29986a01acc3d7998806fa8"
-  integrity sha512-eyVADf3JzD8oCKpDqWh6NEQpVu6jjHD85XmL9UFo01ux/0v7GlOpaADTVERwpUR4W7hEJhsHj4acR0SA0DuOdg==
+"@dhis2-ui/pagination@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/pagination/-/pagination-10.19.0.tgz#143fffa73aeba591f083a2c5565ed49c46a9758f"
+  integrity sha512-L+Up1Vaa0VNbwb5UTnH3lWG5qgiGXe304jDXRvqZvj4zCdTdVApryRRWqFHdlJNNmt1csU+Zt7xlV3Q/8Ww5bw==
   dependencies:
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/popper" "10.17.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/select" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/popover@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/popover/-/popover-10.19.0.tgz#abc7e7ba3ddf69fa952a61b134f4aeeec7d205fa"
+  integrity sha512-ySRmvhhRvKreyDYG6ClnNQs6kD3VFBLmS7+OaKlG3kdwTPrbWC/2RFoZ3v1bL+Fwq8k0Mdy1vdCwmQpwIJZ9hw==
+  dependencies:
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1905,6 +2010,19 @@
     react-popper "^2.3.0"
     resize-observer-polyfill "^1.5.1"
 
+"@dhis2-ui/popper@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/popper/-/popper-10.19.0.tgz#f6e504c59923d943e1ac84c3060f5bd76c68be5e"
+  integrity sha512-I0MrF7gOvuCYpqoZch6+vHppfXwY1XJ/g+lAsPLgOHbq9CaFrWtY4Y+lTZyA/38Ez+LtaxGsuR89jB4hEHgOng==
+  dependencies:
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
+    "@popperjs/core" "^2.11.8"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+    react-popper "^2.3.0"
+    resize-observer-polyfill "^1.5.1"
+
 "@dhis2-ui/portal@10.17.0":
   version "10.17.0"
   resolved "https://registry.yarnpkg.com/@dhis2-ui/portal/-/portal-10.17.0.tgz#b9f19f50625bdab61242f0225e97ea67dadcebd4"
@@ -1913,13 +2031,21 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/radio@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/radio/-/radio-10.17.0.tgz#95f119fbf55972d1c4756d4b302b04ab8fac42e9"
-  integrity sha512-8CIvwzoAIpQguV1m91EBvskMBBZT14BjeJ13gtXctTnM5dvENhQaN7W31MZYQ0hND6l4V3tMd5FmXiEjm/VITw==
+"@dhis2-ui/portal@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/portal/-/portal-10.19.0.tgz#0681f4f7d93464d05b0e163e239a3bfb105b420f"
+  integrity sha512-xFYYsifFXai/ltC87YI8Gu+OaS98g/gExwSf5iXj/xPyboF2fIxS3Fi6wPJhBT+AOuWFdg0LvJJIF8lPx6D2xg==
+  dependencies:
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/radio@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/radio/-/radio-10.19.0.tgz#800028c527571b9702ee15e2ee65f75ce082e055"
+  integrity sha512-TRoq1dREnm/cyuiknP9Ifz0ShlSqx8t2dR+urop8LeDegBY77Q6Nj0bmee0ZSX1fdIMqvApL/dzoACiWJdB5XQ==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -1933,75 +2059,85 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/segmented-control@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/segmented-control/-/segmented-control-10.17.0.tgz#84b136b4f5006f7d7f762738c1002777e6295c94"
-  integrity sha512-mrW1t3+IvgK8C/a993K5zMBS4cd40AnevZ3Ygk7oGE0mgwdNMDYCrbboiX3SMF3LO6r4iWUJcCouBTWRyRYOlQ==
+"@dhis2-ui/required@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/required/-/required-10.19.0.tgz#192000eca4a3ad7d63a0d82f33931bc2f6c32ae6"
+  integrity sha512-6mN6S8HWpMpMBlJWFAEtrnPE5howTjGiBUlTfH5HN12VapRPVqfzEiirKnpSHiSWx3dke/eNiZ1eQ8CbPR8QfQ==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/select@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/select/-/select-10.17.0.tgz#f1239a02bf740fd75b087079f196cf52e53ee8a9"
-  integrity sha512-08oVhvhmjkVMUYjVwOUzQx+WMRV8iKdzP1NdJHfwaAycx9i32Wa5Egnjq4cJKTGEPMq1hGh5peoOLYeyYCsB8g==
+"@dhis2-ui/segmented-control@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/segmented-control/-/segmented-control-10.19.0.tgz#cb07d619f0aa09aaa312a0d1c6e4a00dbc8160b0"
+  integrity sha512-gqBEc320hGF7H8O+MeudDcXmYd8xdoHc+WPvRHmaPj2LlsJkB7/xPWyFghKQV6e64P0DVwKSZ99fpNZH8fFv/g==
   dependencies:
-    "@dhis2-ui/box" "10.17.0"
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/card" "10.17.0"
-    "@dhis2-ui/checkbox" "10.17.0"
-    "@dhis2-ui/chip" "10.17.0"
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/input" "10.17.0"
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/loader" "10.17.0"
-    "@dhis2-ui/popper" "10.17.0"
-    "@dhis2-ui/status-icon" "10.17.0"
-    "@dhis2-ui/tooltip" "10.17.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/selector-bar@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/selector-bar/-/selector-bar-10.17.0.tgz#d27862a5417437842720f8e9efee53dbc435cbf5"
-  integrity sha512-D4pJKtfo6Dtg3CD6ZpXTKJgrKQcrcCjUPQv2On6ce8u+PS3F57jQj8EBU2QpDyM+uachPPUXBNVil8J0PuFFvg==
+"@dhis2-ui/select@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/select/-/select-10.19.0.tgz#1f80446a64fb13428e54e2a63b07195b5ffe1074"
+  integrity sha512-kzdvoJr6nIz/llBxLP4vQUN982mVp4f2MGxGU7/s9liVusQ1WffTRPADmXPEbJXiAvY5AkjpPgDnDCHtz+9bZg==
   dependencies:
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/card" "10.17.0"
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/popper" "10.17.0"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2-ui/box" "10.19.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/card" "10.19.0"
+    "@dhis2-ui/checkbox" "10.19.0"
+    "@dhis2-ui/chip" "10.19.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/input" "10.19.0"
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2-ui/status-icon" "10.19.0"
+    "@dhis2-ui/tooltip" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/sharing-dialog@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/sharing-dialog/-/sharing-dialog-10.17.0.tgz#1ef8d98d64bc4612678321565b92b7c1de6e66c2"
-  integrity sha512-2syg0+nnjgG56ftYcMCKDdM2r3gO5ahqAtO4J6wOi+mBwqiTvIyy+zvpJxo8cX2/gLlDq40n5cGxuknvigrZNA==
+"@dhis2-ui/selector-bar@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/selector-bar/-/selector-bar-10.19.0.tgz#c131f86d8aa462a81222751ff14bff733e27ecce"
+  integrity sha512-sTNry21D1Y8ZkVdE6UJJLGh+GSpDmfsz2AOR6imOPcVVbEo/CrkP8EsZ2GIAWKakDi6Zs3YJzmVjW+W6bPkzGA==
   dependencies:
-    "@dhis2-ui/box" "10.17.0"
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/card" "10.17.0"
-    "@dhis2-ui/divider" "10.17.0"
-    "@dhis2-ui/input" "10.17.0"
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/menu" "10.17.0"
-    "@dhis2-ui/modal" "10.17.0"
-    "@dhis2-ui/notice-box" "10.17.0"
-    "@dhis2-ui/popper" "10.17.0"
-    "@dhis2-ui/select" "10.17.0"
-    "@dhis2-ui/tab" "10.17.0"
-    "@dhis2-ui/tooltip" "10.17.0"
-    "@dhis2-ui/user-avatar" "10.17.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/card" "10.19.0"
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/sharing-dialog@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/sharing-dialog/-/sharing-dialog-10.19.0.tgz#db1c7917a7e1e27eac56495f2bbc138a50a092ea"
+  integrity sha512-bryJFOdoJ9d6zSbhOqqJuRuwLcYk/1rjbqzA4bFoaGzRU4P9TcmYRfyp3lIsb05H4XRojgjuzk7TrpOgw7MQmw==
+  dependencies:
+    "@dhis2-ui/box" "10.19.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/card" "10.19.0"
+    "@dhis2-ui/divider" "10.19.0"
+    "@dhis2-ui/input" "10.19.0"
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/menu" "10.19.0"
+    "@dhis2-ui/modal" "10.19.0"
+    "@dhis2-ui/notice-box" "10.19.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2-ui/select" "10.19.0"
+    "@dhis2-ui/tab" "10.19.0"
+    "@dhis2-ui/tooltip" "10.19.0"
+    "@dhis2-ui/user-avatar" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     "@react-hook/size" "^2.1.2"
     classnames "^2.3.1"
     prop-types "^15.7.2"
@@ -2018,101 +2154,114 @@
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/switch@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/switch/-/switch-10.17.0.tgz#c85de30b4f7b216da105b6a74ef0fa8d86e47798"
-  integrity sha512-H20QKOUthIKUmdOYMKDf70c8CqYjeCpHyHK2oZ5vEsB+6rZmpyc8suPwraOYs0pQKJNgXE+KGqLOigCHp5++Ug==
+"@dhis2-ui/status-icon@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/status-icon/-/status-icon-10.19.0.tgz#470c074d360d49d0b09678acfc15739763eb1f04"
+  integrity sha512-kOvDjsseCm9oCntAOkslwlf33r1qoM8DAurX5kVp/WvYo0F6aqqmCHoEkrrsekbQc/AFT8x60wzTrBdaIpzg6w==
   dependencies:
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/required" "10.17.0"
+    "@dhis2-ui/loader" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/tab@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/tab/-/tab-10.17.0.tgz#2c9a14deb6c4d312d5c1ddf7bc0542e4290cafea"
-  integrity sha512-TN5LMeQ76U7W9UMHmNVcPuzKyemp0wM3W48vyz3HEIb6IL+/bCi+1E7QaH1e6C4SFlCCFGvtRaivCXYJwAHz2g==
+"@dhis2-ui/switch@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/switch/-/switch-10.19.0.tgz#97edef7c5dc77a3349a439221f29715d8123718a"
+  integrity sha512-ZgWvjL5gwizm2g9e1WiV/QuLLYDpK/+4HVRfEqqyN7P6gP3fi51X+FckAI9B3deA3i9HbiHvbmppAC4of4C1Nw==
   dependencies:
-    "@dhis2-ui/tooltip" "10.17.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/required" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/table@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/table/-/table-10.17.0.tgz#1d10278bbd8b5c23e568f6b6344bd4e17d427848"
-  integrity sha512-68ZobaCSeTHnk9uuy97kCUgu2RM4P6idLMjKXEswRlFovb7F8p+fwYfLi+tFe7xs1/Znhvnv8ZWsafapH/eZpg==
+"@dhis2-ui/tab@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/tab/-/tab-10.19.0.tgz#f6e672c36d2cbc60ccbb829456af93394d41cf20"
+  integrity sha512-BRH9faoG3MBNAQZxupeJAenDu3/5ALB/z6+9n5Y6MI5ltDlWAaNmdDnB5HjEZYDwDhpHaIJgp7ALzqcGhvlAPA==
   dependencies:
+    "@dhis2-ui/tooltip" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/tag@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/tag/-/tag-10.17.0.tgz#fcafb6520788aa45376392f66d20fb53fb3897f0"
-  integrity sha512-O9KcXlrA7/9js18BIvhxp1PROSKSa30IH5i6lUTEAPagjIcKAK82oSUAXN2QLSkFAfwmF2sxEqQZ9W7L94U0TA==
+"@dhis2-ui/table@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/table/-/table-10.19.0.tgz#dd4dde44bd83f8c2523e6374ed86fc97fb323f34"
+  integrity sha512-VTc7ZNfVvU0vF5DGieSxByvGyo+8Qx/1TCd5X4OJ3mDERmcduF7e3GycwsCHAroTv/h5P18XdCBuM0CO5mXC0w==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/text-area@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/text-area/-/text-area-10.17.0.tgz#fd2979d698146b0f4e77ba88750ea599ade4d19e"
-  integrity sha512-kfUlkoVInWyENi7rvYaOU26CpdsiP42/zjpPESd+LhYGXSlO1qeVmi4UhGM/AziORHCdFr2DaEyR39hEf/Jrxg==
+"@dhis2-ui/tag@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/tag/-/tag-10.19.0.tgz#e965c9da1fe824a459abc55c9a6e38aa28955bc7"
+  integrity sha512-xxPx5R1etJbEngqpsGkUHKOm8pmTwNEQge8Rrm5tL4Fok+y8rLo1QUO8270HsX663XlvAVMsaW335Xt+Bg6ZXA==
   dependencies:
-    "@dhis2-ui/box" "10.17.0"
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/loader" "10.17.0"
-    "@dhis2-ui/status-icon" "10.17.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/tooltip@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/tooltip/-/tooltip-10.17.0.tgz#0df67c237c5503a503c5d6dce9b44d5f661f2d4a"
-  integrity sha512-7K/QXbl7ehJV3MhkZ/PtPEoVO2y/1Jr8z0/SEt0osddwCzf3amlYMSsE6s8s5r9n7H8KdhADyNLFsxhS/xTLXQ==
+"@dhis2-ui/text-area@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/text-area/-/text-area-10.19.0.tgz#b72f3172e76c9ae152a1234fff1edfb92e30816a"
+  integrity sha512-qike3KtY4Cua67n06ldK3bXaiuON23Kl546GqNA0jGa4bFumt3j1J3PG/TgavSphKmRR9cIoR5FHUcD2rtAKzw==
   dependencies:
-    "@dhis2-ui/popper" "10.17.0"
-    "@dhis2-ui/portal" "10.17.0"
+    "@dhis2-ui/box" "10.19.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/status-icon" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/transfer@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/transfer/-/transfer-10.17.0.tgz#574d4703b41a93595b68047c9d4019c311560f7f"
-  integrity sha512-OAV2Gtejr9E56PUhNni5fcjfUEr9DdKaYZSoAORWnYO/aL/kY5nULYIhzWyifa34/fhKTj0wkVtP5AWllf4ugA==
+"@dhis2-ui/tooltip@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/tooltip/-/tooltip-10.19.0.tgz#fe40354bdfe166e8ff8dca0624cd8c85c22cc960"
+  integrity sha512-+GMfbvr4A/spQo0mC+MXah4nxAwlAcHtw5AkFqNM80J/uDGrHaPkjLP+wyN1dR9r2S2mOIBvYD6fm2/EBALOdA==
   dependencies:
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/input" "10.17.0"
-    "@dhis2-ui/intersection-detector" "10.17.0"
-    "@dhis2-ui/loader" "10.17.0"
-    "@dhis2-ui/tooltip" "10.17.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2-ui/portal" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
-"@dhis2-ui/user-avatar@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2-ui/user-avatar/-/user-avatar-10.17.0.tgz#6fe036010fd66207b98cc00cc8fac0059e4d157a"
-  integrity sha512-Guoc/1ms6gpMq1vHDoBs7c2JvYWP0xRKEuYJMHKFN3mEkoQIdRCcrpbej67b/4ufoDWpjOVGpsZ4HGil4SmfJg==
+"@dhis2-ui/transfer@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/transfer/-/transfer-10.19.0.tgz#26af855fc06a33c5df7a9ea857c8082d582358fb"
+  integrity sha512-JwrPNCr2Gxj+rKKHv7TlYlumfz1HtWlkqpIWdiI0BVB9qgEstORKeorxoY+s78oveICDjKdPo94mnkpHC3S3QA==
+  dependencies:
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/input" "10.19.0"
+    "@dhis2-ui/intersection-detector" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/tooltip" "10.19.0"
+    "@dhis2/prop-types" "^3.1.2"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dnd-kit/core" "^6.3.1"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+
+"@dhis2-ui/user-avatar@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2-ui/user-avatar/-/user-avatar-10.19.0.tgz#4df39bbba9d5c8d8472dc86936dce72f5d5e1e57"
+  integrity sha512-X5Dd4V6ZG9iTO/aw9C6+mOb42Ds2w88piYhagUH9Xyb0jlDk6o6iQtPd3nJsIHN1RZqjvpfvozhDQx2bUQAokQ==
   dependencies:
     "@dhis2/prop-types" "^3.1.2"
-    "@dhis2/ui-constants" "10.17.0"
+    "@dhis2/ui-constants" "10.19.0"
     classnames "^2.3.1"
     prop-types "^15.7.2"
 
@@ -2385,20 +2534,27 @@
   dependencies:
     prop-types "^15.7.2"
 
-"@dhis2/ui-forms@10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-forms/-/ui-forms-10.17.0.tgz#fbd42b05dabfa853be1dde2257c7ffe2bcbcccde"
-  integrity sha512-0rOkRE+wja5H7zeBMoY+7q6/PJv3H+b5ACQEFScA918Pwl/cbkfhlB48G8mlV4lLJUu04NZs/jobTq668vWjeA==
+"@dhis2/ui-constants@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-constants/-/ui-constants-10.19.0.tgz#a98e473873a7785c01cfa4c906c6131d9edf24fa"
+  integrity sha512-NtLpN0Qf+4gbgO8cNBysMZNf+Ep74EpwWZbnK7x+pV4stFqL88rlXlyOz10W54t1DN1RCKxnIESntBGrxVmK8w==
   dependencies:
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/checkbox" "10.17.0"
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/file-input" "10.17.0"
-    "@dhis2-ui/input" "10.17.0"
-    "@dhis2-ui/radio" "10.17.0"
-    "@dhis2-ui/select" "10.17.0"
-    "@dhis2-ui/switch" "10.17.0"
-    "@dhis2-ui/text-area" "10.17.0"
+    prop-types "^15.7.2"
+
+"@dhis2/ui-forms@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-forms/-/ui-forms-10.19.0.tgz#d8ac14ad5279ce880bbed77f552f863cf63f68dd"
+  integrity sha512-BfnqqOnKq6O62dnV7xb1qU23tysa9jx8wfh3dh3WDZTraDT9nr0Ku8zge59exFpD4NIcdKMRHU+lYro6TSFGkg==
+  dependencies:
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/checkbox" "10.19.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/file-input" "10.19.0"
+    "@dhis2-ui/input" "10.19.0"
+    "@dhis2-ui/radio" "10.19.0"
+    "@dhis2-ui/select" "10.19.0"
+    "@dhis2-ui/switch" "10.19.0"
+    "@dhis2-ui/text-area" "10.19.0"
     "@dhis2/prop-types" "^3.1.2"
     classnames "^2.3.1"
     final-form "^4.20.2"
@@ -2410,60 +2566,88 @@
   resolved "https://registry.yarnpkg.com/@dhis2/ui-icons/-/ui-icons-10.17.0.tgz#164efacc9c279bc4e6fa236bb81f0479ac3636aa"
   integrity sha512-Mr9qRUH81UhxjvLKlWRak4C4B/14bZhf4nbOOHSeYBeWaSboShmoVOfzfjxxW/lfxjMwHLGy14QoIExESsI3pQ==
 
-"@dhis2/ui@^10.17.0", "@dhis2/ui@^10.9.2":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui/-/ui-10.17.0.tgz#05bc05d27a2eb6c786c60619968200df6bc43c5a"
-  integrity sha512-EsxTCqwqKWuraJmHTJfgcFJKBuEvNDud8CeEeGEjADz5NT42obv24pWeEkTMa64K57TdyKPw3UiAP9x0uw83nA==
+"@dhis2/ui-icons@10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-icons/-/ui-icons-10.19.0.tgz#995392e4d562ba227e7af638a83ff06dc062ab72"
+  integrity sha512-lHuE2WgT+1YQFdeFTURro3fsJycPWdwMr+2AXiGqLd6upmXKklYe8YdOL6Kv2OIIMEhmVahZ05ppRBcd+4MhOA==
+
+"@dhis2/ui@^10.19.0", "@dhis2/ui@^10.9.2":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui/-/ui-10.19.0.tgz#67532625ec5e376b3f5b4393e4a5635eb11b6f6c"
+  integrity sha512-2tAjCvf0zHCpuUgtS6slFALuMX1LQ6JZ5g8pAEg3kZTNkdEzmPXO1p3TMP4TESryAVSYFpZezlRmVF2fglza7g==
   dependencies:
-    "@dhis2-ui/alert" "10.17.0"
-    "@dhis2-ui/box" "10.17.0"
-    "@dhis2-ui/button" "10.17.0"
-    "@dhis2-ui/calendar" "10.17.0"
-    "@dhis2-ui/card" "10.17.0"
-    "@dhis2-ui/center" "10.17.0"
-    "@dhis2-ui/checkbox" "10.17.0"
-    "@dhis2-ui/chip" "10.17.0"
-    "@dhis2-ui/cover" "10.17.0"
-    "@dhis2-ui/css" "10.17.0"
-    "@dhis2-ui/divider" "10.17.0"
-    "@dhis2-ui/field" "10.17.0"
-    "@dhis2-ui/file-input" "10.17.0"
-    "@dhis2-ui/header-bar" "10.17.0"
-    "@dhis2-ui/help" "10.17.0"
-    "@dhis2-ui/input" "10.17.0"
-    "@dhis2-ui/intersection-detector" "10.17.0"
-    "@dhis2-ui/label" "10.17.0"
-    "@dhis2-ui/layer" "10.17.0"
-    "@dhis2-ui/legend" "10.17.0"
-    "@dhis2-ui/loader" "10.17.0"
-    "@dhis2-ui/logo" "10.17.0"
-    "@dhis2-ui/menu" "10.17.0"
-    "@dhis2-ui/modal" "10.17.0"
-    "@dhis2-ui/node" "10.17.0"
-    "@dhis2-ui/notice-box" "10.17.0"
-    "@dhis2-ui/organisation-unit-tree" "10.17.0"
-    "@dhis2-ui/pagination" "10.17.0"
-    "@dhis2-ui/popover" "10.17.0"
-    "@dhis2-ui/popper" "10.17.0"
-    "@dhis2-ui/portal" "10.17.0"
-    "@dhis2-ui/radio" "10.17.0"
-    "@dhis2-ui/required" "10.17.0"
-    "@dhis2-ui/segmented-control" "10.17.0"
-    "@dhis2-ui/select" "10.17.0"
-    "@dhis2-ui/selector-bar" "10.17.0"
-    "@dhis2-ui/sharing-dialog" "10.17.0"
-    "@dhis2-ui/switch" "10.17.0"
-    "@dhis2-ui/tab" "10.17.0"
-    "@dhis2-ui/table" "10.17.0"
-    "@dhis2-ui/tag" "10.17.0"
-    "@dhis2-ui/text-area" "10.17.0"
-    "@dhis2-ui/tooltip" "10.17.0"
-    "@dhis2-ui/transfer" "10.17.0"
-    "@dhis2-ui/user-avatar" "10.17.0"
-    "@dhis2/ui-constants" "10.17.0"
-    "@dhis2/ui-forms" "10.17.0"
-    "@dhis2/ui-icons" "10.17.0"
+    "@dhis2-ui/alert" "10.19.0"
+    "@dhis2-ui/box" "10.19.0"
+    "@dhis2-ui/button" "10.19.0"
+    "@dhis2-ui/calendar" "10.19.0"
+    "@dhis2-ui/card" "10.19.0"
+    "@dhis2-ui/center" "10.19.0"
+    "@dhis2-ui/checkbox" "10.19.0"
+    "@dhis2-ui/chip" "10.19.0"
+    "@dhis2-ui/cover" "10.19.0"
+    "@dhis2-ui/css" "10.19.0"
+    "@dhis2-ui/divider" "10.19.0"
+    "@dhis2-ui/field" "10.19.0"
+    "@dhis2-ui/file-input" "10.19.0"
+    "@dhis2-ui/header-bar" "10.19.0"
+    "@dhis2-ui/help" "10.19.0"
+    "@dhis2-ui/input" "10.19.0"
+    "@dhis2-ui/intersection-detector" "10.19.0"
+    "@dhis2-ui/label" "10.19.0"
+    "@dhis2-ui/layer" "10.19.0"
+    "@dhis2-ui/legend" "10.19.0"
+    "@dhis2-ui/loader" "10.19.0"
+    "@dhis2-ui/logo" "10.19.0"
+    "@dhis2-ui/menu" "10.19.0"
+    "@dhis2-ui/modal" "10.19.0"
+    "@dhis2-ui/node" "10.19.0"
+    "@dhis2-ui/notice-box" "10.19.0"
+    "@dhis2-ui/organisation-unit-tree" "10.19.0"
+    "@dhis2-ui/pagination" "10.19.0"
+    "@dhis2-ui/popover" "10.19.0"
+    "@dhis2-ui/popper" "10.19.0"
+    "@dhis2-ui/portal" "10.19.0"
+    "@dhis2-ui/radio" "10.19.0"
+    "@dhis2-ui/required" "10.19.0"
+    "@dhis2-ui/segmented-control" "10.19.0"
+    "@dhis2-ui/select" "10.19.0"
+    "@dhis2-ui/selector-bar" "10.19.0"
+    "@dhis2-ui/sharing-dialog" "10.19.0"
+    "@dhis2-ui/switch" "10.19.0"
+    "@dhis2-ui/tab" "10.19.0"
+    "@dhis2-ui/table" "10.19.0"
+    "@dhis2-ui/tag" "10.19.0"
+    "@dhis2-ui/text-area" "10.19.0"
+    "@dhis2-ui/tooltip" "10.19.0"
+    "@dhis2-ui/transfer" "10.19.0"
+    "@dhis2-ui/user-avatar" "10.19.0"
+    "@dhis2/ui-constants" "10.19.0"
+    "@dhis2/ui-forms" "10.19.0"
+    "@dhis2/ui-icons" "10.19.0"
     prop-types "^15.7.2"
+
+"@dnd-kit/accessibility@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/accessibility/-/accessibility-3.1.1.tgz#3b4202bd6bb370a0730f6734867785919beac6af"
+  integrity sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw==
+  dependencies:
+    tslib "^2.0.0"
+
+"@dnd-kit/core@^6.3.1":
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/core/-/core-6.3.1.tgz#4c36406a62c7baac499726f899935f93f0e6d003"
+  integrity sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==
+  dependencies:
+    "@dnd-kit/accessibility" "^3.1.1"
+    "@dnd-kit/utilities" "^3.2.2"
+    tslib "^2.0.0"
+
+"@dnd-kit/utilities@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/utilities/-/utilities-3.2.2.tgz#5a32b6af356dc5f74d61b37d6f7129a4040ced7b"
+  integrity sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==
+  dependencies:
+    tslib "^2.0.0"
 
 "@dual-bundle/import-meta-resolve@^4.1.0":
   version "4.1.0"
@@ -14155,7 +14339,7 @@ tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0:
+tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
