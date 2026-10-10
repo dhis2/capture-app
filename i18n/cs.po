@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-29T12:48:58.340Z\n"
+"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -68,16 +68,16 @@ msgid "View {{eventLabel}}"
 msgstr ""
 
 msgid "Edit {{eventLabel}}"
-msgstr ""
+msgstr "Upravit {{eventLabel}}"
 
 msgid "New {{eventLabel}}"
-msgstr ""
+msgstr "Nový {{eventLabel}}"
 
 msgid "Loading..."
 msgstr "Načítání ..."
 
 msgid "{{eventLabel}} list"
-msgstr ""
+msgstr "{{eventLabel}} seznam"
 
 msgid "More"
 msgstr "Více"
@@ -142,6 +142,12 @@ msgstr "Oblast"
 msgid "Coordinate"
 msgstr "Souřadnice"
 
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
+msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
 msgid "Complete {{eventLabel}}"
 msgstr ""
 
@@ -167,9 +173,6 @@ msgstr "{{ stageName }} - Příjemce"
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Stav"
 
-msgid "Please select {{categoryName}}"
-msgstr "Vyberte prosím {{categoryName}}"
-
 msgid "A date in the future is not allowed"
 msgstr "Datum v budoucnosti není povoleno"
 
@@ -185,6 +188,11 @@ msgstr "Zrušit"
 
 msgid "Metadata error. see log for details"
 msgstr "Chyba metadat. viz log pro podrobnosti"
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - Podrobnosti"
@@ -422,6 +430,9 @@ msgstr ""
 msgid "Operations running"
 msgstr "Provoz běží"
 
+msgid "Please select {{categoryName}}"
+msgstr "Vyberte prosím {{categoryName}}"
+
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
 
@@ -447,7 +458,7 @@ msgid "An error occurred while deleting the {{eventLabel}}"
 msgstr ""
 
 msgid "Delete {{eventLabel}}"
-msgstr ""
+msgstr "Odstranit {{eventLabel}}"
 
 msgid "Deleting an {{eventLabel}} is permanent and cannot be undone."
 msgstr ""
@@ -456,7 +467,7 @@ msgid "Are you sure you want to delete this {{eventLabel}}?"
 msgstr ""
 
 msgid "Yes, delete {{eventLabel}}"
-msgstr ""
+msgstr "Ano, smazat {{eventLabel}}"
 
 msgid "Unskip"
 msgstr "Odpojení"
@@ -1041,7 +1052,7 @@ msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
 
 msgid "Search by {{attributesLabel}}"
-msgstr ""
+msgstr "Hledat podle {{attributesLabel}}"
 
 msgid "Fill in at least {{count}} {{attributeLabel}} to search"
 msgid_plural "Fill in at least {{count}} {{attributeLabel}} to search"
@@ -1305,7 +1316,7 @@ msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new {{eventLabel}}"
-msgstr ""
+msgstr "Vytvořit nový {{eventLabel}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
@@ -1382,10 +1393,10 @@ msgid "Mark as cancelled"
 msgstr "Označit jako zrušené"
 
 msgid "You do not have access to delete this {{enrollmentLabel}}"
-msgstr ""
+msgstr "Nemáte přístup ke smazání tohoto {{enrollmentLabel}}"
 
 msgid "Delete {{enrollmentLabel}}"
-msgstr ""
+msgstr "Odstranit {{enrollmentLabel}}"
 
 msgid "Are you sure you want to delete this {{enrollmentLabel}}?"
 msgstr ""
@@ -1527,7 +1538,7 @@ msgid "No polygon captured"
 msgstr "Nebyl zachycen žádný polygon"
 
 msgid "{{eventLabel}} completed"
-msgstr ""
+msgstr "{{eventLabel}} dokončeno"
 
 msgid "{{notesLabel}} about this {{eventLabel}}"
 msgstr ""
@@ -1585,7 +1596,7 @@ msgid "Indicators"
 msgstr "Indikátory"
 
 msgid "Save {{noteLabel}}"
-msgstr ""
+msgstr "Uložit {{noteLabel}}"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr "Upravit {{trackedEntityName}}"
@@ -1702,7 +1713,7 @@ msgid "{{ linkableStageLabel }} has no linkable {{eventsLabel}}"
 msgstr ""
 
 msgid "Link to an existing {{eventLabel}}"
-msgstr ""
+msgstr "Odkaz na existující {{eventLabel}}"
 
 msgid "Actions - {{relationshipName}}"
 msgstr "Akce - {{relationshipName}}"
@@ -1865,7 +1876,7 @@ msgid "Go back without saving {{relationshipLabel}}"
 msgstr ""
 
 msgid "New {{relationshipLabel}}"
-msgstr ""
+msgstr "Nový {{relationshipLabel}}"
 
 msgid "Link to an existing {{tetName}}"
 msgstr "Odkaz na existující {{tetName}}"
@@ -1882,7 +1893,7 @@ msgid "{{trackedEntityTypeName}} {{relationshipsLabel}}"
 msgstr ""
 
 msgid "Delete {{relationshipLabel}}"
-msgstr ""
+msgstr "Odstranit {{relationshipLabel}}"
 
 msgid "Deleting the {{relationshipLabel}} is permanent and cannot be undone."
 msgstr ""
@@ -1891,7 +1902,7 @@ msgid "Are you sure you want to delete this {{relationshipLabel}}?"
 msgstr ""
 
 msgid "Yes, delete {{relationshipLabel}}"
-msgstr ""
+msgstr "Ano, smazat {{relationshipLabel}}"
 
 msgid "An error occurred while deleting the {{relationshipLabel}}."
 msgstr ""
@@ -1952,7 +1963,7 @@ msgid "You do not have access to delete {{eventsLabel}}"
 msgstr ""
 
 msgid "Delete {{eventsLabel}}"
-msgstr ""
+msgstr "Odstranit {{eventsLabel}}"
 
 msgid "This cannot be undone."
 msgstr "To nelze vzít zpět."
@@ -2095,7 +2106,7 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Delete {{enrollmentsLabel}}"
-msgstr ""
+msgstr "Odstranit {{enrollmentsLabel}}"
 
 msgid "An error occurred when deleting {{enrollmentsLabel}}"
 msgstr ""

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-29T12:48:58.340Z\n"
+"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -142,6 +142,12 @@ msgstr ""
 msgid "Coordinate"
 msgstr "Coordonate"
 
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
+msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
 msgid "Complete {{eventLabel}}"
 msgstr ""
 
@@ -165,9 +171,6 @@ msgstr ""
 msgid "{{ stageName }} - Status"
 msgstr ""
 
-msgid "Please select {{categoryName}}"
-msgstr ""
-
 msgid "A date in the future is not allowed"
 msgstr "Nu este permisă o dată în viitor"
 
@@ -183,6 +186,11 @@ msgid "Cancel"
 msgstr "Anulare"
 
 msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
 msgstr ""
 
 msgid "{{ stageName }} - Details"
@@ -415,6 +423,9 @@ msgstr ""
 
 msgid "Operations running"
 msgstr "Operațiuni în derulare"
+
+msgid "Please select {{categoryName}}"
+msgstr ""
 
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
@@ -1027,7 +1038,7 @@ msgid "Search {{uniqueAttrName}}"
 msgstr "Căutare {{uniqueAttrName}}"
 
 msgid "Search by {{attributesLabel}}"
-msgstr ""
+msgstr "Căutare după {{attributesLabel}}"
 
 msgid "Fill in at least {{count}} {{attributeLabel}} to search"
 msgid_plural "Fill in at least {{count}} {{attributeLabel}} to search"
@@ -1274,7 +1285,7 @@ msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new {{eventLabel}}"
-msgstr ""
+msgstr "Crearea unui nou {{eventLabel}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Căutare un {{trackedEntityName}} în {{programName}}"

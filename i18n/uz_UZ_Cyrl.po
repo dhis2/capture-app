@@ -1,14 +1,14 @@
 # Translators:
-# Sharaf Yuldashev, 2024
-# Philip Larsen Donnelly, 2025
+# Sharaf Yuldashev, 2026
 # Khurshid Ibatov <x.ibatov@dtsj.uz>, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-25T07:38:17.502Z\n"
+"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -50,35 +50,35 @@ msgstr ""
 msgid "Program overview"
 msgstr ""
 
-msgid "Active enrollments"
-msgstr "Фаол Қайдномалар"
-
-msgid "Completed enrollments"
-msgstr "Якунларган Қайдномалар"
-
-msgid "Cancelled enrollments"
-msgstr "Бекор қилинган Қайдномалар"
-
 msgid "Search"
 msgstr "Излаш"
 
-msgid "Enrollment dashboard"
-msgstr "Қайд этиш инфопанели"
+msgid "Active {{enrollmentsLabel}}"
+msgstr ""
 
-msgid "View event"
-msgstr "Ҳодиса/вазиятни кўриш"
+msgid "Completed {{enrollmentsLabel}}"
+msgstr ""
 
-msgid "Edit event"
-msgstr "Ҳодиса/вазиятни таҳрирлаш"
+msgid "Cancelled {{enrollmentsLabel}}"
+msgstr ""
 
-msgid "New event"
-msgstr "Янги ҳодиса"
+msgid "{{enrollmentLabel}} dashboard"
+msgstr ""
+
+msgid "View {{eventLabel}}"
+msgstr ""
+
+msgid "Edit {{eventLabel}}"
+msgstr ""
+
+msgid "New {{eventLabel}}"
+msgstr "Янги {{eventLabel}}"
 
 msgid "Loading..."
 msgstr "Юкланмоқда..."
 
-msgid "Event list"
-msgstr "Ҳодиса/вазиятлар рўйхати "
+msgid "{{eventLabel}} list"
+msgstr "{{eventLabel}} рўйхати"
 
 msgid "More"
 msgstr "Кўпроқ"
@@ -89,14 +89,11 @@ msgstr "{{programName}}-инфопанелини кўриш"
 msgid "View dashboard"
 msgstr "Бошқарув панелини кўриш"
 
-msgid "View active enrollment"
-msgstr "Фаол рўйхатдан ўтганларни кўриш"
+msgid "View active {{enrollmentLabel}}"
+msgstr ""
 
 msgid "Re-enroll in {{programName}}"
 msgstr ""
-
-msgid "Re-enroll"
-msgstr "Қайта рўйхатдан ўтиш"
 
 msgid "Enrolled"
 msgstr "Рўйхатга киритилган"
@@ -104,11 +101,8 @@ msgstr "Рўйхатга киритилган"
 msgid "Previously enrolled"
 msgstr "Илгари рўйхатга киритилган"
 
-msgid "Organisation unit"
-msgstr "Ташкилий бўлим"
-
-msgid "Date of enrollment"
-msgstr "Рўйхатга киритилган сана"
+msgid "Date of {{enrollmentLabel}}"
+msgstr ""
 
 msgid "Last updated"
 msgstr "Охирги янгиланган"
@@ -149,11 +143,14 @@ msgstr "Майдон"
 msgid "Coordinate"
 msgstr "Мувофиқлаштириш"
 
-msgid "Enrollment"
-msgstr "Рўйхатга олиш"
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr ""
 
-msgid "Complete event"
-msgstr "Ҳодиса/тадбирни якунлаш"
+msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
+msgid "Complete {{eventLabel}}"
+msgstr ""
 
 msgid ""
 "The date entered belongs to an expired period. Enter a date after "
@@ -175,13 +172,11 @@ msgstr "{{ stageName }} - Топширилган шахс"
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - статуси"
 
-msgid "Please select {{categoryName}}"
-msgstr "Куйидагини танланг: {{categoryName}}"
-
 msgid "A date in the future is not allowed"
 msgstr "Келажакдаги сана қабул қилинмайди"
 
-msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
+msgid ""
+"Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
@@ -193,6 +188,11 @@ msgstr "Бекор қилиш"
 
 msgid "Metadata error. see log for details"
 msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - хақида батафсил"
@@ -206,8 +206,11 @@ msgstr "Тавсия этилган фойдаланувчи"
 msgid "Search for user"
 msgstr "Фойдаланувчини излаш"
 
-msgid "Notes"
-msgstr "Изоҳлар"
+msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr "Сақланади {{programName}} да {{orgUnitName}}"
+
+msgid "Saving to {{programName}}"
+msgstr ""
 
 msgid "Basic info"
 msgstr "Асосий маълумот"
@@ -215,17 +218,8 @@ msgstr "Асосий маълумот"
 msgid "Status"
 msgstr "Статус"
 
-msgid "Relationships"
-msgstr "Ўзаро алоқалар"
-
 msgid "Assignee"
 msgstr "Ваколат берилган шахс"
-
-msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr "Сақланади {{programName}} да {{orgUnitName}}"
-
-msgid "Saving to {{programName}}"
-msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -234,15 +228,13 @@ msgstr ""
 "Бу ҳодиса/тадбир дастури эмас ёки метамаълумотлар бузилган. Тафсилотлар учун"
 " журналга қаранг."
 
-msgid "This event"
-msgstr "Ушбу ҳодиса/тадбир"
+msgid "This {{eventLabel}}"
+msgstr ""
 
 msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
+"{{relationshipLabel}} of type {{relationshipTypeName}} to {{entityName}} "
+"already exists"
 msgstr ""
-" {{relationshipTypeName}} турининг {{entityName}} билан алоқаси аллақачон "
-"мавжуд"
 
 msgid "Active"
 msgstr "Фаол"
@@ -250,10 +242,11 @@ msgstr "Фаол"
 msgid "Completed"
 msgstr "Тўлдирилди"
 
-msgid "Please add or cancel the note before saving the event"
+msgid ""
+"Please add or cancel the {{noteLabel}} before saving the {{eventLabel}}"
 msgstr ""
 
-msgid "Please provide an valid organisation unit"
+msgid "Please provide a valid {{orgUnitLabel}}"
 msgstr ""
 
 msgid "Save and add another"
@@ -283,31 +276,29 @@ msgstr "Шакл кўринишига ўтиш"
 msgid "Switch to row view"
 msgstr "Жадвал кўринишига ўтиш"
 
-msgid "{{count}} event added"
-msgid_plural "{{count}} event added"
+msgid "{{count}} {{eventLabel}} added"
+msgid_plural "{{count}} {{eventLabel}} added"
 msgstr[0] ""
 
-msgid "No events added"
-msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
+msgid "No {{eventsLabel}} added"
+msgstr ""
 
-msgid "New event relationship"
-msgstr "Янги ҳодиса/тадбир муносабатлари"
+msgid "Adding {{relationshipLabel}} to {{eventLabel}}."
+msgstr ""
 
-msgid "Adding relationship to event."
-msgstr "Ҳодиса/тадбирга алоқа-муносабатлар қўшиш"
+msgid "Go back to {{eventLabel}} without saving {{relationshipLabel}}"
+msgstr ""
 
-msgid "Go back to event without saving relationship"
-msgstr "Алоқа-муносабатларни сақламасдан ҳодиса/тадбирга қайтиш"
+msgid "New {{eventLabel}} {{relationshipLabel}}"
+msgstr ""
 
 msgid "Discard unsaved changes?"
 msgstr "Сақланмаган ўзгаришлар бекор қилинсинми?"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
-"relationship"
+"{{relationshipLabel}}"
 msgstr ""
-"Ушбу саҳифани тарк этсангиз, янги муносабатлар учун қилган танловингиз бекор"
-" қилинади."
 
 msgid "Yes, discard changes"
 msgstr "Ҳа, ўзгартиришлар бекор қилинсин"
@@ -315,8 +306,9 @@ msgstr "Ҳа, ўзгартиришлар бекор қилинсин"
 msgid "No, cancel"
 msgstr "Йўқ, бекор қилинг"
 
-msgid "You don't have access to create an event in the current selections"
-msgstr "Ҳозирги танловларда ҳодиса/тадбир яратиш ҳуқуқига эга эмассиз"
+msgid ""
+"You don't have access to create an {{eventLabel}} in the current selections"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr "{{trackedEntityName}} сақланмоқда"
@@ -340,25 +332,25 @@ msgid "{{programStageName}} completed"
 msgstr "{{programStageName}} - якунланди"
 
 msgid ""
-"Would you like to complete the enrollment and all active events as well?"
-msgstr ""
-"Қайд этиш жараёнини ва барча фаол холатларни ҳам якунлашни истайсизми?"
-
-msgid "{{count}} event in {{programStageName}}"
-msgid_plural "{{count}} event in {{programStageName}}"
-msgstr[0] "{{count}} кайднома(лар) {{programStageName}}-да мавжуд"
-
-msgid "Yes, complete enrollment and events"
+"Would you like to complete the {{enrollmentLabel}} and all active "
+"{{eventsLabel}} as well?"
 msgstr ""
 
-msgid "Complete enrollment only"
+msgid "{{count}} {{eventLabel}} in {{programStageName}}"
+msgid_plural "{{count}} {{eventLabel}} in {{programStageName}}"
+msgstr[0] ""
+
+msgid "Yes, complete {{enrollmentLabel}} and {{eventsLabel}}"
 msgstr ""
 
-msgid "Would you like to complete the enrollment?"
+msgid "Complete {{enrollmentLabel}} only"
 msgstr ""
 
-msgid "Complete enrollment"
-msgstr "Қайд этишни якунлаш"
+msgid "Would you like to complete the {{enrollmentLabel}}?"
+msgstr ""
+
+msgid "Complete {{enrollmentLabel}}"
+msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -397,19 +389,19 @@ msgstr ""
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
 
-msgid "No feedback for this event yet"
+msgid "No feedback for this {{eventLabel}} yet"
 msgstr ""
 
-msgid "No indicator output for this event yet"
+msgid "No indicator output for this {{eventLabel}} yet"
 msgstr ""
 
-msgid "Generate new event"
-msgstr "Янги ҳодиса/тадбир яратиш"
+msgid "Generate new {{eventLabel}}"
+msgstr ""
 
-msgid "Do you want to create another event?"
-msgstr "Ҳақиқатдан ҳам бошқа ҳодиса/тадбир яратмоқчимисиз?"
+msgid "Do you want to create another {{eventLabel}}?"
+msgstr ""
 
-msgid "Yes, create new event"
+msgid "Yes, create new {{eventLabel}}"
 msgstr ""
 
 msgid "Back to form"
@@ -433,21 +425,19 @@ msgstr ""
 msgid "Operations running"
 msgstr "Амалиётлар бажарилмоқда"
 
+msgid "Please select {{categoryName}}"
+msgstr "Куйидагини танланг: {{categoryName}}"
+
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
 
 msgid "No indicator output for this {{enrollmentLabel}} yet"
 msgstr ""
 
-msgid ""
-"This event has unsaved changes. Leaving this page without saving will lose "
-"these changes. Are you sure you want to discard unsaved changes?"
-msgstr ""
-
 msgid "View changelog"
 msgstr ""
 
-msgid "An error occurred when updating event status"
+msgid "An error occurred when updating {{eventLabel}} status"
 msgstr ""
 
 msgid "Mark incomplete"
@@ -459,32 +449,26 @@ msgstr "Тугалланган деб белгилансин"
 msgid "Delete"
 msgstr "Ўчириб ташлаш"
 
-msgid "An error occurred while deleting the event"
+msgid "An error occurred while deleting the {{eventLabel}}"
 msgstr ""
 
-msgid "Delete event"
-msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
+msgid "Delete {{eventLabel}}"
+msgstr "Ўчириб ташлаш {{eventLabel}}"
 
-msgid "Deleting an event is permanent and cannot be undone."
+msgid "Deleting an {{eventLabel}} is permanent and cannot be undone."
 msgstr ""
 
-msgid "Are you sure you want to delete this event?"
+msgid "Are you sure you want to delete this {{eventLabel}}?"
 msgstr ""
 
-msgid "Yes, delete event"
-msgstr "Ҳа, холатни ўчириш"
+msgid "Yes, delete {{eventLabel}}"
+msgstr ""
 
 msgid "Unskip"
 msgstr ""
 
 msgid "Skip"
 msgstr "Ўтказиб юбориш"
-
-msgid "No events to display"
-msgstr "Кўрсатиладиган ҳеч қандай ҳодиса/тадбир йўқ"
-
-msgid "Data for offline list not present"
-msgstr "Оффлайн рўйхат учун маълумотлар мавжуд эмас"
 
 msgid "Close"
 msgstr "Ёпиш"
@@ -633,7 +617,7 @@ msgstr ""
 msgid "No match found"
 msgstr "Ҳеч нима топилмади"
 
-msgid "Search for an organisation unit"
+msgid "Search for an {{orgUnitLabel}}"
 msgstr ""
 
 msgid "Clear"
@@ -656,6 +640,9 @@ msgstr "қидириш учун ёзишни бошланг"
 
 msgid "suggestions could not be retrieved"
 msgstr "таклифлар қабул қилинмади"
+
+msgid "Data for offline list not present"
+msgstr "Оффлайн рўйхат учун маълумотлар мавжуд эмас"
 
 msgid "No items to display"
 msgstr "Кўрсатиладиган ахборот йўқ"
@@ -728,25 +715,25 @@ msgstr "... дан олдин ёки унга тенг"
 msgid "More filters"
 msgstr "Кўпроқ фильтр"
 
-msgid "Stage filters"
+msgid "{{programStageLabel}} filters"
 msgstr ""
 
 msgid "Rows per page"
 msgstr "Саҳифада қаторлар"
 
-msgid "Could not get organisation unit"
-msgstr "Ташкилий бўлимни олиб бўлмади"
+msgid "Could not get {{orgUnitLabel}}"
+msgstr ""
 
 msgid "Program doesn't exist"
 msgstr "Дастур мавжуд эмас"
 
-msgid "Selected program is invalid for selected organisation unit"
+msgid "Selected program is invalid for selected {{orgUnitLabel}}"
 msgstr ""
 
-msgid "Add note"
-msgstr "Изоҳ қолдириш"
+msgid "Add {{noteLabel}}"
+msgstr ""
 
-msgid "Write note"
+msgid "Write {{noteLabel}}"
 msgstr ""
 
 msgid "{{fieldName}} was blanked out and hidden by your last action"
@@ -758,51 +745,38 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr "Ушбу қайднома бўйича мулоҳаза хали берилмади"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
-
 msgid "Quick actions"
 msgstr "Тезкор харакатлар"
 
-msgid "Schedule an event"
-msgstr "Ҳодиса/Ҳолатни режалаш"
+msgid "Schedule an {{eventLabel}}"
+msgstr ""
 
 msgid "Make referral"
 msgstr "Йўналиш яратинг"
 
-msgid "No available program stages"
-msgstr "Дастур босқичлари мавжуд эмас"
+msgid "No available {{programStagesLabel}}"
+msgstr ""
 
-msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr " {{enrollmentId}}- Регистрация идентификатори хато."
+msgid "Invalid {{enrollmentLabel}} id {{enrollmentId}}."
+msgstr ""
 
-msgid "Choose an enrollment to view the dashboard."
-msgstr "Бошқарув панелини кўриш учун \"Рўйхатдан ўтиш\"ни танланг."
+msgid "Choose an {{enrollmentLabel}} to view the dashboard."
+msgstr ""
 
 msgid ""
-"Choose a program to add new or see existing enrollments for "
+"Choose a program to add new or see existing {{enrollmentsLabel}} for "
 "{{teiDisplayName}}"
 msgstr ""
-" {{teiDisplayName}} учун янги рўйхатга ёки мавжуд рўйхатга олишларини кўриш "
-"учун дастурни танланг."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 "{{programName}} тоифаларга эга. Панелни кўриш учун барча тоифаларни танланг."
 
-msgid "There are no active enrollments."
-msgstr "Фаол Регистрациялар мавжуд эмас"
-
-msgid "Add new enrollment for {{teiDisplayName}} in this program."
+msgid "There are no active {{enrollmentsLabel}}."
 msgstr ""
 
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
+msgid "Add new {{enrollmentLabel}} for {{teiDisplayName}} in this program."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -813,26 +787,25 @@ msgstr "{{teiDisplayName}} ни ушбу дастурда қайд этинг."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
-"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+"{{programName}}. Choose another program that allows {{tetName}} "
+"{{enrollmentLabel}}. "
 msgstr ""
-"{{teiDisplayName}} бу {{tetName}} ва уни {{programName}} да қайд этиб "
-"бўлмайди. {{tetName}} да қайд этишга рухсат берадиган бошқа дастурни "
-"танланг."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
 msgstr "Ушбу янги {{selectedTetName}} ни дастурда қайд этинг."
 
-msgid "{{programName}} is an event program and does not have enrollments."
-msgstr "{{programName}} - тадбир дастуридир ва унда қайд этиш мавжуд эмас."
+msgid ""
+"{{programName}} is an event program and does not have {{enrollmentsLabel}}."
+msgstr ""
 
-msgid "Create a new event in this program."
-msgstr "Ушбу дастурда янги ҳодиса/тадбирни яратиш."
+msgid "Create a new {{eventLabel}} in this program."
+msgstr ""
 
 msgid "View working list in this program."
 msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "\"{{enrollmentId}}\" - номерли қайднома мавжуд эмас"
+msgid "{{enrollmentLabel}} with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -842,7 +815,8 @@ msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
 
 msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
+"An error occurred while fetching {{enrollmentsLabel}}. Please enter a valid "
+"url."
 msgstr ""
 
 msgid "An error has occurred"
@@ -857,10 +831,10 @@ msgstr "Саҳифани очишда хатолик мавжуд"
 msgid "There was an error loading the page"
 msgstr ""
 
-msgid "Program stage is invalid"
+msgid "{{programStageLabel}} is invalid"
 msgstr ""
 
-msgid "Stage not found"
+msgid "{{programStageLabel}} not found"
 msgstr ""
 
 msgid "Report"
@@ -872,25 +846,19 @@ msgstr "Режа"
 msgid "Refer"
 msgstr ""
 
-msgid "New Event"
-msgstr "Янги Ҳодиса/Ҳолат"
-
-msgid "You can't add any more {{ programStageName }} events"
+msgid "You can't add any more {{ programStageName }} {{eventsLabel}}"
 msgstr ""
 
 msgid "Cancel without saving"
 msgstr ""
 
-msgid "Choose a stage for a new event"
+msgid "Choose a {{programStageLabel}} for a new {{eventLabel}}"
 msgstr ""
 
-msgid "Program Stages could not be loaded"
+msgid "{{programStagesLabel}} could not be loaded"
 msgstr ""
 
-msgid "Stage"
-msgstr "Босқич"
-
-msgid "The category option is not valid for the selected organisation unit."
+msgid "The category option is not valid for the selected {{orgUnitLabel}}."
 msgstr ""
 
 msgid "Please select a valid combination."
@@ -916,24 +884,24 @@ msgstr ""
 msgid "Please select {{category}}."
 msgstr ""
 
-msgid "Please select an organisation unit"
-msgstr "Илтимос, Ташкилий бўлимни танланг"
+msgid "Please select an {{orgUnitLabel}}"
+msgstr ""
 
-msgid "See working list without organisation unit"
+msgid "See working list without {{orgUnitLabel}}"
 msgstr ""
 
 msgid "Search for a {{trackedEntityName}}"
 msgstr ""
 
-msgid "Registered events"
-msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
+msgid "Registered {{eventsLabel}}"
+msgstr ""
 
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
 msgstr ""
 
-msgid "Choose an organisation unit to start reporting"
+msgid "Choose an {{orgUnitLabel}} to start reporting"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -951,7 +919,7 @@ msgstr ""
 "Бундан ташқари, бош панелдан дастурни танлашингиз ва ушбу дастур ичида "
 "яратишингиз мумкин"
 
-msgid "New Enrollment in program{{escape}} {{programName}}"
+msgid "New {{enrollmentLabel}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityTypeName}}"
@@ -960,7 +928,8 @@ msgstr ""
 msgid "Save {{trackedEntityName}}"
 msgstr ""
 
-msgid "Enter details now is not available when creating a relationship"
+msgid ""
+"Enter details now is not available when creating a {{relationshipLabel}}"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -980,9 +949,6 @@ msgstr "Барчага кўрсатиш"
 
 msgid "Program"
 msgstr "Программа"
-
-msgid "Organisation Unit"
-msgstr "Ташкилий Бўлим"
 
 msgid "Registration"
 msgstr "Рўйхатдан ўтиш"
@@ -1011,42 +977,43 @@ msgstr "Рўйхатга олиш"
 msgid "Back"
 msgstr "Орқага"
 
-msgid "events"
-msgstr "ҳодиса/тадбирлар"
+msgid "{{count}} {{eventLabel}}"
+msgid_plural "{{count}} {{eventLabel}}"
+msgstr[0] ""
 
-msgid "event"
-msgstr "ҳодиса/тадбир"
-
-msgid "Event details"
-msgstr "Ҳодиса/тадбир тафсилотлари"
+msgid "{{eventLabel}} details"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
-"relationship"
+"{{relationshipLabel}}"
 msgstr ""
-"Ушбу саҳифани тарк этсангиз, янги алоқа-муносабатлар учун қилинган барча "
-"танловлар бекор қилинади "
 
 msgid "Errors"
 msgstr "Хатоликлар"
 
-msgid "This event doesn't have any notes"
+msgid "This {{eventLabel}} doesn't have any {{notesLabel}}"
 msgstr ""
 
-msgid "This event doesn't have any relationships"
+msgid "This {{eventLabel}} doesn't have any {{relationshipsLabel}}"
 msgstr ""
 
 msgid "Warnings"
 msgstr "Огоҳлантиришлар"
 
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Ҳодиса/тадбирни юклаб бўлмади. Унинг мавжудлигига ишончингиз комилми?"
+msgid "{{eventLabel}} could not be loaded. Are you sure it exists?"
+msgstr ""
 
-msgid "Event could not be loaded"
-msgstr "Ҳодиса/тадбирни юклаб бўлмади"
+msgid "{{eventLabel}} could not be loaded"
+msgstr ""
 
-msgid "Organisation unit could not be loaded"
-msgstr "Ташкилий бўлимни юклаб бўлмади"
+msgid ""
+"Could not load the requested data. It may not exist or you may not have "
+"access."
+msgstr ""
+
+msgid "{{orgUnitLabel}} could not be loaded"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "кузатилаётган объект намунаси"
@@ -1057,11 +1024,11 @@ msgstr "Барчага кириш мумкин"
 msgid "Selected"
 msgstr "Танланган"
 
-msgid "Please select an organisation unit."
+msgid "Please select an {{orgUnitLabel}}."
 msgstr ""
 
-msgid "Organisation unit scope"
-msgstr "Ташкилий бўлим ҳуқуқ ва бурчлари"
+msgid "{{orgUnitLabel}} scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Танланган дастур"
@@ -1069,15 +1036,15 @@ msgstr "Танланган дастур"
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} орқали қидириш"
 
-msgid "Search by attributes"
-msgstr "Атрибут орқали қидириш"
+msgid "Search by {{attributesLabel}}"
+msgstr "{{attributesLabel}} орқали қидириш"
+
+msgid "Fill in at least {{count}} {{attributeLabel}} to search"
+msgid_plural "Fill in at least {{count}} {{attributeLabel}} to search"
+msgstr[0] ""
 
 msgid "Search {{attributeName}}"
 msgstr "{{attributeName}} орқали қидириш"
-
-msgid "Fill in at least {{count}} attribute to search"
-msgid_plural "Fill in at least {{count}} attribute to search"
-msgstr[0] ""
 
 msgid "Missing search criteria"
 msgstr ""
@@ -1094,7 +1061,7 @@ msgstr ""
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
-msgid "The enrollment event data could not be found"
+msgid "The {{enrollmentLabel}} {{eventLabel}} data could not be found"
 msgstr ""
 
 msgid "Loading"
@@ -1124,7 +1091,7 @@ msgstr ""
 msgid "View only"
 msgstr "Фақат кўриш учун"
 
-msgid "You only have view access to this enrollment"
+msgid "You only have view access to this {{enrollmentLabel}}"
 msgstr ""
 
 msgid "You only have view access to this program"
@@ -1136,19 +1103,19 @@ msgstr ""
 msgid "You only have view access to this tracked entity type"
 msgstr ""
 
-msgid "You only have view access to these program stages"
+msgid "You only have view access to these {{programStagesLabel}}"
 msgstr ""
 
-msgid "You only have view access to this program stage"
+msgid "You only have view access to this {{programStageLabel}}"
 msgstr ""
 
-msgid "This event is outside the editing period"
+msgid "This {{eventLabel}} is outside the editing period"
 msgstr ""
 
-msgid "This event has been completed"
+msgid "This {{eventLabel}} has been completed"
 msgstr ""
 
-msgid "You do not have access to uncomplete this event"
+msgid "You do not have access to uncomplete this {{eventLabel}}"
 msgstr ""
 
 msgid "This {{trackedEntityName}} is deactivated"
@@ -1157,20 +1124,20 @@ msgstr ""
 msgid "This tracked entity is deactivated"
 msgstr ""
 
-msgid "Add relationship"
-msgstr "Ўзаро алоқа киритиш"
+msgid "Add {{relationshipLabel}}"
+msgstr ""
 
 msgid "No results found for "
 msgstr ""
 
-msgid "Choose an organisation unit in the form below"
+msgid "Choose an {{orgUnitLabel}} in the form below"
 msgstr ""
 
 msgid "None selected"
 msgstr "Бирор нима танланмаган"
 
-msgid "Choose an organisation unit"
-msgstr "Ташкилий бирликни танланг"
+msgid "Choose an {{orgUnitLabel}}"
+msgstr ""
 
 msgid "Choose a {{categoryName}}"
 msgstr ""
@@ -1210,7 +1177,7 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Қидирув турини танланг ва қидиришни бошланг"
 
-msgid "{{trackedEntityName}} has no searchable attributes"
+msgid "{{trackedEntityName}} has no searchable {{attributesLabel}}"
 msgstr ""
 
 msgid ""
@@ -1234,7 +1201,7 @@ msgid ""
 "Not finding the results you were looking for? Try searching in all programs."
 msgstr ""
 
-msgid "No searchable attributes for {{trackedEntityName}}"
+msgid "No searchable {{attributesLabel}} for {{trackedEntityName}}"
 msgstr ""
 
 msgid "Search in all programs"
@@ -1255,7 +1222,8 @@ msgid ""
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
-msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
+msgid ""
+"Fill in this {{attributeLabel}} to search{{escape}} {{searchableAttributes}}"
 msgstr ""
 
 msgid ""
@@ -1283,8 +1251,8 @@ msgid "This search returned too many results to show."
 msgstr ""
 
 msgid ""
-"Try changing search terms or searching by more attributes to narrow down the"
-" results."
+"Try changing search terms or searching by more {{attributesLabel}} to narrow"
+" down the results."
 msgstr ""
 
 msgid "Cannot search in all programs"
@@ -1313,8 +1281,8 @@ msgstr ""
 msgid "Create new in another program..."
 msgstr ""
 
-msgid "Create new event"
-msgstr "Янги тадбир яратинг"
+msgid "Create new {{eventLabel}}"
+msgstr "Янги {{eventLabel}} яратиш"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
@@ -1337,32 +1305,32 @@ msgstr "Тайинланган"
 msgid "Edit"
 msgstr "Таҳрирлаш"
 
-msgid "No one is assigned to this event"
-msgstr "Ушбу ҳодиса/тадбирга ҳеч ким бириктирилмаган"
+msgid "No one is assigned to this {{eventLabel}}"
+msgstr ""
 
 msgid "Assign"
 msgstr "Тайинланган"
 
+msgid "Check for {{enrollmentsLabel}}"
+msgstr ""
+
 msgid "This program is protected"
 msgstr "Ушбу дастур ҳимояланган"
 
-msgid "Reason to check for enrollments"
-msgstr ""
-
 msgid ""
-"Describe the reason you are checking for enrollments in this protected "
-"program"
-msgstr ""
-
-msgid "Check for enrollments"
-msgstr ""
-
-msgid ""
-"You must provide a reason to check for enrollments in this protected "
-"program."
+"You must provide a reason to check for {{enrollmentsLabel}} in this "
+"protected program."
 msgstr ""
 
 msgid "All activity will be logged."
+msgstr ""
+
+msgid "Reason to check for {{enrollmentsLabel}}"
+msgstr ""
+
+msgid ""
+"Describe the reason you are checking for {{enrollmentsLabel}} in this "
+"protected program"
 msgstr ""
 
 msgid "Unsaved changes"
@@ -1371,13 +1339,14 @@ msgstr "Сақланмаган ўзгартиришлар"
 msgid "Continue data entry"
 msgstr ""
 
-msgid "Enrollment actions"
+msgid "{{enrollmentLabel}} actions"
 msgstr ""
 
 msgid "We are processing your request."
 msgstr ""
 
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
+msgid ""
+"Only one {{enrollmentLabel}} per {{tetName}} is allowed in this program"
 msgstr ""
 
 msgid "Add new"
@@ -1389,26 +1358,26 @@ msgstr ""
 msgid "Mark as cancelled"
 msgstr "\"Бекор қилинди\" деб белгилаш"
 
-msgid "You do not have access to delete this enrollment"
+msgid "You do not have access to delete this {{enrollmentLabel}}"
 msgstr ""
 
-msgid "Delete enrollment"
-msgstr "Рўйхатдан ўтказиш ўчирилсин "
+msgid "Delete {{enrollmentLabel}}"
+msgstr "Ўчириб ташлаш {{enrollmentLabel}}"
 
-msgid "Are you sure you want to delete this enrollment?"
+msgid "Are you sure you want to delete this {{enrollmentLabel}}?"
 msgstr ""
 
-msgid "This will permanently remove the current enrollment."
+msgid "This will permanently remove the current {{enrollmentLabel}}."
 msgstr ""
 
-msgid "Yes, delete enrollment."
+msgid "Yes, delete {{enrollmentLabel}}."
 msgstr ""
 
-msgid "Remove mark for follow-up"
+msgid "Remove mark for {{followUpLabel}}"
 msgstr ""
 
-msgid "Mark for follow-up"
-msgstr "Кузатув учун белгиланг"
+msgid "Mark for {{followUpLabel}}"
+msgstr ""
 
 msgid "Transfer"
 msgstr "Ўтказиш"
@@ -1416,7 +1385,7 @@ msgstr "Ўтказиш"
 msgid "An error occurred while transferring ownership"
 msgstr ""
 
-msgid "Existing dates for auto-generated events will not be updated."
+msgid "Existing dates for auto-generated {{eventsLabel}} will not be updated."
 msgstr ""
 
 msgid "Latitude"
@@ -1447,32 +1416,26 @@ msgid "Set area"
 msgstr "Ҳудудни белгиланг"
 
 msgid ""
-"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"Transferring {{enrollmentLabel}} ownership from {{ownerOrgUnit}} to "
 "{{newOrgUnit}}{{escape}}"
-msgstr ""
-
-msgid ""
-"You will lose access to the enrollment when transferring ownership to "
-"{{organisationUnit}}."
 msgstr ""
 
 msgid "Transfer Ownership"
 msgstr ""
 
 msgid ""
-"Choose the organisation unit to which enrollment ownership should be "
-"transferred."
+"Choose the {{orgUnitLabel}} to which {{enrollmentLabel}} ownership should be"
+" transferred."
 msgstr ""
 
-msgid "Enrollment date"
-msgstr "Қайд этилган сана"
+msgid "{{enrollmentLabel}} date"
+msgstr ""
 
 msgid "Incident date"
 msgstr "Ҳодиса санаси"
 
-msgid "Enrollment widget could not be loaded. Please try again later"
+msgid "{{enrollmentLabel}} widget could not be loaded. Please try again later"
 msgstr ""
-"Қайд этиш виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
 msgid "Started at{{escape}}"
 msgstr ""
@@ -1489,10 +1452,7 @@ msgstr "Координаталар ни киритиш"
 msgid "Add area"
 msgstr ""
 
-msgid "Program stage not found"
-msgstr "Дастур босқичлари топилмади"
-
-msgid "organisation unit could not be retrieved. Please try again later."
+msgid "{{orgUnitLabel}} could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1501,16 +1461,16 @@ msgstr ""
 msgid "Saving to {{stageName}} for {{programName}}"
 msgstr ""
 
-msgid "program or stage is invalid"
+msgid "Program or {{programStageLabel}} is invalid"
 msgstr ""
 
-msgid "Notes about this enrollment"
+msgid "{{notesLabel}} about this {{enrollmentLabel}}"
 msgstr ""
 
-msgid "Write a note about this enrollment"
+msgid "Write a {{noteLabel}} about this {{enrollmentLabel}}"
 msgstr ""
 
-msgid "This enrollment doesn't have any notes"
+msgid "This {{enrollmentLabel}} doesn't have any {{notesLabel}}"
 msgstr ""
 
 msgid "Error"
@@ -1519,16 +1479,16 @@ msgstr "Хатолик"
 msgid "Warning"
 msgstr "Огоҳлантириш"
 
-msgid "stage not found in rules execution"
+msgid "{{programStageLabel}} not found in rules execution"
 msgstr ""
 
-msgid "Are you sure you want to delete this event? "
+msgid "Are you sure you want to delete this {{eventLabel}}? "
 msgstr ""
 
-msgid "Go to “Schedule” tab to reschedule this event"
+msgid "Go to “Schedule” tab to reschedule this {{eventLabel}}"
 msgstr ""
 
-msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
+msgid "Scheduled date cannot be changed for {{ eventStatus }} {{eventsLabel}}"
 msgstr ""
 
 msgid "Geometry (Area)"
@@ -1544,12 +1504,12 @@ msgid "No polygon captured"
 msgstr "Кўпбурчак ушланмади"
 
 msgid "{{eventLabel}} completed"
+msgstr "{{eventLabel}} - якунланди"
+
+msgid "{{notesLabel}} about this {{eventLabel}}"
 msgstr ""
 
-msgid "Notes about this event"
-msgstr ""
-
-msgid "Write a note about this event"
+msgid "Write a {{noteLabel}} about this {{eventLabel}}"
 msgstr ""
 
 msgid "after"
@@ -1570,37 +1530,24 @@ msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
-msgid ""
-"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
-"this day."
-msgid_plural ""
-"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
-"this day."
-msgstr[0] ""
-
 msgid "Schedule date / Due date"
 msgstr ""
 
-msgid "Please provide a valid organisation unit"
-msgstr "Илтимос, тўғри ташкилий бўлимни кўрсатинг"
-
 msgid ""
-"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+"Scheduling an {{eventLabel}} in {{stageName}} for {{programName}} in "
+"{{orgUnitName}}"
 msgstr ""
 
-msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgid "Scheduling an {{eventLabel}} in {{stageName}} for {{programName}}"
 msgstr ""
 
 msgid "Schedule info"
 msgstr ""
 
-msgid "Event notes"
+msgid "{{eventLabel}} {{notesLabel}}"
 msgstr ""
 
-msgid "Write a note about this scheduled event"
-msgstr ""
-
-msgid "Program or stage is invalid"
+msgid "Write a {{noteLabel}} about this scheduled {{eventLabel}}"
 msgstr ""
 
 msgid "Feedback"
@@ -1609,8 +1556,8 @@ msgstr "Қайта алоқа"
 msgid "Indicators"
 msgstr "Индикаторлар"
 
-msgid "Save note"
-msgstr "Изоҳни сақлаш"
+msgid "Save {{noteLabel}}"
+msgstr ""
 
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
@@ -1622,7 +1569,8 @@ msgid "Change information about this {{trackedEntityName}} here."
 msgstr ""
 
 msgid ""
-"Information about this enrollment can be edited in the Enrollment widget."
+"Information about this {{enrollmentLabel}} can be edited in the "
+"{{enrollmentLabel}} widget."
 msgstr ""
 
 msgid "{{trackedEntityName}} profile"
@@ -1683,7 +1631,7 @@ msgstr "Ўчириб ташлаш {{trackedEntityTypeName}}"
 msgid ""
 "Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
 "permanently remove the {{trackedEntityTypeName}} and all its associated "
-"enrollments and events in all programs."
+"{{enrollmentsLabel}} and {{eventsLabel}} in all programs."
 msgstr ""
 
 msgid "There was a problem deleting the {{trackedEntityTypeName}}"
@@ -1699,49 +1647,52 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "Профила виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
-msgid "No attributes configured"
+msgid "No {{attributesLabel}} configured for {{trackedEntityTypeName}}"
 msgstr ""
 
-msgid "No attributes configured to display"
+msgid "No {{attributesLabel}} configured"
+msgstr ""
+
+msgid "No {{attributesLabel}} configured to display"
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
-msgid "Choose a {{linkableStageLabel}} event"
+msgid "Choose a {{linkableStageLabel}} {{eventLabel}}"
 msgstr ""
 
-msgid "Select an event"
+msgid "Select an {{eventLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} can only have one event"
-msgstr ""
-
-msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr ""
-
-msgid "Actions - {{relationshipName}}"
-msgstr ""
-
-msgid "Ambiguous relationships, contact system administrator"
-msgstr ""
-
-msgid "Enter details"
-msgstr ""
-
-msgid "Linked event"
+msgid "{{ linkableStageLabel }} can only have one {{eventLabel}}"
 msgstr ""
 
 msgid "Enter details now"
 msgstr ""
 
-msgid "Link to an existing event"
+msgid "{{ linkableStageLabel }} has no linkable {{eventsLabel}}"
 msgstr ""
 
-msgid "The event was successfully linked"
+msgid "Link to an existing {{eventLabel}}"
+msgstr "Мавжуд  {{eventLabel}} га ҳавола"
+
+msgid "Actions - {{relationshipName}}"
 msgstr ""
 
-msgid "An error occurred while linking the event"
+msgid "Ambiguous {{relationshipsLabel}}, contact system administrator"
+msgstr ""
+
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked {{eventLabel}}"
+msgstr ""
+
+msgid "The {{eventLabel}} was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the {{eventLabel}}"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1753,13 +1704,13 @@ msgstr "Ҳисобот санаси"
 msgid "Please enter a date"
 msgstr ""
 
-msgid "Please select a valid event"
+msgid "Please select a valid {{eventLabel}}"
 msgstr ""
 
-msgid "This stage can only have one event"
+msgid "This {{programStageLabel}} can only have one {{eventLabel}}"
 msgstr ""
 
-msgid "New {{ eventName }} event"
+msgid "New {{ eventName }} {{eventLabel}}"
 msgstr ""
 
 msgid "Show {{ rest }} more"
@@ -1768,12 +1719,8 @@ msgstr ""
 msgid "Go to full {{ eventName }}"
 msgstr ""
 
-msgid "Events could not be retrieved. Please try again later."
+msgid "{{eventsLabel}} could not be retrieved. Please try again later."
 msgstr ""
-
-msgid "{{ count }} event"
-msgid_plural "{{ count }} event"
-msgstr[0] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr ""
@@ -1781,56 +1728,59 @@ msgstr ""
 msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
-msgid "No stages found in this program"
+msgid "No {{programStagesLabel}} found in this program"
 msgstr ""
 
 msgid "{{programStagesLabel}} and {{eventsLabel}}"
 msgstr ""
 
-msgid "An error occurred while unlinking and deleting the event."
+msgid "An error occurred while unlinking and deleting the {{eventLabel}}."
 msgstr ""
 
-msgid "Unlink and delete linked event"
-msgstr ""
-
-msgid "Are you sure you want to remove the link and delete the linked event?"
+msgid "Unlink and delete linked {{eventLabel}}"
 msgstr ""
 
 msgid ""
-"This action permanently removes the link, linked event, and all related "
-"data."
+"Are you sure you want to remove the link and delete the linked "
+"{{eventLabel}}?"
 msgstr ""
 
-msgid "Yes, unlink and delete linked event"
+msgid ""
+"This action permanently removes the link, linked {{eventLabel}}, and all "
+"related data."
 msgstr ""
 
-msgid "Unlink event"
+msgid "Yes, unlink and delete linked {{eventLabel}}"
 msgstr ""
 
-msgid "Are you sure you want to remove the link between these events?"
+msgid "Unlink {{eventLabel}}"
 msgstr ""
 
-msgid "This action removes the link itself, but the linked event will remain."
+msgid ""
+"Are you sure you want to remove the link between these {{eventsLabel}}?"
 msgstr ""
 
-msgid "Yes, unlink event"
+msgid ""
+"This action removes the link itself, but the linked {{eventLabel}} will "
+"remain."
 msgstr ""
 
-msgid "View linked event"
+msgid "Yes, unlink {{eventLabel}}"
 msgstr ""
 
-msgid "You do not have access to remove the link between these events"
+msgid "View linked {{eventLabel}}"
 msgstr ""
 
-msgid "You do not have access to remove the link and delete the linked event"
+msgid ""
+"You do not have access to remove the link between these {{eventsLabel}}"
+msgstr ""
+
+msgid ""
+"You do not have access to remove the link and delete the linked "
+"{{eventLabel}}"
 msgstr ""
 
 msgid "An error occurred while loading the widget."
-msgstr ""
-
-msgid ""
-"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
-"the linked event details before entering data below"
 msgstr ""
 
 msgid "Scheduled"
@@ -1878,50 +1828,48 @@ msgstr "Файл"
 msgid "Image"
 msgstr "Расм"
 
-msgid "New {{trackedEntityTypeName}} relationship"
+msgid "New {{trackedEntityTypeName}} {{relationshipLabel}}"
 msgstr ""
 
 msgid "Missing implementation step"
 msgstr ""
 
-msgid "Go back without saving relationship"
+msgid "Go back without saving {{relationshipLabel}}"
 msgstr ""
 
-msgid "New Relationship"
-msgstr ""
+msgid "New {{relationshipLabel}}"
+msgstr "Янги {{relationshipLabel}}"
 
 msgid "Link to an existing {{tetName}}"
 msgstr "Мавжуд  {{tetName}} га ҳавола"
 
-msgid "An error occurred while adding the relationship"
+msgid "An error occurred while adding the {{relationshipLabel}}"
 msgstr ""
 
 msgid ""
-"Something went wrong while loading relationships. Please try again later."
+"Something went wrong while loading {{relationshipsLabel}}. Please try again "
+"later."
 msgstr ""
 
-msgid "{{trackedEntityTypeName}} relationships"
+msgid "{{trackedEntityTypeName}} {{relationshipsLabel}}"
 msgstr ""
 
-msgid "Delete relationship"
-msgstr "Алоқаларни ўчиринг"
+msgid "Delete {{relationshipLabel}}"
+msgstr "Ўчириб ташлаш {{relationshipLabel}}"
 
-msgid "Deleting the relationship is permanent and cannot be undone."
+msgid "Deleting the {{relationshipLabel}} is permanent and cannot be undone."
 msgstr ""
 
-msgid "Are you sure you want to delete this relationship?"
+msgid "Are you sure you want to delete this {{relationshipLabel}}?"
 msgstr ""
 
-msgid "Yes, delete relationship"
+msgid "Yes, delete {{relationshipLabel}}"
 msgstr ""
 
-msgid "An error occurred while deleting the relationship."
+msgid "An error occurred while deleting the {{relationshipLabel}}."
 msgstr ""
 
-msgid "To open this relationship, please wait until saving is complete"
-msgstr ""
-
-msgid "This enrollment doesn't have any relationships"
+msgid "This {{enrollmentLabel}} doesn't have any {{relationshipsLabel}}"
 msgstr ""
 
 msgid "Type"
@@ -1930,13 +1878,15 @@ msgstr "Тури"
 msgid "Created date"
 msgstr ""
 
-msgid "Program stage name"
-msgstr "Дастур босқичи номи"
+msgid "{{programStageLabel}} name"
+msgstr ""
 
 msgid "Working list could not be loaded"
 msgstr "Ишчи рўйхатни юклаб бўлмади"
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be deleted"
+msgid ""
+"{{occurredAt}} belongs to an expired period. {{eventLabel}} cannot be "
+"deleted"
 msgstr ""
 
 msgid "Download data..."
@@ -1945,175 +1895,161 @@ msgstr "Маълумотларни юклаб олиш ..."
 msgid "an error occurred loading working lists"
 msgstr "ишчи рўйхатни юклашда хатолик юз берди"
 
-msgid "You do not have access to complete events"
+msgid "You do not have access to complete {{eventsLabel}}"
 msgstr ""
 
 msgid "There is a bulk data entry with unsaved changes"
 msgstr ""
 
-msgid "Complete events"
+msgid "Complete {{eventsLabel}}"
 msgstr ""
 
-msgid "Are you sure you want to complete all active events in selection?"
+msgid ""
+"Are you sure you want to complete all active {{eventsLabel}} in selection?"
 msgstr ""
 
-msgid "There are no active events to complete in the current selection."
+msgid ""
+"There are no active {{eventsLabel}} to complete in the current selection."
 msgstr ""
 
-msgid "Error completing events"
+msgid "Error completing {{eventsLabel}}"
 msgstr ""
 
-msgid "There was an error completing the events."
+msgid "There was an error completing the {{eventsLabel}}."
 msgstr ""
 
-msgid "Details (Advanced)"
+msgid "An error occurred while completing {{eventsLabel}}"
 msgstr ""
 
-msgid "An unknown error occurred."
+msgid "You do not have access to delete {{eventsLabel}}"
 msgstr ""
 
-msgid "An error occurred while completing events"
-msgstr ""
-
-msgid "You do not have access to delete events"
-msgstr ""
-
-msgid "An error occurred while deleting the events"
-msgstr ""
-
-msgid "Delete events"
-msgstr ""
+msgid "Delete {{eventsLabel}}"
+msgstr "Ўчириб ташлаш {{eventsLabel}}"
 
 msgid "This cannot be undone."
 msgstr ""
 
-msgid "Are you sure you want to delete the selected events?"
+msgid "Are you sure you want to delete the selected {{eventsLabel}}?"
 msgstr ""
 
-msgid "Owner organisation unit"
+msgid "Error deleting {{eventsLabel}}"
+msgstr ""
+
+msgid ""
+"There was an error while deleting the {{eventsLabel}}. Please see the "
+"details below."
+msgstr ""
+
+msgid "An error occurred while deleting the {{eventsLabel}}"
+msgstr ""
+
+msgid "Owner {{orgUnitLabel}}"
 msgstr ""
 
 msgid "Registration Date"
 msgstr "Рўйхатга олинган сана"
 
-msgid "Enrollment status"
-msgstr "Рўйхатга олиш ҳолати"
-
-msgid "Follow up"
-msgstr "Кузатиб бориш"
-
-msgid "Choose a program stage to filter by {{label}}"
+msgid "{{eventLabel}} {{orgUnitLabel}}"
 msgstr ""
 
-msgid "You do not have access to bulk complete enrollments"
+msgid "{{enrollmentLabel}} status"
 msgstr ""
 
-msgid ""
-"Some enrollments were completed successfully, but there was an error while "
-"completing the rest. Please see the details below."
+msgid "Choose a {{programStageLabel}} to filter by {{label}}"
+msgstr ""
+
+msgid "You do not have access to bulk complete {{enrollmentsLabel}}"
 msgstr ""
 
 msgid ""
-"There was an error while completing the enrollments. Please see the details "
-"below."
+"An unexpected error occurred while fetching the {{enrollmentsLabel}}. Please"
+" try again."
+msgstr ""
+
+msgid "There are currently no active {{enrollmentsLabel}} in the selection."
+msgstr ""
+
+msgid "All {{enrollmentsLabel}} are already completed or cancelled."
 msgstr ""
 
 msgid ""
-"An unexpected error occurred while fetching the enrollments. Please try "
-"again."
-msgstr ""
-
-msgid "There are currently no active enrollments in the selection."
-msgstr ""
-
-msgid "All enrollments are already completed or cancelled."
-msgstr ""
-
-msgid ""
-"This action will complete {{count}} active enrollment in your selection."
+"This action will complete {{count}} active {{enrollmentLabel}} in your "
+"selection."
 msgid_plural ""
-"This action will complete {{count}} active enrollment in your selection."
+"This action will complete {{count}} active {{enrollmentLabel}} in your "
+"selection."
 msgstr[0] ""
 
-msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid ""
+"{{count}} {{enrollmentLabel}} already marked as completed will not be "
+"changed."
 msgid_plural ""
-"{{count}} enrollment already marked as completed will not be changed."
+"{{count}} {{enrollmentLabel}} already marked as completed will not be "
+"changed."
 msgstr[0] ""
 
-msgid "Mark all events within enrollments as complete"
+msgid "Mark all {{eventsLabel}} within {{enrollmentsLabel}} as complete"
 msgstr ""
 
-msgid "Complete enrollments"
+msgid "Complete {{enrollmentsLabel}}"
 msgstr ""
 
-msgid "Error completing enrollments"
+msgid "No active {{enrollmentsLabel}} to complete"
 msgstr ""
 
-msgid "No active enrollments to complete"
-msgstr ""
-
-msgid "Complete {{count}} enrollment"
-msgid_plural "Complete {{count}} enrollment"
+msgid "Complete {{count}} {{enrollmentLabel}}"
+msgid_plural "Complete {{count}} {{enrollmentLabel}}"
 msgstr[0] ""
 
-msgid "An error occurred when completing the enrollments"
+msgid "Error completing {{enrollmentsLabel}}"
 msgstr ""
 
-msgid "An unknown error occurred when completing enrollments"
+msgid "An error occurred when completing the {{enrollmentsLabel}}"
 msgstr ""
 
-msgid "You do not have access to delete enrollments"
+msgid "An unknown error occurred when completing {{enrollmentsLabel}}"
 msgstr ""
 
-msgid "Delete enrollments"
-msgstr ""
-
-msgid "Delete selected enrollments"
+msgid "You do not have access to delete {{enrollmentsLabel}}"
 msgstr ""
 
 msgid ""
-"An error occurred while loading the selected enrollments. Please try again."
+"An error occurred while loading the selected {{enrollmentsLabel}}. Please "
+"try again."
+msgstr ""
+
+msgid "Active {{enrollmentsLabel}} ({{count}})"
+msgid_plural "Active {{enrollmentsLabel}} ({{count}})"
+msgstr[0] ""
+
+msgid "Completed {{enrollmentsLabel}} ({{count}})"
+msgid_plural "Completed {{enrollmentsLabel}} ({{count}})"
+msgstr[0] ""
+
+msgid "Cancelled {{enrollmentsLabel}} ({{count}})"
+msgid_plural "Cancelled {{enrollmentsLabel}} ({{count}})"
+msgstr[0] ""
+
+msgid "Error deleting {{enrollmentsLabel}}"
 msgstr ""
 
 msgid ""
-"This action will permanently delete the selected enrollments, including all "
-"associated data and events."
+"There was an error while deleting the {{enrollmentsLabel}}. Please see the "
+"details below."
 msgstr ""
 
-msgid "Active enrollments ({{count}})"
-msgid_plural "Active enrollments ({{count}})"
-msgstr[0] ""
-
-msgid "Completed enrollments ({{count}})"
-msgid_plural "Completed enrollments ({{count}})"
-msgstr[0] ""
-
-msgid "Cancelled enrollments ({{count}})"
-msgid_plural "Cancelled enrollments ({{count}})"
-msgstr[0] ""
-
-msgid "Delete {{count}} enrollment"
-msgid_plural "Delete {{count}} enrollment"
-msgstr[0] ""
-
-msgid "An error occurred when deleting enrollments"
+msgid "Delete selected {{enrollmentsLabel}}"
 msgstr ""
 
-msgid "Delete {{ trackedEntityName }} with all enrollments"
-msgstr ""
-
-msgid "Delete {{count}} {{ trackedEntityName }}"
-msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgid "Delete {{count}} {{enrollmentLabel}}"
+msgid_plural "Delete {{count}} {{enrollmentLabel}}"
 msgstr[0] ""
 
-msgid ""
-"Deleting records will also delete any associated enrollments and events."
-msgstr ""
+msgid "Delete {{enrollmentsLabel}}"
+msgstr "Ўчириб ташлаш {{enrollmentsLabel}}"
 
-msgid "Are you sure you want to delete?"
-msgstr ""
-
-msgid "An error occurred while deleting the records"
+msgid "An error occurred when deleting {{enrollmentsLabel}}"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -2177,6 +2113,12 @@ msgstr[0] "{{count}} танланган"
 msgid "Deselect all"
 msgstr "Барча танланганни бекор қилиш"
 
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"
 
@@ -2195,23 +2137,14 @@ msgstr ""
 msgid "Must match the end of the value"
 msgstr ""
 
-msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
-
-msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
-
-msgid "Overdue"
-msgstr "Муддат ўтган"
-
-msgid "Skipped"
-msgstr "Ўтказиб юборилди"
-
-msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "
-
 msgid "enrollments"
 msgstr ""
+
+msgid "event"
+msgstr "ҳодиса/тадбир"
+
+msgid "events"
+msgstr "ҳодиса/тадбирлар"
 
 msgid "program stage"
 msgstr ""
@@ -2243,17 +2176,32 @@ msgstr ""
 msgid "follow-up"
 msgstr ""
 
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Overdue"
+msgstr "Муддат ўтган"
+
+msgid "Skipped"
+msgstr "Ўтказиб юборилди"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "
+
 msgid "Program not found"
 msgstr "Дастур топилмади"
 
 msgid "Program is not a tracker program"
 msgstr "Дастур кузатув дастури эмас"
 
-msgid "Could not save event"
-msgstr "Ҳодиса/тадбирни сақлаб бўлмади"
+msgid "Could not save {{eventLabel}}"
+msgstr ""
 
-msgid "Could not delete event"
-msgstr "Ҳодиса/тадбирни ўчириб ташлаб бўлмади"
+msgid "Could not delete {{eventLabel}}"
+msgstr ""
 
 msgid "Could not save working list"
 msgstr "Ишчи рўйхат сақланмади"
@@ -2264,31 +2212,31 @@ msgstr "Ишчи рўйхатни қўшиб бўлмади"
 msgid "Could not delete working list"
 msgstr "Ишчи рўйхатни ўчириб ташлаб бўлмади"
 
-msgid "Organisation unit search failed."
-msgstr "Ташкилий бўлимни излаш амалга ошмади."
+msgid "Search failed. Please try again."
+msgstr ""
 
 msgid "Error saving tracked entity instance"
 msgstr "Кузатувдаги шахс нусхаларини сақлашда хатолик келиб чиқди"
 
-msgid "Error saving enrollment"
-msgstr "Қайдни сақлашда хатолик юзага келди"
-
-msgid "Error saving the enrollment event"
+msgid "Error saving {{enrollmentLabel}}"
 msgstr ""
 
-msgid "Error deleting the enrollment event"
+msgid "Error saving the {{enrollmentLabel}} {{eventLabel}}"
 msgstr ""
 
-msgid "Error editing the event, the changes made were not saved"
+msgid "Error deleting the {{enrollmentLabel}} {{eventLabel}}"
+msgstr ""
+
+msgid "Error editing the {{eventLabel}}, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
 msgstr ""
 
-msgid "Could not save enrollment note"
+msgid "Could not save {{enrollmentLabel}} {{noteLabel}}"
 msgstr ""
 
-msgid "Could not save event note"
+msgid "Could not save {{eventLabel}} {{noteLabel}}"
 msgstr ""
 
 msgid "There was an error fetching metadata"
@@ -2311,6 +2259,9 @@ msgstr "Илтимос, тўғри ёшни кўрсатинг"
 
 msgid "Please provide a valid phone number"
 msgstr "Илтимос, тўғри телефон рақамини кўрсатинг"
+
+msgid "Please provide a valid selection."
+msgstr ""
 
 msgid "This value already exists"
 msgstr "Бу қиймат аллақачон мавжуд"
@@ -2336,30 +2287,18 @@ msgid "Please enter a time"
 msgstr ""
 
 msgid ""
-"The following attribute type is not supported for searching and has been "
-"hidden"
+"The following {{attributeLabel}} type is not supported for searching and has"
+" been hidden"
 msgid_plural ""
-"The following attribute type is not supported for searching and has been "
-"hidden"
+"The following {{attributeLabel}} type is not supported for searching and has"
+" been hidden"
 msgstr[0] ""
 
-msgid "Some attributes are hidden"
+msgid "Some {{attributesLabel}} are hidden"
 msgstr ""
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
-
-msgid "From date"
-msgstr "Санадан бошлаб"
-
-msgid "From time"
-msgstr "Вақтдан бошлаб"
-
-msgid "To date"
-msgstr "Шу кунгача"
-
-msgid "To time"
-msgstr "Шу вақтгача"
 
 msgid "Page {{currentPage}}"
 msgstr "{{currentPage}} саҳифаси"
