@@ -58,23 +58,33 @@ Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) 
 
 Given('you select the schedule tab', () => {
     cy.get('[data-test="new-event-schedule-tab"]')
+        .first()
+        .scrollIntoView()
+        .should('be.visible')
         .click();
 });
 
 When('you add a note to the event', () => {
     cy.get('[data-test="note-textfield"]')
+        .first()
+        .scrollIntoView()
+        .should('be.visible')
         .type('This is a note')
         .blur();
 
     cy.get('[data-test="add-note-btn"]')
+        .first()
+        .scrollIntoView()
+        .should('be.visible')
         .click();
 });
 
 And('the events saves successfully', () => {
     cy.intercept('POST', '**/tracker?async=false').as('postEvent');
 
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Schedule')
+    cy.contains('[data-test="dhis2-uicore-button"]', 'Schedule')
+        .scrollIntoView()
+        .should('be.visible')
         .click();
 
     cy.wait('@postEvent')
@@ -91,17 +101,21 @@ When(/^you click the create new button number (.*)$/, (eq) => {
 When(/^you type (.*) in the input number (.*)$/, (value, eq) => {
     cy.get('input[type="text"]')
         .eq(eq)
+        .scrollIntoView()
+        .should('be.visible')
         .type(value)
         .blur();
 });
 
 When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
-    cy
-        .get('[data-test="new-enrollment-event-form"]')
-        .get('[data-test="dhis2-simplesingleselect"]')
+    cy.get('[data-test="new-enrollment-event-form"]')
+        .find('[data-test="dhis2-simplesingleselect"]')
         .eq(eq)
-        .click()
-        .get('[role="option"]:visible')
+        .scrollIntoView()
+        .should('be.visible')
+        .click();
+
+    cy.get('[role="option"]:visible')
         .contains(value)
         .click();
 });
@@ -113,8 +127,9 @@ When(/^you click the checkbox number (.*)$/, (eq) => {
 });
 
 When(/^you click the button to (.*) without post request/, (buttonText) => {
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains(buttonText)
+    cy.contains('[data-test="dhis2-uicore-button"]', buttonText)
+        .scrollIntoView()
+        .should('be.visible')
         .click();
 });
 
@@ -124,7 +139,8 @@ When('the enrollment overview is finished loading', () => {
 
 When('the form is finished loading', () => {
     cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing')
-        .should('exist');
+        .scrollIntoView()
+        .should('be.visible');
 });
 
 
@@ -170,13 +186,16 @@ Then(/^the input should throw an error with error-message (.*)$/, (error) => {
 
 Then('there should be a modal popping up', () => {
     cy.contains('[data-test="modal-ask-to-create-new"]', 'Generate new event')
-        .should('exist');
+        .scrollIntoView()
+        .should('be.visible');
 });
 
 When(/^you choose option (.*) in the modal$/, (buttonText) => {
     cy.get('[data-test="modal-ask-to-create-new"]')
         .find('[data-test="dhis2-uicore-button"]')
         .contains(buttonText)
+        .scrollIntoView()
+        .should('be.visible')
         .click();
 });
 

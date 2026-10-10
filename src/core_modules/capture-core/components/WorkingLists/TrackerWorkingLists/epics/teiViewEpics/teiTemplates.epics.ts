@@ -102,8 +102,8 @@ export const deleteTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStor
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(
-            ({ payload: { workingListsType, programStageId } }) =>
-                workingListsType === TRACKER_WORKING_LISTS_TYPE && !programStageId,
+            ({ payload: { workingListsType, template } }) =>
+                workingListsType === TRACKER_WORKING_LISTS_TYPE && !template?.criteria?.programStage,
         ),
         concatMap(({ payload: { template, storeId, callBacks: { onChangeTemplate } } }) => {
             const requestPromise = mutate({

@@ -113,8 +113,8 @@ export const deleteProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(
-            ({ payload: { workingListsType, programStageId } }) =>
-                workingListsType === TRACKER_WORKING_LISTS_TYPE && programStageId,
+            ({ payload: { workingListsType, template } }) =>
+                workingListsType === TRACKER_WORKING_LISTS_TYPE && template?.criteria?.programStage,
         ),
         concatMap(
             ({

@@ -216,6 +216,16 @@ When(/^you save the current (event|tracker|program stage) view$/, (listName) => 
     cy.get('button').contains('Save').click();
 
     cy.wait('@createView');
+
+    cy.reload();
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains(VIEW_NAME)
+        .parent()
+        .then(($chip) => {
+            if (!$chip.hasClass('selected')) {
+                cy.wrap($chip).click();
+            }
+        });
 });
 
 When('you share the view with the other user', () => {
