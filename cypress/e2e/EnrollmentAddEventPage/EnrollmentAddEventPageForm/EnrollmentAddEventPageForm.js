@@ -53,7 +53,14 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) => {
+    cy.intercept('POST', '**/tracker?async=false').as('postNewEvent');
     cy.visit(url);
+});
+
+And('the new event request has completed', () => {
+    cy.wait('@postNewEvent', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 200);
 });
 
 Given('you select the schedule tab', () => {
@@ -71,13 +78,11 @@ When('you add a note to the event', () => {
 });
 
 And('the events saves successfully', () => {
-    cy.intercept('POST', '**/tracker?async=false').as('postEvent');
-
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Schedule')
         .click();
 
-    cy.wait('@postEvent')
+    cy.wait('@postNewEvent')
         .its('response.statusCode')
         .should('eq', 200);
 });
@@ -124,6 +129,8 @@ When('the enrollment overview is finished loading', () => {
 
 When('the form is finished loading', () => {
     cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing')
+        .should('exist');
+    cy.contains('[data-test="dataentry-field-orgUnit"]', 'Ngelehun CHC')
         .should('exist');
 });
 
