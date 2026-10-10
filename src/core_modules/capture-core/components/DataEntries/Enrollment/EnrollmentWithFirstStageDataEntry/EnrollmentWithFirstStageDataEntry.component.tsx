@@ -191,7 +191,6 @@ const getCompleteFieldSettingsFn = () => {
             placement: placements.BOTTOM,
             section: sectionKeysForFirstStageDataEntry.STATUS,
         }),
-        getPassOnFieldData: () => true,
     };
 
     return completeSettings;

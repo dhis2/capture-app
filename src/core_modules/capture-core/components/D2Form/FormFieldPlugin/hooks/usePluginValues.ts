@@ -26,7 +26,7 @@ export const usePluginValues = (
 
     const contextValues = useMemo(() => Object.entries(pluginContext)
         .reduce((acc, [key, value]) => {
-            acc[key] = value.value;
+            acc[key] = value?.value;
             return acc;
         }, {}), [pluginContext]);
 
