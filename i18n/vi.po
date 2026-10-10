@@ -1,14 +1,14 @@
 # Translators:
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026
 # Philip Larsen Donnelly, 2026
-# Mai Nguyen <thanhmai.jica@gmail.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# Mai Nguyen <thanhmai.jica@gmail.com>, 2026
 # Em Le <em.hispvietnam@gmail.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-29T12:48:58.340Z\n"
+"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Em Le <em.hispvietnam@gmail.com>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -71,16 +71,16 @@ msgid "View {{eventLabel}}"
 msgstr ""
 
 msgid "Edit {{eventLabel}}"
-msgstr ""
+msgstr "Chỉnh sửa {{eventLabel}}"
 
 msgid "New {{eventLabel}}"
-msgstr ""
+msgstr "{{eventLabel}} mới"
 
 msgid "Loading..."
 msgstr "Đang tải..."
 
 msgid "{{eventLabel}} list"
-msgstr ""
+msgstr "Danh sách {{eventLabel}}"
 
 msgid "More"
 msgstr "Thêm"
@@ -145,6 +145,12 @@ msgstr "Khu vực"
 msgid "Coordinate"
 msgstr "Tọa độ"
 
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
+msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
 msgid "Complete {{eventLabel}}"
 msgstr ""
 
@@ -170,9 +176,6 @@ msgstr "{{ stageName }}- Cấp cho"
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }}-Tình trạng"
 
-msgid "Please select {{categoryName}}"
-msgstr "Hãy chọn {{categoryName}}"
-
 msgid "A date in the future is not allowed"
 msgstr "Không được phép nhập ngày trong tương lai"
 
@@ -189,6 +192,11 @@ msgstr "Hủy"
 
 msgid "Metadata error. see log for details"
 msgstr "Lỗi siêu dữ liệu. xem nhật ký để biết chi tiết"
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }}- Chi tiết"
@@ -419,6 +427,9 @@ msgstr ""
 msgid "Operations running"
 msgstr "Hoạt động đang chạy"
 
+msgid "Please select {{categoryName}}"
+msgstr "Hãy chọn {{categoryName}}"
+
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
 
@@ -444,7 +455,7 @@ msgid "An error occurred while deleting the {{eventLabel}}"
 msgstr ""
 
 msgid "Delete {{eventLabel}}"
-msgstr ""
+msgstr "Xóa {{eventLabel}}"
 
 msgid "Deleting an {{eventLabel}} is permanent and cannot be undone."
 msgstr ""
@@ -453,7 +464,7 @@ msgid "Are you sure you want to delete this {{eventLabel}}?"
 msgstr ""
 
 msgid "Yes, delete {{eventLabel}}"
-msgstr ""
+msgstr "Có, xóa {{eventLabel}}"
 
 msgid "Unskip"
 msgstr "Quay lại"
@@ -1033,7 +1044,7 @@ msgid "Search {{uniqueAttrName}}"
 msgstr "Tìm kiếm {{uniqueAttrName}}"
 
 msgid "Search by {{attributesLabel}}"
-msgstr ""
+msgstr "Tìm bởi {{attributesLabel}}"
 
 msgid "Fill in at least {{count}} {{attributeLabel}} to search"
 msgid_plural "Fill in at least {{count}} {{attributeLabel}} to search"
@@ -1288,7 +1299,7 @@ msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new {{eventLabel}}"
-msgstr ""
+msgstr "Tạo {{eventLabel}} mới"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Tìm kiếm {{trackedEntityName}} trong {{programName}}"
@@ -1365,10 +1376,10 @@ msgid "Mark as cancelled"
 msgstr "Đánh dấu là đã hủy"
 
 msgid "You do not have access to delete this {{enrollmentLabel}}"
-msgstr ""
+msgstr "Bạn không có quyền xóa {{enrollmentLabel}}này"
 
 msgid "Delete {{enrollmentLabel}}"
-msgstr ""
+msgstr "Xóa {{enrollmentLabel}}"
 
 msgid "Are you sure you want to delete this {{enrollmentLabel}}?"
 msgstr ""
@@ -1510,7 +1521,7 @@ msgid "No polygon captured"
 msgstr "Không có bản đồ ranh giới nào được thêm"
 
 msgid "{{eventLabel}} completed"
-msgstr ""
+msgstr "{{eventLabel}} đã hoàn thành"
 
 msgid "{{notesLabel}} about this {{eventLabel}}"
 msgstr ""
@@ -1565,7 +1576,7 @@ msgid "Indicators"
 msgstr "Các chỉ số"
 
 msgid "Save {{noteLabel}}"
-msgstr ""
+msgstr "Lưu {{noteLabel}}"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr "Chỉnh sửa {{trackedEntityName}}"
@@ -1682,7 +1693,7 @@ msgid "{{ linkableStageLabel }} has no linkable {{eventsLabel}}"
 msgstr ""
 
 msgid "Link to an existing {{eventLabel}}"
-msgstr ""
+msgstr "Liên kết với một {{eventLabel}}đã tồn tại"
 
 msgid "Actions - {{relationshipName}}"
 msgstr "Hành động - {{relationshipName}}"
@@ -1845,7 +1856,7 @@ msgid "Go back without saving {{relationshipLabel}}"
 msgstr ""
 
 msgid "New {{relationshipLabel}}"
-msgstr ""
+msgstr "{{relationshipLabel}} mới"
 
 msgid "Link to an existing {{tetName}}"
 msgstr "Liên kết với một {{tetName}}đã tồn tại"
@@ -1862,7 +1873,7 @@ msgid "{{trackedEntityTypeName}} {{relationshipsLabel}}"
 msgstr ""
 
 msgid "Delete {{relationshipLabel}}"
-msgstr ""
+msgstr "Xóa {{relationshipLabel}}"
 
 msgid "Deleting the {{relationshipLabel}} is permanent and cannot be undone."
 msgstr ""
@@ -1871,7 +1882,7 @@ msgid "Are you sure you want to delete this {{relationshipLabel}}?"
 msgstr ""
 
 msgid "Yes, delete {{relationshipLabel}}"
-msgstr ""
+msgstr "Có, xóa {{relationshipLabel}}"
 
 msgid "An error occurred while deleting the {{relationshipLabel}}."
 msgstr ""
@@ -1932,7 +1943,7 @@ msgid "You do not have access to delete {{eventsLabel}}"
 msgstr ""
 
 msgid "Delete {{eventsLabel}}"
-msgstr ""
+msgstr "Xóa {{eventsLabel}}"
 
 msgid "This cannot be undone."
 msgstr ""
@@ -2054,7 +2065,7 @@ msgid_plural "Delete {{count}} {{enrollmentLabel}}"
 msgstr[0] ""
 
 msgid "Delete {{enrollmentsLabel}}"
-msgstr ""
+msgstr "Xóa {{enrollmentsLabel}}"
 
 msgid "An error occurred when deleting {{enrollmentsLabel}}"
 msgstr ""

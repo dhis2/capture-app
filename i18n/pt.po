@@ -3,25 +3,26 @@
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Sheila André <sandre@saudigitus.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
-# David Mondlane, 2025
 # Nancy Espinoza, 2025
 # Andres Miguel Rubio, 2025
 # Shelsea Chumaio, 2025
 # Ge Joao <gsimango@saudigitus.org>, 2026
 # Philip Larsen Donnelly, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
-# David Júnior <davidjr.mondlane@gmail.com>, 2026
-# Laurência Luís, 2026
 # Pablo Del Médico, 2026
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2026
+# David Júnior <davidjr.mondlane@gmail.com>, 2026
+# David Mondlane, 2026
 # Helton Dias, 2026
+# Laurência Luís, 2026
+# Edson Nhancale, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-29T12:48:58.340Z\n"
+"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Helton Dias, 2026\n"
+"Last-Translator: Edson Nhancale, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -85,13 +86,13 @@ msgid "Edit {{eventLabel}}"
 msgstr ""
 
 msgid "New {{eventLabel}}"
-msgstr ""
+msgstr "Novo {{eventLabel}}"
 
 msgid "Loading..."
 msgstr "Carregando..."
 
 msgid "{{eventLabel}} list"
-msgstr ""
+msgstr "{{eventLabel}} lista"
 
 msgid "More"
 msgstr "Mais"
@@ -156,6 +157,12 @@ msgstr "Área"
 msgid "Coordinate"
 msgstr "Coordenada"
 
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
+msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
 msgid "Complete {{eventLabel}}"
 msgstr ""
 
@@ -179,9 +186,6 @@ msgstr "{{ stageName }} - Atribuído"
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Estado"
 
-msgid "Please select {{categoryName}}"
-msgstr "Por Favor Seleccione {{categoryName}}"
-
 msgid "A date in the future is not allowed"
 msgstr "Uma data no futuro não é permitida"
 
@@ -198,6 +202,11 @@ msgstr "Cancelar"
 
 msgid "Metadata error. see log for details"
 msgstr "Erro de metadados. veja o log para detalhes"
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - Detalhes"
@@ -434,6 +443,9 @@ msgstr ""
 msgid "Operations running"
 msgstr "Operações em execução"
 
+msgid "Please select {{categoryName}}"
+msgstr "Por Favor Seleccione {{categoryName}}"
+
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
 
@@ -459,7 +471,7 @@ msgid "An error occurred while deleting the {{eventLabel}}"
 msgstr ""
 
 msgid "Delete {{eventLabel}}"
-msgstr ""
+msgstr "Eliminar {{eventLabel}}"
 
 msgid "Deleting an {{eventLabel}} is permanent and cannot be undone."
 msgstr ""
@@ -468,7 +480,7 @@ msgid "Are you sure you want to delete this {{eventLabel}}?"
 msgstr ""
 
 msgid "Yes, delete {{eventLabel}}"
-msgstr ""
+msgstr "Sim, apagar {{eventLabel}}"
 
 msgid "Unskip"
 msgstr "Descompactar"
@@ -1048,7 +1060,7 @@ msgid "Search {{uniqueAttrName}}"
 msgstr "Pesquise {{uniqueAttrName}}"
 
 msgid "Search by {{attributesLabel}}"
-msgstr ""
+msgstr "Pesquise por {{attributesLabel}}"
 
 msgid "Fill in at least {{count}} {{attributeLabel}} to search"
 msgid_plural "Fill in at least {{count}} {{attributeLabel}} to search"
@@ -1304,7 +1316,7 @@ msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new {{eventLabel}}"
-msgstr ""
+msgstr "Criar novo {{eventLabel}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
@@ -1381,10 +1393,10 @@ msgid "Mark as cancelled"
 msgstr "Marcar como cancelado"
 
 msgid "You do not have access to delete this {{enrollmentLabel}}"
-msgstr ""
+msgstr "Não tem acesso para apagar{{enrollmentLabel}}"
 
 msgid "Delete {{enrollmentLabel}}"
-msgstr ""
+msgstr "Eliminar {{enrollmentLabel}}"
 
 msgid "Are you sure you want to delete this {{enrollmentLabel}}?"
 msgstr ""
@@ -1526,7 +1538,7 @@ msgid "No polygon captured"
 msgstr "Nenhum polígono capturado"
 
 msgid "{{eventLabel}} completed"
-msgstr ""
+msgstr "{{eventLabel}} Concluído"
 
 msgid "{{notesLabel}} about this {{eventLabel}}"
 msgstr ""
@@ -1583,7 +1595,7 @@ msgid "Indicators"
 msgstr "Indicadores"
 
 msgid "Save {{noteLabel}}"
-msgstr ""
+msgstr "Salvar {{noteLabel}}"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
@@ -1704,7 +1716,7 @@ msgid "{{ linkableStageLabel }} has no linkable {{eventsLabel}}"
 msgstr ""
 
 msgid "Link to an existing {{eventLabel}}"
-msgstr ""
+msgstr "Link para um {{eventLabel}} existente"
 
 msgid "Actions - {{relationshipName}}"
 msgstr ""
@@ -1867,7 +1879,7 @@ msgid "Go back without saving {{relationshipLabel}}"
 msgstr ""
 
 msgid "New {{relationshipLabel}}"
-msgstr ""
+msgstr "Novo {{relationshipLabel}}"
 
 msgid "Link to an existing {{tetName}}"
 msgstr "Associar a um existente {{tetName}}"
@@ -1884,7 +1896,7 @@ msgid "{{trackedEntityTypeName}} {{relationshipsLabel}}"
 msgstr ""
 
 msgid "Delete {{relationshipLabel}}"
-msgstr ""
+msgstr "Eliminar {{relationshipLabel}}"
 
 msgid "Deleting the {{relationshipLabel}} is permanent and cannot be undone."
 msgstr ""
@@ -1893,7 +1905,7 @@ msgid "Are you sure you want to delete this {{relationshipLabel}}?"
 msgstr ""
 
 msgid "Yes, delete {{relationshipLabel}}"
-msgstr ""
+msgstr "Sim, apagar {{relationshipLabel}}"
 
 msgid "An error occurred while deleting the {{relationshipLabel}}."
 msgstr ""
@@ -1954,7 +1966,7 @@ msgid "You do not have access to delete {{eventsLabel}}"
 msgstr ""
 
 msgid "Delete {{eventsLabel}}"
-msgstr ""
+msgstr "Eliminar {{eventsLabel}}"
 
 msgid "This cannot be undone."
 msgstr ""
@@ -2090,7 +2102,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Delete {{enrollmentsLabel}}"
-msgstr ""
+msgstr "Eliminar {{enrollmentsLabel}}"
 
 msgid "An error occurred when deleting {{enrollmentsLabel}}"
 msgstr ""
