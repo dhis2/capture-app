@@ -19,7 +19,14 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
-    const { ownerOrgUnitId, programId, programStageId, enrollmentId, eventId, teiId } = useFormFieldPluginContext();
+    const {
+        ownerOrgUnitId,
+        programId,
+        programStageId,
+        enrollmentId,
+        eventId,
+        teiId,
+    } = useFormFieldPluginContext();
 
     // Plugin related functionality and feedback
     const { pluginValues, formValuesRedux } = usePluginValues(formId, metadataByPluginId, pluginContext);

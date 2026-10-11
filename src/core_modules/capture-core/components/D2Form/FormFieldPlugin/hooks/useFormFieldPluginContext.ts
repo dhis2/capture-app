@@ -77,15 +77,25 @@ const resolveLoadedEvent = (
 
 const resolveNavIds = (url: Url, event: LoadedEvent | undefined) => ({
     programId: url.programId ?? event?.programId,
-    programStageId: url.stageId ?? event?.programStageId,
     eventId: getUrlEventId(url),
 });
 
-const resolveTrackerIds = (url: Url, event: LoadedEvent | undefined) => {
+const resolveTrackerIds = (
+    url: Url,
+    event: LoadedEvent | undefined,
+    enrollment: EnrollmentDomain | undefined,
+) => {
     if (event?.isEventProgram) {
-        return { enrollmentId: undefined, teiId: undefined };
+        return {
+            ownerOrgUnitId: undefined,
+            programStageId: undefined,
+            enrollmentId: undefined,
+            teiId: undefined,
+        };
     }
     return {
+        ownerOrgUnitId: enrollment?.ownerOrgUnitId,
+        programStageId: url.stageId ?? event?.programStageId,
         enrollmentId: url.enrollmentId ?? event?.enrollmentId,
         teiId: url.teiId ?? event?.teiId,
     };
@@ -103,8 +113,7 @@ export const useFormFieldPluginContext = (): PluginContextIds => {
     const event = resolveLoadedEvent(getUrlEventId(url), enrollment?.enrollment?.events, viewedEvent);
 
     return {
-        ownerOrgUnitId: enrollment?.ownerOrgUnitId,
-        ...resolveTrackerIds(url, event),
+        ...resolveTrackerIds(url, event, enrollment),
         ...resolveNavIds(url, event),
     };
 };
