@@ -1,3 +1,10 @@
+# [107.8.0](https://github.com/dhis2/capture-app/compare/v107.7.0...v107.8.0) (2026-10-11)
+
+
+### Features
+
+* [DHIS2-22165] Enrollment AOC in the enrollment widget ([#4753](https://github.com/dhis2/capture-app/issues/4753)) ([a979b5b](https://github.com/dhis2/capture-app/commit/a979b5b5314a78b507aa1b05acaa619659a31d63))
+
 # [107.7.0](https://github.com/dhis2/capture-app/compare/v107.6.4...v107.7.0) (2026-10-09)
 
 
