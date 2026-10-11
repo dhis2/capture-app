@@ -57,7 +57,7 @@ Given(/^you land on the enrollment new event page by having typed (.*)$/, (url) 
     cy.visit(url);
 });
 
-And('the new event request has completed', () => {
+Then('the new event should be sent to the server successfully', () => {
     cy.wait('@postNewEvent', { timeout: 30000 })
         .its('response.statusCode')
         .should('eq', 200);
@@ -77,14 +77,10 @@ When('you add a note to the event', () => {
         .click();
 });
 
-And('the events saves successfully', () => {
+When('you click the Schedule button', () => {
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Schedule')
         .click();
-
-    cy.wait('@postNewEvent')
-        .its('response.statusCode')
-        .should('eq', 200);
 });
 
 When(/^you click the create new button number (.*)$/, (eq) => {
@@ -127,7 +123,7 @@ When('the enrollment overview is finished loading', () => {
     cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
 });
 
-When('the form is finished loading', () => {
+When('the new event form is loaded', () => {
     cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing')
         .should('exist');
     cy.contains('[data-test="dataentry-field-orgUnit"]', 'Ngelehun CHC')
