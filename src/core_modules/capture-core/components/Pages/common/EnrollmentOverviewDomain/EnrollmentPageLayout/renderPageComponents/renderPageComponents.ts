@@ -79,7 +79,7 @@ const getPropsForPlugin = ({
     eventId,
     enrollmentId,
     teiId,
-    orgUnitId: ownerOrgUnitId,
+    ownerOrgUnitId,
 });
 
 const renderPlugin = (
