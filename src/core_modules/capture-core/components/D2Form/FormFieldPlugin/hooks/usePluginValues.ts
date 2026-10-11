@@ -14,15 +14,11 @@ export const usePluginValues = (
         if (!formValuesRedux) {
             return {};
         }
-
-        return Object.entries(metadataByPluginId)
-            .reduce((acc, [pluginId, metadata]) => {
-                const value = formValuesRedux[metadata.id];
-                if (value) {
-                    acc[pluginId] = value;
-                }
-                return acc;
-            }, {});
+        return Object.fromEntries(
+            Object.entries(metadataByPluginId).map(
+                ([pluginId, { id }]) => [pluginId, formValuesRedux[id]],
+            ),
+        );
     }, [formValuesRedux, metadataByPluginId]);
 
     const url = useLocationQuery();
