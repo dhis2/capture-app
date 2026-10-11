@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
+import type { EnrollmentCategoryCombo } from '../enrollment.types';
 
 type ProgramData = {
     featureType: string;
+    enrollmentCategoryCombo?: EnrollmentCategoryCombo;
     [key: string]: any;
 };
 
@@ -17,19 +19,25 @@ const baseFields = [
 
 const pluralFields = ['displayEventsLabel'];
 
+const enrollmentAOCFields = [
+    'enrollmentCategoryCombo[id,displayName,isDefault,categories[id,displayName],' +
+    'categoryOptionCombos[id,categoryOptions[id]]]',
+];
+
 export const useProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
-            () => ({
-                program: {
-                    resource: `programs/${programId}`,
-                    params: {
-                        fields: featureAvailable(FEATURES.customTerminologyPlurals)
-                            ? [...baseFields, ...pluralFields]
-                            : baseFields,
+            () => {
+                const fields = [...baseFields];
+                if (featureAvailable(FEATURES.customTerminologyPlurals)) fields.push(...pluralFields);
+                if (featureAvailable(FEATURES.enrollmentAOC)) fields.push(...enrollmentAOCFields);
+                return {
+                    program: {
+                        resource: `programs/${programId}`,
+                        params: { fields },
                     },
-                },
-            }),
+                };
+            },
             [programId],
         ),
     );

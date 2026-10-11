@@ -6,6 +6,7 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { useTrackedEntities } from './hooks/useTrackedEntities';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
+import { useEnrollmentAOCDetails } from './hooks/useEnrollmentAOCDetails';
 import { useUserLocale } from '../../utils/localeData/useUserLocale';
 import type { Props } from './enrollment.types';
 import { plainStatus } from './constants/status.const';
@@ -50,20 +51,29 @@ export const WidgetEnrollment = ({
     onUpdateEnrollmentStatusSuccess,
     onAccessLostFromTransfer,
 }: Props) => {
+    const { error: errorProgram, program } = useProgram(programId);
     const {
         enrollment,
         updateEnrollmentDate,
         updateIncidentDate,
+        updateEnrollmentAOC,
+        savingEnrollmentAOC,
         error: errorEnrollment,
         refetch: refetchEnrollment,
     } = useEnrollment({
         enrollmentId,
+        enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
+        program,
         onUpdateEnrollmentDate,
         onUpdateIncidentDate,
         onError,
+        onSuccess,
         externalData,
     });
-    const { error: errorProgram, program } = useProgram(programId);
+    const { enrollmentAOCDetails } = useEnrollmentAOCDetails({
+        attributeOptionCombo: enrollment?.attributeOptionCombo,
+        enrollmentCategoryCombo: program?.enrollmentCategoryCombo,
+    });
     const {
         error: errorOwnerOrgUnit,
         ownerOrgUnit,
@@ -86,6 +96,10 @@ export const WidgetEnrollment = ({
     return (
         <WidgetEnrollmentNote
             enrollment={enrollment}
+            enrollmentAOCDetails={enrollmentAOCDetails}
+            enrollmentCategoryCombo={program?.enrollmentCategoryCombo}
+            updateEnrollmentAOC={updateEnrollmentAOC}
+            savingEnrollmentAOC={savingEnrollmentAOC}
             events={events}
             canAddNew={canAddNew}
             readOnlyMode={readOnlyMode}

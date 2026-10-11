@@ -2,6 +2,7 @@ export type Props = {
     programWriteAccess?: boolean;
     trackedEntityTypeWriteAccess?: boolean;
     programStageWriteAccess?: boolean;
+    attributeOptionComboWriteAccess?: boolean;
     isEventBlockedByExpiry?: boolean;
     isEventBlockedByCompletion?: boolean;
     multipleStages?: boolean;
@@ -11,14 +12,11 @@ export type Props = {
     stageId?: string;
 };
 
-export type Access = {
-    program: boolean;
-    trackedEntityType: boolean;
-    programStage: boolean;
-};
-
 export type ReadOnlyMessageInput = {
-    access: Access;
+    programWriteAccess: boolean;
+    trackedEntityTypeWriteAccess: boolean;
+    programStageWriteAccess: boolean;
+    attributeOptionComboWriteAccess?: boolean;
     trackedEntityName: string | undefined;
     multipleStages: boolean;
     isEventBlockedByExpiry: boolean;
