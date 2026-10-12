@@ -163,16 +163,14 @@ Both exist because an enrollment can be owned by one org unit while its events h
 
 Context ids:
 
-| Page | `ownerOrgUnitId` | `programStageId` | `enrollmentId` / `teiId` | `eventId` |
-|---|---|---|---|---|
-| Tracker **New TEI** | — | — | — | — |
-| Tracker **Enrollment overview** | ✓ | — | ✓ | — |
-| Tracker **New event** | ✓ | ✓ | ✓ | — |
-| Tracker **Event edit/view** | ✓ | ✓ | ✓ | ✓ |
-| Event program **New event** | — | ✓ | — | — |
-| Event program **Event edit/view** | — | ✓ | — | ✓ |
-
-`programId` is populated on every page.
+| Page | `programId` | `programStageId` | `ownerOrgUnitId` | `enrollmentId` | `teiId` | `eventId` |
+|---|---|---|---|---|---|---|
+| Tracker **New TEI** | ✓ | — | — | — | — | — |
+| Tracker **Enrollment overview** | ✓ | — | ✓ | ✓ | ✓ | — |
+| Tracker **New event** | ✓ | ✓ | ✓ | ✓ | ✓ | — |
+| Tracker **Event edit/view** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Event program **New event** | ✓ | ✓ | — | — | — | — |
+| Event program **Event edit/view** | ✓ | ✓ | — | — | — | ✓ |
 
 Form values (`props.values.*`):
 
