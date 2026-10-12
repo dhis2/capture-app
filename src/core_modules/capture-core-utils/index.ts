@@ -6,3 +6,4 @@ export { chunk } from './chunk';
 export { createWebWorker, WebWorker } from './WebWorker';
 export { useFeature, featureAvailable, FEATURES } from './featuresSupport';
 export type { CaptureClientEvent } from './types/global';
+export type { ApiEnrollmentEvent } from './types/api-types';

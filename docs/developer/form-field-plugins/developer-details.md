@@ -169,8 +169,8 @@ Context ids:
 | Tracker **Enrollment overview** | ✓ | — | ✓ | — |
 | Tracker **New event** | ✓ | ✓ | ✓ | — |
 | Tracker **Event edit/view** | ✓ | ✓ | ✓ | ✓ |
-| Event program **New event** | — | — | — | — |
-| Event program **Event edit/view** | — | — | — | ✓ |
+| Event program **New event** | — | ✓ | — | — |
+| Event program **Event edit/view** | — | ✓ | — | ✓ |
 
 `programId` is populated on every page.
 

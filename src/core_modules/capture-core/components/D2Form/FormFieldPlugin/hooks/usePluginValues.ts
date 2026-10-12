@@ -23,27 +23,15 @@ export const usePluginValues = (
 
     const url = useLocationQuery();
 
-    // URL fallback for `orgUnit`: drop once DHIS2-19171
-    // (https://dhis2.atlassian.net/browse/DHIS2-19171) adds an org-unit widget
-    // to the New TEI form. Revert this block to:
-    //
-    //   const contextValues = useMemo(() => Object.entries(pluginContext)
-    //       .reduce((acc, [key, value]) => {
-    //           acc[key] = value?.value;
-    //           return acc;
-    //       }, {}), [pluginContext]);
-    //
-    // ...and drop the `url` / `useLocationQuery` import.
     const contextValues = useMemo(() => {
-        const acc: Record<string, unknown> = Object.entries(pluginContext)
-            .reduce((a, [key, value]) => {
-                a[key] = value?.value;
-                return a;
-            }, {} as Record<string, unknown>);
+        const base = Object.fromEntries(
+            Object.entries(pluginContext).map(([key, entry]) => [key, entry?.value]),
+        );
+        // remove this once DHIS2-19171 adds an org-unit widget to the New TEI form
         if (!('orgUnit' in pluginContext) && url.orgUnitId) {
-            acc.orgUnit = { id: url.orgUnitId };
+            return { ...base, orgUnit: { id: url.orgUnitId } };
         }
-        return acc;
+        return base;
     }, [pluginContext, url.orgUnitId]);
 
     const pluginValues = useMemo(() => ({
