@@ -790,17 +790,17 @@ Whether you can edit the enrollment once you have access still depends on the pr
 
 2. Select an organisation unit.
 
-3. Select a tracker program with "Display front page list" set to true.
+3. Select a tracker program with **Start page in web Capture app** set to **List of enrolled tracked entities** in the **Program Details** section of the program in the Metadata Management app.
 
 4. The program can have categories associated with it (implementing partner would be an example of such a category). If this is the case, fill them in.
 
-### Custom tracked entity working list for programs with "Display front page list" set to false.
+### Custom tracked entity working list for programs that start on the search form { #custom-tracked-entity-working-list-for-programs-with-display-front-page-list-set-to-false }
 
 1. Open the **Capture** app.
 
 2. Select an organisation unit.
 
-3. Select a tracker program with "Display front page list" set to false.
+3. Select a tracker program with **Start page in web Capture app** set to **Search form**.
 
 4. If the program has any custom working list you are able to click and load it.
 
@@ -862,7 +862,7 @@ You will find the predefined list views above the filters for the list. Click to
 
 1. Open the **Capture** app.
 2. Select an organisation unit.
-3. Select a tracker program with "Display front page list" set to true.
+3. Select a tracker program with **Start page in web Capture app** set to **List of enrolled tracked entities**.
 4. Click the **three dots** icon on the top right of the tracked entities list.
 5. Click **Download data**.
 6. Select the format you want to download.
@@ -1343,8 +1343,8 @@ If this flag has been enabled for the stage under **Completion options** in the 
 When the form is in the view mode the top of the page shows a breadcrumb trail: `{{first item}} > Enrollment dashboard > View event`. The first item depends on where you came from:
 
 - the name of the working list view you had selected in this program, or `Active enrollments`, `Completed enrollments` or `Cancelled enrollments` if you had selected one of those predefined views;
-- `Program overview` if you came from this program's working list without selecting a view, or if the program has "Display front page list" enabled;
-- `Search` if you did not come from this program's working list (for example from a search) and the program has "Display front page list" disabled.
+- `Program overview` if you came from this program's working list without selecting a view, or if the program starts on the list of enrolled tracked entities;
+- `Search` if you did not come from this program's working list (for example from a search) and the program starts on the search form.
 
 Clicking the first item takes you back to the program's front page, and clicking `Enrollment dashboard` takes you back to the enrollment dashboard. You can see in the page all the information related to the event. Click the `Edit event` button to switch to the edit mode. 
 This mode is bypassed for events that are scheduled.
