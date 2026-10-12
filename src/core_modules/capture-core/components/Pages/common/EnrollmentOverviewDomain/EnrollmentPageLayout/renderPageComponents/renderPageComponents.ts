@@ -6,7 +6,7 @@ import type {
     DefaultWidgetColumnConfig,
     PluginWidgetColumnConfig, WidgetConfig,
 } from '../DefaultEnrollmentLayout.types';
-import type { PluginContextIds } from '../../../../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
+import type { PluginContextIds } from '../../../../../D2Form/FormFieldPlugin';
 import { EnrollmentPlugin } from '../../../EnrollmentPlugin';
 import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
 

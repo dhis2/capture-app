@@ -21,9 +21,6 @@ type ReduxState = {
 
 type TrackerProgramEvent = Partial<ApiEnrollmentEvent>;
 
-const resolveUrlEventId = (url: Url): string | undefined =>
-    url.eventId ?? url.viewEventId;
-
 const enrollmentMatchesRoute = (
     domain: EnrollmentDomain | undefined,
     url: Url,
@@ -54,22 +51,23 @@ const resolveTrackerIds = (
     trackerProgramEvent: TrackerProgramEvent | undefined,
     enrollment: EnrollmentDomain | undefined,
     program: Program | undefined,
-) => (program instanceof EventProgram
-    ? { ownerOrgUnitId: undefined, enrollmentId: undefined, teiId: undefined }
-    : {
+) => {
+    if (program instanceof EventProgram) {
+        return { ownerOrgUnitId: undefined, enrollmentId: undefined, teiId: undefined };
+    }
+    return {
         ownerOrgUnitId: enrollment?.ownerOrgUnitId,
         enrollmentId: url.enrollmentId ?? trackerProgramEvent?.enrollment,
         teiId: url.teiId ?? trackerProgramEvent?.trackedEntity,
-    });
+    };
+};
 
 export const useFormFieldPluginContext = (): PluginContextIds => {
     const url: Url = useLocationQuery();
-    const eventId = resolveUrlEventId(url);
+    const eventId = url.eventId ?? url.viewEventId;
 
     const enrollment = useSelector((state: ReduxState) =>
-        (enrollmentMatchesRoute(state.enrollmentDomain, url, eventId)
-            ? state.enrollmentDomain
-            : undefined),
+        (enrollmentMatchesRoute(state.enrollmentDomain, url, eventId) ? state.enrollmentDomain : undefined),
     );
     const eventProgramEvent = useSelector((state: ReduxState) =>
         (eventId ? state.viewEventPage?.loadedValues?.eventContainer?.event : undefined),

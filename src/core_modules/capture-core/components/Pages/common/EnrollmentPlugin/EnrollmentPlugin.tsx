@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
 import { useNavigate } from 'capture-core/utils/routing';
-import type { PluginContextIds } from '../../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
+import type { PluginContextIds } from '../../../D2Form/FormFieldPlugin';
 
 type EnrollmentPluginProps = PluginContextIds & {
     pluginSource: string;

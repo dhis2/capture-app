@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback, useRef } from 'react';
 import { FormFieldPluginComponent } from './FormFieldPlugin.component';
-import type { ContainerProps } from './FormFieldPlugin.types';
+import type { ContainerProps, FormattedMetadataByPluginId } from './FormFieldPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
@@ -28,7 +28,6 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         teiId,
     } = useFormFieldPluginContext();
 
-    // Plugin related functionality and feedback
     const { pluginValues, formValuesRedux } = usePluginValues(formId, metadataByPluginId, pluginContext);
     const { errors, warnings, formSubmitted } = usePluginMessages(formId, metadataByPluginId);
     const valuesRef = useRef(formValuesRedux);
@@ -45,18 +44,19 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         pluginContext,
     });
 
-    // Remove ids from plugin metadata before passing to plugin
-    const formattedMetadata = useMemo(() => {
-        const metadata = [...fieldsMetadata.entries()];
-
-        return metadata.reduce((acc, [pluginFieldId, pluginMetadata]) => {
-            const formattedPluginMetadata = formatPluginConfig(pluginMetadata, {
-                attributes: customAttributes,
-                keysToOmit: ['id', 'dataElement', 'section'],
-            });
-            return { ...acc, [pluginFieldId]: formattedPluginMetadata };
-        }, {});
-    }, [customAttributes, fieldsMetadata]);
+    // id/dataElement/section are capture internals; omit before handing to the plugin
+    const formattedMetadata = useMemo<FormattedMetadataByPluginId>(
+        () => Object.fromEntries(
+            [...fieldsMetadata.entries()].map(([pluginFieldId, pluginMetadata]) => [
+                pluginFieldId,
+                formatPluginConfig(pluginMetadata, {
+                    attributes: customAttributes,
+                    keysToOmit: ['id', 'dataElement', 'section'],
+                }),
+            ]),
+        ),
+        [customAttributes, fieldsMetadata],
+    );
 
     return (
         <FormFieldPluginComponent
