@@ -1,9 +1,10 @@
+import log from 'loglevel';
 import { useSelector } from 'react-redux';
-import type { CaptureClientEvent, ApiEnrollmentEvent } from 'capture-core-utils';
+import { errorCreator, type CaptureClientEvent, type ApiEnrollmentEvent } from 'capture-core-utils';
 import { useLocationQuery } from '../../../../utils/routing';
 import type { Url } from '../../../../utils/url';
 import { programCollection } from '../../../../metaDataMemoryStores';
-import { EventProgram, type Program } from '../../../../metaData';
+import { EventProgram, TrackerProgram } from '../../../../metaData';
 import type { PluginContextIds } from '../FormFieldPlugin.types';
 
 type EnrollmentDomain = {
@@ -19,66 +20,62 @@ type ReduxState = {
     };
 };
 
-type TrackerProgramEvent = Partial<ApiEnrollmentEvent>;
+const selectEnrollment = (state: ReduxState) => state.enrollmentDomain;
+const selectViewedEvent = (state: ReduxState) =>
+    state.viewEventPage?.loadedValues?.eventContainer?.event;
 
-const enrollmentMatchesRoute = (
-    domain: EnrollmentDomain | undefined,
-    url: Url,
+const resolveEventProgramIds = (
+    program: EventProgram,
+    programId: string,
     eventId: string | undefined,
-): boolean => {
-    if (!domain) return false;
-    if (url.enrollmentId) return domain.enrollmentId === url.enrollmentId;
-    if (eventId) return !!domain.enrollment?.events?.some(e => e.event === eventId);
-    return false;
-};
-
-const resolveNavIds = (
-    url: Url,
-    trackerProgramEvent: TrackerProgramEvent | undefined,
-    eventId: string | undefined,
-    programId: string | undefined,
-    program: Program | undefined,
-) => ({
+): PluginContextIds => ({
     programId,
-    programStageId: program instanceof EventProgram
-        ? program.stage?.id
-        : url.stageId ?? trackerProgramEvent?.programStage,
+    programStageId: program.stage?.id,
     eventId,
+    ownerOrgUnitId: undefined,
+    enrollmentId: undefined,
+    teiId: undefined,
 });
 
-const resolveTrackerIds = (
+const resolveTrackerProgramIds = (
     url: Url,
-    trackerProgramEvent: TrackerProgramEvent | undefined,
     enrollment: EnrollmentDomain | undefined,
-    program: Program | undefined,
-) => {
-    if (program instanceof EventProgram) {
-        return { ownerOrgUnitId: undefined, enrollmentId: undefined, teiId: undefined };
-    }
-    return {
-        ownerOrgUnitId: enrollment?.ownerOrgUnitId,
-        enrollmentId: url.enrollmentId ?? trackerProgramEvent?.enrollment,
-        teiId: url.teiId ?? trackerProgramEvent?.trackedEntity,
-    };
-};
+    trackerProgramEvent: Partial<ApiEnrollmentEvent> | undefined,
+    programId: string | undefined,
+    eventId: string | undefined,
+): PluginContextIds => ({
+    programId,
+    programStageId: url.stageId ?? trackerProgramEvent?.programStage,
+    eventId,
+    ownerOrgUnitId: enrollment?.ownerOrgUnitId,
+    enrollmentId: url.enrollmentId ?? trackerProgramEvent?.enrollment,
+    teiId: url.teiId ?? trackerProgramEvent?.trackedEntity,
+});
 
 export const useFormFieldPluginContext = (): PluginContextIds => {
     const url: Url = useLocationQuery();
     const eventId = url.eventId ?? url.viewEventId;
 
-    const enrollment = useSelector((state: ReduxState) =>
-        (enrollmentMatchesRoute(state.enrollmentDomain, url, eventId) ? state.enrollmentDomain : undefined),
-    );
-    const eventProgramEvent = useSelector((state: ReduxState) =>
-        (eventId ? state.viewEventPage?.loadedValues?.eventContainer?.event : undefined),
-    );
+    const enrollment = useSelector(selectEnrollment);
+    const viewedEvent = useSelector(selectViewedEvent);
 
     const trackerProgramEvent = enrollment?.enrollment?.events?.find(e => e.event === eventId);
-    const programId = url.programId ?? trackerProgramEvent?.program ?? eventProgramEvent?.programId;
+    const programId = url.programId ?? trackerProgramEvent?.program ?? viewedEvent?.programId;
     const program = programId ? programCollection.get(programId) : undefined;
 
+    if (program instanceof EventProgram && programId) {
+        return resolveEventProgramIds(program, programId, eventId);
+    }
+    if (program instanceof TrackerProgram && programId) {
+        return resolveTrackerProgramIds(url, enrollment, trackerProgramEvent, programId, eventId);
+    }
+    log.error(errorCreator('useFormFieldPluginContext: unknown program')({ programId }));
     return {
-        ...resolveNavIds(url, trackerProgramEvent, eventId, programId, program),
-        ...resolveTrackerIds(url, trackerProgramEvent, enrollment, program),
+        programId: undefined,
+        programStageId: undefined,
+        eventId: undefined,
+        ownerOrgUnitId: undefined,
+        enrollmentId: undefined,
+        teiId: undefined,
     };
 };
