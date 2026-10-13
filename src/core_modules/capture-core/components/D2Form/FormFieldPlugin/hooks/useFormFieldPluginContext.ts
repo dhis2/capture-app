@@ -39,18 +39,25 @@ const resolveEventProgramIds = (
 
 const resolveTrackerProgramIds = (
     url: Url,
-    enrollment: EnrollmentDomain | undefined,
+    storedEnrollment: EnrollmentDomain | undefined,
     trackerProgramEvent: Partial<ApiEnrollmentEvent> | undefined,
     programId: string | undefined,
     eventId: string | undefined,
-): PluginContextIds => ({
-    programId,
-    programStageId: url.stageId ?? trackerProgramEvent?.programStage,
-    eventId,
-    ownerOrgUnitId: enrollment?.ownerOrgUnitId,
-    enrollmentId: url.enrollmentId ?? trackerProgramEvent?.enrollment,
-    teiId: url.teiId ?? trackerProgramEvent?.trackedEntity,
-});
+): PluginContextIds => {
+    const enrollmentId = url.enrollmentId ?? trackerProgramEvent?.enrollment;
+    const ownerOrgUnitId = enrollmentId && storedEnrollment?.enrollmentId === enrollmentId
+        ? storedEnrollment?.ownerOrgUnitId
+        : undefined;
+
+    return {
+        programId,
+        programStageId: url.stageId ?? trackerProgramEvent?.programStage,
+        eventId,
+        ownerOrgUnitId,
+        enrollmentId,
+        teiId: url.teiId ?? trackerProgramEvent?.trackedEntity,
+    };
+};
 
 export const useFormFieldPluginContext = (): PluginContextIds => {
     const url: Url = useLocationQuery();
