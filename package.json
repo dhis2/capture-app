@@ -20,6 +20,7 @@
         "@dhis2/ui": "^10.19.1",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
+        "@js-temporal/polyfill": "0.5.1",
         "@popperjs/core": "^2.11.6",
         "@react-leaflet/core": "^1.1.1",
         "@redux-offline/redux-offline": "^2.6.0",
@@ -141,7 +142,6 @@
     "resolutions": {
         "@babel/preset-react": "7.29.7",
         "@dhis2-ui/calendar": "^10.19.1",
-        "@js-temporal/polyfill": "0.4.3",
         "core-js": "2.5.7",
         "i18next": "^20.5.0",
         "@types/react": "18.3.1",
