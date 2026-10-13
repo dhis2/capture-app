@@ -1,3 +1,24 @@
+## [107.8.1](https://github.com/dhis2/capture-app/compare/v107.8.0...v107.8.1) (2026-10-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4784](https://github.com/dhis2/capture-app/issues/4784)) ([bc1ee7d](https://github.com/dhis2/capture-app/commit/bc1ee7da387726cb054a2eea74fe4d7496129d19))
+
+# [107.8.0](https://github.com/dhis2/capture-app/compare/v107.7.0...v107.8.0) (2026-10-11)
+
+
+### Features
+
+* [DHIS2-22165] Enrollment AOC in the enrollment widget ([#4753](https://github.com/dhis2/capture-app/issues/4753)) ([a979b5b](https://github.com/dhis2/capture-app/commit/a979b5b5314a78b507aa1b05acaa619659a31d63))
+
+# [107.7.0](https://github.com/dhis2/capture-app/compare/v107.6.4...v107.7.0) (2026-10-09)
+
+
+### Features
+
+* [DHIS2-21797] Enrollment AOC in the registration form ([#4752](https://github.com/dhis2/capture-app/issues/4752)) ([b66016f](https://github.com/dhis2/capture-app/commit/b66016f54bca4e5afd895f092887b103f222a371))
+
 ## [107.6.4](https://github.com/dhis2/capture-app/compare/v107.6.3...v107.6.4) (2026-10-07)
 
 

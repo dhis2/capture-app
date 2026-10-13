@@ -21,6 +21,7 @@ type Props = {
     placeholder?: string;
     filterable?: boolean;
     clearable?: boolean;
+    dense?: boolean;
     dataTest?: string;
 };
 
@@ -36,6 +37,7 @@ const NewSingleSelectFieldComponentPlain = ({
     placeholder,
     filterable = false,
     clearable = true,
+    dense,
     dataTest,
 }: Props) => {
     const selectRef = useRef<HTMLDivElement | null>(null);
@@ -123,6 +125,7 @@ const NewSingleSelectFieldComponentPlain = ({
                 onClear={handleClear}
                 dataTest={dataTest}
                 disabled={disabled}
+                dense={dense}
             />
         </div>
     );

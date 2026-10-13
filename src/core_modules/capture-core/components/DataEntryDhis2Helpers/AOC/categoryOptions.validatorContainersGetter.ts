@@ -1,10 +1,15 @@
 import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
-import type { ValidatorContainer } from '../../../utils/validation/getValidators';
 
-const validateCategories = (value?: string | null, props?: any, fieldId?: string) => {
-    const categoryName = props?.categories
-        ?.find((category: any) => category.id === fieldId)?.label;
+const validateCategories = (
+    value: string | null | undefined,
+    props: any,
+    fieldId: string | undefined,
+    categoriesPropName: string,
+) => {
+    const matchedCategory = props?.[categoriesPropName]
+        ?.find((category: any) => category.id === fieldId);
+    const categoryName = matchedCategory?.label ?? matchedCategory?.displayName;
 
     return {
         valid: hasValue(value),
@@ -12,13 +17,16 @@ const validateCategories = (value?: string | null, props?: any, fieldId?: string
     };
 };
 
-export const getCategoryOptionsValidatorContainers = (props?: any, fieldId?: string): Array<ValidatorContainer> => {
-    const validatorContainers = [
-        {
-            validator: (value?: string | null) => validateCategories(value, props, fieldId),
-            message: '',
-            errorMessage: '',
-        },
-    ];
-    return validatorContainers;
-};
+export const getCategoryOptionsValidatorContainers = (props?: any, fieldId?: string) => [
+    {
+        validator: (value?: string | null) => validateCategories(value, props, fieldId, 'categories'),
+        errorMessage: '',
+    },
+];
+
+export const getEnrollmentCategoryOptionsValidatorContainers = (props?: any, fieldId?: string) => [
+    {
+        validator: (value?: string | null) => validateCategories(value, props, fieldId, 'enrollmentCategories'),
+        errorMessage: '',
+    },
+];

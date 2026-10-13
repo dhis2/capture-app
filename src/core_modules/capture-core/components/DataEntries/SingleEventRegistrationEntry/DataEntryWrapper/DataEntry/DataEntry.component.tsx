@@ -370,6 +370,7 @@ const buildCategoryOptionsFieldSettingsFn = () => {
         getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
             ...props.categories?.find(category => category.id === fieldId) ?? {},
             required: true,
+            filterable: true,
         }),
         getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
         getFieldIds: (props: any) => props.categories?.map(category => category.id),
@@ -670,7 +671,6 @@ class NewEventDataEntry extends Component<Props & WithStyles<typeof getStyles>> 
                         onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
                         onUpdateFormField={onUpdateField(orgUnit)}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
-                        selectedOrgUnitId={orgUnit?.id}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={dataEntrySections}

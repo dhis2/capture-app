@@ -5,6 +5,7 @@ import {
     EventProgram,
     TrackerProgram,
     CategoryCombination,
+    createEnrollmentCategoryCombination,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
@@ -89,6 +90,22 @@ export class ProgramFactory {
         );
     }
 
+    // eslint-disable-next-line class-methods-use-this
+    _buildEnrollmentCategoryCombination(
+        cachedEnrollmentCategoryCombo: ProgramCachedCategoryCombo | null | undefined,
+    ) {
+        if (!cachedEnrollmentCategoryCombo || cachedEnrollmentCategoryCombo.isDefault) {
+            return null;
+        }
+
+        return createEnrollmentCategoryCombination({
+            id: cachedEnrollmentCategoryCombo.id,
+            displayName: cachedEnrollmentCategoryCombo.displayName,
+            categories: cachedEnrollmentCategoryCombo.categories ?? [],
+            categoryOptionCombos: cachedEnrollmentCategoryCombo.categoryOptionCombos ?? [],
+        });
+    }
+
     _buildCategoryCombination(
         cachedCategoryCombination: ProgramCachedCategoryCombo | null,
     ) {
@@ -153,6 +170,8 @@ export class ProgramFactory {
                 o.trackedEntityType = this.trackedEntityTypeCollection.get(
                     cachedProgram.trackedEntityTypeId!,
                 ) as TrackedEntityType;
+                o.enrollmentCategoryCombination =
+                    this._buildEnrollmentCategoryCombination(cachedProgram.enrollmentCategoryCombo);
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {
