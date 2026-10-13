@@ -1,6 +1,8 @@
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../metaData';
+import type { ConvertFn } from '../metaData/DataElement/DataElement';
 import { escapeString } from '../utils/escapeString';
+import { convertLocalToIsoDateTime } from '../utils/converters/date';
 import type { SearchOperator } from '../metaDataMemoryStoreBuilders';
 import { convertClientToServer, convertFormToClient } from './index';
 
@@ -14,20 +16,26 @@ const convertString = (formValue: string, dataElement: DataElement, searchOperat
     return `${dataElement.id}:${searchOperator.toLowerCase()}:${escapeString(convertedString)}`;
 };
 
-const convertRange = (formValues: FormValues, dataElement: DataElement) => {
+const convertRangeWithConverter = (formValues: FormValues, dataElement: DataElement, converter: ConvertFn) => {
     const { from, to } = formValues;
     if (!from && !to) {
         return null;
     }
 
-    const convertedFrom = from && dataElement.convertValue(from, convertValuePipe);
-    const convertedTo = to && dataElement.convertValue(to, convertValuePipe);
+    const convertedFrom = from && dataElement.convertValue(from, converter);
+    const convertedTo = to && dataElement.convertValue(to, converter);
 
     const fromPart = convertedFrom ? `:ge:${escapeString(String(convertedFrom))}` : '';
     const toPart = convertedTo ? `:le:${escapeString(String(convertedTo))}` : '';
 
     return `${dataElement.id}${fromPart}${toPart}`;
 };
+
+const convertRange = (formValues: FormValues, dataElement: DataElement) =>
+    convertRangeWithConverter(formValues, dataElement, convertValuePipe);
+
+const convertDateTimeRange = (formValues: FormValues, dataElement: DataElement) =>
+    convertRangeWithConverter(formValues, dataElement, convertLocalToIsoDateTime);
 
 const convertOrgUnit = (formValues: FormValues, dataElement: DataElement, searchOperator: SearchOperator) => {
     const convertedId = dataElement.convertValue(formValues, convertValuePipe);
@@ -62,8 +70,8 @@ const valueConvertersForType = {
     [dataElementTypes.PERCENTAGE_RANGE]: convertRange,
     [dataElementTypes.DATE]: convertRange,
     [dataElementTypes.DATE_RANGE]: convertRange,
-    [dataElementTypes.DATETIME]: convertRange,
-    [dataElementTypes.DATETIME_RANGE]: convertRange,
+    [dataElementTypes.DATETIME]: convertDateTimeRange,
+    [dataElementTypes.DATETIME_RANGE]: convertDateTimeRange,
     [dataElementTypes.TIME]: convertRange,
     [dataElementTypes.TIME_RANGE]: convertRange,
     [dataElementTypes.TRUE_ONLY]: convertBoolean,

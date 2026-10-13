@@ -2,3 +2,4 @@ export { convertDateObjectToDateFormatString } from './dateObjectToDateFormatStr
 export { convertMomentToDateFormatString } from './momentToDateFormatString';
 export { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
 export { convertLocalToIsoCalendar } from './convertLocalToIsoCalendar';
+export { convertLocalToIsoDateTime } from './convertLocalToIsoDateTime';
