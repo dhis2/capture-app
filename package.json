@@ -16,7 +16,7 @@
         "@dhis2/multi-calendar-dates": "^3.1.0",
         "@dhis2/rule-engine": "^3.8.2",
         "@dhis2/rules-engine-javascript": "107.8.1",
-        "@dhis2/ui": "^10.19.1",
+        "@dhis2/ui": "^10.19.2",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
         "@js-temporal/polyfill": "0.5.1",
@@ -140,6 +140,7 @@
     },
     "resolutions": {
         "@babel/preset-react": "7.29.7",
+        "@dhis2-ui/calendar": "10.19.2",
         "core-js": "2.5.7",
         "i18next": "^20.5.0",
         "@types/react": "18.3.1",
