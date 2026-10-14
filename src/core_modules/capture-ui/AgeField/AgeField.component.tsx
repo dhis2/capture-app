@@ -64,7 +64,7 @@ type Props = {
     locale?: string;
 };
 
-function getCalculatedValues(dateValue: string | null, calendarType: string, dateFormat: string): AgeValues {
+export function getCalculatedValues(dateValue: string | null, calendarType: string, dateFormat: string): AgeValues {
     if (!dateValue) {
         return {
             date: dateValue,
@@ -299,7 +299,7 @@ class D2AgeFieldPlain extends Component<Props> {
     }
 }
 
-function calculatedValuesFromNumbersBlur(values: AgeValues, calendar: string, format: string): AgeValues {
+export function calculatedValuesFromNumbersBlur(values: AgeValues, calendar: string, format: string): AgeValues {
     const duration = {
         years: D2AgeFieldPlain.getNumberOrZero(values.years ?? null),
         months: D2AgeFieldPlain.getNumberOrZero(values.months ?? null),

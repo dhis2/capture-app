@@ -24,7 +24,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
   lint:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
       - name: Lint
         run: yarn linter:check
@@ -51,7 +51,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
       - name: Verify custom terminology in i18n/en.pot
         run: yarn i18n:verify
@@ -66,7 +66,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
       - name: TypeScript
         run: yarn tsc:check
@@ -81,7 +81,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
       - name: Unit tests
         run: yarn test
@@ -144,7 +144,7 @@ jobs:
           echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
           echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
       - name: Cypress run
         uses: cypress-io/github-action@v7
@@ -182,7 +182,7 @@ jobs:
         with:
           cache: ''
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
       - name: Build
         run: yarn build
@@ -214,7 +214,7 @@ jobs:
         with:
           name: app-build
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
 
       - uses: dhis2/action-commit-signing@v1
         with:
