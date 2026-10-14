@@ -1,3 +1,10 @@
+## [107.8.2](https://github.com/dhis2/capture-app/compare/v107.8.1...v107.8.2) (2026-10-14)
+
+
+### Bug Fixes
+
+* [DHIS2-22112] allow rule engine orgunit to be undefined ([#4779](https://github.com/dhis2/capture-app/issues/4779)) ([4a8623a](https://github.com/dhis2/capture-app/commit/4a8623aef05c6ef6f88fdb371568af55835cd00f))
+
 ## [107.8.1](https://github.com/dhis2/capture-app/compare/v107.8.0...v107.8.1) (2026-10-11)
 
 
