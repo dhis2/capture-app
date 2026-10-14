@@ -2409,22 +2409,22 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'I6pDcSm2m0g', message: "d2:zScoreWFA( 20, 15, 'M' ) =  2.47" },
+                    displayText: { id: 'I6pDcSm2m0g', message: "d2:zScoreWFA( 20, 15, 'M' ) =  2.49" },
                 },
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'No0T9TgN1Px', message: "d2:zScoreWFH( 100, 20, 'M' ) =  3.5" },
+                    displayText: { id: 'No0T9TgN1Px', message: "d2:zScoreWFH( 100, 20, 'M' ) =  3.07" },
                 },
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'n1GUxR8fShY', message: "d2:zScoreHFA( 15, 20, 'F' )  = -3.5" },
+                    displayText: { id: 'n1GUxR8fShY', undefined, message: "d2:zScoreHFA( 15, 20, 'F' )  = -21" },
                 },
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'QJlZHo0GoVK', message: "d2:zScoreWFH( 100, 20, 'F' )  =  3" },
+                    displayText: { id: 'QJlZHo0GoVK', message: "d2:zScoreWFH( 100, 20, 'F' )  =  2.85" },
                 },
                 {
                     type: 'DISPLAYTEXT',
@@ -2434,7 +2434,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'uhyaCDzzivm', message: "d2:zScoreHFA( 15, 20, 'M' ) = -3.5" },
+                    displayText: { id: 'uhyaCDzzivm', message: "d2:zScoreHFA( 15, 20, 'M' ) = -23.38" },
                 },
             ]);
         });
