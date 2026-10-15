@@ -1,3 +1,10 @@
+## [107.8.3](https://github.com/dhis2/capture-app/compare/v107.8.2...v107.8.3) (2026-10-15)
+
+
+### Bug Fixes
+
+* [DHIS2-22201] program rule z-score calculations ([#4788](https://github.com/dhis2/capture-app/issues/4788)) ([ff908ef](https://github.com/dhis2/capture-app/commit/ff908ef2b94efd16e492d6504c3cf84c31a65e23))
+
 ## [107.8.2](https://github.com/dhis2/capture-app/compare/v107.8.1...v107.8.2) (2026-10-14)
 
 
