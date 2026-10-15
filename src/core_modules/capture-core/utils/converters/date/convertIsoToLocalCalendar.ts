@@ -1,21 +1,10 @@
 import moment from 'moment';
 import {
     convertFromIso8601,
+    formatCalendarDate,
 } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
-
-function formatLocalDate(
-    day: number | undefined,
-    month: number | undefined,
-    localYear: number | undefined,
-    dateFormat: string,
-): string {
-    const d = padWithZeros(day ?? 0, 2);
-    const m = padWithZeros(month ?? 0, 2);
-    const y = padWithZeros(localYear ?? 0, 4);
-    return dateFormat === 'DD-MM-YYYY' ? `${d}-${m}-${y}` : `${y}-${m}-${d}`;
-}
+import { formatMomentEn } from 'capture-core-utils/date';
 
 /**
  * Converts a date from ISO calendar to local calendar
@@ -39,8 +28,7 @@ export function convertIsoToLocalCalendar(isoDate: string | null | undefined): s
     const calendar = systemSettingsStore.get().calendar;
     const dateFormat = systemSettingsStore.get().dateFormat;
 
-    const { year, eraYear, month, day } = convertFromIso8601(formattedIsoDate, calendar as any);
-    const localYear = calendar === 'ethiopian' ? eraYear : year;
+    const localDate = convertFromIso8601(formattedIsoDate, calendar as any);
 
-    return formatLocalDate(day, month, localYear, dateFormat);
+    return formatCalendarDate(localDate, { format: dateFormat === 'DD-MM-YYYY' ? 'DD-MM-YYYY' : 'YYYY-MM-DD' });
 }
