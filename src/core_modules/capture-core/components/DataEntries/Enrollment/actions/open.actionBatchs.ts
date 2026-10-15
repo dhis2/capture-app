@@ -9,8 +9,13 @@ import { openDataEntryForNewEnrollment } from './open.actions';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
-    getCategoryOptionsValidatorContainers,
 } from '../fieldValidators';
+import {
+    attributeOptionsKey,
+    enrollmentAttributeOptionsKey,
+    getCategoryOptionsValidatorContainers,
+    getEnrollmentCategoryOptionsValidatorContainers,
+} from '../../../DataEntryDhis2Helpers';
 import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
@@ -67,6 +72,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     programCategory?: ProgramCategory;
     formFoundation: RenderFoundation;
 }) => {
+    const enrollmentProgramCategory = program.enrollmentCategoryCombination;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
@@ -81,13 +87,20 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ...enrollmentDataEntryPropsToInclude,
         ...extraDataEntryProps,
         ...(firstStageDataEntryPropsToInclude || []),
-        ...(programCategory && programCategory.categories ?
-            programCategory.categories.map(category => ({
-                id: `attributeCategoryOptions-${category.id}`,
-                type: 'TEXT',
-                validatorContainers:
+        ...(programCategory?.categories?.map(category => ({
+            id: `${attributeOptionsKey}-${category.id}`,
+            type: 'TEXT',
+            validatorContainers:
                 getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
-            })) : []),
+        })) ?? []),
+        ...(enrollmentProgramCategory?.categories?.map(category => ({
+            id: `${enrollmentAttributeOptionsKey}-${category.id}`,
+            type: 'TEXT',
+            validatorContainers: getEnrollmentCategoryOptionsValidatorContainers(
+                { enrollmentCategories: enrollmentProgramCategory.categories },
+                category.id,
+            ),
+        })) ?? []),
     ];
 
     const dataEntryActions =

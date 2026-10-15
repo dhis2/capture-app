@@ -17,11 +17,17 @@ type apiProgramCategory = {
     displayName: string,
 };
 
+type apiProgramCategoryOptionCombo = {
+    id: string,
+    categoryOptions: Array<{ id: string }>,
+};
+
 type apiProgramCategoryCombo = {
     id: string,
     displayName: string,
     isDefault: boolean,
     categories?: Array<apiProgramCategory> | null,
+    categoryOptionCombos?: Array<apiProgramCategoryOptionCombo> | null,
 };
 
 type apiStyle = {
@@ -166,6 +172,7 @@ type apiProgram = {
     access: apiAccess,
     trackedEntityType?: { id: string } | null,
     categoryCombo: apiProgramCategoryCombo,
+    enrollmentCategoryCombo?: apiProgramCategoryCombo | null,
     organisationUnits?: Array<apiProgramOrganisationUnit> | null,
     userRoles?: Array<apiProgramUserRoles> | null,
     programStages?: Array<apiProgramStage> | null,

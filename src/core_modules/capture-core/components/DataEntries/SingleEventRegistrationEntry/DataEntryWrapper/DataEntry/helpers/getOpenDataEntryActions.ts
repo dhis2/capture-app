@@ -5,7 +5,7 @@ import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import { dataEntryId, itemId, formId } from './constants';
 import { addFormData } from '../../../../../D2Form/actions/form.actions';
-import { getCategoryOptionsValidatorContainers } from '../../../../Enrollment/fieldValidators';
+import { getCategoryOptionsValidatorContainers } from '../../../../../DataEntryDhis2Helpers';
 import type { ProgramCategory } from '../../../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import type { DataEntryPropToInclude } from '../../../../../DataEntry/actions/dataEntryLoad.utils';
 import { getTermLabel, LabelKeys } from '../../../../../../customLabels';

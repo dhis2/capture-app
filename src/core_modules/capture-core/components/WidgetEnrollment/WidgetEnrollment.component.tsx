@@ -16,7 +16,7 @@ import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import { ReadOnlyBadge } from '../ReadOnlyBadge';
 import { useEnrollmentAccessContext } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentAccessContext';
-import type { PlainProps } from './enrollment.types';
+import type { EnrollmentCategoryOptionCombo, PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
 import { getTermLabelFromProgram, LabelKeys } from '../../customLabels';
@@ -25,6 +25,7 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
+import { AttributeOptionCombo } from './AttributeOptionCombo';
 
 const styles = {
     enrollment: {
@@ -59,10 +60,23 @@ const getEnrollmentDateLabel = (program, enrollmentLabel: string) =>
     program.displayEnrollmentDateLabel ?? i18n.t('{{enrollmentLabel}} date', { enrollmentLabel });
 const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
+const hasWriteAccessToAllCategoryOptions = (details?: EnrollmentCategoryOptionCombo) =>
+    !details || details.categoryOptions.every(option => option.access?.data?.write);
+
+const getEnrollmentReadOnly = (
+    readOnlyMode: boolean,
+    programWriteAccess: boolean,
+    attributeOptionComboWriteAccess: boolean,
+) => readOnlyMode || !programWriteAccess || !attributeOptionComboWriteAccess;
+
 const WidgetEnrollmentPlain = ({
     classes,
     events,
     enrollment,
+    enrollmentAOCDetails,
+    enrollmentCategoryCombo,
+    updateEnrollmentAOC,
+    savingEnrollmentAOC,
     program,
     ownerOrgUnit,
     locale,
@@ -85,7 +99,10 @@ const WidgetEnrollmentPlain = ({
     onAccessLostFromTransfer,
 }: PlainProps & WithStyles<typeof styles>) => {
     const { programWriteAccess, showWidgetBadge } = useEnrollmentAccessContext();
-    const enrollmentReadOnly = readOnlyMode || !programWriteAccess;
+    const attributeOptionComboWriteAccess = hasWriteAccessToAllCategoryOptions(enrollmentAOCDetails);
+    const enrollmentReadOnly = getEnrollmentReadOnly(
+        readOnlyMode, programWriteAccess, attributeOptionComboWriteAccess,
+    );
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const updatedAtDateTime: string = convertValue(
@@ -112,6 +129,7 @@ const WidgetEnrollmentPlain = ({
                             <div className={classes.badge}>
                                 <ReadOnlyBadge
                                     programWriteAccess={programWriteAccess}
+                                    attributeOptionComboWriteAccess={attributeOptionComboWriteAccess}
                                     trackedEntityName={program?.trackedEntityType?.displayName}
                                 />
                             </div>
@@ -189,6 +207,15 @@ const WidgetEnrollmentPlain = ({
                             })}
                             {convertValue(ownerOrgUnitClientValue, dataElementTypes.ORGANISATION_UNIT)}
                         </div>
+
+                        <AttributeOptionCombo
+                            enrollmentAOCDetails={enrollmentAOCDetails}
+                            enrollmentCategoryCombo={enrollmentCategoryCombo}
+                            orgUnitId={enrollment.orgUnit}
+                            readOnly={enrollmentReadOnly}
+                            saving={savingEnrollmentAOC}
+                            onSave={updateEnrollmentAOC}
+                        />
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">
                             <span data-test="widget-enrollment-icon-clock">

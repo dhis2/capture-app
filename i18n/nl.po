@@ -2,16 +2,16 @@
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
 # Cherise Beek <cherise.beek@gmail.com>, 2026
-# Philip Larsen Donnelly, 2026
 # Rica, 2026
 # Charel van den Elsen <zobeadzorg@gmail.com>, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-09-29T12:48:58.340Z\n"
+"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Charel van den Elsen <zobeadzorg@gmail.com>, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -75,7 +75,7 @@ msgid "Edit {{eventLabel}}"
 msgstr ""
 
 msgid "New {{eventLabel}}"
-msgstr ""
+msgstr "Nieuwe {{eventLabel}}"
 
 msgid "Loading..."
 msgstr "Bezig met laden..."
@@ -146,6 +146,12 @@ msgstr "Oppervlakte"
 msgid "Coordinate"
 msgstr "Coördineren"
 
+msgid "{{eventLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
+msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
+msgstr ""
+
 msgid "Complete {{eventLabel}}"
 msgstr ""
 
@@ -169,9 +175,6 @@ msgstr ""
 msgid "{{ stageName }} - Status"
 msgstr ""
 
-msgid "Please select {{categoryName}}"
-msgstr "Selecteer {{categoryName}}"
-
 msgid "A date in the future is not allowed"
 msgstr "Een datum in de toekomst is niet toegestaan"
 
@@ -188,6 +191,11 @@ msgstr "Annuleer"
 
 msgid "Metadata error. see log for details"
 msgstr "Metadatafout. zie logboek voor details"
+
+msgid ""
+"The selected {{enrollmentLabel}} category options are not a valid "
+"combination."
+msgstr ""
 
 msgid "{{ stageName }} - Details"
 msgstr ""
@@ -422,6 +430,9 @@ msgstr ""
 
 msgid "Operations running"
 msgstr "Operaties lopen"
+
+msgid "Please select {{categoryName}}"
+msgstr "Selecteer {{categoryName}}"
 
 msgid "No feedback for this {{enrollmentLabel}} yet"
 msgstr ""
@@ -1034,7 +1045,7 @@ msgid "Search {{uniqueAttrName}}"
 msgstr "Zoek {{uniqueAttrName}}"
 
 msgid "Search by {{attributesLabel}}"
-msgstr ""
+msgstr "Zoek op {{attributesLabel}}"
 
 msgid "Fill in at least {{count}} {{attributeLabel}} to search"
 msgid_plural "Fill in at least {{count}} {{attributeLabel}} to search"
@@ -1285,7 +1296,7 @@ msgid "Create new in another program..."
 msgstr ""
 
 msgid "Create new {{eventLabel}}"
-msgstr ""
+msgstr "Nieuwe {{eventLabel}} maken"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Zoek naar een {{trackedEntityName}} in {{programName}}"
@@ -1565,7 +1576,7 @@ msgid "Indicators"
 msgstr "Indicatoren"
 
 msgid "Save {{noteLabel}}"
-msgstr ""
+msgstr "Bewaar {{noteLabel}}"
 
 msgid "Edit {{trackedEntityName}}"
 msgstr ""
@@ -1684,7 +1695,7 @@ msgid "{{ linkableStageLabel }} has no linkable {{eventsLabel}}"
 msgstr ""
 
 msgid "Link to an existing {{eventLabel}}"
-msgstr ""
+msgstr "Link naar een bestaande {{eventLabel}}"
 
 msgid "Actions - {{relationshipName}}"
 msgstr ""
@@ -1847,7 +1858,7 @@ msgid "Go back without saving {{relationshipLabel}}"
 msgstr ""
 
 msgid "New {{relationshipLabel}}"
-msgstr ""
+msgstr "Nieuwe {{relationshipLabel}}"
 
 msgid "Link to an existing {{tetName}}"
 msgstr "Link naar een bestaande {{tetName}}"

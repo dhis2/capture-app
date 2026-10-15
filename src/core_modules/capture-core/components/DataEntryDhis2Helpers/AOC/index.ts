@@ -1,3 +1,11 @@
-export { AOCsectionKey, attributeOptionsKey } from './AOCFieldBuilder.constants';
-export { withAOCFieldBuilder } from './withAOCFieldBuilder';
-export { getCategoryOptionsValidatorContainers } from './categoryOptions.validatorContainersGetter';
+export {
+    AOCsectionKey,
+    attributeOptionsKey,
+    enrollmentAOCsectionKey,
+    enrollmentAttributeOptionsKey,
+} from './AOCFieldBuilder.constants';
+export { withAOCFieldBuilder, withEnrollmentAOCFieldBuilder } from './withAOCFieldBuilder';
+export {
+    getCategoryOptionsValidatorContainers,
+    getEnrollmentCategoryOptionsValidatorContainers,
+} from './categoryOptions.validatorContainersGetter';

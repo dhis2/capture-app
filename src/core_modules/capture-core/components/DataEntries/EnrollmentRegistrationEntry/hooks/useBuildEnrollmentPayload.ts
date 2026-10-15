@@ -24,6 +24,7 @@ import {
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
 } from '../helpers';
+import { useDeriveAttributeOptions } from './useDeriveAttributeOptions';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
@@ -81,8 +82,9 @@ export const useBuildEnrollmentPayload = ({
     const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
+    const deriveAttributeOptions = useDeriveAttributeOptions({ programId });
 
-    const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
+    const buildTeiWithEnrollment = (relatedStageRef?: { current: RelatedStageRefPayload | null }): {
         teiWithEnrollment: EnrollmentPayload;
         formHasError: boolean;
         redirect: {
@@ -91,7 +93,7 @@ export const useBuildEnrollmentPayload = ({
         };
     } => {
         if (!formFoundation) throw Error('form foundation object not found');
-        const firstStage = firstStageMetaData && firstStageMetaData.stage;
+        const firstStage = firstStageMetaData?.stage;
         const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
         const serverValuesForFormValues = formFoundation.convertAndGroupBySection(clientValues, convertClientToServer);
         const serverValuesForMainValues = getServerValuesForMainValues(
@@ -101,16 +103,13 @@ export const useBuildEnrollmentPayload = ({
         );
         const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues as any;
 
-        const { stages } = getTrackerProgramThrowIfNotFound(programId);
+        const { stages, enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(programId);
 
-        const attributeCategoryOptionsId = 'attributeCategoryOptions';
-        const attributeCategoryOptions = Object.keys(serverValuesForMainValues)
-            .filter(key => key.startsWith(attributeCategoryOptionsId))
-            .reduce((acc, key) => {
-                const categoryId = key.split('-')[1];
-                acc[categoryId] = serverValuesForMainValues[key];
-                return acc;
-            }, {});
+        const {
+            attributeCategoryOptions,
+            attributeOptionCombo,
+            aocResolveFailed,
+        } = deriveAttributeOptions(serverValuesForMainValues, enrollmentCategoryCombination);
 
         const formServerValues = serverValuesForFormValues[Section.groups.ENROLLMENT];
         const currentEventValues = serverValuesForFormValues[Section.groups.EVENT];
@@ -126,7 +125,12 @@ export const useBuildEnrollmentPayload = ({
             assignee,
         });
 
-        const { formHasError, linkedEvent: relatedStageLinkedEvent, relationship, linkMode } = deriveRelatedStageEvent({
+        const {
+            formHasError: relatedStageHasError,
+            linkedEvent: relatedStageLinkedEvent,
+            relationship,
+            linkMode,
+        } = deriveRelatedStageEvent({
             serverRequestEvent: firstStageDuringRegistrationEvent,
             relatedStageRef,
             firstStageMetaData,
@@ -167,6 +171,7 @@ export const useBuildEnrollmentPayload = ({
             attributes,
             events: allEventsToBeCreated,
             geometry: enrollmentGeometry,
+            attributeOptionCombo,
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
@@ -182,7 +187,7 @@ export const useBuildEnrollmentPayload = ({
                 enrollments: [enrollment],
                 relationships: relationship ? [relationship] : undefined,
             },
-            formHasError,
+            formHasError: relatedStageHasError || aocResolveFailed,
             redirect,
         };
     };

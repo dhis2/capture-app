@@ -535,7 +535,7 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 
         return (
             <div data-test="new-enrollment-event-form">
-                {/* the props orgUnit, orgUnitId and selectedOrgUnitId should all be removed from here. See DHIS2-18869 */}
+                {/* the props orgUnit and orgUnitId should be removed from here. See DHIS2-18869 */}
                 <WrappedDataEntry
                     id={id}
                     onUpdateFormField={onUpdateField}
@@ -550,7 +550,6 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
                     orgUnit={orgUnitFieldValue}
                     // @ts-expect-error - See DHIS2-18869
                     orgUnitId={orgUnitFieldValue?.id}
-                    selectedOrgUnitId={orgUnitFieldValue?.id}
                     {...passOnProps}
                 />
                 <SavingText

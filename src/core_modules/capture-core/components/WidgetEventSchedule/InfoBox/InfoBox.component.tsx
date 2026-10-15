@@ -28,14 +28,7 @@ const InfoBoxPlain = ({
     stageId,
     classes,
 }: Props) => {
-    const { eventLabel, eventsLabel } = useTermLabel(
-        [LabelKeys.eventSingular, LabelKeys.eventPlural],
-        { stageId },
-    );
-    if (!scheduleDate || !suggestedScheduleDate) {
-        return null;
-    }
-
+    const { eventLabel, eventsLabel } = useTermLabel([LabelKeys.eventSingular, LabelKeys.eventPlural], { stageId });
     const dayDifference = getDayDifference(scheduleDate, suggestedScheduleDate);
     const absoluteDifference = Math.abs(dayDifference);
     const position = dayDifference > 0 ? i18n.t('after') : i18n.t('before');

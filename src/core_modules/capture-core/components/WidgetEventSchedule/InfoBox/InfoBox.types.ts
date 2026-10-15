@@ -1,6 +1,6 @@
 export type PlainProps = {
-    scheduleDate?: string | null;
-    suggestedScheduleDate?: string | null;
+    scheduleDate: string;
+    suggestedScheduleDate: string;
     eventCountInOrgUnit: number;
     orgUnitName?: string | null;
     hideDueDate?: boolean;

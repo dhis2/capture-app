@@ -88,10 +88,17 @@ const loadProgramBatch = (() => {
         await loadRulesCentricMetadata(programIds);
 
         return programs
-            .map(({ programTrackedEntityAttributes, categoryCombo, trackedEntityTypeId, programStages }) => ({
+            .map(({
+                programTrackedEntityAttributes,
+                categoryCombo,
+                enrollmentCategoryCombo,
+                trackedEntityTypeId,
+                programStages,
+            }) => ({
                 trackedEntityAttributeIds: getTrackedEntityAttributeIdsFromBatch(programTrackedEntityAttributes),
                 dataElementIds: getDataElementIdsFromBatch(programStages),
                 categoryCombo,
+                enrollmentCategoryCombo,
                 trackedEntityTypeId,
             }));
     };
@@ -142,10 +149,10 @@ const getSideEffects = (() => {
     const getCategories = stalePrograms =>
         pipe(
             () => stalePrograms
-                .flatMap(program =>
-                    ((program.categoryCombo &&
-                    program.categoryCombo.categories) || []),
-                ),
+                .flatMap(program => [
+                    ...(program.categoryCombo?.categories ?? []),
+                    ...(program.enrollmentCategoryCombo?.categories ?? []),
+                ]),
             categories => [
                 ...new Map(
                     categories.map(ic => [ic.id, ic]),

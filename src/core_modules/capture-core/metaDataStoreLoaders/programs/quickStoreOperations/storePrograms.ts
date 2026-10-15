@@ -177,13 +177,20 @@ const pluralProgramFields = [
     'displayTrackedEntityAttributesLabel',
 ];
 
-const buildFieldsParam = (includePluralLabels: boolean): string => {
+const enrollmentAOCProgramFields = [
+    'enrollmentCategoryCombo[id,displayName,isDefault,categories[id,displayName],'
+        + 'categoryOptionCombos[id,categoryOptions[id]]]',
+];
+
+const buildFieldsParam = (includePluralLabels: boolean, includeEnrollmentAOC: boolean): string => {
     const stageFields = includePluralLabels
         ? [...baseProgramStageFields, ...pluralProgramStageFields]
         : baseProgramStageFields;
-    const programFields = includePluralLabels
-        ? [...baseProgramFields, ...pluralProgramFields]
-        : baseProgramFields;
+    const programFields = [
+        ...baseProgramFields,
+        ...(includePluralLabels ? pluralProgramFields : []),
+        ...(includeEnrollmentAOC ? enrollmentAOCProgramFields : []),
+    ];
     return [
         ...programFields,
         `programStages[${stageFields.join(',')}]`,
@@ -192,10 +199,11 @@ const buildFieldsParam = (includePluralLabels: boolean): string => {
 
 export const storePrograms = (programIds: Array<string>) => {
     const includePluralLabels = featureAvailable(FEATURES.customTerminologyPlurals);
+    const includeEnrollmentAOC = featureAvailable(FEATURES.enrollmentAOC);
     const query = {
         resource: 'programs',
         params: {
-            fields: buildFieldsParam(includePluralLabels),
+            fields: buildFieldsParam(includePluralLabels, includeEnrollmentAOC),
             filter: `id:in:[${programIds.join(',')}]`,
             pageSize: programIds.length,
         },

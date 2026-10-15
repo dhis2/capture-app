@@ -11,35 +11,28 @@ const styles = {
         display: 'flex',
         gap: spacers.dp8,
     },
-    button: {
-    },
 };
 
 type Props = PlainProps & WithStyles<typeof styles>;
 
-const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, validation }: Props) => {
+const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Props) => {
     const [cancelDialogVisible, setCancelDialogVisible] = useState(false);
     const handleCancelClick = () => {
         if (hasChanges) { setCancelDialogVisible(true); } else { onCancel(); }
     };
     return (<div className={classes.container}>
-        <div className={classes.button}>
-            <Button
-                onClick={onSchedule}
-                primary
-                disabled={validation?.error}
-            >
-                {i18n.t('Schedule')}
-            </Button>
-        </div>
-        <div className={classes.button}>
-            <Button
-                onClick={handleCancelClick}
-                secondary
-            >
-                {i18n.t('Cancel')}
-            </Button>
-        </div>
+        <Button
+            onClick={onSchedule}
+            primary
+        >
+            {i18n.t('Schedule')}
+        </Button>
+        <Button
+            onClick={handleCancelClick}
+            secondary
+        >
+            {i18n.t('Cancel')}
+        </Button>
         <DiscardDialog
             {...defaultDialogProps}
             onDestroy={onCancel}
