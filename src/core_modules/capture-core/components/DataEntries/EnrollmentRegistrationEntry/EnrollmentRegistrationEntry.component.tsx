@@ -15,6 +15,7 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { FormFieldPluginContextIdsProvider } from '../../D2Form/FormFieldPlugin';
 
 const styles = () => ({
     actions: {
@@ -83,19 +84,21 @@ const EnrollmentRegistrationEntryPlain =
                   scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
                   enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
                   <>
-                      <EnrollmentDataEntry
-                          teiId={teiId}
-                          orgUnit={orgUnit}
-                          programId={selectedScopeId}
-                          formFoundation={formFoundation}
-                          enrollmentMetadata={enrollmentMetadata}
-                          id={id}
-                          onPostProcessErrorMessage={onPostProcessErrorMessage}
-                          onGetUnsavedAttributeValues={() =>
-                              console.log('onGetUnsavedAttributeValues will be here in the future')
-                          }
-                          {...rest}
-                      />
+                      <FormFieldPluginContextIdsProvider programId={selectedScopeId} teiId={teiId}>
+                          <EnrollmentDataEntry
+                              teiId={teiId}
+                              orgUnit={orgUnit}
+                              programId={selectedScopeId}
+                              formFoundation={formFoundation}
+                              enrollmentMetadata={enrollmentMetadata}
+                              id={id}
+                              onPostProcessErrorMessage={onPostProcessErrorMessage}
+                              onGetUnsavedAttributeValues={() =>
+                                  console.log('onGetUnsavedAttributeValues will be here in the future')
+                              }
+                              {...rest}
+                          />
+                      </FormFieldPluginContextIdsProvider>
                       <div className={classes.actions}>
 
                           {

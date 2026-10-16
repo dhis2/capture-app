@@ -15,6 +15,7 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
+import { FormFieldPluginContextIdsProvider } from '../../D2Form/FormFieldPlugin';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 const translatedTextWithStylesForTei = (
@@ -73,20 +74,23 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
-                      <TrackedEntityInstanceDataEntry
-                          // @ts-expect-error - keeping original functionality as before ts rewrite
-                          orgUnitId={orgUnitId}
-                          formFoundation={formFoundation}
-                          trackedEntityTypeId={selectedScopeId}
-                          teiRegistrationMetadata={teiRegistrationMetadata}
-                          id={id}
-                          fieldOptions={fieldOptions}
-                          onPostProcessErrorMessage={onPostProcessErrorMessage}
-                          onGetUnsavedAttributeValues={() =>
-                              console.log('similar to the withErrorMessagePostProcessor this will come in the future')
-                          }
-                          {...rest}
-                      />
+                      {/* No program, so no context ids. Also resets ids from any surrounding host. */}
+                      <FormFieldPluginContextIdsProvider>
+                          <TrackedEntityInstanceDataEntry
+                              // @ts-expect-error - keeping original functionality as before ts rewrite
+                              orgUnitId={orgUnitId}
+                              formFoundation={formFoundation}
+                              trackedEntityTypeId={selectedScopeId}
+                              teiRegistrationMetadata={teiRegistrationMetadata}
+                              id={id}
+                              fieldOptions={fieldOptions}
+                              onPostProcessErrorMessage={onPostProcessErrorMessage}
+                              onGetUnsavedAttributeValues={() =>
+                                  console.log('similar to the withErrorMessagePostProcessor this will come in the future')
+                              }
+                              {...rest}
+                          />
+                      </FormFieldPluginContextIdsProvider>
                       <div className={classes.actions}>
                           {
                               onSave &&
