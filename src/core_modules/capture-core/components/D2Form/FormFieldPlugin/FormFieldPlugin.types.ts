@@ -1,3 +1,5 @@
+import type { DataElementUnique, Option, OptionSet } from '../../../metaData';
+
 export type PluginAttributeValue = {
     attribute: { id: string };
     value: unknown;
@@ -30,6 +32,33 @@ export type PluginFormFieldMetadata = {
     attributeValues?: PluginAttributeValue[];
 };
 
+export type FormattedIcon = {
+    name?: string;
+    color?: string;
+};
+
+export type FormattedUnique = {
+    generatable: boolean;
+    scope: DataElementUnique['scope'];
+};
+
+export type FormattedOption = {
+    code: string;
+    value: Option['value'];
+    text: string;
+    description?: string;
+    icon?: FormattedIcon;
+    attributes?: Record<string, unknown>;
+};
+
+export type FormattedOptionSet = {
+    options: FormattedOption[];
+    inputType: OptionSet['inputType'];
+    viewType?: OptionSet['viewType'];
+    emptyText?: string;
+    attributes?: Record<string, unknown>;
+};
+
 export type FormattedPluginFormFieldMetadata = {
     name: string;
     shortName: string;
@@ -43,9 +72,9 @@ export type FormattedPluginFormFieldMetadata = {
     disabled: boolean;
     displayInForms: boolean;
     displayInReports: boolean;
-    optionSet?: unknown;
-    icon?: unknown;
-    unique?: unknown;
+    optionSet?: FormattedOptionSet;
+    icon?: FormattedIcon;
+    unique?: FormattedUnique;
     attributes?: Record<string, unknown>;
 };
 

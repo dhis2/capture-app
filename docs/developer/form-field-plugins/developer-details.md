@@ -96,6 +96,33 @@ setContextFieldValue({
 The props that a form field plugin can expect are as follows:
 
 ```ts
+type Icon = {
+    name?: string;
+    color?: string;
+}
+
+type Option = {
+    code: string;
+    value: string;
+    text: string;
+    description?: string;
+    icon?: Icon;
+    attributes?: Record<string, any>;
+}
+
+type OptionSet = {
+    options: Option[];
+    inputType: 'dropdown' | 'verticalRadiobuttons' | 'horizontalRadiobuttons';
+    viewType?: 'ICON' | 'ICON_WITH_COLOR';
+    emptyText?: string;
+    attributes?: Record<string, any>;
+}
+
+type Unique = {
+    generatable: boolean;
+    scope: 'entireSystem' | 'organisationUnit';
+}
+
 type fieldsMetadata = {
     name: string;
     shortName: string;
@@ -107,9 +134,9 @@ type fieldsMetadata = {
     type: string;
     displayInForms: boolean;
     displayInReports: boolean;
-    optionSet?: any;
-    icon?: any;
-    unique?: any;
+    optionSet?: OptionSet;
+    icon?: Icon;
+    unique?: Unique;
     searchable?: boolean;
     url?: string;
     attributes?: Record<string, any>;
