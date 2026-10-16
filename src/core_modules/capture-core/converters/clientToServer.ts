@@ -20,6 +20,10 @@ function convertDate(rawValue: string): string {
     return formatMomentEn(rawValue, 'YYYY-MM-DD');
 }
 
+function convertDateTime(rawValue: string): string {
+    return formatMomentEn(rawValue, 'YYYY-MM-DDTHH:mm');
+}
+
 function convertRange(parser: (value: any) => any, rangeValue: RangeValue) {
     return {
         from: parser(rangeValue.from),
@@ -53,6 +57,7 @@ const valueConvertersForType = {
     [dataElementTypes.PERCENTAGE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
     [dataElementTypes.DATE]: convertDate,
     [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
+    [dataElementTypes.DATETIME]: convertDateTime,
     [dataElementTypes.TRUE_ONLY]: () => 'true',
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
     [dataElementTypes.FILE_RESOURCE]: (rawValue: any) => rawValue.value,
