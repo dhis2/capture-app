@@ -13,6 +13,7 @@ import type { PlainProps } from './NewEventDataEntryWrapper.types';
 import { useMetadataForProgramStage } from '../../common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiryForUser } from '../../../../hooks';
 import { LoadingMaskForPage } from '../../../LoadingMasks';
+import { FormFieldPluginContextIdsProvider } from '../../../D2Form/FormFieldPlugin';
 
 const getStyles = () => ({
     flexContainer: {
@@ -103,15 +104,17 @@ const NewEventDataEntryWrapperPlain = ({
                 </div>
             </div>
             <div>
-                <DataEntry
-                    programId={programId}
-                    stage={stage}
-                    stageId={stage?.id}
-                    orgUnit={orgUnitContext}
-                    formFoundation={formFoundation}
-                    formHorizontal={formHorizontal}
-                    expiryPeriod={expiryPeriod}
-                />
+                <FormFieldPluginContextIdsProvider programId={programId} programStageId={stage?.id}>
+                    <DataEntry
+                        programId={programId}
+                        stage={stage}
+                        stageId={stage?.id}
+                        orgUnit={orgUnitContext}
+                        formFoundation={formFoundation}
+                        formHorizontal={formHorizontal}
+                        expiryPeriod={expiryPeriod}
+                    />
+                </FormFieldPluginContextIdsProvider>
                 <EventsList />
             </div>
         </div>

@@ -28,6 +28,7 @@ import { convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import type { PlainProps } from './EventDetailsSection.types';
+import { FormFieldPluginContextIdsProvider } from '../../../D2Form/FormFieldPlugin';
 
 const getStyles: any = () => ({
     container: {
@@ -102,6 +103,12 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     }
 
     const renderDataEntryContainer = () => (
+        <FormFieldPluginContextIdsProvider programId={programId} programStageId={programStage.id} eventId={eventId}>
+            {renderDataEntry()}
+        </FormFieldPluginContextIdsProvider>
+    );
+
+    const renderDataEntry = () => (
         <div className={classes.dataEntryContainer}>
             {isEditEventPage ?
                 <EditEventDataEntry

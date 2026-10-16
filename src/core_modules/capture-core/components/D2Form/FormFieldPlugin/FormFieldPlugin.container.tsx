@@ -4,7 +4,7 @@ import type { ContainerProps, FormattedMetadataByPluginId } from './FormFieldPlu
 import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
-import { useFormFieldPluginContext } from './hooks/useFormFieldPluginContext';
+import { useFormFieldPluginContextIds } from './FormFieldPluginContextIds';
 import { formatPluginConfig } from './formatPluginConfig';
 
 export const FormFieldPlugin = (props: ContainerProps) => {
@@ -19,14 +19,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
-    const {
-        ownerOrgUnitId,
-        programId,
-        programStageId,
-        enrollmentId,
-        eventId,
-        teiId,
-    } = useFormFieldPluginContext();
+    const contextIds = useFormFieldPluginContextIds();
 
     const { pluginValues, formValuesRedux } = usePluginValues(formId, metadataByPluginId, pluginContext);
     const { errors, warnings, formSubmitted } = usePluginMessages(formId, metadataByPluginId);
@@ -60,12 +53,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
 
     return (
         <FormFieldPluginComponent
-            ownerOrgUnitId={ownerOrgUnitId}
-            programId={programId}
-            programStageId={programStageId}
-            enrollmentId={enrollmentId}
-            eventId={eventId}
-            teiId={teiId}
+            {...contextIds}
             pluginSource={pluginSource}
             fieldsMetadata={formattedMetadata}
             values={pluginValues}
@@ -78,4 +66,3 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         />
     );
 };
-
