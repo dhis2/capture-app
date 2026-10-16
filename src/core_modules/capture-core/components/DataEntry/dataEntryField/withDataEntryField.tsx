@@ -115,8 +115,6 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
 };
 
 const getMapStateToProps = (settings: Settings) => (state: any, props: Props) => {
-    if (settings.getPassOnFieldData?.(props) === false) return {};
-
     const dataEntry = state.dataEntries[props.id];
     if (!dataEntry) return {};
 
