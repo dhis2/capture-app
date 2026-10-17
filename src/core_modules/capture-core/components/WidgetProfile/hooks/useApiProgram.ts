@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 
-const baseFields =
+const getBaseFields = (includeEnableChangeLog: boolean) =>
     'id,version,displayName,displayShortName,description,programType,style,minAttributesRequiredToSearch,' +
     'enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,' +
     'displayIncidentDate,access[*],' +
@@ -26,7 +26,8 @@ const baseFields =
         'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]],' +
         'access[read]],' +
         'displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
-    'trackedEntityType[id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,' +
+    'trackedEntityType[id,access,displayName,allowAuditLog,' +
+        `${includeEnableChangeLog ? 'enableChangeLog,' : ''}minAttributesRequiredToSearch,featureType,` +
         'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
         'translations[property,locale,value]],' +
     'userRoles[id,displayName]';
@@ -37,17 +38,20 @@ const pluralLabelFields =
 export const useApiProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
-            () => ({
-                programs: {
-                    resource: 'programs',
-                    id: programId,
-                    params: {
-                        fields: featureAvailable(FEATURES.customTerminologyPlurals)
-                            ? `${baseFields},${pluralLabelFields}`
-                            : baseFields,
+            () => {
+                const baseFields = getBaseFields(featureAvailable(FEATURES.enableChangeLog));
+                return {
+                    programs: {
+                        resource: 'programs',
+                        id: programId,
+                        params: {
+                            fields: featureAvailable(FEATURES.customTerminologyPlurals)
+                                ? `${baseFields},${pluralLabelFields}`
+                                : baseFields,
+                        },
                     },
-                },
-            }),
+                };
+            },
             [programId],
         ),
     );

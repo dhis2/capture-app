@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
+import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 import { useApiProgram } from './useApiProgram';
 import { useOptionGroups } from './useOptionGroups';
 
 type ApiProgram = {
     trackedEntityType: {
         allowAuditLog: boolean;
+        enableChangeLog?: boolean;
         [key: string]: any;
     };
     programTrackedEntityAttributes: Array<{
@@ -49,13 +51,15 @@ export const useProgram = (programId: string) => {
     const programMetadata: Program | null = useMemo(() => {
         if (program && optionGroups) {
             const apiProgram = program as ApiProgram;
-            const { allowAuditLog, ...restTrackedEntityType } = apiProgram.trackedEntityType;
+            const { allowAuditLog, enableChangeLog, ...restTrackedEntityType } = apiProgram.trackedEntityType;
 
             return {
                 ...apiProgram,
                 trackedEntityType: {
                     ...restTrackedEntityType,
-                    changelogEnabled: allowAuditLog,
+                    changelogEnabled: featureAvailable(FEATURES.enableChangeLog)
+                        ? Boolean(enableChangeLog)
+                        : allowAuditLog,
                 },
                 programTrackedEntityAttributes: apiProgram.programTrackedEntityAttributes
                     .filter(programTrackedEntityAttribute =>

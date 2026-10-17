@@ -182,7 +182,15 @@ const enrollmentAOCProgramFields = [
         + 'categoryOptionCombos[id,categoryOptions[id]]]',
 ];
 
-const buildFieldsParam = (includePluralLabels: boolean, includeEnrollmentAOC: boolean): string => {
+const enableChangeLogProgramFields = [
+    'enableChangeLog',
+];
+
+const buildFieldsParam = (
+    includePluralLabels: boolean,
+    includeEnrollmentAOC: boolean,
+    includeEnableChangeLog: boolean,
+): string => {
     const stageFields = includePluralLabels
         ? [...baseProgramStageFields, ...pluralProgramStageFields]
         : baseProgramStageFields;
@@ -190,6 +198,7 @@ const buildFieldsParam = (includePluralLabels: boolean, includeEnrollmentAOC: bo
         ...baseProgramFields,
         ...(includePluralLabels ? pluralProgramFields : []),
         ...(includeEnrollmentAOC ? enrollmentAOCProgramFields : []),
+        ...(includeEnableChangeLog ? enableChangeLogProgramFields : []),
     ];
     return [
         ...programFields,
@@ -200,10 +209,11 @@ const buildFieldsParam = (includePluralLabels: boolean, includeEnrollmentAOC: bo
 export const storePrograms = (programIds: Array<string>) => {
     const includePluralLabels = featureAvailable(FEATURES.customTerminologyPlurals);
     const includeEnrollmentAOC = featureAvailable(FEATURES.enrollmentAOC);
+    const includeEnableChangeLog = featureAvailable(FEATURES.enableChangeLog);
     const query = {
         resource: 'programs',
         params: {
-            fields: buildFieldsParam(includePluralLabels, includeEnrollmentAOC),
+            fields: buildFieldsParam(includePluralLabels, includeEnrollmentAOC, includeEnableChangeLog),
             filter: `id:in:[${programIds.join(',')}]`,
             pageSize: programIds.length,
         },

@@ -21,6 +21,7 @@ type Props = {
     onOpenChangelog: () => void;
     onClose: () => void;
 
+    showChangelog?: boolean;
     hideMutationActions?: boolean;
     isEventBlockedByExpiry: boolean;
     canToggleCompletion: boolean;
@@ -48,6 +49,7 @@ export const EventOverflowMenu = ({
     dataTest = 'overflow-menu',
     onOpenChangelog,
     onClose,
+    showChangelog = true,
     hideMutationActions = false,
     isEventBlockedByExpiry,
     canToggleCompletion,
@@ -63,11 +65,11 @@ export const EventOverflowMenu = ({
     onDeleteRequest,
 }: Props) => (
     <FlyoutMenu dense maxWidth={maxWidth} dataTest={dataTest}>
-        <ChangelogMenuItem onOpenChangelog={onOpenChangelog} onClose={onClose} />
+        {showChangelog && <ChangelogMenuItem onOpenChangelog={onOpenChangelog} onClose={onClose} />}
 
         {!hideMutationActions && (
             <>
-                <MenuDivider />
+                {showChangelog && <MenuDivider />}
 
                 {isSkippableStatus(eventStatus) && (
                     <SkipMenuItem
