@@ -1520,8 +1520,12 @@ The **Changelog** feature provides a historical record of changes made to data f
 The **Event Changelog** tracks changes to data items within an event. These data items include event properties (e.g., report date, scheduled date, and geometry) and data elements.
 
 #### How to open the event changelog
-1. **Navigate** to the "View event" page of an event in the Capture app.  
-2. Click **View Changelog** to open the changelog.
+1. **Go to the Metadata Management app**, open the relevant **Program** and enable the **Record change history for event data values** checkbox in the **Program Details** section.
+
+   > Requires DHIS2 server version 2.43 or higher. On older servers, the event changelog is always available.
+
+2. **Navigate** to the "View event" page of an event in the Capture app.  
+3. Click **View Changelog** to open the changelog.
    ![](resources/images/open-event-changelog.png)
 
 ---
@@ -1531,8 +1535,10 @@ The **Event Changelog** tracks changes to data items within an event. These data
 The **tracked entity changelog** tracks changes to attributes of a tracked entity within an enrollment.
 
 #### How to open the tracked entity changelog
-1. **Go to the Metadata Management app**, open the relevant **Tracked entity type** and **enable** the **Enable tracked entity instance audit log** checkbox.
+1. **Go to the Metadata Management app**, open the relevant **Tracked entity type** and enable the **Record change history for attribute values** checkbox.
    ![](resources/images/enable-tracked-entity-instance-audit-log-mm.png)
+
+   > Requires DHIS2 server version 2.43 or higher. On older servers, the tracked entity changelog is always available.
 
 2. **Open** the enrollment dashboard in the Capture app.  
 
