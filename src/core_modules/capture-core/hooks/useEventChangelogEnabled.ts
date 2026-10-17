@@ -1,10 +1,15 @@
 import { FEATURES, useFeature } from 'capture-core-utils/featuresSupport';
 import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
 
-export const useEventChangelogEnabled = (programId: string): boolean => {
+export const useEventChangelogEnabled = (programId: string) => {
     const enableChangeLogSupported = useFeature(FEATURES.enableChangeLog);
-    const { program } = useProgramFromIndexedDB(programId, { enabled: !!programId && enableChangeLogSupported });
+    const { program, isLoading } = useProgramFromIndexedDB(
+        programId,
+        { enabled: !!programId && enableChangeLogSupported },
+    );
 
-    if (!enableChangeLogSupported) return true;
-    return Boolean(program?.enableChangeLog);
+    if (!enableChangeLogSupported) {
+        return { changelogEnabled: true, isLoading: false };
+    }
+    return { changelogEnabled: Boolean(program?.enableChangeLog), isLoading };
 };

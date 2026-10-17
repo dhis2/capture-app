@@ -26,7 +26,7 @@ const getBaseFields = (includeEnableChangeLog: boolean) =>
         'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]],' +
         'access[read]],' +
         'displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
-    'trackedEntityType[id,access,displayName,allowAuditLog,' +
+    'trackedEntityType[id,access,displayName,' +
         `${includeEnableChangeLog ? 'enableChangeLog,' : ''}minAttributesRequiredToSearch,featureType,` +
         'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
         'translations[property,locale,value]],' +
