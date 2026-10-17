@@ -81,6 +81,8 @@ When('you set the enrollment status filter to active', () => {
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
+        .scrollIntoView()
+        .should('be.visible')
         .contains('Active')
         .click();
 });
@@ -97,8 +99,9 @@ When(/^you set the first name filter to (.*)$/, (name) => {
 });
 
 When('you apply the current filter', () => {
-    cy.get('[data-test="list-view-filter-apply-button"]')
-        .click();
+    cy.intercept('GET', /tracker\/(trackedEntities|events)/).as('listRefresh');
+    cy.get('[data-test="list-view-filter-apply-button"]').click();
+    cy.wait('@listRefresh');
 });
 
 Then('the first name filter button should show that the filter is in effect', () => {
@@ -255,7 +258,10 @@ Then('you see the new sharing settings', () => {
     });
     cy.get('[data-test="list-view-menu-button"]').click();
     cy.contains('Delete view').click();
-    cy.contains('Confirm').click();
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .should('be.visible')
+        .contains('button', 'Confirm')
+        .click();
 });
 
 When(/^you open the More filters menu on the (event|tracker) working list$/, (listType) => {

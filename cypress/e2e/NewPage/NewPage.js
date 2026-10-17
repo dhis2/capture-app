@@ -423,6 +423,9 @@ When('you click the cancel button', () => {
 // New person
 And('you are in the Person registration page', () => {
     cy.visit('/#/new?trackedEntityTypeId=nEenWmSyUEp&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="registration-page-content"]')
+        .contains('First name')
+        .should('be.visible');
 });
 
 And('you fill in the first name with value that has duplicates', () => {
@@ -441,19 +444,25 @@ And('you fill in a unique first name', () => {
 
 And(/^you click the save (.*) submit button$/, (TEType) => {
     cy.contains(`Save ${TEType}`)
+        .scrollIntoView()
+        .should('not.be.disabled')
         .click();
 });
 
 Then('you see the possible duplicates modal', () => {
     cy.get('[data-test="duplicates-modal"]')
         .contains('Possible duplicates found')
-        .should('exist');
+        .should('be.visible');
 });
 
 Then('you submit the form again from the duplicates modal', () => {
+    cy.intercept('POST', '**/tracker**').as('createTrackedEntity');
     cy.get('[data-test="create-as-new-person"]')
         .contains('Save as new')
+        .scrollIntoView()
+        .should('be.visible')
         .click();
+    cy.wait('@createTrackedEntity', { timeout: 30000 });
 });
 
 // New person in WHO RMNCH Tracker

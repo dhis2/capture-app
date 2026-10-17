@@ -55,21 +55,30 @@ Then(/^the user sees the edit profile modal/, () =>
 
 Given('you add a new tracked entity in the Malaria focus investigation program', () => {
     cy.visit('/#/new?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+    cy.contains('Save focus area').scrollIntoView().should('be.visible');
     cy.get('input[type="text"]')
         .eq(2)
         .type(`Local id-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
+    cy.intercept('POST', '**/tracker**').as('saveTrackedEntity');
     cy.contains('Save focus area')
+        .scrollIntoView()
+        .should('not.be.disabled')
         .click();
+    cy.wait('@saveTrackedEntity', { timeout: 30000 });
     cy.url().should('include', 'enrollmentEventEdit?');
 });
 
 When('you open the overflow menu and click the "Delete Focus area" button', () => {
-    cy.get('[data-test=profile-widget]').contains('Focus area profile');
-
+    cy.get('[data-test="profile-widget"]')
+        .contains('Focus area profile')
+        .scrollIntoView()
+        .should('be.visible');
     cy.get('[data-test="tracked-entity-profile-overflow-button"]')
         .click();
     cy.contains('Delete Focus area')
+        .scrollIntoView()
+        .should('be.visible')
         .click();
 });
 
@@ -82,10 +91,12 @@ Then('you see the delete tracked entity confirmation modal', () => {
 });
 
 When('you confirm by clicking the "Yes, delete Focus area" button', () => {
+    cy.intercept('POST', '**/tracker**').as('deleteTrackedEntity');
     cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
         cy.contains('Yes, delete Focus area')
             .click();
     });
+    cy.wait('@deleteTrackedEntity', { timeout: 30000 });
 });
 
 Then('you are redirected to the home page', () => {
