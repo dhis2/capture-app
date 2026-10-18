@@ -103,7 +103,11 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     }
 
     const renderDataEntryContainer = () => (
-        <FormFieldPluginContextIdsProvider programId={programId} programStageId={programStage.id} eventId={eventId}>
+        <FormFieldPluginContextIdsProvider
+            programId={programId}
+            programStageId={programStage.id}
+            eventId={eventId}
+        >
             {renderDataEntry()}
         </FormFieldPluginContextIdsProvider>
     );

@@ -74,7 +74,6 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
-                      {/* No program, so no context ids. Also resets ids from any surrounding host. */}
                       <FormFieldPluginContextIdsProvider>
                           <TrackedEntityInstanceDataEntry
                               // @ts-expect-error - keeping original functionality as before ts rewrite

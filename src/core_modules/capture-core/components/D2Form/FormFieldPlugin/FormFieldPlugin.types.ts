@@ -13,7 +13,7 @@ export type FormattedUnique = {
 
 export type FormattedOption = {
     code: string;
-    value: string | number | boolean; // the code converted to the field's client type (see convertOptionSetValue)
+    value: string | number | boolean;
     text: string;
     description?: string;
     icon?: FormattedIcon;
@@ -45,11 +45,9 @@ export type FormattedPluginFormFieldMetadata = {
     icon?: FormattedIcon;
     unique?: FormattedUnique;
     attributes?: Record<string, any>;
-    // tracked entity attributes only
     inherit?: boolean;
     minCharactersToSearch?: number;
     searchOperator?: SearchOperator;
-    // date fields only
     allowFutureDate?: boolean;
 };
 
