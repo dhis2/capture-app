@@ -83,7 +83,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { changelogEnabled } = useEventChangelogEnabled(programId);
+    const changelogEnabled = useEventChangelogEnabled(programId);
     const { canToggleCompletion } = useEventEditPermissions({
         programId,
         stage: programStage,
