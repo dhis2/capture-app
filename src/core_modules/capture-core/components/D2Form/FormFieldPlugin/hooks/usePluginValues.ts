@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
-import { useLocationQuery } from '../../../../utils/routing';
 import type { MetadataByPluginId, PluginContext } from '../FormFieldPlugin.types';
+import { PluginContextValueKeys } from '../FormFieldPlugin.const';
 
 export const usePluginValues = (
     formId: string,
@@ -21,18 +21,11 @@ export const usePluginValues = (
         );
     }, [formValuesRedux, metadataByPluginId]);
 
-    const url = useLocationQuery();
-
-    const contextValues = useMemo(() => {
-        const base = Object.fromEntries(
-            Object.entries(pluginContext).map(([key, entry]) => [key, entry?.value]),
-        );
-        // remove this once DHIS2-19171 adds an org-unit widget to the New TEI form
-        if (!('orgUnit' in pluginContext) && url.orgUnitId) {
-            return { ...base, orgUnit: { id: url.orgUnitId } };
-        }
-        return base;
-    }, [pluginContext, url.orgUnitId]);
+    const contextValues = useMemo(() => Object.fromEntries(
+        PluginContextValueKeys
+            .filter(key => key in pluginContext)
+            .map(key => [key, pluginContext[key]?.value]),
+    ), [pluginContext]);
 
     const pluginValues = useMemo(() => ({
         ...formValues,

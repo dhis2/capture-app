@@ -1,6 +1,18 @@
+export const PluginContextValueKeys = Object.freeze([
+    'orgUnit',
+    'enrolledAt',
+    'occurredAt',
+    'scheduledAt',
+    'geometry',
+] as const);
+
+export type PluginContextValueKey = typeof PluginContextValueKeys[number];
+
 export const PluginErrorMessages = Object.freeze({
     SET_FIELD_VALUE_MISSING_ID: 'setFieldValue: missing required fieldId',
     SET_FIELD_VALUE_ID_NOT_ALLOWED: 'setFieldValue: fieldId must be one of the configured plugin ids',
+    SET_CONTEXT_FIELD_VALUE_ID_NOT_ALLOWED:
+        `setContextFieldValue: fieldId must be one of ${PluginContextValueKeys.join(', ')}`,
     SET_CONTEXT_FIELD_VALUE_MISSING_ID:
         'setContextFieldValue: tried to set value for a field that does not exist in the plugin context',
 });
