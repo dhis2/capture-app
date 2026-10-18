@@ -24,7 +24,7 @@ These are the props that an enrollment plugin can expect:
 ```ts
 type EnrollmentPluginProps = {
     programId: string;
-    orgUnitId: string;
+    ownerOrgUnitId: string | undefined;
     enrollmentId: string;
     teiId: string;
     programStageId?: string;
@@ -32,3 +32,5 @@ type EnrollmentPluginProps = {
     navigate: (url: string) => void;
 }
 ```
+
+`ownerOrgUnitId` is the enrollment owner, where the tracked entity currently belongs. It changes when the tracked entity is transferred. It replaces the earlier `orgUnitId` prop.
