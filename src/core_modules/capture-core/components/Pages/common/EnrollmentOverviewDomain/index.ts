@@ -4,7 +4,6 @@ export {
     updateEnrollmentEvent,
     updateEnrollmentDate,
     updateIncidentDate,
-    updateEnrollmentGeometry,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
     updateOrAddEnrollmentEvents,

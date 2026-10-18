@@ -5,7 +5,6 @@ export const enrollmentSiteActionTypes = {
     COMMON_ENROLLMENT_SITE_DATA_SET: 'EnrollmentSite.SetCommonData',
     UPDATE_ENROLLMENT_DATE: 'Enrollment.UpdateEnrollmentDate',
     UPDATE_INCIDENT_DATE: 'Enrollment.UpdateIncidentDate',
-    UPDATE_ENROLLMENT_GEOMETRY: 'Enrollment.UpdateEnrollmentGeometry',
     UPDATE_ENROLLMENT_EVENT: 'Enrollment.UpdateEnrollmentEvent',
     UPDATE_OR_ADD_ENROLLMENT_EVENTS: 'Enrollment.UpdateOrAddEnrollmentEvents',
     UPDATE_ENROLLMENT_EVENT_WITHOUT_ID: 'Enrollment.UpdateEnrollmentEventWithoutId',
@@ -58,11 +57,6 @@ export const updateEnrollmentDate = (enrollmentDate: string) =>
 export const updateIncidentDate = (incidentDate: string) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_INCIDENT_DATE)({
         incidentDate,
-    });
-
-export const updateEnrollmentGeometry = (geometry: Record<string, unknown> | null) =>
-    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_GEOMETRY)({
-        geometry,
     });
 
 export const updateEnrollmentEvent = (eventId: string, eventData: any) =>

@@ -7,6 +7,7 @@ import { dataElementTypes } from '../../../metaData';
 import { MapModal } from '../MapModal';
 import type { OwnProps } from './MiniMap.types';
 import { convertToClientCoordinates } from './converters';
+import { useUpdateEnrollment } from '../dataMutation/dataMutation';
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
@@ -25,11 +26,14 @@ const MiniMapPlain = ({
     coordinates,
     geometryType,
     enrollment,
-    updateEnrollmentGeometry,
+    refetchEnrollment,
+    refetchTEI,
+    onError,
     readOnly,
     classes,
 }: Props) => {
     const [isOpenMap, setOpenMap] = useState(false);
+    const { updateMutation } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
     const clientValues = convertToClientCoordinates(coordinates, geometryType);
     const center = geometryType === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
     const onMapReady = (mapRef: any) => {
@@ -69,7 +73,7 @@ const MiniMapPlain = ({
                     center={center}
                     setOpenMap={setOpenMap}
                     defaultValues={clientValues}
-                    onUpdate={({ geometry }) => updateEnrollmentGeometry(geometry)}
+                    onUpdate={updateMutation}
                     enrollment={enrollment}
                     readOnly={readOnly}
                 />

@@ -44,7 +44,6 @@ export const WidgetEnrollment = ({
     onAddNew,
     onUpdateEnrollmentDate,
     onUpdateIncidentDate,
-    onUpdateEnrollmentGeometry,
     onError,
     onSuccess,
     onUpdateEnrollmentStatus,
@@ -57,7 +56,6 @@ export const WidgetEnrollment = ({
         enrollment,
         updateEnrollmentDate,
         updateIncidentDate,
-        updateEnrollmentGeometry,
         updateEnrollmentAOC,
         savingEnrollmentAOC,
         error: errorEnrollment,
@@ -68,7 +66,6 @@ export const WidgetEnrollment = ({
         program,
         onUpdateEnrollmentDate,
         onUpdateIncidentDate,
-        onUpdateEnrollmentGeometry,
         onError,
         onSuccess,
         externalData,
@@ -117,7 +114,6 @@ export const WidgetEnrollment = ({
             onAddNew={onAddNew}
             updateEnrollmentDate={updateEnrollmentDate}
             updateIncidentDate={updateIncidentDate}
-            updateEnrollmentGeometry={updateEnrollmentGeometry}
             initError={error}
             onError={onError}
             onSuccess={onSuccess}

@@ -18,7 +18,6 @@ type Props = {
     program?: Record<string, unknown>;
     onUpdateEnrollmentDate?: (date: string) => void;
     onUpdateIncidentDate?: (date: string) => void;
-    onUpdateEnrollmentGeometry?: (geometry: Record<string, unknown> | null) => void;
     onError?: (error: any) => void;
     onSuccess?: () => void;
     externalData?: { status: { value: string | null }; events?: Array<Record<string, unknown>> | null };
@@ -30,7 +29,6 @@ export const useEnrollment = ({
     program,
     onUpdateEnrollmentDate,
     onUpdateIncidentDate,
-    onUpdateEnrollmentGeometry,
     onError,
     onSuccess,
     externalData,
@@ -87,14 +85,6 @@ export const useEnrollment = ({
         onError,
     });
 
-    const updateEnrollmentGeometry = useUpdateEnrollment<Record<string, unknown> | null>({
-        enrollment,
-        setEnrollment,
-        propertyName: 'geometry',
-        updateHandler: onUpdateEnrollmentGeometry,
-        onError,
-    });
-
     const { update: updateEnrollmentAOC, loading: savingEnrollmentAOC } = useUpdateEnrollmentAOC({
         enrollment,
         setEnrollment,
@@ -110,7 +100,6 @@ export const useEnrollment = ({
         enrollment: !loading ? enrollment : null,
         updateEnrollmentDate,
         updateIncidentDate,
-        updateEnrollmentGeometry,
         updateEnrollmentAOC,
         savingEnrollmentAOC,
     };
