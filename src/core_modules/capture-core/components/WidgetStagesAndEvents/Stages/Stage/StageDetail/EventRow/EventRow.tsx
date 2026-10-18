@@ -70,6 +70,7 @@ const EventRowPlain = ({
         scheduledAtClient: convertServerToClient(eventDetails.scheduledAt, dataElementTypes.DATE) as string,
     });
     const changelogEnabled = useEventChangelogEnabled(programId);
+    const hasMenuActions = changelogEnabled || canEditProgramStage;
     const { enrollmentLabel, programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
         [
             LabelKeys.enrollmentSingular,
@@ -181,7 +182,7 @@ const EventRowPlain = ({
                 <>
                     {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
 
-                    {!pendingApiResponse && (changelogEnabled || canEditProgramStage) && (
+                    {!pendingApiResponse && hasMenuActions && (
                         <OverflowButton
                             open={actionsOpen}
                             onClick={() => setActionsOpen(prev => !prev)}

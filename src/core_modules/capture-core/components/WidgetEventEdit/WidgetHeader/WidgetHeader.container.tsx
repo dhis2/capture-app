@@ -70,6 +70,7 @@ const WidgetHeaderPlain = ({
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
     const changelogEnabled = useEventChangelogEnabled(programId);
+    const hasMenuActions = changelogEnabled || canEditProgramStage;
 
     const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
     const storedEvent = enrollment?.events?.find((event: { event: string }) => event.event === eventId);
@@ -185,7 +186,7 @@ const WidgetHeaderPlain = ({
 
                         {pendingApiResponse && <CircularLoader small dataTest="widget-header-saving-loader" />}
 
-                        {!pendingApiResponse && (changelogEnabled || canEditProgramStage) && (
+                        {!pendingApiResponse && hasMenuActions && (
                             <OverflowButton
                                 open={actionsIsOpen}
                                 onClick={() => setActionsIsOpen(prev => !prev)}

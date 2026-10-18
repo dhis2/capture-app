@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { FEATURES, featureAvailable } from 'capture-core-utils/featuresSupport';
 
-const getBaseFields = (includeEnableChangeLog: boolean) =>
+const baseProgramFields = [
     'id,version,displayName,displayShortName,description,programType,style,minAttributesRequiredToSearch,' +
     'enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,' +
     'displayIncidentDate,access[*],' +
@@ -26,32 +26,48 @@ const getBaseFields = (includeEnableChangeLog: boolean) =>
         'optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]],' +
         'access[read]],' +
         'displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
-    'trackedEntityType[id,access,displayName,' +
-        `${includeEnableChangeLog ? 'enableChangeLog,' : ''}minAttributesRequiredToSearch,featureType,` +
-        'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
-        'translations[property,locale,value]],' +
-    'userRoles[id,displayName]';
+    'userRoles[id,displayName]',
+];
 
-const pluralLabelFields =
-    'displayEnrollmentsLabel,displayEventsLabel,displayTrackedEntityAttributesLabel';
+const pluralProgramFields = [
+    'displayEnrollmentsLabel,displayEventsLabel,displayTrackedEntityAttributesLabel',
+];
+
+const baseTrackedEntityTypeFields = [
+    'id,access,displayName,minAttributesRequiredToSearch,featureType,' +
+    'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
+    'translations[property,locale,value]',
+];
+
+const enableChangeLogTrackedEntityTypeFields = ['enableChangeLog'];
+
+const buildFieldsParam = (includePluralLabels: boolean, includeEnableChangeLog: boolean): string => {
+    const trackedEntityTypeFields = [
+        ...baseTrackedEntityTypeFields,
+        ...(includeEnableChangeLog ? enableChangeLogTrackedEntityTypeFields : []),
+    ];
+    return [
+        ...baseProgramFields,
+        ...(includePluralLabels ? pluralProgramFields : []),
+        `trackedEntityType[${trackedEntityTypeFields.join(',')}]`,
+    ].join(',');
+};
 
 export const useApiProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
-            () => {
-                const baseFields = getBaseFields(featureAvailable(FEATURES.enableChangeLog));
-                return {
-                    programs: {
-                        resource: 'programs',
-                        id: programId,
-                        params: {
-                            fields: featureAvailable(FEATURES.customTerminologyPlurals)
-                                ? `${baseFields},${pluralLabelFields}`
-                                : baseFields,
-                        },
+            () => ({
+                programs: {
+                    resource: 'programs',
+                    id: programId,
+                    params: {
+                        fields: buildFieldsParam(
+                            featureAvailable(FEATURES.customTerminologyPlurals),
+                            featureAvailable(FEATURES.enableChangeLog),
+                        ),
                     },
-                };
-            },
+                },
+            }),
             [programId],
         ),
     );
