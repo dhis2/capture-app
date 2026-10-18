@@ -82,11 +82,11 @@ setFieldValue({
 ### Updating context values
 
 You can also update context values from the plugin using the `setContextFieldValue` function that is passed as a prop to the plugin.
-Context values are values that explains the context of the data, such as the geometry, the date of the event, or the date of enrollment.
+Context values are values that explains the context of the data, such as the org unit, the geometry, the date of the event, or the date of enrollment.
 
 ```ts
 setContextFieldValue({
-    fieldId: 'occurredAt', // The context field you want to update. (occurredAt, enrolledAt, geometry)
+    fieldId: 'occurredAt', // The context field you want to update. (orgUnit, occurredAt, enrolledAt, scheduledAt, geometry)
     value: '2022-01-01',
 });
 ```
@@ -103,7 +103,7 @@ type Icon = {
 
 type Option = {
     code: string;
-    value: string;
+    value: string | number | boolean; // the code converted to the field's value type, e.g. a number for a NUMBER field
     text: string;
     description?: string;
     icon?: Icon;
@@ -140,6 +140,12 @@ type fieldsMetadata = {
     searchable?: boolean;
     url?: string;
     attributes?: Record<string, any>;
+    // tracked entity attributes only
+    inherit?: boolean;
+    minCharactersToSearch?: number;
+    searchOperator?: string;
+    // date fields only
+    allowFutureDate?: boolean;
 }
 
 type FieldValueOptions = {
@@ -155,7 +161,7 @@ export type SetFieldValueProps = {
 }
 
 type SetContextFieldValueProps = {
-    fieldId: 'geometry' | 'occurredAt' | 'enrolledAt'
+    fieldId: 'orgUnit' | 'geometry' | 'occurredAt' | 'enrolledAt' | 'scheduledAt'
     value: any,
 }
 
@@ -192,7 +198,7 @@ Context ids:
 
 | Page | `programId` | `programStageId` | `ownerOrgUnitId` | `enrollmentId` | `teiId` | `eventId` |
 |---|---|---|---|---|---|---|
-| Tracker **New TEI** | ✓ | — | — | — | — | — |
+| Tracker **New TEI** | ✓ | — | — | — | ✓ (when enrolling an existing TEI) | — |
 | Tracker **Enrollment overview** | ✓ | — | ✓ | ✓ | ✓ | — |
 | Tracker **New event** | ✓ | ✓ | ✓ | ✓ | ✓ | — |
 | Tracker **Event edit/view** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -204,7 +210,7 @@ Form values (`props.values.*`):
 | Page | `orgUnit` | `enrolledAt` | `occurredAt` | `scheduledAt` | `geometry` |
 |---|---|---|---|---|---|
 | Tracker **New TEI** | ✓ | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
-| Tracker **Enrollment overview** | — | — | — | — | — |
+| Tracker **Enrollment overview** | ✓ (the owner org unit) | ✓ | ✓ (if program has an incident date) | — | — |
 | Tracker **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
 | Tracker **Event edit/view** | ✓ | — | ✓ | ✓ (if event was ever scheduled) | ✓ (if form has geometry) |
 | Event program **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |

@@ -37,14 +37,17 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         pluginContext,
     });
 
-    // id/dataElement/section are capture internals; omit before handing to the plugin
+    // Capture internals, omitted before handing to the plugin:
+    // - id/dataElement/section
+    // - optionGroups (a Map, which would serialize as {})
+    // - onValidate (the unique validator function)
     const formattedMetadata = useMemo<FormattedMetadataByPluginId>(
         () => Object.fromEntries(
             [...fieldsMetadata.entries()].map(([pluginFieldId, pluginMetadata]) => [
                 pluginFieldId,
                 formatPluginConfig(pluginMetadata, {
                     attributes: customAttributes,
-                    keysToOmit: ['id', 'dataElement', 'section'],
+                    keysToOmit: ['id', 'dataElement', 'section', 'optionGroups', 'onValidate'],
                 }),
             ]),
         ),

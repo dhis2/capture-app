@@ -1,5 +1,5 @@
 import { PluginConfigConvertFns } from './formatPluginConfig.const';
-import type { PluginFormFieldMetadata } from '../FormFieldPlugin.types';
+import type { FormattedPluginFormFieldMetadata } from '../FormFieldPlugin.types';
 import type { DataElement } from '../../../../metaData';
 
 type FormattedAttributes = { [key: string]: any };
@@ -9,8 +9,8 @@ type FormatOptions = {
     attributes?: FormattedAttributes;
 };
 
-export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
-    dataElement: DataElement | PluginFormFieldMetadata,
+export const formatPluginConfig = <TConfigReturn = FormattedPluginFormFieldMetadata>(
+    dataElement: DataElement,
     {
         attributes,
         keysToOmit = ['dataElement', 'optionGroups'],

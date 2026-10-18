@@ -1,36 +1,5 @@
-import type { DataElementUnique, Option, OptionSet } from '../../../metaData';
-
-export type PluginAttributeValue = {
-    attribute: { id: string };
-    value: unknown;
-};
-
-export type PluginOption = {
-    code: string;
-    name: string;
-    attributeValues?: PluginAttributeValue[];
-};
-
-export type PluginOptionSet = {
-    code: string;
-    name: string;
-    options: PluginOption[];
-};
-
-export type PluginFormFieldMetadata = {
-    name: string;
-    id: string;
-    shortName: string;
-    code: string;
-    formName: string;
-    compulsory: boolean;
-    description: string;
-    type: string;
-    optionSet?: PluginOptionSet;
-    searchable?: boolean;
-    url?: string;
-    attributeValues?: PluginAttributeValue[];
-};
+import type { DataElement, DataElementUnique, OptionSet, dataElementTypes } from '../../../metaData';
+import type { SearchOperator } from '../../../metaDataMemoryStoreBuilders';
 
 export type FormattedIcon = {
     name?: string;
@@ -44,11 +13,11 @@ export type FormattedUnique = {
 
 export type FormattedOption = {
     code: string;
-    value: Option['value'];
+    value: string | number | boolean; // the code converted to the field's client type (see convertOptionSetValue)
     text: string;
     description?: string;
     icon?: FormattedIcon;
-    attributes?: Record<string, unknown>;
+    attributes?: Record<string, any>;
 };
 
 export type FormattedOptionSet = {
@@ -56,7 +25,7 @@ export type FormattedOptionSet = {
     inputType: OptionSet['inputType'];
     viewType?: OptionSet['viewType'];
     emptyText?: string;
-    attributes?: Record<string, unknown>;
+    attributes?: Record<string, any>;
 };
 
 export type FormattedPluginFormFieldMetadata = {
@@ -66,7 +35,7 @@ export type FormattedPluginFormFieldMetadata = {
     formName: string;
     compulsory: boolean;
     description: string;
-    type: string;
+    type: keyof typeof dataElementTypes;
     searchable?: boolean;
     url?: string;
     disabled: boolean;
@@ -75,10 +44,16 @@ export type FormattedPluginFormFieldMetadata = {
     optionSet?: FormattedOptionSet;
     icon?: FormattedIcon;
     unique?: FormattedUnique;
-    attributes?: Record<string, unknown>;
+    attributes?: Record<string, any>;
+    // tracked entity attributes only
+    inherit?: boolean;
+    minCharactersToSearch?: number;
+    searchOperator?: SearchOperator;
+    // date fields only
+    allowFutureDate?: boolean;
 };
 
-export type MetadataByPluginId = Record<string, PluginFormFieldMetadata>;
+export type MetadataByPluginId = Record<string, DataElement>;
 export type FormattedMetadataByPluginId = Record<string, FormattedPluginFormFieldMetadata>;
 
 export type FieldValueOptions = {
@@ -89,31 +64,31 @@ export type FieldValueOptions = {
 
 export type SetFieldValueProps = {
     fieldId: string;
-    value: unknown;
+    value: any;
     options?: FieldValueOptions;
 };
 
 export type OnUpdateFieldValue = (
-    fieldMetadata: PluginFormFieldMetadata,
-    newValue: unknown,
-    oldValue: unknown,
+    fieldMetadata: DataElement,
+    newValue: any,
+    oldValue: any,
     options?: FieldValueOptions,
 ) => void;
 
 export type OnUpdateField = (
-    fieldMetadata: PluginFormFieldMetadata,
-    value: unknown,
+    fieldMetadata: DataElement,
+    value: any,
     options?: FieldValueOptions,
 ) => void;
 
-export type PluginContextEntry<TValue = unknown> = {
-    setDataEntryFieldValue: (value: unknown) => void;
+export type PluginContextEntry<TValue = any> = {
+    setDataEntryFieldValue: (value: any) => void;
     value: TValue;
 };
 
 export type PluginContext = {
     orgUnit?: PluginContextEntry<{ id: string } | undefined>;
-    [key: string]: PluginContextEntry<unknown> | undefined;
+    [key: string]: PluginContextEntry<any> | undefined;
 };
 
 export type PluginContextIds = {
@@ -133,7 +108,7 @@ export type CustomAttributeMapping = {
 export type ContainerProps = {
     pluginId: string;
     pluginSource: string;
-    fieldsMetadata: Map<string, PluginFormFieldMetadata>;
+    fieldsMetadata: Map<string, DataElement>;
     pluginContext: PluginContext;
     formId: string;
     customAttributes: Record<string, CustomAttributeMapping>;
@@ -152,7 +127,7 @@ export type ComponentProps = PluginContextIds & {
     pluginSource: string;
     fieldsMetadata: FormattedMetadataByPluginId;
     formSubmitted: boolean;
-    values: Record<string, unknown>;
+    values: Record<string, any>;
     setFieldValue: (props: SetFieldValueProps) => void;
     errors: Record<string, string[]>;
     warnings: Record<string, string[]>;

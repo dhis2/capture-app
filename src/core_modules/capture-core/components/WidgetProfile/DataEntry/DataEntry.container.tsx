@@ -71,6 +71,15 @@ export const DataEntry = ({
     const pluginContext: PluginContext | undefined = useMemo(() => {
         const pluginContextData: any = {};
 
+        // The dialog has no org unit field, so the owner org unit stands in for the form value.
+        // Defining the key also stops usePluginValues falling back to the org unit in the URL.
+        pluginContextData.orgUnit = {
+            setDataEntryFieldValue: () => {
+                log.error('Cannot update orgUnit from the profile widget. This field is read-only in this context.');
+            },
+            value: { id: ownerOrgUnitId },
+        };
+
         if (enrollment?.enrolledAt) {
             pluginContextData.enrolledAt = {
                 setDataEntryFieldValue: () => {
@@ -90,7 +99,7 @@ export const DataEntry = ({
         }
 
         return pluginContextData;
-    }, [enrollment]);
+    }, [enrollment, ownerOrgUnitId]);
 
     const onUpdateFormField = useCallback(
         (innerAction: any) => {
