@@ -82,6 +82,15 @@ export const DataEntry = ({
                 convertFn(enrollment.occurredAt, dataElementTypes.DATE),
             ),
         } : {}),
+        ...(enrollment?.geometry ? {
+            geometry: readOnlyPluginContextEntry(
+                'geometry',
+                convertServerToClient(
+                    enrollment.geometry.coordinates,
+                    enrollment.geometry.type === 'Polygon' ? dataElementTypes.POLYGON : dataElementTypes.COORDINATE,
+                ),
+            ),
+        } : {}),
     }), [enrollment, ownerOrgUnitId]);
 
     const onUpdateFormField = useCallback(
