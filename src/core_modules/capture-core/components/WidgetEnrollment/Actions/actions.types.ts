@@ -16,6 +16,7 @@ export type Props = {
     onUpdateEnrollmentStatusError?: (message: string) => void;
     onError?: (message: string) => void;
     onSuccess?: () => void;
+    updateEnrollmentGeometry: (geometry: Record<string, unknown> | null) => void;
     canAddNew: boolean;
     onlyEnrollOnce: boolean;
     tetName: string;

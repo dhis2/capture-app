@@ -11,21 +11,21 @@ const enrollmentUpdate: Mutation = {
     }),
 };
 
-type UseUpdateEnrollmentProps = {
+type UseUpdateEnrollmentProps<TValue> = {
     enrollment: any;
     setEnrollment: (enrollment: any) => void;
     propertyName: string;
-    updateHandler?: (value: any) => void;
+    updateHandler?: (value: TValue) => void;
     onError?: (error: any) => void;
 };
 
-export const useUpdateEnrollment = ({
+export const useUpdateEnrollment = <TValue = string>({
     enrollment,
     setEnrollment,
     propertyName,
     updateHandler,
     onError,
-}: UseUpdateEnrollmentProps) => {
+}: UseUpdateEnrollmentProps<TValue>) => {
     const { fromClientDate } = useTimeZoneConversion();
     const prevEnrollment = useRef(enrollment);
     const [updateEnrollmentMutation] = useDataMutation(enrollmentUpdate, {
@@ -36,7 +36,7 @@ export const useUpdateEnrollment = ({
         },
     });
 
-    return useCallback((value: string) => {
+    return useCallback((value: TValue) => {
         prevEnrollment.current = enrollment;
         const updatedEnrollment = { ...enrollment };
         updatedEnrollment[propertyName] = value;

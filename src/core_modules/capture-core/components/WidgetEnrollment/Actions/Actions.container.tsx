@@ -15,11 +15,15 @@ export const Actions = ({
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
     onSuccess,
+    updateEnrollmentGeometry,
     onAccessLostFromTransfer,
     readOnly,
     ...passOnProps
 }: Props) => {
-    const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError, onSuccess);
+    const handleUpdateGeometry = useCallback(
+        ({ geometry }: Record<string, any>) => updateEnrollmentGeometry(geometry),
+        [updateEnrollmentGeometry],
+    );
     const { deleteMutation, deleteLoading } = useDeleteEnrollment(onDelete, onError, onSuccess);
     const { hasAuthority } = useAuthority(Authorities.ENROLLMENT_CASCADE_DELETE);
     const { updateEnrollmentOwnership, isTransferLoading } = useUpdateOwnership({
@@ -53,11 +57,11 @@ export const Actions = ({
     return (
         <ActionsComponent
             enrollment={enrollment}
-            onUpdate={updateMutation}
+            onUpdate={handleUpdateGeometry}
             onUpdateStatus={handleUpdateStatus}
             onDelete={deleteMutation}
             canCascadeDeleteEnrollment={hasAuthority}
-            loading={updateLoading || deleteLoading || updateStatusLoading}
+            loading={deleteLoading || updateStatusLoading}
             onUpdateOwnership={updateEnrollmentOwnership}
             isTransferLoading={isTransferLoading}
             {...passOnProps}

@@ -91,6 +91,7 @@ const WidgetEnrollmentPlain = ({
     onAddNew,
     updateEnrollmentDate,
     updateIncidentDate,
+    updateEnrollmentGeometry,
     onError,
     onSuccess,
     onUpdateEnrollmentStatus,
@@ -233,9 +234,7 @@ const WidgetEnrollmentPlain = ({
                                     coordinates={enrollment.geometry.coordinates}
                                     geometryType={geometryType}
                                     enrollment={enrollment}
-                                    refetchEnrollment={refetchEnrollment}
-                                    refetchTEI={refetchTEI}
-                                    onError={onError}
+                                    updateEnrollmentGeometry={updateEnrollmentGeometry}
                                     readOnly={enrollmentReadOnly}
                                 />
                             </div>
@@ -256,6 +255,7 @@ const WidgetEnrollmentPlain = ({
                             canAddNew={canAddNew}
                             onError={onError}
                             onSuccess={onSuccess}
+                            updateEnrollmentGeometry={updateEnrollmentGeometry}
                             onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                             onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                             onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
