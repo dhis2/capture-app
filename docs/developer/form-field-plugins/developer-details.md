@@ -199,7 +199,7 @@ Context ids:
 | Page | `programId` | `programStageId` | `ownerOrgUnitId` | `enrollmentId` | `teiId` | `eventId` |
 |---|---|---|---|---|---|---|
 | Tracker **New TEI** | ✓ | — | — | — | ✓ (when enrolling an existing TEI) | — |
-| Tracker **Enrollment overview** | ✓ | — | ✓ | ✓ | ✓ | — |
+| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ | — | ✓ | ✓ | ✓ | — |
 | Tracker **New event** | ✓ | ✓ | ✓ | ✓ | ✓ | — |
 | Tracker **Event edit/view** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Event program **New event** | ✓ | ✓ | — | — | — | — |
@@ -210,7 +210,7 @@ Form values (`props.values.*`):
 | Page | `orgUnit` | `enrolledAt` | `occurredAt` | `scheduledAt` | `geometry` |
 |---|---|---|---|---|---|
 | Tracker **New TEI** | ✓ (the org unit selected for registration) | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
-| Tracker **Enrollment overview** | ✓ (the owner org unit) | ✓ | ✓ (if program has an incident date) | — | — |
+| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ (the owner org unit) | ✓ | ✓ (if program has an incident date) | — | — |
 | Tracker **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
 | Tracker **Event edit/view** | ✓ | — | ✓ | ✓ (if event was ever scheduled) | ✓ (if form has geometry) |
 | Event program **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
