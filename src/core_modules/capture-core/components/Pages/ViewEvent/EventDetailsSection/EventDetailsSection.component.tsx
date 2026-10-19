@@ -108,31 +108,27 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
             programStageId={programStage.id}
             eventId={eventId}
         >
-            {renderDataEntry()}
+            <div className={classes.dataEntryContainer}>
+                {isEditEventPage ?
+                    <EditEventDataEntry
+                        dataEntryId={dataEntryIds.SINGLE_EVENT}
+                        formFoundation={formFoundation}
+                        orgUnit={orgUnit}
+                        onSaveExternal={onSaveExternal}
+                        expiryPeriod={expiryPeriod}
+                        programId={programId}
+                        canToggleCompletion={canToggleCompletion}
+                        {...passOnProps}
+                    /> :
+                    <ViewEventDataEntry
+                        dataEntryId={dataEntryIds.SINGLE_EVENT}
+                        formFoundation={formFoundation}
+                        programId={programId}
+                        {...passOnProps}
+                    />
+                }
+            </div>
         </FormFieldPluginContextIdsProvider>
-    );
-
-    const renderDataEntry = () => (
-        <div className={classes.dataEntryContainer}>
-            {isEditEventPage ?
-                <EditEventDataEntry
-                    dataEntryId={dataEntryIds.SINGLE_EVENT}
-                    formFoundation={formFoundation}
-                    orgUnit={orgUnit}
-                    onSaveExternal={onSaveExternal}
-                    expiryPeriod={expiryPeriod}
-                    programId={programId}
-                    canToggleCompletion={canToggleCompletion}
-                    {...passOnProps}
-                /> :
-                <ViewEventDataEntry
-                    dataEntryId={dataEntryIds.SINGLE_EVENT}
-                    formFoundation={formFoundation}
-                    programId={programId}
-                    {...passOnProps}
-                />
-            }
-        </div>
     );
 
     const renderActionsContainer = () => (

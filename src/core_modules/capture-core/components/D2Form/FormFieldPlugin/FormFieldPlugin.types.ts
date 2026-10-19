@@ -1,17 +1,17 @@
 import type { DataElement, DataElementUnique, OptionSet, dataElementTypes } from '../../../metaData';
 import type { SearchOperator } from '../../../metaDataMemoryStoreBuilders';
 
-export type FormattedIcon = {
+type FormattedIcon = {
     name?: string;
     color?: string;
 };
 
-export type FormattedUnique = {
+type FormattedUnique = {
     generatable: boolean;
     scope: DataElementUnique['scope'];
 };
 
-export type FormattedOption = {
+type FormattedOption = {
     code: string;
     value: string | number | boolean;
     text: string;
@@ -20,7 +20,7 @@ export type FormattedOption = {
     attributes?: Record<string, any>;
 };
 
-export type FormattedOptionSet = {
+type FormattedOptionSet = {
     options: FormattedOption[];
     inputType: OptionSet['inputType'];
     viewType?: OptionSet['viewType'];
@@ -54,7 +54,7 @@ export type FormattedPluginFormFieldMetadata = {
 export type MetadataByPluginId = Record<string, DataElement>;
 export type FormattedMetadataByPluginId = Record<string, FormattedPluginFormFieldMetadata>;
 
-export type FieldValueOptions = {
+type FieldValueOptions = {
     valid?: boolean;
     touched?: boolean;
     error?: string;
@@ -66,14 +66,14 @@ export type SetFieldValueProps = {
     options?: FieldValueOptions;
 };
 
-export type OnUpdateFieldValue = (
+type OnUpdateFieldValue = (
     fieldMetadata: DataElement,
     newValue: any,
     oldValue: any,
     options?: FieldValueOptions,
 ) => void;
 
-export type OnUpdateField = (
+type OnUpdateField = (
     fieldMetadata: DataElement,
     value: any,
     options?: FieldValueOptions,
@@ -98,7 +98,7 @@ export type PluginContextIds = {
     teiId: string | undefined;
 };
 
-export type CustomAttributeMapping = {
+type CustomAttributeMapping = {
     IdFromPlugin: string;
     IdFromApp: string;
 };

@@ -43,7 +43,7 @@ export const usePluginCallbacks = ({
             return;
         }
 
-        contextField?.setDataEntryFieldValue(value);
+        contextField.setDataEntryFieldValue(value);
     }, [pluginContext]);
 
     return {

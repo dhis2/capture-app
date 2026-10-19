@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { RenderFoundation } from '../../metaData';
+import type { PluginContext } from './FormFieldPlugin/FormFieldPlugin.types';
 
 export type FormRef = {
     readonly formRef?: (instance: any) => void;
@@ -12,6 +13,7 @@ export type OwnProps = {
     readonly fieldOptions?: Record<string, any>;
     readonly getCustomContent?: (beforeSectionId: string) => React.ReactNode;
     readonly validationAttempted?: boolean;
+    readonly pluginContext?: PluginContext;
     readonly onUpdateField?: (...args: any[]) => void;
     readonly onUpdateFieldAsync?: (
         fieldId: string,

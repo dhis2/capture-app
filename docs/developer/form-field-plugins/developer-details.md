@@ -103,7 +103,7 @@ type Icon = {
 
 type Option = {
     code: string;
-    value: string | number | boolean; // the code converted to the field's value type, e.g. a number for a NUMBER field
+    value: string | number | boolean;
     text: string;
     description?: string;
     icon?: Icon;
@@ -140,11 +140,9 @@ type fieldsMetadata = {
     searchable?: boolean;
     url?: string;
     attributes?: Record<string, any>;
-    // tracked entity attributes only
     inherit?: boolean;
     minCharactersToSearch?: number;
     searchOperator?: string;
-    // date fields only
     allowFutureDate?: boolean;
 }
 

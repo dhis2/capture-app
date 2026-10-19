@@ -24,7 +24,7 @@ These are the props that an enrollment plugin can expect:
 ```ts
 type EnrollmentPluginProps = {
     programId: string;
-    ownerOrgUnitId: string | undefined;
+    ownerOrgUnitId: string;
     enrollmentId: string;
     teiId: string;
     programStageId?: string;
