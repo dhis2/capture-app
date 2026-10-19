@@ -13,6 +13,8 @@ export const PluginErrorMessages = Object.freeze({
         `setContextFieldValue: fieldId must be one of ${PluginContextValueKeys.join(', ')}`,
     SET_CONTEXT_FIELD_VALUE_MISSING_ID:
         'setContextFieldValue: tried to set value for a field that does not exist in the plugin context',
+    SET_CONTEXT_FIELD_VALUE_READ_ONLY:
+        'setContextFieldValue: the field is read-only in this form',
 });
 
 export const FormFieldTypes = Object.freeze({

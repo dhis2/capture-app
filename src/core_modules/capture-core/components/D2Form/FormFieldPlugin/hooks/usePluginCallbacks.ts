@@ -43,6 +43,13 @@ export const usePluginCallbacks = ({
             return;
         }
 
+        if (contextField.readOnly) {
+            log.error(errorCreator(
+                PluginErrorMessages.SET_CONTEXT_FIELD_VALUE_READ_ONLY,
+            )({ fieldId, value }));
+            return;
+        }
+
         contextField.setDataEntryFieldValue(value);
     }, [pluginContext]);
 

@@ -77,7 +77,7 @@ const EnrollmentRegistrationEntryPlain =
       // Remove when DHIS2-19171 adds an org unit field to this form; the field will then register itself.
       const pluginOrgUnitId: string | undefined = orgUnit?.id;
       const orgUnitPluginContext = useMemo<PluginContext>(() => ({
-          orgUnit: readOnlyPluginContextEntry('orgUnit', pluginOrgUnitId ? { id: pluginOrgUnitId } : undefined),
+          orgUnit: readOnlyPluginContextEntry(pluginOrgUnitId ? { id: pluginOrgUnitId } : undefined),
       }), [pluginOrgUnitId]);
 
       const handleOnCancel = () => {

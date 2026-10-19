@@ -67,7 +67,7 @@ const TeiRegistrationEntryPlain =
 
       // Remove when DHIS2-19171 adds an org unit field to this form; the field will then register itself.
       const orgUnitPluginContext = useMemo<PluginContext>(() => ({
-          orgUnit: readOnlyPluginContextEntry('orgUnit', orgUnitId ? { id: orgUnitId } : undefined),
+          orgUnit: readOnlyPluginContextEntry(orgUnitId ? { id: orgUnitId } : undefined),
       }), [orgUnitId]);
 
       const handleOnCancel = () => {
