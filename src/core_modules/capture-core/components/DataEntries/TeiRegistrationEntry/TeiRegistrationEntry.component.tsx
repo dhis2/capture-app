@@ -66,7 +66,7 @@ const TeiRegistrationEntryPlain =
       const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
 
       // Remove when DHIS2-19171 adds an org unit field to this form; the field will then register itself.
-      const pluginContext = useMemo<PluginContext>(() => ({
+      const orgUnitPluginContext = useMemo<PluginContext>(() => ({
           orgUnit: readOnlyPluginContextEntry('orgUnit', orgUnitId ? { id: orgUnitId } : undefined),
       }), [orgUnitId]);
 
@@ -94,7 +94,8 @@ const TeiRegistrationEntryPlain =
                               teiRegistrationMetadata={teiRegistrationMetadata}
                               id={id}
                               fieldOptions={fieldOptions}
-                              pluginContext={pluginContext}
+                              // Remove when DHIS2-19171 adds an org unit field to this form
+                              pluginContext={orgUnitPluginContext}
                               onPostProcessErrorMessage={onPostProcessErrorMessage}
                               onGetUnsavedAttributeValues={() =>
                                   console.log('similar to the withErrorMessagePostProcessor this will come in the future')

@@ -2,13 +2,11 @@ import { PluginConfigConvertFns } from './formatPluginConfig.const';
 import type { FormattedPluginFormFieldMetadata } from '../FormFieldPlugin.types';
 import type { DataElement } from '../../../../metaData';
 
-type CustomAttributes = { [key: string]: any };
-
 const keysToOmit = ['id', 'dataElement', 'section', 'optionGroups', 'onValidate'];
 
 export const formatPluginConfig = (
     dataElement: DataElement,
-    attributes?: CustomAttributes,
+    attributes?: { [key: string]: any },
 ): FormattedPluginFormFieldMetadata => {
     const removeUnderscoreFromObjectAttributes = obj => Object.entries(obj)
         .reduce((acc, [key, value]) => {

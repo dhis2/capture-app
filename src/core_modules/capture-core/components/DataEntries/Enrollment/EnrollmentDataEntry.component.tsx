@@ -461,6 +461,7 @@ type PreEnrollmentDataEntryProps = {
     enrollmentMetadata: Enrollment;
     id: string;
     onPostProcessErrorMessage: (message: string) => string;
+    // Remove when DHIS2-19171 adds an org unit field to the registration form
     pluginContext?: PluginContext;
 };
 
