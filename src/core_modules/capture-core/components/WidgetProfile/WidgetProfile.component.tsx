@@ -75,7 +75,7 @@ const WidgetProfilePlain = ({
     programId,
     enrollmentId,
     readOnlyMode = false,
-    ownerOrgUnitId = '',
+    ownerOrgUnitId,
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -287,12 +287,12 @@ const WidgetProfilePlain = ({
             >
                 {renderProfile()}
             </Widget>
-            {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
+            {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && ownerOrgUnitId && (
                 <FormFieldPluginContextIdsProvider
                     programId={programId}
                     teiId={teiId}
                     enrollmentId={enrollmentId}
-                    ownerOrgUnitId={ownerOrgUnitId || undefined}
+                    ownerOrgUnitId={ownerOrgUnitId}
                 >
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}

@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
 import { useNavigate } from 'capture-core/utils/routing';
-import type { PluginContextIds } from '../../../D2Form/FormFieldPlugin';
+import type { PluginContextIds, PluginHostProps } from '../../../Plugins';
 
-type EnrollmentPluginProps = PluginContextIds & {
-    pluginSource: string;
-};
+type EnrollmentPluginProps = PluginContextIds & PluginHostProps;
 
 export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {
     const [pluginWidth, setPluginWidth] = useState<number | undefined>(undefined);
