@@ -6,8 +6,7 @@ import type {
     DefaultWidgetColumnConfig,
     PluginWidgetColumnConfig, WidgetConfig,
 } from '../DefaultEnrollmentLayout.types';
-import type { PluginContextIds } from '../../../../../Plugins';
-import { EnrollmentPlugin } from '../../../EnrollmentPlugin';
+import { EnrollmentPlugin, type EnrollmentPluginProps } from '../../../EnrollmentPlugin';
 import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
 
 type PluginPropsInput = {
@@ -73,7 +72,7 @@ const getPropsForPlugin = ({
     enrollmentId,
     teiId,
     ownerOrgUnitId,
-}: PluginPropsInput): PluginContextIds => ({
+}: PluginPropsInput): Omit<EnrollmentPluginProps, 'pluginSource'> => ({
     programId: program?.id,
     programStageId: stageId ?? programStage?.id,
     eventId,

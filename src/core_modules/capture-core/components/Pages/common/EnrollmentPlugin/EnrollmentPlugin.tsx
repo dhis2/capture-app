@@ -1,9 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
 import { useNavigate } from 'capture-core/utils/routing';
-import type { PluginContextIds, PluginHostProps } from '../../../Plugins';
 
-type EnrollmentPluginProps = PluginContextIds & PluginHostProps;
+export type EnrollmentPluginProps = {
+    pluginSource: string;
+    programId?: string;
+    programStageId?: string;
+    enrollmentId?: string;
+    eventId?: string;
+    teiId?: string;
+    ownerOrgUnitId?: string;
+};
 
 export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {
     const [pluginWidth, setPluginWidth] = useState<number | undefined>(undefined);

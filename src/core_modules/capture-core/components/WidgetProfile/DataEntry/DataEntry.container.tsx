@@ -69,7 +69,7 @@ export const DataEntry = ({
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const pluginContext = useMemo<PluginContext>(() => ({
-        orgUnit: readOnlyPluginContextEntry('orgUnit', ownerOrgUnitId ? { id: ownerOrgUnitId } : undefined),
+        orgUnit: readOnlyPluginContextEntry('orgUnit', { id: ownerOrgUnitId }),
         ...(enrollment?.enrolledAt ? {
             enrolledAt: readOnlyPluginContextEntry(
                 'enrolledAt',

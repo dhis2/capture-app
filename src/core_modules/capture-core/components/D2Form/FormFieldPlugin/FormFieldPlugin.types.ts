@@ -1,8 +1,5 @@
 import type { DataElement, DataElementUnique, OptionSet, dataElementTypes } from '../../../metaData';
 import type { SearchOperator } from '../../../metaDataMemoryStoreBuilders';
-import type { PluginContextIds, PluginHostProps } from '../../Plugins';
-
-export type { PluginContextIds, PluginHostProps };
 
 type FormattedIcon = {
     name?: string;
@@ -92,13 +89,23 @@ export type PluginContext = {
     [key: string]: PluginContextEntry<any> | undefined;
 };
 
+export type PluginContextIds = {
+    ownerOrgUnitId: string | undefined;
+    programId: string | undefined;
+    programStageId: string | undefined;
+    enrollmentId: string | undefined;
+    eventId: string | undefined;
+    teiId: string | undefined;
+};
+
 type CustomAttributeMapping = {
     IdFromPlugin: string;
     IdFromApp: string;
 };
 
-export type ContainerProps = PluginHostProps & {
+export type ContainerProps = {
     pluginId: string;
+    pluginSource: string;
     fieldsMetadata: Map<string, DataElement>;
     pluginContext: PluginContext;
     formId: string;
@@ -114,7 +121,8 @@ export type UsePluginCallbacksProps = {
     pluginContext: PluginContext;
 };
 
-export type ComponentProps = PluginContextIds & PluginHostProps & {
+export type ComponentProps = PluginContextIds & {
+    pluginSource: string;
     fieldsMetadata: FormattedMetadataByPluginId;
     formSubmitted: boolean;
     values: Record<string, any>;
