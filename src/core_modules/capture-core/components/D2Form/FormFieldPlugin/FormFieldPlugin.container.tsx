@@ -41,10 +41,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         () => Object.fromEntries(
             [...fieldsMetadata.entries()].map(([pluginFieldId, pluginMetadata]) => [
                 pluginFieldId,
-                formatPluginConfig(pluginMetadata, {
-                    attributes: customAttributes,
-                    keysToOmit: ['id', 'dataElement', 'section', 'optionGroups', 'onValidate'],
-                }),
+                formatPluginConfig(pluginMetadata, customAttributes),
             ]),
         ),
         [customAttributes, fieldsMetadata],

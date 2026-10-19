@@ -69,6 +69,7 @@ export const DataEntry = ({
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const pluginContext = useMemo<PluginContext>(() => ({
+        orgUnit: readOnlyPluginContextEntry('orgUnit', ownerOrgUnitId ? { id: ownerOrgUnitId } : undefined),
         ...(enrollment?.enrolledAt ? {
             enrolledAt: readOnlyPluginContextEntry(
                 'enrolledAt',
@@ -81,7 +82,7 @@ export const DataEntry = ({
                 convertFn(enrollment.occurredAt, dataElementTypes.DATE),
             ),
         } : {}),
-    }), [enrollment]);
+    }), [enrollment, ownerOrgUnitId]);
 
     const onUpdateFormField = useCallback(
         (innerAction: any) => {

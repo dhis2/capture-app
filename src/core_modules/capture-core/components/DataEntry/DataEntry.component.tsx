@@ -8,7 +8,6 @@ import { D2Form } from '../D2Form';
 import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
 import type { PluginContext } from '../D2Form/FormFieldPlugin/FormFieldPlugin.types';
-import { readOnlyPluginContextEntry } from '../D2Form/FormFieldPlugin';
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { Section } from '../Section/Section.component';
@@ -292,7 +291,6 @@ class DataEntryPlain extends React.Component<Props> {
             dataEntryFieldRef,
             ...passOnProps
         } = this.props;
-        const { orgUnitId, pluginContext } = this.props;
 
         const d2Form = (
             <D2Form
@@ -304,11 +302,6 @@ class DataEntryPlain extends React.Component<Props> {
                     this.renderDataEntryFieldsByPlacement(placements.BEFORE_METADATA_BASED_SECTION, beforeSectionId)
                 )}
                 {...passOnProps}
-                pluginContext={{
-                    // Fallback for forms without an org unit field; a registered field wins. Remove when DHIS2-19171 adds the field.
-                    orgUnit: readOnlyPluginContextEntry('orgUnit', orgUnitId ? { id: orgUnitId } : undefined),
-                    ...pluginContext,
-                }}
             />
         );
         return this.props.formHorizontal ? d2Form : <div className={classes.d2FormContainer}>{d2Form}</div>;

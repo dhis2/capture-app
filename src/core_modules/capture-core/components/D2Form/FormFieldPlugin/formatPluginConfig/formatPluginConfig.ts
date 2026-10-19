@@ -2,20 +2,14 @@ import { PluginConfigConvertFns } from './formatPluginConfig.const';
 import type { FormattedPluginFormFieldMetadata } from '../FormFieldPlugin.types';
 import type { DataElement } from '../../../../metaData';
 
-type FormattedAttributes = { [key: string]: any };
+type CustomAttributes = { [key: string]: any };
 
-type FormatOptions = {
-    keysToOmit?: string[];
-    attributes?: FormattedAttributes;
-};
+const keysToOmit = ['id', 'dataElement', 'section', 'optionGroups', 'onValidate'];
 
-export const formatPluginConfig = <TConfigReturn = FormattedPluginFormFieldMetadata>(
+export const formatPluginConfig = (
     dataElement: DataElement,
-    {
-        attributes,
-        keysToOmit = ['dataElement', 'optionGroups'],
-    }: FormatOptions = {},
-): TConfigReturn => {
+    attributes?: CustomAttributes,
+): FormattedPluginFormFieldMetadata => {
     const removeUnderscoreFromObjectAttributes = obj => Object.entries(obj)
         .reduce((acc, [key, value]) => {
             const modifiedKey = key.replace(/^_/, '');
@@ -49,5 +43,5 @@ export const formatPluginConfig = <TConfigReturn = FormattedPluginFormFieldMetad
             return acc;
         }, {});
 
-    return removeUnderscoreFromObjectAttributes(dataElement) as TConfigReturn;
+    return removeUnderscoreFromObjectAttributes(dataElement) as FormattedPluginFormFieldMetadata;
 };

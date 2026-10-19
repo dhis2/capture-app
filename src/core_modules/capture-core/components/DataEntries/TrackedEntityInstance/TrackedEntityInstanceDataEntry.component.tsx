@@ -7,6 +7,7 @@ import {
     inMemoryFileStore,
 } from '../../DataEntry';
 import type { TeiRegistration, RenderFoundation } from '../../../metaData';
+import type { PluginContext } from '../../D2Form/FormFieldPlugin';
 
 type FinalTeiDataEntryProps = {
     teiRegistrationMetadata: TeiRegistration;
@@ -53,6 +54,7 @@ type PreTeiDataEntryProps = {
     formFoundation: RenderFoundation;
     id: string;
     onPostProcessErrorMessage: (message: string) => string;
+    pluginContext?: PluginContext;
 };
 
 export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {

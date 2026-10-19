@@ -1,4 +1,4 @@
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useMemo, useState } from 'react';
 import { compose } from 'redux';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -15,7 +15,11 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
-import { FormFieldPluginContextIdsProvider } from '../../D2Form/FormFieldPlugin';
+import {
+    FormFieldPluginContextIdsProvider,
+    readOnlyPluginContextEntry,
+    type PluginContext,
+} from '../../D2Form/FormFieldPlugin';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 const translatedTextWithStylesForTei = (
@@ -61,6 +65,11 @@ const TeiRegistrationEntryPlain =
       const orgUnitId = useCurrentOrgUnitId();
       const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
 
+      // Remove when DHIS2-19171 adds an org unit field to this form; the field will then register itself.
+      const pluginContext = useMemo<PluginContext>(() => ({
+          orgUnit: readOnlyPluginContextEntry('orgUnit', orgUnitId ? { id: orgUnitId } : undefined),
+      }), [orgUnitId]);
+
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
               onCancel();
@@ -85,6 +94,7 @@ const TeiRegistrationEntryPlain =
                               teiRegistrationMetadata={teiRegistrationMetadata}
                               id={id}
                               fieldOptions={fieldOptions}
+                              pluginContext={pluginContext}
                               onPostProcessErrorMessage={onPostProcessErrorMessage}
                               onGetUnsavedAttributeValues={() =>
                                   console.log('similar to the withErrorMessagePostProcessor this will come in the future')
