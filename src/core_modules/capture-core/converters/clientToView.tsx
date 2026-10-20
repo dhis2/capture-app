@@ -2,10 +2,9 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
-import { formatMomentEn } from 'capture-core-utils/date';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
-import { convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertToLocalDateTime } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
@@ -15,8 +14,8 @@ function convertDateForView(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
 }
 function convertDateTimeForView(rawValue: string): string {
-    const timeString = formatMomentEn(rawValue, 'HH:mm');
-    const localDate = convertIsoToLocalCalendar(rawValue);
+    const [date = '', timeString = ''] = convertToLocalDateTime(rawValue)?.split('T') ?? [];
+    const localDate = convertIsoToLocalCalendar(date);
     return `${localDate} ${timeString}`;
 }
 

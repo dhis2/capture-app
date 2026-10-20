@@ -1,9 +1,10 @@
-import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
+import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
-import { formatMomentEn } from 'capture-core-utils/date';
+import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
+import { systemSettingsStore } from '../metaDataMemoryStores';
 import { convertLocalToIsoCalendar } from '../utils/converters/date';
 
 type DateTimeValue = {
@@ -17,23 +18,16 @@ type RangeValue = {
 };
 
 function convertDateTime(formValue: DateTimeValue): string | null {
-    const editedDate = formValue.date;
-    const editedTime = formValue.time;
-
-    const parsedTime = parseTime(editedTime);
+    const parsedTime = parseTime(formValue.time);
     if (!parsedTime.isValid) return null;
-    const momentTime = parsedTime.momentTime;
-    const hours = momentTime.hour();
-    const minutes = momentTime.minute();
 
-    const isoDate = convertDate(editedDate);
-    if (!isoDate) return null;
-
-    const momentDateTime = moment(isoDate);
-    if (!momentDateTime.isValid()) return null;
-    momentDateTime.hour(hours);
-    momentDateTime.minute(minutes);
-    return momentDateTime.toISOString();
+    try {
+        const { year, month, day } = convertToIso8601(formValue.date, systemSettingsStore.get().calendar as any);
+        const isoDate = `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
+        return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm')}`;
+    } catch (error) {
+        return null;
+    }
 }
 
 function convertDate(dateValue: string) {
