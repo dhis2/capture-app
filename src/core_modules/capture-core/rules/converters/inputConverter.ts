@@ -4,7 +4,6 @@ import type { IConvertInputRulesValue } from '@dhis2/rules-engine-javascript';
 import { formatMomentEn } from 'capture-core-utils/date';
 
 const dateMomentFormat = 'YYYY-MM-DD';
-const dateTimeMomentFormat = 'YYYY-MM-DDTHH:mm';
 
 const convertStringValue = (value: string | null): string | null => (value || null);
 const convertNumericValue = (value: any): number | null => (typeof value === 'number' ? value : null);
@@ -25,12 +24,7 @@ export const inputConverter: IConvertInputRulesValue = {
         }
         return formatMomentEn(value, dateMomentFormat);
     },
-    convertDateTime: (value: any): string | null => {
-        if (!value) {
-            return null;
-        }
-        return formatMomentEn(value, dateTimeMomentFormat);
-    },
+    convertDateTime: convertStringValue,
     convertTime: convertStringValue,
     convertNumber: convertNumericValue,
     convertUnitInterval: convertNumericValue,
