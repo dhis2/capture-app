@@ -1,4 +1,4 @@
-import React, { type ComponentType, useMemo, useState } from 'react';
+import React, { type ComponentType, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from 'capture-core-utils/styles';
@@ -15,11 +15,7 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
-import {
-    FormFieldPluginContextIdsProvider,
-    readOnlyPluginContextEntry,
-    type PluginContext,
-} from '../../D2Form/FormFieldPlugin';
+import { FormFieldPluginContextIdsProvider } from '../../D2Form/FormFieldPlugin';
 
 const styles = () => ({
     actions: {
@@ -74,12 +70,6 @@ const EnrollmentRegistrationEntryPlain =
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
       const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
 
-      // Remove when DHIS2-19171 adds an org unit field to this form; the field will then register itself.
-      const pluginOrgUnitId: string | undefined = orgUnit?.id;
-      const orgUnitPluginContext = useMemo<PluginContext>(() => ({
-          orgUnit: readOnlyPluginContextEntry(pluginOrgUnitId ? { id: pluginOrgUnitId } : undefined),
-      }), [pluginOrgUnitId]);
-
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
               onCancel();
@@ -102,8 +92,6 @@ const EnrollmentRegistrationEntryPlain =
                               formFoundation={formFoundation}
                               enrollmentMetadata={enrollmentMetadata}
                               id={id}
-                              // Remove when DHIS2-19171 adds an org unit field to this form
-                              pluginContext={orgUnitPluginContext}
                               onPostProcessErrorMessage={onPostProcessErrorMessage}
                               onGetUnsavedAttributeValues={() =>
                                   console.log('onGetUnsavedAttributeValues will be here in the future')

@@ -7,7 +7,6 @@ import {
     inMemoryFileStore,
 } from '../../DataEntry';
 import type { TeiRegistration, RenderFoundation } from '../../../metaData';
-import type { PluginContext } from '../../D2Form/FormFieldPlugin';
 
 type FinalTeiDataEntryProps = {
     teiRegistrationMetadata: TeiRegistration;
@@ -54,8 +53,6 @@ type PreTeiDataEntryProps = {
     formFoundation: RenderFoundation;
     id: string;
     onPostProcessErrorMessage: (message: string) => string;
-    // Remove when DHIS2-19171 adds an org unit field to the registration form
-    pluginContext?: PluginContext;
 };
 
 export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {

@@ -205,10 +205,9 @@ Context ids:
 
 Form values (`props.values.*`):
 
-<!-- DHIS2-19171: once the registration form has an org unit field, the New TEI orgUnit cell becomes a plain ✓ -->
 | Page | `orgUnit` | `enrolledAt` | `occurredAt` | `scheduledAt` | `geometry` |
 |---|---|---|---|---|---|
-| Tracker **New TEI** | ✓ (the org unit selected for registration) | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
+| Tracker **New TEI** | ✓ | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
 | Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ (the owner org unit) | ✓ | ✓ (if program has an incident date) | — | — |
 | Tracker **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
 | Tracker **Event edit/view** | ✓ | — | ✓ | ✓ (if event was ever scheduled) | ✓ (if form has geometry) |

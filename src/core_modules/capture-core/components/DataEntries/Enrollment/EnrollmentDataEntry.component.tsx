@@ -6,7 +6,6 @@ import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { isLangRtl } from '../../../utils/rtl';
-import type { PluginContext } from '../../D2Form/FormFieldPlugin';
 import {
     DataEntry,
     placements,
@@ -461,8 +460,6 @@ type PreEnrollmentDataEntryProps = {
     enrollmentMetadata: Enrollment;
     id: string;
     onPostProcessErrorMessage: (message: string) => string;
-    // Remove when DHIS2-19171 adds an org unit field to the registration form
-    pluginContext?: PluginContext;
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<any> {

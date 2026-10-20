@@ -82,7 +82,6 @@ type OnUpdateField = (
 export type PluginContextEntry<TValue = any> = {
     setDataEntryFieldValue: (value: any) => void;
     value: TValue;
-    readOnly?: boolean;
 };
 
 export type PluginContext = {
