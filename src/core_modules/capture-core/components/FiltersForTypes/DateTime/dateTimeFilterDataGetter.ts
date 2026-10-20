@@ -1,6 +1,4 @@
-import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
-import { padWithZeros } from 'capture-core-utils/date';
-import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import { convertLocalToIsoDate } from '../../../utils/converters/date';
 import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
@@ -13,21 +11,11 @@ import type {
     Value,
 } from './dateTime.types';
 
-function localCalendarDateToIsoDate(localDate: string): string | null {
-    try {
-        const calendar = systemSettingsStore.get().calendar;
-        const { year, month, day } = convertToIso8601(localDate, calendar as any);
-        return `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
-    } catch {
-        return null;
-    }
-}
-
 function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): string | null {
     if (!dateTimeValue.date || dateTimeValue.isValid === false) {
         return null;
     }
-    const isoDate = localCalendarDateToIsoDate(dateTimeValue.date);
+    const isoDate = convertLocalToIsoDate(dateTimeValue.date);
     if (!isoDate) {
         return null;
     }

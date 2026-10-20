@@ -16,7 +16,8 @@ export function convertToLocalDateTime(value: any): string | null {
     }
 
     if (typeof value === 'string' && !timeZoneRegex.test(value)) {
-        return value.replace(' ', 'T').slice(0, 16);
+        // moment.utc only validates the value; it has no daylight saving gaps
+        return moment.utc(value).isValid() ? value.replace(' ', 'T').slice(0, 16) : null;
     }
 
     const momentDateTime = moment(value);

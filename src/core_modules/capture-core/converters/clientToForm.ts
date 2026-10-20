@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { formatMomentEn } from 'capture-core-utils/date';
-import { convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertToLocalDateTime } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
 import { stringifyNumber } from './common/stringifyNumber';
@@ -27,7 +27,9 @@ function convertDateForEdit(rawValue: string): string {
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
-    const [date, time] = rawValue.split('T');
+    const localDateTime = convertToLocalDateTime(rawValue);
+    if (!localDateTime) return { date: '', time: '' };
+    const [date, time] = localDateTime.split('T');
     return {
         date: convertIsoToLocalCalendar(date),
         time,

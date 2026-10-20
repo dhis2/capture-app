@@ -1,11 +1,9 @@
 import isString from 'd2-utilizr/lib/isString';
-import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
-import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
+import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
-import { systemSettingsStore } from '../metaDataMemoryStores';
-import { convertLocalToIsoCalendar } from '../utils/converters/date';
+import { convertLocalToIsoCalendar, convertLocalToIsoDate } from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string;
@@ -19,15 +17,10 @@ type RangeValue = {
 
 function convertDateTime(formValue: DateTimeValue): string | null {
     const parsedTime = parseTime(formValue.time);
-    if (!parsedTime.isValid) return null;
+    const isoDate = convertLocalToIsoDate(formValue.date);
+    if (!parsedTime.isValid || !isoDate) return null;
 
-    try {
-        const { year, month, day } = convertToIso8601(formValue.date, systemSettingsStore.get().calendar as any);
-        const isoDate = `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
-        return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm')}`;
-    } catch (error) {
-        return null;
-    }
+    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm')}`;
 }
 
 function convertDate(dateValue: string) {

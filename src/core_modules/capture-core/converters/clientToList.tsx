@@ -14,9 +14,10 @@ function convertDateForListDisplay(rawValue: string): string {
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
-    const [date = '', timeString = ''] = convertToLocalDateTime(rawValue)?.split('T') ?? [];
-    const localDate = convertIsoToLocalCalendar(date);
-    return `${localDate} ${timeString}`;
+    const localDateTime = convertToLocalDateTime(rawValue);
+    if (!localDateTime) return '';
+    const [date, time] = localDateTime.split('T');
+    return `${convertIsoToLocalCalendar(date)} ${time}`;
 }
 
 type FileClientValue = {
