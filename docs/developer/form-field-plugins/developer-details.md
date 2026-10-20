@@ -208,7 +208,7 @@ Form values (`props.values.*`):
 | Page | `orgUnit` | `enrolledAt` | `occurredAt` | `scheduledAt` | `geometry` |
 |---|---|---|---|---|---|
 | Tracker **New TEI** | ✓ | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
-| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ (the owner org unit) | ✓ | ✓ (if program has an incident date) | — | — |
+| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ (the owner org unit) | ✓ | ✓ (if program has an incident date) | — | ✓ (if enrollment has geometry) |
 | Tracker **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
 | Tracker **Event edit/view** | ✓ | — | ✓ | ✓ (if event was ever scheduled) | ✓ (if form has geometry) |
 | Event program **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |

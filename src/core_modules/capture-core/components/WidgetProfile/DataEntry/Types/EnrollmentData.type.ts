@@ -3,4 +3,5 @@ export type EnrollmentData = {
     enrolledAt: string;
     occurredAt: string;
     status: string;
+    geometry?: { type: string; coordinates: any } | null;
 };

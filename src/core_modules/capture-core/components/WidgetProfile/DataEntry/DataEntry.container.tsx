@@ -98,6 +98,18 @@ export const DataEntry = ({
             };
         }
 
+        if (enrollment?.geometry) {
+            const geometryType = enrollment.geometry.type === 'Point'
+                ? dataElementTypes.COORDINATE
+                : dataElementTypes.POLYGON;
+            pluginContextData.geometry = {
+                setDataEntryFieldValue: () => {
+                    log.error('Cannot update geometry from the profile widget. This field is read-only in this context.');
+                },
+                value: convertServerToClient(enrollment.geometry.coordinates, geometryType),
+            };
+        }
+
         return pluginContextData;
     }, [enrollment, ownerOrgUnitId]);
 
