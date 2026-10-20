@@ -79,14 +79,13 @@ type OnUpdateField = (
     options?: FieldValueOptions,
 ) => void;
 
-export type PluginContextEntry<TValue = any> = {
+export type PluginContextEntry = {
     setDataEntryFieldValue: (value: any) => void;
-    value: TValue;
+    value: any;
 };
 
 export type PluginContext = {
-    orgUnit?: PluginContextEntry<{ id: string } | undefined>;
-    [key: string]: PluginContextEntry<any> | undefined;
+    [key: string]: PluginContextEntry;
 };
 
 export type PluginContextIds = {

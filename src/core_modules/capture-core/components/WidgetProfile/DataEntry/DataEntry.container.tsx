@@ -1,21 +1,14 @@
 import { v4 as uuid } from 'uuid';
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
-import log from 'loglevel';
-import { pipe } from 'capture-core-utils';
-import { convertServerToClient, convertClientToView } from 'capture-core/converters';
-import { dataElementTypes } from 'capture-core/metaData';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
 import { DataEntryReadOnlyComponent } from './DataEntryReadOnly.component';
-import { useLifecycle, useFormValidations } from './hooks';
+import { useLifecycle, useFormValidations, usePluginContext } from './hooks';
 import { getUpdateFieldActions, updateTeiRequest, setTeiModalError } from './dataEntry.actions';
 import { startRunRulesPostUpdateField } from '../../DataEntry';
-import type { PluginContext } from '../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
-
-const convertFn = pipe(convertServerToClient, convertClientToView);
 
 export const DataEntry = ({
     programAPI,
@@ -66,52 +59,8 @@ export const DataEntry = ({
         onGetValidationContext,
     });
     const { formFoundation, enrollment } = context;
+    const pluginContext = usePluginContext({ enrollment, ownerOrgUnitId });
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
-
-    const pluginContext: PluginContext | undefined = useMemo(() => {
-        const pluginContextData: any = {};
-
-        if (ownerOrgUnitId) {
-            pluginContextData.orgUnit = {
-                setDataEntryFieldValue: () => {
-                    log.error('Cannot update orgUnit from the profile widget. This field is read-only in this context.');
-                },
-                value: { id: ownerOrgUnitId },
-            };
-        }
-
-        if (enrollment?.enrolledAt) {
-            pluginContextData.enrolledAt = {
-                setDataEntryFieldValue: () => {
-                    log.error('Cannot update enrolledAt from the profile widget. This field is read-only in this context.');
-                },
-                value: convertFn(enrollment.enrolledAt, dataElementTypes.DATE),
-            };
-        }
-
-        if (enrollment?.occurredAt) {
-            pluginContextData.occurredAt = {
-                setDataEntryFieldValue: () => {
-                    log.error('Cannot update occurredAt from the profile widget. This field is read-only in this context.');
-                },
-                value: convertFn(enrollment.occurredAt, dataElementTypes.DATE),
-            };
-        }
-
-        if (enrollment?.geometry) {
-            const geometryType = enrollment.geometry.type === 'Point'
-                ? dataElementTypes.COORDINATE
-                : dataElementTypes.POLYGON;
-            pluginContextData.geometry = {
-                setDataEntryFieldValue: () => {
-                    log.error('Cannot update geometry from the profile widget. This field is read-only in this context.');
-                },
-                value: convertServerToClient(enrollment.geometry.coordinates, geometryType),
-            };
-        }
-
-        return pluginContextData;
-    }, [enrollment, ownerOrgUnitId]);
 
     const onUpdateFormField = useCallback(
         (innerAction: any) => {
