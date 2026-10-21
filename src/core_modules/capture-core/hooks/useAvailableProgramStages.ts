@@ -7,7 +7,7 @@ import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFrom
 import { countNonSkippedEvents } from '../events/countNonSkippedEvents';
 
 export const useAvailableProgramStages = (
-    programStage: ProgramStage,
+    programStage: ProgramStage | null | undefined,
     teiId: string,
     enrollmentId: string,
     programId: string,
@@ -27,13 +27,13 @@ export const useAvailableProgramStages = (
     }
     const availableProgramStages = useMemo(
         () =>
-            programStage.allowGenerateNextVisit &&
+            programStage?.allowGenerateNextVisit &&
             !programLoading &&
             enrollment &&
             program?.programStages?.map((currentStage) => {
                 const eventCount = countNonSkippedEvents(enrollment.events, currentStage.id);
                 const isAvailableStage = currentStage.repeatable ||
-                    (programStage.id !== currentStage.id && eventCount === 0);
+                    (programStage?.id !== currentStage.id && eventCount === 0);
 
                 return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
             }).filter(stage => stage.isAvailableStage) || [],
@@ -41,8 +41,8 @@ export const useAvailableProgramStages = (
             enrollment,
             program?.programStages,
             programLoading,
-            programStage.allowGenerateNextVisit,
-            programStage.id,
+            programStage?.allowGenerateNextVisit,
+            programStage?.id,
         ],
     );
 

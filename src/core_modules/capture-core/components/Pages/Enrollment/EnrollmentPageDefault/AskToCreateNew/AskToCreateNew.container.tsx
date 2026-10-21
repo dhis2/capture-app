@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 import { clearAskToCreateNew } from '../../../common/EnrollmentOverviewDomain';
-import type { AskToCreateNew as AskToCreateNewState } from '../../../common/EnrollmentOverviewDomain';
+import type { AskToCreateNewPayload } from '../../../common/EnrollmentOverviewDomain';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { AskToCreateNewComponent } from './AskToCreateNew.component';
 
@@ -10,7 +10,7 @@ export const AskToCreateNew = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
-    const askToCreateNew: AskToCreateNewState | undefined = useSelector(
+    const askToCreateNew: AskToCreateNewPayload | undefined = useSelector(
         ({ enrollmentDomain }: any) => enrollmentDomain?.askToCreateNew,
     );
 

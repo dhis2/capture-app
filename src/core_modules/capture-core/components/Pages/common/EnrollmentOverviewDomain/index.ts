@@ -1,5 +1,5 @@
 export type { HideWidgets, WidgetEffects } from './enrollmentOverviewDomain.types';
-export type { AskToCreateNew } from './enrollment.actions';
+export type { AskToCreateNewPayload } from './enrollment.actions';
 export {
     enrollmentSiteActionTypes,
     updateEnrollmentEvent,

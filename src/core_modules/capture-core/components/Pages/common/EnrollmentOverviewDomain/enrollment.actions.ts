@@ -142,7 +142,7 @@ export const setExternalEnrollmentStatus = (status: string) =>
 export const addPersistedEnrollmentEvents = ({ events }: { events: Array<Record<string, unknown>> }) =>
     actionCreator(enrollmentSiteActionTypes.ADD_PERSISTED_ENROLLMENT_EVENTS)({ events });
 
-export type AskToCreateNew = {
+export type AskToCreateNewPayload = {
     enrollmentId: string;
     programId: string;
     teiId: string;
@@ -151,7 +151,7 @@ export type AskToCreateNew = {
     availableProgramStageIds: Array<string>;
 };
 
-export const setAskToCreateNew = (askToCreateNew: AskToCreateNew) =>
+export const setAskToCreateNew = (askToCreateNew: AskToCreateNewPayload) =>
     actionCreator(enrollmentSiteActionTypes.SET_ASK_TO_CREATE_NEW)(askToCreateNew);
 
 export const clearAskToCreateNew = () =>

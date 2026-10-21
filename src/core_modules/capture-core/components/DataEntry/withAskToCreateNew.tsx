@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { RenderFoundation } from '../../metaData';
+import { statusTypes } from '../../events/statusTypes';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 import { relatedStageActions } from '../WidgetRelatedStages';
 import type { RelatedStageRefPayload } from '../WidgetRelatedStages';
@@ -11,6 +12,7 @@ type Props = {
     askCompleteEnrollmentOnEventComplete?: boolean;
     availableProgramStages?: Array<Record<string, any>>;
     isCompleted?: boolean;
+    eventStatus?: string;
     relatedStageRef?: { current: RelatedStageRefPayload | null };
 };
 
@@ -33,6 +35,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
                 this.props.availableProgramStages &&
                 this.props.availableProgramStages.length > 0 &&
                 (this.props.isCompleted || saveType === addEventSaveTypes.COMPLETE) &&
+                this.props.eventStatus !== statusTypes.COMPLETED &&
                 !this.props.askCompleteEnrollmentOnEventComplete &&
                 linkMode !== relatedStageActions.ENTER_DATA
             ) {
