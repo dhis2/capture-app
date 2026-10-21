@@ -111,6 +111,9 @@ export const Validated = ({
             onSaveErrorActionType,
             onSaveSuccessAction: setAskToCreateNew({
                 enrollmentId,
+                programId: program.id,
+                teiId,
+                orgUnitId: orgUnitContext?.id,
                 stageId: stage.id,
                 availableProgramStageIds: availableProgramStages.map(({ id }) => id),
             }),
@@ -123,6 +126,9 @@ export const Validated = ({
         onSaveSuccessActionType,
         onSaveErrorActionType,
         enrollmentId,
+        program.id,
+        teiId,
+        orgUnitContext?.id,
         stage.id,
         availableProgramStages,
     ]);

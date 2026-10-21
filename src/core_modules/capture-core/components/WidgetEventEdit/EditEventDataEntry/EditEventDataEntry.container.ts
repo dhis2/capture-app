@@ -21,9 +21,9 @@ import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
-    startCreateNewAfterCompleting,
     requestSaveAndCompleteEnrollment,
 } from './editEventDataEntry.actions';
+import { setAskToCreateNew } from '../../Pages/common/EnrollmentOverviewDomain';
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
 const customLabels = [
@@ -146,16 +146,16 @@ const mapDispatchToProps = (dispatch: any, props: any): any => ({
         const { eventId } = getLocationQuery();
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
-    onSaveAndAskToCreateNew: (itemId: string) => {
-        const {
-            dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, stageId, availableProgramStages,
-        } = props;
-        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation));
-        dispatch(startCreateNewAfterCompleting({
+    onSaveAndAskToCreateNew: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        const { onSaveExternal, orgUnit, enrollmentId, programId, teiId, stageId, availableProgramStages } = props;
+        window.scrollTo(0, 0);
+        onSaveExternal && onSaveExternal();
+        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation));
+        dispatch(setAskToCreateNew({
             enrollmentId,
-            orgUnitId: orgUnit.id,
             programId,
             teiId,
+            orgUnitId: orgUnit.id,
             stageId,
             availableProgramStageIds: availableProgramStages.map(({ id }) => id),
         }));

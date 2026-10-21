@@ -142,16 +142,17 @@ export const setExternalEnrollmentStatus = (status: string) =>
 export const addPersistedEnrollmentEvents = ({ events }: { events: Array<Record<string, unknown>> }) =>
     actionCreator(enrollmentSiteActionTypes.ADD_PERSISTED_ENROLLMENT_EVENTS)({ events });
 
-export const setAskToCreateNew = ({ enrollmentId, stageId, availableProgramStageIds }: {
+export type AskToCreateNew = {
     enrollmentId: string;
+    programId: string;
+    teiId: string;
+    orgUnitId?: string;
     stageId: string;
     availableProgramStageIds: Array<string>;
-}) =>
-    actionCreator(enrollmentSiteActionTypes.SET_ASK_TO_CREATE_NEW)({
-        enrollmentId,
-        stageId,
-        availableProgramStageIds,
-    });
+};
+
+export const setAskToCreateNew = (askToCreateNew: AskToCreateNew) =>
+    actionCreator(enrollmentSiteActionTypes.SET_ASK_TO_CREATE_NEW)(askToCreateNew);
 
 export const clearAskToCreateNew = () =>
     actionCreator(enrollmentSiteActionTypes.CLEAR_ASK_TO_CREATE_NEW)();

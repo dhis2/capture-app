@@ -16,7 +16,6 @@ import {
     rollbackEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     enrollmentSiteActionTypes,
-    setAskToCreateNew,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { TrackerProgram } from '../../../metaData/Program';
 import {
@@ -224,16 +223,6 @@ export const requestDeleteEventDataEntryEpic = (action$: any, store: any, depend
             const stageId = store.value.viewEventPage?.loadedValues?.eventContainer?.event?.programStageId;
             dependencies.navigate(`/enrollment?${buildUrlQueryString(params)}`);
             return startDeleteEventDataEntry(serverData, eventId, params, programId, stageId);
-        }));
-
-export const startCreateNewAfterCompletingEpic = (
-    action$: any, store: ReduxStore, { navigate }: any) =>
-    action$.pipe(
-        ofType(actionTypes.START_CREATE_NEW_AFTER_COMPLETING),
-        map((action: any) => {
-            const { enrollmentId, orgUnitId, programId, teiId, stageId, availableProgramStageIds } = action.payload;
-            navigate(`/enrollment?${buildUrlQueryString({ enrollmentId, orgUnitId, programId, teiId })}`);
-            return setAskToCreateNew({ enrollmentId, stageId, availableProgramStageIds });
         }));
 
 export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: ReduxStore) =>

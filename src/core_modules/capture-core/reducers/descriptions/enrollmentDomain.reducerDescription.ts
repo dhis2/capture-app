@@ -6,6 +6,9 @@ import { actionTypes as editEventActionTypes }
     from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { newEventWidgetActionTypes } from '../../components/WidgetEnrollmentEventNew/Validated/validated.actions';
 import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
+import {
+    addEnrollmentEventPageDefaultActionTypes,
+} from '../../components/Pages/EnrollmentAddEvent/EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 
 const initialReducerValue = {};
 const {
@@ -42,6 +45,11 @@ const setAssignee = (state, action) => {
     );
 
     return { ...state, enrollment: { ...state.enrollment, events } };
+};
+
+const clearAskToCreateNew = (state) => {
+    const { askToCreateNew, ...newState } = state;
+    return newState;
 };
 
 export const enrollmentDomainDesc = createReducerDescription(
@@ -334,10 +342,10 @@ export const enrollmentDomainDesc = createReducerDescription(
             ...state,
             askToCreateNew: payload,
         }),
-        [CLEAR_ASK_TO_CREATE_NEW]: (state) => {
-            const { askToCreateNew, ...newState } = state;
-            return newState;
-        },
+        [CLEAR_ASK_TO_CREATE_NEW]: clearAskToCreateNew,
+        // Don't ask to create a new event if saving the completed event failed
+        [addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR]: clearAskToCreateNew,
+        [editEventActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: clearAskToCreateNew,
         // Assignee
         [enrollmentEditEventActionTypes.ASSIGNEE_SET]: setAssignee,
         [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: setAssignee,

@@ -13,7 +13,7 @@ export const AskToCreateNewComponent = ({ stageId, onCancel, onConfirm }: Props)
     const { eventLabel } = useTermLabel([LabelKeys.eventSingular], { stageId });
 
     return (
-        <Modal dataTest="modal-ask-to-create-new">
+        <Modal dataTest="modal-ask-to-create-new" onClose={onCancel}>
             <ModalTitle>
                 {i18n.t('Generate new {{eventLabel}}', { eventLabel })}
             </ModalTitle>
