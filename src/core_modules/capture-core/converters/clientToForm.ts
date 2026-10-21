@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { formatMomentEn } from 'capture-core-utils/date';
+import { parseDateTime } from 'capture-core-utils/parsers';
 import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
@@ -27,10 +28,10 @@ function convertDateForEdit(rawValue: string): string {
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
-    const [date, time = ''] = rawValue.split('T');
+    const momentDateTime = moment.utc(parseDateTime(rawValue));
     return {
-        date: convertIsoToLocalCalendar(date),
-        time: time.slice(0, 5),
+        date: convertIsoToLocalCalendar(formatMomentEn(momentDateTime, 'YYYY-MM-DD')),
+        time: formatMomentEn(momentDateTime, 'HH:mm'),
     };
 }
 

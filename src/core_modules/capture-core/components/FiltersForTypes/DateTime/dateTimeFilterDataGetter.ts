@@ -1,3 +1,5 @@
+import { formatMomentEn } from 'capture-core-utils/date';
+import { parseTime } from 'capture-core-utils/parsers';
 import { convertLocalToIsoDate } from '../../../utils/converters/date';
 import {
     isEmptyValueFilter,
@@ -16,11 +18,11 @@ function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): st
         return null;
     }
     const isoDate = convertLocalToIsoDate(dateTimeValue.date);
-    if (!isoDate) {
+    const parsedTime = parseTime(dateTimeValue.time || defaultTime);
+    if (!isoDate || !parsedTime.isValid) {
         return null;
     }
-    const time = dateTimeValue.time || defaultTime;
-    return `${isoDate}T${time}:00`;
+    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm:ss.SSS')}`;
 }
 
 export function getDateTimeFilterData(value: Value): DateTimeFilter | null {

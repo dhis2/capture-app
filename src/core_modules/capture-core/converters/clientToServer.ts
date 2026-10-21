@@ -1,7 +1,7 @@
 import { formatMomentEn } from 'capture-core-utils/date';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
+import { parseDateTime } from 'capture-core-utils/parsers';
 import { dataElementTypes } from '../metaData';
-import { parseDateTime } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 
 type RangeValue = {

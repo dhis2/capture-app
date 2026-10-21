@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
+import { formatMomentEn } from 'capture-core-utils/date';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
 import { convertIsoToLocalCalendar, convertDateTimeForDisplay } from '../utils/converters/date';
@@ -12,6 +13,11 @@ import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForView(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
+}
+function convertDateTimeForView(rawValue: string): string {
+    const timeString = formatMomentEn(rawValue, 'HH:mm');
+    const localDate = convertIsoToLocalCalendar(rawValue);
+    return `${localDate} ${timeString}`;
 }
 
 type FileClientValue = {
@@ -82,5 +88,5 @@ export function convertDateWithTimeForView(rawValue?: string | null): string {
     if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {
         return convertDateForView(rawValue);
     }
-    return convertDateTimeForDisplay(rawValue);
+    return convertDateTimeForView(rawValue);
 }

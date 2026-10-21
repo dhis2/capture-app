@@ -1,9 +1,8 @@
 import moment from 'moment';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
+import { formatMomentEn, padWithZeros } from '../date';
 
-export const DATE_TIME_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SSS';
-
+const dateTimeFormat = 'YYYY-MM-DDTHH:mm:ss.SSS';
 const timeZoneRegex = /(Z|[+-]\d{2}:?\d{2})$/i;
 
 export const hasTimeZone = (value: string) => timeZoneRegex.test(value);
@@ -23,7 +22,7 @@ export function parseDateTime(value: any): string | null {
     if (typeof value === 'string' && !hasTimeZone(value)) {
         // moment.utc is used as a timezone-free calendar, so no daylight saving adjustments are made
         const momentDateTime = moment.utc(value);
-        return momentDateTime.isValid() ? formatMomentEn(momentDateTime, DATE_TIME_FORMAT) : null;
+        return momentDateTime.isValid() ? formatMomentEn(momentDateTime, dateTimeFormat) : null;
     }
 
     // Legacy values saved in UTC (Z) are converted to the server time zone and the timezone info is removed.
