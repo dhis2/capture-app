@@ -29,6 +29,8 @@ const {
     SET_TRACKED_ENTITY_INACTIVE_STATUS,
     SET_ENROLLMENT_RULE_EFFECTS,
     UPDATE_ENROLLMENT_OWNER_ORG_UNIT,
+    SET_ASK_TO_CREATE_NEW,
+    CLEAR_ASK_TO_CREATE_NEW,
 } = enrollmentSiteActionTypes;
 
 const setAssignee = (state, action) => {
@@ -325,6 +327,15 @@ export const enrollmentDomainDesc = createReducerDescription(
         }),
         [newEventWidgetActionTypes.CLEAN_UP_EVENT_SAVE_IN_PROGRESS]: (state) => {
             const { eventSaveInProgress, ...newState } = state;
+            return newState;
+        },
+        // Used to ask the user to create a new event once they are back on the enrollment dashboard
+        [SET_ASK_TO_CREATE_NEW]: (state, { payload }) => ({
+            ...state,
+            askToCreateNew: payload,
+        }),
+        [CLEAR_ASK_TO_CREATE_NEW]: (state) => {
+            const { askToCreateNew, ...newState } = state;
             return newState;
         },
         // Assignee

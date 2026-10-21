@@ -19,6 +19,8 @@ export {
     addPersistedEnrollmentEvents,
     commitEnrollmentEvents,
     rollbackEnrollmentEvents,
+    setAskToCreateNew,
+    clearAskToCreateNew,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
 export {

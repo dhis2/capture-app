@@ -146,18 +146,18 @@ const mapDispatchToProps = (dispatch: any, props: any): any => ({
         const { eventId } = getLocationQuery();
         dispatch(requestDeleteEventDataEntry({ eventId, enrollmentId }));
     },
-    onCancelCreateNew: (itemId: string) => {
-        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
+    onSaveAndAskToCreateNew: (itemId: string) => {
+        const {
+            dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, stageId, availableProgramStages,
+        } = props;
         dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation));
         dispatch(startCreateNewAfterCompleting({
-            enrollmentId, isCreateNew: false, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
-        }));
-    },
-    onConfirmCreateNew: (itemId: string) => {
-        const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
-        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation));
-        dispatch(startCreateNewAfterCompleting({
-            enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
+            enrollmentId,
+            orgUnitId: orgUnit.id,
+            programId,
+            teiId,
+            stageId,
+            availableProgramStageIds: availableProgramStages.map(({ id }) => id),
         }));
     },
 });

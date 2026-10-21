@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-05T10:05:05.847Z\n"
-"PO-Revision-Date: 2026-10-05T10:05:05.847Z\n"
+"POT-Creation-Date: 2026-10-21T18:57:59.532Z\n"
+"PO-Revision-Date: 2026-10-21T18:57:59.532Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -393,15 +393,6 @@ msgstr "No feedback for this {{eventLabel}} yet"
 msgid "No indicator output for this {{eventLabel}} yet"
 msgstr "No indicator output for this {{eventLabel}} yet"
 
-msgid "Generate new {{eventLabel}}"
-msgstr "Generate new {{eventLabel}}"
-
-msgid "Do you want to create another {{eventLabel}}?"
-msgstr "Do you want to create another {{eventLabel}}?"
-
-msgid "Yes, create new {{eventLabel}}"
-msgstr "Yes, create new {{eventLabel}}"
-
 msgid "Back to form"
 msgstr "Back to form"
 
@@ -742,6 +733,15 @@ msgstr "Notice"
 
 msgid "Close the notice"
 msgstr "Close the notice"
+
+msgid "Generate new {{eventLabel}}"
+msgstr "Generate new {{eventLabel}}"
+
+msgid "Do you want to create another {{eventLabel}}?"
+msgstr "Do you want to create another {{eventLabel}}?"
+
+msgid "Yes, create new {{eventLabel}}"
+msgstr "Yes, create new {{eventLabel}}"
 
 msgid "Quick actions"
 msgstr "Quick actions"

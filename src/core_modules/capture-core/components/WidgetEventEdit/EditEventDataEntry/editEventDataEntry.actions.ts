@@ -96,10 +96,10 @@ export const startDeleteEventDataEntry = (
 
 
 export const startCreateNewAfterCompleting = ({
-    enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
+    enrollmentId, orgUnitId, programId, teiId, stageId, availableProgramStageIds,
 }: any) =>
     actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({
-        enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
+        enrollmentId, orgUnitId, programId, teiId, stageId, availableProgramStageIds,
     });
 
 export const requestSaveAndCompleteEnrollment = ({

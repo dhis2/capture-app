@@ -15,7 +15,6 @@ export const newEventWidgetActionTypes = {
     EVENT_SAVE_REQUEST: 'NewEvent.RequestSaveEvent',
     EVENT_SAVE: 'NewEvent.SaveEvent',
     EVENT_NOTE_ADD: 'NewEvent.AddEventNote',
-    START_CREATE_NEW_AFTER_COMPLETING: 'NewEvent.StartCreateNewAfterCompleting',
     SET_SAVE_ENROLLMENT_EVENT_IN_PROGRESS: 'NewEvent.SetSaveEnrollmentEventInProgress',
     CLEAN_UP_EVENT_SAVE_IN_PROGRESS: 'NewEvent.CleanUpDataEntry',
     EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST: 'NewEvent.EventSaveAndEnrollmentCompleteRequest',
@@ -108,20 +107,6 @@ export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessAct
             commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { serverData } },
             rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData } },
         },
-    });
-
-export const startCreateNewAfterCompleting = ({
-    enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
-}: {
-    enrollmentId: string;
-    isCreateNew?: boolean;
-    orgUnitId?: string;
-    programId: string;
-    teiId: string;
-    availableProgramStages: any;
-}) =>
-    actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({
-        enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages,
     });
 
 export const cleanUpEventSaveInProgress = () =>

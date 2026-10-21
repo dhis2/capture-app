@@ -35,6 +35,7 @@ import {
     useEnrollmentPageLayout,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
 import { DefaultPageLayout, WidgetsForEnrollmentPageDefault } from './DefaultPageLayout';
+import { AskToCreateNew } from './AskToCreateNew';
 import { LoadingMaskForPage } from '../../../LoadingMasks';
 import {
     EnrollmentPageKeys,
@@ -233,6 +234,7 @@ export const EnrollmentPageDefault = () => {
                     { enrollmentLabel },
                 )}
             />
+            <AskToCreateNew />
         </EnrollmentAccessProvider>
     );
 };

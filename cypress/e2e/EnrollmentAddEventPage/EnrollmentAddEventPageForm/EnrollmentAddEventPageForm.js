@@ -180,6 +180,11 @@ When(/^you choose option (.*) in the modal$/, (buttonText) => {
         .click();
 });
 
+Then('the modal should be closed', () => {
+    cy.get('[data-test="modal-ask-to-create-new"]')
+        .should('not.exist');
+});
+
 Then(/^you will be navigate to page (.*)$/, (url) => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/${url}`);
 });

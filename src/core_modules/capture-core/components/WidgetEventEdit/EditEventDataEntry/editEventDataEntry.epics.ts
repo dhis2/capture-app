@@ -1,9 +1,7 @@
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
-import { statusTypes } from 'capture-core/events/statusTypes';
-import { EMPTY } from 'rxjs';
 import type { ReduxStore } from 'capture-core-utils/types';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -18,6 +16,7 @@ import {
     rollbackEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     enrollmentSiteActionTypes,
+    setAskToCreateNew,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { TrackerProgram } from '../../../metaData/Program';
 import {
@@ -35,7 +34,6 @@ import {
     showEditEventDataEntry,
 } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString';
-import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 import { enrollmentEditEventActionTypes } from '../../Pages/EnrollmentEditEvent';
 
 const getDataEntryId = (event: any): string => (
@@ -231,27 +229,11 @@ export const requestDeleteEventDataEntryEpic = (action$: any, store: any, depend
 export const startCreateNewAfterCompletingEpic = (
     action$: any, store: ReduxStore, { navigate }: any) =>
     action$.pipe(
-        ofType(
-            actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
-            newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
-        ),
-        flatMap((action: any) => {
-            const { isCreateNew, enrollmentId, orgUnitId, programId, teiId, availableProgramStages } = action.payload;
-            const params = { enrollmentId, orgUnitId, programId, teiId };
-
-            if (isCreateNew) {
-                const finalParams = availableProgramStages.length === 1 ?
-                    { ...params, stageId: availableProgramStages[0].id, tab: statusTypes.SCHEDULE } :
-                    { ...params, tab: statusTypes.SCHEDULE };
-
-                setTimeout(() => {
-                    navigate(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
-                }, 0);
-
-                return EMPTY;
-            }
-            navigate(`/enrollment?${buildUrlQueryString(params)}`);
-            return EMPTY;
+        ofType(actionTypes.START_CREATE_NEW_AFTER_COMPLETING),
+        map((action: any) => {
+            const { enrollmentId, orgUnitId, programId, teiId, stageId, availableProgramStageIds } = action.payload;
+            navigate(`/enrollment?${buildUrlQueryString({ enrollmentId, orgUnitId, programId, teiId })}`);
+            return setAskToCreateNew({ enrollmentId, stageId, availableProgramStageIds });
         }));
 
 export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: ReduxStore) =>
