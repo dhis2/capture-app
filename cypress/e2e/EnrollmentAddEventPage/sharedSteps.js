@@ -9,12 +9,12 @@ And(/^you see the widget header (.*)$/, (name) => {
         .parent() // widget-contents
         .parent() // widget container (WidgetNonCollapsible)
         .within(() => {
-            cy.get('[data-test="widget-contents"]').should('exist');
-            cy.get('[data-test="widget-header"]').should('exist');
-            cy.contains(name).should('exist');
+            cy.get('[data-test="widget-contents"]').first().scrollIntoView().should('be.visible');
+            cy.get('[data-test="widget-header"]').first().scrollIntoView().should('be.visible');
+            cy.contains(name).scrollIntoView().should('be.visible');
         });
 });
 
 When('you see the new event form', () => {
-    cy.get('[data-test="new-enrollment-event-form"]').should('exist');
+    cy.get('[data-test="new-enrollment-event-form"]').first().scrollIntoView().should('be.visible');
 });
