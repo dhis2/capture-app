@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
+"POT-Creation-Date: 2026-10-05T10:05:05.847Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -144,10 +144,10 @@ msgid "Coordinate"
 msgstr "坐标"
 
 msgid "{{eventLabel}} - {{categoryDisplayName}}"
-msgstr ""
+msgstr "{{eventLabel}} -{{categoryDisplayName}}"
 
 msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
-msgstr ""
+msgstr "{{enrollmentLabel}} -{{categoryDisplayName}}"
 
 msgid "Complete {{eventLabel}}"
 msgstr "完成{{eventLabel}}"
@@ -192,7 +192,7 @@ msgstr "元数据错误"
 msgid ""
 "The selected {{enrollmentLabel}} category options are not a valid "
 "combination."
-msgstr ""
+msgstr "所选的“{{enrollmentLabel}} ”类别选项组合无效。"
 
 msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - 详细信息"
@@ -1114,6 +1114,9 @@ msgstr "该{{trackedEntityName}} 已停用"
 msgid "This tracked entity is deactivated"
 msgstr "该跟踪实体 已停用"
 
+msgid "You only have view access to the selected category combination"
+msgstr ""
+
 msgid "Add {{relationshipLabel}}"
 msgstr "添加{{relationshipLabel}}"
 
@@ -1374,6 +1377,9 @@ msgstr "转移"
 
 msgid "An error occurred while transferring ownership"
 msgstr "转移所有权时发生错误"
+
+msgid "Edit {{label}}"
+msgstr ""
 
 msgid "Existing dates for auto-generated {{eventsLabel}} will not be updated."
 msgstr "自动生成的{{eventsLabel}} 的现有日期将不会更新。"
