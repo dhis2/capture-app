@@ -1,14 +1,11 @@
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
-import moment from 'moment';
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
-import { formatMomentEn } from 'capture-core-utils/date';
-import { convertMomentToDateFormatString } from '../../utils/converters/date';
+import { convertValue as convertClientToForm } from '../../converters/clientToForm';
+import { dataElementTypes } from '../../metaData';
 
 
 // These functions are only used for creating assignment effects
-
-const dateMomentFormat = 'YYYY-MM-DD';
 
 export const outputConverter: IConvertOutputRulesEffectsValue = {
     convertText: (value: string): string => value,
@@ -19,17 +16,8 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
     convertEmail: (value: string): string => value,
     convertBoolean: (value: boolean): string => (value ? 'true' : 'false'),
     convertTrueOnly: (value: boolean): string => (value ? 'true' : 'false'),
-    convertDate: (value: string): string => {
-        const momentDate = moment(value, dateMomentFormat);
-        return convertMomentToDateFormatString(momentDate);
-    },
-    convertDateTime: (value: string): any => {
-        const momentDateTime = moment(value);
-        return {
-            date: convertMomentToDateFormatString(momentDateTime),
-            time: formatMomentEn(momentDateTime, 'HH:mm'),
-        };
-    },
+    convertDate: (value: string): string => convertClientToForm(value, dataElementTypes.DATE),
+    convertDateTime: (value: string): any => convertClientToForm(value, dataElementTypes.DATETIME),
     convertTime: (value: string): string => value,
     convertNumber: (value: number): string => (value.toString()),
     convertUnitInterval: (value: number): string => (value.toString()),
@@ -58,25 +46,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         log.warn('convertOrganisationUnit not implemented', value);
         return '';
     },
-    convertAge: (value: string): any => {
-        const now = moment();
-        const age = moment(value, dateMomentFormat);
-
-        const years = now.diff(age, 'years');
-        age.add(years, 'years');
-
-        const months = now.diff(age, 'months');
-        age.add(months, 'months');
-
-        const days = now.diff(age, 'days');
-
-        return {
-            date: convertMomentToDateFormatString(moment(value, dateMomentFormat)),
-            years: years.toString(),
-            months: months.toString(),
-            days: days.toString(),
-        };
-    },
+    convertAge: (value: string): any => convertClientToForm(value, dataElementTypes.AGE),
     convertUrl: (value: string): string => value,
     convertFile: (value: string): any => {
         log.warn('convertFile not implemented', value);
