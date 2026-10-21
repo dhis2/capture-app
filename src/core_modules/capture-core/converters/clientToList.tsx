@@ -4,20 +4,13 @@ import { Tag } from '@dhis2/ui';
 import { PreviewImage } from 'capture-ui';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
-import { convertIsoToLocalCalendar, convertToLocalDateTime } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertDateTimeForDisplay } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates, PolygonCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
-}
-
-function convertDateTimeForListDisplay(rawValue: string): string {
-    const localDateTime = convertToLocalDateTime(rawValue);
-    if (!localDateTime) return '';
-    const [date, time] = localDateTime.split('T');
-    return `${convertIsoToLocalCalendar(date)} ${time}`;
 }
 
 type FileClientValue = {
@@ -97,7 +90,7 @@ const valueConvertersForType = {
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.DATE]: convertDateForListDisplay,
     [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
-    [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
+    [dataElementTypes.DATETIME]: convertDateTimeForDisplay,
     [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,

@@ -3,7 +3,7 @@ import log from 'loglevel';
 import moment from 'moment';
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
 import { formatMomentEn } from 'capture-core-utils/date';
-import { convertMomentToDateFormatString, convertToLocalDateTime } from '../../utils/converters/date';
+import { convertMomentToDateFormatString } from '../../utils/converters/date';
 
 
 // These functions are only used for creating assignment effects
@@ -24,7 +24,7 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         return convertMomentToDateFormatString(momentDate);
     },
     convertDateTime: (value: string): any => {
-        const momentDateTime = moment.utc(convertToLocalDateTime(value));
+        const momentDateTime = moment(value);
         return {
             date: convertMomentToDateFormatString(momentDateTime),
             time: formatMomentEn(momentDateTime, 'HH:mm'),

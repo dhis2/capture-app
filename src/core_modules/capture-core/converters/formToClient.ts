@@ -20,7 +20,7 @@ function convertDateTime(formValue: DateTimeValue): string | null {
     const isoDate = convertLocalToIsoDate(formValue.date);
     if (!parsedTime.isValid || !isoDate) return null;
 
-    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm')}`;
+    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm:ss.SSS')}`;
 }
 
 function convertDate(dateValue: string) {

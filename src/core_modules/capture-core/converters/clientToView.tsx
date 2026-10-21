@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
-import { convertIsoToLocalCalendar, convertToLocalDateTime } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertDateTimeForDisplay } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
@@ -12,12 +12,6 @@ import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForView(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
-}
-function convertDateTimeForView(rawValue: string): string {
-    const localDateTime = convertToLocalDateTime(rawValue);
-    if (!localDateTime) return '';
-    const [date, time] = localDateTime.split('T');
-    return `${convertIsoToLocalCalendar(date)} ${time}`;
 }
 
 type FileClientValue = {
@@ -60,7 +54,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.DATE]: convertDateForView,
-    [dataElementTypes.DATETIME]: convertDateTimeForView,
+    [dataElementTypes.DATETIME]: convertDateTimeForDisplay,
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
@@ -88,5 +82,5 @@ export function convertDateWithTimeForView(rawValue?: string | null): string {
     if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {
         return convertDateForView(rawValue);
     }
-    return convertDateTimeForView(rawValue);
+    return convertDateTimeForDisplay(rawValue);
 }

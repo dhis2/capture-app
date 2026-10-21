@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { convertClientToForm } from '../../../../converters';
+import { convertClientToForm, convertServerToClient } from '../../../../converters';
 import type { InputAttribute } from '../../EnrollmentRegistrationEntry/hooks/useFormValues';
 
 type Props = {
@@ -13,7 +13,7 @@ export const useFormValuesFromSearchTerms = ({ inheritedAttributes }: Props) => 
     const [formValues] = useState(() => {
         if (inheritedAttributes) {
             return inheritedAttributes.reduce((acc, item) => {
-                acc[item.attribute] = convertClientToForm(item.value, item.valueType);
+                acc[item.attribute] = convertClientToForm(convertServerToClient(item.value, item.valueType), item.valueType);
                 return acc;
             }, {});
         }
