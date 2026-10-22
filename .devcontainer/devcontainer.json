@@ -6,13 +6,12 @@
     "service": "dev",
     "workspaceFolder": "/workspaces/capture-app",
     "features": {
-        "ghcr.io/devcontainers/features/node:2": {
+        "ghcr.io/devcontainers/features/node:2.1.1": {
             "nodeGypDependencies": true,
             "installYarnUsingApt": true,
-            "version": "24.16.0",
-            "npmVersion": "11.16.0",
-            "pnpmVersion": "11.5.0",
-            "nvmVersion": "0.40.4"
+            "version": "24.22.1",
+            "npmVersion": "none",
+            "nvmVersion": "0.40.8"
         }
     },
     "portsAttributes": {
