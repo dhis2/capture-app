@@ -1,0 +1,36 @@
+import moment from 'moment';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
+import { formatMomentEn, padWithZeros } from '../date';
+
+const dateTimeFormat = 'YYYY-MM-DDTHH:mm:ss.SSS';
+const timeZoneRegex = /(Z|[+-]\d{2}:?\d{2})$/i;
+
+export const hasTimeZone = (value: string) => timeZoneRegex.test(value);
+
+/**
+ * Parses a DATETIME value to a timezone-free datetime string (YYYY-MM-DDTHH:mm:ss.SSS), or null if invalid
+ * Values without a timezone are kept as entered.
+ * @export
+ * @param {*} value - datetime string
+ * @returns {string | null}
+ */
+export function parseDateTime(value: any): string | null {
+    if (!value) {
+        return null;
+    }
+
+    if (typeof value === 'string' && !hasTimeZone(value)) {
+        // moment.utc avoids daylight saving adjustments
+        const momentDateTime = moment.utc(value);
+        return momentDateTime.isValid() ? formatMomentEn(momentDateTime, dateTimeFormat) : null;
+    }
+
+    // Legacy UTC values (Z) are converted to the server time zone
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+        return null;
+    }
+    // sv-SE formats as YYYY-MM-DD HH:mm:ss
+    const serverDateTime = date.toLocaleString('sv-SE', { timeZone: systemSettingsStore.get().serverTimeZoneId });
+    return `${serverDateTime.replace(' ', 'T')}.${padWithZeros(date.getUTCMilliseconds(), 3)}`;
+}
