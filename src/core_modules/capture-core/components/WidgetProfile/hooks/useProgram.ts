@@ -4,7 +4,7 @@ import { useOptionGroups } from './useOptionGroups';
 
 type ApiProgram = {
     trackedEntityType: {
-        allowAuditLog: boolean;
+        enableChangeLog?: boolean;
         [key: string]: any;
     };
     programTrackedEntityAttributes: Array<{
@@ -49,13 +49,13 @@ export const useProgram = (programId: string) => {
     const programMetadata: Program | null = useMemo(() => {
         if (program && optionGroups) {
             const apiProgram = program as ApiProgram;
-            const { allowAuditLog, ...restTrackedEntityType } = apiProgram.trackedEntityType;
+            const { enableChangeLog, ...restTrackedEntityType } = apiProgram.trackedEntityType;
 
             return {
                 ...apiProgram,
                 trackedEntityType: {
                     ...restTrackedEntityType,
-                    changelogEnabled: allowAuditLog,
+                    changelogEnabled: enableChangeLog ?? true,
                 },
                 programTrackedEntityAttributes: apiProgram.programTrackedEntityAttributes
                     .filter(programTrackedEntityAttribute =>
