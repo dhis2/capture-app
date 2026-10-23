@@ -21,7 +21,7 @@ type Props = {
     onOpenChangelog: () => void;
     onClose: () => void;
 
-    showChangelog?: boolean;
+    showChangelog: boolean;
     hideMutationActions?: boolean;
     isEventBlockedByExpiry: boolean;
     canToggleCompletion: boolean;
@@ -49,7 +49,7 @@ export const EventOverflowMenu = ({
     dataTest = 'overflow-menu',
     onOpenChangelog,
     onClose,
-    showChangelog = true,
+    showChangelog,
     hideMutationActions = false,
     isEventBlockedByExpiry,
     canToggleCompletion,
