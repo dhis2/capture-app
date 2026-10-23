@@ -29,7 +29,6 @@ export type Settings = {
     getValidatorContainers?: (props: Record<string, any>) => Array<ValidatorContainer>;
     getMeta?: (props: Props) => Record<string, any>;
     getIsHidden?: (props: Record<string, any>) => boolean;
-    getPassOnFieldData?: (props: Props) => boolean;
     getOnUpdateField?: (props: Record<string, any>) => (
         innerAction: any,
         data: { value: any; valueMeta: any; fieldId: string; dataEntryId: string; itemId: string }

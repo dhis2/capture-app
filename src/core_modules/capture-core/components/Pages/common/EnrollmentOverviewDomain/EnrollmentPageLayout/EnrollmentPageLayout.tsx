@@ -6,6 +6,7 @@ import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
 import { EnrollmentReadOnlyBadge } from './EnrollmentReadOnlyBadge';
+import { FormFieldPluginContextIdsProvider } from '../../../../D2Form/FormFieldPlugin';
 import './enrollmentPageLayout.css';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
@@ -61,6 +62,8 @@ const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
 type OwnProps = EnrollmentPageProps & {
     stageId?: string;
+    eventId?: string;
+    ownerOrgUnitId?: string;
 };
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
 
@@ -116,44 +119,53 @@ const EnrollmentPageLayoutPlain = ({
     }, [pageLayout.backgroundColor]);
 
     return (
-        <div
-            className={classes.container}
-            style={containerStyle}
-            data-test={`enrollment-${currentPage}-page`}
+        <FormFieldPluginContextIdsProvider
+            programId={program.id}
+            programStageId={stageId}
+            teiId={passOnProps.teiId}
+            enrollmentId={passOnProps.enrollmentId}
+            eventId={passOnProps.eventId}
+            ownerOrgUnitId={passOnProps.ownerOrgUnitId}
         >
-            <AddRelationshipRefWrapper setRelationshipRef={setAddRelationshipContainerElement} />
             <div
-                className={classes.contentContainer}
-                style={!mainContentVisible ? { display: 'none' } : undefined}
+                className={classes.container}
+                style={containerStyle}
+                data-test={`enrollment-${currentPage}-page`}
             >
-                <div className={classes.breadcrumbRow}>
-                    <EnrollmentBreadcrumb
-                        page={currentPage}
-                        onBackToMainPage={onBackToMainPage}
-                        onBackToDashboard={onBackToDashboard}
-                        onBackToViewEvent={onBackToViewEvent}
-                        programId={program.id}
-                        stageId={stageId}
-                        displayFrontPageList={program.displayFrontPageList}
-                        userInteractionInProgress={userInteractionInProgress}
-                        eventStatus={eventStatus}
-                    />
-                    <EnrollmentReadOnlyBadge />
-                </div>
-                <div className={classes.columns}>
-                    {pageLayout.leftColumn && !!leftColumnWidgets?.length && (
-                        <div id="left-column-enrollment-page-layout" className={classes.leftColumn}>
-                            {leftColumnWidgets}
-                        </div>
-                    )}
-                    {pageLayout.rightColumn && !!rightColumnWidgets?.length && (
-                        <div id="right-column-enrollment-page-layout" className={classes.rightColumn}>
-                            {rightColumnWidgets}
-                        </div>
-                    )}
+                <AddRelationshipRefWrapper setRelationshipRef={setAddRelationshipContainerElement} />
+                <div
+                    className={classes.contentContainer}
+                    style={!mainContentVisible ? { display: 'none' } : undefined}
+                >
+                    <div className={classes.breadcrumbRow}>
+                        <EnrollmentBreadcrumb
+                            page={currentPage}
+                            onBackToMainPage={onBackToMainPage}
+                            onBackToDashboard={onBackToDashboard}
+                            onBackToViewEvent={onBackToViewEvent}
+                            programId={program.id}
+                            stageId={stageId}
+                            displayFrontPageList={program.displayFrontPageList}
+                            userInteractionInProgress={userInteractionInProgress}
+                            eventStatus={eventStatus}
+                        />
+                        <EnrollmentReadOnlyBadge />
+                    </div>
+                    <div className={classes.columns}>
+                        {pageLayout.leftColumn && !!leftColumnWidgets?.length && (
+                            <div id="left-column-enrollment-page-layout" className={classes.leftColumn}>
+                                {leftColumnWidgets}
+                            </div>
+                        )}
+                        {pageLayout.rightColumn && !!rightColumnWidgets?.length && (
+                            <div id="right-column-enrollment-page-layout" className={classes.rightColumn}>
+                                {rightColumnWidgets}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </FormFieldPluginContextIdsProvider>
     );
 };
 

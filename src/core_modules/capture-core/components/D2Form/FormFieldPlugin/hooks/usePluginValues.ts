@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import type { MetadataByPluginId, PluginContext } from '../FormFieldPlugin.types';
+import { PluginContextValueKeys } from '../FormFieldPlugin.const';
 
 export const usePluginValues = (
     formId: string,
@@ -13,22 +14,18 @@ export const usePluginValues = (
         if (!formValuesRedux) {
             return {};
         }
-
-        return Object.entries(metadataByPluginId)
-            .reduce((acc, [pluginId, metadata]) => {
-                const value = formValuesRedux[metadata.id];
-                if (value) {
-                    acc[pluginId] = value;
-                }
-                return acc;
-            }, {});
+        return Object.fromEntries(
+            Object.entries(metadataByPluginId).map(
+                ([pluginId, { id }]) => [pluginId, formValuesRedux[id]],
+            ),
+        );
     }, [formValuesRedux, metadataByPluginId]);
 
-    const contextValues = useMemo(() => Object.entries(pluginContext)
-        .reduce((acc, [key, value]) => {
-            acc[key] = value.value;
-            return acc;
-        }, {}), [pluginContext]);
+    const contextValues = useMemo(() => Object.fromEntries(
+        PluginContextValueKeys
+            .filter(key => key in pluginContext)
+            .map(key => [key, pluginContext[key]?.value]),
+    ), [pluginContext]);
 
     const pluginValues = useMemo(() => ({
         ...formValues,
