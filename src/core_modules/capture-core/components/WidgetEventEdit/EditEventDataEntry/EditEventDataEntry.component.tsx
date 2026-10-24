@@ -451,8 +451,7 @@ type Props = {
     onHandleScheduleSave: (eventData: any) => void;
     onDelete: () => void;
     onCancel: () => void;
-    onConfirmCreateNew: (itemId: string) => void;
-    onCancelCreateNew: (itemId: string) => void;
+    onSaveAndAskToCreateNew: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
     theme: any,
     dataEntryId: string;
     onCancelEditEvent?: (isScheduled: boolean) => void;

@@ -8,7 +8,8 @@ import {
     DataTableRow,
     IconMore16,
 } from '@dhis2/ui';
-import { useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
+import { useAvailableProgramStages, useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
+import { statusTypes as eventStatuses } from 'capture-core/events/statusTypes';
 import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { LabelKeys, useTermLabel } from 'capture-core/customLabels';
@@ -21,6 +22,7 @@ import {
     updateEnrollmentEvent,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
+    setAskToCreateNew,
 } from '../../../../../Pages/common/EnrollmentOverviewDomain';
 
 
@@ -54,6 +56,12 @@ const EventRowPlain = ({
     const dispatch = useDispatch();
     const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
     const getUpdatedAt = useServerFormattedNow();
+    const availableProgramStages = useAvailableProgramStages(
+        programStage,
+        enrollment?.trackedEntity,
+        enrollment?.enrollment,
+        programId,
+    );
 
     const {
         canToggleCompletion,
@@ -104,9 +112,23 @@ const EventRowPlain = ({
         }));
     }, [dispatch, eventDetails, id, getUpdatedAt]);
 
-    const onCompletionStatusSuccess = useCallback(() => {
+    const onCompletionStatusSuccess = useCallback((newStatus: string) => {
         dispatch(commitEnrollmentEvent(id));
-    }, [dispatch, id]);
+        if (newStatus === eventStatuses.COMPLETED &&
+            programStage?.allowGenerateNextVisit &&
+            !programStage.askCompleteEnrollmentOnEventComplete &&
+            availableProgramStages.length > 0
+        ) {
+            dispatch(setAskToCreateNew({
+                enrollmentId: enrollment.enrollment,
+                programId,
+                teiId: enrollment.trackedEntity,
+                orgUnitId: eventDetails.orgUnit,
+                stageId: programStage.id,
+                availableProgramStageIds: availableProgramStages.map(({ id: stageId }) => stageId),
+            }));
+        }
+    }, [dispatch, id, programStage, availableProgramStages, enrollment, programId, eventDetails.orgUnit]);
 
     const onCompletionStatusError = useCallback(() => {
         dispatch(rollbackEnrollmentEvent(id));

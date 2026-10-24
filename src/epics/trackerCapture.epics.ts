@@ -47,7 +47,6 @@ import {
     saveEditedEventFailedEpic,
     saveEditedEventSucceededEpic,
     requestDeleteEventDataEntryEpic,
-    startCreateNewAfterCompletingEpic,
     saveEventAndCompleteEnrollmentEpic as saveEditEventAndCompleteEnrollmentEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
@@ -384,6 +383,5 @@ export const epics = (combineEpics as any)(
     updateTeiFailedEpic,
     navigateToNewTrackedEntityPageEpic,
     requestDeleteEventDataEntryEpic,
-    startCreateNewAfterCompletingEpic,
     saveEditEventAndCompleteEnrollmentEpic,
 );

@@ -1,4 +1,5 @@
 export type { HideWidgets, WidgetEffects } from './enrollmentOverviewDomain.types';
+export type { AskToCreateNewPayload } from './enrollment.actions';
 export {
     enrollmentSiteActionTypes,
     updateEnrollmentEvent,
@@ -19,6 +20,8 @@ export {
     addPersistedEnrollmentEvents,
     commitEnrollmentEvents,
     rollbackEnrollmentEvents,
+    setAskToCreateNew,
+    clearAskToCreateNew,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
 export {

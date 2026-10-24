@@ -1,35 +1,27 @@
 import * as React from 'react';
-import i18n from '@dhis2/d2-i18n';
-import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { RenderFoundation } from '../../metaData';
-import { getTermLabel, LabelKeys } from '../../customLabels';
+import { statusTypes } from '../../events/statusTypes';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { relatedStageActions } from '../WidgetRelatedStages';
+import type { RelatedStageRefPayload } from '../WidgetRelatedStages';
 
 type Props = {
-    onCancelCreateNew: (itemId: string) => void;
-    onConfirmCreateNew: (itemId: string) => void;
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: string) => void;
+    onSaveAndAskToCreateNew: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
     allowGenerateNextVisit?: boolean;
     askCompleteEnrollmentOnEventComplete?: boolean;
     availableProgramStages?: Array<Record<string, any>>;
     isCompleted?: boolean;
-    itemId: string;
-    programId: string;
-    stageId?: string;
+    eventStatus?: string;
+    relatedStageRef?: { current: RelatedStageRefPayload | null };
 };
 
-type State = {
-    isOpen: boolean;
-};
-
+// The question itself is asked on the enrollment dashboard after the event has been saved
 const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
-    class AskToCreateNewHOC extends React.Component<Props, State> {
+    class AskToCreateNewHOC extends React.Component<Props> {
         innerInstance: any;
         constructor(props: Props) {
             super(props);
-            this.state = {
-                isOpen: false,
-            };
             this.handleOnSave = this.handleOnSave.bind(this);
         }
 
@@ -38,75 +30,30 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
         }
 
         handleOnSave(eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: string) {
+            const { linkMode } = this.props.relatedStageRef?.current?.getLinkedStageValues() ?? {};
             if (this.props.allowGenerateNextVisit &&
                 this.props.availableProgramStages &&
                 this.props.availableProgramStages.length > 0 &&
                 (this.props.isCompleted || saveType === addEventSaveTypes.COMPLETE) &&
-                !this.props.askCompleteEnrollmentOnEventComplete
+                this.props.eventStatus !== statusTypes.COMPLETED &&
+                !this.props.askCompleteEnrollmentOnEventComplete &&
+                linkMode !== relatedStageActions.ENTER_DATA
             ) {
-                this.setState({ isOpen: true });
+                this.props.onSaveAndAskToCreateNew(eventId, dataEntryId, formFoundation);
             } else {
                 this.props.onSave(eventId, dataEntryId, formFoundation, saveType);
             }
         }
 
-        renderAskToCreateNewModal = () => {
-            if (!this.state.isOpen) {
-                return null;
-            }
-            const { eventLabel } = getTermLabel(
-                [LabelKeys.eventSingular],
-                { programId: this.props.programId, stageId: this.props.stageId },
-            );
-            return (
-                <Modal
-                    hide={!this.state.isOpen}
-                    dataTest="modal-ask-to-create-new"
-                >
-                    <ModalTitle>
-                        {i18n.t('Generate new {{eventLabel}}', { eventLabel })}
-                    </ModalTitle>
-                    <ModalContent>
-                        {i18n.t('Do you want to create another {{eventLabel}}?', { eventLabel })}
-                    </ModalContent>
-                    <ModalActions>
-                        <ButtonStrip end>
-                            <Button
-                                onClick={() => {
-                                    this.props.onCancelCreateNew(this.props.itemId);
-                                    this.setState({ isOpen: false });
-                                }}
-                                secondary
-                            >
-                                {i18n.t('No, cancel')}
-                            </Button>
-                            <Button
-                                onClick={() => {
-                                    this.props.onConfirmCreateNew(this.props.itemId);
-                                    this.setState({ isOpen: false });
-                                }}
-                                primary
-                            >
-                                {i18n.t('Yes, create new {{eventLabel}}', { eventLabel })}
-                            </Button>
-                        </ButtonStrip>
-                    </ModalActions>
-                </Modal>
-            );
-        }
-
         render() {
-            const { onSave, isCompleted, ...passOnProps } = this.props;
+            const { onSave, onSaveAndAskToCreateNew, isCompleted, ...passOnProps } = this.props;
 
             return (
-                <>
-                    <InnerComponent
-                        ref={(innerInstance: any) => { this.innerInstance = innerInstance; }}
-                        onSave={this.handleOnSave}
-                        {...passOnProps}
-                    />
-                    {this.renderAskToCreateNewModal()}
-                </>
+                <InnerComponent
+                    ref={(innerInstance: any) => { this.innerInstance = innerInstance; }}
+                    onSave={this.handleOnSave}
+                    {...passOnProps}
+                />
             );
         }
     };

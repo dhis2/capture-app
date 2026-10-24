@@ -9,8 +9,8 @@ import { ValidatedComponent } from './Validated.component';
 import {
     handleSaveButton,
     cleanUpEventSaveInProgress,
-    startCreateNewAfterCompleting,
 } from './validated.actions';
+import { setAskToCreateNew } from '../../Pages/common/EnrollmentOverviewDomain';
 import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
@@ -100,7 +100,7 @@ export const Validated = ({
         onSaveErrorActionType,
     ]);
 
-    const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
+    const handleSaveAndAskToCreateNew = useCallback(() => {
         window.scrollTo(0, 0);
         dispatch(handleSaveButton({
             saveType: addEventSaveTypes.COMPLETE,
@@ -109,13 +109,13 @@ export const Validated = ({
             onSaveExternal,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            onSaveSuccessAction: startCreateNewAfterCompleting({
-                isCreateNew,
+            onSaveSuccessAction: setAskToCreateNew({
+                enrollmentId,
+                programId: program.id,
+                teiId,
                 orgUnitId: orgUnitContext?.id,
-                enrollmentId: buildPayloadArgs.enrollmentId,
-                programId: buildPayloadArgs.programId,
-                teiId: buildPayloadArgs.teiId,
-                availableProgramStages,
+                stageId: stage.id,
+                availableProgramStageIds: availableProgramStages.map(({ id }) => id),
             }),
         }));
     }, [
@@ -125,11 +125,13 @@ export const Validated = ({
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
+        enrollmentId,
+        program.id,
+        teiId,
         orgUnitContext?.id,
+        stage.id,
         availableProgramStages,
     ]);
-    const cancelCreateNew = useCallback(() => { handleCreateNew(false); }, [handleCreateNew]);
-    const confirmCreateNew = useCallback(() => { handleCreateNew(true); }, [handleCreateNew]);
 
     const handleSaveAndCompleteEnrollment = useCallback(
         (
@@ -180,8 +182,7 @@ export const Validated = ({
             formFoundation={formFoundation}
             relatedStageRef={relatedStageRef}
             onSave={handleSave}
-            onCancelCreateNew={cancelCreateNew}
-            onConfirmCreateNew={confirmCreateNew}
+            onSaveAndAskToCreateNew={handleSaveAndAskToCreateNew}
             programId={program.id}
             onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
             programName={program.name}
