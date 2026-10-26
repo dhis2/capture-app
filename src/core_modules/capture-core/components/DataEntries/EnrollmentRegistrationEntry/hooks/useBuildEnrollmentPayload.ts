@@ -34,7 +34,6 @@ type DataEntryReduxConverterProps = {
     programId: string;
     dataEntryId: string;
     itemId?: string;
-    orgUnitId: string;
     teiId?: string;
     trackedEntityTypeId?: string;
 };
@@ -71,7 +70,6 @@ export const useBuildEnrollmentPayload = ({
     programId,
     dataEntryId,
     itemId = 'newEnrollment',
-    orgUnitId,
     teiId,
     trackedEntityTypeId,
 }: DataEntryReduxConverterProps) => {
@@ -150,7 +148,7 @@ export const useBuildEnrollmentPayload = ({
             enrolledAt,
             occurredAt,
             programId,
-            orgUnitId,
+            orgUnitId: enrollmentOrgUnitId,
             attributeCategoryOptions,
         });
 
