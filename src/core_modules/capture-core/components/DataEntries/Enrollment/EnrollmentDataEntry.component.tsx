@@ -27,11 +27,13 @@ import {
     withDefaultFieldContainer,
     orientations,
     SingleSelectField,
+    SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
+    getOrgUnitValidatorContainers,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
@@ -52,7 +54,7 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
-const customLabels = [LabelKeys.eventSingular, LabelKeys.enrollmentSingular] as const;
+const customLabels = [LabelKeys.eventSingular, LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -193,6 +195,44 @@ const getIncidentDateSettings = () => {
     };
 
     return incidentDateSettings;
+};
+
+const getOrgUnitSettings = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions &&
+                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: any) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: capitalizeFirstLetter(props.orgUnitLabel),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
+        }),
+    };
+
+    return orgUnitSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -436,19 +476,19 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const AOCFieldBuilderHOC = withCustomLabels(customLabels)(
-    withEnrollmentAOCFieldBuilder(
-        withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
-            withAOCFieldBuilder(getAOCSettingsFn())(
-                withDataEntryFields(getCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),
-            ),
+const AOCFieldBuilderHOC = withEnrollmentAOCFieldBuilder(
+    withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
+        withAOCFieldBuilder(getAOCSettingsFn())(
+            withDataEntryFields(getCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),
         ),
     ),
 );
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
-const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
+const OrgUnitFieldHOC = withDataEntryField(getOrgUnitSettings())(LocationHOC);
+const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(OrgUnitFieldHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
-const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
+const CustomLabelsHOC = withCustomLabels(customLabels)(EnrollmentDateFieldHOC);
+const BrowserBackWarningHOC = withBrowserBackWarning()(CustomLabelsHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string;
