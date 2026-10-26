@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-05T10:05:05.847Z\n"
-"PO-Revision-Date: 2026-10-05T10:05:05.847Z\n"
+"POT-Creation-Date: 2026-10-26T15:39:14.871Z\n"
+"PO-Revision-Date: 2026-10-26T15:39:14.871Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -169,6 +169,9 @@ msgstr "{{ stageName }} - Status"
 msgid "A date in the future is not allowed"
 msgstr "A date in the future is not allowed"
 
+msgid "Please provide a valid {{orgUnitLabel}}"
+msgstr "Please provide a valid {{orgUnitLabel}}"
+
 msgid "Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}."
 
@@ -240,9 +243,6 @@ msgstr "Completed"
 
 msgid "Please add or cancel the {{noteLabel}} before saving the {{eventLabel}}"
 msgstr "Please add or cancel the {{noteLabel}} before saving the {{eventLabel}}"
-
-msgid "Please provide a valid {{orgUnitLabel}}"
-msgstr "Please provide a valid {{orgUnitLabel}}"
 
 msgid "Save and add another"
 msgstr "Save and add another"
