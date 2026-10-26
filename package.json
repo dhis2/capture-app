@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "107.8.4",
+    "version": "107.8.5",
     "cacheVersion": "4",
     "license": "BSD-3-Clause",
     "private": true,
@@ -15,7 +15,7 @@
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/data-engine": "^3.17.4",
         "@dhis2/rule-engine": "^3.8.5",
-        "@dhis2/rules-engine-javascript": "107.8.4",
+        "@dhis2/rules-engine-javascript": "107.8.5",
         "@dhis2/ui": "^10.17.0",
         "@emotion/css": "^11.13.5",
         "@emotion/react": "^11.14.0",
@@ -62,8 +62,8 @@
         "reselect": "^5.3.0",
         "rxjs": "^7.8.2",
         "typeface-roboto": "^1.1.13",
-        "uuid": "^14.0.2",
-        "zod": "^4.6.5"
+        "uuid": "^14.0.3",
+        "zod": "^4.6.7"
     },
     "scripts": {
         "start": "yarn verifyCacheVersion && concurrently --kill-others \"yarn workspaces run build:watch\" \"d2-app-scripts start\"",
@@ -100,7 +100,7 @@
         "@dhis2/cli-utils-cypress": "^10.1.2",
         "@dhis2/cypress-commands": "^10.1.2",
         "@dhis2/cypress-plugins": "^10.1.2",
-        "@types/node": "^26.6.3",
+        "@types/node": "^26.6.5",
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.1",
         "@types/react-router-dom": "^5.3.3",
@@ -108,7 +108,7 @@
         "@typescript-eslint/parser": "^4.0.0",
         "babel-eslint": "^10.0.0",
         "babel-plugin-module-resolver": "^5.0.3",
-        "concurrently": "^10.0.5",
+        "concurrently": "^10.0.6",
         "cypress": "12",
         "docdash": "^2.0.2",
         "dotenv": "^18.0.6",

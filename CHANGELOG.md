@@ -1,3 +1,10 @@
+## [107.8.5](https://github.com/dhis2/capture-app/compare/v107.8.4...v107.8.5) (2026-10-23)
+
+
+### Bug Fixes
+
+* [DHIS2-22315] Complete checkbox is always disabled on a scheduled event ([#4804](https://github.com/dhis2/capture-app/issues/4804)) ([72386e6](https://github.com/dhis2/capture-app/commit/72386e63b53faf452a1e9b5509b0025278ab1511))
+
 ## [107.8.4](https://github.com/dhis2/capture-app/compare/v107.8.3...v107.8.4) (2026-10-19)
 
 
