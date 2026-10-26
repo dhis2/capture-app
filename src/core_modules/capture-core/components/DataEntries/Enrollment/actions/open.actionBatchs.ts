@@ -82,15 +82,15 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const enrollmentProgramCategory = program.enrollmentCategoryCombination;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
-    const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
+    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
+    const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage, orgUnitLabel);
 
     const fabricateFirstStageEvent = (stage: ProgramStage) => ({
         programStageId: stage.id,
         programStageName: stage.name,
     });
     const firstStageEvent = firstStage && fabricateFirstStageEvent(firstStage);
-
-    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
+    const defaultOrgUnit = { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path };
 
     const dataEntryPropsToInclude = [
         ...buildEnrollmentDataEntryPropsToInclude(orgUnitLabel),
@@ -119,7 +119,8 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
                 dataEntryPropsToInclude,
                 {
                     enrolledAt: convertDateObjectToDateFormatString(new Date()),
-                    orgUnit: { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path },
+                    orgUnit: defaultOrgUnit,
+                    ...(firstStage ? { stageOrgUnit: defaultOrgUnit } : {}),
                 },
             );
 

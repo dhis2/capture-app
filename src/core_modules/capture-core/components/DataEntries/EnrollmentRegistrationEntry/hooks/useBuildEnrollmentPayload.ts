@@ -124,7 +124,6 @@ export const useBuildEnrollmentPayload = ({
         const firstStageDuringRegistrationEvent = deriveFirstStageDuringRegistrationEvent({
             firstStageMetadata: firstStage,
             programId,
-            orgUnitId,
             currentEventValues,
             fieldsValue: dataEntryFieldValues,
             attributeCategoryOptions,

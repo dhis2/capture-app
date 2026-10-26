@@ -12,7 +12,6 @@ const convertFn = pipe(convertFormToClient, convertClientToServer);
 export const deriveFirstStageDuringRegistrationEvent = ({
     firstStageMetadata,
     programId,
-    orgUnitId,
     currentEventValues,
     fieldsValue,
     attributeCategoryOptions,
@@ -20,7 +19,6 @@ export const deriveFirstStageDuringRegistrationEvent = ({
 }: {
     firstStageMetadata: ProgramStage | null,
     programId: string,
-    orgUnitId: string,
     currentEventValues?: { [id: string]: any },
     fieldsValue: { [id: string]: any },
     attributeCategoryOptions: { [categoryId: string]: string } | string,
@@ -29,7 +27,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     if (!firstStageMetadata) {
         return null;
     }
-    const { stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
+    const { stageComplete, stageOccurredAt, stageGeometry, stageOrgUnit } = fieldsValue;
 
     const eventAttributeCategoryOptions = attributeCategoryOptions
         ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
@@ -42,7 +40,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
         programStage: firstStageMetadata.id,
         program: programId,
-        orgUnit: orgUnitId,
+        orgUnit: convertFn(stageOrgUnit, dataElementTypes.ORGANISATION_UNIT),
         ...eventAttributeCategoryOptions,
     };
 

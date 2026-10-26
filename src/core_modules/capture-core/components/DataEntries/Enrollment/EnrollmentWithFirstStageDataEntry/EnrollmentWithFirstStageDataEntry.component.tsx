@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { isLangRtl } from '../../../../utils/rtl';
 import { LabelKeys, withCustomLabels } from '../../../../customLabels';
 import { DataEntry } from '../../../DataEntry';
@@ -16,6 +17,7 @@ import {
     withDefaultFieldContainer,
     TrueOnlyField,
     orientations,
+    SingleOrgUnitSelectField,
 } from '../../../FormFields/New';
 import { placements } from '../../../DataEntry/constants/placements.const';
 import { withDataEntryFieldIfApplicable } from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
@@ -23,11 +25,12 @@ import { sectionKeysForFirstStageDataEntry } from './EnrollmentWithFirstStageDat
 import labelTypeClasses from './fieldLabels.module.css';
 import { withCleanUp } from './withCleanUp';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { getOrgUnitValidatorContainers } from '../fieldValidators';
 import { stageMainDataIds } from './getDataEntryPropsToInclude';
 import { withTransformPropName } from '../../../../HOC';
 import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 
-const customLabels = [LabelKeys.eventSingular] as const;
+const customLabels = [LabelKeys.eventSingular, LabelKeys.orgUnitSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -239,6 +242,44 @@ const getReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const getOrgUnitSettingsFn = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions &&
+                                props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const orgUnitSettings = {
+        isApplicable: (props: any) => props.firstStageMetaData?.stage?.stageForm,
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: any) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: capitalizeFirstLetter(props.orgUnitLabel),
+            required: true,
+        }),
+        getPropName: () => stageMainDataIds.ORG_UNIT,
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
+        getMeta: () => ({
+            section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
 const getAssigneeSettingsFn = () => {
     const assigneeComponent =
         withTransformPropName(['onBlur', 'onSet'])(
@@ -271,5 +312,6 @@ const getAssigneeSettingsFn = () => {
 const StageLocationHOC = withDataEntryFieldIfApplicable(getStageGeometrySettings())(withCleanUp()(DataEntry));
 const CompleteHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC);
 const AssigneeHOC = withDataEntryFieldIfApplicable(getAssigneeSettingsFn())(CompleteHOC);
-const ReportDateHOC = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(AssigneeHOC);
+const OrgUnitHOC = withDataEntryFieldIfApplicable(getOrgUnitSettingsFn())(AssigneeHOC);
+const ReportDateHOC = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(OrgUnitHOC);
 export const FirstStageDataEntry = withCustomLabels(customLabels)(ReportDateHOC);
