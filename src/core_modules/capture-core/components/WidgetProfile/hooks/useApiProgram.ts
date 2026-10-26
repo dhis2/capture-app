@@ -41,10 +41,17 @@ const baseTrackedEntityTypeFields = [
 
 const enableChangeLogTrackedEntityTypeFields = ['enableChangeLog'];
 
-const buildFieldsParam = (includePluralLabels: boolean, includeEnableChangeLog: boolean): string => {
+const allowAuditLogTrackedEntityTypeFields = ['allowAuditLog'];
+
+const buildFieldsParam = (
+    includePluralLabels: boolean,
+    includeEnableChangeLog: boolean,
+    includeAllowAuditLog: boolean,
+): string => {
     const trackedEntityTypeFields = [
         ...baseTrackedEntityTypeFields,
         ...(includeEnableChangeLog ? enableChangeLogTrackedEntityTypeFields : []),
+        ...(includeAllowAuditLog ? allowAuditLogTrackedEntityTypeFields : []),
     ];
     return [
         ...baseProgramFields,
@@ -64,6 +71,7 @@ export const useApiProgram = (programId: string) => {
                         fields: buildFieldsParam(
                             featureAvailable(FEATURES.customTerminologyPlurals),
                             featureAvailable(FEATURES.enableChangeLog),
+                            !featureAvailable(FEATURES.changelogsV2),
                         ),
                     },
                 },
