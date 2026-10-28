@@ -2372,9 +2372,9 @@
     workbox-strategies "^7.1.0"
 
 "@dhis2/rule-engine@^3.8.6":
-  version "3.8.6"
-  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.8.6.tgz#41c05f226e7f7e682c40ad836519eed2dd5f15e4"
-  integrity sha512-kRce5NFEh/zMkj9wsoek71BZbSjrCP5xo8awju/+cOaG0Su72yQ5Ve6IGLYdWXwQ2G/JrzWrvsb8GYSBrcm8UQ==
+  version "3.8.7"
+  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.8.7.tgz#28ecb47dbd8ad2fa035a735debee6fb1150cf21d"
+  integrity sha512-UX9q6vtaWaI6eIex1oxxVhZT/BAVIk2M2xeaBp/2M93JqXG/bsagnJv11QQLzPI8cZm28vAyzVlVx3rcQICT+A==
   dependencies:
     "@js-joda/core" "3.2.0"
 
