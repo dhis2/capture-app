@@ -8,6 +8,7 @@ export const FEATURES = Object.freeze({
     emptyValueFilter: 'emptyValueFilter',
     customTerminologyPlurals: 'customTerminologyPlurals',
     enrollmentAOC: 'enrollmentAOC',
+    enableChangeLog: 'enableChangeLog',
 });
 
 const MINOR_VERSION_SUPPORT = Object.freeze({
@@ -20,6 +21,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.emptyValueFilter]: 42,
     [FEATURES.customTerminologyPlurals]: 43,
     [FEATURES.enrollmentAOC]: 43,
+    [FEATURES.enableChangeLog]: 43,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>
