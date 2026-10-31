@@ -8,10 +8,11 @@ import { teiRegistrationEntryActionTypes } from './TeiRegistrationEntry.actions'
 import { openDataEntryForNewTeiBatchAsync } from '../TrackedEntityInstance';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
+import { getCoreOrgUnitFn } from '../../../metadataRetrieval/coreOrgUnit';
 
 export const startNewTeiDataEntrySelfInitialisationEpic = (
     action$: any,
-    _: any,
+    store: any,
     { querySingleResource }: any,
 ) =>
     action$.pipe(
@@ -26,13 +27,16 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
                     return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
                 }
 
-                const openTeiPromise = openDataEntryForNewTeiBatchAsync({
+                const openTeiPromise = getCoreOrgUnitFn(querySingleResource)(
+                    selectedOrgUnitId,
+                    store.value.organisationUnits,
+                ).then(({ coreOrgUnit }) => openDataEntryForNewTeiBatchAsync({
                     foundation: formFoundation,
-                    orgUnit: { id: selectedOrgUnitId },
+                    orgUnit: coreOrgUnit,
                     dataEntryId,
                     querySingleResource,
                     formValues,
-                });
+                }));
 
                 return from(openTeiPromise);
             }

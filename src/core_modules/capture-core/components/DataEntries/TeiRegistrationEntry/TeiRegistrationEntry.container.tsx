@@ -87,7 +87,6 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
     const { buildTeiWithoutEnrollment } = useBuildTeiPayload({
         trackedEntityTypeId: selectedScopeId,
         dataEntryId: id,
-        orgUnitId,
     });
 
     const dataEntryKey = useMemo(() => {

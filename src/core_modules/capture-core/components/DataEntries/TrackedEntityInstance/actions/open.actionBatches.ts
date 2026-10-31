@@ -6,6 +6,8 @@ import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
+import { getOrgUnitValidatorContainers } from '../fieldValidators';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 const itemId = 'newTei';
 
@@ -44,11 +46,20 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         }, {});
 
 
+    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: null });
+    const dataEntryPropsToInclude = [
+        {
+            id: 'orgUnit',
+            type: 'ORGANISATION_UNIT',
+            validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
+        },
+    ];
+
     const dataEntryActions = loadNewDataEntry(
         dataEntryId,
         itemId,
-        null,
-        null,
+        dataEntryPropsToInclude,
+        { orgUnit: { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path } },
         { ...generatedUniqueValues, ...formValues },
     );
 
