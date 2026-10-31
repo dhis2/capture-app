@@ -23,7 +23,7 @@ import { removeEventChangelogQueries } from '../../../WidgetsChangelog';
 import { ChangelogMenuItem } from '../../../EventOverflowMenu';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { useProgramExpiryForUser, useEventEditPermissions } from '../../../../hooks';
+import { useProgramExpiryForUser, useEventEditPermissions, useEventChangelogEnabled } from '../../../../hooks';
 import { convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 import { LabelKeys, useTermLabel } from '../../../../customLabels';
@@ -83,6 +83,7 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const expiryPeriod = useProgramExpiryForUser(programId);
+    const changelogEnabled = useEventChangelogEnabled(programId);
     const { canToggleCompletion } = useEventEditPermissions({
         programId,
         stage: programStage,
@@ -137,26 +138,27 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
                         {i18n.t('Edit {{eventLabel}}', { eventLabel })}
                     </Button>
                 </div>}
-            <OverflowButton
-                open={actionsIsOpen}
-                onClick={() => setActionsIsOpen(prev => !prev)}
-                secondary
-                small
-                icon={<IconMore16 />}
-                dataTest="event-program-event-overflow-button"
-                component={(
-                    <FlyoutMenu
-                        dense
-                        maxWidth="250px"
-                        dataTest="event-program-event-overflow-menu"
-                    >
-                        <ChangelogMenuItem
-                            onOpenChangelog={() => setChangeLogIsOpen(true)}
-                            onClose={() => setActionsIsOpen(false)}
-                        />
-                    </FlyoutMenu>
-                )}
-            />
+            {changelogEnabled &&
+                <OverflowButton
+                    open={actionsIsOpen}
+                    onClick={() => setActionsIsOpen(prev => !prev)}
+                    secondary
+                    small
+                    icon={<IconMore16 />}
+                    dataTest="event-program-event-overflow-button"
+                    component={(
+                        <FlyoutMenu
+                            dense
+                            maxWidth="250px"
+                            dataTest="event-program-event-overflow-menu"
+                        >
+                            <ChangelogMenuItem
+                                onOpenChangelog={() => setChangeLogIsOpen(true)}
+                                onClose={() => setActionsIsOpen(false)}
+                            />
+                        </FlyoutMenu>
+                    )}
+                />}
         </div>
     );
 
