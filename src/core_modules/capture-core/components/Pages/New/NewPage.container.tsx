@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import type { ComponentType } from 'react';
 import { v4 as uuid } from 'uuid';
 import { NewPageComponent } from './NewPage.component';
@@ -17,6 +17,7 @@ import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayN
 import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 import { TopBar } from './TopBar.container';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
 
 const hasWriteAccess = (access: any) => Boolean(access?.data?.write);
 
@@ -74,6 +75,12 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
 
     const currentScopeId: string =
         useSelector(({ currentSelections }: any) => currentSelections.programId || currentSelections.trackedEntityTypeId);
+    const { scopeType } = useScopeInfo(currentScopeId);
+    const [selectedScopeId, setScopeId] = useState(currentScopeId);
+
+    useEffect(() => {
+        setScopeId(currentScopeId);
+    }, [scopeType, currentScopeId]);
 
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
@@ -105,12 +112,12 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}
-                program={program}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 teiId={teiId}
                 trackedEntityName={trackedEntityType?.name}
                 teiDisplayName={teiDisplayName}
                 formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
+                isScopeSelected={!!selectedScopeId}
                 onOpenNewRegistrationPage={onOpenNewRegistrationPage}
             />
             <NewPageComponent
@@ -118,7 +125,8 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
                 showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
                 showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
                 handleMainPageNavigation={handleMainPageNavigation}
-                currentScopeId={currentScopeId}
+                selectedScopeId={selectedScopeId}
+                setScopeId={setScopeId}
                 programCategorySelectionIncomplete={programSelectionIsIncomplete}
                 missingCategoriesInProgramSelection={missingCategories}
                 categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
