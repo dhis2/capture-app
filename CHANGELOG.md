@@ -1,3 +1,10 @@
+# [107.9.0](https://github.com/dhis2/capture-app/compare/v107.8.5...v107.9.0) (2026-10-31)
+
+
+### Features
+
+* [DHIS2-22185] Use enableChangeLog for changelog toggling ([#4795](https://github.com/dhis2/capture-app/issues/4795)) ([0c29890](https://github.com/dhis2/capture-app/commit/0c2989016accfb0d3a3001cdc9f4b280482852fb))
+
 ## [107.8.5](https://github.com/dhis2/capture-app/compare/v107.8.4...v107.8.5) (2026-10-23)
 
 
