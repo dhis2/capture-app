@@ -28,6 +28,7 @@ import {
     orientations,
     SingleSelectField,
     SingleOrgUnitSelectField,
+    withConditionalTooltip,
 } from '../../FormFields/New';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
@@ -51,6 +52,7 @@ import {
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import type { AutoSelectOrgUnit } from '../../../dataQueries';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
@@ -333,7 +335,13 @@ const categoryOptionsComponent =
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(SingleSelectField),
+                            withFilterProps(defaultFilterProps)(
+                                withConditionalTooltip((props: any) =>
+                                    i18n.t('Choose an {{orgUnitLabel}} to see the available options', {
+                                        orgUnitLabel: props.orgUnitLabel,
+                                    }),
+                                )(SingleSelectField),
+                            ),
                         ),
                     ),
                 ),
@@ -347,6 +355,8 @@ const getCategoryOptionsSettingsFn = () => ({
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
+        disabled: !props.orgUnitIdFieldValue,
+        orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
@@ -388,6 +398,8 @@ const getEnrollmentCategoryOptionsSettingsFn = () => ({
         ...props.enrollmentCategories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
+        disabled: !props.orgUnitIdFieldValue,
+        orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) =>
         (fieldId ? `${enrollmentAttributeOptionsKey}-${fieldId}` : enrollmentAttributeOptionsKey),
@@ -428,6 +440,7 @@ type FinalTeiDataEntryProps = {
     };
     formFoundation: RenderFoundation;
     enrollmentLabel: string;
+    orgUnitIdFieldValue?: string;
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -442,6 +455,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             relatedStageActionsOptions,
             programId,
             enrollmentLabel,
+            orgUnitIdFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -493,6 +507,7 @@ const BrowserBackWarningHOC = withBrowserBackWarning()(CustomLabelsHOC);
 type PreEnrollmentDataEntryProps = {
     programId: string;
     orgUnit?: OrgUnit;
+    orgUnitFieldValue?: AutoSelectOrgUnit | null;
     onUpdateField: (...args: any[]) => any;
     onUpdateDataEntryField: (...args: any[]) => any;
     onStartAsyncUpdateField: (...args: any[]) => any;
@@ -570,6 +585,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
             orgUnit,
+            orgUnitFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -581,6 +597,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
                 orgUnit={orgUnit}
                 orgUnitId={orgUnit?.id}
+                orgUnitIdFieldValue={orgUnitFieldValue?.id}
                 {...passOnProps}
             />
         );

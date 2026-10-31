@@ -6,6 +6,14 @@ import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } 
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 
+const mapStateToProps = (state: any, props: { id: string }) => {
+    const itemId = state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    const dataEntryKey = `${props.id}-${itemId}`;
+    return {
+        orgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit,
+    };
+};
+
 const mapDispatchToProps = (dispatch: any) => ({
     onUpdateDataEntryField: (
         innerAction: ReduxAction<any, any>,
@@ -57,4 +65,4 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
 });
 
-export const EnrollmentDataEntry = connect(() => ({}), mapDispatchToProps)(EnrollmentDataEntryComponent);
+export const EnrollmentDataEntry = connect(mapStateToProps, mapDispatchToProps)(EnrollmentDataEntryComponent);
