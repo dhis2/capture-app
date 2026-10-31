@@ -49,6 +49,7 @@ import {
     enrollmentAOCsectionKey,
     withAOCFieldBuilder,
     withEnrollmentAOCFieldBuilder,
+    withClearUnavailableCategoryOption,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
@@ -336,11 +337,13 @@ const categoryOptionsComponent =
                     withDisplayMessages()(
                         withInternalChangeHandler()(
                             withFilterProps(defaultFilterProps)(
-                                withConditionalTooltip((props: any) =>
-                                    i18n.t('Choose an {{orgUnitLabel}} to see the available options', {
-                                        orgUnitLabel: props.orgUnitLabel,
-                                    }),
-                                )(SingleSelectField),
+                                withClearUnavailableCategoryOption()(
+                                    withConditionalTooltip((props: any) =>
+                                        i18n.t('Choose an {{orgUnitLabel}} to see the available options', {
+                                            orgUnitLabel: props.orgUnitLabel,
+                                        }),
+                                    )(SingleSelectField),
+                                ),
                             ),
                         ),
                     ),
