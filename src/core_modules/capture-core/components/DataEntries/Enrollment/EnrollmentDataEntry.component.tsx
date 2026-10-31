@@ -228,7 +228,7 @@ const getOrgUnitSettings = () => {
             required: true,
         }),
         getPropName: () => 'orgUnit',
-        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel, props.programId),
         getMeta: () => ({
             placement: placements.TOP,
             section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,

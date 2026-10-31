@@ -29,7 +29,7 @@ const itemId = 'newEnrollment';
 
 type DataEntryPropsToInclude = Array<any>;
 
-const buildEnrollmentDataEntryPropsToInclude = (orgUnitLabel: string): DataEntryPropsToInclude => [
+const buildEnrollmentDataEntryPropsToInclude = (orgUnitLabel: string, programId: string): DataEntryPropsToInclude => [
     {
         id: 'enrolledAt',
         type: 'DATE',
@@ -43,7 +43,7 @@ const buildEnrollmentDataEntryPropsToInclude = (orgUnitLabel: string): DataEntry
     {
         id: 'orgUnit',
         type: 'ORGANISATION_UNIT',
-        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
+        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel, programId),
     },
     {
         clientId: 'geometry',
@@ -83,7 +83,8 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
-    const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage, orgUnitLabel);
+    const firstStageDataEntryPropsToInclude =
+        firstStage && getDataEntryPropsToInclude(firstStage, orgUnitLabel, program.id);
 
     const fabricateFirstStageEvent = (stage: ProgramStage) => ({
         programStageId: stage.id,
@@ -95,7 +96,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         : undefined;
 
     const dataEntryPropsToInclude = [
-        ...buildEnrollmentDataEntryPropsToInclude(orgUnitLabel),
+        ...buildEnrollmentDataEntryPropsToInclude(orgUnitLabel, program.id),
         ...extraDataEntryProps,
         ...(firstStageDataEntryPropsToInclude || []),
         ...(programCategory?.categories?.map(category => ({

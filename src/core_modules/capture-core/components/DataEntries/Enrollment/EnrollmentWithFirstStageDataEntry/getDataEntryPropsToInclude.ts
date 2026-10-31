@@ -20,7 +20,7 @@ const stageMainDataRulesEngineIds = {
 
 export const convertToRulesEngineIds = (id: string) => stageMainDataRulesEngineIds[id];
 
-export const getDataEntryPropsToInclude = (firstStage: ProgramStage, orgUnitLabel: string) => [
+export const getDataEntryPropsToInclude = (firstStage: ProgramStage, orgUnitLabel: string, programId: string) => [
     {
         id: stageMainDataIds.OCCURRED_AT,
         type: 'DATE',
@@ -29,7 +29,7 @@ export const getDataEntryPropsToInclude = (firstStage: ProgramStage, orgUnitLabe
     {
         id: stageMainDataIds.ORG_UNIT,
         type: 'ORGANISATION_UNIT',
-        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
+        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel, programId),
     },
     {
         clientId: stageMainDataIds.COMPLETE,

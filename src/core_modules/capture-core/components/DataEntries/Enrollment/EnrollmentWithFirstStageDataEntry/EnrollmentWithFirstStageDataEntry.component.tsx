@@ -271,7 +271,7 @@ const getOrgUnitSettingsFn = () => {
             required: true,
         }),
         getPropName: () => stageMainDataIds.ORG_UNIT,
-        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel, props.programId),
         getMeta: () => ({
             section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
         }),
