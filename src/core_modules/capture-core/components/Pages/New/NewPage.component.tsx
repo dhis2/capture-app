@@ -5,7 +5,6 @@ import type { ComponentType } from 'react';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
 
 import type { ContainerProps } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
@@ -25,7 +24,6 @@ const styles: Readonly<any> = {
 type Props = ContainerProps & WithStyles<typeof styles>;
 
 const NewPagePlain = ({
-    showMessageToSelectOrgUnitOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage,
     showMessageThatCategoryOptionIsInvalidForOrgUnit,
     showDefaultViewOnNewPage,
@@ -38,7 +36,6 @@ const NewPagePlain = ({
     programCategorySelectionIncomplete,
     categoryOptionIsInvalidForOrgUnit,
     missingCategoriesInProgramSelection,
-    orgUnitSelectionIncomplete,
     trackedEntityName,
     trackedEntityInstanceAttributes,
 }: Props) => {
@@ -50,9 +47,7 @@ const NewPagePlain = ({
     }, [scopeType, currentScopeId]);
 
     useEffect(() => {
-        if (orgUnitSelectionIncomplete) {
-            showMessageToSelectOrgUnitOnNewPage();
-        } else if (programCategorySelectionIncomplete) {
+        if (programCategorySelectionIncomplete) {
             showMessageToSelectProgramCategoryOnNewPage();
         } else if (categoryOptionIsInvalidForOrgUnit) {
             showMessageThatCategoryOptionIsInvalidForOrgUnit();
@@ -62,8 +57,6 @@ const NewPagePlain = ({
     },
     [
         programCategorySelectionIncomplete,
-        orgUnitSelectionIncomplete,
-        showMessageToSelectOrgUnitOnNewPage,
         showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
         categoryOptionIsInvalidForOrgUnit,
@@ -97,21 +90,6 @@ const NewPagePlain = ({
                                 trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
                                 newPageKey={newPageKey}
                             />
-                        }
-
-                        {
-                            newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
-                            <>
-                                <IncompleteSelectionsMessage>
-                                    {i18n.t('Choose an {{orgUnitLabel}} to start reporting', { orgUnitLabel })}
-                                </IncompleteSelectionsMessage>
-                                <Button
-                                    dataTest="new-page-cancel-button"
-                                    onClick={handleMainPageNavigation}
-                                >
-                                    {i18n.t('Cancel')}
-                                </Button>
-                            </>
                         }
 
                         {

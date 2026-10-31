@@ -492,7 +492,7 @@ const BrowserBackWarningHOC = withBrowserBackWarning()(CustomLabelsHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string;
-    orgUnit: OrgUnit;
+    orgUnit?: OrgUnit;
     onUpdateField: (...args: any[]) => any;
     onUpdateDataEntryField: (...args: any[]) => any;
     onStartAsyncUpdateField: (...args: any[]) => any;
@@ -520,7 +520,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
         const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
             programId,
-            orgUnitId: orgUnit.id,
+            orgUnitId: orgUnit?.id,
             trackedEntityInstanceId: teiId,
             trackedEntityTypeId: this.props.enrollmentMetadata.trackedEntityType.id,
             onGetUnsavedAttributeValues,
@@ -580,7 +580,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
                 orgUnit={orgUnit}
-                orgUnitId={orgUnit.id}
+                orgUnitId={orgUnit?.id}
                 {...passOnProps}
             />
         );

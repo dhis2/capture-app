@@ -4,13 +4,12 @@ import type { ComponentType } from 'react';
 import { v4 as uuid } from 'uuid';
 import { NewPageComponent } from './NewPage.component';
 import {
-    showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage, showMessageThatCategoryOptionIsInvalidForOrgUnit,
 } from './NewPage.actions';
 import { newPageStatuses } from './NewPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { getScopeFromScopeId, TrackerProgram, TrackedEntityType, EventProgram } from '../../../metaData';
+import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useTrackedEntityAttributes } from './hooks';
@@ -55,10 +54,6 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     trackedEntityAttributes &&
         deriveTeiName(trackedEntityAttributes, trackedEntityType?.id || '', teiId);
 
-    const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
-        () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
-        [dispatch]);
-
     const dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit = useCallback(
         () => { dispatch(showMessageThatCategoryOptionIsInvalidForOrgUnit()); },
         [dispatch]);
@@ -81,14 +76,6 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
         useSelector(({ currentSelections }: any) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
-
-    // TODO: OrgUnitSelectionIncomplete should be removed when DHIS2-19171 is implemented
-    const orgUnitSelectionIncomplete: boolean = useSelector(
-        ({ currentSelections }: any) =>
-            !(program instanceof EventProgram) &&
-            !currentSelections.orgUnitId &&
-            !currentSelections.complete,
-    );
 
     const newPageStatus: keyof typeof newPageStatuses =
         useSelector(({ newPage }: any) => newPage.newPageStatus);
@@ -127,13 +114,11 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
                 onOpenNewRegistrationPage={onOpenNewRegistrationPage}
             />
             <NewPageComponent
-                showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
                 showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
                 showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
                 showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
                 handleMainPageNavigation={handleMainPageNavigation}
                 currentScopeId={currentScopeId}
-                orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
                 programCategorySelectionIncomplete={programSelectionIsIncomplete}
                 missingCategoriesInProgramSelection={missingCategories}
                 categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}

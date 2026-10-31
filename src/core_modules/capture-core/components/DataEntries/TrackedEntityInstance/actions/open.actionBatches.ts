@@ -35,7 +35,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     const generatedItemContainers = await getGeneratedUniqueValuesAsync(
         foundation,
         generatedUniqueValuesCache,
-        { orgUnitCode: orgUnit.code },
+        { orgUnitCode: orgUnit?.code },
         querySingleResource,
     );
 
@@ -59,7 +59,11 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         dataEntryId,
         itemId,
         dataEntryPropsToInclude,
-        { orgUnit: { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path } },
+        {
+            orgUnit: orgUnit
+                ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+                : undefined,
+        },
         { ...generatedUniqueValues, ...formValues },
     );
 

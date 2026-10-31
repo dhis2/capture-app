@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
 import { pluck, switchMap } from 'rxjs/operators';
-import { empty, from } from 'rxjs';
+import { from } from 'rxjs';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -19,28 +19,24 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
         ofType(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
         switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation, formValues }: any) => {
-            if (selectedOrgUnitId) {
-                try {
-                    getTrackedEntityTypeThrowIfNotFound(TETypeId);
-                } catch (error) {
-                    log.error(errorCreator('TET for id not found')({ TETypeId, error }));
-                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
-                }
-
-                const openTeiPromise = getCoreOrgUnitFn(querySingleResource)(
-                    selectedOrgUnitId,
-                    store.value.organisationUnits,
-                ).then(({ coreOrgUnit }) => openDataEntryForNewTeiBatchAsync({
-                    foundation: formFoundation,
-                    orgUnit: coreOrgUnit,
-                    dataEntryId,
-                    querySingleResource,
-                    formValues,
-                }));
-
-                return from(openTeiPromise);
+            try {
+                getTrackedEntityTypeThrowIfNotFound(TETypeId);
+            } catch (error) {
+                log.error(errorCreator('TET for id not found')({ TETypeId, error }));
+                return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
             }
 
-            return empty();
+            const openTeiPromise = getCoreOrgUnitFn(querySingleResource)(
+                selectedOrgUnitId,
+                store.value.organisationUnits,
+            ).then(({ coreOrgUnit }) => openDataEntryForNewTeiBatchAsync({
+                foundation: formFoundation,
+                orgUnit: coreOrgUnit,
+                dataEntryId,
+                querySingleResource,
+                formValues,
+            }));
+
+            return from(openTeiPromise);
         }),
     );

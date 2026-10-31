@@ -17,12 +17,16 @@ export const useLifecycle = (
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     orgUnit?: OrgUnit,
     teiId?: string,
+    orgUnitId?: string,
 ) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const program = getTrackerProgramThrowIfNotFound(selectedScopeId);
+    const orgUnitReady = !orgUnitId || !!orgUnit;
     const ready =
-        useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) && !!orgUnit && dataEntryReadyRef.current === true;
+        useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) &&
+        orgUnitReady &&
+        dataEntryReadyRef.current === true;
     const searchTerms = useSelector(({ newPage }: any) => newPage.prepopulatedData);
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { firstStageMetaData } = useBuildFirstStageRegistration(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
@@ -38,6 +42,7 @@ export const useLifecycle = (
         program,
         trackedEntityInstanceAttributes,
         orgUnit,
+        orgUnitReady,
         formFoundation,
         teiId,
         searchTerms,
@@ -50,7 +55,7 @@ export const useLifecycle = (
         if (
             dataEntryReadyRef.current === false &&
             formValuesReadyRef.current === true &&
-            orgUnit &&
+            orgUnitReady &&
             scopeType === scopeTypes.TRACKER_PROGRAM &&
             formFoundation
         ) {
@@ -74,6 +79,7 @@ export const useLifecycle = (
         dataEntryId,
         selectedScopeId,
         orgUnit,
+        orgUnitReady,
         formValuesReadyRef,
         formValues,
         clientValues,

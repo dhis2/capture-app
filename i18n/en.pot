@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-26T15:39:14.871Z\n"
-"PO-Revision-Date: 2026-10-26T15:39:14.871Z\n"
+"POT-Creation-Date: 2026-10-31T16:58:03.216Z\n"
+"PO-Revision-Date: 2026-10-31T16:58:03.216Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -175,8 +175,14 @@ msgstr "Please provide a valid {{orgUnitLabel}}"
 msgid "Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}."
 
+msgid "Saving a new {{enrollmentLabel}} in {{programName}}."
+msgstr "Saving a new {{enrollmentLabel}} in {{programName}}."
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
+
+msgid "Saving a {{trackedEntityName}} in {{programName}}."
+msgstr "Saving a {{trackedEntityName}} in {{programName}}."
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -906,9 +912,6 @@ msgstr ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
 
-msgid "Choose an {{orgUnitLabel}} to start reporting"
-msgstr "Choose an {{orgUnitLabel}} to start reporting"
-
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
 
@@ -1067,6 +1070,9 @@ msgstr "Search form is missing. See log for details"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
+
+msgid "Choose an {{orgUnitLabel}} to start reporting"
+msgstr "Choose an {{orgUnitLabel}} to start reporting"
 
 msgid "The {{enrollmentLabel}} {{eventLabel}} data could not be found"
 msgstr "The {{enrollmentLabel}} {{eventLabel}} data could not be found"

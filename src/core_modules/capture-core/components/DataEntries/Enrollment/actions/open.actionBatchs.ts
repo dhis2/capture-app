@@ -69,7 +69,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     formFoundation,
 }: {
     program: TrackerProgram;
-    orgUnit: CoreOrgUnit;
+    orgUnit?: CoreOrgUnit;
     dataEntryId: string;
     extraActions?: Array<ReduxAction<any, any>>;
     extraDataEntryProps?: Array<any>;
@@ -90,7 +90,9 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         programStageName: stage.name,
     });
     const firstStageEvent = firstStage && fabricateFirstStageEvent(firstStage);
-    const defaultOrgUnit = { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path };
+    const defaultOrgUnit = orgUnit
+        ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+        : undefined;
 
     const dataEntryPropsToInclude = [
         ...buildEnrollmentDataEntryPropsToInclude(orgUnitLabel),

@@ -24,35 +24,31 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) 
             firstStage,
             formFoundation,
         }: any) => {
-            if (selectedOrgUnit) {
-                let trackerProgram: TrackerProgram | null = null;
-                try {
-                    trackerProgram = getTrackerProgramThrowIfNotFound(programId);
-                } catch (error) {
-                    log.error(
-                        errorCreator('tracker program for id not found')({ programId, error }),
-                    );
-                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
-                }
-
-                if (!trackerProgram) {
-                    return empty();
-                }
-
-                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync({
-                    program: trackerProgram,
-                    orgUnit: selectedOrgUnit,
-                    dataEntryId,
-                    formValues,
-                    clientValues,
-                    firstStage,
-                    programCategory,
-                    formFoundation,
-                });
-
-                return from(openEnrollmentPromise);
+            let trackerProgram: TrackerProgram | null = null;
+            try {
+                trackerProgram = getTrackerProgramThrowIfNotFound(programId);
+            } catch (error) {
+                log.error(
+                    errorCreator('tracker program for id not found')({ programId, error }),
+                );
+                return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
             }
 
-            return empty();
+            if (!trackerProgram) {
+                return empty();
+            }
+
+            const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync({
+                program: trackerProgram,
+                orgUnit: selectedOrgUnit,
+                dataEntryId,
+                formValues,
+                clientValues,
+                firstStage,
+                programCategory,
+                formFoundation,
+            });
+
+            return from(openEnrollmentPromise);
         }),
     );
