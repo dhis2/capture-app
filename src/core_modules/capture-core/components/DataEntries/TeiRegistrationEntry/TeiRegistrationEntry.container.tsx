@@ -100,6 +100,8 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
         (state: any) =>
             dataEntryHasChanges(state, dataEntryKey),
     );
+    const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) =>
+        dataEntriesFieldsValue[dataEntryKey]?.orgUnit);
 
     if (!teiRegistrationMetadata || teiRegistrationMetadata instanceof Enrollment) {
         return null;
@@ -114,6 +116,7 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
         <TeiRegistrationEntryComponent
             id={id}
             orgUnitId={orgUnitId}
+            orgUnitName={orgUnitFieldValue?.name}
             teiRegistrationMetadata={teiRegistrationMetadata}
             selectedScopeId={teiRegistrationMetadata.form?.id}
             ready={ready && !!teiRegistrationMetadata}

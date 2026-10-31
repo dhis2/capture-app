@@ -62,6 +62,7 @@ const EnrollmentRegistrationEntryPlain =
       onPostProcessErrorMessage,
       orgUnitId,
       orgUnit,
+      orgUnitName,
       teiId,
       isUserInteractionInProgress,
       isSavingInProgress,
@@ -126,7 +127,7 @@ const EnrollmentRegistrationEntryPlain =
                           {translatedTextWithStylesForProgram(
                               trackedEntityName.toLowerCase(),
                               programName,
-                              orgUnit?.name,
+                              orgUnitName,
                               enrollmentLabel,
                               teiId,
                           )}
