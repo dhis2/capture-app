@@ -233,7 +233,6 @@ const buildCompleteFieldSettingsFn = () => {
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.STATUS,
         }),
-        passOnFieldData: true,
     };
     return completeSettings;
 };
