@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-31T20:34:00.210Z\n"
-"PO-Revision-Date: 2026-10-31T20:34:00.210Z\n"
+"POT-Creation-Date: 2026-11-01T08:08:13.319Z\n"
+"PO-Revision-Date: 2026-11-01T08:08:13.319Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -143,6 +143,9 @@ msgstr "{{eventLabel}} - {{categoryDisplayName}}"
 
 msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
 msgstr "{{enrollmentLabel}} - {{categoryDisplayName}}"
+
+msgid "Registration"
+msgstr "Registration"
 
 msgid "Complete {{eventLabel}}"
 msgstr "Complete {{eventLabel}}"
@@ -333,9 +336,6 @@ msgstr "in"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Enroll in a program by selecting a program from the top bar."
-
-msgid "Registration"
-msgstr "Registration"
 
 msgid "An error has occurred. See log for details"
 msgstr "An error has occurred. See log for details"

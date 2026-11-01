@@ -229,9 +229,12 @@ const getOrgUnitSettings = () => {
         }),
         getPropName: () => 'orgUnit',
         getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel, props.programId),
-        getMeta: () => ({
+        // An existing tracked entity is already registered, so the org unit then only belongs to the enrollment
+        getMeta: (props: any) => ({
             placement: placements.TOP,
-            section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
+            section: props.teiId
+                ? sectionKeysForEnrollmentDataEntry.ENROLLMENT
+                : sectionKeysForEnrollmentDataEntry.REGISTRATION,
         }),
     };
 
@@ -463,6 +466,10 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         } = this.props;
 
         const dataEntrySections = {
+            [sectionKeysForEnrollmentDataEntry.REGISTRATION]: {
+                placement: placements.TOP,
+                name: i18n.t('Registration'),
+            },
             [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
                 name: capitalizeFirstLetter(enrollmentLabel),

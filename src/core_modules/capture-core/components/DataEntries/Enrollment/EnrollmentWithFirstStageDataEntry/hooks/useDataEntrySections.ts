@@ -10,6 +10,10 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
     const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
     return useMemo(
         () => ({
+            [sectionKeysForFirstStageDataEntry.REGISTRATION]: {
+                placement: placements.TOP,
+                name: i18n.t('Registration'),
+            },
             [sectionKeysForFirstStageDataEntry.ENROLLMENT]: {
                 placement: placements.TOP,
                 name: capitalizeFirstLetter(enrollmentLabel),
