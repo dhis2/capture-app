@@ -48,7 +48,7 @@ export const useBuildTeiPayload = ({
         return {
             attributes,
             trackedEntity: generateUID(),
-            orgUnit: convertClientToServer(dataEntryFieldValues.orgUnit, dataElementTypes.ORGANISATION_UNIT),
+            orgUnit: convertClientToServer(dataEntryFieldValues?.orgUnit, dataElementTypes.ORGANISATION_UNIT),
             trackedEntityType: trackedEntityTypeId,
             geometry: tetGeometry,
             enrollments: [],

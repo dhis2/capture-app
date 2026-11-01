@@ -155,7 +155,6 @@ type OrgUnit = {
 };
 
 type PreTeiDataEntryProps = {
-    orgUnitId: string;
     orgUnitFieldValue?: OrgUnit | null;
     trackedEntityTypeId: string;
     onUpdateField: (field: string, value: any) => void;

@@ -359,7 +359,7 @@ const getCategoryOptionsSettingsFn = () => ({
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
-        disabled: !props.orgUnitIdFieldValue,
+        disabled: !(props.firstStageMetaData ? props.stageOrgUnitIdFieldValue : props.orgUnitIdFieldValue),
         orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
@@ -394,6 +394,9 @@ const getAOCSettingsFn = () => ({
 
         return !shouldShowAOC;
     },
+    // The first stage event has its own org unit, auto generated events use the enrollment org unit
+    getOrgUnitId: (props: any) =>
+        (props.firstStageMetaData ? props.stageOrgUnitIdFieldValue : props.orgUnitIdFieldValue),
 });
 
 const getEnrollmentCategoryOptionsSettingsFn = () => ({
@@ -429,7 +432,6 @@ type FinalTeiDataEntryProps = {
     programId: string;
     id: string;
     orgUnitId: string;
-    orgUnit: OrgUnit;
     onUpdateDataEntryField: (...args: any[]) => any;
     onUpdateFormFieldAsync: (...args: any[]) => any;
     onUpdateFormField: (...args: any[]) => any;
@@ -611,7 +613,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateFormField={this.handleUpdateField}
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
-                orgUnit={orgUnit}
                 orgUnitId={orgUnit?.id}
                 orgUnitIdFieldValue={orgUnitFieldValue?.id}
                 stageOrgUnitIdFieldValue={stageOrgUnitFieldValue?.id}

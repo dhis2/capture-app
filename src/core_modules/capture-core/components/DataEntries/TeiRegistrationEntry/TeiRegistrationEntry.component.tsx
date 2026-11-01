@@ -6,7 +6,6 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
-import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
@@ -51,13 +50,13 @@ const TeiRegistrationEntryPlain =
       isSavingInProgress,
       onCancel,
       hideProgramSelectionMessage,
+      orgUnitId,
       orgUnitName,
       ...rest
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-      const orgUnitId = useCurrentOrgUnitId();
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -73,8 +72,6 @@ const TeiRegistrationEntryPlain =
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
                       <TrackedEntityInstanceDataEntry
-                          // @ts-expect-error - keeping original functionality as before ts rewrite
-                          orgUnitId={orgUnitId}
                           formFoundation={formFoundation}
                           trackedEntityTypeId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}
