@@ -55,14 +55,6 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
             programId: programId || undefined,
         };
     },
-    [registrationSectionActionTypes.ORG_UNIT_CHANGE]: (state, action) => {
-        const { orgUnit, resetProgramSelection } = action.payload;
-        return {
-            ...state,
-            orgUnit,
-            programId: resetProgramSelection ? null : state.programId,
-        };
-    },
     [registrationSectionActionTypes.PROGRAM_FILTER_CLEAR]: state => ({
         ...state,
         orgUnit: null,
@@ -96,14 +88,6 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
         return {
             ...state,
             programId: programId || undefined,
-        };
-    },
-    [registrationSectionActionTypesRelationshipsWidget.ORG_UNIT_CHANGE]: (state, action) => {
-        const { orgUnit, resetProgramSelection } = action.payload;
-        return {
-            ...state,
-            orgUnit,
-            programId: resetProgramSelection ? null : state.programId,
         };
     },
     [registrationSectionActionTypesRelationshipsWidget.PROGRAM_FILTER_CLEAR]: state => ({

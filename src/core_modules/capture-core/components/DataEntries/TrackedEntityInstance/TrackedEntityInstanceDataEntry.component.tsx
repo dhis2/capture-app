@@ -27,7 +27,7 @@ import type { TeiRegistration, RenderFoundation } from '../../../metaData';
 const customLabels = [LabelKeys.orgUnitSingular] as const;
 
 const dataEntrySectionNames = {
-    BASICINFO: 'BASICINFO',
+    REGISTRATION: 'REGISTRATION',
 };
 
 const overrideMessagePropNames = {
@@ -98,7 +98,7 @@ const getOrgUnitSettings = () => {
         getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
         getMeta: () => ({
             placement: placements.TOP,
-            section: dataEntrySectionNames.BASICINFO,
+            section: dataEntrySectionNames.REGISTRATION,
         }),
     };
 
@@ -119,9 +119,9 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
     render() {
         const { teiRegistrationMetadata, ...passOnProps } = this.props;
         const dataEntrySections = {
-            [dataEntrySectionNames.BASICINFO]: {
+            [dataEntrySectionNames.REGISTRATION]: {
                 placement: placements.TOP,
-                name: i18n.t('Basic info'),
+                name: i18n.t('Registration'),
             },
         };
 

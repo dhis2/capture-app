@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-31T19:46:49.645Z\n"
-"PO-Revision-Date: 2026-10-31T19:46:49.645Z\n"
+"POT-Creation-Date: 2026-10-31T20:34:00.210Z\n"
+"PO-Revision-Date: 2026-10-31T20:34:00.210Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -333,6 +333,9 @@ msgstr "in"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Enroll in a program by selecting a program from the top bar."
+
+msgid "Registration"
+msgstr "Registration"
 
 msgid "An error has occurred. See log for details"
 msgstr "An error has occurred. See log for details"
@@ -959,9 +962,6 @@ msgstr "Show all"
 
 msgid "Program"
 msgstr "Program"
-
-msgid "Registration"
-msgstr "Registration"
 
 msgid "Search results"
 msgstr "Search results"
@@ -2293,9 +2293,6 @@ msgstr "Could not add working list"
 
 msgid "Could not delete working list"
 msgstr "Could not delete working list"
-
-msgid "Search failed. Please try again."
-msgstr "Search failed. Please try again."
 
 msgid "Error saving tracked entity instance"
 msgstr "Error saving tracked entity instance"
