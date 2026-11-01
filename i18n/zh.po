@@ -1115,7 +1115,7 @@ msgid "This tracked entity is deactivated"
 msgstr "该跟踪实体 已停用"
 
 msgid "You only have view access to the selected category combination"
-msgstr ""
+msgstr "您对所选的类别组合仅具有查看权限"
 
 msgid "Add {{relationshipLabel}}"
 msgstr "添加{{relationshipLabel}}"
@@ -1379,7 +1379,7 @@ msgid "An error occurred while transferring ownership"
 msgstr "转移所有权时发生错误"
 
 msgid "Edit {{label}}"
-msgstr ""
+msgstr "编辑{{label}}"
 
 msgid "Existing dates for auto-generated {{eventsLabel}} will not be updated."
 msgstr "自动生成的{{eventsLabel}} 的现有日期将不会更新。"
