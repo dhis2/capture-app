@@ -80,6 +80,7 @@ type ContainerProps = {
     ready: boolean;
     orgUnitId: string;
     orgUnit: any;
+    orgUnitName?: string;
     onCancel: () => void;
     isUserInteractionInProgress: boolean;
     isSavingInProgress: boolean;

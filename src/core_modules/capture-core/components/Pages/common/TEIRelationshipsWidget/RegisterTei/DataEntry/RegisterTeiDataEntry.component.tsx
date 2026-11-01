@@ -6,16 +6,11 @@ import type { Props } from './RegisterTeiDataEntry.types';
 export class RegisterTeiDataEntryComponent extends React.Component<Props> {
     render() {
         const {
-            showDataEntry,
             programId,
             onSaveWithoutEnrollment,
             onSaveWithEnrollment,
             ...passOnProps
         } = this.props;
-
-        if (!showDataEntry) {
-            return null;
-        }
 
         if (programId) {
             return (

@@ -4,8 +4,10 @@ import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
+import { useTrackedEntityOrgUnitId } from './hooks/useTrackedEntityOrgUnitId';
 import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     useBuildEnrollmentPayload,
 } from './hooks/useBuildEnrollmentPayload';
@@ -24,6 +26,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
 }) => {
     const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const trackedEntityOrgUnitId = useTrackedEntityOrgUnitId(teiId);
     const {
         ready,
         skipDuplicateCheck,
@@ -31,12 +34,16 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         formId,
         enrollmentMetadata,
         formFoundation,
-    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId);
+    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId, orgUnitId);
+    const dataEntryItemId = useSelector(({ dataEntries }: any) => dataEntries[id]?.itemId);
+    const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
+    const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) =>
+        dataEntriesFieldsValue[dataEntryKey]?.orgUnit);
     const { buildTeiWithEnrollment } = useBuildEnrollmentPayload({
         programId: selectedScopeId,
         dataEntryId: id,
-        orgUnitId,
         teiId,
+        trackedEntityOrgUnitId,
         trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id || undefined,
     });
 
@@ -83,6 +90,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             skipDuplicateCheck={skipDuplicateCheck}
             orgUnitId={orgUnitId}
             orgUnit={orgUnit}
+            orgUnitName={orgUnitFieldValue?.name}
             isUserInteractionInProgress={isUserInteractionInProgress}
             isSavingInProgress={isSavingInProgress}
             onSave={onSaveWithEnrollment}

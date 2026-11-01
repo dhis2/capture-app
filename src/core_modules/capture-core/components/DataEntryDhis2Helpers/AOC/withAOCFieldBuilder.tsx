@@ -16,7 +16,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         [isLoading, programCategory]);
         const categories = useGroupedCategoryOptions(
             programCategories,
-            orgUnitIdFieldValue ?? orgUnitId,
+            settings?.getOrgUnitId?.(props) ?? orgUnitIdFieldValue ?? orgUnitId,
             !hideAOC,
         );
 

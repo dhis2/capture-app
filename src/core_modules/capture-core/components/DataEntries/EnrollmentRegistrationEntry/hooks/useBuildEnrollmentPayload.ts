@@ -34,8 +34,8 @@ type DataEntryReduxConverterProps = {
     programId: string;
     dataEntryId: string;
     itemId?: string;
-    orgUnitId: string;
     teiId?: string;
+    trackedEntityOrgUnitId?: string;
     trackedEntityTypeId?: string;
 };
 
@@ -71,8 +71,8 @@ export const useBuildEnrollmentPayload = ({
     programId,
     dataEntryId,
     itemId = 'newEnrollment',
-    orgUnitId,
     teiId,
+    trackedEntityOrgUnitId,
     trackedEntityTypeId,
 }: DataEntryReduxConverterProps) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
@@ -101,7 +101,13 @@ export const useBuildEnrollmentPayload = ({
             dataEntryFieldsMeta,
             formFoundation,
         );
-        const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues as any;
+        const {
+            enrolledAt,
+            occurredAt,
+            assignee,
+            geometry: enrollmentGeometry,
+            orgUnit: enrollmentOrgUnitId,
+        } = serverValuesForMainValues as any;
 
         const { stages, enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(programId);
 
@@ -118,7 +124,6 @@ export const useBuildEnrollmentPayload = ({
         const firstStageDuringRegistrationEvent = deriveFirstStageDuringRegistrationEvent({
             firstStageMetadata: firstStage,
             programId,
-            orgUnitId,
             currentEventValues,
             fieldsValue: dataEntryFieldValues,
             attributeCategoryOptions,
@@ -145,7 +150,7 @@ export const useBuildEnrollmentPayload = ({
             enrolledAt,
             occurredAt,
             programId,
-            orgUnitId,
+            orgUnitId: enrollmentOrgUnitId,
             attributeCategoryOptions,
         });
 
@@ -165,7 +170,7 @@ export const useBuildEnrollmentPayload = ({
         const enrollment = {
             program: programId,
             status: 'ACTIVE',
-            orgUnit: orgUnitId,
+            orgUnit: enrollmentOrgUnitId,
             occurredAt,
             enrolledAt,
             attributes,
@@ -180,7 +185,7 @@ export const useBuildEnrollmentPayload = ({
         return {
             teiWithEnrollment: {
                 trackedEntity: teiId || generateUID(),
-                orgUnit: orgUnitId,
+                orgUnit: (teiId && trackedEntityOrgUnitId) || enrollmentOrgUnitId,
                 trackedEntityType: trackedEntityTypeId || undefined,
                 attributes,
                 geometry: tetGeometry,

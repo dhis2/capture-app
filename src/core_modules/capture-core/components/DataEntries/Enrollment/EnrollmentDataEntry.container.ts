@@ -1,41 +1,47 @@
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { connect } from 'react-redux';
 import type { ReduxAction } from 'capture-core-utils/types';
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+
+const mapStateToProps = (state: any, props: { id: string }) => {
+    const itemId = state.dataEntries[props.id]?.itemId;
+    const dataEntryKey = getDataEntryKey(props.id, itemId);
+    return {
+        orgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit,
+        stageOrgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.stageOrgUnit,
+    };
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
     onUpdateDataEntryField: (
         innerAction: ReduxAction<any, any>,
         data: any,
         programId: string,
-        orgUnit: OrgUnit,
         stage: ProgramStage,
         formFoundation: RenderFoundation,
         onGetValidationContext: () => any,
     ) => {
         dispatch(
-            updateDataEntryFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext),
+            updateDataEntryFieldBatch(innerAction, programId, stage, formFoundation, onGetValidationContext),
         );
     },
     onUpdateField: (
         innerAction: ReduxAction<any, any>,
         programId: string,
-        orgUnit: OrgUnit,
         stage: ProgramStage,
         formFoundation: RenderFoundation,
         onGetValidationContext: () => any,
     ) => {
-        dispatch(updateFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext));
+        dispatch(updateFieldBatch(innerAction, programId, stage, formFoundation, onGetValidationContext));
     },
     onStartAsyncUpdateField: (
         innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
         programId: string,
-        orgUnit: OrgUnit,
         stage: ProgramStage,
         formFoundation: RenderFoundation,
         onGetValidationContext: () => any,
@@ -46,7 +52,6 @@ const mapDispatchToProps = (dispatch: any) => ({
                 dataEntryId,
                 itemId,
                 programId,
-                orgUnit,
                 stage,
                 formFoundation,
                 onGetValidationContext,
@@ -57,4 +62,4 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
 });
 
-export const EnrollmentDataEntry = connect(() => ({}), mapDispatchToProps)(EnrollmentDataEntryComponent);
+export const EnrollmentDataEntry = connect(mapStateToProps, mapDispatchToProps)(EnrollmentDataEntryComponent);

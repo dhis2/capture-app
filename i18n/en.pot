@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-05T10:05:05.847Z\n"
-"PO-Revision-Date: 2026-10-05T10:05:05.847Z\n"
+"POT-Creation-Date: 2026-11-01T08:08:13.319Z\n"
+"PO-Revision-Date: 2026-11-01T08:08:13.319Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -135,11 +135,17 @@ msgstr "Area"
 msgid "Coordinate"
 msgstr "Coordinate"
 
+msgid "Choose an {{orgUnitLabel}} to see the available options"
+msgstr "Choose an {{orgUnitLabel}} to see the available options"
+
 msgid "{{eventLabel}} - {{categoryDisplayName}}"
 msgstr "{{eventLabel}} - {{categoryDisplayName}}"
 
 msgid "{{enrollmentLabel}} - {{categoryDisplayName}}"
 msgstr "{{enrollmentLabel}} - {{categoryDisplayName}}"
+
+msgid "Registration"
+msgstr "Registration"
 
 msgid "Complete {{eventLabel}}"
 msgstr "Complete {{eventLabel}}"
@@ -169,11 +175,23 @@ msgstr "{{ stageName }} - Status"
 msgid "A date in the future is not allowed"
 msgstr "A date in the future is not allowed"
 
+msgid "Please provide a valid {{orgUnitLabel}}"
+msgstr "Please provide a valid {{orgUnitLabel}}"
+
+msgid "The selected {{orgUnitLabel}} can't collect data for {{programName}}"
+msgstr "The selected {{orgUnitLabel}} can't collect data for {{programName}}"
+
 msgid "Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}."
 
+msgid "Saving a new {{enrollmentLabel}} in {{programName}}."
+msgstr "Saving a new {{enrollmentLabel}} in {{programName}}."
+
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
+
+msgid "Saving a {{trackedEntityName}} in {{programName}}."
+msgstr "Saving a {{trackedEntityName}} in {{programName}}."
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -240,9 +258,6 @@ msgstr "Completed"
 
 msgid "Please add or cancel the {{noteLabel}} before saving the {{eventLabel}}"
 msgstr "Please add or cancel the {{noteLabel}} before saving the {{eventLabel}}"
-
-msgid "Please provide a valid {{orgUnitLabel}}"
-msgstr "Please provide a valid {{orgUnitLabel}}"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -906,9 +921,6 @@ msgstr ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
 
-msgid "Choose an {{orgUnitLabel}} to start reporting"
-msgstr "Choose an {{orgUnitLabel}} to start reporting"
-
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
 
@@ -950,9 +962,6 @@ msgstr "Show all"
 
 msgid "Program"
 msgstr "Program"
-
-msgid "Registration"
-msgstr "Registration"
 
 msgid "Search results"
 msgstr "Search results"
@@ -1067,6 +1076,9 @@ msgstr "Search form is missing. See log for details"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
+
+msgid "Choose an {{orgUnitLabel}} to start reporting"
+msgstr "Choose an {{orgUnitLabel}} to start reporting"
 
 msgid "The {{enrollmentLabel}} {{eventLabel}} data could not be found"
 msgstr "The {{enrollmentLabel}} {{eventLabel}} data could not be found"
@@ -2281,9 +2293,6 @@ msgstr "Could not add working list"
 
 msgid "Could not delete working list"
 msgstr "Could not delete working list"
-
-msgid "Search failed. Please try again."
-msgstr "Search failed. Please try again."
 
 msgid "Error saving tracked entity instance"
 msgstr "Error saving tracked entity instance"

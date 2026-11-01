@@ -6,7 +6,7 @@ import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type StaticPatternValues = {
-    orgUnitCode: string;
+    orgUnitCode?: string;
 };
 
 type CacheItem = {
