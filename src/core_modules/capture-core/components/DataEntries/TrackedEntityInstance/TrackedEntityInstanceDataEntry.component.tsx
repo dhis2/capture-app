@@ -149,8 +149,15 @@ class PreTeiDataEntryPure extends React.PureComponent<Record<string, unknown>> {
     }
 }
 
+type OrgUnit = {
+    id: string;
+    name: string;
+    path: string;
+};
+
 type PreTeiDataEntryProps = {
     orgUnitId: string;
+    orgUnitFieldValue?: OrgUnit | null;
     trackedEntityTypeId: string;
     onUpdateField: (field: string, value: any) => void;
     onStartAsyncUpdateField: (field: string, value: any) => void;
@@ -164,10 +171,10 @@ type PreTeiDataEntryProps = {
 
 export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnitId, onGetUnsavedAttributeValues, trackedEntityTypeId } = this.props;
+        const { orgUnitFieldValue, onGetUnsavedAttributeValues, trackedEntityTypeId } = this.props;
         return {
             trackedEntityTypeId,
-            orgUnitId,
+            orgUnitId: orgUnitFieldValue?.id,
             onGetUnsavedAttributeValues,
         };
     }
@@ -179,6 +186,7 @@ export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
             onStartAsyncUpdateField,
             teiRegistrationMetadata,
             onGetUnsavedAttributeValues,
+            orgUnitFieldValue,
             ...passOnProps } = this.props;
 
         if (!teiRegistrationMetadata) {

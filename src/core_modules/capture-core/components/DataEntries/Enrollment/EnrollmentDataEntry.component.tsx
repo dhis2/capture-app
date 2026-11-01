@@ -53,7 +53,6 @@ import {
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
-import type { AutoSelectOrgUnit } from '../../../dataQueries';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
@@ -514,10 +513,16 @@ const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(I
 const CustomLabelsHOC = withCustomLabels(customLabels)(EnrollmentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(CustomLabelsHOC);
 
+type OrgUnitFieldValue = {
+    id: string;
+    name: string;
+    path: string;
+};
+
 type PreEnrollmentDataEntryProps = {
     programId: string;
     orgUnit?: OrgUnit;
-    orgUnitFieldValue?: AutoSelectOrgUnit | null;
+    orgUnitFieldValue?: OrgUnitFieldValue | null;
     onUpdateField: (...args: any[]) => any;
     onUpdateDataEntryField: (...args: any[]) => any;
     onStartAsyncUpdateField: (...args: any[]) => any;
@@ -542,10 +547,10 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
 
 export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
+        const { orgUnitFieldValue, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
             programId,
-            orgUnitId: orgUnit?.id,
+            orgUnitId: orgUnitFieldValue?.id,
             trackedEntityInstanceId: teiId,
             trackedEntityTypeId: this.props.enrollmentMetadata.trackedEntityType.id,
             onGetUnsavedAttributeValues,

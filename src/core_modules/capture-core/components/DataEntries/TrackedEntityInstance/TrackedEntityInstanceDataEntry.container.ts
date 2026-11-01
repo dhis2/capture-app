@@ -4,7 +4,13 @@ import { updateFieldBatch, asyncUpdateSuccessBatch } from './actions/tei.actionB
 import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
 import { PreTeiDataEntry } from './TrackedEntityInstanceDataEntry.component';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: any, props: { id: string }) => {
+    const itemId = state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    const dataEntryKey = `${props.id}-${itemId}`;
+    return {
+        orgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit,
+    };
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
     onUpdateField: (
