@@ -10,6 +10,7 @@ const mapStateToProps = (state: any, props: { id: string }) => {
     const dataEntryKey = `${props.id}-${itemId}`;
     return {
         orgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit,
+        stageOrgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.stageOrgUnit,
     };
 };
 

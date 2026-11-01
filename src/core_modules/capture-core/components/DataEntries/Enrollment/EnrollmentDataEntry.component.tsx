@@ -303,7 +303,7 @@ const getGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                orgUnitId: props.orgUnit?.id,
+                orgUnitId: props.orgUnitIdFieldValue,
             });
         }
 
@@ -314,7 +314,7 @@ const getGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            orgUnitId: props.orgUnit?.id,
+            orgUnitId: props.orgUnitIdFieldValue,
         });
     },
     getPropName: () => 'geometry',
@@ -446,6 +446,7 @@ type FinalTeiDataEntryProps = {
     formFoundation: RenderFoundation;
     enrollmentLabel: string;
     orgUnitIdFieldValue?: string;
+    stageOrgUnitIdFieldValue?: string;
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -461,6 +462,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             programId,
             enrollmentLabel,
             orgUnitIdFieldValue,
+            stageOrgUnitIdFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -486,6 +488,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
                     programId={programId}
+                    stageOrgUnitIdFieldValue={stageOrgUnitIdFieldValue}
                     firstStageMetaData={firstStageMetaData}
                     relatedStageActionsOptions={relatedStageActionsOptions}
                 />
@@ -523,6 +526,7 @@ type PreEnrollmentDataEntryProps = {
     programId: string;
     orgUnit?: OrgUnit;
     orgUnitFieldValue?: OrgUnitFieldValue | null;
+    stageOrgUnitFieldValue?: OrgUnitFieldValue | null;
     onUpdateField: (...args: any[]) => any;
     onUpdateDataEntryField: (...args: any[]) => any;
     onStartAsyncUpdateField: (...args: any[]) => any;
@@ -598,6 +602,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onGetUnsavedAttributeValues,
             orgUnit,
             orgUnitFieldValue,
+            stageOrgUnitFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -610,6 +615,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 orgUnit={orgUnit}
                 orgUnitId={orgUnit?.id}
                 orgUnitIdFieldValue={orgUnitFieldValue?.id}
+                stageOrgUnitIdFieldValue={stageOrgUnitFieldValue?.id}
                 {...passOnProps}
             />
         );
