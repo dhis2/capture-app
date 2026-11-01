@@ -33,7 +33,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         enrollmentMetadata,
         formFoundation,
     } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId, orgUnitId);
-    const dataEntryItemId = useSelector(({ dataEntries }: any) => dataEntries[id] && dataEntries[id].itemId);
+    const dataEntryItemId = useSelector(({ dataEntries }: any) => dataEntries[id]?.itemId);
     const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
     const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) =>
         dataEntriesFieldsValue[dataEntryKey]?.orgUnit);

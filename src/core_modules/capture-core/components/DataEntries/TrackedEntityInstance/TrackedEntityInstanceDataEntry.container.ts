@@ -5,7 +5,7 @@ import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
 import { PreTeiDataEntry } from './TrackedEntityInstanceDataEntry.component';
 
 const mapStateToProps = (state: any, props: { id: string }) => {
-    const itemId = state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    const itemId = state.dataEntries[props.id]?.itemId;
     const dataEntryKey = `${props.id}-${itemId}`;
     return {
         orgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit,

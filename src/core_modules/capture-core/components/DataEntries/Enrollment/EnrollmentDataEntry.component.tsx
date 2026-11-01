@@ -207,8 +207,7 @@ const getOrgUnitSettings = () => {
                     withLabel({
                         onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                         onGetCustomFieldLabeClass: (props: any) =>
-                            `${props.fieldOptions &&
-                            props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                            `${props.fieldOptions?.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
                     })(
                         withDisplayMessages()(
                             withInternalChangeHandler()(
@@ -222,7 +221,7 @@ const getOrgUnitSettings = () => {
     const orgUnitSettings = {
         getComponent: () => orgUnitComponent,
         getComponentProps: (props: any) => createComponentProps(props, {
-            width: props && props.formHorizontal ? 150 : 350,
+            width: props?.formHorizontal ? 150 : 350,
             label: capitalizeFirstLetter(props.orgUnitLabel),
             required: true,
         }),

@@ -76,10 +76,10 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     const currentScopeId: string =
         useSelector(({ currentSelections }: any) => currentSelections.programId || currentSelections.trackedEntityTypeId);
     const { scopeType } = useScopeInfo(currentScopeId);
-    const [selectedScopeId, setScopeId] = useState(currentScopeId);
+    const [selectedScopeId, setSelectedScopeId] = useState(currentScopeId);
 
     useEffect(() => {
-        setScopeId(currentScopeId);
+        setSelectedScopeId(currentScopeId);
     }, [scopeType, currentScopeId]);
 
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
@@ -126,7 +126,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
                 showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
                 handleMainPageNavigation={handleMainPageNavigation}
                 selectedScopeId={selectedScopeId}
-                setScopeId={setScopeId}
+                setScopeId={setSelectedScopeId}
                 programCategorySelectionIncomplete={programSelectionIsIncomplete}
                 missingCategoriesInProgramSelection={missingCategories}
                 categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
