@@ -1,10 +1,9 @@
-import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
-import { convertLocalToIsoCalendar } from '../utils/converters/date';
+import { convertLocalToIsoCalendar, convertLocalToIsoDate } from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string;
@@ -17,23 +16,11 @@ type RangeValue = {
 };
 
 function convertDateTime(formValue: DateTimeValue): string | null {
-    const editedDate = formValue.date;
-    const editedTime = formValue.time;
+    const parsedTime = parseTime(formValue.time);
+    const isoDate = convertLocalToIsoDate(formValue.date);
+    if (!parsedTime.isValid || !isoDate) return null;
 
-    const parsedTime = parseTime(editedTime);
-    if (!parsedTime.isValid) return null;
-    const momentTime = parsedTime.momentTime;
-    const hours = momentTime.hour();
-    const minutes = momentTime.minute();
-
-    const isoDate = convertDate(editedDate);
-    if (!isoDate) return null;
-
-    const momentDateTime = moment(isoDate);
-    if (!momentDateTime.isValid()) return null;
-    momentDateTime.hour(hours);
-    momentDateTime.minute(minutes);
-    return momentDateTime.toISOString();
+    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm:ss.SSS')}`;
 }
 
 function convertDate(dateValue: string) {

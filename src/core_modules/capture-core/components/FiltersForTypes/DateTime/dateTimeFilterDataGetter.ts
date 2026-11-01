@@ -1,6 +1,6 @@
-import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
-import { padWithZeros } from 'capture-core-utils/date';
-import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import { formatMomentEn } from 'capture-core-utils/date';
+import { parseTime } from 'capture-core-utils/parsers';
+import { convertLocalToIsoDate } from '../../../utils/converters/date';
 import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
@@ -13,26 +13,16 @@ import type {
     Value,
 } from './dateTime.types';
 
-function localCalendarDateToIsoDate(localDate: string): string | null {
-    try {
-        const calendar = systemSettingsStore.get().calendar;
-        const { year, month, day } = convertToIso8601(localDate, calendar as any);
-        return `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
-    } catch {
-        return null;
-    }
-}
-
 function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): string | null {
     if (!dateTimeValue.date || dateTimeValue.isValid === false) {
         return null;
     }
-    const isoDate = localCalendarDateToIsoDate(dateTimeValue.date);
-    if (!isoDate) {
+    const isoDate = convertLocalToIsoDate(dateTimeValue.date);
+    const parsedTime = parseTime(dateTimeValue.time || defaultTime);
+    if (!isoDate || !parsedTime.isValid) {
         return null;
     }
-    const time = dateTimeValue.time || defaultTime;
-    return `${isoDate}T${time}:00`;
+    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm:ss.SSS')}`;
 }
 
 export function getDateTimeFilterData(value: Value): DateTimeFilter | null {

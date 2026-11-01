@@ -5,7 +5,7 @@ import { PreviewImage } from 'capture-ui';
 import { formatMomentEn } from 'capture-core-utils/date';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
-import { convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertDateTimeForDisplay } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
@@ -60,7 +60,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.DATE]: convertDateForView,
-    [dataElementTypes.DATETIME]: convertDateTimeForView,
+    [dataElementTypes.DATETIME]: convertDateTimeForDisplay,
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,

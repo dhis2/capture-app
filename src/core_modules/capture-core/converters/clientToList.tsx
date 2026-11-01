@@ -2,22 +2,15 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Tag } from '@dhis2/ui';
 import { PreviewImage } from 'capture-ui';
-import { formatMomentEn } from 'capture-core-utils/date';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
-import { convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertDateTimeForDisplay } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates, PolygonCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
-}
-
-function convertDateTimeForListDisplay(rawValue: string): string {
-    const timeString = formatMomentEn(rawValue, 'HH:mm');
-    const localDate = convertIsoToLocalCalendar(rawValue);
-    return `${localDate} ${timeString}`;
 }
 
 type FileClientValue = {
@@ -97,7 +90,7 @@ const valueConvertersForType = {
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.DATE]: convertDateForListDisplay,
     [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
-    [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
+    [dataElementTypes.DATETIME]: convertDateTimeForDisplay,
     [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
