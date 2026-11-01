@@ -62,7 +62,7 @@ const runRulesOnEnrollmentUpdate = async ({
     const attributeValues = convertedValues[Section.groups.ENROLLMENT];
     const currentEventValues = convertedValues[Section.groups.EVENT] || {};
     const currentClientMainData = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation) || {};
-    const { currentEnrollmentValues, currentEventMainData } = splitCurrentClientMainData(state, currentClientMainData);
+    const { currentEnrollmentValues, currentEventMainData } = splitCurrentClientMainData(stage, currentClientMainData);
     const currentEvent = stage
         ? {
             ...currentEventValues,

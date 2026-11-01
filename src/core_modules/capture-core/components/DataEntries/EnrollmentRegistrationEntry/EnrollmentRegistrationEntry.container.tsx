@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { useLifecycle } from './hooks';
+import { useTrackedEntityOrgUnitId } from './hooks/useTrackedEntityOrgUnitId';
 import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
@@ -25,6 +26,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
 }) => {
     const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const trackedEntityOrgUnitId = useTrackedEntityOrgUnitId(teiId);
     const {
         ready,
         skipDuplicateCheck,
@@ -41,6 +43,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         programId: selectedScopeId,
         dataEntryId: id,
         teiId,
+        trackedEntityOrgUnitId,
         trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id || undefined,
     });
 

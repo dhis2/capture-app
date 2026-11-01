@@ -35,6 +35,7 @@ type DataEntryReduxConverterProps = {
     dataEntryId: string;
     itemId?: string;
     teiId?: string;
+    trackedEntityOrgUnitId?: string;
     trackedEntityTypeId?: string;
 };
 
@@ -71,6 +72,7 @@ export const useBuildEnrollmentPayload = ({
     dataEntryId,
     itemId = 'newEnrollment',
     teiId,
+    trackedEntityOrgUnitId,
     trackedEntityTypeId,
 }: DataEntryReduxConverterProps) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
@@ -183,7 +185,7 @@ export const useBuildEnrollmentPayload = ({
         return {
             teiWithEnrollment: {
                 trackedEntity: teiId || generateUID(),
-                orgUnit: enrollmentOrgUnitId,
+                orgUnit: (teiId && trackedEntityOrgUnitId) || enrollmentOrgUnitId,
                 trackedEntityType: trackedEntityTypeId || undefined,
                 attributes,
                 geometry: tetGeometry,
