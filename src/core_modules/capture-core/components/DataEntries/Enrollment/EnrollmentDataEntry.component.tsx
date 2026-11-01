@@ -553,11 +553,10 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     }
 
     handleUpdateField = (...args: any[]) => {
-        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        const { programId, firstStageMetaData, formFoundation } = this.props;
         this.props.onUpdateField(
             ...args,
             programId,
-            orgUnit,
             firstStageMetaData?.stage,
             formFoundation,
             this.getValidationContext,
@@ -565,11 +564,10 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     };
 
     handleUpdateDataEntryField = (...args: any[]) => {
-        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        const { programId, firstStageMetaData, formFoundation } = this.props;
         this.props.onUpdateDataEntryField(
             ...args,
             programId,
-            orgUnit,
             firstStageMetaData?.stage,
             formFoundation,
             this.getValidationContext,
@@ -577,11 +575,10 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     }
 
     handleStartAsyncUpdateField = (...args: any[]) => {
-        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        const { programId, firstStageMetaData, formFoundation } = this.props;
         this.props.onStartAsyncUpdateField(
             ...args,
             programId,
-            orgUnit,
             firstStageMetaData?.stage,
             formFoundation,
             this.getValidationContext,

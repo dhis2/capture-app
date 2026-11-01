@@ -1,4 +1,3 @@
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
@@ -11,7 +10,6 @@ export const startRunRulesOnUpdateForNewEnrollment = ({
     payload,
     uid,
     programId,
-    orgUnit,
     stage,
     formFoundation,
     onGetValidationContext,
@@ -19,7 +17,6 @@ export const startRunRulesOnUpdateForNewEnrollment = ({
     payload: any;
     uid: string;
     programId: string;
-    orgUnit: OrgUnit;
     stage?: ProgramStage;
     formFoundation: RenderFoundation;
     onGetValidationContext: () => any;
@@ -28,7 +25,6 @@ export const startRunRulesOnUpdateForNewEnrollment = ({
         innerPayload: payload,
         uid,
         programId,
-        orgUnit,
         stage,
         formFoundation,
         onGetValidationContext,

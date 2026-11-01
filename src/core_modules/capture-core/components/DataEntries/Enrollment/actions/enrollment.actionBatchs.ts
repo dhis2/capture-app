@@ -43,7 +43,7 @@ export const runRulesOnUpdateFieldBatch = async ({
     formId: string;
     dataEntryId: string;
     itemId: string;
-    orgUnit: OrgUnit;
+    orgUnit: OrgUnit | null;
     enrollmentData?: Enrollment;
     attributeValues?: TEIValues;
     extraActions: Array<ReduxAction<any, any>>;
@@ -82,7 +82,6 @@ export const runRulesOnUpdateFieldBatch = async ({
 export const updateDataEntryFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
-    orgUnit: OrgUnit,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
@@ -98,7 +97,6 @@ export const updateDataEntryFieldBatch = (
                 payload: innerAction.payload,
                 uid,
                 programId,
-                orgUnit,
                 stage,
                 formFoundation,
                 onGetValidationContext,
@@ -111,7 +109,6 @@ export const updateDataEntryFieldBatch = (
 export const updateFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
-    orgUnit: OrgUnit,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
@@ -127,7 +124,6 @@ export const updateFieldBatch = (
                 payload: innerAction.payload,
                 uid,
                 programId,
-                orgUnit,
                 stage,
                 formFoundation,
                 onGetValidationContext,
@@ -142,7 +138,6 @@ export const asyncUpdateSuccessBatch = (
     dataEntryId: string,
     itemId: string,
     programId: string,
-    orgUnit: OrgUnit,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
@@ -157,7 +152,6 @@ export const asyncUpdateSuccessBatch = (
                 payload: { ...innerAction.payload, dataEntryId, itemId },
                 uid,
                 programId,
-                orgUnit,
                 stage,
                 formFoundation,
                 onGetValidationContext,
