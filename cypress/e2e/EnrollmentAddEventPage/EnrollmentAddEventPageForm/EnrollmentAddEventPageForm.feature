@@ -4,6 +4,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 0
+    And the new event form is loaded
     When you type 2021-10-15 in the input number 0
     And you click the checkbox number 0
     And you click the checkbox number 2
@@ -16,6 +17,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the new event form is loaded
     When you type 2021-10-15 in the input number 0
     And you type 13 in the input number 1
     And the user selects Positive
@@ -30,7 +32,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 0
-    And the form is finished loading
+    And the new event form is loaded
     When you click the button to Save without completing without post request
     Then the input should throw an error with error-message A value is required
 
@@ -38,6 +40,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the new event form is loaded
     When you focus and blur a required field
     Then the input should throw an error with error-message A value is required
 
@@ -45,6 +48,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
     And you click the create new button number 2
+    And the new event form is loaded
     And you type x in the input number 1
     Then the input should throw an error with error-message Please provide a positive integer
 
@@ -59,6 +63,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Then there should be a modal popping up
     When you choose option No, cancel in the modal
     Then you will be navigate to page #/enrollment?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&teiId=S3JjTA4QMNe
+    And the new event should be sent to the server successfully
 
   Scenario: User should be asked to create new event after completing a stage and choose to continue
     Given you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=CWaAcQYKVpq&teiId=S3JjTA4QMNe
@@ -71,13 +76,15 @@ Feature: User interacts with the Enrollment New Event Workspace
     Then there should be a modal popping up
     When you choose option Yes, create new event in the modal
     Then you will be navigate to page #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&tab=SCHEDULE&teiId=S3JjTA4QMNe
+    And the new event should be sent to the server successfully
 
   Scenario: User is able to schedule an event with a note
     Given you land on the enrollment new event page by having typed /#/enrollmentEventNew?enrollmentId=qcFFRp7DpcX&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&stageId=edqlbukwRfQ&teiId=erqa3phUfpI
     And you see the new event form
     And you select the schedule tab
     When you add a note to the event
-    And the events saves successfully
+    And you click the Schedule button
+    Then the new event should be sent to the server successfully
 
   Scenario: User can add a new event and complete the enrollment
     Given you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=FZAa7j0muDj&orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&stageId=eHvTba5ijAh&teiId=bj4UmUpqaSp
