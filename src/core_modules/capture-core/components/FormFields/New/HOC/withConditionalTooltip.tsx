@@ -3,9 +3,13 @@ import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
 
 type GetTooltipContent = (props: any) => string | undefined;
 
+const inlineWrapperStyle: React.CSSProperties = {
+    display: 'inline-block',
+};
+
 export const withConditionalTooltip = (
     getTooltipContent: GetTooltipContent,
-    { wrapperStyle }: { wrapperStyle?: React.CSSProperties } = {},
+    { inline = false }: { inline?: boolean } = {},
 ) =>
     (InnerComponent: React.ComponentType<any>) =>
         (props: any) => {
@@ -18,7 +22,7 @@ export const withConditionalTooltip = (
                     enabled={shouldShowTooltip}
                     content={tooltipContent}
                 >
-                    <div style={wrapperStyle}>
+                    <div style={inline ? inlineWrapperStyle : undefined}>
                         <InnerComponent
                             {...passOnProps}
                             disabled={disabled}

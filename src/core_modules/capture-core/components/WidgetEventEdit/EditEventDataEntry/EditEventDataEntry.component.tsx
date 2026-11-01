@@ -339,7 +339,7 @@ const buildCompleteFieldSettingsFn = () => {
                                             { eventLabel: props.eventLabel },
                                         )
                                         : undefined;
-                                }, { wrapperStyle: { display: 'inline-block' } })(TrueOnlyField),
+                                }, { inline: true })(TrueOnlyField),
                             ),
                         ),
                     ),
