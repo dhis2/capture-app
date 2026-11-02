@@ -101,7 +101,13 @@ export const useBuildEnrollmentPayload = ({
             dataEntryFieldsMeta,
             formFoundation,
         );
-        const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues as any;
+        const {
+            enrolledAt,
+            occurredAt,
+            assignee,
+            geometry: enrollmentGeometry,
+            stageOrgUnit: eventOrgUnitId,
+        } = serverValuesForMainValues as any;
 
         const { stages, enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(programId);
 
@@ -118,7 +124,7 @@ export const useBuildEnrollmentPayload = ({
         const firstStageDuringRegistrationEvent = deriveFirstStageDuringRegistrationEvent({
             firstStageMetadata: firstStage,
             programId,
-            orgUnitId,
+            orgUnitId: eventOrgUnitId,
             currentEventValues,
             fieldsValue: dataEntryFieldValues,
             attributeCategoryOptions,
@@ -145,7 +151,7 @@ export const useBuildEnrollmentPayload = ({
             enrolledAt,
             occurredAt,
             programId,
-            orgUnitId,
+            orgUnitId: eventOrgUnitId,
             attributeCategoryOptions,
         });
 

@@ -135,7 +135,7 @@ const getStageGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                orgUnitId: props.orgUnit?.id,
+                orgUnitId: props.stageOrgUnitIdFieldValue,
             });
         }
 
@@ -146,7 +146,7 @@ const getStageGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            orgUnitId: props.orgUnit?.id,
+            orgUnitId: props.stageOrgUnitIdFieldValue,
         });
     },
     getPropName: () => stageMainDataIds.GEOMETRY,

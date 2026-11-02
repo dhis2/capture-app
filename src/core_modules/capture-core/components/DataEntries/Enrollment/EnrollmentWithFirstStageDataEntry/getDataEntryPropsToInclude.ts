@@ -4,6 +4,7 @@ import { getConvertGeometryIn, convertGeometryOut, convertStatusIn, convertStatu
 
 export const stageMainDataIds = {
     OCCURRED_AT: 'stageOccurredAt',
+    ORG_UNIT: 'stageOrgUnit',
     COMPLETE: 'stageComplete',
     GEOMETRY: 'stageGeometry',
     ASSIGNEE: 'assignee',
@@ -11,6 +12,7 @@ export const stageMainDataIds = {
 
 const stageMainDataRulesEngineIds = {
     OCCURRED_AT: 'occurredAt',
+    ORG_UNIT: 'orgUnit',
     COMPLETE: 'complete',
     GEOMETRY: 'geometry',
 };

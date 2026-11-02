@@ -1,6 +1,6 @@
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ReduxAction } from 'capture-core-utils/types';
+import type { CoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
@@ -9,6 +9,7 @@ import { openDataEntryForNewEnrollment } from './open.actions';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
+    getOrgUnitValidatorContainers,
 } from '../fieldValidators';
 import {
     attributeOptionsKey,
@@ -20,8 +21,10 @@ import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
-import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
+import { getDataEntryPropsToInclude, stageMainDataIds } from '../EnrollmentWithFirstStageDataEntry';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
+import { createsEventsOnEnrollment } from '../helpers/createsEventsOnEnrollment';
 
 const itemId = 'newEnrollment';
 
@@ -62,7 +65,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     formFoundation,
 }: {
     program: TrackerProgram;
-    orgUnit: OrgUnit;
+    orgUnit: CoreOrgUnit;
     dataEntryId: string;
     extraActions?: Array<ReduxAction<any, any>>;
     extraDataEntryProps?: Array<any>;
@@ -82,10 +85,17 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         programStageName: stage.name,
     });
     const firstStageEvent = firstStage && fabricateFirstStageEvent(firstStage);
+    const createsEvents = createsEventsOnEnrollment(program);
+    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
 
     const dataEntryPropsToInclude = [
         ...enrollmentDataEntryPropsToInclude,
         ...extraDataEntryProps,
+        ...(createsEvents ? [{
+            id: stageMainDataIds.ORG_UNIT,
+            type: 'ORGANISATION_UNIT',
+            validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
+        }] : []),
         ...(firstStageDataEntryPropsToInclude || []),
         ...(programCategory?.categories?.map(category => ({
             id: `${attributeOptionsKey}-${category.id}`,
@@ -103,12 +113,19 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         })) ?? []),
     ];
 
+    const defaultDataEntryValues = {
+        enrolledAt: convertDateObjectToDateFormatString(new Date()),
+        ...(createsEvents
+            ? { [stageMainDataIds.ORG_UNIT]: { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path } }
+            : {}),
+    };
+
     const dataEntryActions =
             loadNewDataEntry(
                 dataEntryId,
                 itemId,
                 dataEntryPropsToInclude,
-                { enrolledAt: convertDateObjectToDateFormatString(new Date()) },
+                defaultDataEntryValues,
             );
 
     const effects = getApplicableRuleEffectsForTrackerProgram({

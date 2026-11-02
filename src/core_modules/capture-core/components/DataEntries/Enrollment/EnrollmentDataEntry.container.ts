@@ -5,6 +5,16 @@ import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import { stageMainDataIds } from './EnrollmentWithFirstStageDataEntry';
+
+const mapStateToProps = (state: any, props: { id: string }) => {
+    const itemId = state.dataEntries[props.id]?.itemId;
+    const dataEntryKey = getDataEntryKey(props.id, itemId);
+    return {
+        stageOrgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.[stageMainDataIds.ORG_UNIT],
+    };
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
     onUpdateDataEntryField: (
@@ -57,4 +67,4 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
 });
 
-export const EnrollmentDataEntry = connect(() => ({}), mapDispatchToProps)(EnrollmentDataEntryComponent);
+export const EnrollmentDataEntry = connect(mapStateToProps, mapDispatchToProps)(EnrollmentDataEntryComponent);

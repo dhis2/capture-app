@@ -3,11 +3,11 @@ import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { placements } from '../../../../DataEntry/constants/placements.const';
 import { sectionKeysForFirstStageDataEntry } from '../EnrollmentWithFirstStageDataEntry.constants';
-import { AOCsectionKey, enrollmentAOCsectionKey } from '../../../../DataEntryDhis2Helpers';
+import { enrollmentAOCsectionKey } from '../../../../DataEntryDhis2Helpers';
 import { LabelKeys, useTermLabel } from '../../../../../customLabels';
 
 export const useDataEntrySections = (stageName: string, beforeSectionId: string) => {
-    const { enrollmentLabel } = useTermLabel([LabelKeys.enrollmentSingular]);
+    const { enrollmentLabel, eventsLabel } = useTermLabel([LabelKeys.enrollmentSingular, LabelKeys.eventPlural]);
     return useMemo(
         () => ({
             [sectionKeysForFirstStageDataEntry.ENROLLMENT]: {
@@ -17,16 +17,16 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
             [enrollmentAOCsectionKey]: {
                 placement: placements.TOP,
             },
+            [sectionKeysForFirstStageDataEntry.EVENTS]: {
+                placement: placements.TOP,
+                name: capitalizeFirstLetter(eventsLabel),
+            },
             [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {
                 beforeSectionId,
                 placement: placements.BEFORE_METADATA_BASED_SECTION,
                 name: i18n.t('{{ stageName }} - Basic info', {
                     stageName,
                 }),
-            },
-            [AOCsectionKey]: {
-                beforeSectionId,
-                placement: placements.BEFORE_METADATA_BASED_SECTION,
             },
             [sectionKeysForFirstStageDataEntry.ASSIGNEE]: {
                 placement: placements.BOTTOM,
@@ -41,6 +41,6 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
                 }),
             },
         }),
-        [stageName, beforeSectionId, enrollmentLabel],
+        [stageName, beforeSectionId, enrollmentLabel, eventsLabel],
     );
 };
