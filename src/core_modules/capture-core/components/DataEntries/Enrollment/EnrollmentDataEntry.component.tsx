@@ -28,6 +28,7 @@ import {
     orientations,
     SingleSelectField,
     SingleOrgUnitSelectField,
+    withConditionalTooltip,
 } from '../../FormFields/New';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
@@ -48,6 +49,7 @@ import {
     enrollmentAOCsectionKey,
     withAOCFieldBuilder,
     withEnrollmentAOCFieldBuilder,
+    withClearUnavailableCategoryOption,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
@@ -333,7 +335,15 @@ const categoryOptionsComponent =
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(SingleSelectField),
+                            withFilterProps(defaultFilterProps)(
+                                withClearUnavailableCategoryOption()(
+                                    withConditionalTooltip((props: any) =>
+                                        i18n.t('Choose an {{orgUnitLabel}} to see the available options', {
+                                            orgUnitLabel: props.orgUnitLabel,
+                                        }),
+                                    )(SingleSelectField),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -347,6 +357,8 @@ const getCategoryOptionsSettingsFn = () => ({
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
+        disabled: !props.stageOrgUnitIdFieldValue,
+        orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
