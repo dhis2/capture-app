@@ -16,6 +16,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         [isLoading, programCategory]);
         const categories = useGroupedCategoryOptions(
             programCategories,
+            // Remove the orgUnitId fallback when the single event form passes orgUnitIdFieldValue (DHIS2-22219)
             settings?.getOrgUnitId ? settings.getOrgUnitId(props) : orgUnitIdFieldValue ?? orgUnitId,
             !hideAOC,
         );
@@ -43,6 +44,7 @@ const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
         }, [programId]);
         const enrollmentCategories = useGroupedCategoryOptions(
             enrollmentProgramCategory?.categories ?? [],
+            // Remove the orgUnitId fallback when the registration form passes orgUnitIdFieldValue (DHIS2-19171)
             orgUnitIdFieldValue ?? orgUnitId,
             !!enrollmentProgramCategory,
         );
