@@ -18,7 +18,8 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
                 placement: placements.TOP,
             },
             [sectionKeysForFirstStageDataEntry.EVENTS]: {
-                placement: placements.TOP,
+                beforeSectionId,
+                placement: placements.BEFORE_METADATA_BASED_SECTION,
                 name: capitalizeFirstLetter(eventsLabel),
             },
             [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {

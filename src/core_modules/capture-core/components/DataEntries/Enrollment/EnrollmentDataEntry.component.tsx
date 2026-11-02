@@ -315,7 +315,7 @@ const getEventOrgUnitSettings = () => {
         getPropName: () => stageMainDataIds.ORG_UNIT,
         getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel),
         getMeta: () => ({
-            placement: placements.TOP,
+            placement: placements.BOTTOM,
             section: sectionKeysForEnrollmentDataEntry.EVENTS,
         }),
     };
@@ -365,7 +365,7 @@ const getCategoryOptionsSettingsFn = () => ({
     getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
     getMeta: () => ({
         section: sectionKeysForEnrollmentDataEntry.EVENTS,
-        placement: placements.TOP,
+        placement: placements.BOTTOM,
     }),
 });
 
@@ -451,7 +451,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
                 placement: placements.TOP,
             },
             [sectionKeysForEnrollmentDataEntry.EVENTS]: {
-                placement: placements.TOP,
+                placement: placements.BOTTOM,
                 name: capitalizeFirstLetter(eventsLabel),
             },
         };
