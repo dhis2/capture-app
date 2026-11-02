@@ -357,7 +357,7 @@ const getCategoryOptionsSettingsFn = () => ({
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
-        disabled: !props.stageOrgUnitIdFieldValue,
+        disabled: !props.eventOrgUnitIdFieldValue,
         orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
@@ -372,7 +372,7 @@ const getCategoryOptionsSettingsFn = () => ({
 const getAOCSettingsFn = () => ({
     hideAOC: ({ programId }: { programId: string }) =>
         !createsEventsOnEnrollment(getTrackerProgramThrowIfNotFound(programId)),
-    getOrgUnitId: (props: any) => props.stageOrgUnitIdFieldValue,
+    getOrgUnitId: (props: any) => props.eventOrgUnitIdFieldValue,
 });
 
 const getEnrollmentCategoryOptionsSettingsFn = () => ({
@@ -422,7 +422,7 @@ type FinalTeiDataEntryProps = {
     formFoundation: RenderFoundation;
     enrollmentLabel: string;
     eventsLabel: string;
-    stageOrgUnitIdFieldValue?: string;
+    eventOrgUnitIdFieldValue?: string;
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -438,7 +438,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             programId,
             enrollmentLabel,
             eventsLabel,
-            stageOrgUnitIdFieldValue,
+            eventOrgUnitIdFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -461,7 +461,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
                     programId={programId}
-                    stageOrgUnitIdFieldValue={stageOrgUnitIdFieldValue}
+                    eventOrgUnitIdFieldValue={eventOrgUnitIdFieldValue}
                     firstStageMetaData={firstStageMetaData}
                     relatedStageActionsOptions={relatedStageActionsOptions}
                 />
@@ -500,7 +500,7 @@ type OrgUnitFieldValue = {
 type PreEnrollmentDataEntryProps = {
     programId: string;
     orgUnit: OrgUnit;
-    stageOrgUnitFieldValue?: OrgUnitFieldValue | null;
+    eventOrgUnitFieldValue?: OrgUnitFieldValue | null;
     onUpdateField: (...args: any[]) => any;
     onUpdateDataEntryField: (...args: any[]) => any;
     onStartAsyncUpdateField: (...args: any[]) => any;
@@ -578,7 +578,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
             orgUnit,
-            stageOrgUnitFieldValue,
+            eventOrgUnitFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -590,7 +590,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
                 orgUnit={orgUnit}
                 orgUnitId={orgUnit.id}
-                stageOrgUnitIdFieldValue={stageOrgUnitFieldValue?.id}
+                eventOrgUnitIdFieldValue={eventOrgUnitFieldValue?.id}
                 {...passOnProps}
             />
         );
