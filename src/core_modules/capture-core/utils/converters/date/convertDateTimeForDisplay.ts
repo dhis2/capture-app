@@ -5,7 +5,7 @@ import { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
 
 /**
  * Converts a datetime value to a display string (local calendar date and HH:mm:ss)
- * DATETIME values are timezone-free. Values with a timezone (timestamps like updatedAt) are shown in the browser time zone.
+ * Values with a timezone (e.g. updatedAt) are shown in the browser time zone.
  * @export
  * @param {string} value - datetime string
  * @returns {string}

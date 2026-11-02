@@ -11,6 +11,14 @@ function convertTime(d2Value: string) {
     return parseData.momentTime;
 }
 
+export function convertTimestamp(value?: string | null) {
+    if (value == null) {
+        return null;
+    }
+
+    return moment(value).toISOString();
+}
+
 const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) =>
     ((assignedUser && assignedUser.uid) ? {
         id: assignedUser.uid,
@@ -76,14 +84,6 @@ const valueConvertersForType = {
     [dataElementTypes.POLYGON]: (d2Value: string | Array<Array<number>>) => convertPolygonToClient(d2Value),
     [dataElementTypes.ASSIGNEE]: convertAssignedUserToClient,
 };
-
-export function convertTimestamp(value?: string | null) {
-    if (value == null) {
-        return null;
-    }
-
-    return moment(value).toISOString();
-}
 
 export function convertValue(value: any, type: keyof typeof dataElementTypes) {
     if (value == null) {

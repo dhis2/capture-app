@@ -20,13 +20,12 @@ export function parseDateTime(value: any): string | null {
     }
 
     if (typeof value === 'string' && !hasTimeZone(value)) {
-        // moment.utc is used as a timezone-free calendar, so no daylight saving adjustments are made
+        // moment.utc avoids daylight saving adjustments
         const momentDateTime = moment.utc(value);
         return momentDateTime.isValid() ? formatMomentEn(momentDateTime, dateTimeFormat) : null;
     }
 
-    // Legacy values saved in UTC (Z) are converted to the server time zone and the timezone info is removed.
-    // This is a best guess of the entered value, and is correct when server and client time zones were the same.
+    // Legacy UTC values (Z) are converted to the server time zone
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) {
         return null;
