@@ -4,10 +4,10 @@ type Props = {
     value?: string | null;
     options?: Array<{ value: string }>;
     onChange?: (value: string | null) => void;
-    onBlur?: (value: string | null) => void;
+    onBlur?: (value: string | null, options?: { touched: boolean }) => void;
 };
 
-// The category options are filtered by org unit, so a selected option is cleared when it is no longer available
+// The category options are filtered by org unit, so a selected option is cleared when it is no longer available.
 export const withClearUnavailableCategoryOption = () => (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
         const { value, options, onChange, onBlur } = props;
@@ -16,7 +16,7 @@ export const withClearUnavailableCategoryOption = () => (InnerComponent: Compone
         useEffect(() => {
             if (isUnavailable) {
                 onChange?.(null);
-                onBlur?.(null);
+                onBlur?.(null, { touched: false });
             }
         }, [isUnavailable, onChange, onBlur]);
 
