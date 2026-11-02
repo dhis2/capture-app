@@ -5,13 +5,14 @@ import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } 
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import { stageMainDataIds } from './EnrollmentWithFirstStageDataEntry';
 
 const mapStateToProps = (state: any, props: { id: string }) => {
     const itemId = state.dataEntries[props.id]?.itemId;
     const dataEntryKey = getDataEntryKey(props.id, itemId);
     return {
         orgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit,
-        stageOrgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.stageOrgUnit,
+        stageOrgUnitFieldValue: state.dataEntriesFieldsValue[dataEntryKey]?.[stageMainDataIds.ORG_UNIT],
     };
 };
 

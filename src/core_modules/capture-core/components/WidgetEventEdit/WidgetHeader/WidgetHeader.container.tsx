@@ -5,7 +5,7 @@ import { spacersNum, Button, CircularLoader, IconEdit24, IconMore16, spacers } f
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 import i18n from '@dhis2/d2-i18n';
-import { useEnrollmentEditEventPageMode, useServerFormattedNow } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useEventChangelogEnabled, useServerFormattedNow } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
@@ -69,6 +69,8 @@ const WidgetHeaderPlain = ({
 
     const showEditButton = !readOnly;
     const { programCategory } = useCategoryCombinations(programId);
+    const changelogEnabled = useEventChangelogEnabled(programId);
+    const hasMenuActions = changelogEnabled || canEditProgramStage;
 
     const enrollment = useSelector((state: any) => state.enrollmentDomain?.enrollment);
     const storedEvent = enrollment?.events?.find((event: { event: string }) => event.event === eventId);
@@ -184,7 +186,7 @@ const WidgetHeaderPlain = ({
 
                         {pendingApiResponse && <CircularLoader small dataTest="widget-header-saving-loader" />}
 
-                        {!pendingApiResponse && (
+                        {!pendingApiResponse && hasMenuActions && (
                             <OverflowButton
                                 open={actionsIsOpen}
                                 onClick={() => setActionsIsOpen(prev => !prev)}
@@ -201,6 +203,7 @@ const WidgetHeaderPlain = ({
                                         dataTest="tracker-program-event-overflow-menu"
                                         onOpenChangelog={() => setChangeLogIsOpen(true)}
                                         onClose={() => setActionsIsOpen(false)}
+                                        showChangelog={changelogEnabled}
                                         hideMutationActions={!canEditProgramStage}
                                         onSkipMutate={onSkipStatusMutate}
                                         onSkipSuccess={onSkipStatusSuccess}

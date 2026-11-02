@@ -22,9 +22,9 @@ import { convertDateObjectToDateFormatString } from '../../../../utils/converter
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude, stageMainDataIds } from '../EnrollmentWithFirstStageDataEntry';
-import { createsEventsOnEnrollment } from '../helpers/createsEventsOnEnrollment';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
+import { createsEventsOnEnrollment } from '../helpers/createsEventsOnEnrollment';
 
 const itemId = 'newEnrollment';
 
@@ -121,16 +121,18 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         })) ?? []),
     ];
 
+    const defaultDataEntryValues = {
+        enrolledAt: convertDateObjectToDateFormatString(new Date()),
+        orgUnit: defaultOrgUnit,
+        ...(createsEvents ? { [stageMainDataIds.ORG_UNIT]: defaultOrgUnit } : {}),
+    };
+
     const dataEntryActions =
             loadNewDataEntry(
                 dataEntryId,
                 itemId,
                 dataEntryPropsToInclude,
-                {
-                    enrolledAt: convertDateObjectToDateFormatString(new Date()),
-                    orgUnit: defaultOrgUnit,
-                    ...(createsEvents ? { [stageMainDataIds.ORG_UNIT]: defaultOrgUnit } : {}),
-                },
+                defaultDataEntryValues,
             );
 
     const effects = getApplicableRuleEffectsForTrackerProgram({
