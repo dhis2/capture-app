@@ -36,15 +36,15 @@ import {
     getOrgUnitValidatorContainers,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getTrackerProgramThrowIfNotFound } from '../../../metaData';
 import { LabelKeys, withCustomLabels } from '../../../customLabels';
-import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
+import { EnrollmentWithFirstStageDataEntry, stageMainDataIds } from './EnrollmentWithFirstStageDataEntry';
+import { createsEventsOnEnrollment } from './helpers/createsEventsOnEnrollment';
 import {
     getCategoryOptionsValidatorContainers,
     getEnrollmentCategoryOptionsValidatorContainers,
     attributeOptionsKey,
     enrollmentAttributeOptionsKey,
-    AOCsectionKey,
     enrollmentAOCsectionKey,
     withAOCFieldBuilder,
     withEnrollmentAOCFieldBuilder,
@@ -55,7 +55,7 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
-const customLabels = [LabelKeys.eventSingular, LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular] as const;
+const customLabels = [LabelKeys.eventPlural, LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -238,6 +238,16 @@ const getOrgUnitSettings = () => {
     return orgUnitSettings;
 };
 
+const getEventOrgUnitSettings = () => ({
+    ...getOrgUnitSettings(),
+    isApplicable: (props: any) => createsEventsOnEnrollment(getTrackerProgramThrowIfNotFound(props.programId)),
+    getPropName: () => stageMainDataIds.ORG_UNIT,
+    getMeta: () => ({
+        placement: placements.TOP,
+        section: sectionKeysForEnrollmentDataEntry.EVENTS,
+    }),
+});
+
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
@@ -358,41 +368,22 @@ const getCategoryOptionsSettingsFn = () => ({
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
-        disabled: !props.orgUnitIdFieldValue,
+        disabled: !props.stageOrgUnitIdFieldValue,
         orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
     getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
-    getMeta: (props: any) => {
-        const { programCategory, eventLabel } = props;
-        return {
-            section: AOCsectionKey,
-            placement: placements.BOTTOM,
-            sectionName: i18n.t('{{eventLabel}} - {{categoryDisplayName}}', {
-                eventLabel,
-                categoryDisplayName: programCategory?.displayName,
-            }),
-        };
-    },
+    getMeta: () => ({
+        section: sectionKeysForEnrollmentDataEntry.EVENTS,
+        placement: placements.TOP,
+    }),
 });
 
 const getAOCSettingsFn = () => ({
-    hideAOC: ({ programId }: { programId: string }) => {
-        const { stages: stagesMap, useFirstStageDuringRegistration } = getProgramThrowIfNotFound(programId);
-
-        /*
-        Show AOC selection if:
-        - There are any program stages in the program with "Auto-generate"
-        - The "Show first stage on registration page" is selected for the program
-        */
-
-        const stages = [...stagesMap.values()];
-
-        const shouldShowAOC = stages.some((stage: any) => stage.autoGenerateEvent) || useFirstStageDuringRegistration;
-
-        return !shouldShowAOC;
-    },
+    hideAOC: ({ programId }: { programId: string }) =>
+        !createsEventsOnEnrollment(getTrackerProgramThrowIfNotFound(programId)),
+    getOrgUnitId: (props: any) => props.stageOrgUnitIdFieldValue,
 });
 
 const getEnrollmentCategoryOptionsSettingsFn = () => ({
@@ -441,6 +432,7 @@ type FinalTeiDataEntryProps = {
     };
     formFoundation: RenderFoundation;
     enrollmentLabel: string;
+    eventsLabel: string;
     orgUnitIdFieldValue?: string;
     stageOrgUnitIdFieldValue?: string;
 };
@@ -457,6 +449,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             relatedStageActionsOptions,
             programId,
             enrollmentLabel,
+            eventsLabel,
             orgUnitIdFieldValue,
             stageOrgUnitIdFieldValue,
             ...passOnProps
@@ -474,8 +467,9 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             [enrollmentAOCsectionKey]: {
                 placement: placements.TOP,
             },
-            [AOCsectionKey]: {
-                placement: placements.BOTTOM,
+            [sectionKeysForEnrollmentDataEntry.EVENTS]: {
+                placement: placements.TOP,
+                name: capitalizeFirstLetter(eventsLabel),
             },
         };
 
@@ -505,7 +499,8 @@ const AOCFieldBuilderHOC = withEnrollmentAOCFieldBuilder(
         ),
     ),
 );
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
+const EventOrgUnitFieldHOC = withDataEntryFieldIfApplicable(getEventOrgUnitSettings())(AOCFieldBuilderHOC);
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(EventOrgUnitFieldHOC);
 const OrgUnitFieldHOC = withDataEntryField(getOrgUnitSettings())(LocationHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(OrgUnitFieldHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);

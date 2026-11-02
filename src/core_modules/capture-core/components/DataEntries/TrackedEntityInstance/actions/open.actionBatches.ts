@@ -54,16 +54,17 @@ export const openDataEntryForNewTeiBatchAsync = async ({
             validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
         },
     ];
+    const defaultDataEntryValues = {
+        orgUnit: orgUnit
+            ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+            : undefined,
+    };
 
     const dataEntryActions = loadNewDataEntry(
         dataEntryId,
         itemId,
         dataEntryPropsToInclude,
-        {
-            orgUnit: orgUnit
-                ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
-                : undefined,
-        },
+        defaultDataEntryValues,
         { ...generatedUniqueValues, ...formValues },
     );
 

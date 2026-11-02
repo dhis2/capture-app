@@ -107,6 +107,7 @@ export const useBuildEnrollmentPayload = ({
             assignee,
             geometry: enrollmentGeometry,
             orgUnit: enrollmentOrgUnitId,
+            stageOrgUnit: eventOrgUnitId,
         } = serverValuesForMainValues as any;
 
         const { stages, enrollmentCategoryCombination } = getTrackerProgramThrowIfNotFound(programId);
@@ -150,7 +151,7 @@ export const useBuildEnrollmentPayload = ({
             enrolledAt,
             occurredAt,
             programId,
-            orgUnitId: enrollmentOrgUnitId,
+            orgUnitId: eventOrgUnitId,
             attributeCategoryOptions,
         });
 

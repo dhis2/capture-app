@@ -1,6 +1,5 @@
 import type { ProgramStage } from '../../../../metaData';
 import { getEventDateValidatorContainers } from './fieldValidators';
-import { getOrgUnitValidatorContainers } from '../fieldValidators';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusIn, convertStatusOut } from '../../converters';
 
 export const stageMainDataIds = {
@@ -20,16 +19,11 @@ const stageMainDataRulesEngineIds = {
 
 export const convertToRulesEngineIds = (id: string) => stageMainDataRulesEngineIds[id];
 
-export const getDataEntryPropsToInclude = (firstStage: ProgramStage, orgUnitLabel: string, programId: string) => [
+export const getDataEntryPropsToInclude = (firstStage: ProgramStage) => [
     {
         id: stageMainDataIds.OCCURRED_AT,
         type: 'DATE',
         validatorContainers: getEventDateValidatorContainers(),
-    },
-    {
-        id: stageMainDataIds.ORG_UNIT,
-        type: 'ORGANISATION_UNIT',
-        validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel, programId),
     },
     {
         clientId: stageMainDataIds.COMPLETE,
