@@ -12,6 +12,7 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
 import { stageMainDataIds, convertToRulesEngineIds } from '../EnrollmentWithFirstStageDataEntry';
 import type { QuerySingleResource } from '../../../../utils/api';
+import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
 
 type Context = {
     dataEntryId: string;
@@ -41,7 +42,7 @@ const splitCurrentClientMainData = (stage: any, currentClientMainData: any) => {
     }, { currentEnrollmentValues: {}, currentEventMainData: {} });
 };
 
-const runRulesOnEnrollmentUpdate = ({
+const runRulesOnEnrollmentUpdate = async ({
     store,
     context,
     searchActions = [],
@@ -72,23 +73,29 @@ const runRulesOnEnrollmentUpdate = ({
         }
         : undefined;
 
-    const runRulesOnUpdateFieldBatchPromise = runRulesOnUpdateFieldBatch({
+    const eventOrgUnit = stage
+        ? await getCoreOrgUnitFn(querySingleResource)(currentEvent?.orgUnit?.id, state.organisationUnits)
+        : undefined;
+    const orgUnitActions = eventOrgUnit?.coreOrgUnit && !eventOrgUnit.cached
+        ? [orgUnitFetched(eventOrgUnit.coreOrgUnit)]
+        : [];
+
+    return runRulesOnUpdateFieldBatch({
         program,
         formId,
         dataEntryId,
         itemId,
-        orgUnit,
+        orgUnit: eventOrgUnit ? eventOrgUnit.coreOrgUnit : orgUnit,
         enrollmentData: currentEnrollmentValues,
         attributeValues,
         currentEvent,
-        extraActions: searchActions,
+        extraActions: [...searchActions, ...orgUnitActions],
         uid,
         stage,
         formFoundation: stage ? formFoundation : undefined,
         querySingleResource,
         onGetValidationContext,
     });
-    return from(runRulesOnUpdateFieldBatchPromise);
 };
 
 export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
@@ -116,7 +123,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
                 itemId,
             } = innerPayload;
 
-            return runRulesOnEnrollmentUpdate({
+            return from(runRulesOnEnrollmentUpdate({
                 store,
                 context: {
                     dataEntryId,
@@ -129,7 +136,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
                 },
                 querySingleResource,
                 onGetValidationContext,
-            });
+            }));
         }));
 
 export const runRulesOnEnrollmentFieldUpdateEpic = (
@@ -155,7 +162,7 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (
             const { dataEntryId, itemId } = payload;
 
 
-            return runRulesOnEnrollmentUpdate({
+            return from(runRulesOnEnrollmentUpdate({
                 store,
                 context: {
                     programId,
@@ -169,6 +176,6 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (
                 searchActions,
                 querySingleResource,
                 onGetValidationContext,
-            });
+            }));
         }),
     );

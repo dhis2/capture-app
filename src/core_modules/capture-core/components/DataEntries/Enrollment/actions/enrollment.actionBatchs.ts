@@ -43,7 +43,7 @@ export const runRulesOnUpdateFieldBatch = async ({
     formId: string;
     dataEntryId: string;
     itemId: string;
-    orgUnit: OrgUnit;
+    orgUnit: OrgUnit | null;
     enrollmentData?: Enrollment;
     attributeValues?: TEIValues;
     extraActions: Array<ReduxAction<any, any>>;
