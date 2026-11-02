@@ -19,8 +19,7 @@ export type ContainerProps = {
   categoryOptionIsInvalidForOrgUnit: boolean;
   showDefaultViewOnNewPage: () => void;
   handleMainPageNavigation: () => void;
-  selectedScopeId: string;
-  setScopeId: (scopeId: string) => void;
+  currentScopeId: string;
   programCategorySelectionIncomplete: boolean;
   missingCategoriesInProgramSelection: ProgramCategories;
   newPageStatus: keyof typeof newPageStatuses;
