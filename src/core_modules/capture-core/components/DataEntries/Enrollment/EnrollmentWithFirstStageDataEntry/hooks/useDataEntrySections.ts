@@ -21,16 +21,16 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
             [enrollmentAOCsectionKey]: {
                 placement: placements.TOP,
             },
+            [AOCsectionKey]: {
+                beforeSectionId,
+                placement: placements.BEFORE_METADATA_BASED_SECTION,
+            },
             [sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO]: {
                 beforeSectionId,
                 placement: placements.BEFORE_METADATA_BASED_SECTION,
                 name: i18n.t('{{ stageName }} - Basic info', {
                     stageName,
                 }),
-            },
-            [AOCsectionKey]: {
-                beforeSectionId,
-                placement: placements.BEFORE_METADATA_BASED_SECTION,
             },
             [sectionKeysForFirstStageDataEntry.ASSIGNEE]: {
                 placement: placements.BOTTOM,

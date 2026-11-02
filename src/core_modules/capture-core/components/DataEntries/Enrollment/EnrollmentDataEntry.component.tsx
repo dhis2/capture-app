@@ -2,7 +2,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
-import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { isLangRtl } from '../../../utils/rtl';
@@ -359,7 +358,7 @@ const getCategoryOptionsSettingsFn = () => ({
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
-        disabled: !(props.firstStageMetaData ? props.stageOrgUnitIdFieldValue : props.orgUnitIdFieldValue),
+        disabled: !props.orgUnitIdFieldValue,
         orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
@@ -394,9 +393,6 @@ const getAOCSettingsFn = () => ({
 
         return !shouldShowAOC;
     },
-    // The first stage event has its own org unit, auto generated events use the enrollment org unit
-    getOrgUnitId: (props: any) =>
-        (props.firstStageMetaData ? props.stageOrgUnitIdFieldValue : props.orgUnitIdFieldValue),
 });
 
 const getEnrollmentCategoryOptionsSettingsFn = () => ({
@@ -431,7 +427,6 @@ type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment;
     programId: string;
     id: string;
-    orgUnitId: string;
     onUpdateDataEntryField: (...args: any[]) => any;
     onUpdateFormFieldAsync: (...args: any[]) => any;
     onUpdateFormField: (...args: any[]) => any;
@@ -525,7 +520,6 @@ type OrgUnitFieldValue = {
 
 type PreEnrollmentDataEntryProps = {
     programId: string;
-    orgUnit?: OrgUnit;
     orgUnitFieldValue?: OrgUnitFieldValue | null;
     stageOrgUnitFieldValue?: OrgUnitFieldValue | null;
     onUpdateField: (...args: any[]) => any;
@@ -601,7 +595,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onUpdateDataEntryField,
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
-            orgUnit,
             orgUnitFieldValue,
             stageOrgUnitFieldValue,
             ...passOnProps
@@ -613,7 +606,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateFormField={this.handleUpdateField}
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
-                orgUnitId={orgUnit?.id}
                 orgUnitIdFieldValue={orgUnitFieldValue?.id}
                 stageOrgUnitIdFieldValue={stageOrgUnitFieldValue?.id}
                 {...passOnProps}

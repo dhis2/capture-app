@@ -6,5 +6,4 @@ export type Props = {
 
 export type Settings = {
     hideAOC?: (props: any) => boolean;
-    getOrgUnitId?: (props: any) => string | undefined;
 };

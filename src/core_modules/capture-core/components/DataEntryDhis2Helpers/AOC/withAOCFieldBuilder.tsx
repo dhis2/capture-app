@@ -16,7 +16,8 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         [isLoading, programCategory]);
         const categories = useGroupedCategoryOptions(
             programCategories,
-            settings?.getOrgUnitId?.(props) ?? orgUnitIdFieldValue ?? orgUnitId,
+            // Remove fallback when doing DHIS2-22219
+            orgUnitIdFieldValue ?? orgUnitId,
             !hideAOC,
         );
 
@@ -36,14 +37,14 @@ export const withAOCFieldBuilder = (settings: Settings) =>
 
 const getEnrollmentAOCFieldBuilder = (InnerComponent: ComponentType<any>) =>
     (props: Props) => {
-        const { programId, orgUnitId, orgUnitIdFieldValue } = props;
+        const { programId, orgUnitIdFieldValue } = props;
         const enrollmentProgramCategory = useMemo(() => {
             if (!featureAvailable(FEATURES.enrollmentAOC)) return null;
             return getTrackerProgramThrowIfNotFound(programId).enrollmentCategoryCombination;
         }, [programId]);
         const enrollmentCategories = useGroupedCategoryOptions(
             enrollmentProgramCategory?.categories ?? [],
-            orgUnitIdFieldValue ?? orgUnitId,
+            orgUnitIdFieldValue,
             !!enrollmentProgramCategory,
         );
 

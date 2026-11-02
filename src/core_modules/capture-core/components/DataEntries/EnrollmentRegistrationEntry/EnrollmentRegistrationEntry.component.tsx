@@ -88,7 +88,6 @@ const EnrollmentRegistrationEntryPlain =
                   <>
                       <EnrollmentDataEntry
                           teiId={teiId}
-                          orgUnit={orgUnit}
                           programId={selectedScopeId}
                           formFoundation={formFoundation}
                           enrollmentMetadata={enrollmentMetadata}
