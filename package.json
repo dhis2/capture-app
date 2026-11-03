@@ -95,7 +95,7 @@
         "@babel/preset-typescript": "^7.29.7",
         "@badeball/cypress-cucumber-preprocessor": "17.2.1",
         "@cypress/webpack-preprocessor": "^8.0.0",
-        "@dhis2/cli-app-scripts": "^12.11.5",
+        "@dhis2/cli-app-scripts": "^12.11.8",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.7.10",
         "@dhis2/cli-utils-cypress": "^10.1.2",
@@ -140,7 +140,6 @@
     },
     "resolutions": {
         "@babel/preset-react": "7.29.7",
-        "@dhis2-ui/calendar": "10.19.3",
         "core-js": "2.5.7",
         "i18next": "^20.5.0",
         "@types/react": "18.3.1",
