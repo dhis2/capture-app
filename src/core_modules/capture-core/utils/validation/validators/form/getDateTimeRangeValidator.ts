@@ -1,5 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
-import { convertLocalToIsoCalendar } from 'capture-core/utils/converters/date';
+import { convertLocalToIsoDate } from 'capture-core/utils/converters/date';
 import { isValidDateTime } from './dateTimeValidator';
 
 function isValidDateTimeWithEmptyCheck(
@@ -18,11 +18,11 @@ const convertDateTimeToIsoTemporal = (value: any | null | undefined) => {
     }
 
     const { date, time } = value;
-    const isoDate = convertLocalToIsoCalendar(date);
+    const isoDate = convertLocalToIsoDate(date);
     if (!isoDate) {
         return null;
     }
-    const [year, month, day] = isoDate.split('T')[0].split('-').map(Number);
+    const [year, month, day] = isoDate.split('-').map(Number);
 
     let hour;
     let minutes;

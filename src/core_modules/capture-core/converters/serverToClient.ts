@@ -2,6 +2,7 @@ import moment from 'moment';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes } from '../metaData';
+import { convertToTimeZoneFreeDateTime } from '../utils/converters/date';
 
 function convertTime(d2Value: string) {
     const parseData = parseTime(d2Value);
@@ -9,6 +10,14 @@ function convertTime(d2Value: string) {
         return null;
     }
     return parseData.momentTime;
+}
+
+export function convertTimestamp(value?: string | null) {
+    if (value == null) {
+        return null;
+    }
+
+    return moment(value).toISOString();
 }
 
 const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) =>
@@ -28,7 +37,7 @@ const optionSetConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: parseNumber,
     [dataElementTypes.PERCENTAGE]: parseNumber,
     [dataElementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
-    [dataElementTypes.DATETIME]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD HH:mm').toISOString(),
+    [dataElementTypes.DATETIME]: convertToTimeZoneFreeDateTime,
     [dataElementTypes.TIME]: convertTime,
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
@@ -69,7 +78,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: parseNumber,
     [dataElementTypes.PERCENTAGE]: parseNumber,
     [dataElementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
-    [dataElementTypes.DATETIME]: (d2Value: string) => moment(d2Value).toISOString(),
+    [dataElementTypes.DATETIME]: convertToTimeZoneFreeDateTime,
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
     [dataElementTypes.COORDINATE]: (d2Value: string | Array<string>) => convertCoordinateToClient(d2Value),

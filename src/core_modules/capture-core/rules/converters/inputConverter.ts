@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
+import moment from 'moment';
 import type { IConvertInputRulesValue } from '@dhis2/rules-engine-javascript';
 import { formatMomentEn } from 'capture-core-utils/date';
 
@@ -24,7 +25,12 @@ export const inputConverter: IConvertInputRulesValue = {
         }
         return formatMomentEn(value, dateMomentFormat);
     },
-    convertDateTime: convertStringValue,
+    convertDateTime: (value: any): string | null => {
+        if (!value) {
+            return null;
+        }
+        return moment(value).toISOString();
+    },
     convertTime: convertStringValue,
     convertNumber: convertNumericValue,
     convertUnitInterval: convertNumericValue,

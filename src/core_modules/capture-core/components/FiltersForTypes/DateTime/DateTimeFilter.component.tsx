@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Temporal } from '@js-temporal/polyfill';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
-import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
+import { convertLocalToIsoDate } from '../../../utils/converters/date';
 import type { UpdatableFilterContent } from '../types';
 import type { DateValue } from '../Date/date.types';
 import type { DateTimeFilterProps, DateTimeValue, Value } from './dateTime.types';
@@ -51,11 +51,12 @@ const isFromAfterTo = (from: DateTimeValue, to: DateTimeValue): boolean => {
     if (!from.date || !to.date) {
         return false;
     }
-    const fromIso = convertLocalToIsoCalendar(from.date);
-    const toIso = convertLocalToIsoCalendar(to.date);
-    const fromDate = Temporal.PlainDate.from(fromIso.split('T')[0]);
-    const toDate = Temporal.PlainDate.from(toIso.split('T')[0]);
-    const dateCompare = Temporal.PlainDate.compare(fromDate, toDate);
+    const fromIso = convertLocalToIsoDate(from.date);
+    const toIso = convertLocalToIsoDate(to.date);
+    if (!fromIso || !toIso) {
+        return false;
+    }
+    const dateCompare = Temporal.PlainDate.compare(Temporal.PlainDate.from(fromIso), Temporal.PlainDate.from(toIso));
     if (dateCompare !== 0) {
         return dateCompare > 0;
     }

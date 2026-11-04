@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { useQuery } from '@tanstack/react-query';
-import { errorCreator, buildUrl, pipe } from 'capture-core-utils';
+import { errorCreator, buildUrl } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import { CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
 import type { Change, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
@@ -106,7 +106,7 @@ const fetchFormattedValues = async ({
 
             return {
                 reactKey: metadataElement.id ? `${createdAt}-${metadataElement.id}` : createdAt,
-                date: pipe(convertServerToClient, convertClientToList)(fromServerDate(createdAt), dataElementTypes.DATETIME),
+                date: convertClientToList(fromServerDate(createdAt).toISOString(), dataElementTypes.DATETIME, null),
                 user: `${firstName} ${surname} (${username})`,
                 username,
                 dataItemId: metadataElement.id,
