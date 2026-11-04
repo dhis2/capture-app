@@ -1,15 +1,14 @@
 import moment from 'moment';
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
+import { formatMomentEn } from 'capture-core-utils/date';
 
 const dateTimeFormat = 'YYYY-MM-DDTHH:mm:ss.SSS';
 const timeZoneRegex = /(Z|[+-]\d{2}:?\d{2})$/i;
 
-export const hasTimeZone = (value: string) => timeZoneRegex.test(value);
+const isTimeZoneFree = (value: unknown) => typeof value === 'string' && !timeZoneRegex.test(value);
 
 /**
  * Converts a DATETIME value to a timezone-free datetime string (YYYY-MM-DDTHH:mm:ss.SSS), or null if invalid
- * Values without a timezone are kept as entered.
+ * Values without a timezone are kept as entered. Legacy values with a timezone (Z) are converted to the browser time zone.
  * @export
  * @param {*} value - datetime string
  * @returns {string | null}
@@ -19,18 +18,7 @@ export function convertToTimeZoneFreeDateTime(value: any): string | null {
         return null;
     }
 
-    if (typeof value === 'string' && !hasTimeZone(value)) {
-        // moment.utc avoids daylight saving adjustments
-        const momentDateTime = moment.utc(value);
-        return momentDateTime.isValid() ? formatMomentEn(momentDateTime, dateTimeFormat) : null;
-    }
-
-    // Legacy UTC values (Z) are converted to the server time zone
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) {
-        return null;
-    }
-    // sv-SE formats as YYYY-MM-DD HH:mm:ss
-    const serverDateTime = date.toLocaleString('sv-SE', { timeZone: systemSettingsStore.get().serverTimeZoneId });
-    return `${serverDateTime.replace(' ', 'T')}.${padWithZeros(date.getUTCMilliseconds(), 3)}`;
+    // moment.utc avoids daylight saving adjustments
+    const momentDateTime = isTimeZoneFree(value) ? moment.utc(value) : moment(value);
+    return momentDateTime.isValid() ? formatMomentEn(momentDateTime, dateTimeFormat) : null;
 }

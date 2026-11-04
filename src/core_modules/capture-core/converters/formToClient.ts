@@ -3,7 +3,7 @@ import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
-import { convertLocalToIsoCalendar, convertLocalToIsoDate } from '../utils/converters/date';
+import { convertLocalToIsoCalendar, convertLocalToIsoDateTime } from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string;
@@ -16,11 +16,7 @@ type RangeValue = {
 };
 
 function convertDateTime(formValue: DateTimeValue): string | null {
-    const parsedTime = parseTime(formValue.time);
-    const isoDate = convertLocalToIsoDate(formValue.date);
-    if (!parsedTime.isValid || !isoDate) return null;
-
-    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm:ss.SSS')}`;
+    return convertLocalToIsoDateTime(formValue.date, formValue.time);
 }
 
 function convertDate(dateValue: string) {

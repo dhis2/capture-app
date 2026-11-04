@@ -78,7 +78,9 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
 
     if (lastEventUpdated) {
         const { updatedAt } = lastEventUpdated;
-        const localDateTime = convertValueClientToView(updatedAt, dataElementTypes.DATETIME) as string;
+        const localDateTime = convertValueClientToView(
+            fromServerDate(updatedAt).toISOString(), dataElementTypes.DATETIME,
+        ) as string;
         return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
             ? (
                 <>

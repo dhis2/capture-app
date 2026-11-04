@@ -91,7 +91,7 @@ const valueConvertersForType = {
     [dataElementTypes.DATE]: convertDateForListDisplay,
     [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
     [dataElementTypes.DATETIME]: convertDateTimeForDisplay,
-    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
+    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateTimeForDisplay, value),
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
     [dataElementTypes.INTEGER]: stringifyNumber,
