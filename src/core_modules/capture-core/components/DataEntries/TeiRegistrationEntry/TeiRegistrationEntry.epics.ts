@@ -29,10 +29,7 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
             const openTeiPromise = getCoreOrgUnitFn(querySingleResource)(
                 selectedOrgUnitId,
                 store.value.organisationUnits,
-            ).catch((error) => {
-                log.error(errorCreator('org unit could not be fetched')({ selectedOrgUnitId, error }));
-                return { coreOrgUnit: null, cached: true };
-            }).then(({ coreOrgUnit, cached }) => openDataEntryForNewTeiBatchAsync({
+            ).then(({ coreOrgUnit, cached }) => openDataEntryForNewTeiBatchAsync({
                 foundation: formFoundation,
                 orgUnit: coreOrgUnit,
                 dataEntryId,
