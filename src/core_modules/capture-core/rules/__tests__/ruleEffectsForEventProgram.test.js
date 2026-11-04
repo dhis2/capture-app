@@ -7,7 +7,7 @@ const groups = [
     { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
 ];
 
-systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD' });
+systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD', calendar: 'gregory' });
 
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
@@ -2896,6 +2896,72 @@ describe('Assign effects', () => {
                     latitude: 2,
                     longitude: 434,
                 },
+            },
+        ]);
+    });
+});
+
+describe('DATETIME values', () => {
+    const constants = [];
+    const dataElementsInProgram = {
+        dtCurrent01: { id: 'dtCurrent01', valueType: 'DATETIME' },
+        dtAssign001: { id: 'dtAssign001', valueType: 'DATETIME' },
+    };
+    const programRuleVariables = [
+        {
+            id: 'dtVariable1',
+            displayName: 'dateTimeVariable',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
+            dataElementId: 'dtCurrent01',
+            valueType: 'DATETIME',
+            programId: 'eBAyeGv0exc',
+        },
+    ];
+    const programRules = [
+        {
+            id: 'dtRule0001',
+            condition: 'true',
+            displayName: 'datetime values',
+            programId: 'eBAyeGv0exc',
+            programRuleActions: [
+                {
+                    id: 'dtDisplay01',
+                    displayContent: 'datetime =',
+                    data: '#{dateTimeVariable}',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'dtAssign01',
+                    data: '#{dateTimeVariable}',
+                    dataElementId: 'dtAssign001',
+                    programRuleActionType: 'ASSIGN',
+                },
+            ],
+        },
+    ];
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
+
+    test('are passed to rules and assigned as entered, without timezone conversion', () => {
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules, constants },
+            currentEvent: { dtCurrent01: '2026-03-29T02:30:00.000' },
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets: {},
+        });
+
+        expect(rulesEffects).toEqual([
+            {
+                type: 'DISPLAYTEXT',
+                id: 'feedback',
+                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-03-29T02:30:00.000' },
+            },
+            {
+                type: 'ASSIGN',
+                id: 'dtAssign001',
+                value: { date: '2026-03-29', time: '02:30' },
+                targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
             },
         ]);
     });
