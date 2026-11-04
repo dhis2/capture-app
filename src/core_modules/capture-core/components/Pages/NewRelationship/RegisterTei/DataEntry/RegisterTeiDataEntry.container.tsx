@@ -3,7 +3,6 @@ import { RegisterTeiDataEntryComponent } from './RegisterTeiDataEntry.component'
 import type { ReduxState } from '../../../../App/withAppUrlSync.types';
 
 const mapStateToProps = (state: ReduxState) => ({
-    showDataEntry: !!state.newRelationshipRegisterTei.orgUnit,
     error: state.newRelationshipRegisterTei.dataEntryError,
     programId: state.newRelationshipRegisterTei.programId,
 });

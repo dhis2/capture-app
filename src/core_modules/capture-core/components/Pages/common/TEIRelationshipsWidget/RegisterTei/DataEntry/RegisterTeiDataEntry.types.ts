@@ -9,7 +9,6 @@ import type { InputAttribute } from '../../../../../DataEntries/EnrollmentRegist
 import type { SharedProps } from '../RegisterTei.types';
 
 export type Props = {
-    showDataEntry: boolean;
     programId: string;
     error?: string;
     onSaveWithoutEnrollment: (payload: TeiPayload) => void;

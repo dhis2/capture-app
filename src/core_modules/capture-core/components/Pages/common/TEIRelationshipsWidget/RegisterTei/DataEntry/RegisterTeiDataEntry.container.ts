@@ -6,7 +6,6 @@ import { withErrorMessageHandler } from '../../../../../../HOC/withErrorMessageH
 import type { Props } from './RegisterTeiDataEntry.types';
 
 const mapStateToProps = (state: any) => ({
-    showDataEntry: state.newRelationshipRegisterTei.orgUnit,
     error: state.newRelationshipRegisterTei.dataEntryError,
     programId: state.newRelationshipRegisterTei.programId,
 });
