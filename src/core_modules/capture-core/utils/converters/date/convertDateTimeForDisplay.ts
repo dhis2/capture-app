@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { formatMomentEn } from 'capture-core-utils/date';
-import { hasTimeZone } from 'capture-core-utils/parsers';
 import { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
+import { hasTimeZone } from './convertToTimeZoneFreeDateTime';
 
 /**
  * Converts a datetime value to a display string (local calendar date and HH:mm:ss)

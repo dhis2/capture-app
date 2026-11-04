@@ -4,3 +4,4 @@ export { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
 export { convertLocalToIsoCalendar } from './convertLocalToIsoCalendar';
 export { convertLocalToIsoDate } from './convertLocalToIsoDate';
 export { convertDateTimeForDisplay } from './convertDateTimeForDisplay';
+export { convertToTimeZoneFreeDateTime } from './convertToTimeZoneFreeDateTime';

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { formatMomentEn, padWithZeros } from '../date';
+import { formatMomentEn, padWithZeros } from 'capture-core-utils/date';
 
 const dateTimeFormat = 'YYYY-MM-DDTHH:mm:ss.SSS';
 const timeZoneRegex = /(Z|[+-]\d{2}:?\d{2})$/i;
@@ -8,13 +8,13 @@ const timeZoneRegex = /(Z|[+-]\d{2}:?\d{2})$/i;
 export const hasTimeZone = (value: string) => timeZoneRegex.test(value);
 
 /**
- * Parses a DATETIME value to a timezone-free datetime string (YYYY-MM-DDTHH:mm:ss.SSS), or null if invalid
+ * Converts a DATETIME value to a timezone-free datetime string (YYYY-MM-DDTHH:mm:ss.SSS), or null if invalid
  * Values without a timezone are kept as entered.
  * @export
  * @param {*} value - datetime string
  * @returns {string | null}
  */
-export function parseDateTime(value: any): string | null {
+export function convertToTimeZoneFreeDateTime(value: any): string | null {
     if (!value) {
         return null;
     }
