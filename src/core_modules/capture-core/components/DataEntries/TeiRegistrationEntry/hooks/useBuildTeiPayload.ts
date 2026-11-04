@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
-import { dataElementTypes, type RenderFoundation } from '../../../../metaData';
+import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
@@ -48,7 +48,7 @@ export const useBuildTeiPayload = ({
         return {
             attributes,
             trackedEntity: generateUID(),
-            orgUnit: convertClientToServer(dataEntryFieldValues?.orgUnit, dataElementTypes.ORGANISATION_UNIT),
+            orgUnit: dataEntryFieldValues?.orgUnit?.id,
             trackedEntityType: trackedEntityTypeId,
             geometry: tetGeometry,
             enrollments: [],
