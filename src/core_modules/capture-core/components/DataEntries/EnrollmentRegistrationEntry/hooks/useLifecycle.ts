@@ -15,17 +15,17 @@ export const useLifecycle = (
     selectedScopeId: string,
     dataEntryId: string,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
-    orgUnit?: OrgUnit,
+    contextOrgUnit?: OrgUnit,
     teiId?: string,
-    orgUnitId?: string,
+    contextOrgUnitId?: string,
 ) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const program = getTrackerProgramThrowIfNotFound(selectedScopeId);
-    const orgUnitReady = !orgUnitId || !!orgUnit;
+    const defaultOrgUnitReady = !contextOrgUnitId || !!contextOrgUnit;
     const ready =
         useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) &&
-        orgUnitReady &&
+        defaultOrgUnitReady &&
         dataEntryReadyRef.current === true;
     const searchTerms = useSelector(({ newPage }: any) => newPage.prepopulatedData);
     const { scopeType } = useScopeInfo(selectedScopeId);
@@ -41,8 +41,8 @@ export const useLifecycle = (
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
-        orgUnit,
-        orgUnitReady,
+        contextOrgUnit,
+        defaultOrgUnitReady,
         formFoundation,
         teiId,
         searchTerms,
@@ -55,14 +55,14 @@ export const useLifecycle = (
         if (
             dataEntryReadyRef.current === false &&
             formValuesReadyRef.current === true &&
-            orgUnitReady &&
+            defaultOrgUnitReady &&
             scopeType === scopeTypes.TRACKER_PROGRAM &&
             formFoundation
         ) {
             dataEntryReadyRef.current = true;
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
-                    selectedOrgUnit: orgUnit,
+                    contextOrgUnit,
                     selectedScopeId,
                     dataEntryId,
                     formValues,
@@ -78,8 +78,8 @@ export const useLifecycle = (
         scopeType,
         dataEntryId,
         selectedScopeId,
-        orgUnit,
-        orgUnitReady,
+        contextOrgUnit,
+        defaultOrgUnitReady,
         formValuesReadyRef,
         formValues,
         clientValues,

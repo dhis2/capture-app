@@ -17,7 +17,7 @@ export const batchActionTypes = {
 
 export const openDataEntryForNewTeiBatchAsync = async ({
     foundation,
-    orgUnit,
+    contextOrgUnit,
     dataEntryId,
     extraActions = [],
     generatedUniqueValuesCache = {},
@@ -25,7 +25,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     querySingleResource,
 }: {
     foundation: RenderFoundation | null;
-    orgUnit: any;
+    contextOrgUnit: any;
     dataEntryId: string;
     extraActions?: Array<ReduxAction<any, any>>;
     generatedUniqueValuesCache?: any;
@@ -35,7 +35,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     const generatedItemContainers = await getGeneratedUniqueValuesAsync(
         foundation,
         generatedUniqueValuesCache,
-        { orgUnitCode: orgUnit?.code },
+        { orgUnitCode: contextOrgUnit?.code },
         querySingleResource,
     );
 
@@ -55,8 +55,8 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         },
     ];
     const defaultDataEntryValues = {
-        orgUnit: orgUnit
-            ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+        orgUnit: contextOrgUnit
+            ? { id: contextOrgUnit.id, name: contextOrgUnit.name, path: contextOrgUnit.path }
             : undefined,
     };
 

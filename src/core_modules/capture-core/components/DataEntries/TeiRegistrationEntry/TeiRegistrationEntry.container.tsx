@@ -37,7 +37,7 @@ const useInitialiseTeiRegistration = ({
             dispatch(
                 startNewTeiDataEntryInitialisation(
                     {
-                        selectedOrgUnitId: orgUnitId,
+                        contextOrgUnitId: orgUnitId,
                         selectedScopeId,
                         dataEntryId,
                         formFoundation,

@@ -58,7 +58,7 @@ export const batchActionTypes = {
 
 export const openDataEntryForNewEnrollmentBatchAsync = async ({
     program,
-    orgUnit,
+    contextOrgUnit,
     dataEntryId,
     extraActions = [],
     extraDataEntryProps = [],
@@ -69,7 +69,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     formFoundation,
 }: {
     program: TrackerProgram;
-    orgUnit?: CoreOrgUnit;
+    contextOrgUnit?: CoreOrgUnit;
     dataEntryId: string;
     extraActions?: Array<ReduxAction<any, any>>;
     extraDataEntryProps?: Array<any>;
@@ -90,8 +90,8 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         programStageName: stage.name,
     });
     const firstStageEvent = firstStage && fabricateFirstStageEvent(firstStage);
-    const defaultOrgUnit = orgUnit
-        ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+    const defaultOrgUnit = contextOrgUnit
+        ? { id: contextOrgUnit.id, name: contextOrgUnit.name, path: contextOrgUnit.path }
         : undefined;
 
     const dataEntryPropsToInclude = [
@@ -129,7 +129,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
 
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
-        orgUnit,
+        orgUnit: contextOrgUnit,
         currentEvent: firstStageEvent,
         stage: firstStage,
         attributeValues: clientValues,
