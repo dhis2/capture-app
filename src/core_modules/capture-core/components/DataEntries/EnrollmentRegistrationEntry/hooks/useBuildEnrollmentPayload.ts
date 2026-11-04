@@ -186,7 +186,7 @@ export const useBuildEnrollmentPayload = ({
         return {
             teiWithEnrollment: {
                 trackedEntity: teiId || generateUID(),
-                orgUnit: (teiId && trackedEntityOrgUnitId) || enrollmentOrgUnitId,
+                orgUnit: teiId ? trackedEntityOrgUnitId : enrollmentOrgUnitId,
                 trackedEntityType: trackedEntityTypeId || undefined,
                 attributes,
                 geometry: tetGeometry,
