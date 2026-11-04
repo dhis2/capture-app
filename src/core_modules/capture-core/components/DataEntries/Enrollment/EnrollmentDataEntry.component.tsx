@@ -36,10 +36,9 @@ import {
     getOrgUnitValidatorContainers,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment, ProgramStage, RenderFoundation, getTrackerProgramThrowIfNotFound } from '../../../metaData';
+import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
 import { LabelKeys, withCustomLabels } from '../../../customLabels';
 import { EnrollmentWithFirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry';
-import { createsEventsOnEnrollment } from './helpers/createsEventsOnEnrollment';
 import {
     getCategoryOptionsValidatorContainers,
     getEnrollmentCategoryOptionsValidatorContainers,
@@ -376,8 +375,21 @@ const getCategoryOptionsSettingsFn = () => ({
 });
 
 const getAOCSettingsFn = () => ({
-    hideAOC: ({ programId }: { programId: string }) =>
-        !createsEventsOnEnrollment(getTrackerProgramThrowIfNotFound(programId)),
+    hideAOC: ({ programId }: { programId: string }) => {
+        const { stages: stagesMap, useFirstStageDuringRegistration } = getProgramThrowIfNotFound(programId);
+
+        /*
+        Show AOC selection if:
+        - There are any program stages in the program with "Auto-generate"
+        - The "Show first stage on registration page" is selected for the program
+        */
+
+        const stages = [...stagesMap.values()];
+
+        const shouldShowAOC = stages.some((stage: any) => stage.autoGenerateEvent) || useFirstStageDuringRegistration;
+
+        return !shouldShowAOC;
+    },
 });
 
 const getEnrollmentCategoryOptionsSettingsFn = () => ({
