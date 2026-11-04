@@ -4,7 +4,8 @@ import { useOptionGroups } from './useOptionGroups';
 
 type ApiProgram = {
     trackedEntityType: {
-        allowAuditLog: boolean;
+        enableChangeLog?: boolean;
+        allowAuditLog?: boolean;
         [key: string]: any;
     };
     programTrackedEntityAttributes: Array<{
@@ -49,13 +50,14 @@ export const useProgram = (programId: string) => {
     const programMetadata: Program | null = useMemo(() => {
         if (program && optionGroups) {
             const apiProgram = program as ApiProgram;
-            const { allowAuditLog, ...restTrackedEntityType } = apiProgram.trackedEntityType;
+            const { enableChangeLog, allowAuditLog, ...restTrackedEntityType } = apiProgram.trackedEntityType;
 
             return {
                 ...apiProgram,
                 trackedEntityType: {
                     ...restTrackedEntityType,
-                    changelogEnabled: allowAuditLog,
+                    // 2.43+: enableChangeLog. 2.42: controlled by dhis.conf, so always shown. 2.41: allowAuditLog
+                    changelogEnabled: enableChangeLog ?? allowAuditLog ?? true,
                 },
                 programTrackedEntityAttributes: apiProgram.programTrackedEntityAttributes
                     .filter(programTrackedEntityAttribute =>

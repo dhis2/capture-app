@@ -37,10 +37,8 @@ const computeCanToggleCompletion = (
 ): boolean =>
     canEditProgramStage
     && !isEventBlockedByExpiry
-    && (
-        eventStatus === eventStatuses.ACTIVE
-        || (eventStatus === eventStatuses.COMPLETED && hasUncompleteAuthority)
-    );
+    && eventStatus !== eventStatuses.SKIPPED
+    && (eventStatus !== eventStatuses.COMPLETED || hasUncompleteAuthority);
 
 const computeIsEventReadOnly = (
     canEditProgramStage: boolean,
