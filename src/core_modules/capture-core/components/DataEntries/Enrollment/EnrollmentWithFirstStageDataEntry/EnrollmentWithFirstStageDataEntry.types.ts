@@ -7,7 +7,7 @@ export type Props = {
         stage: ProgramStage;
     };
     formFoundation: RenderFoundation;
-    stageOrgUnitIdFieldValue?: string;
+    orgUnitIdFieldValue?: string;
     programId: string;
     relatedStageRef?: { current: RelatedStageRefPayload | null },
     relatedStageActionsOptions?: {

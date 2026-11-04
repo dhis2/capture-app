@@ -17,7 +17,7 @@ const getAOCFieldBuilder = (settings: Settings, InnerComponent: ComponentType<an
         const categories = useGroupedCategoryOptions(
             programCategories,
             // Remove the orgUnitId fallback when the single event form passes orgUnitIdFieldValue (DHIS2-22219)
-            settings?.getOrgUnitId ? settings.getOrgUnitId(props) : orgUnitIdFieldValue ?? orgUnitId,
+            orgUnitIdFieldValue ?? orgUnitId,
             !hideAOC,
         );
 

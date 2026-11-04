@@ -21,10 +21,9 @@ import { convertGeometryOut } from '../../converters';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
-import { getDataEntryPropsToInclude, stageMainDataIds } from '../EnrollmentWithFirstStageDataEntry';
+import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
-import { createsEventsOnEnrollment } from '../helpers/createsEventsOnEnrollment';
 
 const itemId = 'newEnrollment';
 
@@ -85,7 +84,6 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: program.id });
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
-    const createsEvents = createsEventsOnEnrollment(program);
 
     const fabricateFirstStageEvent = (stage: ProgramStage) => ({
         programStageId: stage.id,
@@ -99,11 +97,6 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const dataEntryPropsToInclude = [
         ...buildEnrollmentDataEntryPropsToInclude(orgUnitLabel, program.id),
         ...extraDataEntryProps,
-        ...(createsEvents ? [{
-            id: stageMainDataIds.ORG_UNIT,
-            type: 'ORGANISATION_UNIT',
-            validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel, program.id),
-        }] : []),
         ...(firstStageDataEntryPropsToInclude || []),
         ...(programCategory?.categories?.map(category => ({
             id: `${attributeOptionsKey}-${category.id}`,
@@ -124,7 +117,6 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     const defaultDataEntryValues = {
         enrolledAt: convertDateObjectToDateFormatString(new Date()),
         orgUnit: defaultOrgUnit,
-        ...(createsEvents ? { [stageMainDataIds.ORG_UNIT]: defaultOrgUnit } : {}),
     };
 
     const dataEntryActions =
