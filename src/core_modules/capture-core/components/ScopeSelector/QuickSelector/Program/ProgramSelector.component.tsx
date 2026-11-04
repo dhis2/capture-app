@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 // @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../../../../metaDataMemoryStores';
 import { CategorySelector } from './CategorySelector.component';
-import type { Program } from '../../../../metaData';
+import { useProgramsArray } from './useProgramsArray';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import { EmptyPrograms } from './EmptyPrograms';
 import { ProgramList } from './ProgramList';
@@ -47,14 +47,10 @@ const ProgramSelectorPlain = ({
     classes,
 }: Props) => {
     const [open, setOpen] = useState(false);
-    const [programsArray, setProgramsArray] = useState<Array<Program>>([]);
+    const programsArray = useProgramsArray(selectedOrgUnitId);
     const selectedProgram = selectedProgramId ? programCollection.get(selectedProgramId) : null;
     const programOptions = getOptions(programsArray, selectedOrgUnitId);
     const isMenuDisabled = !handleClickProgram;
-
-    useEffect(() => {
-        setProgramsArray(Array.from(programCollection.values()));
-    }, []);
 
     const renderCategories = () => {
         if (selectedProgram?.categoryCombination) {

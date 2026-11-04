@@ -1,4 +1,6 @@
-import type { Program, Icon } from '../../../../metaData';
+import type { Icon } from '../../../../metaData';
+import type { Program } from './useProgramsArray';
+
 
 const getOptionsFromPrograms = (
     programs: Array<Program>,
