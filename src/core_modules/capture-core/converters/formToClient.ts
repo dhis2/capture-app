@@ -19,14 +19,6 @@ function convertDateTime(formValue: DateTimeValue): string | null {
     return convertLocalToIsoDateTime(formValue.date, formValue.time);
 }
 
-function convertDate(dateValue: string) {
-    try {
-        return convertLocalToIsoCalendar(dateValue);
-    } catch (error) {
-        return '';
-    }
-}
-
 function convertTime(timeValue: string) {
     const parsedTime = parseTime(timeValue);
     if (!parsedTime.isValid) return null;
@@ -35,7 +27,7 @@ function convertTime(timeValue: string) {
 }
 
 function convertAge(ageValue: any) {
-    return convertDate(ageValue.date);
+    return convertLocalToIsoCalendar(ageValue.date);
 }
 
 function convertRange(parser: any, value: RangeValue) {
@@ -58,8 +50,8 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [dataElementTypes.PERCENTAGE]: (value: string) => parseNumber(value.replace('%', '')),
     [dataElementTypes.PERCENTAGE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
-    [dataElementTypes.DATE]: convertDate,
-    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
+    [dataElementTypes.DATE]: convertLocalToIsoCalendar,
+    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertLocalToIsoCalendar, value),
     [dataElementTypes.DATETIME]: convertDateTime,
     [dataElementTypes.DATETIME_RANGE]: (value: RangeValue) => convertRange(convertDateTime, value),
     [dataElementTypes.TIME]: convertTime,
