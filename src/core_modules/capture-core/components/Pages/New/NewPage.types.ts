@@ -32,4 +32,5 @@ export type ContainerProps = {
   trackedEntityName?: string;
   teiDisplayName?: string;
   trackedEntityInstanceAttributes?: Array<InputAttribute>;
+  trackedEntityOrgUnitId?: string;
 };

@@ -47,7 +47,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
-    const { trackedEntityAttributes, loading: isTrackedEntityAttributesLoading } =
+    const { trackedEntityAttributes, trackedEntityOrgUnitId, loading: isTrackedEntityAttributesLoading } =
         useTrackedEntityAttributes(teiId, programId);
     const trackedEntityType = (program && program instanceof TrackerProgram) ? program.trackedEntityType : undefined;
     const teiDisplayName =
@@ -127,6 +127,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
                 error={error}
                 ready={ready}
                 trackedEntityInstanceAttributes={trackedEntityAttributes}
+                trackedEntityOrgUnitId={trackedEntityOrgUnitId}
                 trackedEntityName={trackedEntityType?.name}
                 newPageKey={newPageKey}
             />

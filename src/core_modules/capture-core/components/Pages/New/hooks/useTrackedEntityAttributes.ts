@@ -16,7 +16,7 @@ export const useTrackedEntityAttributes = (teiId?: string, programId?: string) =
             id: teiId,
             params: {
                 program: programId,
-                fields: ['attributes'],
+                fields: ['attributes', 'orgUnit'],
             },
         },
         {
@@ -35,7 +35,7 @@ export const useTrackedEntityAttributes = (teiId?: string, programId?: string) =
             resource: 'tracker/trackedEntities',
             id: teiId,
             params: {
-                fields: ['attributes'],
+                fields: ['attributes', 'orgUnit'],
             },
         },
         {
@@ -70,8 +70,12 @@ export const useTrackedEntityAttributes = (teiId?: string, programId?: string) =
             ((programAttributes as any)?.attributes || (tetAttributes as any)?.attributes || undefined);
     }, [teiId, programAttributesIsError, tetAttributesIsError, programAttributes, tetAttributes]);
 
+    const trackedEntityOrgUnitId: string | undefined =
+        (programAttributes as any)?.orgUnit || (tetAttributes as any)?.orgUnit;
+
     return {
         trackedEntityAttributes,
+        trackedEntityOrgUnitId,
         loading: programAttributesIsLoading || tetAttributesIsLoading,
     };
 };

@@ -38,6 +38,7 @@ const NewPagePlain = ({
     missingCategoriesInProgramSelection,
     trackedEntityName,
     trackedEntityInstanceAttributes,
+    trackedEntityOrgUnitId,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
@@ -88,6 +89,7 @@ const NewPagePlain = ({
                                 selectedScopeId={selectedScopeId}
                                 setScopeId={setScopeId}
                                 trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+                                trackedEntityOrgUnitId={trackedEntityOrgUnitId}
                                 newPageKey={newPageKey}
                             />
                         }

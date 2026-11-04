@@ -64,6 +64,7 @@ export type OwnProps = {
     teiId?: string;
     skipDuplicateCheck?: boolean;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
+    trackedEntityOrgUnitId?: string;
     saveButtonText: (trackedEntityName: string) => string;
     firstStageMetaData?: { stage: ProgramStage } | null;
     relatedStageRef?: { current: RelatedStageRefPayload | null };
@@ -88,7 +89,7 @@ type ContainerProps = {
     saveButtonText: string;
 };
 
-export type Props = Omit<OwnProps, 'saveButtonText' | 'orgUnitId'> & ContainerProps;
+export type Props = Omit<OwnProps, 'saveButtonText' | 'orgUnitId' | 'trackedEntityOrgUnitId'> & ContainerProps;
 
 type PropsAddedInHOC = {
     onPostProcessErrorMessage: (message: string) => string;

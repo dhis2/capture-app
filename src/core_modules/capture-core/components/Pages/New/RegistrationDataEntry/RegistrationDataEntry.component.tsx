@@ -121,6 +121,7 @@ const RegistrationDataEntryPlain = ({
     dataEntryIsReady,
     teiId,
     trackedEntityInstanceAttributes,
+    trackedEntityOrgUnitId,
 }: Props) => {
     const { navigate } = useNavigate();
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
@@ -231,6 +232,7 @@ const RegistrationDataEntryPlain = ({
                                 renderDuplicatesCardActions={renderDuplicatesCardActions}
                                 ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
                                 trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+                                trackedEntityOrgUnitId={trackedEntityOrgUnitId}
                             />
                         </div>
                         {dataEntryIsReady && (
