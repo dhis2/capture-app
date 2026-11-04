@@ -8,7 +8,7 @@ import { teiRegistrationEntryActionTypes } from './TeiRegistrationEntry.actions'
 import { openDataEntryForNewTeiBatchAsync } from '../TrackedEntityInstance';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
-import { getCoreOrgUnitFn } from '../../../metadataRetrieval/coreOrgUnit';
+import { getCoreOrgUnitFn, orgUnitFetched } from '../../../metadataRetrieval/coreOrgUnit';
 
 export const startNewTeiDataEntrySelfInitialisationEpic = (
     action$: any,
@@ -29,12 +29,16 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
             const openTeiPromise = getCoreOrgUnitFn(querySingleResource)(
                 selectedOrgUnitId,
                 store.value.organisationUnits,
-            ).then(({ coreOrgUnit }) => openDataEntryForNewTeiBatchAsync({
+            ).catch((error) => {
+                log.error(errorCreator('org unit could not be fetched')({ selectedOrgUnitId, error }));
+                return { coreOrgUnit: null, cached: true };
+            }).then(({ coreOrgUnit, cached }) => openDataEntryForNewTeiBatchAsync({
                 foundation: formFoundation,
                 orgUnit: coreOrgUnit,
                 dataEntryId,
                 querySingleResource,
                 formValues,
+                extraActions: coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : [],
             }));
 
             return from(openTeiPromise);

@@ -60,8 +60,6 @@ const EnrollmentRegistrationEntryPlain =
       onSave,
       onCancel,
       onPostProcessErrorMessage,
-      orgUnitId,
-      orgUnit,
       orgUnitName,
       teiId,
       isUserInteractionInProgress,

@@ -140,6 +140,12 @@ export class DataElementFactory {
                     }
                 }
 
+                if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT && !contextProps.orgUnitId) {
+                    return {
+                        valid: true,
+                        data: {},
+                    };
+                }
 
                 let requestPromise;
                 if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {

@@ -78,8 +78,6 @@ export type OwnProps = {
 
 type ContainerProps = {
     ready: boolean;
-    orgUnitId: string;
-    orgUnit: any;
     orgUnitName?: string;
     onCancel: () => void;
     isUserInteractionInProgress: boolean;
@@ -90,7 +88,7 @@ type ContainerProps = {
     saveButtonText: string;
 };
 
-export type Props = Omit<OwnProps, 'saveButtonText'> & ContainerProps;
+export type Props = Omit<OwnProps, 'saveButtonText' | 'orgUnitId'> & ContainerProps;
 
 type PropsAddedInHOC = {
     onPostProcessErrorMessage: (message: string) => string;
