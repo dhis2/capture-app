@@ -150,16 +150,15 @@ export class DataElementFactory {
                         }
                     }
 
-                    if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT && !contextProps.orgUnitId) {
-                        return {
-                            valid: true,
-                            data: {},
-                        };
-                    }
-
                     let requestPromise;
                     if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;
+                        if (!orgUnitId) {
+                            return {
+                                valid: true,
+                                data: {},
+                            };
+                        }
                         requestPromise = querySingleResource({
                             resource: 'tracker/trackedEntities',
                             params: {
