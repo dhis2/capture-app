@@ -46,6 +46,29 @@ Given('you are in the main page with program preselected', () => {
         .should('exist');
 });
 
+When(/^you search for the org unit (.*) in the scope selector$/, (searchText) => {
+    cy.get('[data-test="org-unit-selector-container"]')
+        .click();
+    cy.get('input[type="text"]')
+        .type(searchText);
+});
+
+Then('you see that no org units were found', () => {
+    cy.get('[data-test="org-unit-search-no-results"]')
+        .contains('No results found')
+        .should('exist');
+    cy.get('[data-test="org-unit-search-more-results"]')
+        .should('not.exist');
+});
+
+Then('you see a hint to refine the org unit search', () => {
+    cy.get('[data-test="org-unit-search-more-results"]')
+        .contains('Refine your search to find more.')
+        .should('exist');
+    cy.get('[data-test="org-unit-search-no-results"]')
+        .should('not.exist');
+});
+
 Given('you select both org unit and program Malaria case registration', () => {
     cy.get('[data-test="org-unit-selector-container"]')
         .click();

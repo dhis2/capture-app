@@ -68,6 +68,16 @@ Feature: User uses the ScopeSelector to navigate
     When you select org unit that is incompatible with the already selected program
     Then you can see message on the scope selector
 
+  Scenario: Main page > Searching for an org unit without matches
+    Given you are in the main page with no selections made
+    When you search for the org unit zzzz in the scope selector
+    Then you see that no org units were found
+
+  Scenario: Main page > Searching for an org unit with more matches than shown
+    Given you are in the main page with no selections made
+    When you search for the org unit CHC in the scope selector
+    Then you see a hint to refine the org unit search
+
   # New Event page
   Scenario: New event page > Landing on the page
     Given you are in the main page with no selections made
