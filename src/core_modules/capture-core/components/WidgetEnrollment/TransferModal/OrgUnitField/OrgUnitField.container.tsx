@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { DebounceField } from 'capture-ui';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
+import { OrgUnitSearchMessage } from 'capture-core/components/FormFields/New';
 import { OrgUnitTreeComponent } from './OrgUnitField.component';
 import { useSearchScopeWithFallback } from './useSearchScopeWithFallback';
 
@@ -34,6 +35,7 @@ type Props = {
 export const OrgUnitFieldPlain = ({ selected, onSelectClick, classes }: Props) => {
     const [searchText, setSearchText] = useState<string | undefined>(undefined);
     const { orgUnitRoots } = useSearchScopeWithFallback({ searchText });
+    const searchResultCount = searchText && orgUnitRoots ? orgUnitRoots.length : undefined;
 
     const handleFilterChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         const { value } = event.currentTarget;
@@ -51,12 +53,15 @@ export const OrgUnitFieldPlain = ({ selected, onSelectClick, classes }: Props) =
                 />
             </div>
             <div className={classes.orgUnitTreeContainer}>
-                <OrgUnitTreeComponent
-                    treeKey={JSON.stringify(orgUnitRoots)}
-                    roots={orgUnitRoots}
-                    selected={selected}
-                    onSelectClick={onSelectClick}
-                />
+                {searchResultCount !== undefined && <OrgUnitSearchMessage resultCount={searchResultCount} />}
+                {searchResultCount !== 0 && (
+                    <OrgUnitTreeComponent
+                        treeKey={JSON.stringify(orgUnitRoots)}
+                        roots={orgUnitRoots}
+                        selected={selected}
+                        onSelectClick={onSelectClick}
+                    />
+                )}
             </div>
         </div>
     );

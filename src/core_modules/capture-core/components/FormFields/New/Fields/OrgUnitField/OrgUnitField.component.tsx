@@ -6,6 +6,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { DebounceField } from 'capture-ui';
 import { CurrentUser } from '../../../../../utils/userInfo/CurrentUser';
 import { OrgUnitTree } from './OrgUnitTree.component';
+import { OrgUnitSearchMessage, ORG_UNIT_SEARCH_PAGE_SIZE } from './OrgUnitSearchMessage.component';
 
 const getStyles = () => ({
     container: {
@@ -71,7 +72,13 @@ const OrgUnitFieldPlain = (props: Props) => {
 
     const initialRoots = React.useMemo(() => CurrentUser.get().organisationUnits, []);
 
-    const { loading: searchLoading, data: searchData, refetch: refetchOrg } = useDataQuery(
+    const {
+        loading: searchLoading,
+        fetching: searchFetching,
+        called: searchCalled,
+        data: searchData,
+        refetch: refetchOrg,
+    } = useDataQuery(
         React.useMemo(
             () => ({
                 orgUnits: {
@@ -81,7 +88,7 @@ const OrgUnitFieldPlain = (props: Props) => {
                         paging: true,
                         query: currentSearchText,
                         withinUserSearchHierarchy: true,
-                        pageSize: 15,
+                        pageSize: ORG_UNIT_SEARCH_PAGE_SIZE,
                     }),
                 },
             }),
@@ -103,13 +110,23 @@ const OrgUnitFieldPlain = (props: Props) => {
 
     const renderOrgUnitTree = () => {
         if (searchText?.length) {
-            return (<OrgUnitTree
-                roots={(searchData?.orgUnits as any)?.organisationUnits || []}
-                onSelectClick={onSelectClick}
-                ready={ready}
-                treeKey={key}
-                selected={selectedItems}
-            />);
+            const searchRoots = (searchData?.orgUnits as any)?.organisationUnits || [];
+            const searchFinished = searchCalled && !searchFetching;
+            if (searchFinished && !searchRoots.length) {
+                return <OrgUnitSearchMessage resultCount={0} />;
+            }
+            return (
+                <>
+                    {searchFinished && <OrgUnitSearchMessage resultCount={searchRoots.length} />}
+                    <OrgUnitTree
+                        roots={searchRoots}
+                        onSelectClick={onSelectClick}
+                        ready={ready}
+                        treeKey={key}
+                        selected={selectedItems}
+                    />
+                </>
+            );
         }
         return (<OrgUnitTree
             roots={initialRoots}

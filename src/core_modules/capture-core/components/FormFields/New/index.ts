@@ -14,6 +14,10 @@ export { CoordinateField } from './Fields/CoordinateField/CoordinateField.compon
 export { PolygonField } from './Fields/PolygonField/PolygonField.component';
 export { OrgUnitField } from './Fields/OrgUnitField/OrgUnitField.component';
 export { SingleOrgUnitSelectField } from './Fields/OrgUnitField/SingleOrgUnitSelectField.component';
+export {
+    OrgUnitSearchMessage,
+    ORG_UNIT_SEARCH_PAGE_SIZE,
+} from './Fields/OrgUnitField/OrgUnitSearchMessage.component';
 export { TextRangeField } from './Fields/TextField/TextRangeField.component';
 export { DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRangeField.component';
 export { ViewModeField } from './Fields/ViewModeField/ViewModeField.component';

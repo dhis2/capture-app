@@ -1,3 +1,4 @@
+import { ORG_UNIT_SEARCH_PAGE_SIZE } from 'capture-core/components/FormFields/New';
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 
 type Props = {
@@ -39,7 +40,7 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
                 paging: true,
                 query: searchText,
                 withinUserSearchHierarchy: true,
-                pageSize: 15,
+                pageSize: ORG_UNIT_SEARCH_PAGE_SIZE,
             },
         },
         {
