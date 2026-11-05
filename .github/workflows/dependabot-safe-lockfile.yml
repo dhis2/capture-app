@@ -54,7 +54,7 @@ jobs:
           node-version-file: .nvmrc
           cache: ''
 
-      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.0
+      - uses: dhis2/action-safe-yarn-install-with-cache@v1.1.1
         with:
           install-args: --non-interactive --ignore-scripts --ignore-engines --ignore-workspace-root-check
 
