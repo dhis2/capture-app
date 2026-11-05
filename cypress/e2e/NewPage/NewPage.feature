@@ -150,6 +150,13 @@ Feature: User creates a new entries from the registration page
     And you click the save person submit button
     Then you see the enrollment event Edit page
 
+  Scenario: New person in Tracker Program > Submitting the form while the browser translates the page navigates you to the user dashboard
+    Given you are in the WHO RMNCH program registration page
+    When you fill the WHO RMNCH program registration form with its required unique values
+    And the browser translates the save button
+    And you click the save person submit button
+    Then you see the enrollment event Edit page
+
   Scenario: New person in Tracker Program > Submitting the form with enrollment coordinate
     Given you are in Child programme and Buma MCHP organization unit registration page
     When you fill the Child Program program registration form with unique values

@@ -96,7 +96,7 @@ const TeiRegistrationEntryPlain =
                                   onClick={onSave}
                                   loading={isSavingInProgress}
                               >
-                                  {saveButtonText}
+                                  <span>{saveButtonText}</span>
                               </Button>
                           }
 

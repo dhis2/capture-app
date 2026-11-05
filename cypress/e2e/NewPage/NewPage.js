@@ -439,6 +439,29 @@ And('you fill in a unique first name', () => {
         .blur();
 });
 
+const getTextNodes = node => [...node.childNodes].flatMap(child =>
+    (child.nodeType === Node.TEXT_NODE ? [child] : getTextNodes(child)));
+
+const wrapInFontElementsLikeGoogleTranslate = (textNode) => {
+    const ownerDocument = textNode.ownerDocument;
+    const outerFont = ownerDocument.createElement('font');
+    const innerFont = ownerDocument.createElement('font');
+    innerFont.textContent = textNode.textContent;
+    outerFont.appendChild(innerFont);
+    textNode.parentNode.replaceChild(outerFont, textNode);
+};
+
+And('the browser translates the save button', () => {
+    cy.get('[data-test="create-and-link-button"]')
+        .then(($button) => {
+            getTextNodes($button[0])
+                .filter(textNode => textNode.textContent.trim())
+                .forEach(textNode => wrapInFontElementsLikeGoogleTranslate(textNode));
+        });
+    cy.get('[data-test="create-and-link-button"] font font')
+        .should('exist');
+});
+
 And(/^you click the save (.*) submit button$/, (TEType) => {
     cy.contains(`Save ${TEType}`)
         .click();
