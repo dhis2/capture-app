@@ -82,11 +82,11 @@ setFieldValue({
 ### Updating context values
 
 You can also update context values from the plugin using the `setContextFieldValue` function that is passed as a prop to the plugin.
-Context values are values that explains the context of the data, such as the geometry, the date of the event, or the date of enrollment.
+Context values are values that explains the context of the data, such as the org unit, the geometry, the date of the event, or the date of enrollment.
 
 ```ts
 setContextFieldValue({
-    fieldId: 'occurredAt', // The context field you want to update. (occurredAt, enrolledAt, geometry)
+    fieldId: 'occurredAt', // The context field you want to update. (orgUnit, occurredAt, enrolledAt, scheduledAt, geometry)
     value: '2022-01-01',
 });
 ```
@@ -96,6 +96,33 @@ setContextFieldValue({
 The props that a form field plugin can expect are as follows:
 
 ```ts
+type Icon = {
+    name?: string;
+    color?: string;
+}
+
+type Option = {
+    code: string;
+    value: string | number | boolean;
+    text: string;
+    description?: string;
+    icon?: Icon;
+    attributes?: Record<string, any>;
+}
+
+type OptionSet = {
+    options: Option[];
+    inputType: 'dropdown' | 'verticalRadiobuttons' | 'horizontalRadiobuttons';
+    viewType?: 'ICON' | 'ICON_WITH_COLOR';
+    emptyText?: string;
+    attributes?: Record<string, any>;
+}
+
+type Unique = {
+    generatable: boolean;
+    scope: 'entireSystem' | 'organisationUnit';
+}
+
 type fieldsMetadata = {
     name: string;
     shortName: string;
@@ -107,12 +134,16 @@ type fieldsMetadata = {
     type: string;
     displayInForms: boolean;
     displayInReports: boolean;
-    optionSet?: any;
-    icon?: any;
-    unique?: any;
+    optionSet?: OptionSet;
+    icon?: Icon;
+    unique?: Unique;
     searchable?: boolean;
     url?: string;
     attributes?: Record<string, any>;
+    inherit?: boolean;
+    minCharactersToSearch?: number;
+    searchOperator?: string;
+    allowFutureDate?: boolean;
 }
 
 type FieldValueOptions = {
@@ -128,12 +159,17 @@ export type SetFieldValueProps = {
 }
 
 type SetContextFieldValueProps = {
-    fieldId: 'geometry' | 'occurredAt' | 'enrolledAt'
+    fieldId: 'orgUnit' | 'geometry' | 'occurredAt' | 'enrolledAt' | 'scheduledAt'
     value: any,
 }
 
 export type IFormFieldPluginProps = {
-    orgUnitId: string;
+    ownerOrgUnitId: string | undefined;
+    programId: string | undefined;
+    programStageId: string | undefined;
+    enrollmentId: string | undefined;
+    eventId: string | undefined;
+    teiId: string | undefined;
     values: Record<string, any>;
     errors: Record<string, string[]>;
     warnings: Record<string, string[]>;
@@ -144,3 +180,36 @@ export type IFormFieldPluginProps = {
     setContextFieldValue: (values: SetContextFieldValueProps) => void;
 }
 ```
+
+### Org units
+
+A plugin can read two different org units:
+
+- **`props.ownerOrgUnitId`** — the enrollment owner. On tracker, this is where the TEI currently belongs; it can be changed by a transfer. Undefined on event programs and before an enrollment exists.
+- **`props.values.orgUnit`** — the org unit set in the form itself (the widget value). This is the org unit the record will be saved under.
+
+Both exist because an enrollment can be owned by one org unit while its events happen in another. Use `ownerOrgUnitId` when you need the TEI's home; use `values.orgUnit?.id` when you need the current form value.
+
+### What each page exposes
+
+Context ids:
+
+| Page | `programId` | `programStageId` | `ownerOrgUnitId` | `enrollmentId` | `teiId` | `eventId` |
+|---|---|---|---|---|---|---|
+| Tracker **New TEI** | ✓ | — | — | — | ✓ (when enrolling an existing TEI) | — |
+| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ | — | ✓ | ✓ | ✓ | — |
+| Tracker **New event** | ✓ | ✓ | ✓ | ✓ | ✓ | — |
+| Tracker **Event edit/view** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Event program **New event** | ✓ | ✓ | — | — | — | — |
+| Event program **Event edit/view** | ✓ | ✓ | — | — | — | ✓ |
+
+Form values (`props.values.*`):
+
+| Page | `orgUnit` | `enrolledAt` | `occurredAt` | `scheduledAt` | `geometry` |
+|---|---|---|---|---|---|
+| Tracker **New TEI** | ✓ | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
+| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ (the owner org unit) | ✓ | ✓ (if program has an incident date) | — | ✓ (if enrollment has geometry) |
+| Tracker **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
+| Tracker **Event edit/view** | ✓ | — | ✓ | ✓ (if event was ever scheduled) | ✓ (if form has geometry) |
+| Event program **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
+| Event program **Event edit/view** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
