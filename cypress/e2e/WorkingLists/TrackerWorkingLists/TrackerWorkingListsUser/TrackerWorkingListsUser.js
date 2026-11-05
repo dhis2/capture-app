@@ -3,6 +3,29 @@ import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
+const PROGRAM_STAGE_VIEW_LABEL = 'Custom Program stage list';
+const PROGRAM_STAGE_VIEW_NAME_PREFIX = 'stageView-';
+const PROGRAM_STAGE_VIEW_NAME = `${PROGRAM_STAGE_VIEW_NAME_PREFIX}${Date.now()}`;
+const STALE_VIEW_AGE_MS = 30 * 60 * 1000;
+const viewNamesByLabel = { [PROGRAM_STAGE_VIEW_LABEL]: PROGRAM_STAGE_VIEW_NAME };
+const toViewName = label => viewNamesByLabel[label] ?? label;
+
+const isStaleProgramStageView = name =>
+    name.startsWith(PROGRAM_STAGE_VIEW_NAME_PREFIX) &&
+    Number(name.slice(PROGRAM_STAGE_VIEW_NAME_PREFIX.length)) < Date.now() - STALE_VIEW_AGE_MS;
+
+const isLeftoverProgramStageView = ({ name }) =>
+    [PROGRAM_STAGE_VIEW_LABEL, PROGRAM_STAGE_VIEW_NAME].includes(name) || isStaleProgramStageView(name);
+
+const cleanUpProgramStageViews = programId =>
+    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,name&paging=false`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            (body.programStageWorkingLists ?? []).filter(isLeftoverProgramStageView).forEach(({ id }) =>
+                cy.buildApiUrl('programStageWorkingLists', id)
+                    .then(resourceUrl => cy.request('DELETE', resourceUrl)));
+        });
+
 const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
     cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
         .then(url => cy.request(url))
@@ -92,7 +115,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis default t
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'qDkgAbB5Jlk', 'Custom Program stage list');
+    cleanUpProgramStageViews('qDkgAbB5Jlk');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -113,7 +136,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 });
 
 Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'M3xtLkYBlKI', 'Custom Program stage list');
+    cleanUpProgramStageViews('M3xtLkYBlKI');
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
@@ -470,7 +493,7 @@ When('you save the list with the name Custom Program stage list', () => {
     cy.get('[data-test="view-name-content"]')
         .within(() => {
             cy.get('input[type="text"]')
-                .type('Custom Program stage list')
+                .type(PROGRAM_STAGE_VIEW_NAME)
                 .blur();
         });
 
@@ -538,7 +561,9 @@ When('you delete the name Custom Program stage list', () => {
     cy.get('button')
         .contains('Confirm')
         .click();
-    cy.wait('@deleteProgramStageWorkingLists', { timeout: 30000 });
+    cy.wait('@deleteProgramStageWorkingLists', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 200);
 });
 
 When(/^you set the date filter "([^"]+)" to (.+) and (.+)$/, (filterName, startDate, endDate) => {
@@ -835,14 +860,14 @@ Then('the saved tracker working list view is cleaned up', () => {
 Then(/^the new ?(.*) is created/, (name) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
-            cy.contains(name).should('exist');
+            cy.contains(toViewName(name)).should('exist');
         });
 });
 
 Then(/^the ?(.*) is deleted/, (name) => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
-            cy.contains(name).should('not.exist');
+            cy.contains(toViewName(name)).should('not.exist');
         });
 });
 
