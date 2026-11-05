@@ -28,7 +28,7 @@ const OrgUnitSearchMessagePlain = ({ resultCount, classes }: Props) => {
     if (resultCount >= ORG_UNIT_SEARCH_PAGE_SIZE) {
         return (
             <div className={classes.message} data-test="org-unit-search-more-results">
-                {i18n.t('Showing the first {{pageSize}} results. Refine your search to find more.', {
+                {i18n.t('Showing the first {{pageSize}} search results, please refine your search to see more.', {
                     pageSize: ORG_UNIT_SEARCH_PAGE_SIZE,
                 })}
             </div>

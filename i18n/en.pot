@@ -624,8 +624,8 @@ msgstr "Clear"
 msgid "No results found"
 msgstr "No results found"
 
-msgid "Showing the first {{pageSize}} results. Refine your search to find more."
-msgstr "Showing the first {{pageSize}} results. Refine your search to find more."
+msgid "Showing the first {{pageSize}} search results, please refine your search to see more."
+msgstr "Showing the first {{pageSize}} search results, please refine your search to see more."
 
 msgid "Description"
 msgstr "Description"

@@ -63,7 +63,7 @@ Then('you see that no org units were found', () => {
 
 Then('you see a hint to refine the org unit search', () => {
     cy.get('[data-test="org-unit-search-more-results"]')
-        .contains('Refine your search to find more.')
+        .contains('please refine your search to see more.')
         .should('exist');
     cy.get('[data-test="org-unit-search-no-results"]')
         .should('not.exist');
