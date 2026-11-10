@@ -1,48 +1,31 @@
-import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
-import { v4 as uuid } from 'uuid';
+import { After, defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
 import { truncateFilterLabelForTest } from '../../../../support/filterLabelTestUtils';
 
-const PROGRAM_STAGE_VIEW_LABEL = 'Custom Program stage list';
-const PROGRAM_STAGE_VIEW_NAME_PREFIX = 'stageView-';
-const PROGRAM_STAGE_VIEW_NAME = `${PROGRAM_STAGE_VIEW_NAME_PREFIX}${Date.now()}`;
-const STALE_VIEW_AGE_MS = 30 * 60 * 1000;
-const viewNamesByLabel = { [PROGRAM_STAGE_VIEW_LABEL]: PROGRAM_STAGE_VIEW_NAME };
-const toViewName = label => viewNamesByLabel[label] ?? label;
+const VIEW_NAME = `trackerView-${Date.now()}`;
+const WORKING_LIST_RESOURCES = ['trackedEntityInstanceFilters', 'programStageWorkingLists'];
 
-const isStaleProgramStageView = name =>
-    name.startsWith(PROGRAM_STAGE_VIEW_NAME_PREFIX) &&
-    Number(name.slice(PROGRAM_STAGE_VIEW_NAME_PREFIX.length)) < Date.now() - STALE_VIEW_AGE_MS;
-
-const isLeftoverProgramStageView = ({ name }) =>
-    [PROGRAM_STAGE_VIEW_LABEL, PROGRAM_STAGE_VIEW_NAME].includes(name) || isStaleProgramStageView(name);
-
-const cleanUpProgramStageViews = programId =>
-    cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,name&paging=false`)
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            (body.programStageWorkingLists ?? []).filter(isLeftoverProgramStageView).forEach(({ id }) =>
-                cy.buildApiUrl('programStageWorkingLists', id)
-                    .then(resourceUrl => cy.request('DELETE', resourceUrl)));
-        });
-
-const cleanUpWorkingListIfApplicable = (resource, programId, displayName) => {
-    cy.buildApiUrl(`${resource}?filter=program.id:eq:${programId}&fields=id,displayName`)
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            const matches = body[resource]?.filter(e => e.displayName === displayName) ?? [];
-            matches.forEach((match) => {
-                cy.buildApiUrl(resource, match.id)
-                    .then(resourceUrl => cy.request('DELETE', resourceUrl));
+const deleteSavedViews = () => {
+    WORKING_LIST_RESOURCES.forEach((resource) => {
+        cy.buildApiUrl(`${resource}?filter=name:eq:${VIEW_NAME}&fields=id&paging=false`)
+            .then(url => cy.request(url))
+            .then(({ body }) => {
+                (body[resource] ?? []).forEach(({ id }) =>
+                    cy.buildApiUrl(resource, id)
+                        .then(resourceUrl => cy.request('DELETE', resourceUrl)));
             });
-        });
+    });
 };
+
+After({ tags: '@with-working-list-view-cleanup' }, () => {
+    deleteSavedViews();
+});
+
 Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
 Given('you open the main page with Ngelehun and child programme default template context', () => {
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'IpHINAT79UW', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default');
 });
 
@@ -51,13 +34,10 @@ Given('you open the main page with child programe context', () => {
 });
 
 Given('you open the main page with Ngelehun and TEI value types program context', () => {
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'ur1Edk5Oe2n', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&selectedTemplateId=ur1Edk5Oe2n-default');
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 });
 
@@ -66,7 +46,6 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -87,7 +66,6 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context', () => {
-    cleanUpWorkingListIfApplicable('programStageWorkingLists', 'WSGAb5XwJ3Y', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -105,17 +83,14 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis context', () => {
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'My custom list');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis default template context', () => {
-    cleanUpWorkingListIfApplicable('trackedEntityInstanceFilters', 'qDkgAbB5Jlk', 'trackerStoredWorkingList');
     cy.visit('#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default');
 });
 
 Given('you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context', () => {
-    cleanUpProgramStageViews('qDkgAbB5Jlk');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
     cy.get('[data-test="tracker-working-lists"]')
@@ -136,7 +111,6 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
 });
 
 Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
-    cleanUpProgramStageViews('M3xtLkYBlKI');
     cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
 });
 
@@ -464,7 +438,7 @@ Then('you see the custom TEI working lists', () => {
         });
 });
 
-When('you save the list with the name My custom list', () => {
+When('you save the TEI view', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Save current view')
@@ -473,7 +447,7 @@ When('you save the list with the name My custom list', () => {
     cy.get('[data-test="view-name-content"]')
         .within(() => {
             cy.get('input[type="text"]')
-                .type('My custom list')
+                .type(VIEW_NAME)
                 .blur();
         });
 
@@ -481,10 +455,12 @@ When('you save the list with the name My custom list', () => {
     cy.get('button')
         .contains('Save')
         .click();
-    cy.wait('@newTrackedEntityInstanceFilters', { timeout: 30000 });
+    cy.wait('@newTrackedEntityInstanceFilters', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 201);
 });
 
-When('you save the list with the name Custom Program stage list', () => {
+When('you save the program stage view', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Save current view')
@@ -493,7 +469,7 @@ When('you save the list with the name Custom Program stage list', () => {
     cy.get('[data-test="view-name-content"]')
         .within(() => {
             cy.get('input[type="text"]')
-                .type(PROGRAM_STAGE_VIEW_NAME)
+                .type(VIEW_NAME)
                 .blur();
         });
 
@@ -501,10 +477,12 @@ When('you save the list with the name Custom Program stage list', () => {
     cy.get('button')
         .contains('Save')
         .click();
-    cy.wait('@newProgramStageWorkingLists', { timeout: 30000 });
+    cy.wait('@newProgramStageWorkingLists', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 201);
 });
 
-When('you update the list with the name My custom list', () => {
+When('you update the TEI view', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -514,21 +492,7 @@ When('you update the list with the name My custom list', () => {
     cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
 });
 
-When(/^you update the tracker tei view with the name (.+)$/, (_name) => {
-    cy.get('[data-test="list-view-menu-button"]').click();
-    cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFiltersByName');
-    cy.contains('Update view').click();
-    cy.wait('@editTrackedEntityInstanceFiltersByName', { timeout: 30000 });
-});
-
-When(/^you update the tracker program stage view with the name (.+)$/, (_name) => {
-    cy.get('[data-test="list-view-menu-button"]').click();
-    cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingListsByName');
-    cy.contains('Update view').click();
-    cy.wait('@editProgramStageWorkingListsByName', { timeout: 30000 });
-});
-
-When('you update the list with the name Custom Program stage list', () => {
+When('you update the program stage view', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
 
@@ -538,7 +502,7 @@ When('you update the list with the name Custom Program stage list', () => {
     cy.wait('@editProgramStageWorkingLists', { timeout: 30000 });
 });
 
-When('you delete the name My custom list', () => {
+When('you delete the TEI view', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
@@ -548,10 +512,12 @@ When('you delete the name My custom list', () => {
     cy.get('button')
         .contains('Confirm')
         .click();
-    cy.wait('@deleteTrackedEntityInstanceFilters', { timeout: 30000 });
+    cy.wait('@deleteTrackedEntityInstanceFilters', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 200);
 });
 
-When('you delete the name Custom Program stage list', () => {
+When('you delete the program stage view', () => {
     cy.get('[data-test="list-view-menu-button"]')
         .click();
     cy.contains('Delete view')
@@ -725,52 +691,6 @@ When(/^you set the program stage organisation unit filter "([^"]+)" to "([^"]+)"
     });
 });
 
-When(/^you save the view as (.*)$/, (name) => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Save current view')
-        .click();
-
-    cy.get('[data-test="view-name-content"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .type(name)
-                .blur();
-        });
-
-    cy.intercept('POST', '**/trackedEntityInstanceFilters**').as('newTrackerFilterResult');
-
-    cy.get('button')
-        .contains('Save')
-        .click();
-
-    cy.wait('@newTrackerFilterResult', { timeout: 30000 });
-});
-
-When(/^you save the program stage view as (.*)$/, (name) => {
-    cy.get('[data-test="list-view-menu-button"]')
-        .click();
-
-    cy.contains('Save current view')
-        .click();
-
-    cy.get('[data-test="view-name-content"]')
-        .within(() => {
-            cy.get('input[type="text"]')
-                .type(name)
-                .blur();
-        });
-
-    cy.intercept('POST', '**/programStageWorkingLists**').as('newTrackerFilterResult');
-
-    cy.get('button')
-        .contains('Save')
-        .click();
-
-    cy.wait('@newTrackerFilterResult', { timeout: 30000 });
-});
-
 Then(/^the text filter "([^"]+)" should be in effect and show (.*) when opened$/, (filterName, value) => {
     const chipLabel = truncateFilterLabelForTest(`${filterName}: ${value}`);
     cy.get('[data-test="tracker-working-lists"]').contains(chipLabel).should('be.visible');
@@ -843,31 +763,17 @@ Then(/^the program stage organisation unit filter "([^"]+)" should be in effect 
     cy.get('body').click(0, 0);
 });
 
-Then('the saved tracker working list view is cleaned up', () => {
-    cy.get('@newTrackerFilterResult').then((result) => {
-        expect(result.response.statusCode).to.equal(201);
-        const body = result.response?.body;
-        const id = body?.response?.uid ?? body?.uid;
-        const resource = result.request?.url?.includes('programStageWorkingLists')
-            ? 'programStageWorkingLists'
-            : 'trackedEntityInstanceFilters';
-        cy.buildApiUrl(resource, id).then((url) => {
-            cy.request('DELETE', url);
-        });
-    });
-});
-
-Then(/^the new ?(.*) is created/, (name) => {
+Then('the saved view chip is shown', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
-            cy.contains(toViewName(name)).should('exist');
+            cy.contains(VIEW_NAME).should('exist');
         });
 });
 
-Then(/^the ?(.*) is deleted/, (name) => {
+Then('the saved view chip is removed', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
-            cy.contains(toViewName(name)).should('not.exist');
+            cy.contains(VIEW_NAME).should('not.exist');
         });
 });
 
@@ -879,12 +785,10 @@ When('you create a copy of the working list',
         cy.contains('Save current view as')
             .click();
 
-        const id = uuid();
-
         cy.get('[data-test="view-name-content"]')
             .within(() => {
                 cy.get('input[type="text"]')
-                    .type(id)
+                    .type(VIEW_NAME)
                     .blur();
             });
 
