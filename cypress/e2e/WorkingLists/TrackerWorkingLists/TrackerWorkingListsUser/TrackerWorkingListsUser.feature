@@ -1,3 +1,4 @@
+@with-working-list-view-cleanup
 Feature: User interacts with tei working lists
 
 Scenario: The TEI custom working can be shared
@@ -105,15 +106,15 @@ Scenario: The user creates, updates and deletes a TEI custom working list
   And you apply the current filter
   And you set the enrollment date to a relative range
   And you apply the current filter
-  When you save the list with the name My custom list
-  Then the new My custom list is created
+  When you save the TEI view
+  Then the view is saved
   And the enrollment status filter button should show that the completed filter is in effect
   When you set the enrollment status filter to active
   And you apply the current filter
-  When you update the list with the name My custom list
+  When you update the TEI view
   Then the enrollment status filter button should show that the active filter is in effect
-  And you delete the name My custom list
-  Then the My custom list is deleted
+  And you delete the TEI view
+  Then the view is deleted
 
 Scenario: The user is navigated back to the selected working list after closing a TEI
   Given you open the main page with Ngelehun and child programe context
@@ -128,10 +129,10 @@ Scenario: The user can delete a TEI working list right immediately after creatin
   And you apply the current filter
   And you set the enrollment date to a relative range
   And you apply the current filter
-  When you save the list with the name My custom list
-  Then the new My custom list is created
-  When you delete the name My custom list
-  Then the My custom list is deleted
+  When you save the TEI view
+  Then the view is saved
+  When you delete the TEI view
+  Then the view is deleted
 
 Scenario: The user can open and select a program stage filter
   Given you open the main page with Ngelehun and Malaria focus investigation context
@@ -229,12 +230,12 @@ Scenario: The assigned user data is kept when switching between working list typ
   Then the assignee filter button should show that None filter is in effect
 
 Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
-  Given you open a clean main page with Ngelehun and Malaria focus investigation context
+  Given you open the main page with Ngelehun and Malaria focus investigation context
   And you filter by assigned Foci investigation & classification events
-  When you save the list with the name Custom Program stage list
-  Then the new Custom Program stage list is created
-  And you delete the name Custom Program stage list
-  Then the Custom Program stage list is deleted
+  When you save the program stage view
+  Then the view is saved
+  And you delete the program stage view
+  Then the view is deleted
 
 Scenario: The user creates, updates and deletes a Program stage custom working list
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
@@ -242,93 +243,87 @@ Scenario: The user creates, updates and deletes a Program stage custom working l
   And you apply the current filter
   And you set the enrollment date to a relative range
   And you apply the current filter
-  When you save the list with the name Custom Program stage list
-  Then the new Custom Program stage list is created
+  When you save the program stage view
+  Then the view is saved
   And the enrollment status filter button should show that the completed filter is in effect
   When you set the enrollment status filter to active
   And you apply the current filter
-  When you update the list with the name Custom Program stage list
+  When you update the program stage view
   Then the enrollment status filter button should show that the active filter is in effect
-  And you delete the name Custom Program stage list
-  Then the Custom Program stage list is deleted
+  And you delete the program stage view
+  Then the view is deleted
 
 Scenario: The user can delete a Program stage working list right immediately after creating it.
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
-  When you save the list with the name Custom Program stage list
-  Then the new Custom Program stage list is created
-  And you delete the name Custom Program stage list
-  Then the Custom Program stage list is deleted
+  When you save the program stage view
+  Then the view is saved
+  And you delete the program stage view
+  Then the view is deleted
 # For the program stage WL scenarios I need to create/delete my own because there are no program stage working lists in the demo database.
 
 Scenario: The Program stage custom working can be shared
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
-  And you save the list with the name Custom Program stage list
+  And you save the program stage view
   When you change the sharing settings
   Then you see the new sharing settings
 
 Scenario: The Program stage working list configuration is kept when changing the org unit
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
-  And you save the list with the name Custom Program stage list
-  Then the new Custom Program stage list is created
+  And you save the program stage view
+  Then the view is saved
   And you set the event status filter to completed
   And you apply the current filter
   And you change the org unit
   Then the working list configuration was kept
-  And you delete the name Custom Program stage list
-  And the Custom Program stage list is deleted
+  And you delete the program stage view
+  And the view is deleted
 
 Scenario: The user can save a program stage working list, based on a TEI working list configuration
-  Given you open a clean main page with Ngelehun and Malaria focus investigation context
+  Given you open the main page with Ngelehun and Malaria focus investigation context
   Then you see the custom TEI working lists
   And you can load the view with the name Ongoing foci responses
   And you open the program stage filters from the more filters dropdown menu
   And you select the Foci response program stage
   And you apply the current filter
   Then you are redirect to the default templete
-  When you save the list with the name Custom Program stage list
-  Then the new Custom Program stage list is created
+  When you save the program stage view
+  Then the view is saved
   And the TEI working list initial configuration was kept
-  And you delete the name Custom Program stage list
-  Then the Custom Program stage list is deleted
+  And you delete the program stage view
+  Then the view is deleted
 
 Scenario: Save and load view with active filters for - EMAIL
   Given you open the main page with Ngelehun and WHO RMNCH Tracker context
   When you set the text filter "Email address" to test@example.com
-  And you save the view as trackerStoredWorkingList
+  And you save the TEI view
   And you refresh the page
   Then the text filter "Email address" should be in effect and show test@example.com when opened
-  And the saved tracker working list view is cleaned up
-
 @v>=42
 Scenario: Save and load view with isEmpty filtering for - EMAIL
   Given you open the main page with Ngelehun and WHO RMNCH Tracker context
   When you set the isEmpty filter "Email address" to Is empty
-  And you save the view as trackerStoredWorkingList
+  And you save the TEI view
   And you refresh the page
   Then the isEmpty filter "Email address" should be in effect and show Is empty when opened
   When you set the isEmpty filter "Email address" to Is not empty
-  And you update the tracker tei view with the name trackerStoredWorkingList
+  And you update the TEI view
   And you refresh the page
   Then the isEmpty filter "Email address" should be in effect and show Is not empty when opened
-  And the saved tracker working list view is cleaned up
-
 Scenario: Save and load view with active filters for - BOOLEAN, LONG_TEXT
   Given you open the main page with Ngelehun and child programme default template context
   When you set the boolean filter
   And you set the text filter "Apgar comment" to some long text comment
-  And you save the program stage view as trackerStoredWorkingList
+  And you save the program stage view
   And you refresh the page
   Then the boolean filter should be in effect and show the correct value when opened
   And the text filter "Apgar comment" should be in effect and show some long text comment when opened
-  And the saved tracker working list view is cleaned up
-
 @v>=42
 Scenario: Save and load view with isEmpty filtering for - BOOLEAN, LONG_TEXT, FILE_RESOURCE
   Given you open the main page with Ngelehun and child programme default template context
   When you set the isEmpty filter "BCG dose" to Is empty
   And you set the isEmpty filter "Apgar comment" to Is empty
   And you set the isEmpty filter "Birth certificate" to Is empty
-  And you save the program stage view as trackerStoredWorkingList
+  And you save the program stage view
   And you refresh the page
   Then the isEmpty filter "BCG dose" should be in effect and show Is empty when opened
   And the isEmpty filter "Apgar comment" should be in effect and show Is empty when opened
@@ -336,13 +331,11 @@ Scenario: Save and load view with isEmpty filtering for - BOOLEAN, LONG_TEXT, FI
   When you set the isEmpty filter "BCG dose" to Is not empty
   And you set the isEmpty filter "Apgar comment" to Is not empty
   And you set the isEmpty filter "Birth certificate" to Is not empty
-  And you update the tracker program stage view with the name trackerStoredWorkingList
+  And you update the program stage view
   And you refresh the page
   Then the isEmpty filter "BCG dose" should be in effect and show Is not empty when opened
   And the isEmpty filter "Apgar comment" should be in effect and show Is not empty when opened
   And the isEmpty filter "Birth certificate" should be in effect and show Is not empty when opened
-  And the saved tracker working list view is cleaned up
-
 Scenario: Save and load view with active filters for - INTEGER_POSITIVE, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE, PERCENTAGE, DATE, ORGANISATION_UNIT
   Given you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context
   When you set the range filter "WHOMCH Fetal heart rate on admission" to 60-180
@@ -353,7 +346,7 @@ Scenario: Save and load view with active filters for - INTEGER_POSITIVE, INTEGER
   And you set the range filter "WHOMCH Respiratory rate" to -20--5
   And you set the date filter "WHOMCH Date of induction of labor" to 2000-01-01 and 2010-12-31
   And you set the program stage organisation unit filter "WHOMCH Hospital / Birth clinic" to "Ngelehun"
-  And you save the program stage view as trackerStoredWorkingList
+  And you save the program stage view
   And you refresh the page
   Then the range filter "WHOMCH Fetal heart rate on admission" should be in effect and show 60 to 180 when opened
   And the range filter "WHOMCH Estimated blood loss (ml)" should be in effect and show 0 to 500 when opened
@@ -363,8 +356,6 @@ Scenario: Save and load view with active filters for - INTEGER_POSITIVE, INTEGER
   And the range filter "WHOMCH Respiratory rate" should be in effect and show -20 to -5 when opened
   And the date filter "WHOMCH Date of induction of labor" should be in effect and show 2000-01-01 to 2010-12-31 when opened
   And the program stage organisation unit filter "WHOMCH Hospital / Birth clinic" should be in effect and show "Ngelehun" when opened
-  And the saved tracker working list view is cleaned up
-
 @v>=42
 Scenario: Save and load view with isEmpty filtering for - INTEGER_POSITIVE, PERCENTAGE, DATE, ORGANISATION_UNIT, INTEGER_ZERO_OR_POSITIVE, INTEGER_NEGATIVE
   Given you open the main page with Ngelehun, WHO RMNCH Tracker and Care at birth context
@@ -374,7 +365,7 @@ Scenario: Save and load view with isEmpty filtering for - INTEGER_POSITIVE, PERC
   And you set the isEmpty filter "WHOMCH Respiratory rate" to Is empty
   And you set the isEmpty filter "WHOMCH Date of induction of labor" to Is empty
   And you set the isEmpty filter "WHOMCH Hospital / Birth clinic" to Is empty
-  And you save the program stage view as trackerStoredWorkingList
+  And you save the program stage view
   And you refresh the page
   Then the isEmpty filter "WHOMCH Fetal heart rate on admission" should be in effect and show Is empty when opened
   And the isEmpty filter "WHOMCH Body temperature" should be in effect and show Is empty when opened
@@ -388,7 +379,7 @@ Scenario: Save and load view with isEmpty filtering for - INTEGER_POSITIVE, PERC
   And you set the isEmpty filter "WHOMCH Respiratory rate" to Is not empty
   And you set the isEmpty filter "WHOMCH Date of induction of labor" to Is not empty
   And you set the isEmpty filter "WHOMCH Hospital / Birth clinic" to Is not empty
-  And you update the tracker program stage view with the name trackerStoredWorkingList
+  And you update the program stage view
   And you refresh the page
   Then the isEmpty filter "WHOMCH Fetal heart rate on admission" should be in effect and show Is not empty when opened
   And the isEmpty filter "WHOMCH Body temperature" should be in effect and show Is not empty when opened
@@ -396,43 +387,35 @@ Scenario: Save and load view with isEmpty filtering for - INTEGER_POSITIVE, PERC
   And the isEmpty filter "WHOMCH Respiratory rate" should be in effect and show Is not empty when opened
   And the isEmpty filter "WHOMCH Date of induction of labor" should be in effect and show Is not empty when opened
   And the isEmpty filter "WHOMCH Hospital / Birth clinic" should be in effect and show Is not empty when opened
-  And the saved tracker working list view is cleaned up
-
 Scenario: Save and load view with active filters for - TRUE_ONLY
   Given you open the main page with Ngelehun and Malaria case diagnosis default template context
   When you set the option filter "Date of birth (mal) is estimated" to Yes
-  And you save the view as trackerStoredWorkingList
+  And you save the TEI view
   And you refresh the page
   Then the option filter "Date of birth (mal) is estimated" should be in effect and show Yes when opened
-  And the saved tracker working list view is cleaned up
-
 @v>=42
 Scenario: Save and load view with isEmpty filtering for - TRUE_ONLY
   Given you open the main page with Ngelehun and Malaria case diagnosis default template context
   When you set the isEmpty filter "Date of birth (mal) is estimated" to Is empty
-  And you save the view as trackerStoredWorkingList
+  And you save the TEI view
   And you refresh the page
   Then the isEmpty filter "Date of birth (mal) is estimated" should be in effect and show Is empty when opened
   When you set the isEmpty filter "Date of birth (mal) is estimated" to Is not empty
-  And you update the tracker tei view with the name trackerStoredWorkingList
+  And you update the TEI view
   And you refresh the page
   Then the isEmpty filter "Date of birth (mal) is estimated" should be in effect and show Is not empty when opened
-  And the saved tracker working list view is cleaned up
-
 Scenario: Save and load view with active filters for - TEXT, AGE, NUMBER, PHONE_NUMBER
   Given you open the main page with Ngelehun and TEI value types program context
   And you set the date filter "Age" to 1990-01-01 and 2010-12-31
   And you set the range filter "Height in cm" to 100-200
   And you set the text filter "Phone number" to 12345678
   When you set the text filter "First name" to test
-  And you save the view as trackerStoredWorkingList
+  And you save the TEI view
   And you refresh the page
   And the date filter "Age" should be in effect and show 1990-01-01 to 2010-12-31 when opened
   And the range filter "Height in cm" should be in effect and show 100 to 200 when opened
   And the text filter "Phone number" should be in effect and show 12345678 when opened
   Then the text filter "First name" should be in effect and show test when opened
-  And the saved tracker working list view is cleaned up
-
 @v>=42
 Scenario: Save and load view with isEmpty filtering for - PHONE_NUMBER, NUMBER, AGE, TEXT
   Given you open the main page with Ngelehun and TEI value types program context
@@ -440,7 +423,7 @@ Scenario: Save and load view with isEmpty filtering for - PHONE_NUMBER, NUMBER, 
   And you set the isEmpty filter "Height in cm" to Is empty
   And you set the isEmpty filter "Age" to Is empty
   And you set the isEmpty filter "First name" to Is empty
-  And you save the view as trackerStoredWorkingList
+  And you save the TEI view
   And you refresh the page
   When the isEmpty filter "Phone number" should be in effect and show Is empty when opened
   And the isEmpty filter "Height in cm" should be in effect and show Is empty when opened
@@ -450,14 +433,12 @@ Scenario: Save and load view with isEmpty filtering for - PHONE_NUMBER, NUMBER, 
   And you set the isEmpty filter "Phone number" to Is not empty
   And you set the isEmpty filter "Height in cm" to Is not empty
   And you set the isEmpty filter "Age" to Is not empty
-  And you update the tracker tei view with the name trackerStoredWorkingList
+  And you update the TEI view
   And you refresh the page
   Then the isEmpty filter "First name" should be in effect and show Is not empty when opened
   And the isEmpty filter "Phone number" should be in effect and show Is not empty when opened
   And the isEmpty filter "Height in cm" should be in effect and show Is not empty when opened
   And the isEmpty filter "Age" should be in effect and show Is not empty when opened
-  And the saved tracker working list view is cleaned up
-
 @v<42
 Scenario: EMPTY_ONLY filter types (COORDINATE, FILE_RESOURCE, IMAGE, URL) are not visible in filter list
   Given you open the main page with Ngelehun and child programme default template context
