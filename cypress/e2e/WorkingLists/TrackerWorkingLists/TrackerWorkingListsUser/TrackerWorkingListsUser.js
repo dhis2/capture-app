@@ -110,10 +110,6 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
         .click();
 });
 
-Given('you open a clean main page with Ngelehun and Malaria focus investigation context', () => {
-    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
-});
-
 Then('the default working list should be displayed', () => {
     const names = [
         'Filona',
@@ -489,7 +485,9 @@ When('you update the TEI view', () => {
     cy.intercept('PUT', '**/trackedEntityInstanceFilters/**').as('editTrackedEntityInstanceFilters');
     cy.contains('Update view')
         .click();
-    cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 });
+    cy.wait('@editTrackedEntityInstanceFilters', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 200);
 });
 
 When('you update the program stage view', () => {
@@ -499,7 +497,9 @@ When('you update the program stage view', () => {
     cy.intercept('PUT', '**/programStageWorkingLists/**').as('editProgramStageWorkingLists');
     cy.contains('Update view')
         .click();
-    cy.wait('@editProgramStageWorkingLists', { timeout: 30000 });
+    cy.wait('@editProgramStageWorkingLists', { timeout: 30000 })
+        .its('response.statusCode')
+        .should('eq', 200);
 });
 
 When('you delete the TEI view', () => {
@@ -763,14 +763,14 @@ Then(/^the program stage organisation unit filter "([^"]+)" should be in effect 
     cy.get('body').click(0, 0);
 });
 
-Then('the saved view chip is shown', () => {
+Then('the view is saved', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
             cy.contains(VIEW_NAME).should('exist');
         });
 });
 
-Then('the saved view chip is removed', () => {
+Then('the view is deleted', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .within(() => {
             cy.contains(VIEW_NAME).should('not.exist');

@@ -107,14 +107,14 @@ Scenario: The user creates, updates and deletes a TEI custom working list
   And you set the enrollment date to a relative range
   And you apply the current filter
   When you save the TEI view
-  Then the saved view chip is shown
+  Then the view is saved
   And the enrollment status filter button should show that the completed filter is in effect
   When you set the enrollment status filter to active
   And you apply the current filter
   When you update the TEI view
   Then the enrollment status filter button should show that the active filter is in effect
   And you delete the TEI view
-  Then the saved view chip is removed
+  Then the view is deleted
 
 Scenario: The user is navigated back to the selected working list after closing a TEI
   Given you open the main page with Ngelehun and child programe context
@@ -130,9 +130,9 @@ Scenario: The user can delete a TEI working list right immediately after creatin
   And you set the enrollment date to a relative range
   And you apply the current filter
   When you save the TEI view
-  Then the saved view chip is shown
+  Then the view is saved
   When you delete the TEI view
-  Then the saved view chip is removed
+  Then the view is deleted
 
 Scenario: The user can open and select a program stage filter
   Given you open the main page with Ngelehun and Malaria focus investigation context
@@ -230,12 +230,12 @@ Scenario: The assigned user data is kept when switching between working list typ
   Then the assignee filter button should show that None filter is in effect
 
 Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
-  Given you open a clean main page with Ngelehun and Malaria focus investigation context
+  Given you open the main page with Ngelehun and Malaria focus investigation context
   And you filter by assigned Foci investigation & classification events
   When you save the program stage view
-  Then the saved view chip is shown
+  Then the view is saved
   And you delete the program stage view
-  Then the saved view chip is removed
+  Then the view is deleted
 
 Scenario: The user creates, updates and deletes a Program stage custom working list
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
@@ -244,21 +244,21 @@ Scenario: The user creates, updates and deletes a Program stage custom working l
   And you set the enrollment date to a relative range
   And you apply the current filter
   When you save the program stage view
-  Then the saved view chip is shown
+  Then the view is saved
   And the enrollment status filter button should show that the completed filter is in effect
   When you set the enrollment status filter to active
   And you apply the current filter
   When you update the program stage view
   Then the enrollment status filter button should show that the active filter is in effect
   And you delete the program stage view
-  Then the saved view chip is removed
+  Then the view is deleted
 
 Scenario: The user can delete a Program stage working list right immediately after creating it.
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
   When you save the program stage view
-  Then the saved view chip is shown
+  Then the view is saved
   And you delete the program stage view
-  Then the saved view chip is removed
+  Then the view is deleted
 # For the program stage WL scenarios I need to create/delete my own because there are no program stage working lists in the demo database.
 
 Scenario: The Program stage custom working can be shared
@@ -270,16 +270,16 @@ Scenario: The Program stage custom working can be shared
 Scenario: The Program stage working list configuration is kept when changing the org unit
   Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
   And you save the program stage view
-  Then the saved view chip is shown
+  Then the view is saved
   And you set the event status filter to completed
   And you apply the current filter
   And you change the org unit
   Then the working list configuration was kept
   And you delete the program stage view
-  And the saved view chip is removed
+  And the view is deleted
 
 Scenario: The user can save a program stage working list, based on a TEI working list configuration
-  Given you open a clean main page with Ngelehun and Malaria focus investigation context
+  Given you open the main page with Ngelehun and Malaria focus investigation context
   Then you see the custom TEI working lists
   And you can load the view with the name Ongoing foci responses
   And you open the program stage filters from the more filters dropdown menu
@@ -287,10 +287,10 @@ Scenario: The user can save a program stage working list, based on a TEI working
   And you apply the current filter
   Then you are redirect to the default templete
   When you save the program stage view
-  Then the saved view chip is shown
+  Then the view is saved
   And the TEI working list initial configuration was kept
   And you delete the program stage view
-  Then the saved view chip is removed
+  Then the view is deleted
 
 Scenario: Save and load view with active filters for - EMAIL
   Given you open the main page with Ngelehun and WHO RMNCH Tracker context
