@@ -30,5 +30,5 @@ export function convertIsoToLocalCalendar(isoDate: string | null | undefined): s
 
     const localDate = convertFromIso8601(formattedIsoDate, calendar as any);
 
-    return formatCalendarDate(localDate, { format: dateFormat === 'DD-MM-YYYY' ? 'DD-MM-YYYY' : 'YYYY-MM-DD' });
+    return formatCalendarDate(localDate, { format: dateFormat });
 }
