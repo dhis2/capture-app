@@ -12,6 +12,7 @@ import type {
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
     CachedCategory,
+    CachedDataElement,
 } from '../../storageControllers';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { BuildProgramsInput } from './buildPrograms.types';
@@ -48,6 +49,14 @@ function getCategories(
         }, {}));
 }
 
+function getDataElements(
+    storageController: StorageController,
+    storeName: string,
+): Promise<Map<string, CachedDataElement>> {
+    return storageController.getAll(storeName)
+        .then(dataElements => new Map(dataElements.map(dataElement => [dataElement.id, dataElement])));
+}
+
 export async function getBuilderPrerequisites() {
     const storageController = getUserMetadataStorageController();
 
@@ -57,6 +66,7 @@ export async function getBuilderPrerequisites() {
     const cachedProgramIndicatorsPromise = getProgramIndicators(storageController, stores.PROGRAM_INDICATORS);
     const cachedRelationshipTypesPromise = getRelationshipTypes(storageController, stores.RELATIONSHIP_TYPES);
     const cachedCategoriesPromise = getCategories(storageController, stores.CATEGORIES);
+    const cachedDataElementsPromise = getDataElements(storageController, stores.DATA_ELEMENTS);
 
     return Promise.all([
         cachedProgramsPromise,
@@ -65,6 +75,7 @@ export async function getBuilderPrerequisites() {
         cachedProgramIndicatorsPromise,
         cachedRelationshipTypesPromise,
         cachedCategoriesPromise,
+        cachedDataElementsPromise,
     ]);
 }
 
@@ -160,6 +171,7 @@ function getBuiltPrograms(
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
     cachedCategories: {[categoryId: string]: CachedCategory},
+    cachedDataElements: Map<string, CachedDataElement>,
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     locale: string | null,
 ) {
@@ -169,6 +181,7 @@ function getBuiltPrograms(
         cachedTrackedEntityAttributes,
         cachedTrackedEntityTypes,
         cachedCategories,
+        cachedDataElements,
         trackedEntityTypeCollection,
         locale,
     );
@@ -237,6 +250,7 @@ export async function buildPrograms({
         cachedProgramIndicators,
         cachedRelationshipTypes,
         cachedCategories,
+        cachedDataElements,
     ] = await getBuilderPrerequisites();
 
     const programs = await getBuiltPrograms(
@@ -246,6 +260,7 @@ export async function buildPrograms({
         cachedTrackedEntityAttributes,
         cachedTrackedEntityTypes,
         cachedCategories,
+        cachedDataElements,
         trackedEntityTypeCollection,
         locale,
     );
