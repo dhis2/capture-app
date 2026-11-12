@@ -37,27 +37,33 @@ export const loadMetaDataInternal = async () => {
         trackedEntityTypeIds,
         changesDetected,
         stalePrograms,
+        optionSetsFromProgramsLoaded,
     } = await loadPrograms();
 
-    changesDetected && await loadCoreMetaData();
+    const optionSetIdsFromPrograms = new Set(optionSetsOutlineFromPrograms.map(({ id }) => id));
 
-    const {
-        trackedEntityAttributeIds: trackedEntityAttributeIdsFromTrackedEntityTypes,
-        optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
-    } = await loadTrackedEntityTypes(trackedEntityTypeIds);
+    const loadTrackedEntityTypesAndDependencies = async () => {
+        const {
+            trackedEntityAttributeIds: trackedEntityAttributeIdsFromTrackedEntityTypes,
+            optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
+        } = await loadTrackedEntityTypes(trackedEntityTypeIds);
 
-    await loadTrackedEntityAttributes([
-        ...trackedEntityAttributeIdsFromPrograms,
-        ...trackedEntityAttributeIdsFromTrackedEntityTypes,
-    ]);
+        await Promise.all([
+            loadTrackedEntityAttributes([
+                ...trackedEntityAttributeIdsFromPrograms,
+                ...trackedEntityAttributeIdsFromTrackedEntityTypes,
+            ]),
+            loadOptionSets(optionSetsOutlineFromTrackedEntityTypes
+                .filter(({ id }) => !optionSetIdsFromPrograms.has(id))),
+        ]);
+    };
 
-    await loadDataElements(dataElementIds);
-
-    await loadCategories(categories);
-
-    await loadOptionSets([
-        ...optionSetsOutlineFromPrograms,
-        ...optionSetsOutlineFromTrackedEntityTypes,
+    await Promise.all([
+        optionSetsFromProgramsLoaded,
+        changesDetected && loadCoreMetaData(),
+        loadTrackedEntityTypesAndDependencies(),
+        loadDataElements(dataElementIds),
+        loadCategories(categories),
     ]);
 
     // set program version to cache to confirm loading of programs and their dependencies

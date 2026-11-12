@@ -6,6 +6,7 @@ import {
     storeOrganisationUnitsByProgram,
 } from './quickStoreOperations';
 import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
+import { loadOptionSets } from '../optionSets';
 import type { StalePrograms } from '../storeLoaders.types';
 
 const getCachedProgramsOutline = () => {
@@ -83,9 +84,11 @@ const loadProgramBatch = (() => {
 
 
     return async (programIds) => {
-        await storeOrganisationUnitsByProgram(programIds);
-        const { convertedData: programs = [] } = await storePrograms(programIds);
-        await loadRulesCentricMetadata(programIds);
+        const [, { convertedData: programs = [] }] = await Promise.all([
+            storeOrganisationUnitsByProgram(programIds),
+            storePrograms(programIds),
+            loadRulesCentricMetadata(programIds),
+        ]);
 
         return programs
             .map(({
@@ -191,6 +194,9 @@ export const loadPrograms = async () => {
     const stalePrograms = getStalePrograms(apiProgramsOutline, cachedProgramsOutline);
     const staleProgramIds = stalePrograms.map(({ id }) => id);
 
+    const { optionSetsOutline } = getSideEffects(apiProgramsOutline, []);
+    const optionSetsFromProgramsLoaded = loadOptionSets(optionSetsOutline);
+
     const programBatches = chunk(staleProgramIds, 50);
     const programsDataForSideEffects: Array<any> = (await Promise.all(
         programBatches
@@ -199,6 +205,7 @@ export const loadPrograms = async () => {
 
     return {
         ...getSideEffects(apiProgramsOutline, programsDataForSideEffects),
+        optionSetsFromProgramsLoaded,
         stalePrograms,
     };
 };

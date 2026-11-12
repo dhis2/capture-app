@@ -28,28 +28,42 @@ const quickStoreIteration = async (
         queryVariables,
     });
 
-    return !(rawResponse && rawResponse.pager && rawResponse.pager.nextPage);
+    return rawResponse?.pager;
 };
 
-const executeRecursiveQuickStore = (
+const getRemainingIterations = (pageCount: number) =>
+    Array.from({ length: pageCount - 1 }, (_, index) => index + 2);
+
+const executeRecursiveQuickStore = async (
     recursiveQuery: RecursiveQuery,
     storeName: StoreName,
     convertQueryResponse: ConvertQueryResponseFn,
 ) => {
-    const next = async (iteration = 1) => {
-        const done = await quickStoreIteration(recursiveQuery, storeName, {
-            convertQueryResponse,
-            queryVariables: {
-                iteration,
-            },
-        });
+    const storeIteration = (iteration: number) => quickStoreIteration(recursiveQuery, storeName, {
+        convertQueryResponse,
+        queryVariables: {
+            iteration,
+        },
+    });
 
-        if (!done) {
+    const next = async (iteration: number) => {
+        const pager = await storeIteration(iteration);
+        if (pager?.nextPage) {
             await next(iteration + 1);
         }
     };
 
-    return next();
+    const firstPager = await storeIteration(1);
+    if (!firstPager?.nextPage) {
+        return;
+    }
+
+    if (firstPager.pageCount) {
+        await Promise.all(getRemainingIterations(firstPager.pageCount).map(storeIteration));
+        return;
+    }
+
+    await next(2);
 };
 
 const getRecursiveQuery = (query: ApiQuery, iterationSize: number) => ({
