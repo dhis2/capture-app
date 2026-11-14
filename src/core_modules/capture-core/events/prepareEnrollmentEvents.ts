@@ -4,6 +4,7 @@ import type { CaptureClientEvent } from 'capture-core-utils/types/global';
 import type { ApiEnrollmentEvent, ApiDataValue } from 'capture-core-utils/types/api-types';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
+import { convertTimestamp } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 import type { EventData, EventsData } from '../rules/RuleEngine/types/ruleEngine.types';
 
@@ -61,7 +62,7 @@ function convertMainProperties(apiEvent: ApiEnrollmentEvent): (CaptureClientEven
                 if (inputKey === 'occurredAt' || inputKey === 'scheduledAt' || inputKey === 'completedAt') {
                     convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
                 } else if (inputKey === 'createdAt' || inputKey === 'createdAtClient') {
-                    convertedValue = convertValue(valueToConvert, dataElementTypes.DATETIME);
+                    convertedValue = convertTimestamp(valueToConvert);
                 } else {
                     convertedValue = valueToConvert;
                 }

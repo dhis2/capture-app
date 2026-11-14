@@ -5,6 +5,7 @@ import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
 import { localeCompareStrings } from '../../../../../../utils/localeCompareStrings';
+import { convertToTimeZoneFreeDateTime } from '../../../../../../utils/converters/date';
 
 
 const sortNumber = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
@@ -72,6 +73,37 @@ const sortTime = (clientValueA: any, clientValueB: any, direction: string, optio
     if (direction === SORT_DIRECTION.ASC) {
         if (clientValueA !== clientValueB) {
             return moment(clientValueA).unix() - moment(clientValueB).unix();
+        }
+        return moment(eventDateA).unix() - moment(eventDateB).unix();
+    }
+
+    return 0;
+};
+
+// Client values can be legacy values with a timezone, so sort on the displayed value.
+// moment.utc keeps the wall-clock time, avoiding daylight saving shifts in the browser time zone.
+// Empty values sort as the latest time, as sortTime does: first when descending and last when ascending.
+const toSortableDateTime = (clientValue: any) => {
+    const dateTime = convertToTimeZoneFreeDateTime(clientValue);
+    return dateTime ? moment.utc(dateTime).valueOf() : Number.POSITIVE_INFINITY;
+};
+
+const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
+    const dateTimeA = toSortableDateTime(clientValueA);
+    const dateTimeB = toSortableDateTime(clientValueB);
+    const { eventDateA, eventDateB } = options;
+
+    // most recent dates first
+    if (direction === SORT_DIRECTION.DESC) {
+        if (dateTimeA !== dateTimeB) {
+            return dateTimeB - dateTimeA;
+        }
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    }
+
+    if (direction === SORT_DIRECTION.ASC) {
+        if (dateTimeA !== dateTimeB) {
+            return dateTimeA - dateTimeB;
         }
         return moment(eventDateA).unix() - moment(eventDateB).unix();
     }
@@ -147,7 +179,7 @@ const sortForTypes = {
     [dataElementTypes.BOOLEAN]: sortText,
     [dataElementTypes.TRUE_ONLY]: sortText,
     [dataElementTypes.DATE]: sortTime,
-    [dataElementTypes.DATETIME]: sortTime,
+    [dataElementTypes.DATETIME]: sortDateTime,
     [dataElementTypes.TIME]: sortTime,
     [dataElementTypes.PERCENTAGE]: sortText,
     [dataElementTypes.URL]: sortText,

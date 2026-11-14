@@ -1,7 +1,5 @@
 import moment from 'moment';
-import {
-    convertToIso8601,
-} from '@dhis2/multi-calendar-dates';
+import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { padWithZeros } from 'capture-core-utils/date';
 
@@ -16,11 +14,14 @@ export function convertLocalToIsoCalendar(localDate: string | null | undefined):
         return '';
     }
 
-    const calendar = systemSettingsStore.get().calendar;
+    try {
+        const calendar = systemSettingsStore.get().calendar;
+        const { year, month, day } = convertToIso8601(localDate, calendar as any);
+        const dateString = `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
+        const parsedMoment = moment(dateString);
 
-    const { year, month, day } = convertToIso8601(localDate, calendar as any);
-    const dateString = `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
-    const parsedMoment = moment(dateString);
-
-    return parsedMoment.isValid() ? parsedMoment.toISOString() : '';
+        return parsedMoment.isValid() ? parsedMoment.toISOString() : '';
+    } catch {
+        return '';
+    }
 }

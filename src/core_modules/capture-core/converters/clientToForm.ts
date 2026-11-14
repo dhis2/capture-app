@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { formatMomentEn } from 'capture-core-utils/date';
-import { convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertToTimeZoneFreeDateTime } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
 import { stringifyNumber } from './common/stringifyNumber';
@@ -8,6 +8,7 @@ import { stringifyNumber } from './common/stringifyNumber';
 type DateTimeFormValue = {
     date: string;
     time: string;
+    originalValue?: string;
 };
 
 type AgeFormValue = {
@@ -27,9 +28,17 @@ function convertDateForEdit(rawValue: string): string {
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
+    const dateTime = convertToTimeZoneFreeDateTime(rawValue);
+    if (!dateTime) {
+        return { date: '', time: '' };
+    }
+
+    const momentDateTime = moment.utc(dateTime);
     return {
-        date: convertIsoToLocalCalendar(rawValue),
-        time: formatMomentEn(rawValue, 'HH:mm'),
+        date: convertIsoToLocalCalendar(formatMomentEn(momentDateTime, 'YYYY-MM-DD')),
+        time: formatMomentEn(momentDateTime, 'HH:mm'),
+        // kept so an unchanged value is sent back to the server as stored
+        originalValue: rawValue,
     };
 }
 
