@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the BIMONTHLY period containing a date 1`] = `
+Object {
+  "endDate": "2024-06-30",
+  "id": "202403B",
+  "startDate": "2024-05-01",
+}
+`;
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the DAILY period containing a date 1`] = `
+Object {
+  "endDate": "2024-06-15",
+  "id": "20240615",
+  "startDate": "2024-06-15",
+}
+`;
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the FYAPR period containing a date 1`] = `
+Object {
+  "endDate": "2025-03-31",
+  "id": "2024April",
+  "startDate": "2024-04-01",
+}
+`;
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the MONTHLY period containing a date 1`] = `
+Object {
+  "endDate": "2024-06-30",
+  "id": "202406",
+  "startDate": "2024-06-01",
+}
+`;
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the QUARTERLY period containing a date 1`] = `
+Object {
+  "endDate": "2024-06-30",
+  "id": "2024Q2",
+  "startDate": "2024-04-01",
+}
+`;
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the SIXMONTHLY period containing a date 1`] = `
+Object {
+  "endDate": "2024-06-30",
+  "id": "2024S1",
+  "startDate": "2024-01-01",
+}
+`;
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the WEEKLY period containing a date 1`] = `
+Object {
+  "endDate": "2024-06-16",
+  "id": "2024W24",
+  "startDate": "2024-06-10",
+}
+`;
+
+exports[`getFixedPeriodByDate as used by the expiredPeriod validator finds the YEARLY period containing a date 1`] = `
+Object {
+  "endDate": "2024-12-31",
+  "id": "2024",
+  "startDate": "2024-01-01",
+}
+`;
+
+exports[`multi-calendar-dates usage (ethiopian) convertFromIso8601 converts 2024-01-01 1`] = `
+Object {
+  "day": 22,
+  "eraYear": 2016,
+  "month": 4,
+  "year": 7516,
+}
+`;
+
+exports[`multi-calendar-dates usage (ethiopian) convertFromIso8601 converts 2024-06-15 1`] = `
+Object {
+  "day": 8,
+  "eraYear": 2016,
+  "month": 10,
+  "year": 7516,
+}
+`;
+
+exports[`multi-calendar-dates usage (ethiopian) convertFromIso8601 converts 2024-12-31 1`] = `
+Object {
+  "day": 22,
+  "eraYear": 2017,
+  "month": 4,
+  "year": 7517,
+}
+`;
+
+exports[`multi-calendar-dates usage (ethiopian) convertToIso8601 round trips local dates 1`] = `
+Array [
+  Object {
+    "day": 1,
+    "month": 1,
+    "year": 2024,
+  },
+  Object {
+    "day": 15,
+    "month": 6,
+    "year": 2024,
+  },
+  Object {
+    "day": 31,
+    "month": 12,
+    "year": 2024,
+  },
+]
+`;
+
+exports[`multi-calendar-dates usage (ethiopian) formats a converted date with temporalToString (AgeField) 1`] = `
+Array [
+  "22-04-2016",
+  "08-10-2016",
+  "22-04-2017",
+]
+`;
+
+exports[`multi-calendar-dates usage (gregory) convertFromIso8601 converts 2024-01-01 1`] = `
+Object {
+  "day": 1,
+  "eraYear": 2024,
+  "month": 1,
+  "year": 2024,
+}
+`;
+
+exports[`multi-calendar-dates usage (gregory) convertFromIso8601 converts 2024-06-15 1`] = `
+Object {
+  "day": 15,
+  "eraYear": 2024,
+  "month": 6,
+  "year": 2024,
+}
+`;
+
+exports[`multi-calendar-dates usage (gregory) convertFromIso8601 converts 2024-12-31 1`] = `
+Object {
+  "day": 31,
+  "eraYear": 2024,
+  "month": 12,
+  "year": 2024,
+}
+`;
+
+exports[`multi-calendar-dates usage (gregory) convertToIso8601 round trips local dates 1`] = `
+Array [
+  Object {
+    "day": 1,
+    "month": 1,
+    "year": 2024,
+  },
+  Object {
+    "day": 15,
+    "month": 6,
+    "year": 2024,
+  },
+  Object {
+    "day": 31,
+    "month": 12,
+    "year": 2024,
+  },
+]
+`;
+
+exports[`multi-calendar-dates usage (gregory) formats a converted date with temporalToString (AgeField) 1`] = `
+Array [
+  "01-01-2024",
+  "15-06-2024",
+  "31-12-2024",
+]
+`;
+
+exports[`multi-calendar-dates usage (nepali) convertFromIso8601 converts 2024-01-01 1`] = `
+Object {
+  "day": 16,
+  "eraYear": 2080,
+  "month": 9,
+  "year": 2080,
+}
+`;
+
+exports[`multi-calendar-dates usage (nepali) convertFromIso8601 converts 2024-06-15 1`] = `
+Object {
+  "day": 1,
+  "eraYear": 2081,
+  "month": 3,
+  "year": 2081,
+}
+`;
+
+exports[`multi-calendar-dates usage (nepali) convertFromIso8601 converts 2024-12-31 1`] = `
+Object {
+  "day": 16,
+  "eraYear": 2081,
+  "month": 9,
+  "year": 2081,
+}
+`;
+
+exports[`multi-calendar-dates usage (nepali) convertToIso8601 round trips local dates 1`] = `
+Array [
+  Object {
+    "day": 1,
+    "month": 1,
+    "year": 2024,
+  },
+  Object {
+    "day": 15,
+    "month": 6,
+    "year": 2024,
+  },
+  Object {
+    "day": 31,
+    "month": 12,
+    "year": 2024,
+  },
+]
+`;
+
+exports[`multi-calendar-dates usage (nepali) formats a converted date with temporalToString (AgeField) 1`] = `
+Array [
+  "16-09-2080",
+  "01-03-2081",
+  "16-09-2081",
+]
+`;

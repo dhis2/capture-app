@@ -47,7 +47,7 @@ type State = {
     submitAttempted: boolean;
 };
 
-const isFromAfterTo = (from: DateTimeValue, to: DateTimeValue): boolean => {
+export const isFromAfterTo = (from: DateTimeValue, to: DateTimeValue): boolean => {
     if (!from.date || !to.date) {
         return false;
     }
