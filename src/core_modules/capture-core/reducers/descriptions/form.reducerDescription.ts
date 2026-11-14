@@ -61,7 +61,7 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
-        const assignEffects: { [id: string]: Array<AssignOutputEffectWithValidations> } =
+        const assignEffects: AssignOutputEffectWithValidations =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
         if (!assignEffects) {
             return state;
@@ -74,7 +74,7 @@ export const formsValuesDesc = createReducerDescription({
                 ...state[payload.formId],
                 ...Object.keys(assignEffects).reduce((acc, id) => {
                     const effectsForId = assignEffects[id];
-                    const value: any = effectsForId[0].value;
+                    const value = effectsForId[0].value;
                     const currentValue = state[payload.formId]?.[id];
                     acc[id] = currentValue?.originalValue && value &&
                         currentValue.date === value.date && currentValue.time === value.time
