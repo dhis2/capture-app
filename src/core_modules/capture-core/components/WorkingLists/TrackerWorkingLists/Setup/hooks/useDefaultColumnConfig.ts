@@ -98,7 +98,6 @@ const buildSearchFilterMetaById = (program: TrackerProgram): Map<string, SearchF
 
 const getTEIMetaDataConfig = (
     attributes: Array<any>,
-    orgUnitId: string | null | undefined,
     searchFilterMetaById: Map<string, SearchFilterMeta>,
 ): Array<MetadataColumnConfig> =>
     attributes.map((attribute) => {
@@ -109,7 +108,6 @@ const getTEIMetaDataConfig = (
             name,
             formName,
             optionSet,
-            searchable,
             unique,
         } = attribute;
         const filterMeta = searchFilterMetaById.get(id);
@@ -120,7 +118,6 @@ const getTEIMetaDataConfig = (
             header: formName || name,
             options: optionSet?.options?.map(({ text, value }) => ({ text, value })),
             multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
-            filterHidden: !(orgUnitId || searchable || unique),
             unique: Boolean(unique),
             searchOperator: filterMeta?.searchOperator ?? attribute.searchOperator,
             minCharactersToSearch: filterMeta?.minCharactersToSearch ?? attribute.minCharactersToSearch,
@@ -140,7 +137,6 @@ const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> 
 
 export const useDefaultColumnConfig = (
     program: TrackerProgram,
-    orgUnitId: string | null | undefined,
     programStageId: string | null | undefined,
 ): TrackerWorkingListsColumnConfigs => {
     const { orgUnitLabel, eventLabel } = useTermLabel(
@@ -155,7 +151,7 @@ export const useDefaultColumnConfig = (
 
         const defaultColumns = [
             ...getMainConfig(hasDisplayInReportsAttributes, orgUnitLabel),
-            ...getTEIMetaDataConfig(attributes, orgUnitId, searchFilterMetaById),
+            ...getTEIMetaDataConfig(attributes, searchFilterMetaById),
         ];
 
         if (programStageId && programStage) {
@@ -165,5 +161,5 @@ export const useDefaultColumnConfig = (
             ]);
         }
         return defaultColumns;
-    }, [orgUnitId, program, programStageId, orgUnitLabel, eventLabel]);
+    }, [program, programStageId, orgUnitLabel, eventLabel]);
 };
