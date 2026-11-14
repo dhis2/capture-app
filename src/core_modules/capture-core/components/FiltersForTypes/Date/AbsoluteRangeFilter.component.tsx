@@ -4,15 +4,16 @@ import { cx } from '@emotion/css';
 import i18n from '@dhis2/d2-i18n';
 import { Temporal } from '@js-temporal/polyfill';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
-import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
+import { convertLocalToIsoDate } from '../../../utils/converters/date';
 import type { DateValue } from './date.types';
 
 function isFromAfterTo(valueFrom: string, valueTo: string): boolean {
-    const from = convertLocalToIsoCalendar(valueFrom);
-    const to = convertLocalToIsoCalendar(valueTo);
-    const fromIso = Temporal.PlainDate.from(from.split('T')[0]);
-    const toIso = Temporal.PlainDate.from(to.split('T')[0]);
-    return Temporal.PlainDate.compare(fromIso, toIso) > 0;
+    const fromIso = convertLocalToIsoDate(valueFrom);
+    const toIso = convertLocalToIsoDate(valueTo);
+    if (!fromIso || !toIso) {
+        return false;
+    }
+    return Temporal.PlainDate.compare(Temporal.PlainDate.from(fromIso), Temporal.PlainDate.from(toIso)) > 0;
 }
 
 export function getAbsoluteRangeErrors(

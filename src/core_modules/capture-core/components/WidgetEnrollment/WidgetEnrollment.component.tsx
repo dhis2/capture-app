@@ -106,7 +106,7 @@ const WidgetEnrollmentPlain = ({
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const updatedAtDateTime: string = convertValue(
-        fromServerDate(enrollment?.updatedAt).toISOString(), dataElementTypes.DATETIME,
+        fromServerDate(enrollment?.updatedAt).getClientZonedISOString(), dataElementTypes.DATETIME,
     );
     const geometryType = getGeometryType(enrollment?.geometry?.type);
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);

@@ -1,12 +1,6 @@
 import i18n from '@dhis2/d2-i18n';
-import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
+import { convertDateTimeForDisplay } from '../../../../../../utils/converters/date';
 import type { DateTimeFilterData } from '../../../../../FiltersForTypes/DateTime/dateTime.types';
-
-function formatDateTime(isoDatetime: string): string {
-    const [datePart, timePart] = isoDatetime.split('T');
-    if (!datePart) return isoDatetime;
-    return `${convertIsoToLocalCalendar(datePart)} ${timePart?.slice(0, 5) ?? ''}`.trim();
-}
 
 export function convertDateTime(filter: DateTimeFilterData): string {
     let appliedText = '';
@@ -16,17 +10,17 @@ export function convertDateTime(filter: DateTimeFilterData): string {
     const leHasValue = !!le;
 
     if (geHasValue && leHasValue) {
-        const fromText = formatDateTime(ge);
-        const toText = formatDateTime(le);
+        const fromText = convertDateTimeForDisplay(ge);
+        const toText = convertDateTimeForDisplay(le);
         if (fromText === toText) {
             appliedText = fromText;
         } else {
             appliedText = i18n.t('{{fromDate}} to {{toDate}}', { fromDate: fromText, toDate: toText });
         }
     } else if (geHasValue) {
-        appliedText = i18n.t('after or equal to {{date}}', { date: formatDateTime(ge) });
+        appliedText = i18n.t('after or equal to {{date}}', { date: convertDateTimeForDisplay(ge) });
     } else if (leHasValue) {
-        appliedText = i18n.t('before or equal to {{date}}', { date: formatDateTime(le) });
+        appliedText = i18n.t('before or equal to {{date}}', { date: convertDateTimeForDisplay(le) });
     }
 
     return appliedText;

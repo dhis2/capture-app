@@ -71,26 +71,31 @@ const styles: Readonly<any> = {
     },
 };
 
-const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (date: string) => Date) => {
+const getLastUpdatedAt = (
+    events: Array<ApiEnrollmentEvent>,
+    fromServerDate: (date: string) => Date & { getClientZonedISOString: () => string },
+) => {
     const lastEventUpdated = events.reduce((acc, event) => (
         new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
     ));
 
-    if (lastEventUpdated) {
-        const { updatedAt } = lastEventUpdated;
-        const localDateTime = convertValueClientToView(updatedAt, dataElementTypes.DATETIME) as string;
-        return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
-            ? (
-                <>
-                    {i18n.t('Last updated')}&nbsp;
-                    <Tooltip content={localDateTime}>
-                        {moment(fromServerDate(updatedAt)).fromNow()}
-                    </Tooltip>
-                </>
-            )
-            : null;
+    const { updatedAt } = lastEventUpdated;
+    if (!updatedAt || !moment(updatedAt).isValid()) {
+        return null;
     }
-    return null;
+
+    const serverDate = fromServerDate(updatedAt);
+    const localDateTime = convertValueClientToView(
+        serverDate.getClientZonedISOString(), dataElementTypes.DATETIME,
+    ) as string;
+    return (
+        <>
+            {i18n.t('Last updated')}&nbsp;
+            <Tooltip content={localDateTime}>
+                {moment(serverDate).fromNow()}
+            </Tooltip>
+        </>
+    );
 };
 
 export const StageOverviewPlain = ({

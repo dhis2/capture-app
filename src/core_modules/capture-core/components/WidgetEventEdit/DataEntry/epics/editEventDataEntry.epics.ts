@@ -11,7 +11,7 @@ import {
 } from '../editEventDataEntry.actions';
 import { getProgramThrowIfNotFound } from '../../../../metaData';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
-import { convertTimestamp } from '../../../../converters/serverToClient';
+import { convertTimestamp } from '../../../../utils/converters/date';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,

@@ -1,13 +1,19 @@
+import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
-import { convertLocalToIsoCalendar, convertLocalToIsoDate } from '../utils/converters/date';
+import {
+    convertLocalToIsoCalendar,
+    convertLocalToIsoDateTime,
+    convertToTimeZoneFreeDateTime,
+} from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string;
     time: string;
+    originalValue?: string;
 };
 
 type RangeValue = {
@@ -16,19 +22,13 @@ type RangeValue = {
 };
 
 function convertDateTime(formValue: DateTimeValue): string | null {
-    const parsedTime = parseTime(formValue.time);
-    const isoDate = convertLocalToIsoDate(formValue.date);
-    if (!parsedTime.isValid || !isoDate) return null;
-
-    return `${isoDate}T${formatMomentEn(parsedTime.momentTime, 'HH:mm:ss.SSS')}`;
-}
-
-function convertDate(dateValue: string) {
-    try {
-        return convertLocalToIsoCalendar(dateValue);
-    } catch (error) {
-        return '';
+    const dateTime = convertLocalToIsoDateTime(formValue.date, formValue.time);
+    const originalDateTime = convertToTimeZoneFreeDateTime(formValue.originalValue);
+    if (dateTime && originalDateTime && moment.utc(dateTime).isSame(moment.utc(originalDateTime), 'minute')) {
+        // unchanged by the user, keep the value as stored on the server
+        return formValue.originalValue as string;
     }
+    return dateTime;
 }
 
 function convertTime(timeValue: string) {
@@ -39,7 +39,7 @@ function convertTime(timeValue: string) {
 }
 
 function convertAge(ageValue: any) {
-    return convertDate(ageValue.date);
+    return convertLocalToIsoCalendar(ageValue.date);
 }
 
 function convertRange(parser: any, value: RangeValue) {
@@ -62,8 +62,8 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [dataElementTypes.PERCENTAGE]: (value: string) => parseNumber(value.replace('%', '')),
     [dataElementTypes.PERCENTAGE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
-    [dataElementTypes.DATE]: convertDate,
-    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
+    [dataElementTypes.DATE]: convertLocalToIsoCalendar,
+    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertLocalToIsoCalendar, value),
     [dataElementTypes.DATETIME]: convertDateTime,
     [dataElementTypes.DATETIME_RANGE]: (value: RangeValue) => convertRange(convertDateTime, value),
     [dataElementTypes.TIME]: convertTime,

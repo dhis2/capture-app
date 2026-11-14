@@ -36,15 +36,15 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
     const handleTimeChange = useCallback((timeValue: string) => {
         const currentValue = value || {};
         onChange({
+            ...currentValue,
             time: timeValue,
-            date: currentValue.date,
         });
     }, [onChange, value]);
 
     const handleDateChange = useCallback((dateValue: string) => {
         const currentValue = value || {};
         onChange({
-            time: currentValue.time,
+            ...currentValue,
             date: dateValue,
         });
     }, [onChange, value]);
@@ -72,7 +72,7 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
         timeTouched.current = true;
         const currentValue = value || {};
         handleBlur(
-            { time: timeValue, date: currentValue.date },
+            { ...currentValue, time: timeValue },
             { error: dateError.error, errorCode: dateError.errorCode },
         );
     };
@@ -86,7 +86,7 @@ const DateTimeFieldPlain = (props: Props & WithStyles<any>) => {
 
         const currentValue = value || {};
         handleBlur(
-            { time: currentValue.time, date: dateValue },
+            { ...currentValue, date: dateValue },
             { error: options?.error, errorCode: options?.errorCode },
         );
     };

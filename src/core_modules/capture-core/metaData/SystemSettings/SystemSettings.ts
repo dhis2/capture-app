@@ -3,8 +3,8 @@ export class SystemSettings {
     dir!: string;
     trackerAppRelativePath!: string;
     calendar!: string;
-    serverTimeZoneId!: string;
     uiLocale!: string;
     captureScope!: Array<string>;
     searchScope!: Array<string>;
+    serverTimeZoneId!: string;
 }

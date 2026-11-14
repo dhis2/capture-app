@@ -1,6 +1,5 @@
 import type { RelationshipType } from '../metaData';
-import { getTrackedEntityTypeThrowIfNotFound, convertDataElementsValues } from '../metaData';
-import { convertValue } from '../converters/serverToClient';
+import { getTrackedEntityTypeThrowIfNotFound } from '../metaData';
 import { programCollection } from '../metaDataMemoryStores';
 import { getDisplayName } from '../trackedEntityInstances/getDisplayName';
 
@@ -8,14 +7,10 @@ const getClientConstraintByType = {
     TRACKED_ENTITY_INSTANCE: (constraint: any, relationshipConstraint: any) => {
         const tei = constraint.trackedEntity;
         const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(tei.trackedEntityType);
-        const values = convertDataElementsValues(
-            tei.attributes.reduce((accValues: any, attr: any) => {
-                accValues[attr.attribute] = attr.value;
-                return accValues;
-            }, {}),
-            trackedEntityType.attributes,
-            convertValue,
-        );
+        const values = tei.attributes.reduce((accValues: any, attr: any) => {
+            accValues[attr.attribute] = attr.value;
+            return accValues;
+        }, {});
         return {
             id: tei.trackedEntity,
             name: getDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
