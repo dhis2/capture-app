@@ -6,3 +6,4 @@ export { convertLocalToIsoDate } from './convertLocalToIsoDate';
 export { convertLocalToIsoDateTime } from './convertLocalToIsoDateTime';
 export { convertDateTimeForDisplay } from './convertDateTimeForDisplay';
 export { convertToTimeZoneFreeDateTime } from './convertToTimeZoneFreeDateTime';
+export { convertTimestamp } from './convertTimestamp';

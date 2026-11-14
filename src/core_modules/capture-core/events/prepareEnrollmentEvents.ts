@@ -3,7 +3,8 @@ import { errorCreator } from 'capture-core-utils';
 import type { CaptureClientEvent } from 'capture-core-utils/types/global';
 import type { ApiEnrollmentEvent, ApiDataValue } from 'capture-core-utils/types/api-types';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
-import { convertValue, convertTimestamp } from '../converters/serverToClient';
+import { convertValue } from '../converters/serverToClient';
+import { convertTimestamp } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 import type { EventData, EventsData } from '../rules/RuleEngine/types/ruleEngine.types';
 

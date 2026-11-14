@@ -12,14 +12,6 @@ function convertTime(d2Value: string) {
     return parseData.momentTime;
 }
 
-export function convertTimestamp(value?: string | null) {
-    if (value == null) {
-        return null;
-    }
-
-    return moment(value).toISOString();
-}
-
 const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) =>
     ((assignedUser && assignedUser.uid) ? {
         id: assignedUser.uid,
