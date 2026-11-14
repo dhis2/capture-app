@@ -84,11 +84,37 @@ const sortTime = (clientValueA: any, clientValueB: any, direction: string, optio
 // moment.utc keeps the wall-clock time, avoiding daylight saving shifts in the browser time zone
 const toSortableDateTime = (clientValue: any) => {
     const dateTime = convertToTimeZoneFreeDateTime(clientValue);
-    return dateTime ? moment.utc(dateTime).valueOf() : dateTime;
+    return dateTime ? moment.utc(dateTime).valueOf() : null;
 };
 
-const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, options: any) =>
-    sortTime(toSortableDateTime(clientValueA), toSortableDateTime(clientValueB), direction, options);
+const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
+    const dateTimeA = toSortableDateTime(clientValueA);
+    const dateTimeB = toSortableDateTime(clientValueB);
+    const { eventDateA, eventDateB } = options;
+
+    // most recent dates first, empty values first when descending and last when ascending, as in sortTime
+    if (direction === SORT_DIRECTION.DESC) {
+        if (dateTimeA === null) return -1;
+        if (dateTimeB === null) return 1;
+
+        if (dateTimeA !== dateTimeB) {
+            return dateTimeB - dateTimeA;
+        }
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    }
+
+    if (direction === SORT_DIRECTION.ASC) {
+        if (dateTimeA === null) return 1;
+        if (dateTimeB === null) return -1;
+
+        if (dateTimeA !== dateTimeB) {
+            return dateTimeA - dateTimeB;
+        }
+        return moment(eventDateA).unix() - moment(eventDateB).unix();
+    }
+
+    return 0;
+};
 
 const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: string, options: any) => {
     const orgUnitNameA = getCachedOrgUnitName(clientValueA);
