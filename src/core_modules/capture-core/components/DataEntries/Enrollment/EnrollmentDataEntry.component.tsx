@@ -2,7 +2,6 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
-import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { isLangRtl } from '../../../utils/rtl';
@@ -27,11 +26,14 @@ import {
     withDefaultFieldContainer,
     orientations,
     SingleSelectField,
+    SingleOrgUnitSelectField,
+    withConditionalTooltip,
 } from '../../FormFields/New';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
+    getOrgUnitValidatorContainers,
 } from './fieldValidators';
 import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment, ProgramStage, RenderFoundation, getProgramThrowIfNotFound } from '../../../metaData';
@@ -46,13 +48,14 @@ import {
     enrollmentAOCsectionKey,
     withAOCFieldBuilder,
     withEnrollmentAOCFieldBuilder,
+    withClearUnavailableCategoryOption,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
-const customLabels = [LabelKeys.eventSingular, LabelKeys.enrollmentSingular] as const;
+const customLabels = [LabelKeys.eventSingular, LabelKeys.enrollmentSingular, LabelKeys.orgUnitSingular] as const;
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -195,6 +198,43 @@ const getIncidentDateSettings = () => {
     return incidentDateSettings;
 };
 
+const getOrgUnitSettings = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: any) =>
+                            `${props.fieldOptions?.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(
+                                withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: any) => createComponentProps(props, {
+            width: props?.formHorizontal ? 150 : 350,
+            label: capitalizeFirstLetter(props.orgUnitLabel),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: (props: any) => getOrgUnitValidatorContainers(props.orgUnitLabel, props.programId),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
@@ -258,7 +298,7 @@ const getGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                orgUnitId: props.orgUnit?.id,
+                orgUnitId: props.orgUnitIdFieldValue,
             });
         }
 
@@ -269,7 +309,7 @@ const getGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            orgUnitId: props.orgUnit?.id,
+            orgUnitId: props.orgUnitIdFieldValue,
         });
     },
     getPropName: () => 'geometry',
@@ -293,7 +333,15 @@ const categoryOptionsComponent =
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(SingleSelectField),
+                            withFilterProps(defaultFilterProps)(
+                                withClearUnavailableCategoryOption()(
+                                    withConditionalTooltip((props: any) =>
+                                        i18n.t('Choose an {{orgUnitLabel}} to see the available options', {
+                                            orgUnitLabel: props.orgUnitLabel,
+                                        }),
+                                    )(SingleSelectField),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -307,6 +355,8 @@ const getCategoryOptionsSettingsFn = () => ({
         ...props.categories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
+        disabled: !props.orgUnitIdFieldValue,
+        orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
     getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
@@ -348,6 +398,8 @@ const getEnrollmentCategoryOptionsSettingsFn = () => ({
         ...props.enrollmentCategories?.find((category: any) => category.id === fieldId),
         required: true,
         filterable: true,
+        disabled: !props.orgUnitIdFieldValue,
+        orgUnitLabel: props.orgUnitLabel,
     }),
     getPropName: (props: any, fieldId?: string) =>
         (fieldId ? `${enrollmentAttributeOptionsKey}-${fieldId}` : enrollmentAttributeOptionsKey),
@@ -372,8 +424,6 @@ type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment;
     programId: string;
     id: string;
-    orgUnitId: string;
-    orgUnit: OrgUnit;
     onUpdateDataEntryField: (...args: any[]) => any;
     onUpdateFormFieldAsync: (...args: any[]) => any;
     onUpdateFormField: (...args: any[]) => any;
@@ -388,6 +438,7 @@ type FinalTeiDataEntryProps = {
     };
     formFoundation: RenderFoundation;
     enrollmentLabel: string;
+    orgUnitIdFieldValue?: string;
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -402,6 +453,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
             relatedStageActionsOptions,
             programId,
             enrollmentLabel,
+            orgUnitIdFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -423,6 +475,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
                     programId={programId}
+                    orgUnitIdFieldValue={orgUnitIdFieldValue}
                     firstStageMetaData={firstStageMetaData}
                     relatedStageActionsOptions={relatedStageActionsOptions}
                 />
@@ -436,23 +489,29 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const AOCFieldBuilderHOC = withCustomLabels(customLabels)(
-    withEnrollmentAOCFieldBuilder(
-        withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
-            withAOCFieldBuilder(getAOCSettingsFn())(
-                withDataEntryFields(getCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),
-            ),
+const AOCFieldBuilderHOC = withEnrollmentAOCFieldBuilder(
+    withDataEntryFields(getEnrollmentCategoryOptionsSettingsFn())(
+        withAOCFieldBuilder(getAOCSettingsFn())(
+            withDataEntryFields(getCategoryOptionsSettingsFn())(FinalEnrollmentDataEntry),
         ),
     ),
 );
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(AOCFieldBuilderHOC);
-const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
+const OrgUnitFieldHOC = withDataEntryField(getOrgUnitSettings())(LocationHOC);
+const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(OrgUnitFieldHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
-const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
+const CustomLabelsHOC = withCustomLabels(customLabels)(EnrollmentDateFieldHOC);
+const BrowserBackWarningHOC = withBrowserBackWarning()(CustomLabelsHOC);
+
+type OrgUnitFieldValue = {
+    id: string;
+    name: string;
+    path: string;
+};
 
 type PreEnrollmentDataEntryProps = {
     programId: string;
-    orgUnit: OrgUnit;
+    orgUnitFieldValue?: OrgUnitFieldValue | null;
     onUpdateField: (...args: any[]) => any;
     onUpdateDataEntryField: (...args: any[]) => any;
     onStartAsyncUpdateField: (...args: any[]) => any;
@@ -477,10 +536,10 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
 
 export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues, programId, teiId } = this.props;
+        const { orgUnitFieldValue, onGetUnsavedAttributeValues, programId, teiId } = this.props;
         return {
             programId,
-            orgUnitId: orgUnit.id,
+            orgUnitId: orgUnitFieldValue?.id,
             trackedEntityInstanceId: teiId,
             trackedEntityTypeId: this.props.enrollmentMetadata.trackedEntityType.id,
             onGetUnsavedAttributeValues,
@@ -488,11 +547,10 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     }
 
     handleUpdateField = (...args: any[]) => {
-        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        const { programId, firstStageMetaData, formFoundation } = this.props;
         this.props.onUpdateField(
             ...args,
             programId,
-            orgUnit,
             firstStageMetaData?.stage,
             formFoundation,
             this.getValidationContext,
@@ -500,11 +558,10 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     };
 
     handleUpdateDataEntryField = (...args: any[]) => {
-        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        const { programId, firstStageMetaData, formFoundation } = this.props;
         this.props.onUpdateDataEntryField(
             ...args,
             programId,
-            orgUnit,
             firstStageMetaData?.stage,
             formFoundation,
             this.getValidationContext,
@@ -512,11 +569,10 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     }
 
     handleStartAsyncUpdateField = (...args: any[]) => {
-        const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
+        const { programId, firstStageMetaData, formFoundation } = this.props;
         this.props.onStartAsyncUpdateField(
             ...args,
             programId,
-            orgUnit,
             firstStageMetaData?.stage,
             formFoundation,
             this.getValidationContext,
@@ -529,7 +585,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onUpdateDataEntryField,
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
-            orgUnit,
+            orgUnitFieldValue,
             ...passOnProps
         } = this.props;
 
@@ -539,8 +595,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateFormField={this.handleUpdateField}
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
-                orgUnit={orgUnit}
-                orgUnitId={orgUnit.id}
+                orgUnitIdFieldValue={orgUnitFieldValue?.id}
                 {...passOnProps}
             />
         );

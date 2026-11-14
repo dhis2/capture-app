@@ -23,11 +23,6 @@ When('you click the first option from the "New" button to add a new event', () =
         .click();
 });
 
-Then('you should see informative text saying you should do finish your selections', () => {
-    cy.get('[data-test="informative-paper"]')
-        .should('exist');
-});
-
 Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/?orgUnitId=DiszpKrYNg8');
     cy.get('[data-test="org-unit-selector-container"]').contains('Ngelehun CHC');
@@ -132,17 +127,6 @@ Then('you should see error message', () => {
 
 Given('you land on a view event page from the url', () => {
     cy.visit('/#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=a969f7a3bf1');
-});
-
-Given('you are in the new event page with no selections made', () => {
-    cy.visit('/#/new');
-    cy.get('[data-test="informative-paper"]')
-        .should('exist');
-});
-
-When('you click the cancel button', () => {
-    cy.get('[data-test="new-page-cancel-button"]')
-        .click();
 });
 
 Given('you land on a new event page with an invalid program id', () => {

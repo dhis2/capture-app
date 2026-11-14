@@ -17,6 +17,7 @@ export type OwnProps = {
   teiId?: string;
   newPageKey?: string;
   trackedEntityInstanceAttributes?: Array<InputAttribute>;
+  trackedEntityOrgUnitId?: string;
 };
 
 export type ContainerProps = {

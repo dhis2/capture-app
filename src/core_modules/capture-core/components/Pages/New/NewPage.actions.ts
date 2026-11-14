@@ -2,7 +2,6 @@ import { actionCreator } from '../../../actions/actions.utils';
 
 export const newPageActionTypes = {
     NEW_PAGE_OPEN: 'NewPage.NewPageOpen',
-    NEW_PAGE_WITHOUT_ORG_UNIT_SELECTED_VIEW: 'NewPage.WithoutOrgUnitSelectedView',
     NEW_PAGE_WITHOUT_PROGRAM_CATEGORY_SELECTED_VIEW: 'NewPage.WithoutProgramComboSelectedView',
     NEW_PAGE_CATEGORY_OPTION_INVALID_FOR_ORG_UNIT_VIEW: 'NewPage.InvalidCategoryOptionSelectedView',
     NEW_PAGE_DEFAULT_VIEW: 'NewPage.DefaultView',
@@ -13,9 +12,6 @@ export const newPageActionTypes = {
     SET_PREPOPULATE_DATA_ON_NEW_PAGE: 'NewPage.SetPrepopulateData',
     CLEAR_PREPOPULATED_DATA: 'NewPage.ClearPrepopulatedData',
 } as const;
-
-export const showMessageToSelectOrgUnitOnNewPage = () =>
-    actionCreator(newPageActionTypes.NEW_PAGE_WITHOUT_ORG_UNIT_SELECTED_VIEW)();
 
 export const showMessageToSelectProgramCategoryOnNewPage = () =>
     actionCreator(newPageActionTypes.NEW_PAGE_WITHOUT_PROGRAM_CATEGORY_SELECTED_VIEW)();

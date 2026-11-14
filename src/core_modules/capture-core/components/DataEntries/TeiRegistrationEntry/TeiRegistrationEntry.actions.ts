@@ -5,14 +5,14 @@ export const teiRegistrationEntryActionTypes = {
 };
 
 export const startNewTeiDataEntryInitialisation = ({
-    selectedOrgUnitId,
+    contextOrgUnitId,
     selectedScopeId,
     dataEntryId,
     formFoundation,
     formValues,
 }: any) =>
     actionCreator(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START)({
-        selectedOrgUnitId,
+        contextOrgUnitId,
         selectedScopeId,
         dataEntryId,
         formFoundation,
