@@ -17,7 +17,13 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
     convertBoolean: (value: boolean): string => (value ? 'true' : 'false'),
     convertTrueOnly: (value: boolean): string => (value ? 'true' : 'false'),
     convertDate: (value: string): string => convertClientToForm(value, dataElementTypes.DATE),
-    convertDateTime: (value: string): any => convertClientToForm(value, dataElementTypes.DATETIME),
+    convertDateTime: (value: string): any => {
+        if (!value) {
+            return value;
+        }
+        const { date, time } = convertClientToForm(value, dataElementTypes.DATETIME);
+        return { date, time };
+    },
     convertTime: (value: string): string => value,
     convertNumber: (value: number): string => (value.toString()),
     convertUnitInterval: (value: number): string => (value.toString()),

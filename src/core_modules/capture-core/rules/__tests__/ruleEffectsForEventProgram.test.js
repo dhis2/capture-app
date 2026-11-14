@@ -7,7 +7,7 @@ const groups = [
     { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
 ];
 
-systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD', calendar: 'gregory' });
+systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD', calendar: 'gregory', serverTimeZoneId: 'Africa/Kampala' });
 
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
@@ -2961,6 +2961,30 @@ describe('DATETIME values', () => {
                 type: 'ASSIGN',
                 id: 'dtAssign001',
                 value: { date: '2026-03-29', time: '02:30' },
+                targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+            },
+        ]);
+    });
+
+    test('are passed to rules and assigned in the server time zone for legacy values', () => {
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules, constants },
+            currentEvent: { dtCurrent01: '2026-11-10T13:00:00.000Z' },
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets: {},
+        });
+
+        expect(rulesEffects).toEqual([
+            {
+                type: 'DISPLAYTEXT',
+                id: 'feedback',
+                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-11-10T16:00:00.000' },
+            },
+            {
+                type: 'ASSIGN',
+                id: 'dtAssign001',
+                value: { date: '2026-11-10', time: '16:00' },
                 targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
             },
         ]);
