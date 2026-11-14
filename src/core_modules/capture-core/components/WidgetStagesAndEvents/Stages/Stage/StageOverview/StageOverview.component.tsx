@@ -84,15 +84,15 @@ const getLastUpdatedAt = (
         return null;
     }
 
-    const serverDate = fromServerDate(updatedAt);
+    const updatedAtClient = fromServerDate(updatedAt);
     const localDateTime = convertValueClientToView(
-        serverDate.getClientZonedISOString(), dataElementTypes.DATETIME,
+        updatedAtClient.getClientZonedISOString(), dataElementTypes.DATETIME,
     ) as string;
     return (
         <>
             {i18n.t('Last updated')}&nbsp;
             <Tooltip content={localDateTime}>
-                {moment(serverDate).fromNow()}
+                {moment(updatedAtClient).fromNow()}
             </Tooltip>
         </>
     );

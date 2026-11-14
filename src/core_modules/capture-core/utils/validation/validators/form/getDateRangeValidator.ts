@@ -1,6 +1,6 @@
 import { Temporal } from '@js-temporal/polyfill';
 import { isValidDate } from './dateValidator';
-import { convertLocalToIsoDate } from '../../../converters/date';
+import { convertLocalToIsoCalendar } from '../../../converters/date';
 
 function isValidDateWithEmptyCheck(
     value: string | null | undefined,
@@ -33,8 +33,8 @@ export const getDateRangeValidator = (invalidDateMessage: string) =>
             };
         }
         const { from, to } = value;
-        const isoFrom = convertLocalToIsoDate(from);
-        const isoTo = convertLocalToIsoDate(to);
+        const isoFrom = convertLocalToIsoCalendar(from || null);
+        const isoTo = convertLocalToIsoCalendar(to || null);
 
         if (!isoFrom || !isoTo) {
             return {
@@ -43,8 +43,11 @@ export const getDateRangeValidator = (invalidDateMessage: string) =>
             };
         }
 
+        const fromDate = Temporal.PlainDate.from(isoFrom.split('T')[0]);
+        const toDate = Temporal.PlainDate.from(isoTo.split('T')[0]);
+
         return {
-            valid: Temporal.PlainDate.compare(Temporal.PlainDate.from(isoFrom), Temporal.PlainDate.from(isoTo)) <= 0,
+            valid: Temporal.PlainDate.compare(fromDate, toDate) <= 0,
             errorMessage: undefined,
         };
     };
