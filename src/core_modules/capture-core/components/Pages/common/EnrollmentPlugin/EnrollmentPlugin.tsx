@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
 import { useNavigate } from 'capture-core/utils/routing';
 
-type EnrollmentPluginProps = {
-    enrollmentId: string;
-    programId?: string;
-    teiId: string;
-    orgUnitId: string;
+export type EnrollmentPluginProps = {
     pluginSource: string;
+    programId?: string;
     programStageId?: string;
+    enrollmentId?: string;
     eventId?: string;
+    teiId?: string;
+    ownerOrgUnitId?: string;
 };
 
 export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {

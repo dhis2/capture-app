@@ -21,6 +21,7 @@ import {
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 import { removeTrackedEntityChangelogQueries } from '../WidgetsChangelog';
+import { FormFieldPluginContextIdsProvider } from '../D2Form/FormFieldPlugin';
 import { OverflowMenu } from './OverflowMenu';
 import {
     useDataEntryFormConfig,
@@ -74,7 +75,7 @@ const WidgetProfilePlain = ({
     programId,
     enrollmentId,
     readOnlyMode = false,
-    ownerOrgUnitId = '',
+    ownerOrgUnitId,
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     onStatusToggleSuccess,
@@ -286,8 +287,13 @@ const WidgetProfilePlain = ({
             >
                 {renderProfile()}
             </Widget>
-            {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && (
-                <>
+            {showEditModal(loading, error, Boolean(profileButtonLabel), modalState, program) && ownerOrgUnitId && (
+                <FormFieldPluginContextIdsProvider
+                    programId={programId}
+                    teiId={teiId}
+                    enrollmentId={enrollmentId}
+                    ownerOrgUnitId={ownerOrgUnitId}
+                >
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
                         onDisable={handleOnDisable}
@@ -308,7 +314,7 @@ const WidgetProfilePlain = ({
                         accessReadOnly={!trackedEntityTypeWriteAccess}
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
-                </>
+                </FormFieldPluginContextIdsProvider>
             )}
         </div>
     );
