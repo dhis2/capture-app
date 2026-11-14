@@ -80,14 +80,15 @@ const sortTime = (clientValueA: any, clientValueB: any, direction: string, optio
     return 0;
 };
 
-// client values can be legacy values with a timezone, so sort on the displayed value
+// client values can be legacy values with a timezone, so sort on the displayed value.
+// moment.utc keeps the wall-clock time, avoiding daylight saving shifts in the browser time zone
+const toSortableDateTime = (clientValue: any) => {
+    const dateTime = convertToTimeZoneFreeDateTime(clientValue);
+    return dateTime ? moment.utc(dateTime).valueOf() : dateTime;
+};
+
 const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, options: any) =>
-    sortTime(
-        convertToTimeZoneFreeDateTime(clientValueA),
-        convertToTimeZoneFreeDateTime(clientValueB),
-        direction,
-        options,
-    );
+    sortTime(toSortableDateTime(clientValueA), toSortableDateTime(clientValueB), direction, options);
 
 const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: string, options: any) => {
     const orgUnitNameA = getCachedOrgUnitName(clientValueA);
