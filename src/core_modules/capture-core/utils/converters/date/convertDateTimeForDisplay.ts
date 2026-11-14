@@ -5,7 +5,7 @@ import { convertToTimeZoneFreeDateTime } from './convertToTimeZoneFreeDateTime';
 
 /**
  * Converts a datetime value to a display string (local calendar date and HH:mm)
- * Values with a timezone (e.g. updatedAt) are shown in the browser time zone.
+ * Legacy values with a timezone (Z) are shown in the server time zone.
  * @export
  * @param {string} value - datetime string
  * @returns {string}
