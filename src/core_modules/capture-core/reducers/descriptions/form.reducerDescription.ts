@@ -74,8 +74,12 @@ export const formsValuesDesc = createReducerDescription({
                 ...state[payload.formId],
                 ...Object.keys(assignEffects).reduce((acc, id) => {
                     const effectsForId = assignEffects[id];
-                    const value = effectsForId[0].value;
-                    acc[id] = value;
+                    const value: any = effectsForId[0].value;
+                    const currentValue = state[payload.formId]?.[id];
+                    acc[id] = currentValue?.originalValue && value &&
+                        currentValue.date === value.date && currentValue.time === value.time
+                        ? currentValue
+                        : value;
                     return acc;
                 }, {}),
             },
