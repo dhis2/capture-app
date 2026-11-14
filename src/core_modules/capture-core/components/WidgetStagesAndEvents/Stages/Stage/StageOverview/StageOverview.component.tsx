@@ -71,7 +71,10 @@ const styles: Readonly<any> = {
     },
 };
 
-const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (date: string) => Date) => {
+const getLastUpdatedAt = (
+    events: Array<ApiEnrollmentEvent>,
+    fromServerDate: (date: string) => Date & { getClientZonedISOString: () => string },
+) => {
     const lastEventUpdated = events.reduce((acc, event) => (
         new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
     ));
@@ -82,7 +85,9 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
     }
 
     const serverDate = fromServerDate(updatedAt);
-    const localDateTime = convertValueClientToView(serverDate.toISOString(), dataElementTypes.DATETIME) as string;
+    const localDateTime = convertValueClientToView(
+        serverDate.getClientZonedISOString(), dataElementTypes.DATETIME,
+    ) as string;
     return (
         <>
             {i18n.t('Last updated')}&nbsp;

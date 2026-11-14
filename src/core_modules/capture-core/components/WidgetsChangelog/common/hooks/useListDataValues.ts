@@ -106,7 +106,9 @@ const fetchFormattedValues = async ({
 
             return {
                 reactKey: metadataElement.id ? `${createdAt}-${metadataElement.id}` : createdAt,
-                date: convertClientToList(fromServerDate(createdAt).toISOString(), dataElementTypes.DATETIME, null),
+                date: convertClientToList(
+                    fromServerDate(createdAt).getClientZonedISOString(), dataElementTypes.DATETIME, null,
+                ),
                 user: `${firstName} ${surname} (${username})`,
                 username,
                 dataItemId: metadataElement.id,

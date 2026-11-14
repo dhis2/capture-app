@@ -8,6 +8,7 @@ import { stringifyNumber } from './common/stringifyNumber';
 type DateTimeFormValue = {
     date: string;
     time: string;
+    originalValue?: string;
 };
 
 type AgeFormValue = {
@@ -36,6 +37,8 @@ function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     return {
         date: convertIsoToLocalCalendar(formatMomentEn(momentDateTime, 'YYYY-MM-DD')),
         time: formatMomentEn(momentDateTime, 'HH:mm'),
+        // kept so an unchanged value is sent back to the server as stored
+        originalValue: rawValue,
     };
 }
 

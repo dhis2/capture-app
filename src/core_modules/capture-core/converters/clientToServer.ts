@@ -1,7 +1,6 @@
 import { formatMomentEn } from 'capture-core-utils/date';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes } from '../metaData';
-import { convertToTimeZoneFreeDateTime } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 
 type RangeValue = {
@@ -54,7 +53,6 @@ const valueConvertersForType = {
     [dataElementTypes.PERCENTAGE_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
     [dataElementTypes.DATE]: convertDate,
     [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
-    [dataElementTypes.DATETIME]: convertToTimeZoneFreeDateTime,
     [dataElementTypes.TRUE_ONLY]: () => 'true',
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
     [dataElementTypes.FILE_RESOURCE]: (rawValue: any) => rawValue.value,

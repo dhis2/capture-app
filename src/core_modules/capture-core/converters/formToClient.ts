@@ -1,13 +1,19 @@
+import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
-import { convertLocalToIsoCalendar, convertLocalToIsoDateTime } from '../utils/converters/date';
+import {
+    convertLocalToIsoCalendar,
+    convertLocalToIsoDateTime,
+    convertToTimeZoneFreeDateTime,
+} from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string;
     time: string;
+    originalValue?: string;
 };
 
 type RangeValue = {
@@ -16,7 +22,13 @@ type RangeValue = {
 };
 
 function convertDateTime(formValue: DateTimeValue): string | null {
-    return convertLocalToIsoDateTime(formValue.date, formValue.time);
+    const dateTime = convertLocalToIsoDateTime(formValue.date, formValue.time);
+    const originalDateTime = convertToTimeZoneFreeDateTime(formValue.originalValue);
+    if (dateTime && originalDateTime && moment.utc(dateTime).isSame(moment.utc(originalDateTime), 'minute')) {
+        // unchanged by the user, keep the value as stored on the server
+        return formValue.originalValue as string;
+    }
+    return dateTime;
 }
 
 function convertTime(timeValue: string) {
