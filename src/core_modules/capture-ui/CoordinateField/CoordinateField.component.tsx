@@ -38,6 +38,10 @@ export class CoordinateField extends React.Component<PlainProps, State> {
     }
 
     onMapPositionChange = (mapCoordinates: any) => {
+        if (mapCoordinates.originalEvent?.target && !mapCoordinates.originalEvent.target.isConnected) {
+            // Guard against the irrelevant click event emitted by clicking on a search result
+            return;
+        }
         const { lat, lng } = mapCoordinates.latlng;
         this.setMapPosition([this.toSixDecimal(lat), this.toSixDecimal(lng)], mapCoordinates.target.getZoom());
     }
