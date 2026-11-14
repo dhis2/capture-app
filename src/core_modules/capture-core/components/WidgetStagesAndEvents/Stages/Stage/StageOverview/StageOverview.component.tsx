@@ -76,23 +76,21 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
         new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
     ));
 
-    if (lastEventUpdated) {
-        const { updatedAt } = lastEventUpdated;
-        const localDateTime = convertValueClientToView(
-            fromServerDate(updatedAt).toISOString(), dataElementTypes.DATETIME,
-        ) as string;
-        return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
-            ? (
-                <>
-                    {i18n.t('Last updated')}&nbsp;
-                    <Tooltip content={localDateTime}>
-                        {moment(fromServerDate(updatedAt)).fromNow()}
-                    </Tooltip>
-                </>
-            )
-            : null;
+    const { updatedAt } = lastEventUpdated;
+    if (!updatedAt || !moment(updatedAt).isValid()) {
+        return null;
     }
-    return null;
+
+    const serverDate = fromServerDate(updatedAt);
+    const localDateTime = convertValueClientToView(serverDate.toISOString(), dataElementTypes.DATETIME) as string;
+    return (
+        <>
+            {i18n.t('Last updated')}&nbsp;
+            <Tooltip content={localDateTime}>
+                {moment(serverDate).fromNow()}
+            </Tooltip>
+        </>
+    );
 };
 
 export const StageOverviewPlain = ({
