@@ -80,11 +80,12 @@ const sortTime = (clientValueA: any, clientValueB: any, direction: string, optio
     return 0;
 };
 
-// client values can be legacy values with a timezone, so sort on the displayed value.
-// moment.utc keeps the wall-clock time, avoiding daylight saving shifts in the browser time zone
+// Client values can be legacy values with a timezone, so sort on the displayed value.
+// moment.utc keeps the wall-clock time, avoiding daylight saving shifts in the browser time zone.
+// Empty values sort as the latest time, as sortTime does: first when descending and last when ascending.
 const toSortableDateTime = (clientValue: any) => {
     const dateTime = convertToTimeZoneFreeDateTime(clientValue);
-    return dateTime ? moment.utc(dateTime).valueOf() : null;
+    return dateTime ? moment.utc(dateTime).valueOf() : Number.POSITIVE_INFINITY;
 };
 
 const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
@@ -92,11 +93,8 @@ const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, o
     const dateTimeB = toSortableDateTime(clientValueB);
     const { eventDateA, eventDateB } = options;
 
-    // most recent dates first, empty values first when descending and last when ascending, as in sortTime
+    // most recent dates first
     if (direction === SORT_DIRECTION.DESC) {
-        if (dateTimeA === null) return -1;
-        if (dateTimeB === null) return 1;
-
         if (dateTimeA !== dateTimeB) {
             return dateTimeB - dateTimeA;
         }
@@ -104,9 +102,6 @@ const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, o
     }
 
     if (direction === SORT_DIRECTION.ASC) {
-        if (dateTimeA === null) return 1;
-        if (dateTimeB === null) return -1;
-
         if (dateTimeA !== dateTimeB) {
             return dateTimeA - dateTimeB;
         }
