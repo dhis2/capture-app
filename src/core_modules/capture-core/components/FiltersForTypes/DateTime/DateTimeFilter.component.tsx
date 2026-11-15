@@ -90,7 +90,7 @@ class DateTimeFilterPlain extends Component<Props, State> implements UpdatableFi
         const { from, to } = value;
         const hasNoDates = !from?.date && !to?.date;
         const hasInvalidDate = from?.isValid === false || to?.isValid === false;
-        const isOrderInvalid = !!from && !!to && isFromAfterTo(from, to);
+        const isOrderInvalid = !hasInvalidDate && !!from && !!to && isFromAfterTo(from, to);
         return !hasNoDates && !hasInvalidDate && !isOrderInvalid;
     }
 
