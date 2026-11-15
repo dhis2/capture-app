@@ -110,7 +110,7 @@ const NoteSectionPlain = ({
                     </span>}
                     <span className={classes.lastUpdated}>
                         <Tooltip content={convertClientToList(
-                            moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(),
+                            fromServerDate(storedAt).getClientZonedISOString(),
                             dataElementTypes.DATETIME,
                         )}
                         >

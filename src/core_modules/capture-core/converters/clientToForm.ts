@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { formatMomentEn } from 'capture-core-utils/date';
-import { convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertToTimeZoneFreeDateTime } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
 import { stringifyNumber } from './common/stringifyNumber';
@@ -8,6 +8,7 @@ import { stringifyNumber } from './common/stringifyNumber';
 type DateTimeFormValue = {
     date: string;
     time: string;
+    originalValue?: string;
 };
 
 type AgeFormValue = {
@@ -27,9 +28,12 @@ function convertDateForEdit(rawValue: string): string {
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
+    const dateTime = convertToTimeZoneFreeDateTime(rawValue);
     return {
-        date: convertIsoToLocalCalendar(rawValue),
-        time: formatMomentEn(rawValue, 'HH:mm'),
+        date: convertIsoToLocalCalendar(dateTime),
+        time: formatMomentEn(moment.utc(dateTime), 'HH:mm'),
+        // TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
+        originalValue: rawValue,
     };
 }
 

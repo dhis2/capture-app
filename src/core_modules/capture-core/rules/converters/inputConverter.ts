@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import type { IConvertInputRulesValue } from '@dhis2/rules-engine-javascript';
 import { formatMomentEn } from 'capture-core-utils/date';
+import { convertToTimeZoneFreeDateTime } from '../../utils/converters/date';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
@@ -24,7 +25,7 @@ export const inputConverter: IConvertInputRulesValue = {
         }
         return formatMomentEn(value, dateMomentFormat);
     },
-    convertDateTime: convertStringValue,
+    convertDateTime: convertToTimeZoneFreeDateTime,
     convertTime: convertStringValue,
     convertNumber: convertNumericValue,
     convertUnitInterval: convertNumericValue,

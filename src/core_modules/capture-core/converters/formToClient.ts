@@ -4,11 +4,16 @@ import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
-import { convertLocalToIsoCalendar } from '../utils/converters/date';
+import {
+    convertLocalToIsoCalendar,
+    convertLocalToIsoDateTime,
+    convertToTimeZoneFreeDateTime,
+} from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string;
     time: string;
+    originalValue?: string;
 };
 
 type RangeValue = {
@@ -17,31 +22,17 @@ type RangeValue = {
 };
 
 function convertDateTime(formValue: DateTimeValue): string | null {
-    const editedDate = formValue.date;
-    const editedTime = formValue.time;
+    const dateTime = convertLocalToIsoDateTime(formValue.date, formValue.time);
+    const originalDateTime = convertToTimeZoneFreeDateTime(formValue.originalValue);
 
-    const parsedTime = parseTime(editedTime);
-    if (!parsedTime.isValid) return null;
-    const momentTime = parsedTime.momentTime;
-    const hours = momentTime.hour();
-    const minutes = momentTime.minute();
-
-    const isoDate = convertDate(editedDate);
-    if (!isoDate) return null;
-
-    const momentDateTime = moment(isoDate);
-    if (!momentDateTime.isValid()) return null;
-    momentDateTime.hour(hours);
-    momentDateTime.minute(minutes);
-    return momentDateTime.toISOString();
-}
-
-function convertDate(dateValue: string) {
-    try {
-        return convertLocalToIsoCalendar(dateValue);
-    } catch (error) {
-        return '';
+    // Existing values are only rewritten when the user changes them. If the date and time still match the
+    // stored value (compared to the minute), the stored value is sent back as is.
+    // Changed values are sent without a timezone.
+    // TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
+    if (dateTime && originalDateTime && moment.utc(dateTime).isSame(moment.utc(originalDateTime), 'minute')) {
+        return formValue.originalValue as string;
     }
+    return dateTime;
 }
 
 function convertTime(timeValue: string) {
@@ -52,7 +43,7 @@ function convertTime(timeValue: string) {
 }
 
 function convertAge(ageValue: any) {
-    return convertDate(ageValue.date);
+    return convertLocalToIsoCalendar(ageValue.date);
 }
 
 function convertRange(parser: any, value: RangeValue) {
@@ -75,8 +66,8 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [dataElementTypes.PERCENTAGE]: (value: string) => parseNumber(value.replace('%', '')),
     [dataElementTypes.PERCENTAGE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
-    [dataElementTypes.DATE]: convertDate,
-    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
+    [dataElementTypes.DATE]: convertLocalToIsoCalendar,
+    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertLocalToIsoCalendar, value),
     [dataElementTypes.DATETIME]: convertDateTime,
     [dataElementTypes.DATETIME_RANGE]: (value: RangeValue) => convertRange(convertDateTime, value),
     [dataElementTypes.TIME]: convertTime,

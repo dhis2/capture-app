@@ -6,4 +6,5 @@ export class SystemSettings {
     uiLocale!: string;
     captureScope!: Array<string>;
     searchScope!: Array<string>;
+    serverTimeZoneId!: string;
 }
