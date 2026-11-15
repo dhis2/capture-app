@@ -15,14 +15,18 @@ export const useLifecycle = (
     selectedScopeId: string,
     dataEntryId: string,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
-    orgUnit?: OrgUnit,
+    contextOrgUnit?: OrgUnit,
     teiId?: string,
+    contextOrgUnitId?: string,
 ) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const program = getTrackerProgramThrowIfNotFound(selectedScopeId);
+    const defaultOrgUnitReady = !contextOrgUnitId || !!contextOrgUnit;
     const ready =
-        useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) && !!orgUnit && dataEntryReadyRef.current === true;
+        useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) &&
+        defaultOrgUnitReady &&
+        dataEntryReadyRef.current === true;
     const searchTerms = useSelector(({ newPage }: any) => newPage.prepopulatedData);
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { firstStageMetaData } = useBuildFirstStageRegistration(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
@@ -37,7 +41,8 @@ export const useLifecycle = (
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
-        orgUnit,
+        contextOrgUnit,
+        defaultOrgUnitReady,
         formFoundation,
         teiId,
         searchTerms,
@@ -50,14 +55,14 @@ export const useLifecycle = (
         if (
             dataEntryReadyRef.current === false &&
             formValuesReadyRef.current === true &&
-            orgUnit &&
+            defaultOrgUnitReady &&
             scopeType === scopeTypes.TRACKER_PROGRAM &&
             formFoundation
         ) {
             dataEntryReadyRef.current = true;
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
-                    selectedOrgUnit: orgUnit,
+                    contextOrgUnit,
                     selectedScopeId,
                     dataEntryId,
                     formValues,
@@ -73,7 +78,8 @@ export const useLifecycle = (
         scopeType,
         dataEntryId,
         selectedScopeId,
-        orgUnit,
+        contextOrgUnit,
+        defaultOrgUnitReady,
         formValuesReadyRef,
         formValues,
         clientValues,

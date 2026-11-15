@@ -7,6 +7,7 @@ export { useScopeInfo } from './useScopeInfo';
 export { useScopeTitleText } from './useScopeTitleText';
 export { useProgramExpiryForUser } from './useProgramExpiryForUser';
 export { useCompleteEventsExpiryForUser } from './useCompleteEventsExpiryForUser';
+export { useEventChangelogEnabled } from './useEventChangelogEnabled';
 export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
 export { useEventEditPermissions } from './useEventEditPermissions';
 export { useServerFormattedNow } from './useServerFormattedNow';

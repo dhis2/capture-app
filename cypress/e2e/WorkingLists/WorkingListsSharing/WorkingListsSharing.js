@@ -7,7 +7,9 @@ const EVENT_PROGRAM_ID = 'VBqh0ynB2wv';
 const SHARED_EVENT_PROGRAM_ID = 'MoUd5BTQ3lY';
 const TRACKER_PROGRAM_ID = 'WSGAb5XwJ3Y';
 const ANTENATAL_STAGE_ID = 'edqlbukwRfQ';
-const VIEW_NAME = 'sharedWorkingListView';
+const VIEW_NAME_PREFIX = 'sharedView-';
+const VIEW_NAME = `${VIEW_NAME_PREFIX}${Date.now()}`;
+const STALE_VIEW_AGE_MS = 30 * 60 * 1000;
 const VIEW_AND_EDIT = 'rw------';
 const NO_ACCESS = '--------';
 const RESTRICTED_USER = 'trackerAutoTestRestricted';
@@ -67,6 +69,17 @@ const findViewByName = resource =>
         .then(url => cy.request({ url, auth: asAdmin() }))
         .then(({ body }) => body[resource]?.[0]);
 
+const isStaleView = ({ name }) => Number(name.slice(VIEW_NAME_PREFIX.length)) < Date.now() - STALE_VIEW_AGE_MS;
+
+const deleteStaleViews = resource =>
+    cy.buildApiUrl(`${resource}?filter=name:like:${VIEW_NAME_PREFIX}&fields=id,name&paging=false`)
+        .then(url => cy.request({ url, auth: asAdmin() }))
+        .then(({ body }) => {
+            (body[resource] ?? []).filter(isStaleView).forEach(({ id }) =>
+                cy.buildApiUrl(resource, id)
+                    .then(url => cy.request({ url, method: 'DELETE', auth: asAdmin() })));
+        });
+
 const deleteSharedViews = () => {
     Object.values(OWNER_LIST_TYPES).forEach((listType) => {
         const { resource } = LIST_TYPES[listType];
@@ -76,6 +89,7 @@ const deleteSharedViews = () => {
             cy.buildApiUrl(resource, view.id)
                 .then(url => cy.request({ url, method: 'DELETE', auth: asAdmin() }));
         });
+        deleteStaleViews(resource);
     });
 };
 

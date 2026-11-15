@@ -18,7 +18,7 @@ export const useEnrollmentEditEventPageMode = (eventStatus?: string, eventId?: s
     const landedAsSkipped = initialStatusRef.current.status === statusTypes.SKIPPED;
 
     return useMemo(() => {
-        if (initMode) return { currentPageMode: initMode };
+        if (initMode && !landedAsSkipped) return { currentPageMode: initMode };
 
         const shouldEdit = showEditEvent || (isScheduledStatus(eventStatus) && !landedAsSkipped);
 

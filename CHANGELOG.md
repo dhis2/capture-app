@@ -1,3 +1,45 @@
+## [107.9.1](https://github.com/dhis2/capture-app/compare/v107.9.0...v107.9.1) (2026-11-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4818](https://github.com/dhis2/capture-app/issues/4818)) ([1f9a60f](https://github.com/dhis2/capture-app/commit/1f9a60f9586000bb16f43c6b5a27069d55da5758))
+
+# [107.9.0](https://github.com/dhis2/capture-app/compare/v107.8.5...v107.9.0) (2026-10-31)
+
+
+### Features
+
+* [DHIS2-22185] Use enableChangeLog for changelog toggling ([#4795](https://github.com/dhis2/capture-app/issues/4795)) ([0c29890](https://github.com/dhis2/capture-app/commit/0c2989016accfb0d3a3001cdc9f4b280482852fb))
+
+## [107.8.5](https://github.com/dhis2/capture-app/compare/v107.8.4...v107.8.5) (2026-10-23)
+
+
+### Bug Fixes
+
+* [DHIS2-22315] Complete checkbox is always disabled on a scheduled event ([#4804](https://github.com/dhis2/capture-app/issues/4804)) ([72386e6](https://github.com/dhis2/capture-app/commit/72386e63b53faf452a1e9b5509b0025278ab1511))
+
+## [107.8.4](https://github.com/dhis2/capture-app/compare/v107.8.3...v107.8.4) (2026-10-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4796](https://github.com/dhis2/capture-app/issues/4796)) ([fc743b3](https://github.com/dhis2/capture-app/commit/fc743b3343e0e74c273da7c8934fe44c0811f50d))
+
+## [107.8.3](https://github.com/dhis2/capture-app/compare/v107.8.2...v107.8.3) (2026-10-15)
+
+
+### Bug Fixes
+
+* [DHIS2-22201] program rule z-score calculations ([#4788](https://github.com/dhis2/capture-app/issues/4788)) ([ff908ef](https://github.com/dhis2/capture-app/commit/ff908ef2b94efd16e492d6504c3cf84c31a65e23))
+
+## [107.8.2](https://github.com/dhis2/capture-app/compare/v107.8.1...v107.8.2) (2026-10-14)
+
+
+### Bug Fixes
+
+* [DHIS2-22112] allow rule engine orgunit to be undefined ([#4779](https://github.com/dhis2/capture-app/issues/4779)) ([4a8623a](https://github.com/dhis2/capture-app/commit/4a8623aef05c6ef6f88fdb371568af55835cd00f))
+
 ## [107.8.1](https://github.com/dhis2/capture-app/compare/v107.8.0...v107.8.1) (2026-10-11)
 
 

@@ -21,6 +21,7 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
     dataEntryId,
     setScopeId,
     trackedEntityInstanceAttributes,
+    trackedEntityOrgUnitId,
     newPageKey,
 }) => {
     const dispatch = useDispatch();
@@ -64,6 +65,7 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
             onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
             teiId={teiId}
             trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+            trackedEntityOrgUnitId={trackedEntityOrgUnitId}
             key={newPageKey}
         />);
 };

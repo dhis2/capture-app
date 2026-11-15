@@ -25,6 +25,7 @@ export type OwnProps = {
 
 type ContainerProps = {
     orgUnitId: string;
+    orgUnitName?: string;
     teiRegistrationMetadata: TeiRegistration;
     ready: boolean;
     trackedEntityName: string;

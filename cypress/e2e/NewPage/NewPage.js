@@ -47,12 +47,6 @@ Given('you are in the registration page with Ngelehun CHC org unit selected', ()
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
 });
 
-And('there should be informative message explaining you need to select an organisation unit', () => {
-    cy.get('[data-test="informative-paper"]')
-        .contains('Choose an organisation unit to start reporting')
-        .should('exist');
-});
-
 And('you select tracked entity type person', () => {
     cy.get('[data-test="dhis2-simplesingleselect"]')
         .click()

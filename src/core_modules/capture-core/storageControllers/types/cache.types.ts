@@ -208,6 +208,7 @@ export type CachedProgram = {
     programType: string,
     categoryCombo: ProgramCachedCategoryCombo | null,
     enrollmentCategoryCombo?: ProgramCachedCategoryCombo | null,
+    enableChangeLog?: boolean | null,
     style?: CachedStyle | null,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,

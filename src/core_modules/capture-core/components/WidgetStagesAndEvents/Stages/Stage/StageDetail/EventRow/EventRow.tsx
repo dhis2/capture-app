@@ -8,7 +8,7 @@ import {
     DataTableRow,
     IconMore16,
 } from '@dhis2/ui';
-import { useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
+import { useEventChangelogEnabled, useEventEditPermissions, useServerFormattedNow } from 'capture-core/hooks';
 import { convertServerToClient } from 'capture-core/converters';
 import { dataElementTypes } from 'capture-core/metaData';
 import { LabelKeys, useTermLabel } from 'capture-core/customLabels';
@@ -69,6 +69,8 @@ const EventRowPlain = ({
         completedAtClient: convertServerToClient(eventDetails.completedAt, dataElementTypes.DATE) as string,
         scheduledAtClient: convertServerToClient(eventDetails.scheduledAt, dataElementTypes.DATE) as string,
     });
+    const changelogEnabled = useEventChangelogEnabled(programId);
+    const hasMenuActions = changelogEnabled || canEditProgramStage;
     const { enrollmentLabel, programStageLabel, programStagesLabel, eventLabel } = useTermLabel(
         [
             LabelKeys.enrollmentSingular,
@@ -180,7 +182,7 @@ const EventRowPlain = ({
                 <>
                     {pendingApiResponse && <CircularLoader small dataTest={'event-row-saving-loader'} />}
 
-                    {!pendingApiResponse && (
+                    {!pendingApiResponse && hasMenuActions && (
                         <OverflowButton
                             open={actionsOpen}
                             onClick={() => setActionsOpen(prev => !prev)}
@@ -195,6 +197,7 @@ const EventRowPlain = ({
                                     stageId={programStage?.id}
                                     onOpenChangelog={() => setChangelogOpen(true)}
                                     onClose={() => setActionsOpen(false)}
+                                    showChangelog={changelogEnabled}
                                     hideMutationActions={!canEditProgramStage}
                                     onSkipMutate={onSkipStatusMutate}
                                     onSkipSuccess={onSkipStatusSuccess}

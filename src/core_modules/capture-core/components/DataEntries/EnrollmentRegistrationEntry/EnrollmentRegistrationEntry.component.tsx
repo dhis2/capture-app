@@ -27,24 +27,26 @@ const styles = () => ({
 const translatedTextWithStylesForProgram = (
     trackedEntityName: string,
     programName: string,
-    orgUnitName: string,
+    orgUnitName: string | undefined,
     enrollmentLabel: string,
     teiId?: string,
-) => (
-    teiId ? <span>
-        {i18n.t('Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}.', {
-            enrollmentLabel,
-            programName,
-            orgUnitName,
-        })}
-    </span> : <span>
-        {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', {
-            trackedEntityName,
-            programName,
-            orgUnitName,
-            interpolation: { escapeValue: false },
-        })}
-    </span>);
+) => {
+    const getText = () => {
+        if (teiId) {
+            const options = { enrollmentLabel, programName, orgUnitName };
+            return orgUnitName
+                ? i18n.t('Saving a new {{enrollmentLabel}} in {{programName}} in {{orgUnitName}}.', options)
+                : i18n.t('Saving a new {{enrollmentLabel}} in {{programName}}.', options);
+        }
+
+        const options = { trackedEntityName, programName, orgUnitName, interpolation: { escapeValue: false } };
+        return orgUnitName
+            ? i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', options)
+            : i18n.t('Saving a {{trackedEntityName}} in {{programName}}.', options);
+    };
+
+    return <span>{getText()}</span>;
+};
 
 
 const EnrollmentRegistrationEntryPlain =
@@ -59,8 +61,7 @@ const EnrollmentRegistrationEntryPlain =
       onSave,
       onCancel,
       onPostProcessErrorMessage,
-      orgUnitId,
-      orgUnit,
+      orgUnitName,
       teiId,
       isUserInteractionInProgress,
       isSavingInProgress,
@@ -81,13 +82,12 @@ const EnrollmentRegistrationEntryPlain =
       return (
           <>
               {
-                  scopeType === scopeTypes.TRACKER_PROGRAM && formId && orgUnit &&
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
                   enrollmentMetadata && 'enrollmentForm' in enrollmentMetadata && formFoundation &&
                   <>
                       <FormFieldPluginContextIdsProvider programId={selectedScopeId} teiId={teiId}>
                           <EnrollmentDataEntry
                               teiId={teiId}
-                              orgUnit={orgUnit}
                               programId={selectedScopeId}
                               formFoundation={formFoundation}
                               enrollmentMetadata={enrollmentMetadata}
@@ -127,7 +127,7 @@ const EnrollmentRegistrationEntryPlain =
                           {translatedTextWithStylesForProgram(
                               trackedEntityName.toLowerCase(),
                               programName,
-                              orgUnit.name,
+                              orgUnitName,
                               enrollmentLabel,
                               teiId,
                           )}

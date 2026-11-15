@@ -6,8 +6,6 @@ import { withStyles, WithStyles } from 'capture-core-utils/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
-import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
-import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
@@ -53,13 +51,13 @@ const TeiRegistrationEntryPlain =
       isSavingInProgress,
       onCancel,
       hideProgramSelectionMessage,
+      orgUnitId,
+      orgUnitName,
       ...rest
   }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
-      const orgUnitId = useCurrentOrgUnitId();
-      const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
@@ -78,8 +76,6 @@ const TeiRegistrationEntryPlain =
                           e.g. when this form opens in the relationships dialog on an enrollment dashboard. */}
                       <FormFieldPluginContextIdsProvider>
                           <TrackedEntityInstanceDataEntry
-                              // @ts-expect-error - keeping original functionality as before ts rewrite
-                              orgUnitId={orgUnitId}
                               formFoundation={formFoundation}
                               trackedEntityTypeId={selectedScopeId}
                               teiRegistrationMetadata={teiRegistrationMetadata}

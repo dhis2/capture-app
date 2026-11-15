@@ -173,6 +173,7 @@ type apiProgram = {
     trackedEntityType?: { id: string } | null,
     categoryCombo: apiProgramCategoryCombo,
     enrollmentCategoryCombo?: apiProgramCategoryCombo | null,
+    enableChangeLog?: boolean | null,
     organisationUnits?: Array<apiProgramOrganisationUnit> | null,
     userRoles?: Array<apiProgramUserRoles> | null,
     programStages?: Array<apiProgramStage> | null,
