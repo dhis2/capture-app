@@ -25,6 +25,7 @@ const cleanUp = (state, { payload: { dataEntryId } }) => {
     return newState;
 };
 
+// TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
 const isSameDateTimeAsShown = (currentValue, value) =>
     !!currentValue?.originalValue && !!value &&
     currentValue.date === value.date && currentValue.time === value.time;

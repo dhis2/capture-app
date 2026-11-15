@@ -28,6 +28,7 @@ function convertDateTime(formValue: DateTimeValue): string | null {
     // Existing values are only rewritten when the user changes them. If the date and time still match the
     // stored value (compared to the minute), the stored value is sent back as is.
     // Changed values are sent without a timezone.
+    // TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
     if (dateTime && originalDateTime && moment.utc(dateTime).isSame(moment.utc(originalDateTime), 'minute')) {
         return formValue.originalValue as string;
     }

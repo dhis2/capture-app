@@ -37,6 +37,7 @@ export function convertToTimeZoneFreeDateTime(value: any): string | null {
         return null;
     }
 
+    // TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
     if (!isTimeZoneFree(value)) {
         return convertToServerTimeZone(value);
     }

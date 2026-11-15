@@ -83,7 +83,7 @@ const sortTime = (clientValueA: any, clientValueB: any, direction: string, optio
 // DATETIME values can be without a timezone or legacy values with a timezone (Z), so sortTime would compare
 // them in different time zones. Both are converted to the displayed wall-clock time and compared as UTC,
 // which also avoids daylight saving shifts. Empty values sort as the latest time, like in sortTime.
-// TODO: Remove and use sortTime for DATETIME when v44 (legacy values migrated) is the lowest supported version
+// TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
 const toSortableDateTime = (clientValue: any) => {
     const dateTime = convertToTimeZoneFreeDateTime(clientValue);
     return dateTime ? moment.utc(dateTime).valueOf() : Number.POSITIVE_INFINITY;
