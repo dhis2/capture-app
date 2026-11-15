@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
-import { convertValue as convertClientToForm } from '../../converters/clientToForm';
+import { convertClientToForm } from '../../converters';
 import { dataElementTypes } from '../../metaData';
 
 

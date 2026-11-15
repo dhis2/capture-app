@@ -29,15 +29,9 @@ function convertDateForEdit(rawValue: string): string {
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     const dateTime = convertToTimeZoneFreeDateTime(rawValue);
-    if (!dateTime) {
-        return { date: '', time: '' };
-    }
-
-    const momentDateTime = moment.utc(dateTime);
     return {
-        date: convertIsoToLocalCalendar(formatMomentEn(momentDateTime, 'YYYY-MM-DD')),
-        time: formatMomentEn(momentDateTime, 'HH:mm'),
-        // kept so an unchanged value is sent back to the server as stored
+        date: convertIsoToLocalCalendar(dateTime),
+        time: formatMomentEn(moment.utc(dateTime), 'HH:mm'),
         originalValue: rawValue,
     };
 }

@@ -16,8 +16,7 @@ export function convertDateTimeForDisplay(value: string): string {
         return '';
     }
 
-    const momentDateTime = moment.utc(dateTime);
-    const timeString = formatMomentEn(momentDateTime, 'HH:mm');
-    const localDate = convertIsoToLocalCalendar(formatMomentEn(momentDateTime, 'YYYY-MM-DD'));
+    const timeString = formatMomentEn(moment.utc(dateTime), 'HH:mm');
+    const localDate = convertIsoToLocalCalendar(dateTime);
     return `${localDate} ${timeString}`;
 }

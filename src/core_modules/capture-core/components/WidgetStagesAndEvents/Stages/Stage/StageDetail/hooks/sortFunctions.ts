@@ -80,9 +80,10 @@ const sortTime = (clientValueA: any, clientValueB: any, direction: string, optio
     return 0;
 };
 
-// Client values can be legacy values with a timezone, so sort on the displayed value.
-// moment.utc keeps the wall-clock time, avoiding daylight saving shifts in the browser time zone.
-// Empty values sort as the latest time, as sortTime does: first when descending and last when ascending.
+// DATETIME values can be without a timezone or legacy values with a timezone (Z), so sortTime would compare
+// them in different time zones. Both are converted to the displayed wall-clock time and compared as UTC,
+// which also avoids daylight saving shifts. Empty values sort as the latest time, like in sortTime.
+// TODO: Remove and use sortTime for DATETIME when v44 (legacy values migrated) is the lowest supported version
 const toSortableDateTime = (clientValue: any) => {
     const dateTime = convertToTimeZoneFreeDateTime(clientValue);
     return dateTime ? moment.utc(dateTime).valueOf() : Number.POSITIVE_INFINITY;
@@ -93,7 +94,6 @@ const sortDateTime = (clientValueA: any, clientValueB: any, direction: string, o
     const dateTimeB = toSortableDateTime(clientValueB);
     const { eventDateA, eventDateB } = options;
 
-    // most recent dates first
     if (direction === SORT_DIRECTION.DESC) {
         if (dateTimeA !== dateTimeB) {
             return dateTimeB - dateTimeA;

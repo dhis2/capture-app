@@ -25,6 +25,10 @@ const cleanUp = (state, { payload: { dataEntryId } }) => {
     return newState;
 };
 
+const isSameDateTimeAsShown = (currentValue, value) =>
+    !!currentValue?.originalValue && !!value &&
+    currentValue.date === value.date && currentValue.time === value.time;
+
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.FORM_DATA_ADD]: (state, action) => {
         const newState = { ...state };
@@ -76,10 +80,7 @@ export const formsValuesDesc = createReducerDescription({
                     const effectsForId = assignEffects[id];
                     const value = effectsForId[0].value;
                     const currentValue = state[payload.formId]?.[id];
-                    acc[id] = currentValue?.originalValue && value &&
-                        currentValue.date === value.date && currentValue.time === value.time
-                        ? currentValue
-                        : value;
+                    acc[id] = isSameDateTimeAsShown(currentValue, value) ? currentValue : value;
                     return acc;
                 }, {}),
             },

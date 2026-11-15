@@ -24,8 +24,11 @@ type RangeValue = {
 function convertDateTime(formValue: DateTimeValue): string | null {
     const dateTime = convertLocalToIsoDateTime(formValue.date, formValue.time);
     const originalDateTime = convertToTimeZoneFreeDateTime(formValue.originalValue);
+
+    // Existing values are only rewritten when the user changes them. If the date and time still match the
+    // stored value (compared to the minute), the stored value is sent back as is.
+    // Changed values are sent without a timezone.
     if (dateTime && originalDateTime && moment.utc(dateTime).isSame(moment.utc(originalDateTime), 'minute')) {
-        // unchanged by the user, keep the value as stored on the server
         return formValue.originalValue as string;
     }
     return dateTime;
