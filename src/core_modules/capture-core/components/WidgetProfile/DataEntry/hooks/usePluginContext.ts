@@ -13,9 +13,15 @@ type Enrollment = {
     geometry?: { type: string; coordinates: any } | null;
 };
 
+type OrgUnit = {
+    id: string;
+    name: string;
+    path: string;
+};
+
 type Props = {
     enrollment?: Enrollment;
-    ownerOrgUnitId: string;
+    orgUnit?: OrgUnit | null;
 };
 
 const readOnlyEntry = (name: string, value: any): PluginContextEntry => ({
@@ -25,10 +31,12 @@ const readOnlyEntry = (name: string, value: any): PluginContextEntry => ({
     value,
 });
 
-export const usePluginContext = ({ enrollment, ownerOrgUnitId }: Props): PluginContext => useMemo(() => {
-    const pluginContext: PluginContext = {
-        orgUnit: readOnlyEntry('orgUnit', { id: ownerOrgUnitId }),
-    };
+export const usePluginContext = ({ enrollment, orgUnit }: Props): PluginContext => useMemo(() => {
+    const pluginContext: PluginContext = {};
+
+    if (orgUnit) {
+        pluginContext.orgUnit = readOnlyEntry('orgUnit', { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path });
+    }
 
     if (enrollment?.enrolledAt) {
         pluginContext.enrolledAt = readOnlyEntry('enrolledAt', convertFn(enrollment.enrolledAt, dataElementTypes.DATE));
@@ -49,4 +57,4 @@ export const usePluginContext = ({ enrollment, ownerOrgUnitId }: Props): PluginC
     }
 
     return pluginContext;
-}, [enrollment, ownerOrgUnitId]);
+}, [enrollment, orgUnit]);

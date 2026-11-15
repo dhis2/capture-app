@@ -58,8 +58,8 @@ export const DataEntry = ({
         querySingleResource,
         onGetValidationContext,
     });
-    const { formFoundation, enrollment } = context;
-    const pluginContext = usePluginContext({ enrollment, ownerOrgUnitId });
+    const { formFoundation, enrollment, orgUnit } = context;
+    const pluginContext = usePluginContext({ enrollment, orgUnit });
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const onUpdateFormField = useCallback(
