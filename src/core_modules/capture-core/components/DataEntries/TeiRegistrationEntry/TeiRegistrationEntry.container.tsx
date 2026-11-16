@@ -115,7 +115,6 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
     return (
         <TeiRegistrationEntryComponent
             id={id}
-            orgUnitId={orgUnitId}
             orgUnitName={orgUnitFieldValue?.name}
             teiRegistrationMetadata={teiRegistrationMetadata}
             selectedScopeId={teiRegistrationMetadata.form?.id}

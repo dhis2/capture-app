@@ -51,7 +51,6 @@ const TeiRegistrationEntryPlain =
       isSavingInProgress,
       onCancel,
       hideProgramSelectionMessage,
-      orgUnitId,
       orgUnitName,
       ...rest
   }: PlainProps & WithStyles<typeof styles>) => {
