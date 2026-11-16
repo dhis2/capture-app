@@ -50,6 +50,7 @@ export type Props = {
     onAddNew: () => void;
     onUpdateEnrollmentDate?: (enrollmentDate: string) => void;
     onUpdateIncidentDate?: (enrollmentDate: string) => void;
+    onUpdateEnrollmentGeometry?: (geometry: Record<string, unknown> | null) => void;
     onError?: (message: string) => void;
     onSuccess?: () => void;
     onUpdateEnrollmentStatus?: (enrollment: Record<string, unknown>) => void;
