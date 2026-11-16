@@ -1,11 +1,11 @@
 import React, { useMemo, useCallback, useRef } from 'react';
 import { FormFieldPluginComponent } from './FormFieldPlugin.component';
-import type { ContainerProps } from './FormFieldPlugin.types';
+import type { ContainerProps, FormattedMetadataByPluginId } from './FormFieldPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
 import { usePluginCallbacks } from './hooks/usePluginCallbacks';
 import { usePluginValues } from './hooks/usePluginValues';
+import { useFormFieldPluginContextIds } from './FormFieldPluginContextIds';
 import { formatPluginConfig } from './formatPluginConfig';
-import { useLocationQuery } from '../../../utils/routing';
 
 export const FormFieldPlugin = (props: ContainerProps) => {
     const {
@@ -19,16 +19,15 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
-    const { orgUnitId } = useLocationQuery();
+    const contextIds = useFormFieldPluginContextIds();
 
-    // Plugin related functionality and feedback
     const { pluginValues, formValuesRedux } = usePluginValues(formId, metadataByPluginId, pluginContext);
     const { errors, warnings, formSubmitted } = usePluginMessages(formId, metadataByPluginId);
     const valuesRef = useRef(formValuesRedux);
     valuesRef.current = formValuesRedux;
     const onUpdateField = useCallback(
         (fieldMetadata, value, options) =>
-            onUpdateFieldValue(fieldMetadata, value, valuesRef.current[fieldMetadata.id], options),
+            onUpdateFieldValue(fieldMetadata, value, valuesRef.current?.[fieldMetadata.id], options),
         [onUpdateFieldValue, valuesRef],
     );
     const { setFieldValue, setContextFieldValue } = usePluginCallbacks({
@@ -38,22 +37,19 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         pluginContext,
     });
 
-    // Remove ids from plugin metadata before passing to plugin
-    const formattedMetadata = useMemo(() => {
-        const metadata = [...fieldsMetadata.entries()];
-
-        return metadata.reduce((acc, [pluginFieldId, pluginMetadata]) => {
-            const formattedPluginMetadata = formatPluginConfig(pluginMetadata, {
-                attributes: customAttributes,
-                keysToOmit: ['id', 'dataElement', 'section'],
-            });
-            return { ...acc, [pluginFieldId]: formattedPluginMetadata };
-        }, {});
-    }, [customAttributes, fieldsMetadata]);
+    const formattedMetadata = useMemo<FormattedMetadataByPluginId>(
+        () => Object.fromEntries(
+            Object.entries(metadataByPluginId).map(([pluginFieldId, pluginMetadata]) => [
+                pluginFieldId,
+                formatPluginConfig(pluginMetadata, customAttributes),
+            ]),
+        ),
+        [customAttributes, metadataByPluginId],
+    );
 
     return (
         <FormFieldPluginComponent
-            orgUnitId={orgUnitId}
+            {...contextIds}
             pluginSource={pluginSource}
             fieldsMetadata={formattedMetadata}
             values={pluginValues}
@@ -66,4 +62,3 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         />
     );
 };
-

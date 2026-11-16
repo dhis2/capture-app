@@ -28,6 +28,7 @@ import { convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 import { LabelKeys, useTermLabel } from '../../../../customLabels';
 import type { PlainProps } from './EventDetailsSection.types';
+import { FormFieldPluginContextIdsProvider } from '../../../D2Form/FormFieldPlugin';
 
 const getStyles: any = () => ({
     container: {
@@ -103,26 +104,32 @@ const EventDetailsSectionPlain = (props: PlainProps & { classes: any }) => {
     }
 
     const renderDataEntryContainer = () => (
-        <div className={classes.dataEntryContainer}>
-            {isEditEventPage ?
-                <EditEventDataEntry
-                    dataEntryId={dataEntryIds.SINGLE_EVENT}
-                    formFoundation={formFoundation}
-                    orgUnit={orgUnit}
-                    onSaveExternal={onSaveExternal}
-                    expiryPeriod={expiryPeriod}
-                    programId={programId}
-                    canToggleCompletion={canToggleCompletion}
-                    {...passOnProps}
-                /> :
-                <ViewEventDataEntry
-                    dataEntryId={dataEntryIds.SINGLE_EVENT}
-                    formFoundation={formFoundation}
-                    programId={programId}
-                    {...passOnProps}
-                />
-            }
-        </div>
+        <FormFieldPluginContextIdsProvider
+            programId={programId}
+            programStageId={programStage.id}
+            eventId={eventId}
+        >
+            <div className={classes.dataEntryContainer}>
+                {isEditEventPage ?
+                    <EditEventDataEntry
+                        dataEntryId={dataEntryIds.SINGLE_EVENT}
+                        formFoundation={formFoundation}
+                        orgUnit={orgUnit}
+                        onSaveExternal={onSaveExternal}
+                        expiryPeriod={expiryPeriod}
+                        programId={programId}
+                        canToggleCompletion={canToggleCompletion}
+                        {...passOnProps}
+                    /> :
+                    <ViewEventDataEntry
+                        dataEntryId={dataEntryIds.SINGLE_EVENT}
+                        formFoundation={formFoundation}
+                        programId={programId}
+                        {...passOnProps}
+                    />
+                }
+            </div>
+        </FormFieldPluginContextIdsProvider>
     );
 
     const renderActionsContainer = () => (

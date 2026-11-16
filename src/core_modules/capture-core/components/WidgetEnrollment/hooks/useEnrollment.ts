@@ -18,6 +18,7 @@ type Props = {
     program?: Record<string, unknown>;
     onUpdateEnrollmentDate?: (date: string) => void;
     onUpdateIncidentDate?: (date: string) => void;
+    onUpdateEnrollmentGeometry?: (geometry: Record<string, unknown> | null) => void;
     onError?: (error: any) => void;
     onSuccess?: () => void;
     externalData?: { status: { value: string | null }; events?: Array<Record<string, unknown>> | null };
@@ -29,6 +30,7 @@ export const useEnrollment = ({
     program,
     onUpdateEnrollmentDate,
     onUpdateIncidentDate,
+    onUpdateEnrollmentGeometry,
     onError,
     onSuccess,
     externalData,
@@ -62,6 +64,12 @@ export const useEnrollment = ({
             setEnrollment((data as { enrollment: Enrollment }).enrollment);
         }
     }, [setEnrollment, data]);
+
+    useEffect(() => {
+        if (data) {
+            onUpdateEnrollmentGeometry?.((data as { enrollment: Enrollment }).enrollment.geometry ?? null);
+        }
+    }, [onUpdateEnrollmentGeometry, data]);
 
     useEffect(() => {
         if (externalData?.status?.value) {
