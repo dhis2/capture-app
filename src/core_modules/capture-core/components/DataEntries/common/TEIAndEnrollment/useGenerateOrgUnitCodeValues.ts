@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { v4 as uuid } from 'uuid';
@@ -14,14 +14,14 @@ type Props = {
     formId: string;
     orgUnitId?: string;
     ready: boolean;
-    teiId?: string;
 };
 
 // Generates the values using the org unit code for the org unit selected in the form
-export const useGenerateOrgUnitCodeValues = ({ formFoundation, formId, orgUnitId, ready, teiId }: Props) => {
+export const useGenerateOrgUnitCodeValues = ({ formFoundation, formId, orgUnitId, ready }: Props) => {
     const dispatch = useDispatch();
     const store = useStore();
     const dataEngine = useDataEngine();
+    const generatedValuesRef = useRef<{ [id: string]: any }>({});
     const orgUnitCodeDataElements = useMemo(() => (formFoundation?.getElements() ?? [])
         .filter(dataElement => dataElement.unique?.generatable && dataElement.unique.usesOrgUnitCode),
     [formFoundation]);
@@ -35,9 +35,10 @@ export const useGenerateOrgUnitCodeValues = ({ formFoundation, formId, orgUnitId
             return undefined;
         }
         const formValues = (store.getState() as any).formsValues[formId] || {};
-        // An existing tracked entity keeps its values, so only missing values are generated
-        const dataElements = orgUnitCodeDataElements
-            .filter(dataElement => !teiId || !formValues[dataElement.id]);
+        // Values from search, inherited attributes or an existing tracked entity are kept,
+        // so only empty values and values generated here are generated again
+        const dataElements = orgUnitCodeDataElements.filter(dataElement =>
+            !formValues[dataElement.id] || formValues[dataElement.id] === generatedValuesRef.current[dataElement.id]);
         if (dataElements.length === 0) {
             return undefined;
         }
@@ -51,11 +52,14 @@ export const useGenerateOrgUnitCodeValues = ({ formFoundation, formId, orgUnitId
                     .filter(validator => validator.type !== validatorTypes.UNIQUE);
                 const validation = await validateValue({ validators, value });
                 const uiState = { ...validation, touched: !!value };
-                return updateFieldFromAsync(value, uiState, dataElement.id, formId, formId, uuid());
+                return { id: dataElement.id, value, uiState };
             })))
-            .then((actions) => {
+            .then((results) => {
                 if (request.active) {
-                    actions.forEach(action => dispatch(action));
+                    results.forEach(({ id, value, uiState }) => {
+                        generatedValuesRef.current[id] = value;
+                        dispatch(updateFieldFromAsync(value, uiState, id, formId, formId, uuid()));
+                    });
                 }
             });
 
@@ -63,5 +67,5 @@ export const useGenerateOrgUnitCodeValues = ({ formFoundation, formId, orgUnitId
         return () => {
             request.active = false;
         };
-    }, [ready, orgUnitCode, orgUnitCodeDataElements, formId, teiId, store, dataEngine, dispatch]);
+    }, [ready, orgUnitCode, orgUnitCodeDataElements, formId, store, dataEngine, dispatch]);
 };

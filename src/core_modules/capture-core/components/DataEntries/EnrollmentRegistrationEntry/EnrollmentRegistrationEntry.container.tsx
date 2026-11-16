@@ -44,7 +44,6 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         formId: dataEntryKey,
         orgUnitId: orgUnitFieldValue?.id,
         ready,
-        teiId,
     });
     const { buildTeiWithEnrollment } = useBuildEnrollmentPayload({
         programId: selectedScopeId,
