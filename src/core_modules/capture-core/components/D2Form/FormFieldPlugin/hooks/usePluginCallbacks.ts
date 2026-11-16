@@ -4,6 +4,8 @@ import { errorCreator } from 'capture-core-utils';
 import type { SetFieldValueProps, UsePluginCallbacksProps } from '../FormFieldPlugin.types';
 import { PluginErrorMessages, PluginContextValueKeys } from '../FormFieldPlugin.const';
 
+const allowedContextKeys = new Set<string>(PluginContextValueKeys);
+
 export const usePluginCallbacks = ({
     configuredPluginIds,
     metadataByPluginId,
@@ -27,7 +29,7 @@ export const usePluginCallbacks = ({
     }, [configuredPluginIds, metadataByPluginId, onUpdateField]);
 
     const setContextFieldValue = useCallback(({ fieldId, value }: SetFieldValueProps) => {
-        if (!(PluginContextValueKeys as readonly string[]).includes(fieldId)) {
+        if (!allowedContextKeys.has(fieldId)) {
             log.error(errorCreator(
                 PluginErrorMessages.SET_CONTEXT_FIELD_VALUE_ID_NOT_ALLOWED,
             )({ fieldId, value }));

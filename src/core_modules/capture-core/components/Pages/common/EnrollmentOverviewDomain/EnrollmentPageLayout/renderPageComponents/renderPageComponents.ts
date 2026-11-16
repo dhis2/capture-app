@@ -9,16 +9,6 @@ import type {
 import { EnrollmentPlugin, type EnrollmentPluginProps } from '../../../EnrollmentPlugin';
 import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
 
-type PluginPropsInput = {
-    program?: { id: string };
-    programStage?: { id: string };
-    stageId?: string;
-    eventId?: string;
-    enrollmentId?: string;
-    teiId?: string;
-    ownerOrgUnitId?: string;
-};
-
 const MemoizedWidgets: Record<string, React.ComponentType<any>> = {};
 const UnsupportedWidgets: Record<string, boolean> = {};
 
@@ -72,7 +62,7 @@ const getPropsForPlugin = ({
     enrollmentId,
     teiId,
     ownerOrgUnitId,
-}: PluginPropsInput): Omit<EnrollmentPluginProps, 'pluginSource'> => ({
+}: any): Omit<EnrollmentPluginProps, 'pluginSource'> => ({
     programId: program?.id,
     programStageId: stageId ?? programStage?.id,
     eventId,

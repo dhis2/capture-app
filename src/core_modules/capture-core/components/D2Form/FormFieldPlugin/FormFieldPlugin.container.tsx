@@ -27,7 +27,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     valuesRef.current = formValuesRedux;
     const onUpdateField = useCallback(
         (fieldMetadata, value, options) =>
-            onUpdateFieldValue(fieldMetadata, value, valuesRef.current[fieldMetadata.id], options),
+            onUpdateFieldValue(fieldMetadata, value, valuesRef.current?.[fieldMetadata.id], options),
         [onUpdateFieldValue, valuesRef],
     );
     const { setFieldValue, setContextFieldValue } = usePluginCallbacks({
@@ -39,12 +39,12 @@ export const FormFieldPlugin = (props: ContainerProps) => {
 
     const formattedMetadata = useMemo<FormattedMetadataByPluginId>(
         () => Object.fromEntries(
-            [...fieldsMetadata.entries()].map(([pluginFieldId, pluginMetadata]) => [
+            Object.entries(metadataByPluginId).map(([pluginFieldId, pluginMetadata]) => [
                 pluginFieldId,
                 formatPluginConfig(pluginMetadata, customAttributes),
             ]),
         ),
-        [customAttributes, fieldsMetadata],
+        [customAttributes, metadataByPluginId],
     );
 
     return (

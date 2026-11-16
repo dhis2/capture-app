@@ -2,7 +2,7 @@ import { PluginConfigConvertFns } from './formatPluginConfig.const';
 import type { FormattedPluginFormFieldMetadata } from '../FormFieldPlugin.types';
 import type { DataElement } from '../../../../metaData';
 
-const keysToOmit = ['id', 'dataElement', 'section', 'optionGroups', 'onValidate'];
+const keysToOmit = new Set(['id', 'dataElement', 'section', 'optionGroups', 'onValidate']);
 
 export const formatPluginConfig = (
     dataElement: DataElement,
@@ -12,7 +12,7 @@ export const formatPluginConfig = (
         .reduce((acc, [key, value]) => {
             const modifiedKey = key.replace(/^_/, '');
 
-            if (keysToOmit.includes(modifiedKey)) {
+            if (keysToOmit.has(modifiedKey)) {
                 return acc;
             }
 

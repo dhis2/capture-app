@@ -72,8 +72,6 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
-                      {/* No program here, so no context ids. Also resets ids from a surrounding host,
-                          e.g. when this form opens in the relationships dialog on an enrollment dashboard. */}
                       <FormFieldPluginContextIdsProvider>
                           <TrackedEntityInstanceDataEntry
                               formFoundation={formFoundation}

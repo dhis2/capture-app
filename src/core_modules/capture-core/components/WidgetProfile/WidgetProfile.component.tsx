@@ -292,7 +292,7 @@ const WidgetProfilePlain = ({
                     programId={programId}
                     teiId={teiId}
                     enrollmentId={enrollmentId}
-                    ownerOrgUnitId={ownerOrgUnitId || undefined}
+                    ownerOrgUnitId={ownerOrgUnitId}
                 >
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
