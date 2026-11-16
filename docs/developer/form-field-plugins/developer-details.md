@@ -91,7 +91,7 @@ setContextFieldValue({
 });
 ```
 
-The `orgUnit` value is an object, not an id: `{ id: string, name: string, path: string }`. `props.values.orgUnit` has the same shape.
+The `orgUnit` value is an object, not an id: `{ id: string, name: string, path?: string }` (`id` and `name` are required). `props.values.orgUnit` has the same shape.
 
 ### Props
 
@@ -194,28 +194,28 @@ Both exist because an enrollment can be owned by one org unit while its events h
 
 ### What each page exposes
 
-The registration forms opened from the relationships widget expose the same as the matching **New TEI** row.
+The registration forms opened from the relationships widget expose the same as the matching **Register TEI** or **Register and enroll** row.
 
 Context ids:
 
-| Page | `programId` | `programStageId` | `ownerOrgUnitId` | `enrollmentId` | `teiId` | `eventId` |
+| Page | `ownerOrgUnitId` | `programId` | `programStageId` | `enrollmentId` | `eventId` | `teiId` |
 |---|---|---|---|---|---|---|
-| Tracked entity type **New TEI** (no program) | — | — | — | — | — | — |
-| Tracker **New TEI** | ✓ | — | — | — | ✓ (when enrolling an existing TEI) | — |
-| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ | — | ✓ | ✓ | ✓ | — |
-| Tracker **New event** | ✓ | ✓ | ✓ | ✓ | ✓ | — |
-| Tracker **Event edit/view** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Event program **New event** | ✓ | ✓ | — | — | — | — |
-| Event program **Event edit/view** | ✓ | ✓ | — | — | — | ✓ |
+| **Register TEI** (no program) | — | — | — | — | — | — |
+| **Register and enroll** | — | ✓ | — | — | — | ✓ (when enrolling an existing TEI) |
+| **Edit profile** | ✓ | ✓ | — | ✓ | — | ✓ |
+| **Add event** (enrollment dashboard) | ✓ | ✓ | ✓ | ✓ | — | ✓ |
+| **Edit/view event** (enrollment dashboard) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **New event** (event program) | — | ✓ | ✓ | — | — | — |
+| **Edit/view event** (event program) | — | ✓ | ✓ | — | ✓ | — |
 
 Form values (`props.values.*`):
 
 | Page | `orgUnit` | `enrolledAt` | `occurredAt` | `scheduledAt` | `geometry` |
 |---|---|---|---|---|---|
-| Tracked entity type **New TEI** (no program) | ✓ | — | — | — | — |
-| Tracker **New TEI** | ✓ | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
-| Tracker **Edit profile** (dialog on the enrollment dashboard) | ✓ (the owner org unit, read-only) | ✓ | ✓ (if program has an incident date) | — | ✓ (if enrollment has geometry) |
-| Tracker **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
-| Tracker **Event edit/view** | ✓ | — | ✓ | ✓ (if event was ever scheduled) | ✓ (if form has geometry) |
-| Event program **New event** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
-| Event program **Event edit/view** | ✓ | — | ✓ | — | ✓ (if form has geometry) |
+| **Register TEI** (no program) | ✓ | — | — | — | — |
+| **Register and enroll** | ✓ | ✓ | ✓ (if program has an incident date) | — | ✓ (if form has geometry) |
+| **Edit profile** | ✓ (the owner org unit, read-only) | ✓ | ✓ (if program has an incident date) | — | ✓ (if enrollment has geometry) |
+| **Add event** (enrollment dashboard) | ✓ | — | ✓ | — | ✓ (if form has geometry) |
+| **Edit/view event** (enrollment dashboard) | ✓ | — | ✓ | ✓ (if event was ever scheduled) | ✓ (if form has geometry) |
+| **New event** (event program) | ✓ | — | ✓ | — | ✓ (if form has geometry) |
+| **Edit/view event** (event program) | ✓ | — | ✓ | — | ✓ (if form has geometry) |
