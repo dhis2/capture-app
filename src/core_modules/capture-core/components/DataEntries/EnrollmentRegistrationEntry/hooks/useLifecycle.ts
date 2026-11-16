@@ -41,8 +41,6 @@ export const useLifecycle = (
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
-        contextOrgUnit,
-        defaultOrgUnitReady,
         formFoundation,
         teiId,
         searchTerms,

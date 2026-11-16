@@ -193,6 +193,7 @@ export class DataElementFactory {
 
             if (cachedTrackedEntityAttribute.pattern) {
                 o.generatable = !!cachedTrackedEntityAttribute.pattern;
+                o.usesOrgUnitCode = cachedTrackedEntityAttribute.pattern.includes('ORG_UNIT_CODE');
             }
         });
     }
