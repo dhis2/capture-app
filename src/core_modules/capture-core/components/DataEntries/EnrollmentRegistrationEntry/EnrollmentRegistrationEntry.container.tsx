@@ -9,6 +9,9 @@ import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges'
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { useGenerateOrgUnitCodeValues } from '../common/TEIAndEnrollment/useGenerateOrgUnitCodeValues';
 import {
+    useValidateOrgUnitScopedUniqueValues,
+} from '../common/TEIAndEnrollment/useValidateOrgUnitScopedUniqueValues';
+import {
     useBuildEnrollmentPayload,
 } from './hooks/useBuildEnrollmentPayload';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
@@ -45,6 +48,15 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         orgUnitId: orgUnitFieldValue?.id,
         ready,
         teiId,
+    });
+    useValidateOrgUnitScopedUniqueValues({
+        formFoundation,
+        formId: dataEntryKey,
+        orgUnitId: orgUnitFieldValue?.id,
+        programId: selectedScopeId,
+        trackedEntityTypeId: enrollmentMetadata?.trackedEntityType?.id,
+        teiId,
+        ready,
     });
     const { buildTeiWithEnrollment } = useBuildEnrollmentPayload({
         programId: selectedScopeId,

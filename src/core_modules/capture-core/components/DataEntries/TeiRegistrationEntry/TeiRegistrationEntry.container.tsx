@@ -11,6 +11,9 @@ import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTer
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import { useGenerateOrgUnitCodeValues } from '../common/TEIAndEnrollment/useGenerateOrgUnitCodeValues';
+import {
+    useValidateOrgUnitScopedUniqueValues,
+} from '../common/TEIAndEnrollment/useValidateOrgUnitScopedUniqueValues';
 import { useBuildTeiPayload } from './hooks/useBuildTeiPayload';
 import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
@@ -107,6 +110,13 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
         formFoundation: teiRegistrationMetadata instanceof Enrollment ? null : teiRegistrationMetadata?.form,
         formId: dataEntryKey,
         orgUnitId: orgUnitFieldValue?.id,
+        ready,
+    });
+    useValidateOrgUnitScopedUniqueValues({
+        formFoundation: teiRegistrationMetadata instanceof Enrollment ? null : teiRegistrationMetadata?.form,
+        formId: dataEntryKey,
+        orgUnitId: orgUnitFieldValue?.id,
+        trackedEntityTypeId: selectedScopeId,
         ready,
     });
 
