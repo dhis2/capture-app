@@ -55,10 +55,6 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
             programId: programId || undefined,
         };
     },
-    [registrationSectionActionTypes.PROGRAM_FILTER_CLEAR]: state => ({
-        ...state,
-        orgUnit: null,
-    }),
     [dataEntryActionTypes.DATA_ENTRY_OPEN]: state => ({
         ...state,
         dataEntryError: null,
@@ -90,10 +86,6 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
             programId: programId || undefined,
         };
     },
-    [registrationSectionActionTypesRelationshipsWidget.PROGRAM_FILTER_CLEAR]: state => ({
-        ...state,
-        orgUnit: null,
-    }),
     [dataEntryActionTypesRelationshipsWidget.DATA_ENTRY_OPEN]: state => ({
         ...state,
         dataEntryError: null,

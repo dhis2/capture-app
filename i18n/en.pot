@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-11-04T09:17:28.040Z\n"
-"PO-Revision-Date: 2026-11-04T09:17:28.040Z\n"
+"POT-Creation-Date: 2026-11-16T13:51:51.527Z\n"
+"PO-Revision-Date: 2026-11-16T13:51:51.527Z\n"
 
 msgid "The application could not be loaded."
 msgstr "The application could not be loaded."
@@ -954,12 +954,6 @@ msgstr "Link"
 msgid "Save as new {{trackedEntityName}}"
 msgstr "Save as new {{trackedEntityName}}"
 
-msgid "Some programs are being filtered."
-msgstr "Some programs are being filtered."
-
-msgid "Show all"
-msgstr "Show all"
-
 msgid "Program"
 msgstr "Program"
 
@@ -1172,6 +1166,9 @@ msgstr "Clear selection"
 
 msgid "No programs available."
 msgstr "No programs available."
+
+msgid "Show all"
+msgstr "Show all"
 
 msgid "Search for a program"
 msgstr "Search for a program"
