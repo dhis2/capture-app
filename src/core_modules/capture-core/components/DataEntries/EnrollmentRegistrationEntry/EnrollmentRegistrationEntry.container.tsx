@@ -7,6 +7,7 @@ import { useLifecycle } from './hooks';
 import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import { useGenerateOrgUnitCodeValues } from '../common/TEIAndEnrollment/useGenerateOrgUnitCodeValues';
 import {
     useBuildEnrollmentPayload,
 } from './hooks/useBuildEnrollmentPayload';
@@ -38,6 +39,12 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
     const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) =>
         dataEntriesFieldsValue[dataEntryKey]?.orgUnit);
+    useGenerateOrgUnitCodeValues({
+        formFoundation,
+        formId: dataEntryKey,
+        orgUnitId: orgUnitFieldValue?.id,
+        ready,
+    });
     const { buildTeiWithEnrollment } = useBuildEnrollmentPayload({
         programId: selectedScopeId,
         dataEntryId: id,

@@ -8,12 +8,14 @@ type Validator = (value: any, contextProps: any, querySingleResource: QuerySingl
 
 export class Unique {
     _generatable!: boolean;
+    _usesOrgUnitCode!: boolean;
     _scope!: typeof scopes[keyof typeof scopes];
     _onValidate!: Validator;
 
     constructor(initFn: ((_this: Unique) => void) | null) {
         this._scope = scopes.ENTIRE_SYSTEM;
         this._generatable = false;
+        this._usesOrgUnitCode = false;
         initFn && initFn(this);
     }
 
@@ -22,6 +24,13 @@ export class Unique {
     }
     get generatable(): boolean {
         return this._generatable;
+    }
+
+    set usesOrgUnitCode(usesOrgUnitCode: boolean) {
+        this._usesOrgUnitCode = usesOrgUnitCode;
+    }
+    get usesOrgUnitCode(): boolean {
+        return this._usesOrgUnitCode;
     }
 
     set scope(scope: typeof scopes[keyof typeof scopes]) {

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getUniqueValuesForAttributesWithoutValue } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';
@@ -22,15 +21,9 @@ export type InputAttribute = {
 type InputForm = {
     program: TrackerProgram;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
-    contextOrgUnit?: OrgUnit | null;
-    defaultOrgUnitReady: boolean;
     formFoundation: RenderFoundation | null;
     teiId?: string;
     searchTerms: Array<{[key: string]: string}> | null;
-};
-
-type StaticPatternValues = {
-    orgUnitCode?: string;
 };
 
 const useClientAttributesWithSubvalues = (program: TrackerProgram, attributes?: Array<InputAttribute>) => {
@@ -85,7 +78,6 @@ const useClientAttributesWithSubvalues = (program: TrackerProgram, attributes?: 
 const buildFormValues = async ({
     foundation,
     clientAttributesWithSubvalues,
-    staticPatternValues,
     setFormValues,
     setClientValues,
     formValuesReadyRef,
@@ -94,7 +86,6 @@ const buildFormValues = async ({
 }: {
     foundation: RenderFoundation | null;
     clientAttributesWithSubvalues: Array<any>;
-    staticPatternValues: StaticPatternValues;
     setFormValues: (values: any) => void;
     setClientValues: (values: any) => void;
     formValuesReadyRef: { current: boolean };
@@ -118,10 +109,11 @@ const buildFormValues = async ({
         {},
     );
 
+    // Values using the org unit code are generated for the form's org unit by useGenerateOrgUnitCodeValues
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
         foundation,
         clientAttributesWithSubvalues,
-        staticPatternValues,
+        {},
         querySingleResource,
     );
     setFormValues && setFormValues({ ...searchFormValues, ...formValues, ...uniqueValues });
@@ -130,7 +122,7 @@ const buildFormValues = async ({
 };
 
 export const useFormValues = ({
-    program, trackedEntityInstanceAttributes, contextOrgUnit, defaultOrgUnitReady, formFoundation, teiId, searchTerms,
+    program, trackedEntityInstanceAttributes, formFoundation, teiId, searchTerms,
 }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const dataEngine = useDataEngine();
@@ -144,18 +136,15 @@ export const useFormValues = ({
 
     useEffect(() => {
         if (
-            defaultOrgUnitReady &&
             formFoundation &&
             Object.entries(formFoundation).length > 0 &&
             formValuesReadyRef.current === false &&
             !!clientAttributesWithSubvalues
         ) {
-            const staticPatternValues = { orgUnitCode: contextOrgUnit?.code };
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             buildFormValues({
                 foundation: formFoundation,
                 clientAttributesWithSubvalues,
-                staticPatternValues,
                 setFormValues,
                 setClientValues,
                 formValuesReadyRef,
@@ -167,8 +156,6 @@ export const useFormValues = ({
         formFoundation,
         clientAttributesWithSubvalues,
         formValuesReadyRef,
-        contextOrgUnit,
-        defaultOrgUnitReady,
         searchTerms,
         dataEngine,
     ]);

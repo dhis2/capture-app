@@ -189,6 +189,7 @@ export class DataElementFactory {
 
                 if (cachedAttribute.pattern) {
                     o.generatable = !!cachedAttribute.pattern;
+                    o.usesOrgUnitCode = cachedAttribute.pattern.includes('ORG_UNIT_CODE');
                 }
             });
         }

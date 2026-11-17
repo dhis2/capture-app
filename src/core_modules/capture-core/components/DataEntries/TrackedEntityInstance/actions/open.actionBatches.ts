@@ -35,7 +35,8 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     const generatedItemContainers = await getGeneratedUniqueValuesAsync(
         foundation,
         generatedUniqueValuesCache,
-        { orgUnitCode: contextOrgUnit?.code },
+        // Values using the org unit code are generated for the form's org unit by useGenerateOrgUnitCodeValues
+        {},
         querySingleResource,
     );
 
