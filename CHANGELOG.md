@@ -1,3 +1,10 @@
+## [107.9.3](https://github.com/dhis2/capture-app/compare/v107.9.2...v107.9.3) (2026-11-17)
+
+
+### Bug Fixes
+
+* [CoP-78201] select a map search result ([#4834](https://github.com/dhis2/capture-app/issues/4834)) ([c6e343e](https://github.com/dhis2/capture-app/commit/c6e343e1609c73684dc4ecba1a1ffcfeef77fc61))
+
 ## [107.9.2](https://github.com/dhis2/capture-app/compare/v107.9.1...v107.9.2) (2026-11-15)
 
 
