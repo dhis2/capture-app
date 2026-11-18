@@ -1,5 +1,5 @@
 export class SystemSettings {
-    dateFormat!: string;
+    dateFormat!: 'YYYY-MM-DD' | 'DD-MM-YYYY';
     dir!: string;
     trackerAppRelativePath!: string;
     calendar!: string;

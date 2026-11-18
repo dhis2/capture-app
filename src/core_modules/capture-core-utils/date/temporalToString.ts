@@ -1,5 +1,4 @@
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { padWithZeros } from './padWithZeros';
+import { formatCalendarDate } from '@dhis2/multi-calendar-dates';
 
 /**
  * Converts a Temporal.PlainDate to a formatted date string (YYYY-MM-DD or DD-MM-YYYY)
@@ -21,14 +20,7 @@ export function temporalToString(temporalDate: PlainDate | null, dateFormat: str
     }
 
     try {
-        const calendar = systemSettingsStore.get().calendar;
-        const year = calendar === 'ethiopian' ? (temporalDate.eraYear ?? temporalDate.year) : temporalDate.year;
-        const month = temporalDate.month;
-        const day = temporalDate.day;
-
-        return dateFormat === 'YYYY-MM-DD' ?
-            `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}` :
-            `${padWithZeros(day, 2)}-${padWithZeros(month, 2)}-${padWithZeros(year, 4)}`;
+        return formatCalendarDate(temporalDate, { format: dateFormat as 'YYYY-MM-DD' | 'DD-MM-YYYY' });
     } catch (error) {
         return '';
     }
