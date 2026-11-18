@@ -1,3 +1,10 @@
+## [107.9.4](https://github.com/dhis2/capture-app/compare/v107.9.3...v107.9.4) (2026-11-18)
+
+
+### Bug Fixes
+
+* [LIBS-763][DHIS2-21183] tackle slow typing in date fields ([#4786](https://github.com/dhis2/capture-app/issues/4786)) ([937d2d5](https://github.com/dhis2/capture-app/commit/937d2d53ab191f37f0d173a838300e1e0cacdd1f))
+
 ## [107.9.3](https://github.com/dhis2/capture-app/compare/v107.9.2...v107.9.3) (2026-11-17)
 
 
