@@ -1,5 +1,4 @@
-import { convertToIso8601 } from '@dhis2/multi-calendar-dates';
-import { padWithZeros } from 'capture-core-utils/date';
+import { convertToIso8601, formatCalendarDate } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import {
     isEmptyValueFilter,
@@ -16,8 +15,7 @@ import type {
 function localCalendarDateToIsoDate(localDate: string): string | null {
     try {
         const calendar = systemSettingsStore.get().calendar;
-        const { year, month, day } = convertToIso8601(localDate, calendar as any);
-        return `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
+        return formatCalendarDate(convertToIso8601(localDate, calendar as any));
     } catch {
         return null;
     }
