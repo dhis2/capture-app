@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
+"POT-Creation-Date: 2026-10-05T10:05:05.847Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Rohit Wadhwani, 2026\n"
 "Language-Team: Hindi (India) (https://app.transifex.com/hisp-uio/teams/100509/hi_IN/)\n"
@@ -1113,6 +1113,9 @@ msgstr ""
 msgid "This tracked entity is deactivated"
 msgstr ""
 
+msgid "You only have view access to the selected category combination"
+msgstr ""
+
 msgid "Add {{relationshipLabel}}"
 msgstr ""
 
@@ -1374,6 +1377,9 @@ msgstr ""
 msgid "An error occurred while transferring ownership"
 msgstr ""
 
+msgid "Edit {{label}}"
+msgstr ""
+
 msgid "Existing dates for auto-generated {{eventsLabel}} will not be updated."
 msgstr ""
 
@@ -1421,7 +1427,7 @@ msgid "{{enrollmentLabel}} date"
 msgstr ""
 
 msgid "Incident date"
-msgstr ""
+msgstr "घटना की तारीख़"
 
 msgid "{{enrollmentLabel}} widget could not be loaded. Please try again later"
 msgstr ""
