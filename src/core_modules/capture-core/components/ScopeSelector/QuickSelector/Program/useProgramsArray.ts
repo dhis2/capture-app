@@ -1,10 +1,12 @@
 import type { StorageController } from 'capture-core-utils/storage';
+import { useQueryClient, type QueryClient } from '@tanstack/react-query';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 import {
     USER_METADATA_STORES,
     getUserMetadataStorageController,
     type CachedProgram,
 } from '../../../../storageControllers';
+import { isProgramOrganisationUnit } from '../../../../utils/cachedDataQueries';
 import { buildIcon } from '../../../../metaDataMemoryStoreBuilders/common/helpers';
 import type { Icon } from '../../../../metaData';
 
@@ -13,10 +15,10 @@ export type Program = {
     name: string,
     icon: Icon,
     access: { data: { read: boolean } },
-    organisationUnits: Array<{ [id: string]: boolean }>,
+    organisationUnits: { [id: string]: boolean },
 }
 
-const getCachedPrograms = async (
+const getCachedPrograms = (
     storageController: StorageController,
 ): Promise<Array<Program>> =>
     storageController.getAll(
@@ -31,31 +33,29 @@ const getCachedPrograms = async (
         },
     );
 
-const appendProgramOrgUnit = async (
-    storageController: StorageController,
+const appendProgramOrgUnit = (
+    queryClient: QueryClient,
     program: Program,
     selectedOrgUnitId: string,
 ): Promise<Program> =>
-    storageController.get(
-        USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM,
-        program.id, {
-            project: cachedProgramOrgUnits => ({
-                [selectedOrgUnitId]: cachedProgramOrgUnits.organisationUnits[selectedOrgUnitId] ?? false,
-            }),
-        },
-    ).then(organisationUnits => ({
+    isProgramOrganisationUnit({
+        queryClient,
+        programId: program.id,
+        orgUnitId: selectedOrgUnitId,
+    }).then(result => ({
         ...program,
-        organisationUnits,
+        organisationUnits: { [selectedOrgUnitId]: result },
     }));
 
 export const useProgramsArray = (selectedOrgUnitId: string | null | undefined): Array<Program> => {
     const storageController = getUserMetadataStorageController();
+    const queryClient = useQueryClient();
     const { data: programsArray } = useIndexedDBQuery(
         ['programSelectorPrograms', selectedOrgUnitId],
         () => getCachedPrograms(storageController).then(
             cachedPrograms => (selectedOrgUnitId ?
                 Promise.all(cachedPrograms.map(program =>
-                    appendProgramOrgUnit(storageController, program, selectedOrgUnitId)),
+                    appendProgramOrgUnit(queryClient, program, selectedOrgUnitId)),
                 ) : cachedPrograms),
         ),
     );
