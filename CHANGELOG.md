@@ -1,3 +1,10 @@
+## [107.9.5](https://github.com/dhis2/capture-app/compare/v107.9.4...v107.9.5) (2026-11-19)
+
+
+### Bug Fixes
+
+* [DHIS2-21654] mark hidden fields as untouched ([#4831](https://github.com/dhis2/capture-app/issues/4831)) ([3ab692d](https://github.com/dhis2/capture-app/commit/3ab692d465a3c96fa5eebf0d7bbeda0c792d8797))
+
 ## [107.9.4](https://github.com/dhis2/capture-app/compare/v107.9.3...v107.9.4) (2026-11-18)
 
 
