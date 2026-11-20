@@ -9,7 +9,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/app-runtime": "^3.17.4",
+        "@dhis2/app-runtime": "^3.17.6",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/data-engine": "^3.17.4",
