@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { TrackerWorkingListsViewMenuSetup } from '../ViewMenuSetup';
@@ -56,10 +56,18 @@ export const TrackerWorkingListsReduxProvider = ({
         }));
     }, [dispatch, programId, storeId, selectedTemplateId]);
 
+    const prevSelectedTemplateIdRef = useRef<string | undefined>(undefined);
+
     useEffect(() => {
-        if (selectedTemplateId &&
+        if (viewPreloaded) {
+            return;
+        }
+        const urlTemplateChanged = selectedTemplateId !== prevSelectedTemplateIdRef.current;
+        prevSelectedTemplateIdRef.current = selectedTemplateId;
+
+        if (urlTemplateChanged &&
+            selectedTemplateId &&
             selectedTemplateId !== currentTemplateId &&
-            !viewPreloaded &&
             onSelectTemplate
         ) {
             onSelectTemplate(selectedTemplateId);

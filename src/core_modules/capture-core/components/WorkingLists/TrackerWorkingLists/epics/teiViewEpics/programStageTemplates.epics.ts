@@ -10,6 +10,7 @@ import {
     addTemplateSuccess,
     deleteTemplateError,
     deleteTemplateSuccess,
+    selectTemplate,
     updateDefaultTemplate,
     updateTemplateError,
     updateTemplateSuccess,
@@ -142,7 +143,10 @@ export const deleteProgramStageTemplateEpic = (action$: EpicAction<any>, store: 
                                 template,
                             }),
                         );
-                        return deleteTemplateError(template, storeId);
+                        return batchActions([
+                            deleteTemplateError(template, storeId),
+                            selectTemplate(template.id, storeId, template.criteria?.programStage),
+                        ], workingListsCommonActionTypesBatchActionTypes.TEMPLATE_DELETE_ERROR);
                     });
 
                 return from(requestPromise).pipe(
