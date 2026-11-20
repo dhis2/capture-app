@@ -1,3 +1,24 @@
+## [107.9.5](https://github.com/dhis2/capture-app/compare/v107.9.4...v107.9.5) (2026-11-19)
+
+
+### Bug Fixes
+
+* [DHIS2-21654] mark hidden fields as untouched ([#4831](https://github.com/dhis2/capture-app/issues/4831)) ([3ab692d](https://github.com/dhis2/capture-app/commit/3ab692d465a3c96fa5eebf0d7bbeda0c792d8797))
+
+## [107.9.4](https://github.com/dhis2/capture-app/compare/v107.9.3...v107.9.4) (2026-11-18)
+
+
+### Bug Fixes
+
+* [LIBS-763][DHIS2-21183] tackle slow typing in date fields ([#4786](https://github.com/dhis2/capture-app/issues/4786)) ([937d2d5](https://github.com/dhis2/capture-app/commit/937d2d53ab191f37f0d173a838300e1e0cacdd1f))
+
+## [107.9.3](https://github.com/dhis2/capture-app/compare/v107.9.2...v107.9.3) (2026-11-17)
+
+
+### Bug Fixes
+
+* [CoP-78201] select a map search result ([#4834](https://github.com/dhis2/capture-app/issues/4834)) ([c6e343e](https://github.com/dhis2/capture-app/commit/c6e343e1609c73684dc4ecba1a1ffcfeef77fc61))
+
 ## [107.9.2](https://github.com/dhis2/capture-app/compare/v107.9.1...v107.9.2) (2026-11-15)
 
 

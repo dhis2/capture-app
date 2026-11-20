@@ -214,6 +214,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
         const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
             const effect = assignEffects[id][0];
+            const touched = !rulesEffects[effectActions.HIDE_FIELD]?.[id];
             const isEffectWithValidations = effect.hasOwnProperty('valid');
             if (formSectionFields?.[id] && isEffectWithValidations) {
                 acc[id] = {
@@ -221,12 +222,12 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
                     errorData: effect.errorData,
                     errorMessage: effect.errorMessage,
                     errorType: effect.errorType,
-                    touched: true,
+                    touched,
                     validatingMessage: null,
                 };
             } else {
                 acc[id] = {
-                    touched: true,
+                    touched,
                 };
             }
             return acc;
