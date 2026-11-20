@@ -24,14 +24,14 @@ export type OwnProps = {
 };
 
 type ContainerProps = {
-    orgUnitId: string;
+    orgUnitName?: string;
     teiRegistrationMetadata: TeiRegistration;
     ready: boolean;
     trackedEntityName: string;
     isUserInteractionInProgress: boolean;
 };
 
-export type Props = OwnProps & ContainerProps;
+export type Props = Omit<OwnProps, 'orgUnitId'> & ContainerProps;
 
 type PropsAddedInHOC = {
     onPostProcessErrorMessage: (message: string) => string;

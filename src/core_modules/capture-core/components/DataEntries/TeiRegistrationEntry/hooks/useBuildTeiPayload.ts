@@ -11,7 +11,6 @@ import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '.
 type Props = {
     trackedEntityTypeId: string;
     dataEntryId: string;
-    orgUnitId: string;
     itemId?: string;
 };
 
@@ -28,11 +27,11 @@ export const useBuildTeiPayload = ({
     trackedEntityTypeId,
     dataEntryId,
     itemId = 'newTei',
-    orgUnitId,
 }: Props) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
     const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId: trackedEntityTypeId });
     const formValues = useSelector(({ formsValues }: any) => formsValues[dataEntryKey]);
+    const dataEntryFieldValues = useSelector(({ dataEntriesFieldsValue }: any) => dataEntriesFieldsValue[dataEntryKey]);
 
     const buildTeiWithoutEnrollment = (): TeiPayload => {
         if (!formFoundation) throw Error('form foundation object not found');
@@ -49,7 +48,7 @@ export const useBuildTeiPayload = ({
         return {
             attributes,
             trackedEntity: generateUID(),
-            orgUnit: orgUnitId,
+            orgUnit: dataEntryFieldValues?.orgUnit?.id,
             trackedEntityType: trackedEntityTypeId,
             geometry: tetGeometry,
             enrollments: [],

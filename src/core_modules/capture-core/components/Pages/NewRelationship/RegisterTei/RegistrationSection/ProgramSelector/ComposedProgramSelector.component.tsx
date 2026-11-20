@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import i18n from '@dhis2/d2-i18n';
-import { LinkButton } from '../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../ProgramFilterer';
 import type { Program } from '../../../../../../metaData';
 import { TrackerProgram } from '../../../../../../metaData';
@@ -15,7 +13,7 @@ import {
 } from '../../../../../FormFields/New';
 import { NonBundledDhis2Icon } from '../../../../../NonBundledDhis2Icon';
 
-const getStyles = (theme: any) => ({
+const getStyles = () => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -26,15 +24,6 @@ const getStyles = (theme: any) => ({
         height: 22,
         borderRadius: 2,
     },
-    isFilteredContainer: {
-        fontSize: 12,
-        color: theme.palette.grey.dark,
-        paddingTop: 5,
-    },
-    isFilteredLink: {
-        paddingInlineStart: 2,
-        backgroundColor: 'inherit',
-    },
 });
 
 type Option = {
@@ -44,11 +33,9 @@ type Option = {
 };
 
 type Props = {
-    orgUnitIds?: Array<string> | null;
     value: string;
     trackedEntityTypeId: string;
     onUpdateSelectedProgram: (programId: string) => void;
-    onClearFilter: () => void;
 } & WithStyles<typeof getStyles>;
 
 class ProgramSelector extends React.Component<Props> {
@@ -91,32 +78,14 @@ class ProgramSelector extends React.Component<Props> {
         program.access.data.write;
     }
 
-    renderIsFilteredText() {
-        const { classes, onClearFilter } = this.props;
-        return (
-            <div
-                className={classes.isFilteredContainer}
-            >
-                {i18n.t('Some programs are being filtered.')}
-                <LinkButton
-                    className={classes.isFilteredLink}
-                    onClick={onClearFilter}
-                >
-                    {i18n.t('Show all')}
-                </LinkButton>
-            </div>
-        );
-    }
-
     render() {
-        const { classes, orgUnitIds, onUpdateSelectedProgram, onClearFilter, ...passOnProps } = this.props;
+        const { classes, onUpdateSelectedProgram, ...passOnProps } = this.props;
         return (
             <ProgramFilterer
-                orgUnitIds={orgUnitIds}
                 baselineFilter={this.baseLineFilter}
             >
                 {
-                    (programs: Program[], isFiltered: boolean) => (
+                    (programs: Program[]) => (
                         <div>
                             <SingleSelectField
                                 options={this.getOptionsFromPrograms(programs)}
@@ -124,7 +93,6 @@ class ProgramSelector extends React.Component<Props> {
                                 onChange={onUpdateSelectedProgram}
                                 {...passOnProps as any}
                             />
-                            {isFiltered ? this.renderIsFilteredText() : null }
                         </div>
                     )
                 }

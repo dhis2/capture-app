@@ -22,14 +22,15 @@ export type InputAttribute = {
 type InputForm = {
     program: TrackerProgram;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
-    orgUnit?: OrgUnit | null;
+    contextOrgUnit?: OrgUnit | null;
+    defaultOrgUnitReady: boolean;
     formFoundation: RenderFoundation | null;
     teiId?: string;
     searchTerms: Array<{[key: string]: string}> | null;
 };
 
 type StaticPatternValues = {
-    orgUnitCode: string;
+    orgUnitCode?: string;
 };
 
 const useClientAttributesWithSubvalues = (program: TrackerProgram, attributes?: Array<InputAttribute>) => {
@@ -129,7 +130,7 @@ const buildFormValues = async ({
 };
 
 export const useFormValues = ({
-    program, trackedEntityInstanceAttributes, orgUnit, formFoundation, teiId, searchTerms,
+    program, trackedEntityInstanceAttributes, contextOrgUnit, defaultOrgUnitReady, formFoundation, teiId, searchTerms,
 }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const dataEngine = useDataEngine();
@@ -143,13 +144,13 @@ export const useFormValues = ({
 
     useEffect(() => {
         if (
-            orgUnit?.id &&
+            defaultOrgUnitReady &&
             formFoundation &&
             Object.entries(formFoundation).length > 0 &&
             formValuesReadyRef.current === false &&
             !!clientAttributesWithSubvalues
         ) {
-            const staticPatternValues = { orgUnitCode: orgUnit.code };
+            const staticPatternValues = { orgUnitCode: contextOrgUnit?.code };
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             buildFormValues({
                 foundation: formFoundation,
@@ -166,7 +167,8 @@ export const useFormValues = ({
         formFoundation,
         clientAttributesWithSubvalues,
         formValuesReadyRef,
-        orgUnit,
+        contextOrgUnit,
+        defaultOrgUnitReady,
         searchTerms,
         dataEngine,
     ]);

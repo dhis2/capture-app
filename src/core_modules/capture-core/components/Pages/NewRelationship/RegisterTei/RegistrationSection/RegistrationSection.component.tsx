@@ -3,7 +3,7 @@ import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 
 import i18n from '@dhis2/d2-i18n';
 import { Section, SectionHeaderSimple } from '../../../../Section';
-import { SectionContents } from './SectionContents.component';
+import { ProgramSelector } from './ProgramSelector';
 
 const getStyles = (theme: any) => ({
     section: {
@@ -15,7 +15,7 @@ const getStyles = (theme: any) => ({
 type Props = WithStyles<typeof getStyles>;
 
 const renderSectionHeader = () => {
-    const title = i18n.t('Registration');
+    const title = i18n.t('Program');
     return (
         <SectionHeaderSimple
             title={title}
@@ -30,7 +30,7 @@ const RegistrationSectionPlain = (props: Props) => {
             header={renderSectionHeader()}
             className={classes.section}
         >
-            <SectionContents />
+            <ProgramSelector />
         </Section>
     );
 };
