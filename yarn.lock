@@ -3094,10 +3094,10 @@
     workbox-routing "^7.1.0"
     workbox-strategies "^7.1.0"
 
-"@dhis2/rule-engine@^3.8.6":
-  version "3.8.6"
-  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.8.6.tgz#41c05f226e7f7e682c40ad836519eed2dd5f15e4"
-  integrity sha512-kRce5NFEh/zMkj9wsoek71BZbSjrCP5xo8awju/+cOaG0Su72yQ5Ve6IGLYdWXwQ2G/JrzWrvsb8GYSBrcm8UQ==
+"@dhis2/rule-engine@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.9.0.tgz#9c56d9a9c012910bb8b91faabe864743535d9bd8"
+  integrity sha512-Mi/kDNVjrewLv8/0N21OkJeeSNvcebG1SmX2v2DkjCY9H//Gm/KmGdnXasEpE8hMFWaUjW9q/prrIla1ipIPmA==
   dependencies:
     "@js-joda/core" "3.2.0"
 
