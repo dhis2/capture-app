@@ -12,13 +12,14 @@
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # Cyrille Kabrane, 2026
 # Elise Desailly, 2026
+# Edvin Stava, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-10-03T19:52:00.618Z\n"
+"POT-Creation-Date: 2026-10-05T10:05:05.847Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Elise Desailly, 2026\n"
+"Last-Translator: Edvin Stava, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -1021,9 +1022,9 @@ msgstr "Précédent"
 
 msgid "{{count}} {{eventLabel}}"
 msgid_plural "{{count}} {{eventLabel}}"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{{count}} {{eventLabel}}"
+msgstr[1] "{{count}} {{eventsLabel}}"
+msgstr[2] "{{count}} {{eventsLabel}}"
 
 msgid "{{eventLabel}} details"
 msgstr ""
@@ -1175,6 +1176,9 @@ msgstr "Cette {{trackedEntityName}} est désactivée"
 
 msgid "This tracked entity is deactivated"
 msgstr "Cette entité suivie est désactivée"
+
+msgid "You only have view access to the selected category combination"
+msgstr ""
 
 msgid "Add {{relationshipLabel}}"
 msgstr ""
@@ -1455,6 +1459,9 @@ msgstr "Transférer"
 
 msgid "An error occurred while transferring ownership"
 msgstr "Une erreur s'est produite lors du transfert de propriété"
+
+msgid "Edit {{label}}"
+msgstr ""
 
 msgid "Existing dates for auto-generated {{eventsLabel}} will not be updated."
 msgstr ""
