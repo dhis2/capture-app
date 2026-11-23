@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@js-temporal/polyfill usage (gregorian) AbsoluteRangeFilter flags a start date after the end date 1`] = `
+Array [
+  Object {
+    "dateLogicError": null,
+  },
+  Object {
+    "dateLogicError": "Start date must be before the end date",
+  },
+  Object {
+    "dateLogicError": null,
+  },
+]
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) AgeField calculates the age for 1990-03-05 1`] = `
+Object {
+  "date": "1990-03-05",
+  "days": "8",
+  "months": "7",
+  "years": "36",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) AgeField calculates the age for 2024-02-29 1`] = `
+Object {
+  "date": "2024-02-29",
+  "days": "13",
+  "months": "7",
+  "years": "2",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) AgeField calculates the age for 2026-10-13 1`] = `
+Object {
+  "date": "2026-10-13",
+  "days": "0",
+  "months": "0",
+  "years": "0",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) AgeField calculates the age for a DD-MM-YYYY date 1`] = `
+Object {
+  "date": "29-02-2024",
+  "days": "13",
+  "months": "7",
+  "years": "2",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) AgeField calculates the date from years/months/days { years: '0', months: '0', days: '10' } 1`] = `
+Object {
+  "date": "2026-10-03",
+  "days": "10",
+  "months": "0",
+  "years": "0",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) AgeField calculates the date from years/months/days { years: '5' } 1`] = `
+Object {
+  "date": "2021-10-13",
+  "days": "0",
+  "months": "0",
+  "years": "5",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) AgeField calculates the date from years/months/days { years: '30', months: '1', days: '2' } 1`] = `
+Object {
+  "date": "1996-09-11",
+  "days": "2",
+  "months": "1",
+  "years": "30",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) DateTimeFilter flags a start date time after the end date time 1`] = `
+Array [
+  false,
+  true,
+  true,
+  false,
+]
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) getDateRangeValidator compares local dates 1`] = `
+Array [
+  Object {
+    "errorMessage": undefined,
+    "valid": true,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": false,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": true,
+  },
+]
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) getDateTimeRangeValidator compares local date times 1`] = `
+Array [
+  Object {
+    "errorMessage": undefined,
+    "valid": true,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": false,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": false,
+  },
+  Object {
+    "errorMessage": Object {
+      "from": "invalid",
+      "to": "invalid",
+    },
+    "valid": false,
+  },
+]
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) stringToTemporal parses 1990-03-05 1`] = `
+Object {
+  "day": 5,
+  "eraYear": 1990,
+  "iso": "1990-03-05[u-ca=gregory]",
+  "month": 3,
+  "year": 1990,
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) stringToTemporal parses 2024-02-29 1`] = `
+Object {
+  "day": 29,
+  "eraYear": 2024,
+  "iso": "2024-02-29[u-ca=gregory]",
+  "month": 2,
+  "year": 2024,
+}
+`;
+
+exports[`@js-temporal/polyfill usage (gregorian) stringToTemporal parses 2026-10-13 1`] = `
+Object {
+  "day": 13,
+  "eraYear": 2026,
+  "iso": "2026-10-13[u-ca=gregory]",
+  "month": 10,
+  "year": 2026,
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AbsoluteRangeFilter flags a start date after the end date 1`] = `
+Array [
+  Object {
+    "dateLogicError": null,
+  },
+  Object {
+    "dateLogicError": "Start date must be before the end date",
+  },
+  Object {
+    "dateLogicError": null,
+  },
+]
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AgeField calculates the age for 2046-11-21 1`] = `
+Object {
+  "date": "2046-11-21",
+  "days": "9",
+  "months": "7",
+  "years": "36",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AgeField calculates the age for 2080-11-17 1`] = `
+Object {
+  "date": "2080-11-17",
+  "days": "13",
+  "months": "7",
+  "years": "2",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AgeField calculates the age for 2083-06-27 1`] = `
+Object {
+  "date": "2083-06-27",
+  "days": "0",
+  "months": "0",
+  "years": "0",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AgeField calculates the age for a DD-MM-YYYY date 1`] = `
+Object {
+  "date": "17-11-2080",
+  "days": "13",
+  "months": "7",
+  "years": "2",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AgeField calculates the date from years/months/days { years: '0', months: '0', days: '10' } 1`] = `
+Object {
+  "date": "2083-06-17",
+  "days": "10",
+  "months": "0",
+  "years": "0",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AgeField calculates the date from years/months/days { years: '5' } 1`] = `
+Object {
+  "date": "2078-06-27",
+  "days": "0",
+  "months": "0",
+  "years": "5",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) AgeField calculates the date from years/months/days { years: '30', months: '1', days: '2' } 1`] = `
+Object {
+  "date": "2053-05-26",
+  "days": "2",
+  "months": "1",
+  "years": "30",
+}
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) DateTimeFilter flags a start date time after the end date time 1`] = `
+Array [
+  false,
+  true,
+  true,
+  false,
+]
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) getDateRangeValidator compares local dates 1`] = `
+Array [
+  Object {
+    "errorMessage": undefined,
+    "valid": true,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": false,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": true,
+  },
+]
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) getDateTimeRangeValidator compares local date times 1`] = `
+Array [
+  Object {
+    "errorMessage": undefined,
+    "valid": true,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": false,
+  },
+  Object {
+    "errorMessage": undefined,
+    "valid": false,
+  },
+  Object {
+    "errorMessage": Object {
+      "from": "invalid",
+      "to": "invalid",
+    },
+    "valid": false,
+  },
+]
+`;
+
+exports[`@js-temporal/polyfill usage (nepali) stringToTemporal parses 2046-11-21 1`] = `null`;
+
+exports[`@js-temporal/polyfill usage (nepali) stringToTemporal parses 2080-11-17 1`] = `null`;
+
+exports[`@js-temporal/polyfill usage (nepali) stringToTemporal parses 2083-06-27 1`] = `null`;
