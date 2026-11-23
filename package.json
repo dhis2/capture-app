@@ -134,7 +134,7 @@
         "patch-package": "^8.0.1",
         "postinstall-postinstall": "^2.1.0",
         "redux-devtools-extension": "^2.13.9",
-        "serve": "^14.2.6",
+        "serve": "^14.2.7",
         "typescript": "^5.8.2",
         "wait-on": "^9.5.1"
     },
