@@ -194,7 +194,13 @@ export async function initializeAsync({
 
     const dateTimeHandlingSettings = await querySingleResource({
         resource: 'dataStore/capture/dateTimeHandling',
-    }).catch(() => ({ mode: dateTimeHandlingModes.LEGACY }));
+    }).catch((error) => {
+        const { httpStatusCode } = error?.details || {};
+        if (httpStatusCode === 404) {
+            return { mode: dateTimeHandlingModes.LEGACY };
+        }
+        throw error;
+    });
     initDateTimeHandling(dateTimeHandlingSettings?.mode);
 
     try {

@@ -2,6 +2,7 @@ import { rulesEngineEffectTargetDataTypes, variableSourceTypes } from '@dhis2/ru
 import { ruleEngine } from '../rulesEngine';
 import { systemSettingsStore } from '../../metaDataMemoryStores';
 import { initDateTimeHandling, dateTimeHandlingModes } from '../../utils/dateTimeHandling';
+import { convertServerToClient } from '../../converters';
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
@@ -2967,11 +2968,12 @@ describe('DATETIME values', () => {
         ]);
     });
 
-    test('are assigned with the timezone stripped with New dateTimeHandling', () => {
+    test('are passed to rules and assigned with the timezone stripped with New dateTimeHandling', () => {
         initDateTimeHandling(dateTimeHandlingModes.NEW);
         const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
-            currentEvent: { dtCurrent01: '2026-11-10T13:00:00.000Z' },
+            // a stored value with a timezone is converted when the event is loaded
+            currentEvent: { dtCurrent01: convertServerToClient('2026-11-10T13:00:00.000Z', 'DATETIME') },
             dataElements: dataElementsInProgram,
             selectedOrgUnit: orgUnit,
             optionSets: {},
@@ -2982,7 +2984,7 @@ describe('DATETIME values', () => {
             {
                 type: 'DISPLAYTEXT',
                 id: 'feedback',
-                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-11-10T13:00:00.000Z' },
+                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-11-10T13:00:00.000' },
             },
             {
                 type: 'ASSIGN',
