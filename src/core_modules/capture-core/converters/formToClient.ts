@@ -24,7 +24,6 @@ function convertDateTime(formValue: DateTimeValue): string | null {
     }
 
     // TODO: DHIS2-22491 Remove Legacy dateTimeHandling when v44 is the lowest supported version
-    // Legacy: the value is in the browser time zone and is sent with a timezone (Z)
     return moment(dateTime).toISOString();
 }
 

@@ -80,8 +80,7 @@ const sortTime = (clientValueA: any, clientValueB: any, direction: string, optio
     return 0;
 };
 
-// DATETIME values are compared as the displayed wall-clock time, read as UTC to avoid daylight saving shifts.
-// Empty values sort as the latest time, like in sortTime.
+// moment.utc avoids daylight saving adjustments, empty values sort as the latest time like in sortTime
 const toSortableDateTime = (clientValue: any) => {
     const dateTime = convertToTimeZoneFreeDateTime(clientValue);
     return dateTime ? moment.utc(dateTime).valueOf() : Number.POSITIVE_INFINITY;

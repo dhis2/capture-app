@@ -136,21 +136,22 @@ async function initializeSystemSettingsAsync(
 }
 
 async function getDateTimeHandlingMode(querySingleResource: any) {
-    // From v44 the setting is not used, as values are always handled without a timezone
     if (featureAvailable(FEATURES.timeZoneFreeDateTime)) {
         return null;
     }
 
-    const dateTimeHandlingSettings = await querySingleResource({
-        resource: 'dataStore/capture/dateTimeHandling',
-    }).catch((error) => {
+    try {
+        const dateTimeHandlingSettings = await querySingleResource({
+            resource: 'dataStore/capture/dateTimeHandling',
+        });
+        return dateTimeHandlingSettings?.mode;
+    } catch (error: any) {
         const { httpStatusCode } = error?.details || {};
         if (httpStatusCode === 404) {
-            return { mode: dateTimeHandlingModes.LEGACY };
+            return dateTimeHandlingModes.LEGACY;
         }
         throw error;
-    });
-    return dateTimeHandlingSettings?.mode;
+    }
 }
 
 export async function initializeAsync({
