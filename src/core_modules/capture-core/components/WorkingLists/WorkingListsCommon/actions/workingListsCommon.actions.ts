@@ -5,6 +5,7 @@ import type {
 
 export const workingListsCommonActionTypesBatchActionTypes = {
     TEMPLATE_ADD_SUCCESS: 'WorkingListsTemplateAddSuccessBatchAction',
+    TEMPLATE_DELETE_ERROR: 'WorkingListsTemplateDeleteErrorBatchAction',
 };
 
 export const workingListsCommonActionTypes = {
