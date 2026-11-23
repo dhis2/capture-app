@@ -1,3 +1,10 @@
+## [107.9.7](https://github.com/dhis2/capture-app/compare/v107.9.6...v107.9.7) (2026-11-23)
+
+
+### Bug Fixes
+
+* [DHIS2-22493] Program stage working lists deleted right after saving goes to the TEI endpoint ([#4836](https://github.com/dhis2/capture-app/issues/4836)) ([b6e1e23](https://github.com/dhis2/capture-app/commit/b6e1e231b1724c12097f756541ddb512da5d36cc))
+
 ## [107.9.6](https://github.com/dhis2/capture-app/compare/v107.9.5...v107.9.6) (2026-11-23)
 
 
