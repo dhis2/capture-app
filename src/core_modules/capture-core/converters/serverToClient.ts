@@ -2,6 +2,8 @@ import moment from 'moment';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import type { ApiAssignedUser } from 'capture-core-utils/types/api-types';
 import { dataElementTypes } from '../metaData';
+import { convertToTimeZoneFreeDateTime } from '../utils/converters/date';
+import { isNewDateTimeHandling } from '../utils/dateTimeHandling';
 
 function convertTime(d2Value: string) {
     const parseData = parseTime(d2Value);
@@ -10,6 +12,15 @@ function convertTime(d2Value: string) {
     }
     return parseData.momentTime;
 }
+
+// TODO: DHIS2-22491 Remove Legacy dateTimeHandling when v44 is the lowest supported version
+const convertDateTime = (d2Value: string) =>
+    (isNewDateTimeHandling() ? convertToTimeZoneFreeDateTime(d2Value) : moment(d2Value).toISOString());
+
+const convertOptionSetDateTime = (d2Value: string) =>
+    (isNewDateTimeHandling()
+        ? convertToTimeZoneFreeDateTime(d2Value)
+        : moment(d2Value, 'YYYY-MM-DD HH:mm').toISOString());
 
 const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) =>
     ((assignedUser && assignedUser.uid) ? {
@@ -28,6 +39,7 @@ const optionSetConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: parseNumber,
     [dataElementTypes.PERCENTAGE]: parseNumber,
     [dataElementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
+    [dataElementTypes.DATETIME]: convertOptionSetDateTime,
     [dataElementTypes.TIME]: convertTime,
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
@@ -68,6 +80,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: parseNumber,
     [dataElementTypes.PERCENTAGE]: parseNumber,
     [dataElementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
+    [dataElementTypes.DATETIME]: convertDateTime,
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
     [dataElementTypes.COORDINATE]: (d2Value: string | Array<string>) => convertCoordinateToClient(d2Value),

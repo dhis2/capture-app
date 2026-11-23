@@ -25,11 +25,6 @@ const cleanUp = (state, { payload: { dataEntryId } }) => {
     return newState;
 };
 
-// TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
-const isSameDateTimeAsShown = (currentValue, value) =>
-    !!currentValue?.originalValue && !!value &&
-    currentValue.date === value.date && currentValue.time === value.time;
-
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.FORM_DATA_ADD]: (state, action) => {
         const newState = { ...state };
@@ -66,7 +61,7 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
-        const assignEffects: AssignOutputEffectWithValidations =
+        const assignEffects: { [id: string]: Array<AssignOutputEffectWithValidations> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
         if (!assignEffects) {
             return state;
@@ -80,8 +75,7 @@ export const formsValuesDesc = createReducerDescription({
                 ...Object.keys(assignEffects).reduce((acc, id) => {
                     const effectsForId = assignEffects[id];
                     const value = effectsForId[0].value;
-                    const currentValue = state[payload.formId]?.[id];
-                    acc[id] = isSameDateTimeAsShown(currentValue, value) ? currentValue : value;
+                    acc[id] = value;
                     return acc;
                 }, {}),
             },

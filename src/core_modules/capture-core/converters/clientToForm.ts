@@ -8,7 +8,6 @@ import { stringifyNumber } from './common/stringifyNumber';
 type DateTimeFormValue = {
     date: string;
     time: string;
-    originalValue?: string;
 };
 
 type AgeFormValue = {
@@ -32,8 +31,6 @@ function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     return {
         date: convertIsoToLocalCalendar(dateTime),
         time: formatMomentEn(moment.utc(dateTime), 'HH:mm'),
-        // TODO: DHIS2-22491 Remove legacy timezone handling when v44 is the lowest supported version
-        originalValue: rawValue,
     };
 }
 

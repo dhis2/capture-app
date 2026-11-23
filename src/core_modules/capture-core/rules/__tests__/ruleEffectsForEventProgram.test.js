@@ -1,13 +1,14 @@
 import { rulesEngineEffectTargetDataTypes, variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { ruleEngine } from '../rulesEngine';
 import { systemSettingsStore } from '../../metaDataMemoryStores';
+import { initDateTimeHandling, dateTimeHandlingModes } from '../../utils/dateTimeHandling';
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
     { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
 ];
 
-systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD', calendar: 'gregory', serverTimeZoneId: 'Africa/Kampala' });
+systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD', calendar: 'gregory' });
 
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
@@ -2966,7 +2967,8 @@ describe('DATETIME values', () => {
         ]);
     });
 
-    test('are passed to rules and assigned in the server time zone for legacy values', () => {
+    test('are assigned with the timezone stripped with New dateTimeHandling', () => {
+        initDateTimeHandling(dateTimeHandlingModes.NEW);
         const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent: { dtCurrent01: '2026-11-10T13:00:00.000Z' },
@@ -2974,17 +2976,18 @@ describe('DATETIME values', () => {
             selectedOrgUnit: orgUnit,
             optionSets: {},
         });
+        initDateTimeHandling(dateTimeHandlingModes.LEGACY);
 
         expect(rulesEffects).toEqual([
             {
                 type: 'DISPLAYTEXT',
                 id: 'feedback',
-                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-11-10T16:00:00.000' },
+                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-11-10T13:00:00.000Z' },
             },
             {
                 type: 'ASSIGN',
                 id: 'dtAssign001',
-                value: { date: '2026-11-10', time: '16:00' },
+                value: { date: '2026-11-10', time: '13:00' },
                 targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
             },
         ]);

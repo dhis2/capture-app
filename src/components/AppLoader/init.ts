@@ -10,6 +10,7 @@ import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaD
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from 'capture-core/rules/rulesEngine';
+import { initDateTimeHandling, dateTimeHandlingModes } from 'capture-core/utils/dateTimeHandling';
 import { getDateFnLocale } from './getDateFnLocale';
 import { getMomentLocale } from './getMomentLocale';
 
@@ -190,6 +191,11 @@ export async function initializeAsync({
         ruleEngineSettings = { version: 'default' };
     }
     initRulesEngine(ruleEngineSettings.version, userRoles, userGroups);
+
+    const dateTimeHandlingSettings = await querySingleResource({
+        resource: 'dataStore/capture/dateTimeHandling',
+    }).catch(() => ({ mode: dateTimeHandlingModes.LEGACY }));
+    initDateTimeHandling(dateTimeHandlingSettings?.mode);
 
     try {
         await initStorageControllers({
