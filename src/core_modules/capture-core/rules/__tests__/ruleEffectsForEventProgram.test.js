@@ -2994,4 +2994,42 @@ describe('DATETIME values', () => {
             },
         ]);
     });
+
+    test('assigned values with a timezone have it stripped with New dateTimeHandling', () => {
+        const assignRules = [
+            {
+                id: 'dtRule0002',
+                condition: 'true',
+                displayName: 'assign datetime with timezone',
+                programId: 'eBAyeGv0exc',
+                programRuleActions: [
+                    {
+                        id: 'dtAssign02',
+                        data: "'2026-11-10T13:00:00.000Z'",
+                        dataElementId: 'dtAssign001',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                ],
+            },
+        ];
+
+        initDateTimeHandling(dateTimeHandlingModes.NEW);
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules: assignRules, constants },
+            currentEvent: {},
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets: {},
+        });
+        initDateTimeHandling(dateTimeHandlingModes.LEGACY);
+
+        expect(rulesEffects).toEqual([
+            {
+                type: 'ASSIGN',
+                id: 'dtAssign001',
+                value: { date: '2026-11-10', time: '13:00' },
+                targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+            },
+        ]);
+    });
 });

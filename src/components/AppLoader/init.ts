@@ -11,6 +11,7 @@ import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from 'capture-core/rules/rulesEngine';
 import { initDateTimeHandling, dateTimeHandlingModes } from 'capture-core/utils/dateTimeHandling';
+import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
 import { getDateFnLocale } from './getDateFnLocale';
 import { getMomentLocale } from './getMomentLocale';
 
@@ -134,6 +135,24 @@ async function initializeSystemSettingsAsync(
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
+async function getDateTimeHandlingMode(querySingleResource: any) {
+    // From v44 the setting is not used, as values are always handled without a timezone
+    if (featureAvailable(FEATURES.timeZoneFreeDateTime)) {
+        return null;
+    }
+
+    const dateTimeHandlingSettings = await querySingleResource({
+        resource: 'dataStore/capture/dateTimeHandling',
+    }).catch((error) => {
+        const { httpStatusCode } = error?.details || {};
+        if (httpStatusCode === 404) {
+            return { mode: dateTimeHandlingModes.LEGACY };
+        }
+        throw error;
+    });
+    return dateTimeHandlingSettings?.mode;
+}
+
 export async function initializeAsync({
     onCacheExpired,
     querySingleResource,
@@ -192,16 +211,7 @@ export async function initializeAsync({
     }
     initRulesEngine(ruleEngineSettings.version, userRoles, userGroups);
 
-    const dateTimeHandlingSettings = await querySingleResource({
-        resource: 'dataStore/capture/dateTimeHandling',
-    }).catch((error) => {
-        const { httpStatusCode } = error?.details || {};
-        if (httpStatusCode === 404) {
-            return { mode: dateTimeHandlingModes.LEGACY };
-        }
-        throw error;
-    });
-    initDateTimeHandling(dateTimeHandlingSettings?.mode);
+    initDateTimeHandling(await getDateTimeHandlingMode(querySingleResource));
 
     try {
         await initStorageControllers({
