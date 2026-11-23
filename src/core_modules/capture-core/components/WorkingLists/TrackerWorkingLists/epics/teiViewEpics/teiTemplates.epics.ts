@@ -10,6 +10,7 @@ import {
     addTemplateSuccess,
     deleteTemplateError,
     deleteTemplateSuccess,
+    selectTemplate,
     updateDefaultTemplate,
     updateTemplateError,
     updateTemplateSuccess,
@@ -124,7 +125,10 @@ export const deleteTEITemplateEpic = (action$: EpicAction<any>, store: ReduxStor
                             template,
                         }),
                     );
-                    return deleteTemplateError(template, storeId);
+                    return batchActions([
+                        deleteTemplateError(template, storeId),
+                        selectTemplate(template.id, storeId),
+                    ], workingListsCommonActionTypesBatchActionTypes.TEMPLATE_DELETE_ERROR);
                 });
 
             return from(requestPromise).pipe(
