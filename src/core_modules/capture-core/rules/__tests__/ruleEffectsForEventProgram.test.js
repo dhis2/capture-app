@@ -2972,8 +2972,9 @@ describe('DATETIME values', () => {
         initDateTimeHandling(dateTimeHandlingModes.NEW);
         const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
-            // a stored value with a timezone is converted when the event is loaded
-            currentEvent: { dtCurrent01: convertServerToClient('2026-11-10T13:00:00.000Z', 'DATETIME') },
+            // a stored value with a timezone is converted when the event is loaded.
+            // An unusual offset makes sure the result differs from a conversion to the test runner time zone
+            currentEvent: { dtCurrent01: convertServerToClient('2026-11-10T13:00:00.000+05:45', 'DATETIME') },
             dataElements: dataElementsInProgram,
             selectedOrgUnit: orgUnit,
             optionSets: {},
@@ -3005,7 +3006,8 @@ describe('DATETIME values', () => {
                 programRuleActions: [
                     {
                         id: 'dtAssign02',
-                        data: "'2026-11-10T13:00:00.000Z'",
+                        // an unusual offset makes sure the result differs from a conversion to the test runner time zone
+                        data: "'2026-11-10T13:00:00.000+05:45'",
                         dataElementId: 'dtAssign001',
                         programRuleActionType: 'ASSIGN',
                     },
