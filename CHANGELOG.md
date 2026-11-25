@@ -1,3 +1,10 @@
+## [107.9.8](https://github.com/dhis2/capture-app/compare/v107.9.7...v107.9.8) (2026-11-25)
+
+
+### Bug Fixes
+
+* [DHIS2-21306] show all attribute filters in working lists without an org unit ([#4827](https://github.com/dhis2/capture-app/issues/4827)) ([26a0047](https://github.com/dhis2/capture-app/commit/26a0047911033b92725c629d9e79674a35afc569))
+
 ## [107.9.7](https://github.com/dhis2/capture-app/compare/v107.9.6...v107.9.7) (2026-11-23)
 
 
