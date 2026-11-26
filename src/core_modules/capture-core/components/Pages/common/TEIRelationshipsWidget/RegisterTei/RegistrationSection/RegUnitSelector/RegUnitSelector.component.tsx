@@ -1,9 +1,10 @@
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useCallback } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
 import { LabelKeys, withCustomLabels } from '../../../../../../../customLabels';
+import { isProgramOrganisationUnit } from '../../../../../../../utils/cachedDataQueries';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 
 const customLabels = [LabelKeys.orgUnitSingular] as const;
@@ -17,53 +18,58 @@ const getStyles = () => ({
     },
 });
 
+const baseComponentStyles = {
+    labelContainerStyle: {
+        flexBasis: 200,
+    },
+    inputContainerStyle: {
+        flexBasis: 150,
+    },
+};
+
 type LabelProps = {
     orgUnitLabel: string;
 };
 
 type Props = RegUnitSelectorProps & LabelProps & WithStyles<typeof getStyles>;
 
-class RegUnitSelectorPlain extends React.Component<Props> {
-    static baseComponentStyles = {
-        labelContainerStyle: {
-            flexBasis: 200,
-        },
-        inputContainerStyle: {
-            flexBasis: 150,
-        },
-    };
+const RegUnitSelectorPlain = ({
+    programId,
+    orgUnitLabel,
+    onUpdateSelectedOrgUnit,
+    classes,
+    ...passOnProps
+}: Props) => {
+    const queryClient = useQueryClient();
 
-    handleUpdateSelectedOrgUnit = (orgUnit: Record<string, any>) => {
-        const { programId, onUpdateSelectedOrgUnit } = this.props;
+    const handleUpdateSelectedOrgUnit = useCallback(async (orgUnit: Record<string, any>) => {
         if (!programId || !orgUnit) {
             onUpdateSelectedOrgUnit(orgUnit, false);
             return;
         }
 
-        let program;
         try {
-            program = getProgramFromProgramIdThrowIfNotFound(programId);
-        } catch (error) {
+            const isProgramOrgUnit = await isProgramOrganisationUnit({
+                queryClient,
+                programId,
+                orgUnitId: orgUnit.id,
+            });
+            onUpdateSelectedOrgUnit(orgUnit, !isProgramOrgUnit);
+        } catch {
             onUpdateSelectedOrgUnit(orgUnit, true);
-            return;
         }
+    }, [queryClient, programId, onUpdateSelectedOrgUnit]);
 
-        onUpdateSelectedOrgUnit(orgUnit, program?.organisationUnits ? !program.organisationUnits[orgUnit.id] : false);
-    }
-
-    render() {
-        const { classes, onUpdateSelectedOrgUnit, programId, orgUnitLabel, ...passOnProps } = this.props;
-        return (
-            <ComposedRegUnitSelector
-                labelClass={classes.label}
-                label={capitalizeFirstLetter(orgUnitLabel)}
-                styles={RegUnitSelectorPlain.baseComponentStyles}
-                onUpdateSelectedOrgUnit={this.handleUpdateSelectedOrgUnit}
-                {...passOnProps}
-            />
-        );
-    }
-}
+    return (
+        <ComposedRegUnitSelector
+            labelClass={classes.label}
+            label={capitalizeFirstLetter(orgUnitLabel)}
+            styles={baseComponentStyles}
+            onUpdateSelectedOrgUnit={handleUpdateSelectedOrgUnit}
+            {...passOnProps}
+        />
+    );
+};
 
 export const RegUnitSelectorComponent =
     withCustomLabels(customLabels)(withStyles(getStyles)(RegUnitSelectorPlain)) as ComponentType<RegUnitSelectorProps>;
