@@ -144,6 +144,7 @@ jobs:
                   wait-on-timeout: 300
               env:
                   CI: true
+                  CYPRESS_video: ${{ env.SHOULD_RECORD }}
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   CYPRESS_dhis2BaseUrl: ${{ steps.instance-url.outputs.url }}

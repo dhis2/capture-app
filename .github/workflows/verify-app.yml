@@ -169,6 +169,7 @@ jobs:
           wait-on-timeout: 300
         env:
           CI: true
+          CYPRESS_video: ${{ env.SHOULD_RECORD }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_dhis2BaseUrl: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/tracker-dev
