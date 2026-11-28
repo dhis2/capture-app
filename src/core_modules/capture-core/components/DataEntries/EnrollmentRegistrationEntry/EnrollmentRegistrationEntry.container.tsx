@@ -26,6 +26,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
 }) => {
     const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const { orgUnit: contextOrgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const defaultOrgUnitReady = !orgUnitId || !!contextOrgUnit;
     const {
         ready,
         skipDuplicateCheck,
@@ -33,7 +34,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         formId,
         enrollmentMetadata,
         formFoundation,
-    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, contextOrgUnit, teiId, orgUnitId);
+    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, contextOrgUnit, teiId, defaultOrgUnitReady);
     const dataEntryItemId = useSelector(({ dataEntries }: any) => dataEntries[id]?.itemId);
     const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
     const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) =>

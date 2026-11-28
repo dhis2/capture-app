@@ -17,12 +17,11 @@ export const useLifecycle = (
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     contextOrgUnit?: OrgUnit,
     teiId?: string,
-    contextOrgUnitId?: string,
+    defaultOrgUnitReady = true,
 ) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
     const program = getTrackerProgramThrowIfNotFound(selectedScopeId);
-    const defaultOrgUnitReady = !contextOrgUnitId || !!contextOrgUnit;
     const ready =
         useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) &&
         defaultOrgUnitReady &&
