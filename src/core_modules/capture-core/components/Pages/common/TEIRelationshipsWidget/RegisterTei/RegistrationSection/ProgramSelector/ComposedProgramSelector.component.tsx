@@ -1,7 +1,5 @@
 import React from 'react';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
-import i18n from '@dhis2/d2-i18n';
-import { LinkButton } from '../../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../../ProgramFilterer';
 import { TrackerProgram } from '../../../../../../../metaData';
 import {
@@ -16,7 +14,7 @@ import { NonBundledDhis2Icon } from '../../../../../../NonBundledDhis2Icon';
 import type { Program } from '../../../../../../../metaData';
 import type { ComposedProgramSelectorProps, ProgramOption } from './ProgramSelector.types';
 
-const getStyles = (theme: any) => ({
+const getStyles = () => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -26,15 +24,6 @@ const getStyles = (theme: any) => ({
         width: 22,
         height: 22,
         borderRadius: 2,
-    },
-    isFilteredContainer: {
-        fontSize: 12,
-        color: theme.palette.grey.dark,
-        paddingTop: 5,
-    },
-    isFilteredLink: {
-        paddingInlineStart: 2,
-        backgroundColor: 'inherit',
     },
 });
 
@@ -81,32 +70,14 @@ class ProgramSelector extends React.Component<Props> {
         return isValid;
     }
 
-    renderIsFilteredText() {
-        const { classes, onClearFilter } = this.props;
-        return (
-            <div
-                className={classes.isFilteredContainer}
-            >
-                {i18n.t('Some programs are being filtered.')}
-                <LinkButton
-                    className={classes.isFilteredLink}
-                    onClick={onClearFilter}
-                >
-                    {i18n.t('Show all')}
-                </LinkButton>
-            </div>
-        );
-    }
-
     render() {
-        const { classes, orgUnitIds, onUpdateSelectedProgram, onClearFilter, ...passOnProps } = this.props;
+        const { classes, onUpdateSelectedProgram, ...passOnProps } = this.props;
         return (
             <ProgramFilterer
-                orgUnitIds={orgUnitIds || null}
                 baselineFilter={this.baseLineFilter}
             >
                 {
-                    (programs: Program[], isFiltered: boolean) => (
+                    (programs: Program[]) => (
                         <div>
                             <SingleSelectField
                                 options={this.getOptionsFromPrograms(programs)}
@@ -114,7 +85,6 @@ class ProgramSelector extends React.Component<Props> {
                                 onChange={onUpdateSelectedProgram}
                                 {...passOnProps as any}
                             />
-                            {isFiltered ? this.renderIsFilteredText() : null }
                         </div>
                     )
                 }

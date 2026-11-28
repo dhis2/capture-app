@@ -1,10 +1,10 @@
 Feature: User uses the ScopeSelector to navigate
 
   # Main page
-  Scenario: Main page > Notifying that you need to select org unit and program to get started
+  Scenario: Main page > Opening the registration page without selections
     Given you are in the main page with no selections made
     When you click the "New" button to add a new event
-    Then you should see informative text saying you should do finish your selections
+    Then you see the dropdown menu for selecting tracked entity type
 
   Scenario: Main page > Notifying that you need to select a program to get started
     Given you are in the main page with organisation unit preselected
@@ -12,10 +12,10 @@ Feature: User uses the ScopeSelector to navigate
     Then you should be taken to the new page
     And you see the dropdown menu for selecting tracked entity type
 
-  Scenario: Main page >  Notifying that you need to select an org unit to get started
+  Scenario: Main page > Opening the registration page in another program without org unit
     Given you are in the main page with program preselected
     When you click the first option from the "New" button to add a new event
-    Then you should see informative text saying you should do finish your selections
+    Then you see the dropdown menu for selecting tracked entity type
 
   Scenario: Main page > Clicking start again takes you to the main page
     Given you are in the main page with no selections made
@@ -74,11 +74,6 @@ Feature: User uses the ScopeSelector to navigate
     When you select both org unit and program Malaria case registration
     And you click the first option from the "New" button to add a new event
     Then you can see the new event page
-
-  Scenario: New event page > Clicking the cancel button
-    Given you are in the new event page with no selections made
-    When you click the cancel button
-    Then you should be taken to the main page
 
   Scenario: New event page > Selecting program while org unit is preselected
     Given you land on a new event page with preselected org unit

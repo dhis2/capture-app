@@ -21,7 +21,6 @@ import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
-import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
 import { workingListsCommonActionTypes } from '../../components/WorkingLists/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
@@ -119,8 +118,6 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback({ message: action.payload.message }),
     [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (_state, action) =>
         addErrorFeedback({ message: action.payload.message }),
-    [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: () =>
-        addErrorFeedback({ message: i18n.t('Search failed. Please try again.') }),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: () =>
         addErrorFeedback({ message: i18n.t('Error saving tracked entity instance') }),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: (_state, action) => {

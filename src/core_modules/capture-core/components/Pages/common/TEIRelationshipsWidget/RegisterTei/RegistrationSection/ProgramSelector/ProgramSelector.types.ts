@@ -9,11 +9,9 @@ export type ProgramSelectorComponentProps = {
 };
 
 export type ComposedProgramSelectorProps = {
-    orgUnitIds?: string[] | null;
     value: string;
     trackedEntityTypeId: string;
     onUpdateSelectedProgram: (programId: string) => void;
-    onClearFilter: () => void;
     programLabelClass?: string;
     label?: string;
     dataTest?: string;

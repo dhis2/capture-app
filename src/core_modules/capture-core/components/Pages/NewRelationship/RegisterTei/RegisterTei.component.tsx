@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
 import { withStyles, type WithStyles } from 'capture-core-utils/styles';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
@@ -22,6 +22,9 @@ const styles: Readonly<any> = {
         flexGrow: 10,
         flexBasis: 0,
         margin: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
     },
 };
 

@@ -5,7 +5,10 @@ import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import type { CoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
+import { getOrgUnitValidatorContainers } from '../fieldValidators';
+import { getTermLabel, LabelKeys } from '../../../../customLabels';
 
 const itemId = 'newTei';
 
@@ -15,7 +18,7 @@ export const batchActionTypes = {
 
 export const openDataEntryForNewTeiBatchAsync = async ({
     foundation,
-    orgUnit,
+    contextOrgUnit,
     dataEntryId,
     extraActions = [],
     generatedUniqueValuesCache = {},
@@ -23,7 +26,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     querySingleResource,
 }: {
     foundation: RenderFoundation | null;
-    orgUnit: any;
+    contextOrgUnit?: CoreOrgUnit | null;
     dataEntryId: string;
     extraActions?: Array<ReduxAction<any, any>>;
     generatedUniqueValuesCache?: any;
@@ -33,7 +36,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     const generatedItemContainers = await getGeneratedUniqueValuesAsync(
         foundation,
         generatedUniqueValuesCache,
-        { orgUnitCode: orgUnit.code },
+        { orgUnitCode: contextOrgUnit?.code },
         querySingleResource,
     );
 
@@ -44,11 +47,25 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         }, {});
 
 
+    const { orgUnitLabel } = getTermLabel([LabelKeys.orgUnitSingular], { programId: null });
+    const dataEntryPropsToInclude = [
+        {
+            id: 'orgUnit',
+            type: 'ORGANISATION_UNIT',
+            validatorContainers: getOrgUnitValidatorContainers(orgUnitLabel),
+        },
+    ];
+    const defaultDataEntryValues = {
+        orgUnit: contextOrgUnit
+            ? { id: contextOrgUnit.id, name: contextOrgUnit.name, path: contextOrgUnit.path }
+            : undefined,
+    };
+
     const dataEntryActions = loadNewDataEntry(
         dataEntryId,
         itemId,
-        null,
-        null,
+        dataEntryPropsToInclude,
+        defaultDataEntryValues,
         { ...generatedUniqueValues, ...formValues },
     );
 

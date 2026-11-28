@@ -11,7 +11,7 @@ const makeMapStateToProps = () => {
         return {
             enrollmentMetadata,
             programId: state.newRelationshipRegisterTei.programId,
-            orgUnitId: state.newRelationshipRegisterTei.orgUnit.id,
+            orgUnitId: state.newRelationshipRegisterTei.orgUnit?.id,
         };
     };
     return mapStateToProps;
