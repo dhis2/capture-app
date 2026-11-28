@@ -147,10 +147,10 @@ async function getDateTimeHandlingMode(querySingleResource: any) {
         return dateTimeHandlingSettings?.mode;
     } catch (error: any) {
         const { httpStatusCode } = error?.details || {};
-        if (httpStatusCode === 404) {
-            return dateTimeHandlingModes.LEGACY;
+        if (httpStatusCode !== 404) {
+            log.error('could not get the dateTimeHandling setting, fallback to legacy', error);
         }
-        throw error;
+        return dateTimeHandlingModes.LEGACY;
     }
 }
 
