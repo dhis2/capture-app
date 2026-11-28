@@ -15,7 +15,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) 
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
         switchMap(({
-            contextOrgUnit,
+            defaultOrgUnit,
             selectedScopeId: programId,
             dataEntryId,
             formValues,
@@ -40,7 +40,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) 
 
             const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync({
                 program: trackerProgram,
-                contextOrgUnit,
+                defaultOrgUnit,
                 dataEntryId,
                 formValues,
                 clientValues,

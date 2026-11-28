@@ -22,7 +22,7 @@ export type InputAttribute = {
 type InputForm = {
     program: TrackerProgram;
     trackedEntityInstanceAttributes?: Array<InputAttribute>;
-    contextOrgUnit?: OrgUnit | null;
+    defaultOrgUnit?: OrgUnit | null;
     defaultOrgUnitReady: boolean;
     formFoundation: RenderFoundation | null;
     teiId?: string;
@@ -130,7 +130,7 @@ const buildFormValues = async ({
 };
 
 export const useFormValues = ({
-    program, trackedEntityInstanceAttributes, contextOrgUnit, defaultOrgUnitReady, formFoundation, teiId, searchTerms,
+    program, trackedEntityInstanceAttributes, defaultOrgUnit, defaultOrgUnitReady, formFoundation, teiId, searchTerms,
 }: InputForm) => {
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const dataEngine = useDataEngine();
@@ -150,7 +150,7 @@ export const useFormValues = ({
             formValuesReadyRef.current === false &&
             !!clientAttributesWithSubvalues
         ) {
-            const staticPatternValues = { orgUnitCode: contextOrgUnit?.code };
+            const staticPatternValues = { orgUnitCode: defaultOrgUnit?.code };
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             buildFormValues({
                 foundation: formFoundation,
@@ -167,7 +167,7 @@ export const useFormValues = ({
         formFoundation,
         clientAttributesWithSubvalues,
         formValuesReadyRef,
-        contextOrgUnit,
+        defaultOrgUnit,
         defaultOrgUnitReady,
         searchTerms,
         dataEngine,

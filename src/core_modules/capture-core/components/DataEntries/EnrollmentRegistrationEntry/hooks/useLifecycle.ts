@@ -15,7 +15,7 @@ export const useLifecycle = (
     selectedScopeId: string,
     dataEntryId: string,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
-    contextOrgUnit?: OrgUnit,
+    defaultOrgUnit?: OrgUnit,
     teiId?: string,
     defaultOrgUnitReady = true,
 ) => {
@@ -40,7 +40,7 @@ export const useLifecycle = (
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,
-        contextOrgUnit,
+        defaultOrgUnit,
         defaultOrgUnitReady,
         formFoundation,
         teiId,
@@ -61,7 +61,7 @@ export const useLifecycle = (
             dataEntryReadyRef.current = true;
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
-                    contextOrgUnit,
+                    defaultOrgUnit,
                     selectedScopeId,
                     dataEntryId,
                     formValues,
@@ -77,7 +77,7 @@ export const useLifecycle = (
         scopeType,
         dataEntryId,
         selectedScopeId,
-        contextOrgUnit,
+        defaultOrgUnit,
         defaultOrgUnitReady,
         formValuesReadyRef,
         formValues,
