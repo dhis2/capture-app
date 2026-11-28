@@ -16,6 +16,7 @@ import {
     updateEnrollmentAttributeValues,
     updateEnrollmentDate,
     updateIncidentDate,
+    updateEnrollmentGeometry,
     useCommonEnrollmentDomainData,
     useEnrollmentScopeRuleEffects,
     selectEnrollmentWidgetEffects,
@@ -146,6 +147,10 @@ export const EnrollmentPageDefault = () => {
         dispatch(updateIncidentDate(incidentDate));
     }, [dispatch]);
 
+    const onUpdateEnrollmentGeometry = useCallback((geometry: Record<string, unknown> | null) => {
+        dispatch(updateEnrollmentGeometry(geometry));
+    }, [dispatch]);
+
     const onDeleteEvent = useCallback((eventId: string) => {
         dispatch(deleteEnrollmentEvent(eventId));
     }, [dispatch]);
@@ -218,6 +223,7 @@ export const EnrollmentPageDefault = () => {
                 onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
                 onUpdateEnrollmentDate={onUpdateEnrollmentDate}
                 onUpdateIncidentDate={onUpdateIncidentDate}
+                onUpdateEnrollmentGeometry={onUpdateEnrollmentGeometry}
                 onEnrollmentError={onEnrollmentError}
                 onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}

@@ -12,6 +12,7 @@ const {
     COMMON_ENROLLMENT_SITE_DATA_SET,
     UPDATE_ENROLLMENT_DATE,
     UPDATE_INCIDENT_DATE,
+    UPDATE_ENROLLMENT_GEOMETRY,
     UPDATE_ENROLLMENT_EVENT,
     UPDATE_OR_ADD_ENROLLMENT_EVENTS,
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES,
@@ -82,6 +83,13 @@ export const enrollmentDomainDesc = createReducerDescription(
                 occurredAt: incidentDate,
             },
         }),
+        [UPDATE_ENROLLMENT_GEOMETRY]: (state, { payload: { geometry } }) => (state.enrollment ? {
+            ...state,
+            enrollment: {
+                ...state.enrollment,
+                geometry,
+            },
+        } : state),
         // Update a single event - used in EditEventDataEntry
         [UPDATE_ENROLLMENT_EVENT]: (
             state,

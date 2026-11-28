@@ -2,7 +2,9 @@ import log from 'loglevel';
 import { useCallback } from 'react';
 import { errorCreator } from 'capture-core-utils';
 import type { SetFieldValueProps, UsePluginCallbacksProps } from '../FormFieldPlugin.types';
-import { PluginErrorMessages } from '../FormFieldPlugin.const';
+import { PluginErrorMessages, PluginContextValueKeys } from '../FormFieldPlugin.const';
+
+const allowedContextKeys = new Set<string>(PluginContextValueKeys);
 
 export const usePluginCallbacks = ({
     configuredPluginIds,
@@ -27,6 +29,13 @@ export const usePluginCallbacks = ({
     }, [configuredPluginIds, metadataByPluginId, onUpdateField]);
 
     const setContextFieldValue = useCallback(({ fieldId, value }: SetFieldValueProps) => {
+        if (!allowedContextKeys.has(fieldId)) {
+            log.error(errorCreator(
+                PluginErrorMessages.SET_CONTEXT_FIELD_VALUE_ID_NOT_ALLOWED,
+            )({ fieldId, value }));
+            return;
+        }
+
         const contextField = pluginContext[fieldId];
 
         if (!contextField) {
@@ -36,7 +45,7 @@ export const usePluginCallbacks = ({
             return;
         }
 
-        contextField?.setDataEntryFieldValue(value);
+        contextField.setDataEntryFieldValue(value);
     }, [pluginContext]);
 
     return {
