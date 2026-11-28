@@ -52,6 +52,7 @@ import {
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import type { CoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
@@ -503,11 +504,7 @@ const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(I
 const CustomLabelsHOC = withCustomLabels(customLabels)(EnrollmentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(CustomLabelsHOC);
 
-type OrgUnitFieldValue = {
-    id: string;
-    name: string;
-    path: string;
-};
+type OrgUnitFieldValue = Pick<CoreOrgUnit, 'id' | 'name' | 'path'>;
 
 type PreEnrollmentDataEntryProps = {
     programId: string;

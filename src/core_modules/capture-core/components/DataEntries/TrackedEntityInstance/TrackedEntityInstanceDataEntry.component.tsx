@@ -23,6 +23,7 @@ import labelTypeClasses from './fieldLabels.module.css';
 import { getOrgUnitValidatorContainers } from './fieldValidators';
 import { LabelKeys, withCustomLabels } from '../../../customLabels';
 import type { TeiRegistration, RenderFoundation } from '../../../metaData';
+import type { CoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 
 const customLabels = [LabelKeys.orgUnitSingular] as const;
 
@@ -148,11 +149,7 @@ class PreTeiDataEntryPure extends React.PureComponent<Record<string, unknown>> {
     }
 }
 
-type OrgUnit = {
-    id: string;
-    name: string;
-    path: string;
-};
+type OrgUnit = Pick<CoreOrgUnit, 'id' | 'name' | 'path'>;
 
 type PreTeiDataEntryProps = {
     orgUnitFieldValue?: OrgUnit | null;
