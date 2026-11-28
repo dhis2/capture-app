@@ -2,7 +2,7 @@ import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { convertServerToClient, convertClientToForm } from '../../../../converters';
-import type { RenderFoundation } from '../../../../metaData';
+import type { DataElement, RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type StaticPatternValues = {
@@ -63,6 +63,10 @@ async function generateUniqueValueAsync(
     return generatedValue;
 }
 
+// Values using the org unit code can only be generated once an org unit is selected
+const canGenerate = (dataElement: DataElement, staticPatternValues: StaticPatternValues) =>
+    !!dataElement.unique?.generatable && (!dataElement.unique.usesOrgUnitCode || !!staticPatternValues.orgUnitCode);
+
 function getActiveUniqueItemFromCache(
     id: string,
     generatedUniqueValuesCache: {[id: string]: CacheItem},
@@ -88,7 +92,7 @@ export function getGeneratedUniqueValuesAsync(
 
     const itemContainerPromises = foundation
         .getElements()
-        .filter(dataElement => dataElement.unique && dataElement.unique.generatable)
+        .filter(dataElement => canGenerate(dataElement, staticPatternValues))
         .map(async (dataElement) => {
             const id = dataElement.id;
             const cacheItem = getActiveUniqueItemFromCache(id, generatedUniqueValuesCache);
@@ -112,6 +116,17 @@ export function getGeneratedUniqueValuesAsync(
         .all(itemContainerPromises);
 }
 
+// Generates the values using the org unit code, for the org unit selected in the form
+export const getGeneratedOrgUnitCodeValuesAsync = async (
+    dataElements: Array<DataElement>,
+    orgUnitCode: string,
+    querySingleResource: QuerySingleResource,
+): Promise<Array<{ dataElement: DataElement, value: any }>> =>
+    Promise.all(dataElements.map(async (dataElement) => {
+        const value = await generateUniqueValueAsync(dataElement.id, { orgUnitCode }, querySingleResource);
+        return { dataElement, value: getFormValue(value, dataElement.type) };
+    }));
+
 export const getUniqueValuesForAttributesWithoutValue = async (
     foundation: RenderFoundation | null,
     attributes: Array<any>,
@@ -122,7 +137,7 @@ export const getUniqueValuesForAttributesWithoutValue = async (
         return {};
     }
     const uniqueDataElements = foundation.getElements().filter(
-        dataElement => dataElement.unique && dataElement.unique.generatable,
+        dataElement => canGenerate(dataElement, staticPatternValues),
     );
 
     if (uniqueDataElements && uniqueDataElements.length > 0) {

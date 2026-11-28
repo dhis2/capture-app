@@ -10,6 +10,7 @@ import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component'
 import { useFormValuesFromSearchTerms } from './hooks/useFormValuesFromSearchTerms';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
+import { useGenerateOrgUnitCodeValues } from '../common/TEIAndEnrollment/useGenerateOrgUnitCodeValues';
 import { useBuildTeiPayload } from './hooks/useBuildTeiPayload';
 import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
@@ -102,6 +103,12 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
     );
     const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) =>
         dataEntriesFieldsValue[dataEntryKey]?.orgUnit);
+    useGenerateOrgUnitCodeValues({
+        formFoundation: teiRegistrationMetadata instanceof Enrollment ? null : teiRegistrationMetadata?.form,
+        formId: dataEntryKey,
+        orgUnitId: orgUnitFieldValue?.id,
+        ready,
+    });
 
     if (!teiRegistrationMetadata || teiRegistrationMetadata instanceof Enrollment) {
         return null;
