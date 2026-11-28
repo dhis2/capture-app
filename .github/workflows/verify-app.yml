@@ -149,7 +149,7 @@ jobs:
       # Chrome 158+ breaks Cypress < 15.21.2 ("* is not a valid URL"). Remove the pin after upgrading Cypress.
       - name: Install Chrome for Testing
         id: setup-chrome
-        uses: browser-actions/setup-chrome@v2
+        uses: browser-actions/setup-chrome@48ad923757ca74d66703209fe939badbdf80f2f4  # v2.2.0
         with:
           chrome-version: 157
 
