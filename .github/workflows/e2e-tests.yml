@@ -120,7 +120,14 @@ jobs:
                 echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
 
             - uses: dhis2/action-safe-install@v1
-            
+
+            # Chrome 158+ breaks Cypress < 15.21.2 ("* is not a valid URL"). Remove the pin after upgrading Cypress.
+            - name: Install Chrome for Testing
+              id: setup-chrome
+              uses: browser-actions/setup-chrome@v2
+              with:
+                  chrome-version: 157
+
             - name: Cypress run
               uses: cypress-io/github-action@v7
               with:
@@ -131,7 +138,7 @@ jobs:
                   tag: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}
                   ci-build-id: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}
                   spec: ${{ join(matrix.spec-group.tests, ',') }}
-                  browser: chrome
+                  browser: ${{ steps.setup-chrome.outputs.chrome-path }}
                   start: yarn start:forCypress
                   wait-on: http://localhost:3000
                   wait-on-timeout: 300
