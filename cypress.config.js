@@ -3,8 +3,18 @@ const { defineConfig } = require('cypress');
 const getCypressEnvVariables = require('./cypress/support/getCypressEnvVariables');
 const cucumberPreprocessor = require('./cypress/support/cucumberPreprocessor');
 
+// Cypress 12 can't parse the version of Chrome for Testing ("Google Chrome for Testing <version>"),
+// so it skips --proxy-bypass-list=<-loopback> and the browser never connects. Remove after upgrading Cypress.
+const routeLoopbackThroughProxyForChromeForTesting = (browser, launchOptions) => {
+    if (browser.name === 'chrome' && Number.isNaN(Number(browser.majorVersion))) {
+        launchOptions.args.push('--proxy-bypass-list=<-loopback>');
+    }
+    return launchOptions;
+};
+
 async function setupNodeEvents(on, config) {
-    await chromeAllowXSiteCookies(on);
+    await chromeAllowXSiteCookies((event, handler) => on(event, (browser, launchOptions) =>
+        routeLoopbackThroughProxyForChromeForTesting(browser, handler(browser, launchOptions))));
     await cucumberPreprocessor(on, config);
 
     config.env = getCypressEnvVariables(config);
