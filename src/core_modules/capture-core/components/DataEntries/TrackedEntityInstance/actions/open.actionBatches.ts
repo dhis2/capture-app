@@ -5,6 +5,7 @@ import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import type { CoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
 import { getOrgUnitValidatorContainers } from '../fieldValidators';
 import { getTermLabel, LabelKeys } from '../../../../customLabels';
@@ -25,7 +26,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     querySingleResource,
 }: {
     foundation: RenderFoundation | null;
-    contextOrgUnit: any;
+    contextOrgUnit?: CoreOrgUnit | null;
     dataEntryId: string;
     extraActions?: Array<ReduxAction<any, any>>;
     generatedUniqueValuesCache?: any;
