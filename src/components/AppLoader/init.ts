@@ -10,6 +10,8 @@ import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaD
 import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from 'capture-core/rules/rulesEngine';
+import { initDateTimeHandling, dateTimeHandlingModes } from 'capture-core/utils/dateTimeHandling';
+import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
 import { getDateFnLocale } from './getDateFnLocale';
 import { getMomentLocale } from './getMomentLocale';
 
@@ -133,6 +135,25 @@ async function initializeSystemSettingsAsync(
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
+async function getDateTimeHandlingMode(querySingleResource: any) {
+    if (featureAvailable(FEATURES.timeZoneFreeDateTime)) {
+        return null;
+    }
+
+    try {
+        const dateTimeHandlingSettings = await querySingleResource({
+            resource: 'dataStore/capture/dateTimeHandling',
+        });
+        return dateTimeHandlingSettings?.mode;
+    } catch (error: any) {
+        const { httpStatusCode } = error?.details || {};
+        if (httpStatusCode !== 404) {
+            log.error('could not get the dateTimeHandling setting, fallback to legacy', error);
+        }
+        return dateTimeHandlingModes.LEGACY;
+    }
+}
+
 export async function initializeAsync({
     onCacheExpired,
     querySingleResource,
@@ -190,6 +211,8 @@ export async function initializeAsync({
         ruleEngineSettings = { version: 'default' };
     }
     initRulesEngine(ruleEngineSettings.version, userRoles, userGroups);
+
+    initDateTimeHandling(await getDateTimeHandlingMode(querySingleResource));
 
     try {
         await initStorageControllers({

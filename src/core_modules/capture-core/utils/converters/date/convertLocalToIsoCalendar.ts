@@ -1,9 +1,5 @@
 import moment from 'moment';
-import {
-    convertToIso8601,
-    formatCalendarDate,
-} from '@dhis2/multi-calendar-dates';
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
+import { convertLocalToIsoDate } from './convertLocalToIsoDate';
 
 /**
  * Converts a date from local calendar to ISO calendar
@@ -12,14 +8,11 @@ import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
  * @returns {string}
  */
 export function convertLocalToIsoCalendar(localDate: string | null | undefined): string {
-    if (!localDate) {
+    const isoDate = convertLocalToIsoDate(localDate);
+    if (!isoDate) {
         return '';
     }
 
-    const calendar = systemSettingsStore.get().calendar;
-
-    const dateString = formatCalendarDate(convertToIso8601(localDate, calendar as any));
-    const parsedMoment = moment(dateString);
-
+    const parsedMoment = moment(isoDate);
     return parsedMoment.isValid() ? parsedMoment.toISOString() : '';
 }

@@ -9,6 +9,7 @@ export const FEATURES = Object.freeze({
     customTerminologyPlurals: 'customTerminologyPlurals',
     enrollmentAOC: 'enrollmentAOC',
     enableChangeLog: 'enableChangeLog',
+    timeZoneFreeDateTime: 'timeZoneFreeDateTime',
 });
 
 const MINOR_VERSION_SUPPORT = Object.freeze({
@@ -22,6 +23,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.customTerminologyPlurals]: 43,
     [FEATURES.enrollmentAOC]: 43,
     [FEATURES.enableChangeLog]: 43,
+    [FEATURES.timeZoneFreeDateTime]: 44,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>

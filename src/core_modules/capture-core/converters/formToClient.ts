@@ -4,7 +4,8 @@ import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { formatMomentEn } from 'capture-core-utils/date';
 import { dataElementTypes } from '../metaData';
 import type { DataElement } from '../metaData';
-import { convertLocalToIsoCalendar } from '../utils/converters/date';
+import { convertLocalToIsoCalendar, convertLocalToIsoDateTime } from '../utils/converters/date';
+import { isNewDateTimeHandling } from '../utils/dateTimeHandling';
 
 type DateTimeValue = {
     date: string;
@@ -17,31 +18,13 @@ type RangeValue = {
 };
 
 function convertDateTime(formValue: DateTimeValue): string | null {
-    const editedDate = formValue.date;
-    const editedTime = formValue.time;
-
-    const parsedTime = parseTime(editedTime);
-    if (!parsedTime.isValid) return null;
-    const momentTime = parsedTime.momentTime;
-    const hours = momentTime.hour();
-    const minutes = momentTime.minute();
-
-    const isoDate = convertDate(editedDate);
-    if (!isoDate) return null;
-
-    const momentDateTime = moment(isoDate);
-    if (!momentDateTime.isValid()) return null;
-    momentDateTime.hour(hours);
-    momentDateTime.minute(minutes);
-    return momentDateTime.toISOString();
-}
-
-function convertDate(dateValue: string) {
-    try {
-        return convertLocalToIsoCalendar(dateValue);
-    } catch (error) {
-        return '';
+    const dateTime = convertLocalToIsoDateTime(formValue.date, formValue.time);
+    if (!dateTime || isNewDateTimeHandling()) {
+        return dateTime;
     }
+
+    // TODO: DHIS2-22491 Remove Legacy dateTimeHandling when v44 is the lowest supported version
+    return moment(dateTime).toISOString();
 }
 
 function convertTime(timeValue: string) {
@@ -52,7 +35,7 @@ function convertTime(timeValue: string) {
 }
 
 function convertAge(ageValue: any) {
-    return convertDate(ageValue.date);
+    return convertLocalToIsoCalendar(ageValue.date);
 }
 
 function convertRange(parser: any, value: RangeValue) {
@@ -75,8 +58,8 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [dataElementTypes.PERCENTAGE]: (value: string) => parseNumber(value.replace('%', '')),
     [dataElementTypes.PERCENTAGE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
-    [dataElementTypes.DATE]: convertDate,
-    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
+    [dataElementTypes.DATE]: convertLocalToIsoCalendar,
+    [dataElementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertLocalToIsoCalendar, value),
     [dataElementTypes.DATETIME]: convertDateTime,
     [dataElementTypes.DATETIME_RANGE]: (value: RangeValue) => convertRange(convertDateTime, value),
     [dataElementTypes.TIME]: convertTime,

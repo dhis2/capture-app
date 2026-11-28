@@ -1,5 +1,4 @@
-import { convertToIso8601, formatCalendarDate } from '@dhis2/multi-calendar-dates';
-import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import { convertLocalToIsoDateTime } from '../../../utils/converters/date';
 import {
     isEmptyValueFilter,
     getEmptyValueFilterData,
@@ -12,25 +11,11 @@ import type {
     Value,
 } from './dateTime.types';
 
-function localCalendarDateToIsoDate(localDate: string): string | null {
-    try {
-        const calendar = systemSettingsStore.get().calendar;
-        return formatCalendarDate(convertToIso8601(localDate, calendar as any));
-    } catch {
-        return null;
-    }
-}
-
 function buildIsoDateTime(dateTimeValue: DateTimeValue, defaultTime: string): string | null {
     if (!dateTimeValue.date || dateTimeValue.isValid === false) {
         return null;
     }
-    const isoDate = localCalendarDateToIsoDate(dateTimeValue.date);
-    if (!isoDate) {
-        return null;
-    }
-    const time = dateTimeValue.time || defaultTime;
-    return `${isoDate}T${time}:00`;
+    return convertLocalToIsoDateTime(dateTimeValue.date, dateTimeValue.time || defaultTime);
 }
 
 export function getDateTimeFilterData(value: Value): DateTimeFilter | null {

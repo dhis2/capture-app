@@ -2,10 +2,9 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
-import { formatMomentEn } from 'capture-core-utils/date';
 import type { DataElement } from '../metaData';
 import { dataElementTypes } from '../metaData';
-import { convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar, convertDateTimeForDisplay } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
@@ -13,11 +12,6 @@ import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForView(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
-}
-function convertDateTimeForView(rawValue: string): string {
-    const timeString = formatMomentEn(rawValue, 'HH:mm');
-    const localDate = convertIsoToLocalCalendar(rawValue);
-    return `${localDate} ${timeString}`;
 }
 
 type FileClientValue = {
@@ -60,7 +54,7 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.DATE]: convertDateForView,
-    [dataElementTypes.DATETIME]: convertDateTimeForView,
+    [dataElementTypes.DATETIME]: convertDateTimeForDisplay,
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
@@ -88,5 +82,5 @@ export function convertDateWithTimeForView(rawValue?: string | null): string {
     if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {
         return convertDateForView(rawValue);
     }
-    return convertDateTimeForView(rawValue);
+    return convertDateTimeForDisplay(rawValue);
 }

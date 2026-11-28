@@ -1,6 +1,8 @@
 import { rulesEngineEffectTargetDataTypes, variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { ruleEngine } from '../rulesEngine';
 import { systemSettingsStore } from '../../metaDataMemoryStores';
+import { initDateTimeHandling, dateTimeHandlingModes } from '../../utils/dateTimeHandling';
+import { convertServerToClient } from '../../converters';
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
@@ -2896,6 +2898,138 @@ describe('Assign effects', () => {
                     latitude: 2,
                     longitude: 434,
                 },
+            },
+        ]);
+    });
+});
+
+describe('DATETIME values', () => {
+    const constants = [];
+    const dataElementsInProgram = {
+        dtCurrent01: { id: 'dtCurrent01', valueType: 'DATETIME' },
+        dtAssign001: { id: 'dtAssign001', valueType: 'DATETIME' },
+    };
+    const programRuleVariables = [
+        {
+            id: 'dtVariable1',
+            displayName: 'dateTimeVariable',
+            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
+            dataElementId: 'dtCurrent01',
+            valueType: 'DATETIME',
+            programId: 'eBAyeGv0exc',
+        },
+    ];
+    const programRules = [
+        {
+            id: 'dtRule0001',
+            condition: 'true',
+            displayName: 'datetime values',
+            programId: 'eBAyeGv0exc',
+            programRuleActions: [
+                {
+                    id: 'dtDisplay01',
+                    displayContent: 'datetime =',
+                    data: '#{dateTimeVariable}',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'dtAssign01',
+                    data: '#{dateTimeVariable}',
+                    dataElementId: 'dtAssign001',
+                    programRuleActionType: 'ASSIGN',
+                },
+            ],
+        },
+    ];
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
+
+    test('are passed to rules and assigned as entered, without timezone conversion', () => {
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules, constants },
+            currentEvent: { dtCurrent01: '2026-03-29T02:30:00.000' },
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets: {},
+        });
+
+        expect(rulesEffects).toEqual([
+            {
+                type: 'DISPLAYTEXT',
+                id: 'feedback',
+                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-03-29T02:30:00.000' },
+            },
+            {
+                type: 'ASSIGN',
+                id: 'dtAssign001',
+                value: { date: '2026-03-29', time: '02:30' },
+                targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+            },
+        ]);
+    });
+
+    test('are passed to rules and assigned with the timezone stripped with New dateTimeHandling', () => {
+        initDateTimeHandling(dateTimeHandlingModes.NEW);
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules, constants },
+            // an offset no time zone uses, so stripping it differs from converting to the runner time zone
+            currentEvent: { dtCurrent01: convertServerToClient('2026-11-10T13:00:00.000+05:17', 'DATETIME') },
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets: {},
+        });
+        initDateTimeHandling(dateTimeHandlingModes.LEGACY);
+
+        expect(rulesEffects).toEqual([
+            {
+                type: 'DISPLAYTEXT',
+                id: 'feedback',
+                displayText: { id: 'dtDisplay01', message: 'datetime = 2026-11-10T13:00:00.000' },
+            },
+            {
+                type: 'ASSIGN',
+                id: 'dtAssign001',
+                value: { date: '2026-11-10', time: '13:00' },
+                targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+            },
+        ]);
+    });
+
+    test('assigned values with a timezone have it stripped with New dateTimeHandling', () => {
+        const assignRules = [
+            {
+                id: 'dtRule0002',
+                condition: 'true',
+                displayName: 'assign datetime with timezone',
+                programId: 'eBAyeGv0exc',
+                programRuleActions: [
+                    {
+                        id: 'dtAssign02',
+                        // an offset no time zone uses, so stripping it differs from converting to the runner time zone
+                        data: "'2026-11-10T13:00:00.000+05:17'",
+                        dataElementId: 'dtAssign001',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                ],
+            },
+        ];
+
+        initDateTimeHandling(dateTimeHandlingModes.NEW);
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules: assignRules, constants },
+            currentEvent: {},
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets: {},
+        });
+        initDateTimeHandling(dateTimeHandlingModes.LEGACY);
+
+        expect(rulesEffects).toEqual([
+            {
+                type: 'ASSIGN',
+                id: 'dtAssign001',
+                value: { date: '2026-11-10', time: '13:00' },
+                targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
             },
         ]);
     });
