@@ -9,7 +9,7 @@ const groups = [
     { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
 ];
 
-systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD', calendar: 'gregory' });
+systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD' });
 
 describe('Event Event rules engine', () => {
     // these variables are shared between each test

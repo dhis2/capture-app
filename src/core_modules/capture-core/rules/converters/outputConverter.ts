@@ -2,9 +2,9 @@
 import log from 'loglevel';
 import moment from 'moment';
 import type { IConvertOutputRulesEffectsValue } from '@dhis2/rules-engine-javascript';
-import { convertMomentToDateFormatString } from '../../utils/converters/date';
-import { convertClientToForm } from '../../converters';
-import { dataElementTypes } from '../../metaData';
+import { formatMomentEn } from 'capture-core-utils/date';
+import { convertMomentToDateFormatString, convertToTimeZoneFreeDateTime } from '../../utils/converters/date';
+import { isNewDateTimeHandling } from '../../utils/dateTimeHandling';
 
 
 // These functions are only used for creating assignment effects
@@ -25,11 +25,14 @@ export const outputConverter: IConvertOutputRulesEffectsValue = {
         return convertMomentToDateFormatString(momentDate);
     },
     convertDateTime: (value: string): any => {
-        if (!value) {
-            return value;
-        }
-        const { date, time } = convertClientToForm(value, dataElementTypes.DATETIME);
-        return { date, time };
+        // TODO: DHIS2-22491 Remove Legacy dateTimeHandling when v44 is the lowest supported version
+        const momentDateTime = isNewDateTimeHandling()
+            ? moment.utc(convertToTimeZoneFreeDateTime(value))
+            : moment(value);
+        return {
+            date: convertMomentToDateFormatString(momentDateTime),
+            time: formatMomentEn(momentDateTime, 'HH:mm'),
+        };
     },
     convertTime: (value: string): string => value,
     convertNumber: (value: number): string => (value.toString()),
